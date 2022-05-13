@@ -7,7 +7,10 @@
 /// @return {string}
 ///     Namespaced class name.
 @function -get-class-name($class)
-    @return $bf-prefix + $bf-separator + $class
+    @if str-slice($class, 1, 2) == $bf-prefix
+        @return $class
+    @else
+        @return $bf-prefix + $bf-separator + $class
 
 
 
@@ -67,13 +70,13 @@
         $class: -get-sub-class-name($base-class, $sub-class)
         $value: -get-value($property-value, $sub-class)
         @if -is-map($value)
-            @include responsive($class, $value)
+            @include responsive($class, $value) using ($recursive-value)
+                @content($recursive-value)
         @else
             %#{$class}
                 @content($value)
             @if $bf-debug
-                .#{$class}
-                    @content($value)
+                @debug $class
     
     // loop separately to ensure min-width overrides come AFTER the base definition
     @each $sub-class, $property-value in $sub-class-map
@@ -84,8 +87,7 @@
                 %#{$class}
                     @content($value)
                 @if $bf-debug
-                    .#{$class}
-                        @content($value)
+                    @debug $class
 
 
 

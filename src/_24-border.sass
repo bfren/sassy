@@ -1,0 +1,11 @@
+@use "10-variables" as *
+@use "11-make" as make
+
+/*  Border
+ =================================================================
+
+@for $i from 0 through 10
+    @include make.responsive("border", ($i)) using ($value)
+        border-style: solid
+        border-width: $value * 1px
+

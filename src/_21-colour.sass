@@ -2,7 +2,7 @@
 @use "10-variables-colours" as *
 @use "11-make" as make
 
-/*  Text Colour
+/*  Text Colours
     =================================================================
 
 @include make.responsive("colour", $bf-colours) using ($value)
@@ -10,13 +10,20 @@
 
 
 
-/*  Background Colour
+/*  Background Colours
     =================================================================
 
-@each $name, $shades in $bf-colours
-    @each $num, $hex in $shades
-        @include make.responsive("bg", ($name + $bf-separator + $num: $hex)) using ($value)
-            background-color: $value
+
+@include make.responsive("bg", $bf-colours) using ($value)
+    background-color: $value
+
+
+
+/*  Border Colours
+    =================================================================
+
+@include make.responsive("border", $bf-colours) using ($value)
+    border-color: $value
 
 
 
