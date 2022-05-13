@@ -1,9 +1,10 @@
 ﻿//  Base
 //  =================================================================
 
-$bf-prefix: "bf";
-$bf-separator: "-";
-$bf-loop-max: 20;
+$bf-debug: false !default;
+$bf-prefix: "bf" !default;
+$bf-separator: "-" !default;
+$bf-loop-max: 20 !default;
 
 
 
@@ -18,8 +19,8 @@ $bf-breakpoints: (
     2xl: 1400px
 );
 
-$bf-margin-unit: 0.25rem;
-$bf-padding-unit: 0.25rem;
+$bf-margin-unit: 0.25rem !default;
+$bf-padding-unit: 0.25rem !default;
 
 
 
