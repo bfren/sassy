@@ -1,0 +1,55 @@
+@use "../../src/" as sassy;
+
+html {
+    @extend %bf-height-100;
+}
+
+body {
+    @extend %bf-d-flex-lg;
+    @extend %bf-flex-column-lg;
+    @extend %bf-height-100-lg;
+}
+
+header {
+    @extend .wrap;
+    @extend %bf-f-weight-600-lg;
+    @extend %bf-d-flex;
+    @extend %bf-flex-justify-between;
+    @extend %bf-flex-align-items-center;
+    @include sassy.util-up(
+        height (sm: 50px)
+    );
+}
+
+main {
+    @extend .wrap;
+    @extend %bf-bg-blue;
+    @extend %bf-bg-red-lg;
+}
+
+footer {
+    @extend .wrap;
+    @extend %bf-mt-auto;
+    @extend %bf-f-style-italic;
+    @extend %bf-t-align-center;
+}
+
+div.footer-gone {
+    @extend %bf-d-none;
+    @extend %bf-d-block-lg;
+    @extend %bf-t-align-center;
+}
+
+div.test {
+    margin: 0 auto;
+    text-align: center;
+
+    @extend %bf-bg-green;
+    @extend %bf-opacity-50;
+    @extend %bf-opacity-100-md;
+
+    @include sassy.util-up(
+        width (sm: 50%, xl: 100%),
+        font-family (md: Arial)
+    );
+}
