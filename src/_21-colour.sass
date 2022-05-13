@@ -1,9 +1,11 @@
+@use "10-variables" as *
+@use "10-variables-colours" as *
 @use "11-make" as make
 
 /*  Text Colour
     =================================================================
 
-@include make.multiple("colour", (red, blue, green)) using ($value)
+@include make.responsive("colour", $bf-colours) using ($value)
     color: $value
 
 
@@ -11,8 +13,10 @@
 /*  Background Colour
     =================================================================
 
-@include make.multiple("bg", (red, blue, green)) using ($value)
-    background-color: $value
+@each $name, $shades in $bf-colours
+    @each $num, $hex in $shades
+        @include make.responsive("bg", ($name + $bf-separator + $num: $hex)) using ($value)
+            background-color: $value
 
 
 
@@ -20,5 +24,5 @@
     =================================================================
 
 @for $i from 0 through 10
-    @include make.multiple("opacity", ($i * 10)) using ($value)
+    @include make.responsive("opacity", ($i * 10)) using ($value)
         opacity: calc($value / 100)
