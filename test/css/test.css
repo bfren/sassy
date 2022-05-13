@@ -337,9 +337,13 @@ footer {
 
 /*  Padding
  *  ================================================================= */
-/*  Text Colour
+/*  Text Colours
  *  ================================================================= */
-/*  Background Colour
+div.footer-gone {
+  color: #991b1b;
+}
+
+/*  Background Colours
  *  ================================================================= */
 main {
   background-color: #ef4444;
@@ -351,9 +355,15 @@ div.test {
 
 @media (min-width: 992px) {
   main {
-    background-color: #06b6d4;
+    background-color: #a5f3fc;
   }
 }
+/*  Border Colours
+ *  ================================================================= */
+header {
+  border-color: #fb923c;
+}
+
 /*  Opacity
  *  ================================================================= */
 div.test {
@@ -423,6 +433,13 @@ footer {
  * ================================================================= */
 footer, div.footer-gone {
   text-align: center;
+}
+
+/*  Border
+ * ================================================================= */
+header {
+  border-style: solid;
+  border-width: 2px;
 }
 
 /*  Sassy v0.1
