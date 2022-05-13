@@ -1,4 +1,6 @@
-@use "../../src/" as sassy;
+@use "../../src/" as sassy with (
+    $bf-debug: false
+);
 
 html {
     @extend %bf-height-100;
@@ -23,8 +25,8 @@ header {
 
 main {
     @extend .wrap;
-    @extend %bf-bg-blue;
-    @extend %bf-bg-red-lg;
+    @extend %bf-bg-red-500;
+    @extend %bf-bg-cyan-500-lg;
 }
 
 footer {
@@ -41,12 +43,13 @@ div.footer-gone {
 }
 
 div.test {
-    margin: 0 auto;
     text-align: center;
 
-    @extend %bf-bg-green;
+    @extend %bf-bg-green-500;
     @extend %bf-opacity-50;
     @extend %bf-opacity-100-md;
+    @extend %bf-mt-5;
+    @extend %bf-mt-1-lg;
 
     @include sassy.util-up(
         width (sm: 50%, xl: 100%),

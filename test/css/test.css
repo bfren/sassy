@@ -264,6 +264,14 @@
   display: list-item;
 }
 
+/*
+    From TailwindCSS v3.0.0
+    https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js
+    See https://tailwindcss.com/docs/customizing-colors
+
+    Licensed under MIT
+    https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/LICENSE
+ */
 /*  Wrap
  *  ================================================================= */
 .wrap-fluid, .wrap, header, main, footer {
@@ -314,6 +322,15 @@ html {
  *  ================================================================= */
 /*  Margin
  *  ================================================================= */
+@media (min-width: 992px) {
+  div.test {
+    margin-top: 0.25rem;
+  }
+}
+div.test {
+  margin-top: 1.25rem;
+}
+
 footer {
   margin-top: auto;
 }
@@ -325,16 +342,16 @@ footer {
 /*  Background Colour
  *  ================================================================= */
 main {
-  background-color: blue;
+  background-color: #ef4444;
 }
 
 div.test {
-  background-color: green;
+  background-color: #22c55e;
 }
 
 @media (min-width: 992px) {
   main {
-    background-color: red;
+    background-color: #06b6d4;
   }
 }
 /*  Opacity
@@ -425,7 +442,6 @@ footer, div.footer-gone {
   }
 }
 div.test {
-  margin: 0 auto;
   text-align: center;
 }
 @media (min-width: 576px) {
