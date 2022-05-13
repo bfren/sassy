@@ -4,7 +4,7 @@
 /*  Display
  =================================================================
 
-@include make.multiple("d", $bf-display) using ($value)
+@include make.responsive("d", $bf-display) using ($value)
     display: $value
 
 
@@ -13,10 +13,10 @@
  =================================================================
 
 @for $i from 0 through 4
-    @include make.multiple("flex-grow", ($i)) using ($value)
+    @include make.responsive("flex-grow", ($i)) using ($value)
         flex-grow: $value
 
-    @include make.multiple("flex-shrink", ($i)) using ($value)
+    @include make.responsive("flex-shrink", ($i)) using ($value)
         flex-shrink: $value
 
 
@@ -24,7 +24,7 @@
 /*  Flex: Direction
  =================================================================
 
-@include make.multiple("flex", $bf-flex-direction) using ($value)
+@include make.responsive("flex", $bf-flex-direction) using ($value)
     flex-direction: $value
 
 
@@ -32,13 +32,13 @@
 /*  Flex: Align
  =================================================================
 
-@include make.multiple("flex-align-content", $bf-flex-align-content) using ($value)
+@include make.responsive("flex-align-content", $bf-flex-align-content) using ($value)
     align-content: $value
 
-@include make.multiple("flex-align-items", $bf-flex-align-items) using ($value)
+@include make.responsive("flex-align-items", $bf-flex-align-items) using ($value)
     align-items: $value
 
-@include make.multiple("flex-align-self", $bf-flex-align-self) using ($value)
+@include make.responsive("flex-align-self", $bf-flex-align-self) using ($value)
     align-self: $value
 
 
@@ -46,5 +46,5 @@
 /*  Flex: Justify
  =================================================================
 
-@include make.multiple("flex-justify", $bf-flex-justify) using ($value)
+@include make.responsive("flex-justify", $bf-flex-justify) using ($value)
     justify-content: $value
