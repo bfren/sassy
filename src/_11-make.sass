@@ -37,6 +37,11 @@
 
 
 
+@function -is-map($var)
+    @return type-of($var) == "map"
+
+
+
 /// Outputs a single namespaced class definition.
 ///
 /// @param {string} $class
@@ -47,26 +52,40 @@
 
 
 
-/// Outputs multiple namespaced class definitions.
+/// Outputs responsive namespaced class definitions.
 /// $base-class is the base class name, $sub-class-map contains sub-class names and optional values.
+/// Each sub-class gets the standard breakpoints added as a suffix.
 ///
 /// @param {string} $base-class
 ///     Base class name.
 /// @param {map} $sub-class-map
 ///     Map of class definitions, e.g. (25: 25%, 50: 50%, auto: auto).
 ///     If the value is null, the key will be passed to the @content block instead, e.g. (red, blue)
-@mixin multiple($base-class, $sub-class-map)
+@mixin responsive($base-class, $sub-class-map)
     // output the base definition first
     @each $sub-class, $property-value in $sub-class-map
-        %#{-get-sub-class-name($base-class, $sub-class)}
-            @content(-get-value($property-value, $sub-class))
+        $class: -get-sub-class-name($base-class, $sub-class)
+        $value: -get-value($property-value, $sub-class)
+        @if -is-map($value)
+            @include responsive($class, $value)
+        @else
+            %#{$class}
+                @content($value)
+            @if $bf-debug
+                .#{$class}
+                    @content($value)
     
     // loop separately to ensure min-width overrides come AFTER the base definition
     @each $sub-class, $property-value in $sub-class-map
-        %#{-get-sub-class-name($base-class, $sub-class)}
+        $value: -get-value($property-value, $sub-class)
+        @if not -is-map($value)
             @include -up() using ($breakpoint)
-                &#{$bf-separator + $breakpoint}
-                    @content(-get-value($property-value, $sub-class))
+                $class: -get-sub-class-name($base-class, $sub-class) + $bf-separator + $breakpoint
+                %#{$class}
+                    @content($value)
+                @if $bf-debug
+                    .#{$class}
+                        @content($value)
 
 
 
