@@ -1,5 +1,5 @@
 @use "10-variables" as *
-
+@use "10-variables-colours" as *
 
 /// Outputs minimum width (breakpoint) override definitions.
 ///
@@ -10,3 +10,14 @@
         @media (min-width: $breakpoint-value)
             @each $property-name, $property-values in $property-map
                 #{$property-name}: map-get($property-values, $breakpoint-key)
+
+
+
+/// Returns a colour definition, if it exists.
+///
+/// @param {string} $name
+///     Colour name (e.g. cyan).
+/// @param {string} $shade
+///     Shade (e.g. 400) - 50, 100 - 900 in 100 intervals.
+@function colour($name, $shade)
+    @return map-get(map-get($bf-colours, $name), $shade)
