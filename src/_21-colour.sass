@@ -1,0 +1,24 @@
+@use "11-make" as make
+
+/*  Text Colour
+    =================================================================
+
+@include make.multiple("colour", (red, blue, green)) using ($value)
+    color: $value
+
+
+
+/*  Background Colour
+    =================================================================
+
+@include make.multiple("bg", (red, blue, green)) using ($value)
+    background-color: $value
+
+
+
+/*  Opacity
+    =================================================================
+
+@for $i from 0 through 10
+    @include make.multiple("opacity", ($i * 10)) using ($value)
+        opacity: calc($value / 100)

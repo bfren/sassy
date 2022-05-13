@@ -1,0 +1,81 @@
+﻿@use "10-variables" as *
+@use "11-make" as make
+
+/*  Wrap
+    =================================================================
+
+@include make.single("wrap")
+    margin: 0 auto
+    padding: 0
+    width: 100%
+
+    @include make.up((width, $bf-breakpoints))
+
+.wrap
+    @extend %bf-wrap
+    @each $breakpoint-key in map-keys($bf-breakpoints)
+        @extend %#{"bf-wrap-" + $breakpoint-key}
+
+.wrap-fluid
+    @extend %bf-wrap
+
+
+
+/*  Position
+    =================================================================
+
+@include make.multiple("position", (inherit, absolute, relative, static)) using ($value)
+    position: $value
+
+
+
+/*  Height
+    =================================================================
+
+@include make.multiple("height", (25: 25%, 50: 50%, 75: 75%, 100: 100%, auto: auto)) using ($value)
+    height: $value
+
+@include make.multiple("viewheight", (25: 25vh, 50: 50vh, 75: 75vh, 100: 100vh, auto: auto)) using ($value)
+    height: $value
+
+
+
+/*  Width
+    =================================================================
+
+@include make.multiple("width", (25: 25%, 50: 50%, 75: 75%, 100: 100%, auto: auto)) using ($value)
+    width: $value
+
+@include make.multiple("viewwidth", (25: 25vw, 50: 50vw, 75: 75vw, 100: 100vw, auto: auto)) using ($value)
+    width: $value
+
+
+
+/*  Margin
+    =================================================================
+
+@for $i from 0 through $bf-loop-max
+    @include make.multiple("m", ($i)) using ($value)
+        margin: $value * $bf-margin-unit
+
+@each $key, $val in (t: top, e: right, b: bottom, s: left)
+    @for $i from 0 through $bf-loop-max
+        @include make.multiple("m" + $key, ($i)) using ($value)
+            #{"margin-" + $val}: $value * $bf-margin-unit
+
+    @include make.multiple("m" + $key, (auto, inherit)) using ($value)
+        #{"margin-" + $val}: $value
+
+
+
+/*  Padding
+    =================================================================
+
+@for $i from 0 through $bf-loop-max
+    @include make.multiple("p", ($i)) using ($value)
+        padding: $value * $bf-padding-unit
+
+@each $key, $val in (t: top, e: right, b: bottom, s: left)
+    @for $i from 0 through $bf-loop-max
+        @include make.multiple("p" + $key, ($i)) using ($value)
+            #{"padding-" + $val}: $value * $bf-padding-unit

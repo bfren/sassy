@@ -1,0 +1,12 @@
+@use "10-variables" as *
+
+
+/// Outputs minimum width (breakpoint) override definitions.
+///
+/// @param {string} $property-map
+///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
+@mixin up($property-map...)
+    @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
+        @media (min-width: $breakpoint-value)
+            @each $property-name, $property-values in $property-map
+                #{$property-name}: map-get($property-values, $breakpoint-key)

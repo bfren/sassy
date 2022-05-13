@@ -1,0 +1,138 @@
+﻿//  Base
+//  =================================================================
+
+$bf-prefix: "bf";
+$bf-separator: "-";
+$bf-loop-max: 20;
+
+
+
+//  Layout
+//  =================================================================
+
+$bf-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    2xl: 1400px
+);
+
+$bf-margin-unit: 0.25rem;
+$bf-padding-unit: 0.25rem;
+
+
+
+//  Display
+//  =================================================================
+
+$bf-display: (
+    block,
+    contents,
+    flex,
+    grid,
+    inherit,
+    initial,
+    inline,
+    inline-block,
+    inline-flex,
+    inline-grid,
+    inline-table,
+    list-item,
+    none,
+    table,
+    table-caption,
+    table-cell,
+    table-column,
+    table-column-group,
+    table-footer-group,
+    table-header-group,
+    table-row
+);
+
+$bf-flex-align-content: (
+    center: center,
+    inherit: inherit,
+    initial: initial,
+    end: flex-end,
+    start: flex-start,
+    around: space-around,
+    between: space-between,
+    evenly: space-evenly,
+    stretch: stretch
+);
+
+$bf-flex-align-items: (
+    baseline: baseline,
+    center: center,
+    end: flex-end,
+    start: flex-start,
+    inherit: inherit,
+    initial: initial,
+    stretch: stretch
+);
+
+$bf-flex-align-self: (
+    auto: auto,
+    baseline: baseline,
+    center: center,
+    end: flex-end,
+    start: flex-start,
+    inherit: inherit,
+    initial: initial,
+    stretch: stretch
+);
+
+$bf-flex-direction: (
+    column,
+    column-reverse,
+    inherit,
+    initial,
+    row,
+    row-reverse
+);
+
+$bf-flex-justify: (
+    center: center,
+    end: flex-end,
+    start: flex-start,
+    inherit: inherit,
+    initial: initial,
+    around: space-around,
+    between: space-between,
+    evenly: space-evenly
+);
+
+
+
+//  Text
+//  =================================================================
+
+$bf-f-style: (
+    inherit,
+    initial,
+    italic,
+    normal,
+    oblique
+);
+
+$bf-f-weight: (
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900
+);
+
+$bf-t-align: (
+    center,
+    inherit,
+    initial,
+    justify,
+    left,
+    right
+);
