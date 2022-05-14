@@ -53,6 +53,7 @@ div.test {
     @extend %bf-opacity-100-md;
     @extend %bf-mt-5;
     @extend %bf-mt-1-lg;
+    @extend %bf-t-decoration-through-2xl;
 
     @include sassy.util-up(
         width (sm: 50%, xl: 100%),

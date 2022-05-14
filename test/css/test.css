@@ -435,6 +435,13 @@ footer, div.footer-gone {
   text-align: center;
 }
 
+/*  Text: Decoration
+ * ================================================================= */
+@media (min-width: 1400px) {
+  div.test {
+    text-decoration: line-through;
+  }
+}
 /*  Border
  * ================================================================= */
 header {

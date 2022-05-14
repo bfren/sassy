@@ -137,3 +137,12 @@ $bf-t-align: (
     left,
     right
 );
+
+$bf-t-decoration: (
+    through: line-through,
+    inherit: inherit,
+    initial: initial,
+    none: none,
+    over: overline,
+    under: underline
+);
