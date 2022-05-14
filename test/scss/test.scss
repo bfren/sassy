@@ -4,7 +4,12 @@
 );
 
 html {
+    font-family: serif;
     @extend %bf-height-100;
+
+    @include sassy.util-up(
+        font-family (md: Arial)
+    );
 }
 
 body {
@@ -60,8 +65,7 @@ div.test {
     @extend %bf-t-decoration-through-2xl;
 
     @include sassy.util-up(
-        width (sm: 50%, xl: 100%),
-        font-family (md: Arial)
+        width (sm: 50%, xl: 100%)
     );
 
     span {

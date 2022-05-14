@@ -575,6 +575,14 @@ div.shadow {
 /*  =================================================================
  *  Additional Placeholders
  *  ================================================================= */
+html {
+  font-family: serif;
+}
+@media (min-width: 768px) {
+  html {
+    font-family: Arial;
+  }
+}
 @media (min-width: 576px) {
   header {
     height: 50px;
@@ -583,11 +591,6 @@ div.shadow {
 @media (min-width: 576px) {
   div.test {
     width: 50%;
-  }
-}
-@media (min-width: 768px) {
-  div.test {
-    font-family: Arial;
   }
 }
 @media (min-width: 1200px) {
