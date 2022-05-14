@@ -1,0 +1,8 @@
+$bf-shadow-unit: 0.125rem !default;
+
+$bf-shadow: (
+    0: none,
+    1: 0 $bf-shadow-unit $bf-shadow-unit * 2 rgba(0, 0, 0, 0.075),
+    2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 rgba(0, 0, 0, 0.15),
+    3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 rgba(0, 0, 0, 0.175)
+);
