@@ -1,5 +1,6 @@
 @use "../../src/" as sassy with (
-    $bf-debug: false
+    $bf-debug: false,
+    $bf-full: false
 );
 
 html {
@@ -14,12 +15,10 @@ body {
 
 header {
     @extend .wrap;
-    @extend %bf-f-weight-600-lg;
-    @extend %bf-border-2;
-    @extend %bf-border-orange-400;
     @extend %bf-d-flex;
+    @extend %bf-f-weight-600-lg;
     @extend %bf-flex-justify-between;
-    @extend %bf-flex-align-items-center;
+    @extend %bf-flex-align-items-centre;
     @include sassy.util-up(
         height (sm: 50px)
     );
@@ -33,30 +32,52 @@ main {
 
 footer {
     @extend .wrap;
-    @extend %bf-mt-auto;
     @extend %bf-f-style-italic;
-    @extend %bf-t-align-center;
+    @extend %bf-mt-auto;
+    @extend %bf-t-align-centre;
+    @extend %bf-t-transform-upper-lg;
 }
 
 div.footer-gone {
+    @extend %bf-colour-red-800;
     @extend %bf-d-none;
     @extend %bf-d-block-lg;
-    @extend %bf-t-align-center;
-    @extend %bf-colour-red-800;
+    @extend %bf-t-align-centre;
+    @extend %bf-t-transform-capitalise;
 }
 
 div.test {
-    text-align: center;
-
     @extend %bf-bg-green-500;
     @extend %bf-opacity-50;
     @extend %bf-opacity-100-md;
     @extend %bf-mt-5;
-    @extend %bf-mt-1-lg;
+    @extend %bf-mt-10-lg;
+    @extend %bf-pt-4;
+    @extend %bf-pb-4;
+    @extend %bf-t-align-centre;
     @extend %bf-t-decoration-through-2xl;
 
     @include sassy.util-up(
         width (sm: 50%, xl: 100%),
         font-family (md: Arial)
     );
+
+    span {
+        @extend %bf-border-2;
+        @extend %bf-border-top-0-xl;
+        @extend %bf-border-orange-400;
+    }
+}
+
+div.shadow {
+    @extend %bf-border-1;
+    @extend %bf-border-grey-200;
+    @extend %bf-m-centre;
+    @extend %bf-mt-5;
+    @extend %bf-shadow-1;
+    @extend %bf-shadow-2-sm;
+    @extend %bf-shadow-3-md;
+    @extend %bf-shadow-0-lg;
+    @extend %bf-t-align-centre;
+    @extend %bf-width-50;
 }
