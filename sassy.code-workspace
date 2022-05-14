@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"files.insertFinalNewline": true,
 		"liveSassCompile.settings.includeItems": [
 			"/test/scss/test.scss"
 		],
