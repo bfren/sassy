@@ -26,7 +26,7 @@
     Position
     =================================================================
 
-@include make.responsive("position", (inherit, absolute, relative, static)) using ($value)
+@include make.responsive("position", $bf-position) using ($value)
     position: $value
 
 
@@ -35,7 +35,7 @@
     Height
     =================================================================
 
-@include make.responsive("height", (25: 25%, 50: 50%, 75: 75%, 100: 100%, auto: auto)) using ($value)
+@include make.responsive("height", $bf-hw-percent) using ($value)
     height: $value
 
 @include make.responsive("viewheight", (25: 25vh, 50: 50vh, 75: 75vh, 100: 100vh, auto: auto)) using ($value)
@@ -47,7 +47,7 @@
     Width
     =================================================================
 
-@include make.responsive("width", (25: 25%, 50: 50%, 75: 75%, 100: 100%, auto: auto)) using ($value)
+@include make.responsive("width", $bf-hw-percent) using ($value)
     width: $value
 
 @include make.responsive("viewwidth", (25: 25vw, 50: 50vw, 75: 75vw, 100: 100vw, auto: auto)) using ($value)
@@ -59,16 +59,18 @@
     Margin
     =================================================================
 
+@include make.responsive("m", ("centre")) using ($value)
+    margin: 0 auto
+
+$bf-m-loop: (auto: auto, inherit: inherit)
 @for $i from 0 through $bf-loop-max
-    @include make.responsive("m", ($i)) using ($value)
-        margin: $value * $bf-margin-unit
+    $bf-m-loop: map-merge($bf-m-loop, ($i: $i * $bf-margin-unit))
 
-@each $key, $val in (t: top, e: right, b: bottom, s: left)
-    @for $i from 0 through $bf-loop-max
-        @include make.responsive("m" + $key, ($i)) using ($value)
-            #{"margin-" + $val}: $value * $bf-margin-unit
+@include make.responsive("m", $bf-m-loop) using ($value)
+    margin: $value
 
-    @include make.responsive("m" + $key, (auto, inherit)) using ($value)
+@each $key, $val in $bf-sides
+    @include make.responsive("m" + $key, $bf-m-loop) using ($value)
         #{"margin-" + $val}: $value
 
 
@@ -77,11 +79,13 @@
     Padding
     =================================================================
 
+$bf-p-loop: (auto: auto, inherit: inherit)
 @for $i from 0 through $bf-loop-max
-    @include make.responsive("p", ($i)) using ($value)
-        padding: $value * $bf-padding-unit
+    $bf-p-loop: map-merge($bf-p-loop, ($i: $i * $bf-padding-unit))
 
-@each $key, $val in (t: top, e: right, b: bottom, s: left)
-    @for $i from 0 through $bf-loop-max
-        @include make.responsive("p" + $key, ($i)) using ($value)
-            #{"padding-" + $val}: $value * $bf-padding-unit
+@include make.responsive("p", $bf-p-loop) using ($value)
+    padding: $value
+
+@each $key, $val in $bf-sides
+    @include make.responsive("p" + $key, $bf-p-loop) using ($value)
+        #{"padding-" + $val}: $value
