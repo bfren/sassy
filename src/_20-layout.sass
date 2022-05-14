@@ -1,6 +1,15 @@
 ﻿@use "10-variables" as *
 @use "11-make" as make
 
+/// Returns a map of steps 25/50/75/100/auto.
+///
+/// @param {string} $unit
+///     Single unit (e.g. 1px).
+@function -get-steps($unit)
+    @return (25: 25 * $unit, 50: 50 * $unit, 75: 75 * $unit, 100: 100 * $unit, auto: auto)
+
+
+
 /*  =================================================================
     Wrap
     =================================================================
@@ -35,10 +44,10 @@
     Height
     =================================================================
 
-@include make.responsive("height", $bf-hw-percent) using ($value)
+@include make.responsive("height", -get-steps(1%)) using ($value)
     height: $value
 
-@include make.responsive("viewheight", (25: 25vh, 50: 50vh, 75: 75vh, 100: 100vh, auto: auto)) using ($value)
+@include make.responsive("viewheight", -get-steps(1vh)) using ($value)
     height: $value
 
 
@@ -47,10 +56,10 @@
     Width
     =================================================================
 
-@include make.responsive("width", $bf-hw-percent) using ($value)
+@include make.responsive("width", -get-steps(1%)) using ($value)
     width: $value
 
-@include make.responsive("viewwidth", (25: 25vw, 50: 50vw, 75: 75vw, 100: 100vw, auto: auto)) using ($value)
+@include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
     width: $value
 
 

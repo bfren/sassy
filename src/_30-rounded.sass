@@ -1,0 +1,46 @@
+@use "10-variables" as *
+@use "11-make" as make
+
+/*  =================================================================
+    Rounded corners: default
+    =================================================================
+
+@include make.responsive("rounded", ())
+    border-radius: $bf-radius
+
+@include make.responsive("rounded-top", ())
+    border-top-left-radius: $bf-radius
+    border-top-right-radius: $bf-radius
+
+@include make.responsive("rounded-end", ())
+    border-top-right-radius: $bf-radius
+    border-bottom-right-radius: $bf-radius
+
+@include make.responsive("rounded-bottom", ())
+    border-bottom-right-radius: $bf-radius
+    border-bottom-left-radius: $bf-radius
+
+@include make.responsive("rounded-start", ())
+    border-top-left-radius: $bf-radius
+    border-bottom-left-radius: $bf-radius
+
+
+
+/*  =================================================================
+    Rounded corners: sized
+    =================================================================
+
+@include make.responsive("rounded", $bf-rounded) using ($value)
+    border-radius: $value
+
+
+
+/*  =================================================================
+    Special cases
+    =================================================================
+
+@include make.responsive("rounded-circle", ())
+    border-radius: 50%
+
+@include make.responsive("rounded-pill", ())
+    border-radius: 50rem
