@@ -14,7 +14,7 @@
     Flex: Grow / Shrink
     =================================================================
 
-@for $i from 0 through 4
+@for $i from 0 through $bf-loop-max
     @include make.responsive("flex-grow", ($i)) using ($value)
         flex-grow: $value
 
