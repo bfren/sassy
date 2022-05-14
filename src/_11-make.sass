@@ -40,6 +40,10 @@
 
 
 
+/// Returns trye if the variable is a map.
+///
+/// @param {string} $var
+///     Variable to check.
 @function -is-map($var)
     @return type-of($var) == "map"
 
@@ -68,7 +72,49 @@
 ///     Map of class definitions, e.g. (25: 25%, 50: 50%, auto: auto).
 ///     If the value is null, the key will be passed to the @content block instead, e.g. (red, blue)
 @mixin responsive($base-class, $sub-class-map)
-    // output the base definition first
+    @if length($sub-class-map) == 0
+        @include -responsive-single(-get-class-name($base-class))
+            @content
+
+    @else
+        @include -responsive-multiple($base-class, $sub-class-map) using ($value)
+            @content($value)
+
+
+
+/// Outputs a single responsive namespaced class definition.
+///
+/// @param {string} $class
+///     Class name.
+@mixin -responsive-single($class)
+    // output the base definition
+    %#{$class}
+        @content
+    @if $bf-full
+        .#{$class}
+            @content
+
+    // loop separately to ensure min-width overrides come AFTER the base definition
+    @include -up() using ($breakpoint)
+        %#{-get-sub-class-name($class, $breakpoint)}
+            @content
+        @if $bf-full
+            .#{$class}
+                @content
+
+
+
+/// Outputs responsive namespaced class definitions.
+/// $base-class is the base class name, $sub-class-map contains sub-class names and optional values.
+/// Each sub-class gets the standard breakpoints added as a suffix.
+///
+/// @param {string} $base-class
+///     Base class name.
+/// @param {map} $sub-class-map
+///     Map of class definitions, e.g. (25: 25%, 50: 50%, auto: auto).
+///     If the value is null, the key will be passed to the @content block instead, e.g. (red, blue)
+@mixin -responsive-multiple($base-class, $sub-class-map)
+    // output the base definition
     @each $sub-class, $property-value in $sub-class-map
         $class: -get-sub-class-name($base-class, $sub-class)
         $value: -get-value($property-value, $sub-class)
@@ -78,8 +124,6 @@
         @else
             %#{$class}
                 @content($value)
-            @if $bf-debug
-                @debug $class
             @if $bf-full
                 .#{$class}
                     @content($value)
@@ -92,8 +136,6 @@
                 $class: -get-sub-class-name($base-class, $sub-class) + $bf-separator + $breakpoint
                 %#{$class}
                     @content($value)
-                @if $bf-debug
-                    @debug $class
                 @if $bf-full
                     .#{$class}
                         @content($value)
