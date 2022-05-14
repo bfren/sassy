@@ -10,16 +10,17 @@
 
 
 
-/*  =================================================================
-    Flex: Grow / Shrink
-    =================================================================
+/*  Flex: Align
+ =================================================================
 
-@for $i from 0 through $bf-loop-max
-    @include make.responsive("flex-grow", ($i)) using ($value)
-        flex-grow: $value
+@include make.responsive("flex-align-content", $bf-flex-align-content) using ($value)
+    align-content: $value
 
-    @include make.responsive("flex-shrink", ($i)) using ($value)
-        flex-shrink: $value
+@include make.responsive("flex-align-items", $bf-flex-align-items) using ($value)
+    align-items: $value
+
+@include make.responsive("flex-align-self", $bf-flex-align-self) using ($value)
+    align-self: $value
 
 
 
@@ -32,17 +33,16 @@
 
 
 
-/*  Flex: Align
- =================================================================
+/*  =================================================================
+    Flex: Grow / Shrink
+    =================================================================
 
-@include make.responsive("flex-align-content", $bf-flex-align-content) using ($value)
-    align-content: $value
+@for $i from 0 through $bf-loop-max
+    @include make.responsive("flex-grow", ($i)) using ($value)
+        flex-grow: $value
 
-@include make.responsive("flex-align-items", $bf-flex-align-items) using ($value)
-    align-items: $value
-
-@include make.responsive("flex-align-self", $bf-flex-align-self) using ($value)
-    align-self: $value
+    @include make.responsive("flex-shrink", ($i)) using ($value)
+        flex-shrink: $value
 
 
 
