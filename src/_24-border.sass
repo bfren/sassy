@@ -2,11 +2,27 @@
 @use "11-make" as make
 
 /*  =================================================================
-    Border
+    Border Width
     =================================================================
 
-@for $i from 0 through 10
-    @include make.responsive("border", ($i)) using ($value)
-        border-style: solid
-        border-width: $value * 1px
+$bf-border-loop: (auto: auto, inherit: inherit)
+@for $i from 0 through $bf-loop-max
+    $bf-border-loop: map-merge($bf-border-loop, ($i: $i * $bf-border-width-unit))
 
+@include make.responsive("border", $bf-border-loop) using ($value)
+    border-style: solid
+    border-width: $value
+
+@each $key, $val in $bf-sides
+    @include make.responsive("border-" + $val, $bf-border-loop) using ($value)
+        #{"border-" + $val + "-style"}: solid
+        #{"border-" + $val + "-width"}: $value
+
+
+
+/*  =================================================================
+    Border Colour
+    =================================================================
+
+@include make.responsive("border", $bf-colours) using ($value)
+    border-color: $value
