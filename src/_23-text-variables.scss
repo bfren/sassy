@@ -19,12 +19,12 @@ $bf-f-weight: (
 );
 
 $bf-t-align: (
-    center,
-    inherit,
-    initial,
-    justify,
-    left,
-    right
+    centre: center,
+    inherit: inherit,
+    initial: initial,
+    justify: justify,
+    left: left,
+    right: right
 );
 
 $bf-t-decoration: (
@@ -34,4 +34,13 @@ $bf-t-decoration: (
     none: none,
     over: overline,
     under: underline
+);
+
+$bf-t-transform: (
+    capitalise: capitalize,
+    inherit: inherit,
+    initial: initial,
+    lower: lowercase,
+    none: none,
+    upper: uppercase
 );
