@@ -28,6 +28,7 @@ main {
     @extend .wrap;
     @extend %bf-bg-red-500;
     @extend %bf-bg-cyan-200-lg;
+    @extend %bf-rounded;
 }
 
 footer {
@@ -48,12 +49,13 @@ div.footer-gone {
 
 div.test {
     @extend %bf-bg-green-500;
-    @extend %bf-opacity-50;
-    @extend %bf-opacity-100-md;
     @extend %bf-mt-5;
     @extend %bf-mt-10-lg;
+    @extend %bf-opacity-50;
+    @extend %bf-opacity-100-md;
     @extend %bf-pt-4;
     @extend %bf-pb-4;
+    @extend %bf-rounded;
     @extend %bf-t-align-centre;
     @extend %bf-t-decoration-through-2xl;
 
@@ -71,9 +73,11 @@ div.test {
 
 div.shadow {
     @extend %bf-border-1;
-    @extend %bf-border-grey-200;
+    @extend %bf-border-grey-400;
+    @extend %bf-rounded-md;
     @extend %bf-m-centre;
     @extend %bf-mt-5;
+    @extend %bf-p-3;
     @extend %bf-shadow-1;
     @extend %bf-shadow-2-sm;
     @extend %bf-shadow-3-md;
