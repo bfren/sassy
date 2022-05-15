@@ -285,34 +285,39 @@
 /*  =================================================================
  *  Wrap
  *  ================================================================= */
-.wrap-fluid, .wrap, header, main, footer {
+.wrap-fluid, header, .wrap, main, footer {
   margin: 0 auto;
   padding: 0;
   width: 100%;
 }
 @media (min-width: 576px) {
-  .wrap, header, main, footer {
+  .wrap, main, footer {
     width: 576px;
   }
 }
 @media (min-width: 768px) {
-  .wrap, header, main, footer {
+  .wrap, main, footer {
     width: 768px;
   }
 }
 @media (min-width: 992px) {
-  .wrap, header, main, footer {
+  .wrap, main, footer {
     width: 992px;
   }
 }
 @media (min-width: 1200px) {
-  .wrap, header, main, footer {
+  .wrap, main, footer {
     width: 1200px;
   }
 }
 @media (min-width: 1400px) {
-  .wrap, header, main, footer {
+  .wrap, main, footer {
     width: 1400px;
+  }
+}
+@media (min-width: 1600px) {
+  .wrap, main, footer {
+    width: 1600px;
   }
 }
 
@@ -349,8 +354,28 @@ footer {
   margin-top: auto;
 }
 
+div.text div h1, div.text div h3, div.text div h5, body h1 {
+  margin-top: 0rem;
+}
+
+body p, body li {
+  margin-top: 0.5rem;
+}
+
+body h5, body h6 {
+  margin-top: 0.75rem;
+}
+
+body h3, body h4 {
+  margin-top: 1rem;
+}
+
 div.test, div.shadow {
   margin-top: 1.25rem;
+}
+
+body h2 {
+  margin-top: 1.5rem;
 }
 
 @media (min-width: 992px) {
@@ -358,6 +383,10 @@ div.test, div.shadow {
     margin-top: 2.5rem;
   }
 }
+body h1, body h2, body h3, body h4, body h5, body h6, body p, body li {
+  margin-bottom: 0.5rem;
+}
+
 /*  =================================================================
  *  Padding
  *  ================================================================= */
@@ -383,6 +412,11 @@ div.footer-gone {
 /*  =================================================================
  *  Background Colour
  *  ================================================================= */
+@media (min-width: 992px) {
+  div.text div:last-child {
+    background-color: #e7e5e4;
+  }
+}
 main {
   background-color: #ef4444;
 }
@@ -420,7 +454,7 @@ header {
   display: flex;
 }
 
-div.footer-gone {
+div.footer-gone, div.text {
   display: none;
 }
 
@@ -442,6 +476,10 @@ header {
 /*  =================================================================
  *  Flex: Direction
  *  ================================================================= */
+div.cols-reverse {
+  flex-direction: row-reverse;
+}
+
 @media (min-width: 992px) {
   body {
     flex-direction: column;
@@ -457,6 +495,58 @@ header {
 }
 
 /*  =================================================================
+ *  Font: Defaults
+ *  ================================================================= */
+body {
+  color: #1f2937;
+  font-family: "Source Sans Pro";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  /*  =============================================================
+  *  Headings
+  *  ============================================================= */
+  /*  =============================================================
+  *  Paragraph
+  *  ============================================================= */
+  /*  =============================================================
+  *  Monospacing
+  *  ============================================================= */
+}
+body h1 {
+  font-size: 2rem;
+}
+body h2 {
+  font-size: 1.8rem;
+}
+body h3 {
+  font-size: 1.6rem;
+}
+body h4 {
+  font-size: 1.4rem;
+}
+body h5 {
+  font-size: 1.2rem;
+}
+body h6 {
+  font-size: 1.1rem;
+}
+body code, body textarea {
+  font-family: "Fira Code", Monaco, Consolas, monospace;
+}
+
+/*  =================================================================
+ *  Font: Family
+ *  ================================================================= */
+@media (min-width: 1200px) {
+  div.text div p {
+    font-family: "Fira Code", Monaco, Consolas, monospace;
+  }
+}
+/*  =================================================================
+ *  Font: Size
+ *  ================================================================= */
+/*  =================================================================
  *  Font: Style
  *  ================================================================= */
 footer {
@@ -468,7 +558,19 @@ footer {
  *  ================================================================= */
 @media (min-width: 992px) {
   header {
-    font-weight: 600;
+    font-weight: 700;
+  }
+}
+/*  =================================================================
+ *  Line: Height
+ *  ================================================================= */
+@media (min-width: 1200px) {
+  div.text div p {
+    line-height: 1;
+  }
+
+  div.text div:last-child p {
+    line-height: 3;
   }
 }
 /*  =================================================================
@@ -498,6 +600,9 @@ div.footer-gone {
     text-transform: uppercase;
   }
 }
+/*  =================================================================
+ *  Text: Wrap
+ *  ================================================================= */
 /*  =================================================================
  *  Border Width
  *  ================================================================= */
@@ -569,6 +674,127 @@ div.shadow {
   }
 }
 /*  =================================================================
+ *  Flex Rows and Columns
+ *  ================================================================= */
+div.cols, div.cols-reverse {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+div.cols div.text div, div.text div.cols div, div.cols-reverse div.text div, div.text div.cols-reverse div {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  width: 33.3333333333%;
+}
+div.cols div, div.cols-reverse div {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  div.cols div, div.cols-reverse div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  div.cols div, div.cols-reverse div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 33.3333333333%;
+  }
+}
+@media (min-width: 992px) {
+  div.cols div, div.cols-reverse div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  div.cols div, div.cols-reverse div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 16.6666666667%;
+  }
+}
+@media (min-width: 1400px) {
+  div.cols div, div.cols-reverse div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 8.3333333333%;
+  }
+}
+@media (min-width: 768px) {
+  div.text {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+  div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 33.3333333333%;
+  }
+  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+}
+@media (min-width: 768px) and (min-width: 576px) {
+  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+  }
+}
+@media (min-width: 768px) and (min-width: 768px) {
+  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 33.3333333333%;
+  }
+}
+@media (min-width: 768px) and (min-width: 992px) {
+  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+  }
+}
+@media (min-width: 768px) and (min-width: 1200px) {
+  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 16.6666666667%;
+  }
+}
+@media (min-width: 768px) and (min-width: 1400px) {
+  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    width: 8.3333333333%;
+  }
+}
+/*  =================================================================
  *  Sassy Copyright notice - see https://github.com/bfren/sassy
  *  ================================================================= */
 /*  =================================================================
@@ -582,6 +808,9 @@ div.shadow {
  *  ================================================================= */
 /*  =================================================================
  *  Additional Placeholders
+ *  ================================================================= */
+/*  =================================================================
+ *  Grid System
  *  ================================================================= */
 html {
   font-family: serif;
