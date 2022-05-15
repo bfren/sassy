@@ -1,14 +1,10 @@
-@use "../../src/" as sassy with (
-    $bf-font-family-sans: "Source Sans Pro"
-);
+@use "../../src/" as sassy with ($bf-font-family-sans: "Source Sans Pro");
 
 html {
     font-family: serif;
     @extend %bf-height-100;
 
-    @include sassy.util-up(
-        font-family (md: Arial)
-    );
+    @include sassy.util-up(font-family (md: Arial));
 }
 
 body {
@@ -24,9 +20,7 @@ header {
     @extend %bf-font-weight-700-lg;
     @extend %bf-flex-justify-between;
     @extend %bf-flex-align-items-centre;
-    @include sassy.util-up(
-        height (sm: 50px)
-    );
+    @include sassy.util-up(height (sm: 50px));
 }
 
 main {
@@ -64,9 +58,7 @@ div.test {
     @extend %bf-text-align-centre;
     @extend %bf-text-decoration-through-2xl;
 
-    @include sassy.util-up(
-        width (sm: 50%, xl: 100%)
-    );
+    @include sassy.util-up(width (sm: 50%, xl: 100%));
 
     span {
         @extend %bf-border-2;
@@ -75,7 +67,8 @@ div.test {
     }
 }
 
-div.cols, div.cols-reverse  {
+div.cols,
+div.cols-reverse {
     @extend %bf-d-flex-row;
 
     div {
@@ -96,10 +89,12 @@ div.text {
     @extend %bf-d-none;
     @extend %bf-d-flex-row-md;
 
-    div {
+    >div {
         @extend %bf-col-4;
 
-        h1, h3, h5 {
+        h1,
+        h3,
+        h5 {
             @extend %bf-mt-0;
         }
 
@@ -128,7 +123,7 @@ div.shadow {
     @extend %bf-shadow-1;
     @extend %bf-shadow-2-sm;
     @extend %bf-shadow-3-md;
-    @extend %bf-shadow-0-lg;
+    @extend %bf-shadow-0-xl;
     @extend %bf-text-align-centre;
     @extend %bf-width-50;
 }
