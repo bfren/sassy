@@ -1,4 +1,31 @@
-$bf-f-style: (
+$bf-font-family-mono: "Fira Code", Monaco, Consolas, monospace !default;
+$bf-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$bf-font-family-serif: "" !default;
+$bf-font-size-base: 1rem !default;
+$bf-font-weight-base: 400 !default;
+$bf-line-height-base: 1.5 !default;
+
+$bf-body-colour: #1f2937 !default; // grey-800
+$bf-body-font-family: $bf-font-family-sans !default;
+$bf-body-font-size: $bf-font-size-base !default;
+$bf-body-font-weight: $bf-font-weight-base !default;
+$bf-body-line-height: $bf-line-height-base !default;
+
+$bf-font-family: (
+    mono: $bf-font-family-mono,
+    sans: $bf-font-family-sans,
+    serif: $bf-font-family-serif
+);
+
+$bf-font-size: (
+    1: calc($bf-font-size-base * 2),
+    2: calc($bf-font-size-base * 1.8),
+    3: calc($bf-font-size-base * 1.6),
+    4: calc($bf-font-size-base * 1.4),
+    5: calc($bf-font-size-base * 1.2),
+    6: calc($bf-font-size-base * 1.1)) !default;
+
+$bf-font-style: (
     inherit,
     initial,
     italic,
@@ -6,7 +33,7 @@ $bf-f-style: (
     oblique
 );
 
-$bf-f-weight: (
+$bf-font-weight: (
     100,
     200,
     300,
@@ -18,16 +45,23 @@ $bf-f-weight: (
     900
 );
 
-$bf-t-align: (
+$bf-line-height: (
+    base: $bf-line-height-base,
+    double: 2,
+    single: 1,
+    triple: 3,
+);
+
+$bf-text-align: (
     centre: center,
     inherit: inherit,
     initial: initial,
     justify: justify,
-    left: left,
-    right: right
+    start: left,
+    end: right
 );
 
-$bf-t-decoration: (
+$bf-text-decoration: (
     through: line-through,
     inherit: inherit,
     initial: initial,
@@ -36,7 +70,7 @@ $bf-t-decoration: (
     under: underline
 );
 
-$bf-t-transform: (
+$bf-text-transform: (
     capitalise: capitalize,
     inherit: inherit,
     initial: initial,

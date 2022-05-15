@@ -1,11 +1,85 @@
 @use "10-variables" as *
 @use "11-make" as make
+@use "20-layout" as *
+
+/*  =================================================================
+    Font: Defaults
+    =================================================================
+
+@include make.single("body")
+    color: $bf-body-colour
+    font-family: $bf-body-font-family
+    font-size: $bf-body-font-size
+    font-weight: $bf-body-font-weight
+    line-height: $bf-body-line-height
+
+    /*  =============================================================
+        Headings
+        =============================================================
+
+    h1
+        font-size: map-get($bf-font-size, 1)
+        @extend %bf-mt-0
+        @extend %bf-mb-2
+
+    h2
+        font-size: map-get($bf-font-size, 2)
+        @extend %bf-mt-6
+        @extend %bf-mb-2
+
+    h3
+        font-size: map-get($bf-font-size, 3)
+        @extend %bf-mt-4
+        @extend %bf-mb-2
+
+    h4
+        font-size: map-get($bf-font-size, 4)
+        @extend %bf-mt-4
+        @extend %bf-mb-2
+
+    h5
+        font-size: map-get($bf-font-size, 5)
+        @extend %bf-mt-3
+        @extend %bf-mb-2
+
+    h6
+        font-size: map-get($bf-font-size, 6)
+        @extend %bf-mt-3
+        @extend %bf-mb-2
+
+    /*  =============================================================
+        Paragraph
+        =============================================================
+
+    p, li
+        @extend %bf-mt-2
+        @extend %bf-mb-2
+
+
+
+/*  =================================================================
+    Font: Family
+    =================================================================
+
+@include make.responsive("font-family", $bf-font-family) using ($value)
+    font-family: $value
+
+
+
+/*  =================================================================
+    Font: Size
+    =================================================================
+
+@include make.responsive("font-size", $bf-font-size) using ($value)
+    font-size: $value
+
+
 
 /*  =================================================================
     Font: Style
     =================================================================
 
-@include make.responsive("f-style", $bf-f-style) using ($value)
+@include make.responsive("font-style", $bf-font-style) using ($value)
     font-style: $value
 
 
@@ -14,8 +88,17 @@
     Font: Weight
     =================================================================
 
-@include make.responsive("f-weight", $bf-f-weight) using ($value)
+@include make.responsive("font-weight", $bf-font-weight) using ($value)
     font-weight: $value
+
+
+
+/*  =================================================================
+    Line: Height
+    =================================================================
+
+@include make.responsive("line-height", $bf-line-height) using ($value)
+    line-height: $value
 
 
 
@@ -23,7 +106,7 @@
     Text: Align
     =================================================================
 
-@include make.responsive("t-align", $bf-t-align) using ($value)
+@include make.responsive("text-align", $bf-text-align) using ($value)
     text-align: $value
 
 
@@ -32,7 +115,7 @@
     Text: Decoration
     =================================================================
 
-@include make.responsive("t-decoration", $bf-t-decoration) using ($value)
+@include make.responsive("text-decoration", $bf-text-decoration) using ($value)
     text-decoration: $value
 
 
@@ -41,5 +124,25 @@
     Text: Transform
     =================================================================
 
-@include make.responsive("t-transform", $bf-t-transform) using ($value)
+@include make.responsive("text-transform", $bf-text-transform) using ($value)
     text-transform: $value
+
+
+
+/*  =================================================================
+    Text: Wrap
+    =================================================================
+
+@include make.responsive("text-wrap", ())
+    white-space: normal
+
+@include make.responsive("text-wrap-hover", ())
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+    &:hover
+        overflow: visible
+
+@include make.responsive("text-wrap-overflow", ())
+    white-space: nowrap
