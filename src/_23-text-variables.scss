@@ -23,7 +23,11 @@ $bf-font-size: (
     3: calc($bf-font-size-base * 1.6),
     4: calc($bf-font-size-base * 1.4),
     5: calc($bf-font-size-base * 1.2),
-    6: calc($bf-font-size-base * 1.1)) !default;
+    6: calc($bf-font-size-base * 1.1),
+    base: $bf-font-size-base,
+    small: calc($bf-font-size-base * 0.8),
+    smaller: calc($bf-font-size-base * 0.7),
+    smallest: calc($bf-font-size-base * 0.6)) !default;
 
 $bf-font-style: (
     inherit,
