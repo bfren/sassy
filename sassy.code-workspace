@@ -7,7 +7,8 @@
 	"settings": {
 		"files.insertFinalNewline": true,
 		"liveSassCompile.settings.includeItems": [
-			"/test/scss/test.scss"
+			"/dist/sass/full.sass",
+			"/test/scss/test.scss",
 		],
 		"liveSassCompile.settings.formats": [
 			{
