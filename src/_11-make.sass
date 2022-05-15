@@ -1,54 +1,5 @@
 ﻿@use "10-variables" as *
 
-/// Creates a namespaced class name - for example 'fred' becomes 'bf-fred'.
-///
-/// @param {string} $class
-///     Class name.
-/// @return {string}
-///     Namespaced class name.
-@function -get-class-name($class)
-    @if str-slice($class, 1, 2) == $bf-prefix
-        @return $class
-    @else
-        @return $bf-prefix + $bf-separator + $class
-
-
-
-/// Creates a namespaced sub-class name - for example 'fred' 'jones' becomes 'bf-fred-jones'.
-///
-/// @param {string} $base-class
-///     Base class name.
-/// @param {string} $sub-class
-///     Sub class name.
-/// @return {string}
-///     Namespaced sub-class name.
-@function -get-sub-class-name($base-class, $sub-class)
-    @return -get-class-name($base-class) + $bf-separator + $sub-class
-
-
-
-/// Returns value or default if value is false / null.
-///
-/// @param {string} $value
-///     Value to check.
-/// @param {string} $default
-///     Default vaule.
-/// @return {string}
-///     Value or default if value is false / null.
-@function -get-value($value, $default)
-    @return if($value, $value, $default)
-
-
-
-/// Returns trye if the variable is a map.
-///
-/// @param {string} $var
-///     Variable to check.
-@function -is-map($var)
-    @return type-of($var) == "map"
-
-
-
 /// Outputs a single namespaced class definition.
 ///
 /// @param {string} $class
@@ -66,11 +17,13 @@
 /// $base-class is the base class name, $sub-class-map contains sub-class names and optional values.
 /// Each sub-class gets the standard breakpoints added as a suffix.
 ///
+/// $sub-class-map can be (technically infinitely) recursive if a property value is itself a map.
+///
 /// @param {string} $base-class
 ///     Base class name.
 /// @param {map} $sub-class-map
 ///     Map of class definitions, e.g. (25: 25%, 50: 50%, auto: auto).
-///     If the value is null, the key will be passed to the @content block instead, e.g. (red, blue)
+///     If the sub class value is null, the key will be passed to the @content block instead, e.g. (red, blue)
 @mixin responsive($base-class, $sub-class-map)
     @if length($sub-class-map) == 0
         @include -responsive-single(-get-class-name($base-class))
@@ -79,6 +32,33 @@
     @else
         @include -responsive-multiple($base-class, $sub-class-map) using ($value)
             @content($value)
+
+
+
+/// Outputs minimum width (breakpoint) definitions.
+///
+/// @param {string} $property-map
+///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
+@mixin up($property-map...)
+    @include -up() using ($breakpoint)
+        &#{$bf-separator + $breakpoint}
+            @each $property-name, $property-values in $property-map
+                #{$property-name}: map-get($property-values, $breakpoint)
+
+
+
+/// Creates a namespaced class name - for example 'fred' becomes 'bf-fred'.
+///
+/// @param {string} $class
+///     Class name.
+/// @return {string}
+///     Namespaced class name.
+@function -get-class-name($class)
+    // don't add the prefix if it already has been - used during make.responsive recursion
+    @if str-slice($class, 1, 2) == $bf-prefix
+        @return $class
+    @else
+        @return $bf-prefix + $bf-separator + $class
 
 
 
@@ -142,15 +122,38 @@
 
 
 
-/// Outputs minimum width (breakpoint) definitions.
+/// Creates a namespaced sub-class name - for example 'fred' 'jones' becomes 'bf-fred-jones'.
 ///
-/// @param {string} $property-map
-///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
-@mixin up($property-map...)
-    @include -up() using ($breakpoint)
-        &#{$bf-separator + $breakpoint}
-            @each $property-name, $property-values in $property-map
-                #{$property-name}: map-get($property-values, $breakpoint)
+/// @param {string} $base-class
+///     Base class name.
+/// @param {string} $sub-class
+///     Sub class name.
+/// @return {string}
+///     Namespaced sub-class name.
+@function -get-sub-class-name($base-class, $sub-class)
+    @return -get-class-name($base-class) + $bf-separator + $sub-class
+
+
+
+/// Returns value or default if value is false / null.
+///
+/// @param {string} $value
+///     Value to check.
+/// @param {string} $default
+///     Default vaule.
+/// @return {string}
+///     Value or default if value is false / null.
+@function -get-value($value, $default)
+    @return if($value, $value, $default)
+
+
+
+/// Returns trye if the variable is a map.
+///
+/// @param {string} $var
+///     Variable to check.
+@function -is-map($var)
+    @return type-of($var) == "map"
 
 
 
