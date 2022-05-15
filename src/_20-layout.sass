@@ -1,12 +1,16 @@
 ﻿@use "10-variables" as *
 @use "11-make" as make
 
-/// Returns a map of steps 25/50/75/100/auto.
+/// Returns a map of steps from 0-100 in increments of 5, including auto
 ///
 /// @param {string} $unit
 ///     Single unit (e.g. 1px).
 @function -get-steps($unit)
-    @return (25: 25 * $unit, 50: 50 * $unit, 75: 75 * $unit, 100: 100 * $unit, auto: auto)
+    $steps: (auto: auto)
+    @for $i from 1 through 20
+        $step: calc($i * 5)
+        $steps: map-merge($steps, ($step: calc($step * $unit)))
+    @return $steps
 
 
 

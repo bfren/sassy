@@ -3,21 +3,14 @@
     md: 768px,
     lg: 992px,
     xl: 1200px,
-    2xl: 1400px) !default;
+    2xl: 1400px,
+    3xl: 1600px) !default;
 
 $bf-position: (
     absolute,
     inherit,
     relative,
     static
-);
-
-$bf-hw-percent: (
-    25: 25%,
-    50: 50%,
-    75: 75%,
-    100: 100%,
-    auto: auto
 );
 
 $bf-margin-unit: 0.25rem !default;
