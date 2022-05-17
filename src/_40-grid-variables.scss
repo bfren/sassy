@@ -1,6 +1,0 @@
-$bf-grid-cols: 12 !default;
-
-$bf-col: ();
-@for $i from 1 through $bf-grid-cols {
-    $bf-col: append($bf-col, $i);
-}
