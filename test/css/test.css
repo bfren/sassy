@@ -23,11 +23,11 @@
 }
 
 /* Sections
-   * ========================================================================== */
+ * ========================================================================== */
 /**
-   * Correct the font size and margin on `h1` elements within `section` and
-   * `article` contexts in Chrome, Edge, Firefox, and Safari.
-   */
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Edge, Firefox, and Safari.
+ */
 :where(h1) {
   font-size: 2em;
   -webkit-margin-after: 0.67em;
@@ -37,10 +37,10 @@
 }
 
 /* Grouping content
-   * ========================================================================== */
+ * ========================================================================== */
 /**
-   * Remove the margin on nested lists in Chrome, Edge, and Safari.
-   */
+ * Remove the margin on nested lists in Chrome, Edge, and Safari.
+ */
 :where(dl, ol, ul) :where(dl, ol, ul) {
   -webkit-margin-after: 0;
           margin-block-end: 0;
@@ -49,9 +49,9 @@
 }
 
 /**
-   * 1. Add the correct box sizing in Firefox.
-   * 2. Correct the inheritance of border color in Firefox.
-   */
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Correct the inheritance of border color in Firefox.
+ */
 :where(hr) {
   box-sizing: content-box;
   /* 1 */
@@ -62,9 +62,9 @@
 }
 
 /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
 :where(pre) {
   font-family: monospace, monospace;
   /* 1 */
@@ -73,10 +73,10 @@
 }
 
 /* Text-level semantics
-   * ========================================================================== */
+ * ========================================================================== */
 /**
-   * Add the correct text decoration in Safari.
-   */
+ * Add the correct text decoration in Safari.
+ */
 :where(abbr[title]) {
   text-decoration: underline;
   -webkit-text-decoration: underline dotted;
@@ -84,16 +84,16 @@
 }
 
 /**
-   * Add the correct font weight in Chrome, Edge, and Safari.
-   */
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
 :where(b, strong) {
   font-weight: bolder;
 }
 
 /**
-   * 1. Correct the inheritance and scaling of font size in all browsers.
-   * 2. Correct the odd `em` font sizing in all browsers.
-   */
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
 :where(code, kbd, samp) {
   font-family: monospace, monospace;
   /* 1 */
@@ -102,18 +102,18 @@
 }
 
 /**
-   * Add the correct font size in all browsers.
-   */
+ * Add the correct font size in all browsers.
+ */
 :where(small) {
   font-size: 80%;
 }
 
 /* Tabular data
-   * ========================================================================== */
+ * ========================================================================== */
 /**
-   * 1. Correct table border color in Chrome, Edge, and Safari.
-   * 2. Remove text indentation from table contents in Chrome, Edge, and Safari.
-   */
+ * 1. Correct table border color in Chrome, Edge, and Safari.
+ * 2. Remove text indentation from table contents in Chrome, Edge, and Safari.
+ */
 :where(table) {
   border-color: currentColor;
   /* 1 */
@@ -122,53 +122,53 @@
 }
 
 /* Forms
-   * ========================================================================== */
+ * ========================================================================== */
 /**
-   * Remove the margin on controls in Safari.
-   */
+ * Remove the margin on controls in Safari.
+ */
 :where(button, input, select) {
   margin: 0;
 }
 
 /**
-   * Remove the inheritance of text transform in Firefox.
-   */
+ * Remove the inheritance of text transform in Firefox.
+ */
 :where(button) {
   text-transform: none;
 }
 
 /**
-   * Correct the inability to style buttons in iOS and Safari.
-   */
+ * Correct the inability to style buttons in iOS and Safari.
+ */
 :where(button, input:is([type="button" i], [type="reset" i], [type="submit" i])) {
   -webkit-appearance: button;
 }
 
 /**
-   * Add the correct vertical alignment in Chrome, Edge, and Firefox.
-   */
+ * Add the correct vertical alignment in Chrome, Edge, and Firefox.
+ */
 :where(progress) {
   vertical-align: baseline;
 }
 
 /**
-   * Remove the inheritance of text transform in Firefox.
-   */
+ * Remove the inheritance of text transform in Firefox.
+ */
 :where(select) {
   text-transform: none;
 }
 
 /**
-   * Remove the margin in Firefox and Safari.
-   */
+ * Remove the margin in Firefox and Safari.
+ */
 :where(textarea) {
   margin: 0;
 }
 
 /**
-   * 1. Correct the odd appearance in Chrome, Edge, and Safari.
-   * 2. Correct the outline style in Safari.
-   */
+ * 1. Correct the odd appearance in Chrome, Edge, and Safari.
+ * 2. Correct the outline style in Safari.
+ */
 :where(input[type="search" i]) {
   -webkit-appearance: textfield;
   /* 1 */
@@ -177,32 +177,32 @@
 }
 
 /**
-   * Correct the cursor style of increment and decrement buttons in Safari.
-   */
+ * Correct the cursor style of increment and decrement buttons in Safari.
+ */
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
   height: auto;
 }
 
 /**
-   * Correct the text style of placeholders in Chrome, Edge, and Safari.
-   */
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
 ::-webkit-input-placeholder {
   color: inherit;
   opacity: 0.54;
 }
 
 /**
-   * Remove the inner padding in Chrome, Edge, and Safari on macOS.
-   */
+ * Remove the inner padding in Chrome, Edge, and Safari on macOS.
+ */
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
 /**
-   * 1. Correct the inability to style upload buttons in iOS and Safari.
-   * 2. Change font properties to `inherit` in Safari.
-   */
+ * 1. Correct the inability to style upload buttons in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   /* 1 */
@@ -211,32 +211,32 @@
 }
 
 /**
-   * Remove the inner border and padding of focus outlines in Firefox.
-   */
+ * Remove the inner border and padding of focus outlines in Firefox.
+ */
 :where(button, input:is([type="button" i], [type="color" i], [type="reset" i], [type="submit" i]))::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
 /**
-   * Restore the focus outline styles unset by the previous rule in Firefox.
-   */
+ * Restore the focus outline styles unset by the previous rule in Firefox.
+ */
 :where(button, input:is([type="button" i], [type="color" i], [type="reset" i], [type="submit" i]))::-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
 /**
-   * Remove the additional :invalid styles in Firefox.
-   */
+ * Remove the additional :invalid styles in Firefox.
+ */
 :where(:-moz-ui-invalid) {
   box-shadow: none;
 }
 
 /* Interactive
-   * ========================================================================== */
+ * ========================================================================== */
 /*
-   * Add the correct styles in Safari.
-   */
+ * Add the correct styles in Safari.
+ */
 :where(dialog) {
   background-color: white;
   border: solid;
@@ -259,8 +259,8 @@
 }
 
 /*
-   * Add the correct display in all browsers.
-   */
+ * Add the correct display in all browsers.
+ */
 :where(summary) {
   display: list-item;
 }
@@ -345,7 +345,9 @@ footer {
   margin-top: auto;
 }
 
-div.text > div h1, div.text > div h3, div.text > div h5, body h1 {
+div.text > div h1,
+div.text > div h3,
+div.text > div h5, body h1 {
   margin-top: 0rem;
 }
 
@@ -458,8 +460,9 @@ div.footer-gone, div.text {
     display: flex;
   }
 }
-/*  Flex: Align
- * ================================================================= */
+/*  =================================================================
+ *  Flex: Align
+ *  ================================================================= */
 header {
   align-items: center;
 }
@@ -479,8 +482,9 @@ div.cols-reverse {
 /*  =================================================================
  *  Flex: Grow / Shrink
  *  ================================================================= */
-/*  Flex: Justify
- * ================================================================= */
+/*  =================================================================
+ *  Flex: Justify
+ *  ================================================================= */
 header {
   justify-content: space-between;
 }
@@ -670,26 +674,30 @@ div.shadow {
 /*  =================================================================
  *  Flex Rows and Columns
  *  ================================================================= */
-div.cols, div.cols-reverse {
+div.cols,
+div.cols-reverse {
   display: flex;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
 }
-div.cols div.text > div, div.cols-reverse div.text > div {
+div.cols div.text > div,
+div.cols-reverse div.text > div {
   flex: 0 0 auto;
   margin: 0;
   padding: 0;
-  width: 33.3333333333%;
+  width: 33.333%;
 }
-div.cols div, div.cols-reverse div {
+div.cols div,
+div.cols-reverse div {
   flex: 0 0 auto;
   margin: 0;
   padding: 0;
   width: 100%;
 }
 @media (min-width: 576px) {
-  div.cols div, div.cols-reverse div {
+  div.cols div,
+div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
@@ -697,15 +705,17 @@ div.cols div, div.cols-reverse div {
   }
 }
 @media (min-width: 768px) {
-  div.cols div, div.cols-reverse div {
+  div.cols div,
+div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 33.3333333333%;
+    width: 33.333%;
   }
 }
 @media (min-width: 992px) {
-  div.cols div, div.cols-reverse div {
+  div.cols div,
+div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
@@ -713,19 +723,21 @@ div.cols div, div.cols-reverse div {
   }
 }
 @media (min-width: 1200px) {
-  div.cols div, div.cols-reverse div {
+  div.cols div,
+div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 16.6666666667%;
+    width: 16.666%;
   }
 }
 @media (min-width: 1400px) {
-  div.cols div, div.cols-reverse div {
+  div.cols div,
+div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 8.3333333333%;
+    width: 8.333%;
   }
 }
 @media (min-width: 768px) {
@@ -739,9 +751,11 @@ div.cols div, div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 33.3333333333%;
+    width: 33.333%;
   }
-  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+  div.text div.cols div, div.cols div.text div,
+div.text div.cols-reverse div,
+div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
@@ -749,7 +763,9 @@ div.cols div, div.cols-reverse div {
   }
 }
 @media (min-width: 768px) and (min-width: 576px) {
-  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+  div.text div.cols div, div.cols div.text div,
+div.text div.cols-reverse div,
+div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
@@ -757,15 +773,19 @@ div.cols div, div.cols-reverse div {
   }
 }
 @media (min-width: 768px) and (min-width: 768px) {
-  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+  div.text div.cols div, div.cols div.text div,
+div.text div.cols-reverse div,
+div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 33.3333333333%;
+    width: 33.333%;
   }
 }
 @media (min-width: 768px) and (min-width: 992px) {
-  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+  div.text div.cols div, div.cols div.text div,
+div.text div.cols-reverse div,
+div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
@@ -773,19 +793,23 @@ div.cols div, div.cols-reverse div {
   }
 }
 @media (min-width: 768px) and (min-width: 1200px) {
-  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+  div.text div.cols div, div.cols div.text div,
+div.text div.cols-reverse div,
+div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 16.6666666667%;
+    width: 16.666%;
   }
 }
 @media (min-width: 768px) and (min-width: 1400px) {
-  div.text div.cols div, div.cols div.text div, div.text div.cols-reverse div, div.cols-reverse div.text div {
+  div.text div.cols div, div.cols div.text div,
+div.text div.cols-reverse div,
+div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
-    width: 8.3333333333%;
+    width: 8.333%;
   }
 }
 /*  =================================================================
