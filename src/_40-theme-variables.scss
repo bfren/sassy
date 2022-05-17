@@ -1,0 +1,17 @@
+$bf-theme-primary: null;
+$bf-theme-secondary: null;
+$bf-theme-ok: null;
+$bf-theme-info: null;
+$bf-theme-warn: null;
+$bf-theme-error: null;
+$bf-theme-grey: null;
+
+$bf-theme: (
+    primary: $bf-theme-primary,
+    secondary: $bf-theme-secondary,
+    ok: $bf-theme-ok,
+    info: $bf-theme-info,
+    warn: $bf-theme-warn,
+    error: $bf-theme-error,
+    grey: $bf-theme-grey
+);
