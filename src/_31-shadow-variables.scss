@@ -1,8 +1,21 @@
 $bf-shadow-unit: 0.125rem !default;
+$bf-shadow-colour: #000 !default;
 
-$bf-shadow: (
-    0: none,
-    1: 0 $bf-shadow-unit $bf-shadow-unit * 2 rgba(0, 0, 0, 0.075),
-    2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 rgba(0, 0, 0, 0.15),
-    3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 rgba(0, 0, 0, 0.175)
-);
+@function get-shadow-colours($colour) {
+    $rgba: rgba($colour, 0.075);
+    @return (0: none,
+        1: 0 $bf-shadow-unit $bf-shadow-unit * 2 $rgba,
+        2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 adjust-color($rgba, $alpha: 0.075),
+        3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 adjust-color($rgba, $alpha: 0.1));
+}
+
+$bf-shadow: get-shadow-colours($bf-shadow-colour);
+
+@each $name, $shades in $bf-colours {
+    @each $num, $shade in $shades {
+        @each $size, $shadow in get-shadow-colours($shade) {
+            $class: #{join-values(($name $num $size))};
+            $bf-shadow: map-merge($bf-shadow, ($class: $shadow));
+        }
+    }
+}

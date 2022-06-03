@@ -1,10 +1,11 @@
-$bf-theme-primary: null;
-$bf-theme-secondary: null;
-$bf-theme-ok: null;
-$bf-theme-info: null;
-$bf-theme-warn: null;
-$bf-theme-error: null;
-$bf-theme-grey: null;
+$bf-theme-primary: #0284c7 !default; // Sky 600
+$bf-theme-secondary: #14b8a6 !default; // Teal 500
+$bf-theme-ok: #16a34a !default; // Green 600
+$bf-theme-info: #d4d4d8 !default; // Zinc 300
+$bf-theme-warn: #fbbf24 !default; // Amber 400
+$bf-theme-error: #ef4444 !default; // Red 500
+$bf-theme-grey-light: #d1d5db !default; // Grey 300
+$bf-theme-grey-dark: #4b5563 !default; // Grey 600
 
 $bf-theme: (
     primary: $bf-theme-primary,
@@ -13,5 +14,13 @@ $bf-theme: (
     info: $bf-theme-info,
     warn: $bf-theme-warn,
     error: $bf-theme-error,
-    grey: $bf-theme-grey
+    grey: $bf-theme-grey-light
 );
+
+$bf-theme-shadow: ();
+@each $name, $colour in $bf-theme {
+    @each $size, $shadow in get-shadow-colours($colour) {
+        $class: #{join-values(($name $size))};
+        $bf-theme-shadow: map-merge($bf-theme-shadow, ($class: $shadow));
+    }
+}
