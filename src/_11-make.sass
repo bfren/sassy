@@ -54,11 +54,24 @@
 /// @return {string}
 ///     Namespaced class name.
 @function -get-class-name($class)
-    // don't add the prefix if it already has been - used during make.responsive recursion
+    // don't add the prefix if it already has been added - used during make.responsive recursion
     @if str-slice($class, 1, 2) == $bf-prefix
         @return $class
     @else
-        @return $bf-prefix + $bf-separator + $class
+        @return join-values(($bf-prefix $class))
+
+
+
+/// Creates a namespaced sub-class name - for example 'fred' 'jones' becomes 'bf-fred-jones'.
+///
+/// @param {string} $base-class
+///     Base class name.
+/// @param {string} $sub-class
+///     Sub class name.
+/// @return {string}
+///     Namespaced sub-class name.
+@function -get-sub-class-name($base-class, $sub-class)
+    @return join-values((-get-class-name($base-class) $sub-class))
 
 
 
@@ -99,7 +112,7 @@
         $class: -get-sub-class-name($base-class, $sub-class)
         $value: -get-value($property-value, $sub-class)
         @if -is-map($value)
-            @include responsive($class, $value) using ($recursive-value)
+            @include -responsive-multiple($class, $value) using ($recursive-value)
                 @content($recursive-value)
         @else
             %#{$class}
@@ -113,25 +126,12 @@
         @each $sub-class, $property-value in $sub-class-map
             $value: -get-value($property-value, $sub-class)
             @if not -is-map($value)
-                $class: -get-sub-class-name($base-class, $sub-class) + $bf-separator + $breakpoint
+                $class: join-values((-get-sub-class-name($base-class, $sub-class) $breakpoint))
                 %#{$class}
                     @content($value)
                 @if $bf-full
                     .#{$class}
                         @content($value)
-
-
-
-/// Creates a namespaced sub-class name - for example 'fred' 'jones' becomes 'bf-fred-jones'.
-///
-/// @param {string} $base-class
-///     Base class name.
-/// @param {string} $sub-class
-///     Sub class name.
-/// @return {string}
-///     Namespaced sub-class name.
-@function -get-sub-class-name($base-class, $sub-class)
-    @return -get-class-name($base-class) + $bf-separator + $sub-class
 
 
 
