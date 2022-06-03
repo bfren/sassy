@@ -122,8 +122,10 @@ div.shadow {
     @extend %bf-p-3;
     @extend %bf-shadow-1;
     @extend %bf-shadow-2-sm;
-    @extend %bf-shadow-3-md;
-    @extend %bf-shadow-0-xl;
+    @extend %bf-shadow-green-900-3-md;
+    @extend %bf-shadow-sky-700-2-lg;
+    @extend %bf-shadow-fuchsia-500-3-xl;
+    @extend %bf-shadow-0-2xl;
     @extend %bf-text-align-centre;
     @extend %bf-width-50;
 }

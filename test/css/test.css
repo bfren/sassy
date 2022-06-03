@@ -140,7 +140,7 @@
 /**
  * Correct the inability to style buttons in iOS and Safari.
  */
-:where(button, input:is([type="button" i], [type="reset" i], [type="submit" i])) {
+:where(button, input:is([type=button i], [type=reset i], [type=submit i])) {
   -webkit-appearance: button;
 }
 
@@ -169,7 +169,7 @@
  * 1. Correct the odd appearance in Chrome, Edge, and Safari.
  * 2. Correct the outline style in Safari.
  */
-:where(input[type="search" i]) {
+:where(input[type=search i]) {
   -webkit-appearance: textfield;
   /* 1 */
   outline-offset: -2px;
@@ -213,7 +213,7 @@
 /**
  * Remove the inner border and padding of focus outlines in Firefox.
  */
-:where(button, input:is([type="button" i], [type="color" i], [type="reset" i], [type="submit" i]))::-moz-focus-inner {
+:where(button, input:is([type=button i], [type=color i], [type=reset i], [type=submit i]))::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -221,7 +221,7 @@
 /**
  * Restore the focus outline styles unset by the previous rule in Firefox.
  */
-:where(button, input:is([type="button" i], [type="color" i], [type="reset" i], [type="submit" i]))::-moz-focusring {
+:where(button, input:is([type=button i], [type=color i], [type=reset i], [type=submit i]))::-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
@@ -397,14 +397,18 @@ div.test {
 
 /*  =================================================================
  *  Text Colour
- *  ================================================================= */
+ *  =================================================================
+ *
+ *  See also 40-theme */
 div.footer-gone {
   color: #991b1b;
 }
 
 /*  =================================================================
  *  Background Colour
- *  ================================================================= */
+ *  =================================================================
+ *
+ *  See also 40-theme */
 @media (min-width: 992px) {
   div.text > div:last-child {
     background-color: #e7e5e4;
@@ -427,7 +431,7 @@ div.test {
  *  Border Colour
  *  =================================================================
  *
- *  See 24-border */
+ *  See 24-border and 40-theme */
 /*  =================================================================
  *  Opacity
  *  ================================================================= */
@@ -651,7 +655,9 @@ main, div.test {
  *  ================================================================= */
 /*  =================================================================
  *  Box Shadow
- *  ================================================================= */
+ *  =================================================================
+ *
+ *  See also 40-theme */
 div.shadow {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
@@ -663,14 +669,36 @@ div.shadow {
 }
 @media (min-width: 768px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1rem 2rem rgba(20, 83, 45, 0.175);
+  }
+}
+@media (min-width: 992px) {
+  div.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(3, 105, 161, 0.15);
   }
 }
 @media (min-width: 1200px) {
   div.shadow {
+    box-shadow: 0 1rem 2rem rgba(217, 70, 239, 0.175);
+  }
+}
+@media (min-width: 1400px) {
+  div.shadow {
     box-shadow: none;
   }
 }
+/*  =================================================================
+ *  Theme: Text
+ *  ================================================================= */
+/*  =================================================================
+ *  Theme: Background
+ *  ================================================================= */
+/*  =================================================================
+ *  Theme: Border
+ *  ================================================================= */
+/*  =================================================================
+ *  Theme: Shadow
+ *  ================================================================= */
 /*  =================================================================
  *  Flex Rows and Columns
  *  ================================================================= */
@@ -825,7 +853,7 @@ div.cols-reverse div.text div {
  *  Additional Placeholders
  *  ================================================================= */
 /*  =================================================================
- *  Grid System
+ *  Sassy UI
  *  ================================================================= */
 html {
   font-family: serif;
