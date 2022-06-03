@@ -19,6 +19,26 @@ $bf-sides: (
 );
 
 
+/// Joins a list of items using $bf-separator.
+///
+/// @param {any} $var
+///     String or list of strings.
+/// @return {string}
+///     Values separated by $bf-separator.
+@function join-values($val) {
+    @if type-of($val) == list {
+        $joined: nth($val, 1);
+        @for $i from 2 through length($val) {
+            $joined: $joined + $bf-separator + nth($val, $i)
+        }
+        @return $joined;
+    }
+    @else {
+        @return join-values(($val));
+    }
+}
+
+
 
 //  =================================================================
 //  20: Layout
