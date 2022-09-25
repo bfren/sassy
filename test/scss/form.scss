@@ -1,0 +1,38 @@
+@use "../../src/" as sassy;
+@use "../../src/form";
+
+html {
+    font-family: serif;
+    @extend %bf-height-100;
+
+    @include sassy.util-up(font-family (md: Arial));
+}
+
+body {
+    @extend %bf-body;
+    @extend %bf-d-flex-lg;
+    @extend %bf-flex-column-lg;
+    @extend %bf-height-100-lg;
+}
+
+header {
+    @extend .wrap-fluid;
+    @extend %bf-d-flex;
+    @extend %bf-font-weight-700-lg;
+    @extend %bf-flex-justify-between;
+    @extend %bf-flex-align-items-centre;
+    @include sassy.util-up(height (sm: 50px));
+}
+
+main {
+    @extend .wrap;
+    @extend %bf-rounded;
+}
+
+footer {
+    @extend .wrap;
+    @extend %bf-font-style-italic;
+    @extend %bf-mt-auto;
+    @extend %bf-text-align-centre;
+    @extend %bf-text-transform-upper-lg;
+}

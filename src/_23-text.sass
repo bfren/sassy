@@ -7,11 +7,11 @@
     =================================================================
 
 @include make.single("body")
-    color: $bf-body-colour
-    font-family: $bf-body-font-family
-    font-size: $bf-body-font-size
-    font-weight: $bf-body-font-weight
-    line-height: $bf-body-line-height
+    color: var(--bf-body-colour)
+    font-family: var(--bf-body-font-family)
+    font-size: var(--bf-body-font-size)
+    font-weight: var(--bf-body-font-weight)
+    line-height: var(--bf-body-line-height)
 
     /*  =============================================================
         Headings
@@ -56,11 +56,18 @@
         @extend %bf-mb-2
 
     /*  =============================================================
+        Inputs
+        =============================================================
+
+    input
+        font-family: var(--bf-body-font-family)
+
+    /*  =============================================================
         Monospacing
         =============================================================
 
     code, textarea
-        font-family: $bf-font-family-mono
+        font-family: var(--bf-font-family-mono)
 
 
 

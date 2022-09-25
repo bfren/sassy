@@ -1,20 +1,23 @@
-$bf-theme-primary: #0284c7 !default; // Sky 600
-$bf-theme-secondary: #14b8a6 !default; // Teal 500
-$bf-theme-ok: #16a34a !default; // Green 600
-$bf-theme-info: #d4d4d8 !default; // Zinc 300
-$bf-theme-warn: #fbbf24 !default; // Amber 400
-$bf-theme-error: #ef4444 !default; // Red 500
-$bf-theme-grey-light: #d1d5db !default; // Grey 300
-$bf-theme-grey-dark: #4b5563 !default; // Grey 600
+:root {
+    --bf-theme-primary: #0284c7; // Sky 600
+    --bf-theme-secondary: #14b8a6; // Teal 500
+    --bf-theme-ok: #16a34a; // Green 600
+    --bf-theme-info: #d4d4d8; // Zinc 300
+    --bf-theme-warn: #fbbf24; // Amber 400
+    --bf-theme-error: #ef4444; // Red 500
+    --bf-theme-grey-light: #d1d5db; // Grey 300
+    --bf-theme-grey-dark: #4b5563; // Grey 600
+}
+
 
 $bf-theme: (
-    primary: $bf-theme-primary,
-    secondary: $bf-theme-secondary,
-    ok: $bf-theme-ok,
-    info: $bf-theme-info,
-    warn: $bf-theme-warn,
-    error: $bf-theme-error,
-    grey: $bf-theme-grey-light
+    primary: var(--bf-theme-primary),
+    secondary: var(--bf-theme-secondary),
+    ok: var(--bf-theme-ok),
+    info: var(--bf-theme-info),
+    warn: var(--bf-theme-warn),
+    error: var(--bf-theme-error),
+    grey: var(--bf-theme-grey-light)
 );
 
 $bf-theme-shadow: ();

@@ -5,10 +5,13 @@
 		}
 	],
 	"settings": {
+		"editor.renderWhitespace": "all",
 		"files.insertFinalNewline": true,
 		"liveSassCompile.settings.includeItems": [
 			//"/dist/sass/full.sass",
+			//"/test/scss/form.scss",
 			"/test/scss/test.scss",
+			//"/test/scss/test-full.scss",
 		],
 		"liveSassCompile.settings.formats": [
 			{

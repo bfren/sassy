@@ -1,10 +1,8 @@
-@use "../../src/" as sassy;
+@use "../../dist/css/full";
 
 html {
     font-family: serif;
     @extend %bf-height-100;
-
-    @include sassy.util-up(font-family (md: Arial));
 }
 
 body {
@@ -20,7 +18,6 @@ header {
     @extend %bf-font-weight-700-lg;
     @extend %bf-flex-justify-between;
     @extend %bf-flex-align-items-centre;
-    @include sassy.util-up(height (sm: 50px));
 }
 
 main {
@@ -39,7 +36,7 @@ footer {
 }
 
 div.footer-gone {
-    @extend %bf-c-error;
+    @extend %bf-c-red-800;
     @extend %bf-d-none;
     @extend %bf-d-block-lg;
     @extend %bf-text-align-centre;
@@ -57,8 +54,6 @@ div.test {
     @extend %bf-rounded;
     @extend %bf-text-align-centre;
     @extend %bf-text-decoration-through-2xl;
-
-    @include sassy.util-up(width (sm: 50%, xl: 100%));
 
     span {
         @extend %bf-border-2;

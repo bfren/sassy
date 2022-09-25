@@ -92,7 +92,7 @@
         %#{-get-sub-class-name($class, $breakpoint)}
             @content
         @if $bf-full
-            .#{$class}
+            .#{-get-sub-class-name($class, $breakpoint)}
                 @content
 
 

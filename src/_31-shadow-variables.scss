@@ -1,15 +1,17 @@
-$bf-shadow-unit: 0.125rem !default;
-$bf-shadow-colour: #000 !default;
-
-@function get-shadow-colours($colour) {
-    $rgba: rgba($colour, 0.075);
-    @return (0: none,
-        1: 0 $bf-shadow-unit $bf-shadow-unit * 2 $rgba,
-        2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 adjust-color($rgba, $alpha: 0.075),
-        3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 adjust-color($rgba, $alpha: 0.1));
+:root {
+    --bf-shadow-colour: #000;
 }
 
-$bf-shadow: get-shadow-colours($bf-shadow-colour);
+$bf-shadow-unit: 0.125rem !default;
+
+@function get-shadow-colours($colour) {
+    @return (0: none,
+        1: 0 $bf-shadow-unit $bf-shadow-unit * 2 rgba($colour, 0.075),
+        2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 rgba($colour, 0.15),
+        3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 rgba($colour, 0.175));
+}
+
+$bf-shadow: get-shadow-colours(var(--bf-shadow-colour));
 
 @each $name, $shades in $bf-colours {
     @each $num, $shade in $shades {

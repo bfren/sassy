@@ -1,4 +1,4 @@
-$bf-grid-cols: 12 !default;
+$bf-grid-cols: 12;
 
 $bf-col: ();
 @for $i from 1 through $bf-grid-cols {
