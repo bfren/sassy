@@ -296,7 +296,7 @@
   --bf-theme-warn: #fbbf24;
   --bf-theme-error: #ef4444;
   --bf-theme-grey-light: #d1d5db;
-  --bf-theme-grey-dark: #4b5563;
+  --bf-theme-grey-dark: #374151;
 }
 
 /*  =================================================================
@@ -3633,6 +3633,11 @@
   margin-bottom: 0.25rem;
 }
 
+.bf-body p, .bf-body li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .bf-my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -4310,10 +4315,6 @@
 
 .bf-mt-1 {
   margin-top: 0.25rem;
-}
-
-.bf-body p, .bf-body li {
-  margin-top: 0.5rem;
 }
 
 .bf-mt-2 {
@@ -5364,7 +5365,7 @@
   margin-bottom: 0.25rem;
 }
 
-.bf-body h1, .bf-body h2, .bf-body h3, .bf-body h4, .bf-body h5, .bf-body h6, .bf-body p, .bf-body li {
+.bf-body h1, .bf-body h2, .bf-body h3, .bf-body h4, .bf-body h5, .bf-body h6 {
   margin-bottom: 0.5rem;
 }
 
