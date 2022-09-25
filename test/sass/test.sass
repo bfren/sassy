@@ -1,5 +1,8 @@
 @use "../../src/" as sassy
 
+:root
+    --bf-theme-primary: #{sassy.colour("orange", 600)}
+
 html
     @extend %bf-height-100
 
@@ -12,7 +15,7 @@ body
         font-family: Arial
     @include sassy.up(3xl)
         font-style: italic
-        color: sassy.colour("yellow", 200)
+        color: #{sassy.colour("yellow", 200)}
 
 header
     @extend .wrap-fluid
@@ -98,6 +101,7 @@ div.text
                 @extend %bf-line-height-triple-xl
 
 div.shadow
+    @extend %bf-c-primary
     @extend %bf-border-1
     @extend %bf-border-grey-400
     @extend %bf-rounded-md

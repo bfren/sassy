@@ -724,6 +724,10 @@ div.shadow {
 /*  =================================================================
  *  Theme: Text
  *  ================================================================= */
+div.shadow {
+  color: var(--bf-theme-primary);
+}
+
 div.footer-gone {
   color: var(--bf-theme-error);
 }
@@ -893,6 +897,10 @@ div.cols-reverse div.text div {
 /*  =================================================================
  *  Sassy UI
  *  ================================================================= */
+:root {
+  --bf-theme-primary: #ea580c;
+}
+
 @media (min-width: 768px) {
   body {
     font-family: Arial;
