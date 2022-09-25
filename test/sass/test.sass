@@ -1,16 +1,17 @@
 @use "../../src/" as sassy
 
 html
-    font-family: serif
     @extend %bf-height-100
-    @include sassy.util-up(font-family (md: Arial))
-
 
 body
     @extend %bf-body
     @extend %bf-d-flex-lg
     @extend %bf-flex-column-lg
     @extend %bf-height-100-lg
+    @include sassy.util-up(md)
+        font-family: Arial
+    @include sassy.util-up(2xl)
+        font-style: italic
 
 header
     @extend .wrap-fluid
@@ -18,7 +19,7 @@ header
     @extend %bf-font-weight-700-lg
     @extend %bf-flex-justify-between
     @extend %bf-flex-align-items-centre
-    @include sassy.util-up(height (sm: 50px))
+    @include sassy.util-up-prop(height (sm: 50px))
 
 main
     @extend .wrap
@@ -34,7 +35,7 @@ footer
     @extend %bf-text-transform-upper-lg
 
 div.footer-gone
-    @extend %bf-c-primary
+    @extend %bf-c-error
     @extend %bf-d-none
     @extend %bf-d-block-lg
     @extend %bf-text-align-centre
@@ -51,7 +52,7 @@ div.test
     @extend %bf-rounded
     @extend %bf-text-align-centre
     @extend %bf-text-decoration-through-2xl
-    @include sassy.util-up(width (sm: 50%, xl: 100%))
+    @include sassy.util-up-prop(width (sm: 50%, xl: 100%))
 
     span
         @extend %bf-border-2
