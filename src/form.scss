@@ -1,6 +1,0 @@
-@use "./" as sassy;
-
-.form-control {
-    font-family: $bf-body-font-family;
-    @extend %bf-p-1;
-}

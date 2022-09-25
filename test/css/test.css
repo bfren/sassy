@@ -30,10 +30,8 @@
  */
 :where(h1) {
   font-size: 2em;
-  -webkit-margin-after: 0.67em;
-          margin-block-end: 0.67em;
-  -webkit-margin-before: 0.67em;
-          margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-block-start: 0.67em;
 }
 
 /* Grouping content
@@ -42,10 +40,8 @@
  * Remove the margin on nested lists in Chrome, Edge, and Safari.
  */
 :where(dl, ol, ul) :where(dl, ol, ul) {
-  -webkit-margin-after: 0;
-          margin-block-end: 0;
-  -webkit-margin-before: 0;
-          margin-block-start: 0;
+  margin-block-end: 0;
+  margin-block-start: 0;
 }
 
 /**
@@ -79,8 +75,7 @@
  */
 :where(abbr[title]) {
   text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
 }
 
 /**
@@ -242,7 +237,6 @@
   border: solid;
   color: black;
   height: -moz-fit-content;
-  height: -webkit-fit-content;
   height: fit-content;
   left: 0;
   margin: auto;
@@ -250,7 +244,6 @@
   position: absolute;
   right: 0;
   width: -moz-fit-content;
-  width: -webkit-fit-content;
   width: fit-content;
 }
 
@@ -724,7 +717,7 @@ div.shadow {
  *  Theme: Text
  *  ================================================================= */
 div.footer-gone {
-  color: var(--bf-theme-error);
+  color: var(--bf-theme-primary);
 }
 
 /*  =================================================================
@@ -914,4 +907,6 @@ html {
   div.test {
     width: 100%;
   }
-}/*# sourceMappingURL=test.css.map */
+}
+
+/*# sourceMappingURL=test.css.map */
