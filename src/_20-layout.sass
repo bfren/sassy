@@ -82,6 +82,14 @@ $bf-m-loop: (auto: auto, inherit: inherit)
 @include make.responsive("m", $bf-m-loop) using ($value)
     margin: $value
 
+@include make.responsive("mx", $bf-m-loop) using ($value)
+    margin-left: $value
+    margin-right: $value
+
+@include make.responsive("my", $bf-m-loop) using ($value)
+    margin-top: $value
+    margin-bottom: $value
+
 @each $key, $val in $bf-sides
     @include make.responsive("m" + $key, $bf-m-loop) using ($value)
         #{"margin-" + $val}: $value
@@ -98,6 +106,14 @@ $bf-p-loop: (auto: auto, inherit: inherit)
 
 @include make.responsive("p", $bf-p-loop) using ($value)
     padding: $value
+
+@include make.responsive("px", $bf-p-loop) using ($value)
+    padding-left: $value
+    padding-right: $value
+
+@include make.responsive("py", $bf-p-loop) using ($value)
+    padding-top: $value
+    padding-bottom: $value
 
 @each $key, $val in $bf-sides
     @include make.responsive("p" + $key, $bf-p-loop) using ($value)
