@@ -1,14 +1,13 @@
 :root {
-    --bf-theme-primary: #0284c7; // Sky 600
-    --bf-theme-secondary: #14b8a6; // Teal 500
-    --bf-theme-ok: #16a34a; // Green 600
-    --bf-theme-info: #d4d4d8; // Zinc 300
-    --bf-theme-warn: #fbbf24; // Amber 400
-    --bf-theme-error: #ef4444; // Red 500
-    --bf-theme-grey-light: #d1d5db; // Grey 300
-    --bf-theme-grey-dark: #4b5563; // Grey 600
+    --bf-theme-primary: #{colour("sky", 500)};
+    --bf-theme-secondary: #{colour("teal", 500)};
+    --bf-theme-ok: #{colour("green", 600)};
+    --bf-theme-info: #{colour("zinc", 300)};
+    --bf-theme-warn: #{colour("amber", 400)};
+    --bf-theme-error: #{colour("red", 500)};
+    --bf-theme-grey-light: #{colour("grey", 300)};
+    --bf-theme-grey-dark: #{colour("grey", 700)};
 }
-
 
 $bf-theme: (
     primary: var(--bf-theme-primary),

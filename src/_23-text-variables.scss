@@ -6,7 +6,7 @@
     --bf-font-weight-base: 400;
     --bf-line-height-base: 1.5;
 
-    --bf-body-colour: #1f2937; // grey-800
+    --bf-body-colour: #{colour("grey", 800)};
     --bf-body-font-family: var(--bf-font-family-sans);
     --bf-body-font-size: var(--bf-font-size-base);
     --bf-body-font-weight: var(--bf-font-weight-base);

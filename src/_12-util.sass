@@ -22,33 +22,6 @@
 
 
 
-/// Returns a colour definition, if it exists.
-///
-/// @param {string} $name
-///     Colour name (e.g. cyan).
-/// @param {string} $shade
-///     Shade (e.g. 400) - 50, 100 - 900 in 100 intervals.
-/// @return {string}
-///     Colour hex for specified $name and $shade
-@function colour($name, $shade)
-    // default colour to return on error
-    $black: #000
-
-    // ensure the colour exists
-    @if not map-has-key($bf-colours, $name)
-        @warn "'#{$name}' is not a valid colour - returning #{$black}."
-        @return $black
-
-    // ensure the shade exists
-    @if not map-has-key(map-get($bf-colours, $name), $shade)
-        @warn "#{$shade} is not a valid shade for '#{$name}' - returning #{$black}."
-        @return $black
-
-    // return the shade for the colour
-    @return map-get(map-get($bf-colours, $name), $shade)
-
-
-
 /// Rounds a number down, to three decimal places.
 /// Hat-tip https://gist.github.com/terkel/4373420
 ///

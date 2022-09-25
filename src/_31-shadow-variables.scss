@@ -13,7 +13,7 @@ $bf-shadow-unit: 0.125rem !default;
 
 $bf-shadow: get-shadow-colours(var(--bf-shadow-colour));
 
-@each $name, $shades in $bf-colours {
+@each $name, $shades in $tailwind-colours {
     @each $num, $shade in $shades {
         @each $size, $shadow in get-shadow-colours($shade) {
             $class: #{join-values(($name $num $size))};

@@ -8,10 +8,11 @@ body
     @extend %bf-d-flex-lg
     @extend %bf-flex-column-lg
     @extend %bf-height-100-lg
-    @include sassy.util-up(md)
+    @include sassy.up(md)
         font-family: Arial
-    @include sassy.util-up(2xl)
+    @include sassy.up(3xl)
         font-style: italic
+        color: sassy.colour("yellow", 200)
 
 header
     @extend .wrap-fluid
@@ -19,7 +20,8 @@ header
     @extend %bf-font-weight-700-lg
     @extend %bf-flex-justify-between
     @extend %bf-flex-align-items-centre
-    @include sassy.util-up-prop(height (sm: 50px))
+    @extend %bf-font-size-4-lg
+    @include sassy.up-prop(height (sm: 50px))
 
 main
     @extend .wrap
@@ -51,7 +53,7 @@ div.test
     @extend %bf-rounded
     @extend %bf-text-align-centre
     @extend %bf-text-decoration-through-2xl
-    @include sassy.util-up-prop(width (sm: 50%, xl: 100%))
+    @include sassy.up-prop(width (sm: 50%, xl: 100%))
 
     span
         @extend %bf-border-2

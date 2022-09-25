@@ -289,14 +289,14 @@
 }
 
 :root {
-  --bf-theme-primary: #0284c7;
+  --bf-theme-primary: #0ea5e9;
   --bf-theme-secondary: #14b8a6;
   --bf-theme-ok: #16a34a;
   --bf-theme-info: #d4d4d8;
   --bf-theme-warn: #fbbf24;
   --bf-theme-error: #ef4444;
   --bf-theme-grey-light: #d1d5db;
-  --bf-theme-grey-dark: #4b5563;
+  --bf-theme-grey-dark: #374151;
 }
 
 /*  =================================================================
@@ -367,6 +367,11 @@ div.shadow {
   margin: 0 auto;
 }
 
+body p, body li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 footer {
   margin-top: auto;
 }
@@ -375,10 +380,6 @@ div.text > div h1,
 div.text > div h3,
 div.text > div h5, body h1 {
   margin-top: 0rem;
-}
-
-body p, body li {
-  margin-top: 0.5rem;
 }
 
 body h5, body h6 {
@@ -407,7 +408,7 @@ body h2 {
     margin-top: 1.25rem;
   }
 }
-body h1, body h2, body h3, body h4, body h5, body h6, body p, body li {
+body h1, body h2, body h3, body h4, body h5, body h6 {
   margin-bottom: 0.5rem;
 }
 
@@ -574,6 +575,11 @@ body code, body textarea {
 /*  =================================================================
  *  Font: Size
  *  ================================================================= */
+@media (min-width: 992px) {
+  header {
+    font-size: calc(var(--bf-font-size-base) * 1.4);
+  }
+}
 /*  =================================================================
  *  Font: Style
  *  ================================================================= */
@@ -892,9 +898,10 @@ div.cols-reverse div.text div {
     font-family: Arial;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1600px) {
   body {
     font-style: italic;
+    color: #fef08a;
   }
 }
 
