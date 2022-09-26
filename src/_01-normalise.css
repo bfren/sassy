@@ -289,3 +289,7 @@
 :where(summary) {
    display: list-item;
 }
+
+*, ::after, ::before {
+   box-sizing: border-box;
+}
