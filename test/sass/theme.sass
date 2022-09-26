@@ -1,0 +1,78 @@
+@use "../../src/" as sassy
+
+body
+    @extend %bf-body
+
+.row
+    @extend %bf-d-flex-row
+
+.text, .background, .border, .shadow
+    @extend %bf-col-12
+    @extend %bf-col-4-sm
+
+    div
+        background-color: white
+        @extend %bf-border-2
+        @extend %bf-border-grey-50
+        @extend %bf-mb-2
+        @extend %bf-p-2
+        @extend %bf-rounded-3
+
+.text
+    .primary
+        @extend %bf-c-primary
+    .secondary
+        @extend %bf-c-secondary
+    .ok
+        @extend %bf-c-ok
+    .info
+        @extend %bf-c-info
+    .warn
+        @extend %bf-c-warn
+    .error
+        @extend %bf-c-error
+    .grey-light
+        @extend %bf-c-grey-light
+    .grey-dark
+        @extend %bf-c-grey-dark
+
+.background
+    .primary
+        @extend %bf-c-grey-50
+        @extend %bf-bg-primary
+    .secondary
+        @extend %bf-c-grey-50
+        @extend %bf-bg-secondary
+    .ok
+        @extend %bf-c-grey-50
+        @extend %bf-bg-ok
+    .info
+        @extend %bf-bg-info
+    .warn
+        @extend %bf-bg-warn
+    .error
+        @extend %bf-c-grey-50
+        @extend %bf-bg-error
+    .grey-light
+        @extend %bf-bg-grey-light
+    .grey-dark
+        @extend %bf-c-grey-50
+        @extend %bf-bg-grey-dark
+
+.border
+    .primary
+        @extend %bf-border-primary
+    .secondary
+        @extend %bf-border-secondary
+    .ok
+        @extend %bf-border-ok
+    .info
+        @extend %bf-border-info
+    .warn
+        @extend %bf-border-warn
+    .error
+        @extend %bf-border-error
+    .grey-light
+        @extend %bf-border-grey-light
+    .grey-dark
+        @extend %bf-border-grey-dark
