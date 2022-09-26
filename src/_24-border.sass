@@ -13,6 +13,14 @@ $bf-border-loop: (auto: auto, inherit: inherit)
     border-style: solid
     border-width: $value
 
+@include make.responsive("border-x", $bf-border-loop) using ($value)
+    border-style: solid
+    border-width: $value 0 $value
+
+@include make.responsive("border-y", $bf-border-loop) using ($value)
+    border-style: solid
+    border-width: 0 $value 0 $value
+
 @each $key, $val in $bf-sides
     @include make.responsive("border-" + $val, $bf-border-loop) using ($value)
         #{"border-" + $val + "-style"}: solid
@@ -25,4 +33,4 @@ $bf-border-loop: (auto: auto, inherit: inherit)
     =================================================================
 
 @include make.responsive("border", $tailwind-colours) using ($value)
-    border-color: $value
+    border-color: rgb($value)

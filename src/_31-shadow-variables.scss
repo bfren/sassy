@@ -1,20 +1,46 @@
 :root {
-    --bf-shadow-colour: #000;
+    --bf-shadow-colour: 0 0 0;
 }
 
 $bf-shadow-unit: 0.125rem !default;
 
+
+
+/// Returns an rgb() definition with alpha transparency value.
+///
+/// @param {string} $colour
+///     Space-separated colour rgb (e.g. 24 68 236) or CSS var().
+/// @param {string} $alpha
+///     Alpha transparency (0-1).
+/// @return {string}
+///     rgb(R G B / ALPHA) definition
+@function rgb-with-alpha($colour, $alpha) {
+    @return #{"rgb(" + $colour + " / " + $alpha + ")"};
+}
+
+
+
+/// Returns an rgb() definition with alpha transparency value.
+///
+/// @param {string} $colour
+///     Space-separated colour rgb (e.g. 24 68 236).
+/// @param {string} $alpha
+///     Alpha transparency (0-1).
+/// @return {string}
+///     rgb(R G B / ALPHA) definition
 @function get-shadow-colours($colour) {
     @return (
         0: none,
-        1: 0 $bf-shadow-unit $bf-shadow-unit * 2 rgba($colour, 0.075),
-        2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 rgba($colour, 0.15),
-        3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 rgba($colour, 0.175)
+        1: 0 $bf-shadow-unit $bf-shadow-unit * 2 rgb-with-alpha($colour, 0.075),
+        2: 0 $bf-shadow-unit * 4 $bf-shadow-unit * 8 rgb-with-alpha($colour, 0.15),
+        3: 0 $bf-shadow-unit * 8 $bf-shadow-unit * 16 rgb-with-alpha($colour, 0.175)
     );
 }
 
+// start shadow map with default shadow colour
 $bf-shadow: get-shadow-colours(var(--bf-shadow-colour));
 
+// add shadow classes for each colour
 @each $name, $shades in $tailwind-colours {
     @each $num, $shade in $shades {
         @each $size, $shadow in get-shadow-colours($shade) {

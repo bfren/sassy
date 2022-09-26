@@ -6,7 +6,7 @@
     =================================================================
 
 @include make.responsive("c", $bf-theme) using ($value)
-    color: $value
+    color: rgb($value)
 
 
 
@@ -15,7 +15,7 @@
     =================================================================
 
 @include make.responsive("bg", $bf-theme) using ($value)
-    background-color: $value
+    background-color: rgb($value)
 
 
 
@@ -24,4 +24,13 @@
     =================================================================
 
 @include make.responsive("border", $bf-theme) using ($value)
-    border-color: $value
+    border-color: rgb($value)
+
+
+
+/*  =================================================================
+    Theme: Shadow
+    =================================================================
+
+@include make.responsive("shadow", $bf-theme-shadow) using ($value)
+    box-shadow: $value
