@@ -9,9 +9,9 @@ body
 .row
     @extend %bf-d-flex-row
 
-.text, .background, .border
+.text, .background, .border, .shadow
     @extend %bf-col-12
-    @extend %bf-col-4-sm
+    @extend %bf-col-3-sm
 
     div
         background-color: white
@@ -79,3 +79,21 @@ body
         @extend %bf-border-grey-light
     .grey-dark
         @extend %bf-border-grey-dark
+
+.shadow
+    .primary
+        @extend %bf-shadow-primary-2
+    .secondary
+        @extend %bf-shadow-secondary-2
+    .ok
+        @extend %bf-shadow-ok-2
+    .info
+        @extend %bf-shadow-info-2
+    .warn
+        @extend %bf-shadow-warn-2
+    .error
+        @extend %bf-shadow-error-2
+    .grey-light
+        @extend %bf-shadow-grey-light-2
+    .grey-dark
+        @extend %bf-shadow-grey-dark-2
