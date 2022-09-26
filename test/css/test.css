@@ -269,7 +269,7 @@
 :root {
   --bf-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
   --bf-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --bf-font-family-serif: "";
+  --bf-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif,;
   --bf-font-size-base: 1rem;
   --bf-font-weight-base: 400;
   --bf-line-height-base: 1.5;
@@ -300,7 +300,7 @@
 }
 
 :root {
-  --bf-grid-gutter: 0.25rem;
+  --bf-grid-gutter: 0.5rem;
 }
 
 /*  =================================================================
@@ -309,6 +309,7 @@
 .wrap-fluid, header, .wrap, main, footer {
   margin: 0 auto;
   padding: 0;
+  width: 100%;
 }
 @media (min-width: 576px) {
   .wrap, main, footer {

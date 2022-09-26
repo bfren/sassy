@@ -1,7 +1,7 @@
 :root {
     --bf-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
     --bf-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-    --bf-font-family-serif: "";
+    --bf-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif,;
     --bf-font-size-base: 1rem;
     --bf-font-weight-base: 400;
     --bf-line-height-base: 1.5;
@@ -48,7 +48,11 @@ $bf-font-weight: (
     600,
     700,
     800,
-    900
+    900,
+    bold,
+    bolder,
+    lighter,
+    normal
 );
 
 $bf-line-height: (
