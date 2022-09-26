@@ -1,12 +1,12 @@
 :root {
     --bf-theme-primary: #{colour("sky", 600)};
-    --bf-theme-secondary: #{colour("teal", 500)};
+    --bf-theme-secondary: #{colour("orange", 700)};
     --bf-theme-ok: #{colour("green", 600)};
-    --bf-theme-info: #{colour("zinc", 300)};
+    --bf-theme-info: #{colour("sky", 200)};
     --bf-theme-warn: #{colour("amber", 400)};
-    --bf-theme-error: #{colour("red", 500)};
+    --bf-theme-error: #{colour("red", 600)};
     --bf-theme-grey-light: #{colour("grey", 300)};
-    --bf-theme-grey-dark: #{colour("grey", 700)};
+    --bf-theme-grey-dark: #{colour("grey", 600)};
 }
 
 $bf-theme: (
@@ -16,7 +16,8 @@ $bf-theme: (
     info: var(--bf-theme-info),
     warn: var(--bf-theme-warn),
     error: var(--bf-theme-error),
-    grey: var(--bf-theme-grey-light)
+    grey-light: var(--bf-theme-grey-light),
+    grey-dark: var(--bf-theme-grey-dark)
 );
 
 $bf-theme-shadow: ();

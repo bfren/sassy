@@ -290,13 +290,17 @@
 
 :root {
   --bf-theme-primary: #0284c7;
-  --bf-theme-secondary: #14b8a6;
+  --bf-theme-secondary: #c2410c;
   --bf-theme-ok: #16a34a;
-  --bf-theme-info: #d4d4d8;
+  --bf-theme-info: #bae6fd;
   --bf-theme-warn: #fbbf24;
-  --bf-theme-error: #ef4444;
+  --bf-theme-error: #dc2626;
   --bf-theme-grey-light: #d1d5db;
-  --bf-theme-grey-dark: #374151;
+  --bf-theme-grey-dark: #4b5563;
+}
+
+:root {
+  --bf-grid-gutter: 0.25rem;
 }
 
 /*  =================================================================
@@ -305,7 +309,6 @@
 .wrap-fluid, header, .wrap, main, footer {
   margin: 0 auto;
   padding: 0;
-  width: 100%;
 }
 @media (min-width: 576px) {
   .wrap, main, footer {
@@ -689,9 +692,7 @@ main, div.test {
  *  ================================================================= */
 /*  =================================================================
  *  Box Shadow
- *  =================================================================
- *
- *  See also 40-theme */
+ *  ================================================================= */
 div.shadow {
   box-shadow: 0 0.125rem 0.25rem rgba(var(--bf-shadow-colour), 0.075);
 }
@@ -739,9 +740,6 @@ div.footer-gone {
  *  Theme: Border
  *  ================================================================= */
 /*  =================================================================
- *  Theme: Shadow
- *  ================================================================= */
-/*  =================================================================
  *  Flex Rows and Columns
  *  ================================================================= */
 div.cols,
@@ -755,23 +753,23 @@ div.cols div.text > div,
 div.cols-reverse div.text > div {
   flex: 0 0 auto;
   margin: 0;
-  padding: 0;
-  width: 33.333%;
+  padding: var(--bf-grid-gutter);
+  width: calc(33.333% - var(--bf-grid-gutter) * 2);
 }
 div.cols div,
 div.cols-reverse div {
   flex: 0 0 auto;
   margin: 0;
-  padding: 0;
-  width: 100%;
+  padding: var(--bf-grid-gutter);
+  width: calc(100% - var(--bf-grid-gutter) * 2);
 }
 @media (min-width: 576px) {
   div.cols div,
 div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 50%;
+    padding: var(--bf-grid-gutter);
+    width: calc(50% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) {
@@ -779,8 +777,8 @@ div.cols-reverse div {
 div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 33.333%;
+    padding: var(--bf-grid-gutter);
+    width: calc(33.333% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 992px) {
@@ -788,8 +786,8 @@ div.cols-reverse div {
 div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 25%;
+    padding: var(--bf-grid-gutter);
+    width: calc(25% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 1200px) {
@@ -797,8 +795,8 @@ div.cols-reverse div {
 div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 16.666%;
+    padding: var(--bf-grid-gutter);
+    width: calc(16.666% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 1400px) {
@@ -806,8 +804,8 @@ div.cols-reverse div {
 div.cols-reverse div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 8.333%;
+    padding: var(--bf-grid-gutter);
+    width: calc(8.333% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) {
@@ -820,16 +818,16 @@ div.cols-reverse div {
   div.text > div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 33.333%;
+    padding: var(--bf-grid-gutter);
+    width: calc(33.333% - var(--bf-grid-gutter) * 2);
   }
   div.text div.cols div, div.cols div.text div,
 div.text div.cols-reverse div,
 div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 100%;
+    padding: var(--bf-grid-gutter);
+    width: calc(100% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) and (min-width: 576px) {
@@ -838,8 +836,8 @@ div.text div.cols-reverse div,
 div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 50%;
+    padding: var(--bf-grid-gutter);
+    width: calc(50% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) and (min-width: 768px) {
@@ -848,8 +846,8 @@ div.text div.cols-reverse div,
 div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 33.333%;
+    padding: var(--bf-grid-gutter);
+    width: calc(33.333% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) and (min-width: 992px) {
@@ -858,8 +856,8 @@ div.text div.cols-reverse div,
 div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 25%;
+    padding: var(--bf-grid-gutter);
+    width: calc(25% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) and (min-width: 1200px) {
@@ -868,8 +866,8 @@ div.text div.cols-reverse div,
 div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 16.666%;
+    padding: var(--bf-grid-gutter);
+    width: calc(16.666% - var(--bf-grid-gutter) * 2);
   }
 }
 @media (min-width: 768px) and (min-width: 1400px) {
@@ -878,8 +876,8 @@ div.text div.cols-reverse div,
 div.cols-reverse div.text div {
     flex: 0 0 auto;
     margin: 0;
-    padding: 0;
-    width: 8.333%;
+    padding: var(--bf-grid-gutter);
+    width: calc(8.333% - var(--bf-grid-gutter) * 2);
   }
 }
 /*  =================================================================
