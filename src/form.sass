@@ -1,25 +1,7 @@
-@use "./" as sassy
+@charset "UTF-8"
 
 /*  =================================================================
-    Text inputs
+    Inputs
     =================================================================
 
-form
-    .input-text
-        @extend %bf-border-1
-        @extend %bf-border-grey-300
-        @extend %bf-c-grey-800
-        @extend %bf-d-block
-        @extend %bf-m-0
-        @extend %bf-p-2
-        @extend %bf-rounded-3
-        @extend %bf-width-100
-        background-clip: padding-box
-        font-family: var(--bf-font-family-sans)
-        font-size: 1rem
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
-
-        &:focus
-            @extend %bf-border-primary
-            @extend %bf-outline-none
-            box-shadow: 0 0 0 0.25rem sassy.rgb-with-alpha(var(--bf-theme-primary), 0.25)
+@forward "form/00-input-text"
