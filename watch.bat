@@ -1,1 +1,1 @@
-sass --load-path=src --watch test/sass:test/css
+sass --load-path=src --watch test/sass:test/css src/form.sass:dist/form.css

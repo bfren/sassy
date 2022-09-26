@@ -1,0 +1,11 @@
+@use "../../src/" as sassy
+
+:root
+    --bf-theme-primary: #{sassy.colour("teal", 400)}
+
+body
+    @extend %bf-body
+    @extend %bf-pt-3
+
+h1
+    @extend %bf-border-x-3
