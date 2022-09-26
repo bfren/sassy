@@ -8,7 +8,7 @@
 
 @function -calc-col-width($value)
     $width: calc(calc($value / $bf-grid-cols) * 100%)
-    @return util.decimal-floor($width)
+    @return calc(util.decimal-floor($width) - calc(var(--bf-grid-gutter) * 2))
 
 @include make.responsive("d-flex-row", ())
     display: flex
@@ -19,5 +19,5 @@
     @include make.responsive("col", $bf-col) using ($value)
         flex: 0 0 auto
         margin: 0
-        padding: 0
+        padding: var(--bf-grid-gutter)
         width: -calc-col-width($value)
