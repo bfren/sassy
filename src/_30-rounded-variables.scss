@@ -8,7 +8,8 @@ $bf-rounded: (
     0: 0,
     1: calc($bf-radius-unit / 2),
     2: calc($bf-radius-unit * 1),
-    3: calc($bf-radius-unit * 2),
-    4: calc($bf-radius-unit * 4),
-    5: calc($bf-radius-unit * 8)
+    3: calc($bf-radius-unit * 1.5),
+    4: calc($bf-radius-unit * 2),
+    5: calc($bf-radius-unit * 3),
+    6: calc($bf-radius-unit * 4)
 );
