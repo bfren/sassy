@@ -269,7 +269,7 @@
 :root {
   --bf-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
   --bf-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --bf-font-family-serif: "";
+  --bf-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif,;
   --bf-font-size-base: 1rem;
   --bf-font-weight-base: 400;
   --bf-line-height-base: 1.5;
@@ -300,7 +300,7 @@
 }
 
 :root {
-  --bf-grid-gutter: 0.25rem;
+  --bf-grid-gutter: 0.5rem;
 }
 
 /*  =================================================================
@@ -309,6 +309,7 @@
 .wrap-fluid, .wrap {
   margin: 0 auto;
   padding: 0;
+  width: 100%;
 }
 @media (min-width: 576px) {
   .wrap {
@@ -374,14 +375,14 @@ body h2 {
   margin-top: 1.5rem;
 }
 
-.text div, .background div, .border div, .shadow div, body h1, body h2, body h3, body h4, body h5, body h6 {
+.text div, .background div, .border div, body h1, body h2, body h3, body h4, body h5, body h6 {
   margin-bottom: 0.5rem;
 }
 
 /*  =================================================================
  *  Padding
  *  ================================================================= */
-.text div, .background div, .border div, .shadow div {
+.text div, .background div, .border div {
   padding: 0.5rem;
 }
 
@@ -502,7 +503,7 @@ body code, body textarea {
 /*  =================================================================
  *  Border Width
  *  ================================================================= */
-.text div, .background div, .border div, .shadow div {
+.text div, .background div, .border div {
   border-style: solid;
   border-width: 2px;
 }
@@ -510,7 +511,7 @@ body code, body textarea {
 /*  =================================================================
  *  Border Colour
  *  ================================================================= */
-.text div, .background div, .border div, .shadow div {
+.text div, .background div, .border div {
   border-color: #f9fafb;
 }
 
@@ -520,7 +521,7 @@ body code, body textarea {
 /*  =================================================================
  *  Rounded corners: sized
  *  ================================================================= */
-.text div, .background div, .border div, .shadow div {
+.text div, .background div, .border div {
   border-radius: 0.375rem;
 }
 
@@ -644,14 +645,14 @@ body code, body textarea {
   margin: 0;
   padding: 0;
 }
-.row .text, .row .background, .row .border, .row .shadow {
+.row .text, .row .background, .row .border {
   flex: 0 0 auto;
   margin: 0;
   padding: var(--bf-grid-gutter);
   width: calc(100% - var(--bf-grid-gutter) * 2);
 }
 @media (min-width: 576px) {
-  .row .text, .row .background, .row .border, .row .shadow {
+  .row .text, .row .background, .row .border {
     flex: 0 0 auto;
     margin: 0;
     padding: var(--bf-grid-gutter);
@@ -673,7 +674,11 @@ body code, body textarea {
 /*  =================================================================
  *  Sassy UI
  *  ================================================================= */
-.text div, .background div, .border div, .shadow div {
+:root {
+  --bf-body-font-family: var(--bf-font-family-mono);
+}
+
+.text div, .background div, .border div {
   background-color: white;
 }
 

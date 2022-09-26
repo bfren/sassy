@@ -1,12 +1,15 @@
 @use "../../src/" as sassy
 
+:root
+    --bf-body-font-family: var(--bf-font-family-mono)
+
 body
     @extend %bf-body
 
 .row
     @extend %bf-d-flex-row
 
-.text, .background, .border, .shadow
+.text, .background, .border
     @extend %bf-col-12
     @extend %bf-col-4-sm
 
