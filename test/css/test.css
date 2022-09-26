@@ -258,8 +258,12 @@
   display: list-item;
 }
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 /*
-    Colour map from TailwindCSS v3.0.0
+    Colour map created from TailwindCSS v3.0.0 (hex values changed to rgb)
     https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js
     See https://tailwindcss.com/docs/customizing-colors
 
@@ -273,7 +277,7 @@
   --bf-font-size-base: 1rem;
   --bf-font-weight-base: 400;
   --bf-line-height-base: 1.5;
-  --bf-body-colour: #1f2937;
+  --bf-body-colour: 31 41 55;
   --bf-body-font-family: var(--bf-font-family-sans);
   --bf-body-font-size: var(--bf-font-size-base);
   --bf-body-font-weight: var(--bf-font-weight-base);
@@ -285,18 +289,18 @@
 }
 
 :root {
-  --bf-shadow-colour: #000;
+  --bf-shadow-colour: 0 0 0;
 }
 
 :root {
-  --bf-theme-primary: #0284c7;
-  --bf-theme-secondary: #c2410c;
-  --bf-theme-ok: #16a34a;
-  --bf-theme-info: #bae6fd;
-  --bf-theme-warn: #fbbf24;
-  --bf-theme-error: #dc2626;
-  --bf-theme-grey-light: #d1d5db;
-  --bf-theme-grey-dark: #4b5563;
+  --bf-theme-primary: 2 132 199;
+  --bf-theme-secondary: 194 65 12;
+  --bf-theme-ok: 22 163 74;
+  --bf-theme-info: 186 230 253;
+  --bf-theme-warn: 251 191 36;
+  --bf-theme-error: 220 38 38;
+  --bf-theme-grey-light: 209 213 219;
+  --bf-theme-grey-dark: 75 85 99;
 }
 
 :root {
@@ -440,20 +444,20 @@ div.test {
  *  See also 40-theme */
 @media (min-width: 992px) {
   div.text > div:last-child {
-    background-color: #e7e5e4;
+    background-color: rgb(231, 229, 228);
   }
 }
 main {
-  background-color: #ef4444;
+  background-color: rgb(239, 68, 68);
 }
 
 div.test {
-  background-color: #22c55e;
+  background-color: rgb(34, 197, 94);
 }
 
 @media (min-width: 992px) {
   main {
-    background-color: #a5f3fc;
+    background-color: rgb(165, 243, 252);
   }
 }
 /*  =================================================================
@@ -525,7 +529,7 @@ header {
  *  Font: Defaults
  *  ================================================================= */
 body {
-  color: var(--bf-body-colour);
+  color: rgb(var(--bf-body-colour));
   font-family: var(--bf-body-font-family);
   font-size: var(--bf-body-font-size);
   font-weight: var(--bf-body-font-weight);
@@ -666,11 +670,11 @@ div.test span {
  *  Border Colour
  *  ================================================================= */
 div.shadow {
-  border-color: #9ca3af;
+  border-color: rgb(156, 163, 175);
 }
 
 div.test span {
-  border-color: #fb923c;
+  border-color: rgb(251, 146, 60);
 }
 
 /*  =================================================================
@@ -693,29 +697,31 @@ main, div.test {
  *  ================================================================= */
 /*  =================================================================
  *  Box Shadow
- *  ================================================================= */
+ *  =================================================================
+ *
+ *  See also 40-theme */
 div.shadow {
-  box-shadow: 0 0.125rem 0.25rem rgba(var(--bf-shadow-colour), 0.075);
+  box-shadow: 0 0.125rem 0.25rem rgb(var(--bf-shadow-colour) / 0.075);
 }
 
 @media (min-width: 576px) {
   div.shadow {
-    box-shadow: 0 0.5rem 1rem rgba(var(--bf-shadow-colour), 0.15);
+    box-shadow: 0 0.5rem 1rem rgb(var(--bf-shadow-colour) / 0.15);
   }
 }
 @media (min-width: 768px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem rgba(20, 83, 45, 0.175);
+    box-shadow: 0 1rem 2rem rgb(20 83 45 / 0.175);
   }
 }
 @media (min-width: 992px) {
   div.shadow {
-    box-shadow: 0 0.5rem 1rem rgba(3, 105, 161, 0.15);
+    box-shadow: 0 0.5rem 1rem rgb(3 105 161 / 0.15);
   }
 }
 @media (min-width: 1200px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem rgba(217, 70, 239, 0.175);
+    box-shadow: 0 1rem 2rem rgb(217 70 239 / 0.175);
   }
 }
 @media (min-width: 1400px) {
@@ -727,11 +733,11 @@ div.shadow {
  *  Theme: Text
  *  ================================================================= */
 div.shadow {
-  color: var(--bf-theme-primary);
+  color: rgb(var(--bf-theme-primary));
 }
 
 div.footer-gone {
-  color: var(--bf-theme-error);
+  color: rgb(var(--bf-theme-error));
 }
 
 /*  =================================================================
@@ -739,6 +745,9 @@ div.footer-gone {
  *  ================================================================= */
 /*  =================================================================
  *  Theme: Border
+ *  ================================================================= */
+/*  =================================================================
+ *  Theme: Shadow
  *  ================================================================= */
 /*  =================================================================
  *  Flex Rows and Columns
@@ -897,7 +906,7 @@ div.cols-reverse div.text div {
  *  Sassy UI
  *  ================================================================= */
 :root {
-  --bf-theme-primary: #ea580c;
+  --bf-theme-primary: 234 88 12;
 }
 
 @media (min-width: 768px) {
@@ -908,7 +917,7 @@ div.cols-reverse div.text div {
 @media (min-width: 1600px) {
   body {
     font-style: italic;
-    color: #fef08a;
+    color: 254 240 138;
   }
 }
 
