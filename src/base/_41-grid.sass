@@ -22,7 +22,7 @@
         padding: 0
 
     // Columns are not nested inside d-flex-row so that their responsive
-    // variants share the same cascade layers as everything else.
+    // variants are ordered by make.passes along with everything else.
     // border-box keeps the gutter inside the column, so widths add up to 100%
     // whatever box-sizing the rest of the page uses.
     @include make.responsive("col", $bf-col) using ($value)

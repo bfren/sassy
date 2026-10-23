@@ -1,14 +1,8 @@
-/*  =================================================================
- *  Copyright notices
- *  ================================================================= */
 /*!
  *  Sassy v0.1 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
-/*  =================================================================
- *  Normalize and variables
- *  ================================================================= */
 /*!
- *  Normalize.css v12.1.0 ~  https://github.com/csstools/normalize.css
+ *  Normalize.css ~  https://github.com/csstools/normalize.css
  *  Licensed under Creative Commons Zero v1.0 Universal
  */
 /* Document
@@ -46,13 +40,11 @@
 }
 
 /**
- * 1. Add the correct box sizing in Firefox.
- * 2. Correct the inheritance of border color in Firefox.
+ * Add the correct box sizing in Firefox.
  */
 :where(hr) {
-  box-sizing: content-box; /* 1 */
-  color: inherit; /* 2 */
-  height: 0; /* 1 */
+  box-sizing: content-box;
+  height: 0;
 }
 
 /* Text-level semantics
@@ -91,12 +83,10 @@
 /* Tabular data
  * ========================================================================== */
 /**
- * 1. Correct table border color in Chrome, Edge, and Safari.
- * 2. Remove text indentation from table contents in Chrome, Edge, and Safari.
+ * Correct table border color in Chrome, Edge, and Safari.
  */
 :where(table) {
-  border-color: currentColor; /* 1 */
-  text-indent: 0; /* 2 */
+  border-color: currentColor;
 }
 
 /* Forms
@@ -282,16 +272,6 @@
   --bf-grid-gutter: 0.5rem;
 }
 
-/*  =================================================================
- *  Output
- *  ================================================================= */
-/*  =================================================================
- *  Placeholders and classes
- *  =================================================================
- *
- *  Every module is rendered once for base definitions, then once per
- *  breakpoint, so breakpoint overrides always come after base rules
- *  and smaller breakpoints, whichever module defines them. */
 .wrap-fluid, header, .wrap, main, footer {
   margin: 0 auto;
   padding: 0;
@@ -718,3 +698,5 @@ div.cols-reverse div {
     width: 100%;
   }
 }
+
+/*# sourceMappingURL=test.css.map */
