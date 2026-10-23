@@ -5,44 +5,62 @@
     =================================================================
 
 @forward "00-sassy"
-@forward "01-normalise"
 
 
 
 /*  =================================================================
-    Utilities
+    Normalize and variables
     =================================================================
 
+@forward "01-normalise"
+
+// variables must be forwarded before anything that @uses them,
+// so that configuration passed with `with (...)` reaches them
 @forward "10-variables"
+
+
+
+//  =================================================================
+//  Utilities
+//  =================================================================
+
 @forward "11-make" as make-*
 @forward "12-util"
 
 
 
+//  =================================================================
+//  Standard Placeholders
+//  =================================================================
+
+@forward "20-layout" hide utilities
+@forward "21-colour" hide utilities
+@forward "22-display" hide utilities
+@forward "23-text" hide utilities
+@forward "24-border" hide utilities
+
+
+
+//  =================================================================
+//  Additional Placeholders
+//  =================================================================
+
+@forward "30-rounded" hide utilities
+@forward "31-shadow" hide utilities
+
+
+
+//  =================================================================
+//  Sassy UI
+//  =================================================================
+
+@forward "40-theme" hide utilities
+@forward "41-grid" hide utilities
+
+
+
 /*  =================================================================
-    Standard Placeholders
+    Output
     =================================================================
 
-@forward "20-layout"
-@forward "21-colour"
-@forward "22-display"
-@forward "23-text"
-@forward "24-border"
-
-
-
-/*  =================================================================
-    Additional Placeholders
-    =================================================================
-
-@forward "30-rounded"
-@forward "31-shadow"
-
-
-
-/*  =================================================================
-    Sassy UI
-    =================================================================
-
-@forward "40-theme"
-@forward "41-grid"
+@forward "50-render"

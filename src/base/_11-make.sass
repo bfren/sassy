@@ -1,15 +1,39 @@
 ﻿@use "10-variables" as *
+@use "sass:list"
+@use "sass:map"
+@use "sass:meta"
+@use "sass:string"
 
-/// Outputs a single namespaced class definition.
+// which pass make.passes is rendering: "base", a breakpoint key, or null when not inside make.passes
+$-pass: null
+
+
+
+/// Renders its content once for base definitions, then once per breakpoint (smallest first).
+///
+/// Wrap every make.* call in the framework in a single make.passes so the output is ordered:
+/// all base rules, then all sm rules, then all md rules, and so on. That way a breakpoint
+/// override always comes after - and so beats - base rules and smaller breakpoints,
+/// whichever module they were defined in.
+@mixin passes()
+    $-pass: "base" !global
+    @content
+    @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
+        $-pass: $breakpoint-key !global
+        @content
+    $-pass: null !global
+
+/// Outputs a single namespaced class definition (base pass only).
 ///
 /// @param {string} $class
 ///     Class name.
 @mixin single($class)
-    %#{-get-class-name($class)}
-        @content
-    @if $bf-full
-        .#{-get-class-name($class)}
+    @include -in-base
+        %#{-get-class-name($class)}
             @content
+        @if $bf-full
+            .#{-get-class-name($class)}
+                @content
 
 
 
@@ -25,7 +49,7 @@
 ///     Map of class definitions, e.g. (25: 25%, 50: 50%, auto: auto).
 ///     If the sub class value is null, the key will be passed to the @content block instead, e.g. (red, blue)
 @mixin responsive($base-class, $sub-class-map)
-    @if length($sub-class-map) == 0
+    @if list.length($sub-class-map) == 0
         @include -responsive-single(-get-class-name($base-class))
             @content
 
@@ -40,10 +64,10 @@
 /// @param {string} $property-map
 ///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
 @mixin up($property-map...)
-    @include -up() using ($breakpoint)
+    @include -up(false) using ($breakpoint)
         &#{$bf-separator + $breakpoint}
             @each $property-name, $property-values in $property-map
-                #{$property-name}: map-get($property-values, $breakpoint)
+                #{$property-name}: map.get($property-values, $breakpoint)
 
 
 
@@ -55,7 +79,8 @@
 ///     Namespaced class name.
 @function -get-class-name($class)
     // don't add the prefix if it already has been added - used during make.responsive recursion
-    @if str-slice($class, 1, 2) == $bf-prefix
+    $prefix: $bf-prefix + $bf-separator
+    @if string.slice($class, 1, string.length($prefix)) == $prefix
         @return $class
     @else
         @return join-values(($bf-prefix $class))
@@ -81,19 +106,21 @@
 ///     Class name.
 @mixin -responsive-single($class)
     // output the base definition
-    %#{$class}
-        @content
-    @if $bf-full
-        .#{$class}
-            @content
-
-    // loop separately to ensure min-width overrides come AFTER the base definition
-    @include -up() using ($breakpoint)
-        %#{-get-sub-class-name($class, $breakpoint)}
+    @include -in-base
+        %#{$class}
             @content
         @if $bf-full
-            .#{-get-sub-class-name($class, $breakpoint)}
+            .#{$class}
                 @content
+
+    // min-width overrides - inside make.passes these are output on the breakpoint passes
+    @include -in-breakpoints
+        @include -up() using ($breakpoint)
+            %#{-get-sub-class-name($class, $breakpoint)}
+                @content
+            @if $bf-full
+                .#{-get-sub-class-name($class, $breakpoint)}
+                    @content
 
 
 
@@ -107,31 +134,47 @@
 ///     Map of class definitions, e.g. (25: 25%, 50: 50%, auto: auto).
 ///     If the value is null, the key will be passed to the @content block instead, e.g. (red, blue)
 @mixin -responsive-multiple($base-class, $sub-class-map)
-    // output the base definition
-    @each $sub-class, $property-value in $sub-class-map
-        $class: -get-sub-class-name($base-class, $sub-class)
-        $value: -get-value($property-value, $sub-class)
-        @if -is-map($value)
-            @include -responsive-multiple($class, $value) using ($recursive-value)
-                @content($recursive-value)
-        @else
+    // output the base definitions
+    @include -in-base
+        @include -each-leaf($base-class, $sub-class-map, null) using ($class, $value)
             %#{$class}
                 @content($value)
             @if $bf-full
                 .#{$class}
                     @content($value)
-    
-    // loop separately to ensure min-width overrides come AFTER the base definition
-    @include -up() using ($breakpoint)
-        @each $sub-class, $property-value in $sub-class-map
-            $value: -get-value($property-value, $sub-class)
-            @if not -is-map($value)
-                $class: join-values((-get-sub-class-name($base-class, $sub-class) $breakpoint))
+
+    // min-width overrides - inside make.passes these are output on the breakpoint passes
+    @include -in-breakpoints
+        @include -up() using ($breakpoint)
+            @include -each-leaf($base-class, $sub-class-map, $breakpoint) using ($class, $value)
                 %#{$class}
                     @content($value)
                 @if $bf-full
                     .#{$class}
                         @content($value)
+
+
+
+/// Walks a (possibly nested) sub-class map and calls @content for each leaf,
+/// passing the full class name and value.
+///
+/// @param {string} $base-class
+///     Base class name.
+/// @param {map} $sub-class-map
+///     Map of class definitions - values may themselves be maps.
+/// @param {string} $breakpoint
+///     Breakpoint suffix to add to each class name, or null for none.
+@mixin -each-leaf($base-class, $sub-class-map, $breakpoint)
+    @each $sub-class, $property-value in $sub-class-map
+        $class: -get-sub-class-name($base-class, $sub-class)
+        $value: -get-value($property-value, $sub-class)
+        @if -is-map($value)
+            @include -each-leaf($class, $value, $breakpoint) using ($leaf-class, $leaf-value)
+                @content($leaf-class, $leaf-value)
+        @else
+            @if $breakpoint
+                $class: join-values(($class $breakpoint))
+            @content($class, $value)
 
 
 
@@ -144,7 +187,9 @@
 /// @return {string}
 ///     Value or default if value is false / null.
 @function -get-value($value, $default)
-    @return if($value, $value, $default)
+    @if $value
+        @return $value
+    @return $default
 
 
 
@@ -153,12 +198,32 @@
 /// @param {string} $var
 ///     Variable to check.
 @function -is-map($var)
-    @return type-of($var) == "map"
+    @return meta.type-of($var) == "map"
 
 
 
 /// Loops through breakpoints and calls @content for each one, passing the breakpoint key.
-@mixin -up()
+///
+/// @param {bool} $by-pass
+///     When true (default) and inside make.passes, only the current pass's breakpoint is output.
+///     make.up uses false because its media queries are part of a base definition.
+@mixin -up($by-pass: true)
     @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
-        @media (min-width: $breakpoint-value)
-            @content($breakpoint-key)
+        @if not $by-pass or $-pass == null or $-pass == $breakpoint-key
+            @media (min-width: $breakpoint-value)
+                @content($breakpoint-key)
+
+
+
+/// Outputs @content on the base pass, or always when not inside make.passes.
+@mixin -in-base()
+    @if $-pass == null or $-pass == "base"
+        @content
+
+
+
+/// Outputs @content on the breakpoint passes, or always when not inside make.passes.
+/// (-up filters to the current breakpoint.)
+@mixin -in-breakpoints()
+    @if $-pass != "base"
+        @content

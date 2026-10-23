@@ -1,67 +1,57 @@
 @use "10-variables" as *
 @use "11-make" as make
 
-/*  =================================================================
-    Display
-    =================================================================
+//  =================================================================
+//  Display, opacity and flex
+//  =================================================================
 
-@include make.responsive("d", $bf-display) using ($value)
-    display: $value
+/// Outputs this module's utilities - called by 50-render inside make.passes.
+@mixin utilities()
 
-    // See 40-grid for flex-row
+    // Display
 
+    @include make.responsive("d", $bf-display) using ($value)
+        display: $value
 
-
-/*  =================================================================
-    Opacity
-    =================================================================
-
-@for $i from 0 through 10
-    @include make.responsive("opacity", ($i * 10)) using ($value)
-        opacity: calc($value / 100)
+        // See 40-grid for flex-row
 
 
+    // Opacity
 
-/*  =================================================================
-    Flex: Align
-    =================================================================
-
-@include make.responsive("flex-align-content", $bf-flex-align-content) using ($value)
-    align-content: $value
-
-@include make.responsive("flex-align-items", $bf-flex-align-items) using ($value)
-    align-items: $value
-
-@include make.responsive("flex-align-self", $bf-flex-align-self) using ($value)
-    align-self: $value
+    @for $i from 0 through 10
+        @include make.responsive("opacity", ($i * 10)) using ($value)
+            opacity: calc($value / 100)
 
 
+    // Flex: Align
 
-/*  =================================================================
-    Flex: Direction
-    =================================================================
+    @include make.responsive("flex-align-content", $bf-flex-align-content) using ($value)
+        align-content: $value
 
-@include make.responsive("flex", $bf-flex-direction) using ($value)
-    flex-direction: $value
+    @include make.responsive("flex-align-items", $bf-flex-align-items) using ($value)
+        align-items: $value
 
-
-
-/*  =================================================================
-    Flex: Grow / Shrink
-    =================================================================
-
-@for $i from 0 through $bf-loop-max
-    @include make.responsive("flex-grow", ($i)) using ($value)
-        flex-grow: $value
-
-    @include make.responsive("flex-shrink", ($i)) using ($value)
-        flex-shrink: $value
+    @include make.responsive("flex-align-self", $bf-flex-align-self) using ($value)
+        align-self: $value
 
 
+    // Flex: Direction
 
-/*  =================================================================
-    Flex: Justify
-    =================================================================
+    @include make.responsive("flex", $bf-flex-direction) using ($value)
+        flex-direction: $value
 
-@include make.responsive("flex-justify", $bf-flex-justify) using ($value)
-    justify-content: $value
+
+    // Flex: Grow / Shrink
+
+    @for $i from 0 through $bf-loop-max
+        @include make.responsive("flex-grow", ($i)) using ($value)
+            flex-grow: $value
+
+        @include make.responsive("flex-shrink", ($i)) using ($value)
+            flex-shrink: $value
+
+
+    // Flex: Justify
+
+    @include make.responsive("flex-justify", $bf-flex-justify) using ($value)
+        justify-content: $value

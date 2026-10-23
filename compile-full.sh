@@ -1,2 +1,2 @@
-#/usr/local/bin/fish
-sass full/sass:full/css
+#!/bin/sh
+sass --no-source-map src/full.sass dist/full.css

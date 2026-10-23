@@ -1,0 +1,29 @@
+@use "11-make" as make
+@use "20-layout" as layout
+@use "21-colour" as colour
+@use "22-display" as display
+@use "23-text" as text
+@use "24-border" as border
+@use "30-rounded" as rounded
+@use "31-shadow" as shadow
+@use "40-theme" as theme
+@use "41-grid" as grid
+
+/*  =================================================================
+    Placeholders and classes
+    =================================================================
+
+    Every module is rendered once for base definitions, then once per
+    breakpoint, so breakpoint overrides always come after base rules
+    and smaller breakpoints, whichever module defines them.
+
+@include make.passes
+    @include layout.utilities
+    @include colour.utilities
+    @include display.utilities
+    @include text.utilities
+    @include border.utilities
+    @include rounded.utilities
+    @include shadow.utilities
+    @include theme.utilities
+    @include grid.utilities

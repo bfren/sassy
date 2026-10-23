@@ -1,3 +1,8 @@
+@use "sass:map";
+@use "10-core" as *;
+@use "21-colour-variables" as *;
+@use "31-shadow-variables" as *;
+
 :root {
     --bf-theme-primary: #{colour("sky", 600)};
     --bf-theme-secondary: #{colour("orange", 700)};
@@ -24,6 +29,6 @@ $bf-theme-shadow: ();
 @each $name, $colour in $bf-theme {
     @each $size, $shadow in get-shadow-colours($colour) {
         $class: #{join-values(($name $size))};
-        $bf-theme-shadow: map-merge($bf-theme-shadow, ($class: $shadow));
+        $bf-theme-shadow: map.merge($bf-theme-shadow, ($class: $shadow));
     }
 }

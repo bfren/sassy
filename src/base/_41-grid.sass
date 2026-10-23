@@ -2,21 +2,31 @@
 @use "11-make" as make
 @use "12-util" as util
 
-/*  =================================================================
-    Flex Rows and Columns
-    =================================================================
-
 @function -calc-col-width($value)
-    $width: calc(calc($value / $bf-grid-cols) * 100%)
-    @return calc(util.decimal-floor($width) - calc(var(--bf-grid-gutter) * 2))
+    @return util.decimal-floor(calc(calc($value / $bf-grid-cols) * 100%))
 
-@include make.responsive("d-flex-row", ())
-    display: flex
-    flex-wrap: wrap
-    margin: 0
-    padding: 0
 
+//  =================================================================
+//  Grid: flex rows and columns
+//  =================================================================
+
+/// Outputs this module's utilities - called by 50-render inside make.passes.
+@mixin utilities()
+
+    // Flex Rows and Columns
+
+    @include make.responsive("d-flex-row", ())
+        display: flex
+        flex-wrap: wrap
+        margin: 0
+        padding: 0
+
+    // Columns are not nested inside d-flex-row so that their responsive
+    // variants share the same cascade layers as everything else.
+    // border-box keeps the gutter inside the column, so widths add up to 100%
+    // whatever box-sizing the rest of the page uses.
     @include make.responsive("col", $bf-col) using ($value)
+        box-sizing: border-box
         flex: 0 0 auto
         margin: 0
         padding: var(--bf-grid-gutter)

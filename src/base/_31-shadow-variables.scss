@@ -1,3 +1,7 @@
+@use "sass:map";
+@use "10-core" as *;
+@use "21-colour-variables" as *;
+
 :root {
     --bf-shadow-colour: 0 0 0;
 }
@@ -45,7 +49,7 @@ $bf-shadow: get-shadow-colours(var(--bf-shadow-colour));
     @each $num, $shade in $shades {
         @each $size, $shadow in get-shadow-colours($shade) {
             $class: #{join-values(($name $num $size))};
-            $bf-shadow: map-merge($bf-shadow, ($class: $shadow));
+            $bf-shadow: map.merge($bf-shadow, ($class: $shadow));
         }
     }
 }

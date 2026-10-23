@@ -1,11 +1,14 @@
 @use "10-variables" as *
+@use "sass:map"
+@use "sass:math"
+@use "sass:meta"
 
 /// Outputs minimum width (breakpoint) override definitions.
 ///
 /// @param {string} $breakpoint
 ///     Breakpoint value.
 @mixin up($breakpoint)
-    @media (min-width: map-get($bf-breakpoints, $breakpoint))
+    @media (min-width: map.get($bf-breakpoints, $breakpoint))
         @content
 
 
@@ -18,7 +21,7 @@
     @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
         @media (min-width: $breakpoint-value)
             @each $property-name, $property-values in $property-map
-                #{$property-name}: map-get($property-values, $breakpoint-key)
+                #{$property-name}: map.get($property-values, $breakpoint-key)
 
 
 
@@ -30,9 +33,9 @@
 /// @return {number}
 ///     $number to three decimal places (rounded down), e.g. 15.265
 @function decimal-floor($number)
-    @if type-of($number) != number
+    @if meta.type-of($number) != number
         @warn "#{$number} is not a number."
         @return $number
 
     $precision: 1000
-    @return calc(floor($number * $precision) / $precision)
+    @return calc(math.floor($number * $precision) / $precision)
