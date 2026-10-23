@@ -1,0 +1,42 @@
+﻿@use "sass:string";
+
+//  =================================================================
+//  Base
+//  =================================================================
+
+$bf-version: 0.1;
+
+$bf-debug: false !default;
+$bf-full: false !default;
+
+$bf-prefix: "bf" !default;
+$bf-separator: "-" !default;
+$bf-loop-max: 20 !default;
+
+$bf-sides: (
+    t: top,
+    e: right,
+    b: bottom,
+    s: left
+);
+
+
+/// Joins a list of items using $bf-separator.
+///
+/// @param {any} $var
+///     String or list of strings.
+/// @return {string}
+///     Values separated by $bf-separator.
+@function join-values($val) {
+    // a single value is treated as a one-item list
+    $joined: null;
+    @each $item in $val {
+        @if $joined == null {
+            $joined: "#{$item}";
+        }
+        @else {
+            $joined: $joined + $bf-separator + $item;
+        }
+    }
+    @return string.unquote($joined);
+}

@@ -1,5 +1,6 @@
 ﻿@use "10-variables" as *
 @use "11-make" as make
+@use "sass:map"
 
 /// Returns a map of steps from 0-100 in increments of 5, including auto
 ///
@@ -9,112 +10,100 @@
     $steps: (auto: auto)
     @for $i from 1 through 20
         $step: calc($i * 5)
-        $steps: map-merge($steps, ($step: calc($step * $unit)))
+        $steps: map.merge($steps, ($step: calc($step * $unit)))
     @return $steps
-
-
-
-/*  =================================================================
-    Wrap
-    =================================================================
-
-@include make.single("wrap")
-    margin: 0 auto
-    padding: 0
-    width: 100%
-
-    @include make.up((width, $bf-breakpoints))
-
-.wrap
-    @extend %bf-wrap
-    @each $breakpoint-key in map-keys($bf-breakpoints)
-        @extend %#{"bf-wrap-" + $breakpoint-key}
-
-.wrap-fluid
-    @extend %bf-wrap
-
-
-
-/*  =================================================================
-    Position
-    =================================================================
-
-@include make.responsive("position", $bf-position) using ($value)
-    position: $value
-
-
-
-/*  =================================================================
-    Height
-    =================================================================
-
-@include make.responsive("height", -get-steps(1%)) using ($value)
-    height: $value
-
-@include make.responsive("viewheight", -get-steps(1vh)) using ($value)
-    height: $value
-
-
-
-/*  =================================================================
-    Width
-    =================================================================
-
-@include make.responsive("width", -get-steps(1%)) using ($value)
-    width: $value
-
-@include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
-    width: $value
-
-
-
-/*  =================================================================
-    Margin
-    =================================================================
-
-@include make.responsive("m", ("centre")) using ($value)
-    margin: 0 auto
 
 $bf-m-loop: (auto: auto, inherit: inherit)
 @for $i from 0 through $bf-loop-max
-    $bf-m-loop: map-merge($bf-m-loop, ($i: $i * $bf-margin-unit))
+    $bf-m-loop: map.merge($bf-m-loop, ($i: $i * $bf-margin-unit))
 
-@include make.responsive("m", $bf-m-loop) using ($value)
-    margin: $value
-
-@include make.responsive("mx", $bf-m-loop) using ($value)
-    margin-left: $value
-    margin-right: $value
-
-@include make.responsive("my", $bf-m-loop) using ($value)
-    margin-top: $value
-    margin-bottom: $value
-
-@each $key, $val in $bf-sides
-    @include make.responsive("m" + $key, $bf-m-loop) using ($value)
-        #{"margin-" + $val}: $value
-
-
-
-/*  =================================================================
-    Padding
-    =================================================================
-
-$bf-p-loop: (auto: auto, inherit: inherit)
+$bf-p-loop: (inherit: inherit)
 @for $i from 0 through $bf-loop-max
-    $bf-p-loop: map-merge($bf-p-loop, ($i: $i * $bf-padding-unit))
+    $bf-p-loop: map.merge($bf-p-loop, ($i: $i * $bf-padding-unit))
 
-@include make.responsive("p", $bf-p-loop) using ($value)
-    padding: $value
 
-@include make.responsive("px", $bf-p-loop) using ($value)
-    padding-left: $value
-    padding-right: $value
 
-@include make.responsive("py", $bf-p-loop) using ($value)
-    padding-top: $value
-    padding-bottom: $value
+//  =================================================================
+//  Layout: wrap, position, height, width, margin, padding
+//  =================================================================
 
-@each $key, $val in $bf-sides
-    @include make.responsive("p" + $key, $bf-p-loop) using ($value)
-        #{"padding-" + $val}: $value
+/// Outputs this module's utilities - called by 50-render inside make.passes.
+@mixin utilities()
+
+    // Wrap
+
+    @include make.single("wrap")
+        margin: 0 auto
+        padding: 0
+        width: 100%
+
+        @include make.up((width, $bf-breakpoints))
+
+    // Position
+
+    @include make.responsive("position", $bf-position) using ($value)
+        position: $value
+
+    // Height
+
+    @include make.responsive("height", -get-steps(1%)) using ($value)
+        height: $value
+
+    @include make.responsive("viewheight", -get-steps(1vh)) using ($value)
+        height: $value
+
+    // Width
+
+    @include make.responsive("width", -get-steps(1%)) using ($value)
+        width: $value
+
+    @include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
+        width: $value
+
+    // Margin
+
+    @include make.responsive("m", ("centre")) using ($value)
+        margin: 0 auto
+
+    @include make.responsive("m", $bf-m-loop) using ($value)
+        margin: $value
+
+    @include make.responsive("mx", $bf-m-loop) using ($value)
+        margin-left: $value
+        margin-right: $value
+
+    @include make.responsive("my", $bf-m-loop) using ($value)
+        margin-top: $value
+        margin-bottom: $value
+
+    @each $key, $val in $bf-sides
+        @include make.responsive("m" + $key, $bf-m-loop) using ($value)
+            #{"margin-" + $val}: $value
+
+    // Padding
+
+    @include make.responsive("p", $bf-p-loop) using ($value)
+        padding: $value
+
+    @include make.responsive("px", $bf-p-loop) using ($value)
+        padding-left: $value
+        padding-right: $value
+
+    @include make.responsive("py", $bf-p-loop) using ($value)
+        padding-top: $value
+        padding-bottom: $value
+
+    @each $key, $val in $bf-sides
+        @include make.responsive("p" + $key, $bf-p-loop) using ($value)
+            #{"padding-" + $val}: $value
+
+
+    // Wrap classes (extend-only, so outputting them on every pass adds nothing)
+
+    .wrap
+        @extend %bf-wrap
+        @each $breakpoint-key in map.keys($bf-breakpoints)
+            @extend %#{"bf-wrap-" + $breakpoint-key}
+
+    .wrap-fluid
+        @extend %bf-wrap

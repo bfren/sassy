@@ -1,3 +1,5 @@
+@use "sass:list";
+
 :root {
     --bf-grid-gutter: 0.5rem;
 }
@@ -6,5 +8,5 @@ $bf-grid-cols: 12;
 
 $bf-col: ();
 @for $i from 1 through $bf-grid-cols {
-    $bf-col: append($bf-col, $i);
+    $bf-col: list.append($bf-col, $i);
 }

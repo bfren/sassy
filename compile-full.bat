@@ -1,1 +1,1 @@
-sass full/sass:full/css
+sass --no-source-map src/full.sass dist/full.css

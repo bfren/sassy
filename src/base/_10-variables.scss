@@ -2,41 +2,9 @@
 //  Base
 //  =================================================================
 
-$bf-version: 0.1;
-
-$bf-debug: false !default;
-$bf-full: false !default;
-
-$bf-prefix: "bf" !default;
-$bf-separator: "-" !default;
-$bf-loop-max: 20 !default;
-
-$bf-sides: (
-    t: top,
-    e: right,
-    b: bottom,
-    s: left
-);
-
-
-/// Joins a list of items using $bf-separator.
-///
-/// @param {any} $var
-///     String or list of strings.
-/// @return {string}
-///     Values separated by $bf-separator.
-@function join-values($val) {
-    @if type-of($val) == list {
-        $joined: nth($val, 1);
-        @for $i from 2 through length($val) {
-            $joined: $joined + $bf-separator + nth($val, $i)
-        }
-        @return $joined;
-    }
-    @else {
-        @return join-values(($val));
-    }
-}
+// Forwarded first so that any configuration passed to the framework
+// (e.g. `with ($bf-full: true)`) reaches it before anything else loads it.
+@forward "10-core";
 
 
 
@@ -44,7 +12,7 @@ $bf-sides: (
 //  20: Layout
 //  =================================================================
 
-@import "20-layout-variables";
+@forward "20-layout-variables";
 
 
 
@@ -52,7 +20,7 @@ $bf-sides: (
 //  21: Colour
 //  =================================================================
 
-@import "21-colour-variables";
+@forward "21-colour-variables";
 
 
 
@@ -60,7 +28,7 @@ $bf-sides: (
 //  22: Display
 //  =================================================================
 
-@import "22-display-variables";
+@forward "22-display-variables";
 
 
 
@@ -68,7 +36,7 @@ $bf-sides: (
 //  23: Text
 //  =================================================================
 
-@import "23-text-variables";
+@forward "23-text-variables";
 
 
 
@@ -76,7 +44,7 @@ $bf-sides: (
 //  24: Border
 //  =================================================================
 
-@import "24-border-variables";
+@forward "24-border-variables";
 
 
 
@@ -84,7 +52,7 @@ $bf-sides: (
 //  30: Rounded
 //  =================================================================
 
-@import "30-rounded-variables";
+@forward "30-rounded-variables";
 
 
 
@@ -92,7 +60,7 @@ $bf-sides: (
 //  31: Shadow
 //  =================================================================
 
-@import "31-shadow-variables";
+@forward "31-shadow-variables";
 
 
 
@@ -100,7 +68,7 @@ $bf-sides: (
 //  40: Theme
 //  =================================================================
 
-@import "40-theme-variables";
+@forward "40-theme-variables";
 
 
 
@@ -108,4 +76,4 @@ $bf-sides: (
 //  41: Grid
 //  =================================================================
 
-@import "41-grid-variables";
+@forward "41-grid-variables";

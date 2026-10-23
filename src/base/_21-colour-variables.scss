@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /*
     Colour map created from TailwindCSS v3.0.0 (hex values changed to rgb)
     https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js
@@ -289,17 +291,17 @@ $tailwind-colours: (
     $default: 0 0 0;
 
     // ensure the colour exists
-    @if not map-has-key($tailwind-colours, $name) {
+    @if not map.has-key($tailwind-colours, $name) {
         @warn "'#{$name}' is not a valid colour - returning #{$default}.";
         @return $default;
     }
 
     // ensure the shade exists
-    @if not map-has-key(map-get($tailwind-colours, $name), $shade) {
+    @if not map.has-key(map.get($tailwind-colours, $name), $shade) {
         @warn "#{$shade} is not a valid shade for '#{$name}' - returning #{$default}.";
         @return $default;
     }
 
     // return the shade for the colour
-    @return map-get(map-get($tailwind-colours, $name), $shade);
+    @return map.get(map.get($tailwind-colours, $name), $shade);
 }

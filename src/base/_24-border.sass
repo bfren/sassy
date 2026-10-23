@@ -1,36 +1,40 @@
 @use "10-variables" as *
 @use "11-make" as make
+@use "sass:map"
 
-/*  =================================================================
-    Border Width
-    =================================================================
-
-$bf-border-loop: (auto: auto, inherit: inherit)
+$bf-border-loop: (inherit: inherit)
 @for $i from 0 through $bf-loop-max
-    $bf-border-loop: map-merge($bf-border-loop, ($i: $i * $bf-border-width-unit))
-
-@include make.responsive("border", $bf-border-loop) using ($value)
-    border-style: solid
-    border-width: $value
-
-@include make.responsive("border-x", $bf-border-loop) using ($value)
-    border-style: solid
-    border-width: $value 0 $value
-
-@include make.responsive("border-y", $bf-border-loop) using ($value)
-    border-style: solid
-    border-width: 0 $value 0 $value
-
-@each $key, $val in $bf-sides
-    @include make.responsive("border-" + $val, $bf-border-loop) using ($value)
-        #{"border-" + $val + "-style"}: solid
-        #{"border-" + $val + "-width"}: $value
+    $bf-border-loop: map.merge($bf-border-loop, ($i: $i * $bf-border-width-unit))
 
 
+//  =================================================================
+//  Border: width and colour
+//  =================================================================
 
-/*  =================================================================
-    Border Colour
-    =================================================================
+/// Outputs this module's utilities - called by 50-render inside make.passes.
+@mixin utilities()
 
-@include make.responsive("border", $tailwind-colours) using ($value)
-    border-color: rgb($value)
+    // Border Width
+
+    @include make.responsive("border", $bf-border-loop) using ($value)
+        border-style: solid
+        border-width: $value
+
+    @include make.responsive("border-x", $bf-border-loop) using ($value)
+        border-style: solid
+        border-width: 0 $value
+
+    @include make.responsive("border-y", $bf-border-loop) using ($value)
+        border-style: solid
+        border-width: $value 0
+
+    @each $key, $val in $bf-sides
+        @include make.responsive("border-" + $val, $bf-border-loop) using ($value)
+            #{"border-" + $val + "-style"}: solid
+            #{"border-" + $val + "-width"}: $value
+
+
+    // Border Colour
+
+    @include make.responsive("border", $tailwind-colours) using ($value)
+        border-color: rgb($value)
