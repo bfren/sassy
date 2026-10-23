@@ -1,5 +1,5 @@
 /*!
- *  Sassy v0.1 ~ https://github.com/bfren/sassy
+ *  Sassy v0.2 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
 /*!
  *  Normalize.css ~  https://github.com/csstools/normalize.css
@@ -272,6 +272,38 @@
   --bf-grid-gutter: 0.5rem;
 }
 
+body {
+  color: rgb(var(--bf-body-colour));
+  font-family: var(--bf-body-font-family);
+  font-size: var(--bf-body-font-size);
+  font-weight: var(--bf-body-font-weight);
+  line-height: var(--bf-body-line-height);
+}
+body h1 {
+  font-size: calc(var(--bf-font-size-base) * 2);
+}
+body h2 {
+  font-size: calc(var(--bf-font-size-base) * 1.8);
+}
+body h3 {
+  font-size: calc(var(--bf-font-size-base) * 1.6);
+}
+body h4 {
+  font-size: calc(var(--bf-font-size-base) * 1.4);
+}
+body h5 {
+  font-size: calc(var(--bf-font-size-base) * 1.2);
+}
+body h6 {
+  font-size: calc(var(--bf-font-size-base) * 1.1);
+}
+body input {
+  font-family: var(--bf-body-font-family);
+}
+body code, body textarea {
+  font-family: var(--bf-font-family-mono);
+}
+
 .wrap-fluid, .wrap {
   margin: 0 auto;
   padding: 0;
@@ -317,11 +349,11 @@ body h1 {
   margin-top: 0rem;
 }
 
-body h6, body h5 {
+body h5, body h6 {
   margin-top: 0.75rem;
 }
 
-body h4, body h3 {
+body h3, body h4 {
   margin-top: 1rem;
 }
 
@@ -329,44 +361,12 @@ body h2 {
   margin-top: 1.5rem;
 }
 
-body h6, body h5, body h4, body h3, body h2, body h1 {
+body h1, body h2, body h3, body h4, body h5, body h6 {
   margin-bottom: 0.5rem;
 }
 
 body {
   padding-top: 0.75rem;
-}
-
-body {
-  color: rgb(var(--bf-body-colour));
-  font-family: var(--bf-body-font-family);
-  font-size: var(--bf-body-font-size);
-  font-weight: var(--bf-body-font-weight);
-  line-height: var(--bf-body-line-height);
-}
-body h1 {
-  font-size: calc(var(--bf-font-size-base) * 2);
-}
-body h2 {
-  font-size: calc(var(--bf-font-size-base) * 1.8);
-}
-body h3 {
-  font-size: calc(var(--bf-font-size-base) * 1.6);
-}
-body h4 {
-  font-size: calc(var(--bf-font-size-base) * 1.4);
-}
-body h5 {
-  font-size: calc(var(--bf-font-size-base) * 1.2);
-}
-body h6 {
-  font-size: calc(var(--bf-font-size-base) * 1.1);
-}
-body input {
-  font-family: var(--bf-body-font-family);
-}
-body code, body textarea {
-  font-family: var(--bf-font-family-mono);
 }
 
 h1 {

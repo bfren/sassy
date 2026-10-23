@@ -1,5 +1,5 @@
 /*!
- *  Sassy v0.1 ~ https://github.com/bfren/sassy
+ *  Sassy v0.2 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
 /*!
  *  Normalize.css ~  https://github.com/csstools/normalize.css
@@ -272,6 +272,75 @@
   --bf-grid-gutter: 0.5rem;
 }
 
+div.cols,
+div.cols-reverse {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+div.text > div {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: var(--bf-grid-gutter);
+  width: 33.333%;
+}
+
+div.cols div,
+div.cols-reverse div {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: var(--bf-grid-gutter);
+  width: 100%;
+}
+
+body {
+  color: rgb(var(--bf-body-colour));
+  font-family: var(--bf-body-font-family);
+  font-size: var(--bf-body-font-size);
+  font-weight: var(--bf-body-font-weight);
+  line-height: var(--bf-body-line-height);
+}
+body h1 {
+  font-size: calc(var(--bf-font-size-base) * 2);
+}
+body h2 {
+  font-size: calc(var(--bf-font-size-base) * 1.8);
+}
+body h3 {
+  font-size: calc(var(--bf-font-size-base) * 1.6);
+}
+body h4 {
+  font-size: calc(var(--bf-font-size-base) * 1.4);
+}
+body h5 {
+  font-size: calc(var(--bf-font-size-base) * 1.2);
+}
+body h6 {
+  font-size: calc(var(--bf-font-size-base) * 1.1);
+}
+body input {
+  font-family: var(--bf-body-font-family);
+}
+body code, body textarea {
+  font-family: var(--bf-font-family-mono);
+}
+
+footer {
+  font-style: italic;
+}
+
+footer, div.footer-gone, div.test, div.shadow {
+  text-align: center;
+}
+
+div.footer-gone {
+  text-transform: capitalize;
+}
+
 .wrap-fluid, header, .wrap, main, footer {
   margin: 0 auto;
   padding: 0;
@@ -335,11 +404,11 @@ div.text > div h5, body h1 {
   margin-top: 0rem;
 }
 
-body h6, body h5 {
+body h5, body h6 {
   margin-top: 0.75rem;
 }
 
-body h4, body h3 {
+body h3, body h4 {
   margin-top: 1rem;
 }
 
@@ -351,7 +420,7 @@ body h2 {
   margin-top: 1.5rem;
 }
 
-body h6, body h5, body h4, body h3, body h2, body h1 {
+body h1, body h2, body h3, body h4, body h5, body h6 {
   margin-bottom: 0.5rem;
 }
 
@@ -396,50 +465,6 @@ header {
   justify-content: space-between;
 }
 
-body {
-  color: rgb(var(--bf-body-colour));
-  font-family: var(--bf-body-font-family);
-  font-size: var(--bf-body-font-size);
-  font-weight: var(--bf-body-font-weight);
-  line-height: var(--bf-body-line-height);
-}
-body h1 {
-  font-size: calc(var(--bf-font-size-base) * 2);
-}
-body h2 {
-  font-size: calc(var(--bf-font-size-base) * 1.8);
-}
-body h3 {
-  font-size: calc(var(--bf-font-size-base) * 1.6);
-}
-body h4 {
-  font-size: calc(var(--bf-font-size-base) * 1.4);
-}
-body h5 {
-  font-size: calc(var(--bf-font-size-base) * 1.2);
-}
-body h6 {
-  font-size: calc(var(--bf-font-size-base) * 1.1);
-}
-body input {
-  font-family: var(--bf-body-font-family);
-}
-body code, body textarea {
-  font-family: var(--bf-font-family-mono);
-}
-
-footer {
-  font-style: italic;
-}
-
-footer, div.footer-gone, div.test, div.shadow {
-  text-align: center;
-}
-
-div.footer-gone {
-  text-transform: capitalize;
-}
-
 div.shadow {
   border-style: solid;
   border-width: 1px;
@@ -474,36 +499,6 @@ div.footer-gone {
   color: rgb(var(--bf-theme-error));
 }
 
-div.cols,
-div.cols-reverse {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-}
-
-div.text > div {
-  box-sizing: border-box;
-  flex: 0 0 auto;
-  margin: 0;
-  padding: var(--bf-grid-gutter);
-  width: 33.333%;
-}
-
-div.cols div,
-div.cols-reverse div {
-  box-sizing: border-box;
-  flex: 0 0 auto;
-  margin: 0;
-  padding: var(--bf-grid-gutter);
-  width: 100%;
-}
-
-@media (min-width: 576px) {
-  div.shadow {
-    box-shadow: 0 0.5rem 1rem rgb(var(--bf-shadow-colour) / 0.15);
-  }
-}
 @media (min-width: 576px) {
   div.cols div,
   div.cols-reverse div {
@@ -514,19 +509,9 @@ div.cols-reverse div {
     width: 50%;
   }
 }
-@media (min-width: 768px) {
-  div.test {
-    opacity: 1;
-  }
-}
-@media (min-width: 768px) {
+@media (min-width: 576px) {
   div.shadow {
-    border-radius: var(--bf-radius);
-  }
-}
-@media (min-width: 768px) {
-  div.shadow {
-    box-shadow: 0 1rem 2rem rgb(20 83 45 / 0.175);
+    box-shadow: 0 0.5rem 1rem rgb(var(--bf-shadow-colour) / 0.15);
   }
 }
 @media (min-width: 768px) {
@@ -545,6 +530,46 @@ div.cols-reverse div {
     margin: 0;
     padding: var(--bf-grid-gutter);
     width: 33.333%;
+  }
+}
+@media (min-width: 768px) {
+  div.test {
+    opacity: 1;
+  }
+}
+@media (min-width: 768px) {
+  div.shadow {
+    border-radius: var(--bf-radius);
+  }
+}
+@media (min-width: 768px) {
+  div.shadow {
+    box-shadow: 0 1rem 2rem rgb(20 83 45 / 0.175);
+  }
+}
+@media (min-width: 992px) {
+  div.cols div,
+  div.cols-reverse div {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: var(--bf-grid-gutter);
+    width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  header {
+    font-size: calc(var(--bf-font-size-base) * 1.4);
+  }
+}
+@media (min-width: 992px) {
+  header {
+    font-weight: 700;
+  }
+}
+@media (min-width: 992px) {
+  footer {
+    text-transform: uppercase;
   }
 }
 @media (min-width: 992px) {
@@ -579,33 +604,18 @@ div.cols-reverse div {
   }
 }
 @media (min-width: 992px) {
-  header {
-    font-size: calc(var(--bf-font-size-base) * 1.4);
-  }
-}
-@media (min-width: 992px) {
-  header {
-    font-weight: 700;
-  }
-}
-@media (min-width: 992px) {
-  footer {
-    text-transform: uppercase;
-  }
-}
-@media (min-width: 992px) {
   div.shadow {
     box-shadow: 0 0.5rem 1rem rgb(3 105 161 / 0.15);
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   div.cols div,
   div.cols-reverse div {
     box-sizing: border-box;
     flex: 0 0 auto;
     margin: 0;
     padding: var(--bf-grid-gutter);
-    width: 25%;
+    width: 16.666%;
   }
 }
 @media (min-width: 1200px) {
@@ -632,31 +642,6 @@ div.cols-reverse div {
     box-shadow: 0 1rem 2rem rgb(217 70 239 / 0.175);
   }
 }
-@media (min-width: 1200px) {
-  div.cols div,
-  div.cols-reverse div {
-    box-sizing: border-box;
-    flex: 0 0 auto;
-    margin: 0;
-    padding: var(--bf-grid-gutter);
-    width: 16.666%;
-  }
-}
-@media (min-width: 1400px) {
-  div.test {
-    margin-top: 1.25rem;
-  }
-}
-@media (min-width: 1400px) {
-  div.test {
-    text-decoration: line-through;
-  }
-}
-@media (min-width: 1400px) {
-  div.shadow {
-    box-shadow: none;
-  }
-}
 @media (min-width: 1400px) {
   div.cols div,
   div.cols-reverse div {
@@ -665,6 +650,21 @@ div.cols-reverse div {
     margin: 0;
     padding: var(--bf-grid-gutter);
     width: 8.333%;
+  }
+}
+@media (min-width: 1400px) {
+  div.test {
+    text-decoration: line-through;
+  }
+}
+@media (min-width: 1400px) {
+  div.test {
+    margin-top: 1.25rem;
+  }
+}
+@media (min-width: 1400px) {
+  div.shadow {
+    box-shadow: none;
   }
 }
 :root {

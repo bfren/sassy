@@ -8,9 +8,37 @@
 
 $bf-position: (
     absolute,
+    fixed,
     inherit,
     relative,
-    static
+    static,
+    sticky
+);
+
+$bf-offset: (
+    0: 0,
+    50: 50%,
+    100: 100%,
+    auto: auto
+) !default;
+
+$bf-z-index: (
+    auto: auto,
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5
+) !default;
+
+$bf-overflow: (
+    auto,
+    hidden,
+    inherit,
+    initial,
+    scroll,
+    visible
 );
 
 $bf-margin-unit: 0.25rem !default;

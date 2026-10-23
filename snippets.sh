@@ -24,21 +24,26 @@ awk -v prefix="$prefix" '
 function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
 function esc(s)  { gsub(/\\/, "\\\\", s); gsub(/"/, "\\\"", s); return s }
 
-# record the declarations of every selector in the rule that is exactly .prefix-name
-function flush(   parts, count, i, s, name) {
+# record the declarations of every selector in the rule that is .prefix-name,
+# optionally followed by pseudo-classes (e.g. :hover), which are kept in the description
+function flush(   parts, count, i, s, name, suffix, d) {
     count = split(selector, parts, ",")
     for (i = 1; i <= count; i++) {
         s = trim(parts[i])
         if (s !~ class_re) continue
-        name = substr(s, 2)
+        match(s, name_re)
+        name = substr(s, 2, RLENGTH - 1)
+        suffix = substr(s, RLENGTH + 1)
+        d = (suffix == "" ? decls : suffix " { " decls " }")
         if (!(name in desc)) { order[++n] = name; desc[name] = "" }
-        desc[name] = trim(desc[name] " " decls)
+        desc[name] = trim(desc[name] " " d)
         if (media != "") at[name] = media
     }
 }
 
 BEGIN {
-    class_re = "^\\." prefix "-[A-Za-z0-9_-]+$"
+    name_re = "^\\." prefix "-[A-Za-z0-9_-]+"
+    class_re = name_re "(:[^ ]*)?$"
     media = ""; selector = ""; decls = ""; in_rule = 0; in_comment = 0; n = 0
 }
 

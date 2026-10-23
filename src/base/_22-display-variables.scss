@@ -64,6 +64,25 @@ $bf-flex-direction: (
     row-reverse
 );
 
+$bf-flex-order: (
+    first: -1,
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    last: 6
+);
+
+$bf-flex-wrap: (
+    inherit,
+    initial,
+    nowrap,
+    wrap,
+    wrap-reverse
+);
+
 $bf-flex-justify: (
     centre: center,
     end: flex-end,
@@ -74,3 +93,5 @@ $bf-flex-justify: (
     between: space-between,
     evenly: space-evenly
 );
+
+$bf-gap-unit: 0.25rem !default;
