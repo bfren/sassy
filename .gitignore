@@ -1,6 +1,5 @@
 .sass-cache/
+.vscode/
 *.css.map
 *.sass.map
 *.scss.map
-
-.DS_Store
