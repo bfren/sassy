@@ -352,9 +352,6 @@ form .input-text:focus {
   border-color: rgb(var(--bf-theme-primary));
 }
 
-/*  =================================================================
- *  Text inputs
- *  ================================================================= */
 form .input-text {
   background-clip: padding-box;
   font-family: var(--bf-font-family-sans);
