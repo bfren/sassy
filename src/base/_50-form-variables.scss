@@ -23,9 +23,21 @@
     --bf-input-focus-colour: var(--bf-theme-primary);
     --bf-input-focus-ring: 0.25rem;
     --bf-input-invalid-colour: var(--bf-theme-error);
+    --bf-input-valid-colour: var(--bf-theme-ok);
+
+    --bf-check-checked-colour: var(--bf-theme-primary);
+    --bf-check-mark-colour: 255 255 255;
+    --bf-check-radius: 0.25em;
+    --bf-switch-knob-colour: var(--bf-input-border-colour);
 
     --bf-form-text-colour: #{colour("grey", 500)};
 }
+
+// Check marks, used as masks - only their shape matters, the colour comes from
+// --bf-check-mark-colour so it can change at runtime.
+$bf-check-tick: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e" !default;
+$bf-check-dash: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e" !default;
+$bf-check-dot: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e" !default;
 
 // Size variants only redefine the custom properties above.
 $bf-input-sizes: (

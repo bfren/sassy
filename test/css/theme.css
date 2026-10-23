@@ -288,6 +288,11 @@
   --bf-input-focus-colour: var(--bf-theme-primary);
   --bf-input-focus-ring: 0.25rem;
   --bf-input-invalid-colour: var(--bf-theme-error);
+  --bf-input-valid-colour: var(--bf-theme-ok);
+  --bf-check-checked-colour: var(--bf-theme-primary);
+  --bf-check-mark-colour: 255 255 255;
+  --bf-check-radius: 0.25em;
+  --bf-switch-knob-colour: var(--bf-input-border-colour);
   --bf-form-text-colour: 107 114 128;
 }
 

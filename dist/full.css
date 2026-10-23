@@ -288,6 +288,11 @@
   --bf-input-focus-colour: var(--bf-theme-primary);
   --bf-input-focus-ring: 0.25rem;
   --bf-input-invalid-colour: var(--bf-theme-error);
+  --bf-input-valid-colour: var(--bf-theme-ok);
+  --bf-check-checked-colour: var(--bf-theme-primary);
+  --bf-check-mark-colour: 255 255 255;
+  --bf-check-radius: 0.25em;
+  --bf-switch-knob-colour: var(--bf-input-border-colour);
   --bf-form-text-colour: 107 114 128;
 }
 
@@ -342,10 +347,10 @@
   cursor: not-allowed;
   opacity: 1;
 }
-.bf-form-control:user-invalid {
+.bf-form-control:user-invalid, .bf-form-control[aria-invalid=true] {
   border-color: rgb(var(--bf-input-invalid-colour));
 }
-.bf-form-control:user-invalid:focus-visible {
+.bf-form-control:user-invalid:focus-visible, .bf-form-control[aria-invalid=true]:focus-visible {
   border-color: rgb(var(--bf-input-invalid-colour));
   box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
   outline: 0;
@@ -423,10 +428,10 @@
   cursor: not-allowed;
   opacity: 1;
 }
-.bf-form-select:user-invalid {
+.bf-form-select:user-invalid, .bf-form-select[aria-invalid=true] {
   border-color: rgb(var(--bf-input-invalid-colour));
 }
-.bf-form-select:user-invalid:focus-visible {
+.bf-form-select:user-invalid:focus-visible, .bf-form-select[aria-invalid=true]:focus-visible {
   border-color: rgb(var(--bf-input-invalid-colour));
   box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
   outline: 0;
@@ -455,6 +460,210 @@
   --bf-input-padding-x: 1rem;
   --bf-input-font-size: calc(var(--bf-font-size-base) * 1.25);
   --bf-input-radius: 0.5rem;
+}
+
+.bf-form-check {
+  align-items: start;
+  column-gap: 0.5em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 0.125rem;
+}
+.bf-form-check > :nth-child(n+3) {
+  grid-column: 2;
+}
+
+.bf-form-check-inline {
+  display: inline-grid;
+  margin-right: 1rem;
+}
+
+.bf-form-check-input {
+  appearance: none;
+  background-color: rgb(var(--bf-input-bg));
+  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
+  box-sizing: border-box;
+  flex-shrink: 0;
+  font-size: inherit;
+  height: 1em;
+  margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0;
+  position: relative;
+  print-color-adjust: exact;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 1em;
+}
+.bf-form-check-input::before {
+  content: "";
+  inset: 0;
+  position: absolute;
+  transition: transform 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bf-form-check-input {
+    transition: none;
+  }
+  .bf-form-check-input::before {
+    transition: none;
+  }
+}
+.bf-form-check-input:checked {
+  background-color: rgb(var(--bf-check-checked-colour));
+  border-color: rgb(var(--bf-check-checked-colour));
+}
+.bf-form-check-input:focus-visible {
+  border-color: rgb(var(--bf-input-focus-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  outline: 0;
+}
+.bf-form-check-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.bf-form-check-input:user-invalid, .bf-form-check-input[aria-invalid=true] {
+  border-color: rgb(var(--bf-input-invalid-colour));
+}
+.bf-form-check-input:user-invalid:focus-visible, .bf-form-check-input[aria-invalid=true]:focus-visible {
+  border-color: rgb(var(--bf-input-invalid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  outline: 0;
+}
+.bf-form-check-input::before {
+  background-color: rgb(var(--bf-check-mark-colour));
+  transform: scale(0);
+}
+.bf-form-check-input:checked::before {
+  transform: scale(1);
+}
+.bf-form-check-input[type=checkbox] {
+  border-radius: var(--bf-check-radius);
+}
+.bf-form-check-input[type=checkbox]::before {
+  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
+}
+.bf-form-check-input[type=checkbox]:indeterminate {
+  background-color: rgb(var(--bf-check-checked-colour));
+  border-color: rgb(var(--bf-check-checked-colour));
+}
+.bf-form-check-input[type=checkbox]:indeterminate::before {
+  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e") center/100% no-repeat;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e") center/100% no-repeat;
+  transform: scale(1);
+}
+.bf-form-check-input[type=radio] {
+  border-radius: 50%;
+}
+.bf-form-check-input[type=radio]::before {
+  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e") center/100% no-repeat;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e") center/100% no-repeat;
+}
+
+:disabled ~ .bf-form-check-label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+:user-invalid ~ .bf-form-check-label, [aria-invalid=true] ~ .bf-form-check-label {
+  color: rgb(var(--bf-input-invalid-colour));
+}
+
+.bf-form-switch {
+  appearance: none;
+  background-color: rgb(var(--bf-input-bg));
+  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
+  box-sizing: border-box;
+  flex-shrink: 0;
+  font-size: inherit;
+  height: 1em;
+  margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0;
+  position: relative;
+  print-color-adjust: exact;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 1em;
+}
+.bf-form-switch::before {
+  content: "";
+  inset: 0;
+  position: absolute;
+  transition: transform 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bf-form-switch {
+    transition: none;
+  }
+  .bf-form-switch::before {
+    transition: none;
+  }
+}
+.bf-form-switch:checked {
+  background-color: rgb(var(--bf-check-checked-colour));
+  border-color: rgb(var(--bf-check-checked-colour));
+}
+.bf-form-switch:focus-visible {
+  border-color: rgb(var(--bf-input-focus-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  outline: 0;
+}
+.bf-form-switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.bf-form-switch:user-invalid, .bf-form-switch[aria-invalid=true] {
+  border-color: rgb(var(--bf-input-invalid-colour));
+}
+.bf-form-switch:user-invalid:focus-visible, .bf-form-switch[aria-invalid=true]:focus-visible {
+  border-color: rgb(var(--bf-input-invalid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  outline: 0;
+}
+.bf-form-switch {
+  border-radius: 1em;
+  width: 2em;
+}
+.bf-form-switch::before {
+  aspect-ratio: 1;
+  background-color: rgb(var(--bf-switch-knob-colour));
+  border-radius: 50%;
+  inset: 0.125em auto auto 0.125em;
+  height: calc(100% - 0.25em);
+}
+.bf-form-switch:checked::before {
+  background-color: rgb(var(--bf-check-mark-colour));
+  transform: translateX(1em);
+}
+
+.bf-form-control-invalid {
+  border-color: rgb(var(--bf-input-invalid-colour));
+}
+.bf-form-control-invalid:focus-visible {
+  border-color: rgb(var(--bf-input-invalid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  outline: 0;
+}
+
+.bf-form-control-valid {
+  border-color: rgb(var(--bf-input-valid-colour));
+}
+.bf-form-control-valid:focus-visible {
+  border-color: rgb(var(--bf-input-valid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-valid-colour) / 0.25);
+  outline: 0;
+}
+
+.bf-form-feedback-invalid {
+  color: rgb(var(--bf-input-invalid-colour));
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+  display: none;
+}
+:user-invalid ~ .bf-form-feedback-invalid, [aria-invalid=true] ~ .bf-form-feedback-invalid {
+  display: block;
+}
+
+.bf-form-feedback-valid {
+  color: rgb(var(--bf-input-valid-colour));
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+  display: block;
 }
 
 .bf-d-flex-row {

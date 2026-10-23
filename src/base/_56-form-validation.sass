@@ -1,0 +1,35 @@
+@use "10-variables" as *
+@use "11-make" as make
+@use "50-form" as form
+
+//  =================================================================
+//  Form: validation states and feedback
+//  =================================================================
+
+/// Outputs this module's utilities - called by 99-render inside make.passes.
+@mixin utilities()
+
+    // Validation
+    // Controls already show native :user-invalid, and [aria-invalid="true"] for server-side errors.
+    // These placeholders set a state explicitly, e.g. from a server-side result.
+
+    @include make.single("form-control-invalid")
+        @include form.state(var(--bf-input-invalid-colour))
+
+    @include make.single("form-control-valid")
+        @include form.state(var(--bf-input-valid-colour))
+
+    // Invalid feedback is hidden until the control before it is invalid, so it can be
+    // rendered up front and the browser reveals it. Valid feedback always shows - only
+    // render it when the field is valid.
+    @include make.single("form-feedback-invalid")
+        @include form.feedback(var(--bf-input-invalid-colour))
+        display: none
+
+        :user-invalid ~ &,
+        [aria-invalid="true"] ~ &
+            display: block
+
+    @include make.single("form-feedback-valid")
+        @include form.feedback(var(--bf-input-valid-colour))
+        display: block

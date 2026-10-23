@@ -288,6 +288,11 @@
   --bf-input-focus-colour: var(--bf-theme-primary);
   --bf-input-focus-ring: 0.25rem;
   --bf-input-invalid-colour: var(--bf-theme-error);
+  --bf-input-valid-colour: var(--bf-theme-ok);
+  --bf-check-checked-colour: var(--bf-theme-primary);
+  --bf-check-mark-colour: 255 255 255;
+  --bf-check-radius: 0.25em;
+  --bf-switch-knob-colour: var(--bf-input-border-colour);
   --bf-form-text-colour: 107 114 128;
 }
 
@@ -342,10 +347,10 @@ label {
   cursor: not-allowed;
   opacity: 1;
 }
-.control:user-invalid, .control-sm:user-invalid, .control-lg:user-invalid {
+.control:user-invalid, .control-sm:user-invalid, .control-lg:user-invalid, [aria-invalid=true].control, [aria-invalid=true].control-sm, [aria-invalid=true].control-lg {
   border-color: rgb(var(--bf-input-invalid-colour));
 }
-.control:user-invalid:focus-visible, .control-sm:user-invalid:focus-visible, .control-lg:user-invalid:focus-visible {
+.control:user-invalid:focus-visible, .control-sm:user-invalid:focus-visible, .control-lg:user-invalid:focus-visible, [aria-invalid=true].control:focus-visible, [aria-invalid=true].control-sm:focus-visible, [aria-invalid=true].control-lg:focus-visible {
   border-color: rgb(var(--bf-input-invalid-colour));
   box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
   outline: 0;
@@ -423,10 +428,10 @@ label {
   cursor: not-allowed;
   opacity: 1;
 }
-.select-sm:user-invalid, .select-lg:user-invalid, .select:user-invalid {
+.select-sm:user-invalid, .select-lg:user-invalid, .select:user-invalid, [aria-invalid=true].select-sm, [aria-invalid=true].select-lg, [aria-invalid=true].select {
   border-color: rgb(var(--bf-input-invalid-colour));
 }
-.select-sm:user-invalid:focus-visible, .select-lg:user-invalid:focus-visible, .select:user-invalid:focus-visible {
+.select-sm:user-invalid:focus-visible, .select-lg:user-invalid:focus-visible, .select:user-invalid:focus-visible, [aria-invalid=true].select-sm:focus-visible, [aria-invalid=true].select-lg:focus-visible, [aria-invalid=true].select:focus-visible {
   border-color: rgb(var(--bf-input-invalid-colour));
   box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
   outline: 0;
@@ -455,6 +460,210 @@ label {
   --bf-input-padding-x: 1rem;
   --bf-input-font-size: calc(var(--bf-font-size-base) * 1.25);
   --bf-input-radius: 0.5rem;
+}
+
+.check, .check-inline {
+  align-items: start;
+  column-gap: 0.5em;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 0.125rem;
+}
+.check > :nth-child(n+3), .check-inline > :nth-child(n+3) {
+  grid-column: 2;
+}
+
+.check-inline {
+  display: inline-grid;
+  margin-right: 1rem;
+}
+
+.check-input {
+  appearance: none;
+  background-color: rgb(var(--bf-input-bg));
+  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
+  box-sizing: border-box;
+  flex-shrink: 0;
+  font-size: inherit;
+  height: 1em;
+  margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0;
+  position: relative;
+  print-color-adjust: exact;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 1em;
+}
+.check-input::before {
+  content: "";
+  inset: 0;
+  position: absolute;
+  transition: transform 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .check-input {
+    transition: none;
+  }
+  .check-input::before {
+    transition: none;
+  }
+}
+.check-input:checked {
+  background-color: rgb(var(--bf-check-checked-colour));
+  border-color: rgb(var(--bf-check-checked-colour));
+}
+.check-input:focus-visible {
+  border-color: rgb(var(--bf-input-focus-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  outline: 0;
+}
+.check-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.check-input:user-invalid, [aria-invalid=true].check-input {
+  border-color: rgb(var(--bf-input-invalid-colour));
+}
+.check-input:user-invalid:focus-visible, [aria-invalid=true].check-input:focus-visible {
+  border-color: rgb(var(--bf-input-invalid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  outline: 0;
+}
+.check-input::before {
+  background-color: rgb(var(--bf-check-mark-colour));
+  transform: scale(0);
+}
+.check-input:checked::before {
+  transform: scale(1);
+}
+[type=checkbox].check-input {
+  border-radius: var(--bf-check-radius);
+}
+[type=checkbox].check-input::before {
+  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
+}
+[type=checkbox].check-input:indeterminate {
+  background-color: rgb(var(--bf-check-checked-colour));
+  border-color: rgb(var(--bf-check-checked-colour));
+}
+[type=checkbox].check-input:indeterminate::before {
+  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e") center/100% no-repeat;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e") center/100% no-repeat;
+  transform: scale(1);
+}
+[type=radio].check-input {
+  border-radius: 50%;
+}
+[type=radio].check-input::before {
+  -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e") center/100% no-repeat;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e") center/100% no-repeat;
+}
+
+:disabled ~ .check-label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+:user-invalid ~ .check-label, [aria-invalid=true] ~ .check-label {
+  color: rgb(var(--bf-input-invalid-colour));
+}
+
+.switch {
+  appearance: none;
+  background-color: rgb(var(--bf-input-bg));
+  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
+  box-sizing: border-box;
+  flex-shrink: 0;
+  font-size: inherit;
+  height: 1em;
+  margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0;
+  position: relative;
+  print-color-adjust: exact;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 1em;
+}
+.switch::before {
+  content: "";
+  inset: 0;
+  position: absolute;
+  transition: transform 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .switch {
+    transition: none;
+  }
+  .switch::before {
+    transition: none;
+  }
+}
+.switch:checked {
+  background-color: rgb(var(--bf-check-checked-colour));
+  border-color: rgb(var(--bf-check-checked-colour));
+}
+.switch:focus-visible {
+  border-color: rgb(var(--bf-input-focus-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  outline: 0;
+}
+.switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.switch:user-invalid, [aria-invalid=true].switch {
+  border-color: rgb(var(--bf-input-invalid-colour));
+}
+.switch:user-invalid:focus-visible, [aria-invalid=true].switch:focus-visible {
+  border-color: rgb(var(--bf-input-invalid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  outline: 0;
+}
+.switch {
+  border-radius: 1em;
+  width: 2em;
+}
+.switch::before {
+  aspect-ratio: 1;
+  background-color: rgb(var(--bf-switch-knob-colour));
+  border-radius: 50%;
+  inset: 0.125em auto auto 0.125em;
+  height: calc(100% - 0.25em);
+}
+.switch:checked::before {
+  background-color: rgb(var(--bf-check-mark-colour));
+  transform: translateX(1em);
+}
+
+.invalid {
+  border-color: rgb(var(--bf-input-invalid-colour));
+}
+.invalid:focus-visible {
+  border-color: rgb(var(--bf-input-invalid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  outline: 0;
+}
+
+.valid {
+  border-color: rgb(var(--bf-input-valid-colour));
+}
+.valid:focus-visible {
+  border-color: rgb(var(--bf-input-valid-colour));
+  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-valid-colour) / 0.25);
+  outline: 0;
+}
+
+.feedback-invalid {
+  color: rgb(var(--bf-input-invalid-colour));
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+  display: none;
+}
+:user-invalid ~ .feedback-invalid, [aria-invalid=true] ~ .feedback-invalid {
+  display: block;
+}
+
+.feedback-valid {
+  color: rgb(var(--bf-input-valid-colour));
+  font-size: 0.875em;
+  margin-top: 0.25rem;
+  display: block;
 }
 
 body {

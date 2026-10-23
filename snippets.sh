@@ -24,18 +24,23 @@ awk -v prefix="$prefix" '
 function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t]+$/, "", s); return s }
 function esc(s)  { gsub(/\\/, "\\\\", s); gsub(/"/, "\\\"", s); return s }
 
-# record the declarations of every selector in the rule that is .prefix-name,
-# optionally followed by pseudo-classes or attributes (e.g. :hover, [readonly]),
-# which are kept in the description
-function flush(   parts, count, i, s, name, suffix, d) {
+# record the declarations of every selector in the rule whose last part is .prefix-name,
+# optionally followed by pseudo-classes or attributes (e.g. :hover, [readonly]).
+# Anything else in the selector is kept in the description, with & standing for the class,
+# e.g. ":disabled ~ & { opacity: 0.5; }".
+function flush(   parts, count, i, s, start, context, rest, name, suffix, d) {
     count = split(selector, parts, ",")
     for (i = 1; i <= count; i++) {
         s = trim(parts[i])
-        if (s !~ class_re) continue
-        match(s, name_re)
-        name = substr(s, 2, RLENGTH - 1)
-        suffix = substr(s, RLENGTH + 1)
-        d = (suffix == "" ? decls : suffix " { " decls " }")
+        if (!match(s, class_re)) continue
+        start = RSTART
+        if (start > 1 && substr(s, start - 1, 1) != " ") continue
+        context = substr(s, 1, start - 1)
+        rest = substr(s, start)
+        match(rest, name_re)
+        name = substr(rest, 2, RLENGTH - 1)
+        suffix = substr(rest, RLENGTH + 1)
+        d = (context == "" && suffix == "" ? decls : context "&" suffix " { " decls " }")
         if (!(name in desc)) { order[++n] = name; desc[name] = "" }
         if (media == "") has_base[name] = 1
         # a breakpoint variant only exists inside its media query, so label the whole
@@ -48,7 +53,7 @@ function flush(   parts, count, i, s, name, suffix, d) {
 
 BEGIN {
     name_re = "^\\." prefix "-[A-Za-z0-9_-]+"
-    class_re = name_re "((:|\\[)[^ ]*)?$"
+    class_re = "\\." prefix "-[A-Za-z0-9_-]+((:|\\[)[^ ]*)?$"
     media = ""; selector = ""; decls = ""; in_rule = 0; in_comment = 0; n = 0
 }
 
