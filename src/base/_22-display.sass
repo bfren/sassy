@@ -1,11 +1,16 @@
 @use "10-variables" as *
 @use "11-make" as make
+@use "sass:map"
+
+$bf-gap-loop: (inherit: inherit)
+@for $i from 0 through $bf-loop-max
+    $bf-gap-loop: map.merge($bf-gap-loop, ($i: $i * $bf-gap-unit))
 
 //  =================================================================
-//  Display, opacity and flex
+//  Display, visibility, opacity, flex and gap
 //  =================================================================
 
-/// Outputs this module's utilities - called by 50-render inside make.passes.
+/// Outputs this module's utilities - called by 99-render inside make.passes.
 @mixin utilities()
 
     // Display
@@ -14,6 +19,18 @@
         display: $value
 
         // See 40-grid for flex-row
+
+
+    // Visibility
+    // Not responsive - these are rarely changed at a breakpoint.
+    // !important so that a more specific rule can never accidentally reveal the content.
+
+    @include make.single("visually-hidden")
+        @include -visually-hidden()
+
+    @include make.single("visually-hidden-focusable")
+        &:not(:focus):not(:focus-within)
+            @include -visually-hidden()
 
 
     // Opacity
@@ -41,6 +58,12 @@
         flex-direction: $value
 
 
+    // Flex: Fill
+
+    @include make.responsive("flex", ("fill")) using ($value)
+        flex: 1 1 auto
+
+
     // Flex: Grow / Shrink
 
     @for $i from 0 through $bf-loop-max
@@ -55,3 +78,42 @@
 
     @include make.responsive("flex-justify", $bf-flex-justify) using ($value)
         justify-content: $value
+
+
+    // Flex: Order
+
+    @include make.responsive("flex-order", $bf-flex-order) using ($value)
+        order: $value
+
+
+    // Flex: Wrap
+
+    @include make.responsive("flex-wrap", $bf-flex-wrap) using ($value)
+        flex-wrap: $value
+
+
+    // Gap (flex and grid)
+    // gap-x is the space between columns, gap-y the space between rows
+
+    @include make.responsive("gap", $bf-gap-loop) using ($value)
+        gap: $value
+
+    @include make.responsive("gap-x", $bf-gap-loop) using ($value)
+        column-gap: $value
+
+    @include make.responsive("gap-y", $bf-gap-loop) using ($value)
+        row-gap: $value
+
+
+
+/// Hides content visually while keeping it available to screen readers.
+@mixin -visually-hidden()
+    border: 0 !important
+    clip: rect(0, 0, 0, 0) !important
+    height: 1px !important
+    margin: -1px !important
+    overflow: hidden !important
+    padding: 0 !important
+    position: absolute !important
+    white-space: nowrap !important
+    width: 1px !important

@@ -16,14 +16,18 @@
 //  Every module is rendered once for base definitions, then once per
 //  breakpoint, so breakpoint overrides always come after base rules
 //  and smaller breakpoints, whichever module defines them.
+//
+//  Within each pass, modules with composite placeholders (grid; text, which
+//  has body and text-wrap-hover) come first so that single-purpose utilities
+//  always override them, e.g. col-4 + p-0, or body + c-red-500.
 
 @include make.passes
+    @include grid.utilities
+    @include text.utilities
     @include layout.utilities
     @include colour.utilities
     @include display.utilities
-    @include text.utilities
     @include border.utilities
     @include rounded.utilities
     @include shadow.utilities
     @include theme.utilities
-    @include grid.utilities

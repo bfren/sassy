@@ -2,7 +2,7 @@
  *  Inputs
  *  ================================================================= */
 /*!
- *  Sassy v0.1 ~ https://github.com/bfren/sassy
+ *  Sassy v0.2 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
 /*!
  *  Normalize.css ~  https://github.com/csstools/normalize.css
@@ -275,6 +275,10 @@
   --bf-grid-gutter: 0.5rem;
 }
 
+form .input-text:focus {
+  outline: 0 none;
+}
+
 .wrap-fluid, .wrap {
   margin: 0 auto;
   padding: 0;
@@ -329,10 +333,6 @@ form .input-text {
 
 form .input-text {
   display: block;
-}
-
-form .input-text:focus {
-  outline: 0 none;
 }
 
 form .input-text {

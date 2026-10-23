@@ -2,12 +2,14 @@
 @use "11-make" as make
 @use "sass:map"
 
-/// Returns a map of steps from 0-100 in increments of 5, including auto
+/// Returns a map of steps from 0-100 in increments of 5, including a keyword (auto by default)
 ///
 /// @param {string} $unit
 ///     Single unit (e.g. 1px).
-@function -get-steps($unit)
-    $steps: (auto: auto)
+/// @param {string} $keyword
+///     Keyword to include as the first step, e.g. none for max-width / max-height.
+@function -get-steps($unit, $keyword: auto)
+    $steps: ($keyword: $keyword)
     @for $i from 1 through 20
         $step: calc($i * 5)
         $steps: map.merge($steps, ($step: calc($step * $unit)))
@@ -24,10 +26,10 @@ $bf-p-loop: (inherit: inherit)
 
 
 //  =================================================================
-//  Layout: wrap, position, height, width, margin, padding
+//  Layout: wrap, position, offset, z-index, overflow, height, width, margin, padding
 //  =================================================================
 
-/// Outputs this module's utilities - called by 50-render inside make.passes.
+/// Outputs this module's utilities - called by 99-render inside make.passes.
 @mixin utilities()
 
     // Wrap
@@ -44,6 +46,28 @@ $bf-p-loop: (inherit: inherit)
     @include make.responsive("position", $bf-position) using ($value)
         position: $value
 
+    // Offset
+
+    @each $key, $val in $bf-sides
+        @include make.responsive($val, $bf-offset) using ($value)
+            #{$val}: $value
+
+    // Z-index
+
+    @include make.responsive("z-index", $bf-z-index) using ($value)
+        z-index: $value
+
+    // Overflow
+
+    @include make.responsive("overflow", $bf-overflow) using ($value)
+        overflow: $value
+
+    @include make.responsive("overflow-x", $bf-overflow) using ($value)
+        overflow-x: $value
+
+    @include make.responsive("overflow-y", $bf-overflow) using ($value)
+        overflow-y: $value
+
     // Height
 
     @include make.responsive("height", -get-steps(1%)) using ($value)
@@ -52,6 +76,18 @@ $bf-p-loop: (inherit: inherit)
     @include make.responsive("viewheight", -get-steps(1vh)) using ($value)
         height: $value
 
+    @include make.responsive("min-height", -get-steps(1%)) using ($value)
+        min-height: $value
+
+    @include make.responsive("min-viewheight", -get-steps(1vh)) using ($value)
+        min-height: $value
+
+    @include make.responsive("max-height", -get-steps(1%, none)) using ($value)
+        max-height: $value
+
+    @include make.responsive("max-viewheight", -get-steps(1vh, none)) using ($value)
+        max-height: $value
+
     // Width
 
     @include make.responsive("width", -get-steps(1%)) using ($value)
@@ -59,6 +95,18 @@ $bf-p-loop: (inherit: inherit)
 
     @include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
         width: $value
+
+    @include make.responsive("min-width", -get-steps(1%)) using ($value)
+        min-width: $value
+
+    @include make.responsive("min-viewwidth", -get-steps(1vw)) using ($value)
+        min-width: $value
+
+    @include make.responsive("max-width", -get-steps(1%, none)) using ($value)
+        max-width: $value
+
+    @include make.responsive("max-viewwidth", -get-steps(1vw, none)) using ($value)
+        max-width: $value
 
     // Margin
 
