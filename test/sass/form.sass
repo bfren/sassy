@@ -9,3 +9,61 @@ body
 
 h1
     @extend %bf-border-x-3
+
+h2
+    @extend %bf-mt-5
+
+.field
+    @extend %bf-mb-3
+
+label
+    @extend %bf-form-label
+
+.help
+    @extend %bf-form-text
+
+.control
+    @extend %bf-form-control
+
+@each $size in (sm, lg)
+    .control-#{$size}
+        @extend %bf-form-control
+        @extend %bf-form-control-#{$size}
+
+    .select-#{$size}
+        @extend %bf-form-select
+        @extend %bf-form-select-#{$size}
+
+.plaintext
+    @extend %bf-form-control-plaintext
+
+.select
+    @extend %bf-form-select
+
+.check
+    @extend %bf-form-check
+
+.check-inline
+    @extend %bf-form-check
+    @extend %bf-form-check-inline
+
+.check-input
+    @extend %bf-form-check-input
+
+.check-label
+    @extend %bf-form-check-label
+
+.switch
+    @extend %bf-form-switch
+
+.invalid
+    @extend %bf-form-control-invalid
+
+.valid
+    @extend %bf-form-control-valid
+
+.feedback-invalid
+    @extend %bf-form-feedback-invalid
+
+.feedback-valid
+    @extend %bf-form-feedback-valid

@@ -8,6 +8,12 @@
 @use "31-shadow" as shadow
 @use "40-theme" as theme
 @use "41-grid" as grid
+@use "51-form-label" as form-label
+@use "52-form-control" as form-control
+@use "53-form-select" as form-select
+@use "54-form-check" as form-check
+@use "55-form-switch" as form-switch
+@use "56-form-validation" as form-validation
 
 //  =================================================================
 //  Placeholders and classes
@@ -17,11 +23,19 @@
 //  breakpoint, so breakpoint overrides always come after base rules
 //  and smaller breakpoints, whichever module defines them.
 //
-//  Within each pass, modules with composite placeholders (grid; text, which
-//  has body and text-wrap-hover) come first so that single-purpose utilities
-//  always override them, e.g. col-4 + p-0, or body + c-red-500.
+//  Within each pass, modules with composite placeholders (form; grid; text,
+//  which has body and text-wrap-hover) come first so that single-purpose
+//  utilities always override them, e.g. col-4 + p-0, or body + c-red-500.
+//  The form modules stay in numeric order: validation must follow controls
+//  and checks so its state colours win.
 
 @include make.passes
+    @include form-label.utilities
+    @include form-control.utilities
+    @include form-select.utilities
+    @include form-check.utilities
+    @include form-switch.utilities
+    @include form-validation.utilities
     @include grid.utilities
     @include text.utilities
     @include layout.utilities
