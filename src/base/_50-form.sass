@@ -1,0 +1,132 @@
+@use "10-variables" as *
+@use "11-make" as make
+
+//  =================================================================
+//  Form: labels, help text, controls and selects
+//  =================================================================
+
+/// Outputs this module's utilities - called by 99-render inside make.passes.
+@mixin utilities()
+
+    // Label and help text
+
+    @include make.single("form-label")
+        display: inline-block
+        margin-bottom: $bf-margin-unit * 2
+
+    @include make.single("form-text")
+        color: rgb(var(--bf-form-text-colour))
+        display: block
+        font-size: 0.875em
+        margin-top: $bf-margin-unit
+
+
+    // Controls: text inputs and textareas
+
+    @include make.single("form-control")
+        @include -control()
+
+        &:is(textarea)
+            min-height: calc(var(--bf-input-line-height) * 1em + var(--bf-input-padding-y) * 2 + var(--bf-input-border-width) * 2)
+            resize: vertical
+
+    @each $size, $props in $bf-input-sizes
+        @include make.single("form-control-" + $size)
+            @include -size($props)
+
+    @include make.single("form-control-plaintext")
+        background-color: transparent
+        border: solid transparent
+        border-width: var(--bf-input-border-width) 0
+        box-sizing: border-box
+        color: inherit
+        display: block
+        font-family: inherit
+        font-size: var(--bf-input-font-size)
+        line-height: var(--bf-input-line-height)
+        margin: 0
+        padding: var(--bf-input-padding-y) 0
+        width: 100%
+
+
+    // Selects
+    // The chevron is two diagonal strokes drawn with gradients - one square each, side by side -
+    // rather than an SVG, so it follows --bf-input-colour at runtime.
+
+    @include make.single("form-select")
+        $stroke: transparent 40%, rgb(var(--bf-input-colour)) 40% 60%, transparent 60%
+        @include -control()
+        background-image: linear-gradient(45deg, $stroke), linear-gradient(-45deg, $stroke)
+        background-position: calc(100% - var(--bf-input-padding-x) - 0.8em) 50%, calc(100% - var(--bf-input-padding-x) - 0.4em) 50%
+        background-repeat: no-repeat
+        background-size: 0.4em 0.4em
+        padding-right: calc(var(--bf-input-padding-x) * 2 + 0.8em)
+
+        &[multiple],
+        &[size]:not([size="1"])
+            background-image: none
+            padding-right: var(--bf-input-padding-x)
+
+    @each $size, $props in $bf-input-sizes
+        @include make.single("form-select-" + $size)
+            @include -size($props)
+
+
+
+/// Declarations shared by every text-style control.
+@mixin -control()
+    appearance: none
+    background-clip: padding-box
+    background-color: rgb(var(--bf-input-bg))
+    border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour))
+    border-radius: var(--bf-input-radius)
+    box-sizing: border-box
+    color: rgb(var(--bf-input-colour))
+    display: block
+    font-family: inherit
+    font-size: var(--bf-input-font-size)
+    line-height: var(--bf-input-line-height)
+    margin: 0
+    padding: var(--bf-input-padding-y) var(--bf-input-padding-x)
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
+    width: 100%
+
+    @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    &::placeholder
+        color: rgb(var(--bf-input-placeholder-colour))
+        opacity: 1
+
+    &:focus-visible
+        @include -focus-ring(var(--bf-input-focus-colour))
+
+    &[readonly]
+        background-color: rgb(var(--bf-input-readonly-bg))
+
+    &:disabled
+        background-color: rgb(var(--bf-input-disabled-bg))
+        cursor: not-allowed
+        opacity: 1
+
+    // only once the user has interacted with the field - see :user-invalid
+    &:user-invalid
+        border-color: rgb(var(--bf-input-invalid-colour))
+
+        &:focus-visible
+            @include -focus-ring(var(--bf-input-invalid-colour))
+
+
+
+/// Focus ring in the given colour (space-separated R G B).
+@mixin -focus-ring($colour)
+    border-color: rgb($colour)
+    box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb-with-alpha($colour, 0.25)
+    outline: 0
+
+
+
+/// Redefines the control custom properties for a size variant.
+@mixin -size($props)
+    @each $name, $value in $props
+        --bf-input-#{$name}: #{$value}

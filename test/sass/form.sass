@@ -9,3 +9,33 @@ body
 
 h1
     @extend %bf-border-x-3
+
+h2
+    @extend %bf-mt-5
+
+.field
+    @extend %bf-mb-3
+
+label
+    @extend %bf-form-label
+
+.help
+    @extend %bf-form-text
+
+.control
+    @extend %bf-form-control
+
+@each $size in (sm, lg)
+    .control-#{$size}
+        @extend %bf-form-control
+        @extend %bf-form-control-#{$size}
+
+    .select-#{$size}
+        @extend %bf-form-select
+        @extend %bf-form-select-#{$size}
+
+.plaintext
+    @extend %bf-form-control-plaintext
+
+.select
+    @extend %bf-form-select

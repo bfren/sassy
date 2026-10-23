@@ -8,6 +8,7 @@
 @use "31-shadow" as shadow
 @use "40-theme" as theme
 @use "41-grid" as grid
+@use "50-form" as form
 
 //  =================================================================
 //  Placeholders and classes
@@ -17,11 +18,12 @@
 //  breakpoint, so breakpoint overrides always come after base rules
 //  and smaller breakpoints, whichever module defines them.
 //
-//  Within each pass, modules with composite placeholders (grid; text, which
-//  has body and text-wrap-hover) come first so that single-purpose utilities
-//  always override them, e.g. col-4 + p-0, or body + c-red-500.
+//  Within each pass, modules with composite placeholders (form; grid; text,
+//  which has body and text-wrap-hover) come first so that single-purpose
+//  utilities always override them, e.g. col-4 + p-0, or body + c-red-500.
 
 @include make.passes
+    @include form.utilities
     @include grid.utilities
     @include text.utilities
     @include layout.utilities

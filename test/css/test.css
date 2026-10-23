@@ -272,6 +272,25 @@
   --bf-grid-gutter: 0.5rem;
 }
 
+:root {
+  --bf-input-font-size: var(--bf-font-size-base);
+  --bf-input-line-height: var(--bf-line-height-base);
+  --bf-input-padding-y: 0.375rem;
+  --bf-input-padding-x: 0.75rem;
+  --bf-input-border-width: 1px;
+  --bf-input-radius: var(--bf-radius);
+  --bf-input-colour: 31 41 55;
+  --bf-input-bg: 255 255 255;
+  --bf-input-border-colour: 209 213 219;
+  --bf-input-placeholder-colour: 107 114 128;
+  --bf-input-disabled-bg: 243 244 246;
+  --bf-input-readonly-bg: 249 250 251;
+  --bf-input-focus-colour: var(--bf-theme-primary);
+  --bf-input-focus-ring: 0.25rem;
+  --bf-input-invalid-colour: var(--bf-theme-error);
+  --bf-form-text-colour: 107 114 128;
+}
+
 div.cols,
 div.cols-reverse {
   display: flex;

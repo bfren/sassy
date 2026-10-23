@@ -5,7 +5,6 @@
     <title>Sassy test</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <link rel="stylesheet" href="../dist/form.css" />
     <link rel="stylesheet" href="../test/css/form.css" />
 </head>
 
@@ -16,7 +15,91 @@
         <h1>Form Controls</h1>
 
         <form>
-            <input type="text" class="input-text" placeholder="Placeholder" />
+
+            <h2>Text inputs</h2>
+
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="control" placeholder="Placeholder" aria-describedby="name-help" />
+                <span id="name-help" class="help">Help text sits below the control.</span>
+            </div>
+
+            <div class="field">
+                <label for="email">Email (required - type something invalid, then leave the field)</label>
+                <input type="email" id="email" class="control" required />
+            </div>
+
+            <div class="field">
+                <label for="small">Small</label>
+                <input type="text" id="small" class="control-sm" placeholder="Small" />
+            </div>
+
+            <div class="field">
+                <label for="large">Large</label>
+                <input type="text" id="large" class="control-lg" placeholder="Large" />
+            </div>
+
+            <div class="field">
+                <label for="readonly">Read only</label>
+                <input type="text" id="readonly" class="control" value="Read only value" readonly />
+            </div>
+
+            <div class="field">
+                <label for="disabled">Disabled</label>
+                <input type="text" id="disabled" class="control" value="Disabled value" disabled />
+            </div>
+
+            <div class="field">
+                <label for="plain">Plain text</label>
+                <input type="text" id="plain" class="plaintext" value="email@example.com" readonly />
+            </div>
+
+            <div class="field">
+                <label for="message">Textarea</label>
+                <textarea id="message" class="control" rows="3"></textarea>
+            </div>
+
+            <h2>Selects</h2>
+
+            <div class="field">
+                <label for="select">Select</label>
+                <select id="select" class="select">
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="select-sm">Small</label>
+                <select id="select-sm" class="select-sm">
+                    <option>Small select</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="select-lg">Large</label>
+                <select id="select-lg" class="select-lg">
+                    <option>Large select</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="select-multiple">Multiple</label>
+                <select id="select-multiple" class="select" multiple>
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="select-disabled">Disabled</label>
+                <select id="select-disabled" class="select" disabled>
+                    <option>Disabled select</option>
+                </select>
+            </div>
+
         </form>
 
     </div>
