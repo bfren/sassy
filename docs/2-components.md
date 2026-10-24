@@ -1,14 +1,14 @@
-# 2-components: navigation, cards, tabs, tooltips and dialogs
+# 2-components: buttons, navigation, cards, tabs, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/2-components.html](https://bfren.github.io/sassy/2-components.html)
 
-`src/2-components` styles whole interface elements: navigation, cards, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/2-components` styles whole interface elements: buttons, navigation, cards, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Navigation, cards and dialogs need no script. Tabs and tooltips need `sassy.js`, which you load once:
+Buttons, navigation, cards and dialogs need no script. Tabs and tooltips need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -36,23 +36,81 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 
 ## Placeholders
 
-| Placeholder                                                 | For                                                                                     |
-| ----------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `%bf-nav`                                                   | A list of links, side by side - on a `<ul>`, or on a `<nav>` holding the links directly |
-| `%bf-nav-link`                                              | Each link. Mark the current page with `aria-current="page"`                             |
-| `%bf-nav-pills`, `%bf-nav-underline`                        | Pill or underline style for the current link, combined with `%bf-nav`                   |
-| `%bf-nav-vertical`                                          | Stacks the links, combined with `%bf-nav`                                               |
-| `%bf-card`                                                  | A bordered container                                                                    |
-| `%bf-card-header`, `%bf-card-body`, `%bf-card-footer`       | The parts of a card                                                                     |
-| `%bf-card-title`, `%bf-card-image`                          | A title in the body, and an image that fills the card's width                           |
-| `%bf-tabs`                                                  | The list of tabs (`role="tablist"`)                                                     |
-| `%bf-tab`                                                   | Each tab (`role="tab"`)                                                                 |
-| `%bf-tab-panel`                                             | Each panel (`role="tabpanel"`)                                                          |
-| `%bf-tooltip`                                               | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
-| `%bf-dialog`, `-small`, `-large`                            | A `<dialog>`, at the default width or smaller or larger                                 |
-| `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer` | The parts of a dialog                                                                   |
-| `%bf-dialog-title`                                          | The dialog's heading                                                                    |
-| `%bf-dialog-close`                                          | A close button for the header. Give it `aria-label="Close"`                             |
+| Placeholder                                                                                     | For                                                                                     |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `%bf-btn`                                                                                       | A button - on a `<button>`, or on a link that looks like one                            |
+| `%bf-btn-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | A button in a theme colour, combined with `%bf-btn`                                     |
+| `%bf-btn-outline`                                                                               | The colour on the border and text only, combined with `%bf-btn` and a colour            |
+| `%bf-btn-small`, `%bf-btn-large`                                                                | Smaller or larger, the same as the form control sizes                                   |
+| `%bf-nav`                                                                                       | A list of links, side by side - on a `<ul>`, or on a `<nav>` holding the links directly |
+| `%bf-nav-link`                                                                                  | Each link. Mark the current page with `aria-current="page"`                             |
+| `%bf-nav-pills`, `%bf-nav-underline`                                                            | Pill or underline style for the current link, combined with `%bf-nav`                   |
+| `%bf-nav-vertical`                                                                              | Stacks the links, combined with `%bf-nav`                                               |
+| `%bf-card`                                                                                      | A bordered container                                                                    |
+| `%bf-card-header`, `%bf-card-body`, `%bf-card-footer`                                           | The parts of a card                                                                     |
+| `%bf-card-title`, `%bf-card-image`                                                              | A title in the body, and an image that fills the card's width                           |
+| `%bf-tabs`                                                                                      | The list of tabs (`role="tablist"`)                                                     |
+| `%bf-tab`                                                                                       | Each tab (`role="tab"`)                                                                 |
+| `%bf-tab-panel`                                                                                 | Each panel (`role="tabpanel"`)                                                          |
+| `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
+| `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
+| `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
+| `%bf-dialog-title`                                                                              | The dialog's heading                                                                    |
+| `%bf-dialog-close`                                                                              | A close button for the header. Give it `aria-label="Close"`                             |
+
+## Buttons
+
+A button uses the form controls' padding, font size, line height, border and corners, so it lines up with the inputs beside it. Theme colours, outline and size only change custom properties, so extend them alongside `%bf-btn`:
+
+```sass
+@use "sassy/src" as sassy
+
+.button
+    @extend %bf-btn
+
+.button-save
+    @extend %bf-btn-primary
+
+.button-cancel
+    @extend %bf-btn-error
+    @extend %bf-btn-outline
+```
+
+```html
+<button type="submit" class="button button-save">Save changes</button>
+<button type="button" class="button button-cancel">Discard</button>
+<a href="/help" class="button">Help</a>
+```
+
+```css
+.button {
+  align-items: center;
+  background-color: var(--sassy-btn-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-btn-border-colour);
+  border-radius: var(--sassy-input-radius);
+  color: var(--sassy-btn-colour);
+  display: inline-flex;
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+}
+.button:hover {
+  background-color: color-mix(in oklab, var(--sassy-btn-bg) 88%, var(--sassy-btn-shade));
+}
+.button-save {
+  --sassy-btn-bg: var(--sassy-theme-primary);
+  --sassy-btn-border-colour: var(--sassy-theme-primary);
+  --sassy-btn-colour: var(--sassy-btn-primary-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-primary);
+  --sassy-btn-outline-colour: var(--sassy-theme-primary);
+}
+```
+
+Hover and press darken whatever colour the button is, by mixing `--sassy-btn-shade` into it, so a theme colour changed at runtime keeps its hover state. Outlined buttons in the light theme colours mix their colour with the dark text colour, so the text stays readable.
+
+- **Use `<button>` for actions and `<a>` for links to other pages**, even when they look the same, so keyboards and screen readers treat them correctly. Give a `<button>` a `type`: inside a form it submits by default.
+- **Disable with the `disabled` attribute**, or `aria-disabled="true"` on a link, and the button fades and ignores clicks.
+- **In an input group**, a button joins the controls beside it, as an add-on does, and follows the group's size.
+
+The text colour on each theme colour is chosen for contrast with the default theme: dark text on `info`, `warn`, `grey-light` and `ok`, white on the rest. If you change a theme colour, check its text still contrasts, and change it with `--sassy-btn-<name>-colour` if not - for example `--sassy-btn-primary-colour`.
 
 ## Navigation
 
@@ -230,26 +288,30 @@ The dialog is a column with a maximum height, so when its content is taller than
 
 ## Settings and custom properties
 
-| Property                                                                                                                             | Controls                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- |
-| `--sassy-nav-gap`                                                                                                                    | Space between links and between tabs                                    |
-| `--sassy-nav-link-padding-y`, `--sassy-nav-link-padding-x`                                                                           | Padding of links and tabs                                               |
-| `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                    |
-| `--sassy-nav-link-radius`, `--sassy-nav-link-underline-width`                                                                        | Link corners and underline width - set by the pill and underline styles |
-| `--sassy-nav-current-colour`, `--sassy-nav-current-bg`, `--sassy-nav-current-border-colour`                                          | The current link or selected tab                                        |
-| `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels and close buttons              |
-| `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                     |
-| `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                      |
-| `--sassy-tabs-border-width`, `--sassy-tabs-border-colour`, `--sassy-tabs-underline-width`                                            | The line under the tabs, and the selected tab's underline               |
-| `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                 |
-| `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                           |
-| `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                  |
-| `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                   |
-| `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                           |
-| `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                |
-| `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                      |
+| Property                                                                                                                             | Controls                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| `--sassy-btn-bg`, `--sassy-btn-colour`, `--sassy-btn-border-colour`                                                                  | The default button's background, text and border - the theme colours set their own |
+| `--sassy-btn-<name>-colour`                                                                                                          | Text on each theme colour's button, for example `--sassy-btn-warn-colour`          |
+| `--sassy-btn-outline-colour`, `--sassy-btn-focus-colour`                                                                             | The outline style's colour, and the focus ring                                     |
+| `--sassy-btn-font-weight`, `--sassy-btn-shade`                                                                                       | Text weight, and the colour mixed in on hover and press                            |
+| `--sassy-nav-gap`                                                                                                                    | Space between links and between tabs                                               |
+| `--sassy-nav-link-padding-y`, `--sassy-nav-link-padding-x`                                                                           | Padding of links and tabs                                                          |
+| `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                               |
+| `--sassy-nav-link-radius`, `--sassy-nav-link-underline-width`                                                                        | Link corners and underline width - set by the pill and underline styles            |
+| `--sassy-nav-current-colour`, `--sassy-nav-current-bg`, `--sassy-nav-current-border-colour`                                          | The current link or selected tab                                                   |
+| `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels and close buttons                         |
+| `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                |
+| `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                 |
+| `--sassy-tabs-border-width`, `--sassy-tabs-border-colour`, `--sassy-tabs-underline-width`                                            | The line under the tabs, and the selected tab's underline                          |
+| `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                            |
+| `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                      |
+| `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                             |
+| `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                              |
+| `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                                      |
+| `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                           |
+| `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                 |
 
-The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_250-dialog-variables.scss`](../src/2-components/_250-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_260-dialog-variables.scss`](../src/2-components/_260-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 

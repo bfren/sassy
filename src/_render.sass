@@ -8,11 +8,12 @@
 @use "1-forms/170-floating" as form-floating
 @use "1-forms/180-inputs" as form-inputs
 @use "1-forms/190-validation" as form-validation
-@use "2-components/210-nav" as nav
-@use "2-components/220-card" as card
-@use "2-components/230-tabs" as tabs
-@use "2-components/240-tooltip" as tooltip
-@use "2-components/250-dialog" as dialog
+@use "2-components/210-button" as button
+@use "2-components/220-nav" as nav
+@use "2-components/230-card" as card
+@use "2-components/240-tabs" as tabs
+@use "2-components/250-tooltip" as tooltip
+@use "2-components/260-dialog" as dialog
 @use "3-grid/300-grid" as grid
 @use "4-utilities/400-text" as text
 @use "4-utilities/410-layout" as layout
@@ -45,6 +46,7 @@
     @include form-floating.utilities
     @include form-inputs.utilities
     @include form-validation.utilities
+    @include button.utilities
     @include nav.utilities
     @include card.utilities
     @include tabs.utilities
