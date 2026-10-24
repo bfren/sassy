@@ -1,11 +1,12 @@
 name: Publish GitHub Pages
 
 # Publishes the samples folder as the site root whenever a pull request is merged into main.
+# A merge creates a push to main, so this deploys from main itself. Deploying from the
+# pull request's merge ref is refused by the github-pages environment's branch rules.
 # Requires Settings > Pages > Build and deployment > Source: GitHub Actions.
 
 on:
-  pull_request:
-    types: [closed]
+  push:
     branches: [main]
   workflow_dispatch:
 
@@ -20,7 +21,6 @@ concurrency:
 
 jobs:
   build:
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Check out
