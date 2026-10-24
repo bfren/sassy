@@ -1,0 +1,140 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "100-shared" as form
+
+//  =================================================================
+//  Form: range, file and colour inputs
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Range
+    // Each browser styles a range's track and thumb through its own pseudo-elements, and drops a
+    // whole rule if it does not recognise one selector in it - so each browser has separate rules.
+
+    @include make.single("form-range")
+        appearance: none
+        background-color: transparent
+        box-sizing: border-box
+        display: block
+        height: calc(var(--sassy-range-thumb-size) + var(--sassy-input-focus-ring) * 2)
+        margin: 0
+        padding: 0
+        width: 100%
+
+        &:focus-visible
+            outline: 0
+
+        &::-webkit-slider-runnable-track
+            @include -track()
+
+        &::-moz-range-track
+            @include -track()
+
+        &::-webkit-slider-thumb
+            @include -thumb()
+            // WebKit does not centre the thumb on the track
+            margin-top: calc((var(--sassy-range-track-height) - var(--sassy-range-thumb-size)) / 2)
+
+        &::-moz-range-thumb
+            @include -thumb()
+
+        &:focus-visible::-webkit-slider-thumb
+            @include -thumb-focus()
+
+        &:focus-visible::-moz-range-thumb
+            @include -thumb-focus()
+
+        &:disabled
+            cursor: not-allowed
+
+        &:disabled::-webkit-slider-thumb
+            background-color: var(--sassy-range-disabled-colour)
+
+        &:disabled::-moz-range-thumb
+            background-color: var(--sassy-range-disabled-colour)
+
+
+    // File
+
+    @include make.single("form-file")
+        @include form.control()
+        overflow: hidden
+
+        &:not(:disabled):not([readonly])
+            cursor: pointer
+
+        &::file-selector-button
+            background-color: var(--sassy-input-addon-bg)
+            border: 0 solid var(--sassy-input-border-colour)
+            border-inline-end-width: var(--sassy-input-border-width)
+            border-radius: 0
+            color: var(--sassy-input-colour)
+            font: inherit
+            margin: calc(var(--sassy-input-padding-y) * -1) calc(var(--sassy-input-padding-x) * -1)
+            margin-inline-end: var(--sassy-input-padding-x)
+            padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x)
+            pointer-events: none
+            transition: background-color 0.15s ease-in-out
+
+            @media (prefers-reduced-motion: reduce)
+                transition: none
+
+        &:hover:not(:disabled):not([readonly])::file-selector-button
+            background-color: var(--sassy-input-addon-hover-bg)
+
+
+    // Colour
+    // Sized like a text control; as with range, each browser's swatch needs a separate rule.
+
+    @include make.single("form-colour")
+        @include form.control()
+        cursor: pointer
+        height: calc(var(--sassy-input-line-height) * var(--sassy-input-font-size) + var(--sassy-input-padding-y) * 2 + var(--sassy-input-border-width) * 2)
+        padding: var(--sassy-input-padding-y)
+        width: 3rem
+
+        &::-webkit-color-swatch-wrapper
+            padding: 0
+
+        &::-webkit-color-swatch
+            border: 0
+            border-radius: var(--sassy-input-radius)
+
+        &::-moz-color-swatch
+            border: 0
+            border-radius: var(--sassy-input-radius)
+
+
+
+/// Range track.
+@mixin -track()
+    background-color: var(--sassy-range-track-colour)
+    border: 0
+    border-radius: var(--sassy-range-track-height)
+    color: transparent
+    cursor: pointer
+    height: var(--sassy-range-track-height)
+    width: 100%
+
+
+
+/// Range thumb.
+@mixin -thumb()
+    appearance: none
+    background-color: var(--sassy-range-thumb-colour)
+    border: 0
+    border-radius: 50%
+    height: var(--sassy-range-thumb-size)
+    transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
+    width: var(--sassy-range-thumb-size)
+
+    @media (prefers-reduced-motion: reduce)
+        transition: none
+
+
+
+/// Range thumb focus ring: a gap in the control background, then the focus colour.
+@mixin -thumb-focus()
+    box-shadow: 0 0 0 1px var(--sassy-input-bg), 0 0 0 var(--sassy-input-focus-ring) with-alpha(var(--sassy-input-focus-colour), 0.25)

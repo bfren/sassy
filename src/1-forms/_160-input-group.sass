@@ -1,0 +1,68 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "100-shared" as form
+
+//  =================================================================
+//  Form: input groups
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Input groups
+    // Controls, selects and add-on text side by side, sharing their borders.
+    // Put validation feedback after the group: it shows when any control in the group is invalid.
+
+    @include make.single("input-group")
+        align-items: stretch
+        display: flex
+        flex-wrap: wrap
+        position: relative
+        width: 100%
+
+        // controls share the remaining width
+        & > input,
+        & > select,
+        & > textarea
+            flex: 1 1 auto
+            min-width: 0
+            position: relative
+            width: 1%
+
+        // neighbours share a border, and only the group's outer corners are rounded
+        & > :not(:first-child)
+            border-bottom-left-radius: 0
+            border-top-left-radius: 0
+            margin-left: calc(var(--sassy-input-border-width) * -1)
+
+        & > :not(:last-child)
+            border-bottom-right-radius: 0
+            border-top-right-radius: 0
+
+        // an invalid or focused control sits above its neighbours, so its border and ring show in full
+        & > :user-invalid,
+        & > [aria-invalid="true"]
+            z-index: 2
+
+        & > :focus-visible
+            z-index: 3
+
+    // Sizes set the control custom properties on the group, so everything inside it follows
+
+    @each $size, $props in $sassy-input-sizes
+        @include make.single("input-group-" + $size)
+            @include form.size($props)
+
+    @include make.single("input-group-text")
+        align-items: center
+        background-color: var(--sassy-input-addon-bg)
+        border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour)
+        border-radius: var(--sassy-input-radius)
+        box-sizing: border-box
+        color: var(--sassy-input-colour)
+        display: flex
+        font-size: var(--sassy-input-font-size)
+        line-height: var(--sassy-input-line-height)
+        padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x)
+        text-align: center
+        white-space: nowrap

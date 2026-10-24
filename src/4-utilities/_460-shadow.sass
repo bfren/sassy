@@ -1,0 +1,15 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Box shadow
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Box Shadow
+    // See also 5-theme
+
+    @include make.responsive("shadow", $sassy-shadow) using ($value)
+        box-shadow: $value

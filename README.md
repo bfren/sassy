@@ -5,7 +5,7 @@ A Sass utility framework built from [placeholder selectors](https://sass-lang.co
 You `@extend` the utilities you want onto your own selectors, so your markup stays semantic and your compiled CSS contains only the rules you actually use. If you would rather use classes in your HTML, a full build with every utility as a class is also available.
 
 ```sass
-@use "sassy/src/base" as sassy
+@use "sassy/src" as sassy
 
 .card
     @extend %bf-p-3
@@ -56,7 +56,7 @@ git submodule add https://github.com/bfren/sassy.git sassy
 then load it once, in your site's main stylesheet:
 
 ```sass
-@use "sassy/src/base" as sassy
+@use "sassy/src" as sassy
 ```
 
 Use a single entry stylesheet per site: each stylesheet that loads Sassy also outputs Normalize and Sassy's `:root` custom properties.
@@ -102,7 +102,7 @@ A few conventions:
 
   ![The Sassy colour palette: 26 colours, each in shades 50, 100 to 900 and 950](docs/palette.svg)
 
-  The `oklch()` value of every shade is in [`src/base/_21-colour-variables.scss`](src/base/_21-colour-variables.scss).
+  The `oklch()` value of every shade is in [`src/4-utilities/_420-colour-variables.scss`](src/4-utilities/_420-colour-variables.scss).
 
 - **Theme colours** are `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark`, and can be changed at runtime - see [Theming](#theming). The defaults are:
 
@@ -151,7 +151,7 @@ Form placeholders, `%bf-visually-hidden` and `%bf-body` have no breakpoint varia
 Settings are passed with `with (...)` when you load Sassy:
 
 ```sass
-@use "sassy/src/base" as sassy with (
+@use "sassy/src" as sassy with (
     $sassy-breakpoints: (sm: 600px, md: 900px, lg: 1200px),
     $sassy-padding-unit: 0.5rem
 )
@@ -287,25 +287,29 @@ You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your p
 
 ### Structure
 
-The modules in `src/base` are numbered so related modules sit together, with gaps for new ones:
+`src` is arranged in numbered folders, and each file is numbered with its folder's digit followed by its place in the folder - `4-utilities/_420-colour.sass`. **The numbers follow the order the placeholders are output**, because that order decides which placeholder wins when two set the same property:
 
-| Numbers   | Contain                                                              |
-| --------- | -------------------------------------------------------------------- |
-| `00`-`01` | Copyright notice and Normalize                                       |
-| `10`-`12` | Settings, the `make` mixins that generate placeholders, and helpers  |
-| `20`-`31` | Utilities: layout, colour, display, text, border, corners and shadow |
-| `40`-`41` | Theme colours and the grid                                           |
-| `50`-`59` | Forms - `50` holds mixins shared by the form modules                 |
-| `99`      | Render - outputs every module in the right order                     |
+| Folder         | Contains                                                                                     |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers |
+| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                         |
+| `2-components` | Components such as cards and navigation (to come)                                            |
+| `3-grid`       | The grid                                                                                     |
+| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                    |
+| `5-theme`      | Theme colours                                                                                |
 
-Each module's settings and custom properties live in a matching `-variables.scss` file, forwarded from `_10-variables.scss`.
+Composites - placeholders that set several properties at once, such as forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
+
+`src/_render.sass` outputs every module in this order, and is the one place the order is set. Each folder's `_index.sass` forwards its modules, and `src/_index.sass` forwards the folders.
+
+Each module's settings and custom properties live in a `-variables.scss` file with the module's number (in `1-forms`, a single `100-variables.scss`), all forwarded from `0-core/_030-variables.scss`.
 
 ### Adding a module
 
-1. Create `_NN-name.sass` with a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
-2. Put any settings in `_NN-name-variables.scss`, with `!default`, and forward it from `_10-variables.scss`.
-3. Forward the module from `_index.sass` with `hide utilities`.
-4. `@use` the module in `_99-render.sass` and include its `utilities` mixin - before the single-purpose utilities if its placeholders set several properties at once, so that utilities can override them.
+1. Create `_NNN-name.sass` in the folder for its kind - a component goes in `2-components`, a single-purpose utility in `4-utilities` - numbered with the folder's digit and its place in the output order. Give it a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
+2. Put any settings in `_NNN-name-variables.scss`, with `!default`, and forward it from `0-core/_030-variables.scss`.
+3. Forward the module from its folder's `_index.sass` with `hide utilities`.
+4. `@use` the module in `_render.sass` and include its `utilities` mixin, in folder and file order.
 
 Never hard-code the `bf` prefix - use `make.name()` to build a placeholder name from `$sassy-prefix`.
 

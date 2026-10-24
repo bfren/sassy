@@ -3,8 +3,8 @@
 # so the README can show them (Markdown itself cannot show colours).
 #
 # Usage: ./palette.sh
-#   src/base/_21-colour-variables.scss -> docs/palette.svg
-#   src/base/_40-theme-variables.scss  -> docs/theme.svg
+#   src/4-utilities/_420-colour-variables.scss -> docs/palette.svg
+#   src/5-theme/_500-theme-variables.scss      -> docs/theme.svg
 #
 # Colours are oklch(). Each swatch is filled with the nearest sRGB hex colour, for any renderer,
 # and styled with the exact oklch() colour, which wide-gamut screens show more vividly.
@@ -12,8 +12,8 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-colours="src/base/_21-colour-variables.scss"
-theme="src/base/_40-theme-variables.scss"
+colours="src/4-utilities/_420-colour-variables.scss"
+theme="src/5-theme/_500-theme-variables.scss"
 palette_out="docs/palette.svg"
 theme_out="docs/theme.svg"
 mkdir -p docs

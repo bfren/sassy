@@ -1,0 +1,92 @@
+@use "420-colour-variables" as *;
+
+:root {
+    --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
+    --sassy-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --sassy-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
+    --sassy-font-size-base: 1rem;
+    --sassy-font-weight-base: 400;
+    --sassy-line-height-base: 1.5;
+
+    --sassy-body-colour: #{colour("grey", 800)};
+    --sassy-body-font-family: var(--sassy-font-family-sans);
+    --sassy-body-font-size: var(--sassy-font-size-base);
+    --sassy-body-font-weight: var(--sassy-font-weight-base);
+    --sassy-body-line-height: var(--sassy-line-height-base);
+}
+
+$sassy-font-family: (
+    mono: var(--sassy-font-family-mono),
+    sans: var(--sassy-font-family-sans),
+    serif: var(--sassy-font-family-serif)
+);
+
+$sassy-font-size: (
+    1: calc(var(--sassy-font-size-base) * 2),
+    2: calc(var(--sassy-font-size-base) * 1.8),
+    3: calc(var(--sassy-font-size-base) * 1.6),
+    4: calc(var(--sassy-font-size-base) * 1.4),
+    5: calc(var(--sassy-font-size-base) * 1.2),
+    6: calc(var(--sassy-font-size-base) * 1.1),
+    base: var(--sassy-font-size-base),
+    small: calc(var(--sassy-font-size-base) * 0.8),
+    smaller: calc(var(--sassy-font-size-base) * 0.7),
+    smallest: calc(var(--sassy-font-size-base) * 0.6)) !default;
+
+$sassy-font-style: (
+    inherit,
+    initial,
+    italic,
+    normal,
+    oblique
+);
+
+$sassy-font-weight: (
+    100,
+    200,
+    300,
+    400,
+    500,
+    600,
+    700,
+    800,
+    900,
+    bold,
+    bolder,
+    lighter,
+    normal
+);
+
+$sassy-line-height: (
+    base: var(--sassy-line-height-base),
+    double: 2,
+    single: 1,
+    triple: 3,
+);
+
+$sassy-text-align: (
+    centre: center,
+    inherit: inherit,
+    initial: initial,
+    justify: justify,
+    start: left,
+    end: right
+);
+
+$sassy-text-decoration: (
+    through: line-through,
+    inherit: inherit,
+    initial: initial,
+    none: none,
+    over: overline,
+    under: underline
+);
+
+$sassy-text-transform: (
+    capitalise: capitalize,
+    inherit: inherit,
+    initial: initial,
+    lower: lowercase,
+    none: none,
+    upper: uppercase
+);
