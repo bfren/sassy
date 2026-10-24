@@ -1,0 +1,38 @@
+name: Check
+
+# Checks every pull request: Sassy compiles, the CSS shown in README.md and docs/*.md is what
+# Sassy outputs, and every example on the samples site compiles and is used by its page.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dart Sass
+        run: |
+          npm install --prefix "$RUNNER_TEMP/sass" sass@1.93.2
+          echo "$RUNNER_TEMP/sass/node_modules/.bin" >> "$GITHUB_PATH"
+
+      - name: Compile Sassy
+        run: sass --no-source-map src/full.sass "$RUNNER_TEMP/full.css"
+
+      - name: Check the docs
+        run: node tools/site.mjs check
+
+      - name: Build the site
+        run: node tools/site.mjs build
+      
