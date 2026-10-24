@@ -71,6 +71,14 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 
 It is large - around 1.9 MB, or 180 KB gzipped - because it contains everything. If you are using Sass, extending placeholders will give you much smaller CSS.
 
+### Script
+
+Tabs and tooltips also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
+```
+
 ## Naming
 
 Every placeholder follows the same pattern:
@@ -255,13 +263,28 @@ The markup matters in a few places:
 
 Sizes, colours, the focus ring and the validation colours all come from the `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-floating-*`, `--sassy-range-*` and `--sassy-form-*` custom properties - see [Theming](#theming).
 
+## Components
+
+Component placeholders style whole interface elements, and like forms they output before the grid and utilities, so a utility can override any part of one:
+
+| Placeholder                                                                         | For                                                                   |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `%bf-nav`, `%bf-nav-link`                                                           | A list of links - mark the current page with `aria-current="page"`    |
+| `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                            | Styles and layout for a nav, combined with `%bf-nav`                  |
+| `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                       | A bordered container and its parts                                    |
+| `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                              | Tabs that switch panels, using the ARIA tabs roles                    |
+| `%bf-tooltip`                                                                       | A tooltip: a popover described by its trigger with `aria-describedby` |
+| `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close` | A native `<dialog>` and its parts                                     |
+
+Navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs and tooltips need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
+
 ## Limitations
 
 - **No `@extend` inside media queries.** Sass does not allow it, which is why every responsive utility has a breakpoint variant in its name (see [Responsive](#responsive)).
 - **Every file that extends needs its own `@use`.** `@extend` only reaches placeholders in modules the file itself loads, so a partial that extends Sassy's placeholders must `@use` Sassy too. Sass only outputs a module once per compilation, so this does not duplicate anything.
 - **One entry stylesheet per site.** Each separately compiled stylesheet that loads Sassy includes Normalize and the `:root` custom properties again.
 - **Placeholders cannot be used from HTML.** If you need classes in your markup, use `dist/full.css` or set `$sassy-full: true`.
-- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap`, `:has()`, `oklch()` and `color-mix()`.
+- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap`, `:has()`, `oklch()` and `color-mix()`. Tooltips need the Popover API (Baseline since April 2024). They and dialogs also use CSS anchor positioning and `command` / `commandfor`, which are newer (Baseline since January 2026 and December 2025), so `sassy.js` covers them in older browsers.
 
 ## Editor snippets
 
@@ -277,26 +300,26 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows.
 
-| Script                  | Does                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
-| `compile-full.sh`       | Builds `dist/full.css` and `dist/full.css.gz`, then runs `snippets.sh` and `palette.sh`                      |
-| `compile-full.bat`      | Runs `compile-full.sh` in Git Bash on Windows                                                                |
-| `watch.sh`, `watch.bat` | Recompiles the sample stylesheets in `samples/sass` whenever they change - open the pages in `samples` to check them |
-| `snippets.sh`           | Generates `dist/sassy.code-snippets` from `dist/full.css`                                                    |
-| `palette.sh`            | Generates the colour charts in `docs` from the colour and theme variables                                    |
+| Script                  | Does                                                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `compile-full.sh`       | Builds `dist/full.css` and `dist/full.css.gz`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh` |
+| `compile-full.bat`      | Runs `compile-full.sh` in Git Bash on Windows                                                                            |
+| `watch.sh`, `watch.bat` | Recompiles the sample stylesheets in `samples/sass` whenever they change - open the pages in `samples` to check them     |
+| `snippets.sh`           | Generates `dist/sassy.code-snippets` from `dist/full.css`                                                                |
+| `palette.sh`            | Generates the colour charts in `docs` from the colour and theme variables                                                |
 
 ### Structure
 
 `src` is arranged in numbered folders, and each file is numbered with its folder's digit followed by its place in the folder - `4-utilities/_420-colour.sass`. **The numbers follow the order the placeholders are output**, because that order decides which placeholder wins when two set the same property:
 
-| Folder         | Contains                                                                                     |
-| -------------- | -------------------------------------------------------------------------------------------- |
-| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers |
-| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                         |
-| `2-components` | Components such as cards and navigation (to come)                                            |
-| `3-grid`       | The grid                                                                                     |
-| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                    |
-| `5-theme`      | Theme colours                                                                                |
+| Folder         | Contains                                                                                                  |
+| -------------- | --------------------------------------------------------------------------------------------------------- |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers              |
+| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                      |
+| `2-components` | Navigation, cards, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
+| `3-grid`       | The grid                                                                                                  |
+| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                 |
+| `5-theme`      | Theme colours                                                                                             |
 
 Composites - placeholders that set several properties at once, such as forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 
