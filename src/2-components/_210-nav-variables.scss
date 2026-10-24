@@ -1,0 +1,22 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+
+// Navigation links (and tabs) read everything from custom properties, so the pill
+// and underline styles - and themes - only change these. Colours accept any CSS colour.
+:root {
+    --sassy-nav-gap: #{$sassy-margin-unit};
+    --sassy-nav-link-padding-y: #{$sassy-padding-unit * 2};
+    --sassy-nav-link-padding-x: #{$sassy-padding-unit * 4};
+    --sassy-nav-link-colour: var(--sassy-theme-primary);
+    --sassy-nav-link-hover-bg: #{colour("grey", 100)};
+    --sassy-nav-link-radius: 0;
+    --sassy-nav-link-underline-width: 0;
+    --sassy-nav-current-bg: transparent;
+    --sassy-nav-current-colour: var(--sassy-body-colour);
+    --sassy-nav-current-border-colour: transparent;
+
+    // shared by every component that is not a form control
+    --sassy-focus-outline-colour: var(--sassy-theme-primary);
+    --sassy-focus-outline-width: 2px;
+    --sassy-focus-outline-offset: 2px;
+}

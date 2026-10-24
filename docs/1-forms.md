@@ -8,24 +8,24 @@ Forms are composites, so they output before the grid and utilities. A single-pur
 
 ## Placeholders
 
-| Placeholder                                                  | For                                                                    |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| `%bf-form-label`                                             | A label above a control                                                |
-| `%bf-form-text`                                              | Help text under a control                                              |
-| `%bf-form-control`, `-small`, `-large`, `-plaintext`         | Text inputs and textareas. `-plaintext` shows a value without a border |
-| `%bf-form-select`, `-small`, `-large`                        | Selects                                                                |
-| `%bf-form-check`, `%bf-form-check-inline`                    | A checkbox or radio and its label, as a block or inline                |
-| `%bf-form-check-input`                                       | The checkbox or radio itself                                           |
-| `%bf-form-check-label`                                       | The label beside a checkbox or radio                                   |
-| `%bf-form-switch`                                            | A checkbox shown as a switch                                           |
-| `%bf-input-group`, `-small`, `-large`                        | A group of controls and add-ons, joined side by side                   |
-| `%bf-input-group-text`                                       | Add-on text inside an input group                                      |
-| `%bf-form-floating`                                          | A control with its label floating inside it                            |
-| `%bf-form-range`                                             | A range slider (`type="range"`)                                        |
-| `%bf-form-file`                                              | A file input (`type="file"`)                                           |
-| `%bf-form-colour`                                            | A colour picker (`type="color"`)                                       |
-| `%bf-form-control-valid`, `%bf-form-control-invalid`         | A validation state set explicitly                                      |
-| `%bf-form-feedback-valid`, `%bf-form-feedback-invalid`       | Validation messages                                                    |
+| Placeholder                                            | For                                                                    |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `%bf-form-label`                                       | A label above a control                                                |
+| `%bf-form-text`                                        | Help text under a control                                              |
+| `%bf-form-control`, `-small`, `-large`, `-plaintext`   | Text inputs and textareas. `-plaintext` shows a value without a border |
+| `%bf-form-select`, `-small`, `-large`                  | Selects                                                                |
+| `%bf-form-check`, `%bf-form-check-inline`              | A checkbox or radio and its label, as a block or inline                |
+| `%bf-form-check-input`                                 | The checkbox or radio itself                                           |
+| `%bf-form-check-label`                                 | The label beside a checkbox or radio                                   |
+| `%bf-form-switch`                                      | A checkbox shown as a switch                                           |
+| `%bf-input-group`, `-small`, `-large`                  | A group of controls and add-ons, joined side by side                   |
+| `%bf-input-group-text`                                 | Add-on text inside an input group                                      |
+| `%bf-form-floating`                                    | A control with its label floating inside it                            |
+| `%bf-form-range`                                       | A range slider (`type="range"`)                                        |
+| `%bf-form-file`                                        | A file input (`type="file"`)                                           |
+| `%bf-form-colour`                                      | A colour picker (`type="color"`)                                       |
+| `%bf-form-control-valid`, `%bf-form-control-invalid`   | A validation state set explicitly                                      |
+| `%bf-form-feedback-valid`, `%bf-form-feedback-invalid` | Validation messages                                                    |
 
 Form placeholders have no breakpoint variants.
 
@@ -65,7 +65,6 @@ Sizes are `small` and `large`, not `sm` and `lg`, which are breakpoints. A size 
 }
 .field label {
   display: inline-block;
-  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 .field input {
@@ -240,22 +239,22 @@ Selects draw their chevron as an SVG image, which cannot read custom properties.
 
 Every form value is a custom property on `:root`, so you can change it per site, per section or at runtime. The main groups:
 
-| Property                                                                  | Controls                                                  |
-| ------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `--sassy-input-font-size`, `--sassy-input-line-height`                    | Text size and line height in controls                     |
-| `--sassy-input-padding-x`, `--sassy-input-padding-y`, `--sassy-input-radius` | Spacing and corner radius                              |
-| `--sassy-input-bg`, `--sassy-input-colour`                                | Background and text colour                                |
-| `--sassy-input-border-width`, `--sassy-input-border-colour`               | Borders                                                   |
-| `--sassy-input-placeholder-colour`, `--sassy-form-text-colour`            | Placeholder and help text                                 |
-| `--sassy-input-disabled-bg`, `--sassy-input-readonly-bg`                  | Disabled and read-only backgrounds                        |
-| `--sassy-input-focus-colour`, `--sassy-input-focus-ring`                  | Focus ring                                                |
-| `--sassy-input-valid-colour`, `--sassy-input-invalid-colour`              | Validation colours                                        |
-| `--sassy-input-addon-bg`, `--sassy-input-addon-hover-bg`                  | Input group add-ons                                       |
-| `--sassy-check-checked-colour`, `--sassy-check-mark-colour`, `--sassy-check-radius` | Checks and radios                                |
-| `--sassy-switch-knob-colour`                                              | Switch knob                                               |
-| `--sassy-floating-height`, `--sassy-floating-padding-y`                   | Floating labels                                           |
-| `--sassy-range-track-colour`, `--sassy-range-track-height`, `--sassy-range-thumb-colour`, `--sassy-range-thumb-size`, `--sassy-range-disabled-colour` | Range sliders |
-| `--sassy-select-chevron`                                                  | The select's chevron image (use `chevron()`)              |
+| Property                                                                                                                                              | Controls                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `--sassy-input-font-size`, `--sassy-input-line-height`                                                                                                | Text size and line height in controls        |
+| `--sassy-input-padding-x`, `--sassy-input-padding-y`, `--sassy-input-radius`                                                                          | Spacing and corner radius                    |
+| `--sassy-input-bg`, `--sassy-input-colour`                                                                                                            | Background and text colour                   |
+| `--sassy-input-border-width`, `--sassy-input-border-colour`                                                                                           | Borders                                      |
+| `--sassy-input-placeholder-colour`, `--sassy-form-text-colour`                                                                                        | Placeholder and help text                    |
+| `--sassy-input-disabled-bg`, `--sassy-input-readonly-bg`                                                                                              | Disabled and read-only backgrounds           |
+| `--sassy-input-focus-colour`, `--sassy-input-focus-ring`                                                                                              | Focus ring                                   |
+| `--sassy-input-valid-colour`, `--sassy-input-invalid-colour`                                                                                          | Validation colours                           |
+| `--sassy-input-addon-bg`, `--sassy-input-addon-hover-bg`                                                                                              | Input group add-ons                          |
+| `--sassy-check-checked-colour`, `--sassy-check-mark-colour`, `--sassy-check-radius`                                                                   | Checks and radios                            |
+| `--sassy-switch-knob-colour`                                                                                                                          | Switch knob                                  |
+| `--sassy-floating-height`, `--sassy-floating-padding-y`                                                                                               | Floating labels                              |
+| `--sassy-range-track-colour`, `--sassy-range-track-height`, `--sassy-range-thumb-colour`, `--sassy-range-thumb-size`, `--sassy-range-disabled-colour` | Range sliders                                |
+| `--sassy-select-chevron`                                                                                                                              | The select's chevron image (use `chevron()`) |
 
 The sizes `small` and `large` are defined in `$sassy-input-sizes` in [`src/1-forms/_100-variables.scss`](../src/1-forms/_100-variables.scss), and the check and switch shapes in `$sassy-check-tick`, `$sassy-check-dash` and `$sassy-check-dot`.
 

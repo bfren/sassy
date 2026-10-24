@@ -4,14 +4,14 @@ Sassy is a Sass utility framework built from [placeholder selectors](https://sas
 
 ## Where to start
 
-| Page                           | Covers                                                                                                |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| [0-core](0-core.md)            | Loading and configuring Sassy, the functions and mixins it provides, and writing your own placeholders |
-| [1-forms](1-forms.md)          | Every form placeholder, the markup each expects, and validation                                        |
-| [2-components](2-components.md) | Components such as navigation and cards (to come)                                                     |
-| [3-grid](3-grid.md)            | Rows and columns                                                                                      |
-| [4-utilities](4-utilities.md)  | Text, layout, colour, display, border, corners and shadow                                              |
-| [5-theme](5-theme.md)          | Theme colours, and changing them at runtime                                                            |
+| Page                            | Covers                                                                                                 |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [0-core](0-core.md)             | Loading and configuring Sassy, the functions and mixins it provides, and writing your own placeholders |
+| [1-forms](1-forms.md)           | Every form placeholder, the markup each expects, and validation                                        |
+| [2-components](2-components.md) | Components such as navigation and cards (to come)                                                      |
+| [3-grid](3-grid.md)             | Rows and columns                                                                                       |
+| [4-utilities](4-utilities.md)   | Text, layout, colour, display, border, corners and shadow                                              |
+| [5-theme](5-theme.md)           | Theme colours, and changing them at runtime                                                            |
 
 ## How each page is laid out
 
@@ -22,7 +22,7 @@ Each layer page follows the same shape:
 3. Worked examples: the Sass, the HTML it expects and the CSS it produces.
 4. The settings and custom properties it reads, so you know what you can change.
 
-CSS output in these pages is abridged to the rules that matter for the example.
+CSS output in these pages comes from compiling the example with Dart Sass, abridged to the rules that matter for the example.
 
 ## Output order
 

@@ -1,6 +1,108 @@
 @use "../../src" as sassy
 
+// Navigation
 
+.menu
+    @extend %bf-nav
+
+    a
+        @extend %bf-nav-link
+
+.menu-pills
+    @extend %bf-nav-pills
+
+.menu-underline
+    @extend %bf-nav-underline
+
+.menu-vertical
+    @extend %bf-nav-vertical
+
+// Cards
+
+.cards
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-gap-4
+
+.card
+    @extend %bf-card
+    flex: 1 1 15rem
+
+    img
+        @extend %bf-card-image
+
+    h3
+        @extend %bf-card-title
+
+.card-head
+    @extend %bf-card-header
+
+.card-body
+    @extend %bf-card-body
+
+.card-foot
+    @extend %bf-card-footer
+
+// Tabs
+
+.tab-list
+    @extend %bf-tabs
+
+    [role="tab"]
+        @extend %bf-tab
+
+.tab-panel
+    @extend %bf-tab-panel
+
+// Tooltips
+
+.tip
+    @extend %bf-tooltip
+
+// Dialogs
+
+.dialog
+    @extend %bf-dialog
+
+    header
+        @extend %bf-dialog-header
+
+    h2
+        @extend %bf-dialog-title
+
+    footer
+        @extend %bf-dialog-footer
+
+.dialog-large
+    @extend %bf-dialog-large
+
+.dialog-body
+    @extend %bf-dialog-body
+
+.dialog-close
+    @extend %bf-dialog-close
+
+// Demo buttons - Sassy has no button component yet, so these are built from utilities
+
+.button
+    @extend %bf-px-3
+    @extend %bf-py-2
+    @extend %bf-rounded
+    @extend %bf-border-1
+    @extend %bf-border-grey-300
+    @extend %bf-bg-grey-50
+    cursor: pointer
+    font: inherit
+
+.button-primary
+    @extend %bf-bg-primary
+    @extend %bf-border-primary
+    @extend %bf-c-grey-50
+
+.buttons
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-gap-2
 
 //  Chrome around the examples on the site: the header, navigation, code blocks and demo boxes.
 //  Built with Sassy itself, and not part of the examples, so it is kept apart from them.

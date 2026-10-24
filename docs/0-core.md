@@ -28,16 +28,16 @@ Pass settings with `with (...)`. Settings are optional, and each has a default:
 
 With the breakpoints above, the placeholders for `xl`, `2xl` and `3xl` no longer exist, so your own styles must use only the names you defined.
 
-| Setting                                                        | Default                 | Description                                                                              |
-| -------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------- |
-| `$sassy-breakpoints`                                           | `sm` to `3xl`, see below | Names and minimum widths. Every responsive variant is generated from this map            |
-| `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem`               | Size of one spacing step                                                                  |
-| `$sassy-radius-unit`                                           | `0.25rem`               | Size of one step for `%bf-rounded-{0-6}`                                                  |
-| `$sassy-shadow-unit`                                           | `0.125rem`              | Size of one step for `%bf-shadow-{0-3}`                                                   |
-| `$sassy-loop-max`                                              | `20`                    | Highest spacing, border width and flex grow / shrink step                                 |
-| `$sassy-prefix`                                                | `"bf"`                  | Prefix for every placeholder and class. `""` for none                                      |
-| `$sassy-separator`                                             | `"-"`                   | Joins the prefix, utility, value and breakpoint                                           |
-| `$sassy-full`                                                  | `false`                 | Also output every utility as a class, as in `dist/full.css`                               |
+| Setting                                                        | Default                  | Description                                                                   |
+| -------------------------------------------------------------- | ------------------------ | ----------------------------------------------------------------------------- |
+| `$sassy-breakpoints`                                           | `sm` to `3xl`, see below | Names and minimum widths. Every responsive variant is generated from this map |
+| `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem`                | Size of one spacing step                                                      |
+| `$sassy-radius-unit`                                           | `0.25rem`                | Size of one step for `%bf-rounded-{0-6}`                                      |
+| `$sassy-shadow-unit`                                           | `0.125rem`               | Size of one step for `%bf-shadow-{0-3}`                                       |
+| `$sassy-loop-max`                                              | `20`                     | Highest spacing, border width and flex grow / shrink step                     |
+| `$sassy-prefix`                                                | `"bf"`                   | Prefix for every placeholder and class. `""` for none                         |
+| `$sassy-separator`                                             | `"-"`                    | Joins the prefix, utility, value and breakpoint                               |
+| `$sassy-full`                                                  | `false`                  | Also output every utility as a class, as in `dist/full.css`                   |
 
 The default breakpoints are:
 
@@ -60,12 +60,12 @@ If you change the prefix, the placeholders in the [editor snippets](../README.md
 
 These are available as `sassy.name()`.
 
-| Function                            | Returns                                                                                                 |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `colour($name, $shade)`             | A palette colour in `oklch()`, for example `colour("sky", 600)`. Unknown names or shades warn and return black |
-| `with-alpha($colour, $alpha)`       | Any colour with transparency (`$alpha` from 0 to 1), as `color-mix()`                                   |
-| `chevron($colour)`                  | An SVG select chevron as a `url()`, for `--sassy-select-chevron`. See [1-forms](1-forms.md#select-chevron-in-a-dark-theme) |
-| `decimal-floor($number)`            | `$number` rounded down to three decimal places                                                          |
+| Function                      | Returns                                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `colour($name, $shade)`       | A palette colour in `oklch()`, for example `colour("sky", 600)`. Unknown names or shades warn and return black             |
+| `with-alpha($colour, $alpha)` | Any colour with transparency (`$alpha` from 0 to 1), as `color-mix()`                                                      |
+| `chevron($colour)`            | An SVG select chevron as a `url()`, for `--sassy-select-chevron`. See [1-forms](1-forms.md#select-chevron-in-a-dark-theme) |
+| `decimal-floor($number)`      | `$number` rounded down to three decimal places                                                                             |
 
 `colour()` takes a shade of `50`, `100` to `900`, or `950`. The full list of colours is in the [README](../README.md#naming).
 
@@ -73,14 +73,14 @@ These are available as `sassy.name()`.
 
 These are available as `sassy.name()` too.
 
-| Mixin                              | Use                                                                                        |
-| ---------------------------------- | ------------------------------------------------------------------------------------------ |
-| `up($breakpoint)`                  | A `@media` block from a breakpoint name, for your own styles                               |
-| `up-prop($property-map...)`        | Property values by breakpoint, inside a rule                                               |
-| `make-single($class)`              | A placeholder for the base definition only                                                 |
-| `make-responsive($class, $map)`    | A placeholder for the base definition and each breakpoint                                  |
-| `make-passes()`                    | Wraps your own `make-*` calls so their output is ordered like Sassy's                      |
-| `make-name($parts...)`             | A placeholder or class name built from the prefix and separator, for example `"mt", 0`      |
+| Mixin                           | Use                                                                                    |
+| ------------------------------- | -------------------------------------------------------------------------------------- |
+| `up($breakpoint)`               | A `@media` block from a breakpoint name, for your own styles                           |
+| `up-prop($property-map...)`     | Property values by breakpoint, inside a rule                                           |
+| `make-single($class)`           | A placeholder for the base definition only                                             |
+| `make-responsive($class, $map)` | A placeholder for the base definition and each breakpoint                              |
+| `make-passes()`                 | Wraps your own `make-*` calls so their output is ordered like Sassy's                  |
+| `make-name($parts...)`          | A placeholder or class name built from the prefix and separator, for example `"mt", 0` |
 
 ## Worked examples
 
@@ -96,8 +96,8 @@ These are available as `sassy.name()` too.
 
 ```css
 .tooltip {
-  background-color: color-mix(in oklab, oklch(…) 90%, transparent);
-  color: oklch(…);
+  background-color: color-mix(in oklab, oklch(21% 0.034 264.665deg) 60%, transparent);
+  color: oklch(98.5% 0.002 247.839deg);
 }
 ```
 
@@ -137,6 +137,9 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 ```
 
 ```css
+.sidebar {
+  background-color: oklch(92.8% 0.006 264.531deg);
+}
 @media (min-width: 576px) {
   .sidebar {
     width: 50%;

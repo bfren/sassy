@@ -1,0 +1,40 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "200-shared" as component
+
+//  =================================================================
+//  Components: navigation
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // The list of links - on a <ul>, or on a <nav> that holds the links directly
+
+    @include make.single("nav")
+        display: flex
+        flex-wrap: wrap
+        gap: var(--sassy-nav-gap)
+        list-style: none
+        margin: 0
+        padding: 0
+
+    @include make.single("nav-vertical")
+        flex-direction: column
+
+    // Styles only change custom properties, so they combine with %nav and %nav-vertical
+
+    @include make.single("nav-pills")
+        --sassy-nav-link-radius: var(--sassy-radius)
+        --sassy-nav-current-bg: var(--sassy-theme-primary)
+        --sassy-nav-current-colour: #fff
+
+    @include make.single("nav-underline")
+        --sassy-nav-link-underline-width: 0.125rem
+        --sassy-nav-link-hover-bg: transparent
+        --sassy-nav-current-border-colour: var(--sassy-theme-primary)
+
+    // Each link - mark the current page with aria-current="page"
+
+    @include make.single("nav-link")
+        @include component.link()

@@ -34,6 +34,11 @@ jobs:
       - name: Install Dart Sass
         run: npm install --prefix "$RUNNER_TEMP/sass" sass@1.93.2
 
+      - name: Copy sassy.js
+        run: |
+          mkdir -p samples/js
+          cp src/sassy.js samples/js/sassy.js
+
       - name: Compile sample stylesheets
         run: |
           "$RUNNER_TEMP/sass/node_modules/.bin/sass" --no-source-map --load-path=src samples/sass:samples/css

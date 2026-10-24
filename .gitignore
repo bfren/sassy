@@ -3,3 +3,6 @@
 *.css.map
 *.sass.map
 *.scss.map
+
+# copied from src by watch.sh, watch.bat and the Pages workflow
+samples/js/

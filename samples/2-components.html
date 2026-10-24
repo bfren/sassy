@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sassy: 2-components</title>
     <link rel="stylesheet" href="css/2-components.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
@@ -22,13 +23,310 @@
 
     <main class="site-main">
 
-        <h1>2-components</h1>
+        <h1>2-components: navigation, cards, tabs, tooltips and dialogs</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/2-components.sass</code> into <code>css/2-components.css</code>, which this page loads.</p>
+        <p class="stylesheet-note">Compiled from <code>sass/2-components.sass</code> into <code>css/2-components.css</code>, which this page loads. Tabs and tooltips also need <code>js/sassy.js</code>.</p>
 
-        <p>Components are groups of styles that make up a whole interface element, such as navigation or a card. None are built yet. Each will be listed here as it lands, with its placeholders, examples and settings.</p>
+        <p>Components are groups of styles that make up a whole interface element. Like forms, they are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/2-components.md">docs/2-components.md</a>.</p>
 
-        <p>Planned: navigation, cards, tabs, tooltips and dialogs. See the <a href="index.html">index</a> for the other layers.</p>
+        <section class="example">
+            <h2>Navigation</h2>
+            <p>A list of links. Mark the current page with <code>aria-current="page"</code>, which also tells screen readers.</p>
+            <div class="demo">
+                <nav aria-label="Example">
+                    <ul class="menu">
+                        <li><a href="#home" aria-current="page">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+<pre><code>@use "sassy/src" as sassy
+
+.menu
+    @extend %bf-nav
+
+    a
+        @extend %bf-nav-link</code></pre>
+<pre><code>&lt;nav aria-label="Example"&gt;
+    &lt;ul class="menu"&gt;
+        &lt;li&gt;&lt;a href="#home" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Pills and underline</h2>
+            <p>A style only changes custom properties, so it combines with <code>%bf-nav</code> on the same element.</p>
+            <div class="demo">
+                <ul class="menu menu-pills">
+                    <li><a href="#home" aria-current="page">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <ul class="menu menu-underline">
+                    <li><a href="#home" aria-current="page">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+<pre><code>.menu-pills
+    @extend %bf-nav-pills
+
+.menu-underline
+    @extend %bf-nav-underline</code></pre>
+<pre><code>&lt;ul class="menu menu-pills"&gt;
+    &lt;li&gt;&lt;a href="#home" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class="menu menu-underline"&gt;
+    &lt;li&gt;&lt;a href="#home" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Vertical navigation</h2>
+            <div class="demo">
+                <ul class="menu menu-pills menu-vertical">
+                    <li><a href="#profile" aria-current="page">Profile</a></li>
+                    <li><a href="#account">Account</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                </ul>
+            </div>
+<pre><code>.menu-vertical
+    @extend %bf-nav-vertical</code></pre>
+<pre><code>&lt;ul class="menu menu-pills menu-vertical"&gt;
+    &lt;li&gt;&lt;a href="#profile" aria-current="page"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#account"&gt;Account&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#privacy"&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Cards</h2>
+            <p>The card bodies grow, so the footers line up when cards in a row have different amounts of text.</p>
+            <div class="demo">
+                <div class="cards">
+                    <article class="card">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%230284c7'/%3E%3Cstop offset='1' stop-color='%23c2410c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='160' fill='url(%23g)'/%3E%3C/svg%3E" alt="" />
+                        <div class="card-body">
+                            <h3>With an image</h3>
+                            <p>The image is clipped to the card's rounded corners.</p>
+                        </div>
+                        <footer class="card-foot">Updated today</footer>
+                    </article>
+                    <article class="card">
+                        <header class="card-head">Featured</header>
+                        <div class="card-body">
+                            <h3>With a header</h3>
+                            <p>A header and footer share the card's border and background.</p>
+                        </div>
+                        <footer class="card-foot">Updated yesterday</footer>
+                    </article>
+                </div>
+            </div>
+<pre><code>.card
+    @extend %bf-card
+
+    img
+        @extend %bf-card-image
+
+    h3
+        @extend %bf-card-title
+
+.card-head
+    @extend %bf-card-header
+
+.card-body
+    @extend %bf-card-body
+
+.card-foot
+    @extend %bf-card-footer</code></pre>
+<pre><code>&lt;div class="cards"&gt;
+    &lt;article class="card"&gt;
+        &lt;img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%230284c7'/%3E%3Cstop offset='1' stop-color='%23c2410c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='160' fill='url(%23g)'/%3E%3C/svg%3E" alt="" /&gt;
+        &lt;div class="card-body"&gt;
+            &lt;h3&gt;With an image&lt;/h3&gt;
+            &lt;p&gt;The image is clipped to the card's rounded corners.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="card-foot"&gt;Updated today&lt;/footer&gt;
+    &lt;/article&gt;
+    &lt;article class="card"&gt;
+        &lt;header class="card-head"&gt;Featured&lt;/header&gt;
+        &lt;div class="card-body"&gt;
+            &lt;h3&gt;With a header&lt;/h3&gt;
+            &lt;p&gt;A header and footer share the card's border and background.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="card-foot"&gt;Updated yesterday&lt;/footer&gt;
+    &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Tabs</h2>
+            <p>Click a tab, or focus one and use the arrow keys, Home and End. <code>sassy.js</code> switches the panels and keeps the ARIA attributes up to date.</p>
+            <div class="demo">
+                <div class="tab-list" role="tablist" aria-label="Delivery options">
+                    <button type="button" role="tab" id="tab-standard" aria-controls="panel-standard" aria-selected="true">Standard</button>
+                    <button type="button" role="tab" id="tab-express" aria-controls="panel-express">Express</button>
+                    <button type="button" role="tab" id="tab-collect" aria-controls="panel-collect">Click and collect</button>
+                </div>
+                <div class="tab-panel" role="tabpanel" id="panel-standard" aria-labelledby="tab-standard" tabindex="0">
+                    <p>Delivered in three to five working days. Free on orders over £30.</p>
+                </div>
+                <div class="tab-panel" role="tabpanel" id="panel-express" aria-labelledby="tab-express" tabindex="0">
+                    <p>Delivered the next working day if you order by 2pm. £4.99.</p>
+                </div>
+                <div class="tab-panel" role="tabpanel" id="panel-collect" aria-labelledby="tab-collect" tabindex="0">
+                    <p>Ready to collect from your chosen shop in two hours. Free.</p>
+                </div>
+            </div>
+<pre><code>.tab-list
+    @extend %bf-tabs
+
+    [role="tab"]
+        @extend %bf-tab
+
+.tab-panel
+    @extend %bf-tab-panel</code></pre>
+<pre><code>&lt;div class="tab-list" role="tablist" aria-label="Delivery options"&gt;
+    &lt;button type="button" role="tab" id="tab-standard" aria-controls="panel-standard" aria-selected="true"&gt;Standard&lt;/button&gt;
+    &lt;button type="button" role="tab" id="tab-express" aria-controls="panel-express"&gt;Express&lt;/button&gt;
+    &lt;button type="button" role="tab" id="tab-collect" aria-controls="panel-collect"&gt;Click and collect&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="tab-panel" role="tabpanel" id="panel-standard" aria-labelledby="tab-standard" tabindex="0"&gt;
+    &lt;p&gt;Delivered in three to five working days. Free on orders over £30.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="tab-panel" role="tabpanel" id="panel-express" aria-labelledby="tab-express" tabindex="0"&gt;
+    &lt;p&gt;Delivered the next working day if you order by 2pm. £4.99.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="tab-panel" role="tabpanel" id="panel-collect" aria-labelledby="tab-collect" tabindex="0"&gt;
+    &lt;p&gt;Ready to collect from your chosen shop in two hours. Free.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Tooltips</h2>
+            <p>Hover over or tab to a button. A tooltip is a popover described by its trigger with <code>aria-describedby</code>, and anchor positioning places it above the trigger, or below if there is no room.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="button" aria-describedby="tip-save">Save</button>
+                    <button type="button" class="button" aria-describedby="tip-share">Share</button>
+                </div>
+                <div class="tip" role="tooltip" popover="manual" id="tip-save">Saves your changes to this device</div>
+                <div class="tip" role="tooltip" popover="manual" id="tip-share">Copies a link you can send to someone</div>
+            </div>
+<pre><code>.tip
+    @extend %bf-tooltip</code></pre>
+<pre><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button" aria-describedby="tip-save"&gt;Save&lt;/button&gt;
+    &lt;button type="button" class="button" aria-describedby="tip-share"&gt;Share&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="tip" role="tooltip" popover="manual" id="tip-save"&gt;Saves your changes to this device&lt;/div&gt;
+&lt;div class="tip" role="tooltip" popover="manual" id="tip-share"&gt;Copies a link you can send to someone&lt;/div&gt;</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Dialogs</h2>
+            <p>The buttons open and close the dialog with <code>command</code> and <code>commandfor</code>, so no script is needed in current browsers. <code>sassy.js</code> adds the same behaviour to older ones.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="button" commandfor="confirm" command="show-modal">Delete file…</button>
+                    <button type="button" class="button" commandfor="terms" command="show-modal">Read the terms</button>
+                </div>
+
+                <dialog class="dialog" id="confirm" aria-labelledby="confirm-title">
+                    <header>
+                        <h2 id="confirm-title">Delete this file?</h2>
+                        <button type="button" class="dialog-close" commandfor="confirm" command="close" aria-label="Close">×</button>
+                    </header>
+                    <div class="dialog-body">
+                        <p>You can't undo this.</p>
+                    </div>
+                    <footer>
+                        <button type="button" class="button" commandfor="confirm" command="close">Cancel</button>
+                        <button type="button" class="button button-primary" commandfor="confirm" command="close">Delete</button>
+                    </footer>
+                </dialog>
+
+                <dialog class="dialog dialog-large" id="terms" aria-labelledby="terms-title">
+                    <header>
+                        <h2 id="terms-title">Terms</h2>
+                        <button type="button" class="dialog-close" commandfor="terms" command="close" aria-label="Close">×</button>
+                    </header>
+                    <div class="dialog-body">
+                        <p>A large dialog. When the content is taller than the window, the body scrolls between the header and footer.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <footer>
+                        <button type="button" class="button button-primary" commandfor="terms" command="close">Close</button>
+                    </footer>
+                </dialog>
+            </div>
+<pre><code>.dialog
+    @extend %bf-dialog
+
+    header
+        @extend %bf-dialog-header
+
+    h2
+        @extend %bf-dialog-title
+
+    footer
+        @extend %bf-dialog-footer
+
+.dialog-large
+    @extend %bf-dialog-large
+
+.dialog-body
+    @extend %bf-dialog-body
+
+.dialog-close
+    @extend %bf-dialog-close</code></pre>
+<pre><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button" commandfor="confirm" command="show-modal"&gt;Delete file…&lt;/button&gt;
+    &lt;button type="button" class="button" commandfor="terms" command="show-modal"&gt;Read the terms&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;dialog class="dialog" id="confirm" aria-labelledby="confirm-title"&gt;
+    &lt;header&gt;
+        &lt;h2 id="confirm-title"&gt;Delete this file?&lt;/h2&gt;
+        &lt;button type="button" class="dialog-close" commandfor="confirm" command="close" aria-label="Close"&gt;×&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="dialog-body"&gt;
+        &lt;p&gt;You can't undo this.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;footer&gt;
+        &lt;button type="button" class="button" commandfor="confirm" command="close"&gt;Cancel&lt;/button&gt;
+        &lt;button type="button" class="button button-primary" commandfor="confirm" command="close"&gt;Delete&lt;/button&gt;
+    &lt;/footer&gt;
+&lt;/dialog&gt;
+
+&lt;dialog class="dialog dialog-large" id="terms" aria-labelledby="terms-title"&gt;
+    &lt;header&gt;
+        &lt;h2 id="terms-title"&gt;Terms&lt;/h2&gt;
+        &lt;button type="button" class="dialog-close" commandfor="terms" command="close" aria-label="Close"&gt;×&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="dialog-body"&gt;
+        &lt;p&gt;A large dialog. When the content is taller than the window, the body scrolls between the header and footer.&lt;/p&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
+        &lt;p&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+        &lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&lt;/p&gt;
+        &lt;p&gt;Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;footer&gt;
+        &lt;button type="button" class="button button-primary" commandfor="terms" command="close"&gt;Close&lt;/button&gt;
+    &lt;/footer&gt;
+&lt;/dialog&gt;</code></pre>
+        </section>
 
     </main>
 

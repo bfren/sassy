@@ -1,0 +1,22 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/460-shadow-variables" as *;
+
+:root {
+    --sassy-dialog-bg: #fff;
+    --sassy-dialog-border-width: 1px;
+    --sassy-dialog-border-colour: #{colour("grey", 200)};
+    --sassy-dialog-radius: calc(var(--sassy-radius) * 2);
+    --sassy-dialog-width: 32rem;
+    --sassy-dialog-padding-y: #{$sassy-padding-unit * 4};
+    --sassy-dialog-padding-x: #{$sassy-padding-unit * 5};
+    --sassy-dialog-shadow: 0 1rem 3rem #{with-alpha(colour("grey", 950), 0.175)};
+    --sassy-dialog-backdrop: #{with-alpha(colour("grey", 950), 0.5)};
+}
+
+// Size variants only redefine --sassy-dialog-width.
+// Named small and large, not sm and lg, so they are not mistaken for breakpoints.
+$sassy-dialog-sizes: (
+    small: 20rem,
+    large: 50rem
+) !default;
