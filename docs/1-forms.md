@@ -1,5 +1,7 @@
 # 1-forms: form controls and validation
 
+Live examples: [https://bfren.github.io/sassy/1-forms.html](https://bfren.github.io/sassy/1-forms.html)
+
 `src/1-forms` styles form controls: labels, text inputs, selects, checks, radios, switches, input groups, floating labels, range sliders, file and colour inputs, and validation. Each control reads its colours, sizes and spacing from custom properties, so a theme can change them at runtime.
 
 Forms are composites, so they output before the grid and utilities. A single-purpose utility such as `%bf-mb-3` always overrides a form placeholder's margin.

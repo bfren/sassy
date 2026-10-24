@@ -1,5 +1,7 @@
 # 0-core: loading and configuring Sassy
 
+Live examples: [https://bfren.github.io/sassy/0-core.html](https://bfren.github.io/sassy/0-core.html)
+
 `src/0-core` is the foundation of Sassy. It holds the copyright notice, Normalize, the settings, the `make` mixins that generate placeholders, and a few helper mixins and functions. Nothing in it outputs utilities directly, but everything else depends on it.
 
 ## Loading Sassy
@@ -126,11 +128,11 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 
 ### Different values at different breakpoints
 
-`up-prop()` sets a property at each breakpoint in one map. A breakpoint missing from the map is left alone:
+`up-prop()` sets a property at each breakpoint. Give it the property name, then a map of breakpoint values. A breakpoint missing from the map is left alone:
 
 ```sass
 .sidebar
-    @include sassy.up-prop((width: (sm: 50%, lg: 25%)))
+    @include sassy.up-prop(width (sm: 50%, lg: 25%))
 ```
 
 ```css

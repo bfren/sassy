@@ -1,5 +1,4 @@
 @use "../../src" as sassy
-@use "site"
 
 .tooltip
     background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.9)
@@ -12,7 +11,7 @@
         font-size: 1.5rem
 
 .sidebar
-    @include sassy.up-prop((width: (sm: 50%, lg: 25%)))
+    @include sassy.up-prop(width (sm: 50%, lg: 25%))
 
 @include sassy.make-passes
     @include sassy.make-responsive("stack", (1: 0.25rem, 2: 0.5rem)) using ($value)
@@ -26,3 +25,46 @@
 
 .menu-named
     @extend %#{sassy.make-name("stack", 2)}
+
+//  Chrome around the examples on the site: the header, navigation, code blocks and demo boxes.
+//  Built with Sassy itself, and not part of the examples, so it is kept apart from them.
+
+body
+    @extend %bf-body
+    @extend %bf-pb-6
+
+.site-header
+    @extend %bf-bg-grey-50
+    @extend %bf-border-bottom-1
+    @extend %bf-border-grey-200
+    @extend %bf-p-3
+
+.site-nav
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-flex-align-items-centre
+    @extend %bf-gap-x-3
+    @extend %bf-gap-y-1
+
+.site-main
+    @extend .wrap
+    @extend %bf-py-4
+
+.example
+    @extend %bf-mb-6
+
+.demo
+    @extend %bf-border-1
+    @extend %bf-border-grey-200
+    @extend %bf-rounded-2
+    @extend %bf-p-4
+    @extend %bf-mb-3
+
+pre
+    @extend %bf-bg-grey-900
+    @extend %bf-c-grey-100
+    @extend %bf-rounded-2
+    @extend %bf-p-3
+    @extend %bf-font-family-mono
+    @extend %bf-font-size-smaller
+    @extend %bf-overflow-x-auto

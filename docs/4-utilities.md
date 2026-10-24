@@ -1,5 +1,7 @@
 # 4-utilities: text, layout, colour, display, border, corners and shadow
 
+Live examples: [https://bfren.github.io/sassy/4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+
 `src/4-utilities` holds the single-purpose utilities: each sets one property, or one family of related properties, to one value. They output after the composites, so they can override them. Each section below has its placeholders, examples where they combine, and the settings it reads.
 
 Most utilities have a breakpoint variant. Add the breakpoint to the end of the name, such as `%bf-d-none` and `%bf-d-block-lg`. Breakpoint variants are not available for `%bf-body`, `%bf-wrap`, the form placeholders and `%bf-visually-hidden`. `%bf-wrap` changes its own width at each breakpoint already.

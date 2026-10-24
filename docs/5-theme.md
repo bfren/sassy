@@ -1,5 +1,7 @@
 # 5-theme: theme colours and runtime theming
 
+Live examples: [https://bfren.github.io/sassy/5-theme.html](https://bfren.github.io/sassy/5-theme.html)
+
 `src/5-theme` provides a small set of named theme colours - `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark` - for text, backgrounds, borders and shadows. Each one is a custom property on `:root`, so a theme can change them per site, per section or at runtime.
 
 Theme colours are output last, so a theme utility such as `%bf-bg-primary` always wins over any composite or single-purpose utility that sets the same property.
