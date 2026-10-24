@@ -1,10 +1,11 @@
-@use "../../src" as sassy
+//  The demos on 4-utilities.html - each example's Sass is shown on the page.
+//  The page around them is styled by _site.sass.
 
-body
-    @extend %bf-body
+@use "../../src" as sassy
+@use "site"
 
 .caption
-    @extend %bf-font-size-smaller
+    @extend %bf-font-size-small
     @extend %bf-font-style-italic
     @extend %bf-text-align-centre
     @extend %bf-c-grey-500
@@ -12,10 +13,15 @@ body
 .card-title
     @extend %bf-text-wrap-hover
     @extend %bf-font-weight-700
+    max-width: 24rem
 
-.page
-    @extend %bf-wrap
-    @extend %bf-py-4
+.scroller
+    @extend %bf-overflow-y-auto
+    @extend %bf-border-1
+    @extend %bf-border-grey-200
+    @extend %bf-rounded
+    @extend %bf-px-3
+    max-height: 11rem
 
 .header
     @extend %bf-position-sticky
@@ -28,7 +34,8 @@ body
 .section
     @extend %bf-py-4
     @extend %bf-py-6-md
-    @extend %bf-mx-auto
+    @extend %bf-px-4
+    @extend %bf-bg-grey-100
 
 .badge
     @extend %bf-c-green-800
@@ -37,72 +44,24 @@ body
     @extend %bf-px-2
     @extend %bf-py-1
 
-.nav
+.panel
+    @extend %bf-border-1
+    @extend %bf-border-grey-200
+    @extend %bf-rounded-3
+    @extend %bf-shadow-2
+    @extend %bf-p-4
+
+.links
     @extend %bf-d-flex
     @extend %bf-flex-column
-    @extend %bf-gap-2
     @extend %bf-flex-row-md
-    @extend %bf-flex-justify-between
-    @extend %bf-flex-align-items-centre
+    @extend %bf-flex-justify-between-md
+    @extend %bf-gap-2
     @extend %bf-gap-4-md
 
 .menu-toggle
-    @extend %bf-d-block
+    @extend %bf-btn
     @extend %bf-d-none-lg
 
 .skip-link
     @extend %bf-visually-hidden-focusable
-
-.card
-    @extend %bf-border-1
-    @extend %bf-border-grey-200
-    @extend %bf-rounded-3
-    @extend %bf-p-4
-
-.panel
-    @extend %bf-shadow-2
-    @extend %bf-rounded
-    @extend %bf-p-4
-
-//  Chrome around the examples on the site: the header, navigation, code blocks and demo boxes.
-//  Built with Sassy itself, and not part of the examples, so it is kept apart from them.
-
-body
-    @extend %bf-body
-    @extend %bf-pb-6
-
-.site-header
-    @extend %bf-bg-grey-50
-    @extend %bf-border-bottom-1
-    @extend %bf-border-grey-200
-    @extend %bf-p-3
-
-.site-nav
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-flex-align-items-centre
-    @extend %bf-gap-x-3
-    @extend %bf-gap-y-1
-
-.site-main
-    @extend .wrap
-    @extend %bf-py-4
-
-.example
-    @extend %bf-mb-6
-
-.demo
-    @extend %bf-border-1
-    @extend %bf-border-grey-200
-    @extend %bf-rounded-2
-    @extend %bf-p-4
-    @extend %bf-mb-3
-
-pre
-    @extend %bf-bg-grey-900
-    @extend %bf-c-grey-100
-    @extend %bf-rounded-2
-    @extend %bf-p-3
-    @extend %bf-font-family-mono
-    @extend %bf-font-size-smaller
-    @extend %bf-overflow-x-auto

@@ -3,154 +3,198 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy: 4-utilities</title>
+    <title>Utilities - Sassy</title>
     <link rel="stylesheet" href="css/4-utilities.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html">Core</a></li>
+                <li><a href="1-forms.html">Forms</a></li>
+                <li><a href="2-components.html">Components</a></li>
+                <li><a href="3-grid.html">Grid</a></li>
+                <li><a href="4-utilities.html" aria-current="page">Utilities</a></li>
+                <li><a href="5-theme.html">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
-        <h1>4-utilities: text, layout, colour, display, border, corners and shadow</h1>
+        <h1>Text, layout, colour, display, border, corners and shadow</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/4-utilities.sass</code> into <code>css/4-utilities.css</code>, which this page loads. The <code>body</code> rule applies to the whole page.</p>
+        <p class="lead">The utilities layer, <code>src/4-utilities</code>, has the single-purpose placeholders: each sets one property, or one family of properties, to one value. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/4-utilities.md">docs/4-utilities.md</a>.</p>
 
-        <p>Single-purpose utilities, each setting one property or family of properties. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/4-utilities.md">docs/4-utilities.md</a>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/4-utilities.sass</code>, compiled to <code>css/4-utilities.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example">
+        <section class="example" id="text">
             <h2>Text</h2>
             <div class="demo">
                 <p class="caption">Photographed in the studio, spring 2026.</p>
-                <div class="card-title">A long title that stays on one line and shows an ellipsis (hover to see all of it)</div>
+                <p class="card-title">A long title that stays on one line, ending in an ellipsis until you hover over it</p>
             </div>
-<pre><code>body
-    @extend %bf-body
+<div class="code">
+<pre data-lang="sass"><code>@use "sassy/src" as sassy
 
 .caption
-    @extend %bf-font-size-smaller
+    @extend %bf-font-size-small
     @extend %bf-font-style-italic
     @extend %bf-text-align-centre
     @extend %bf-c-grey-500
 
 .card-title
     @extend %bf-text-wrap-hover
-    @extend %bf-font-weight-700</code></pre>
+    @extend %bf-font-weight-700
+    max-width: 24rem</code></pre>
+<pre data-lang="html"><code>&lt;p class="caption"&gt;Photographed in the studio, spring 2026.&lt;/p&gt;
+&lt;p class="card-title"&gt;A long title that stays on one line, ending in an ellipsis until you hover over it&lt;/p&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="sticky">
             <h2>A sticky header</h2>
-            <p>The header sticks to the top of its box while you scroll it.</p>
-            <div class="demo" style="max-height: 12rem; overflow-y: auto;">
-                <div class="header">Sticky header</div>
-                <p>Scroll this box to see the header stay in place.</p>
-                <p>More content.</p>
-                <p>More content.</p>
-                <p>More content.</p>
-                <p>More content.</p>
+            <p>Scroll inside the box: the header stays at the top while the content moves under it.</p>
+            <div class="demo">
+                <div class="scroller">
+                    <div class="header">Sticky header</div>
+                    <p>Scroll this box.</p>
+                    <p>The header stays put.</p>
+                    <p>Its shadow separates it from the content.</p>
+                    <p>And z-index keeps it on top.</p>
+                    <p>That's the end.</p>
+                </div>
             </div>
-<pre><code>.header
+<div class="code">
+<pre data-lang="sass"><code>.scroller
+    @extend %bf-overflow-y-auto
+    @extend %bf-border-1
+    @extend %bf-border-grey-200
+    @extend %bf-rounded
+    @extend %bf-px-3
+    max-height: 11rem
+
+.header
     @extend %bf-position-sticky
     @extend %bf-top-0
     @extend %bf-z-index-3
     @extend %bf-bg-grey-50
     @extend %bf-shadow-1
     @extend %bf-p-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="scroller"&gt;
+    &lt;div class="header"&gt;Sticky header&lt;/div&gt;
+    &lt;p&gt;Scroll this box.&lt;/p&gt;
+    …
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="spacing">
             <h2>Responsive spacing</h2>
+            <p>The grey is the section's padding: 1rem above and below, then 1.5rem from 768px.</p>
             <div class="demo">
-                <div class="section">Vertical padding of 1rem, and 1.5rem from md upwards.</div>
+                <div class="section"><div class="box">Content</div></div>
             </div>
-<pre><code>.section
+<div class="code">
+<pre data-lang="sass"><code>.section
     @extend %bf-py-4
     @extend %bf-py-6-md
-    @extend %bf-mx-auto</code></pre>
+    @extend %bf-px-4
+    @extend %bf-bg-grey-100</code></pre>
+<pre data-lang="html"><code>&lt;div class="section"&gt;Content&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>Colour and corners</h2>
+        <section class="example" id="colour">
+            <h2>Colour, borders and corners</h2>
             <div class="demo">
-                <span class="badge">Active</span>
-                <div class="card">A card with a border and rounded corners</div>
+                <p><span class="badge">Active</span></p>
+                <div class="panel">A panel with a border, rounded corners and a shadow</div>
             </div>
-<pre><code>.badge
+<div class="code">
+<pre data-lang="sass"><code>.badge
     @extend %bf-c-green-800
     @extend %bf-bg-green-100
     @extend %bf-rounded-pill
     @extend %bf-px-2
     @extend %bf-py-1
 
-.card
+.panel
     @extend %bf-border-1
     @extend %bf-border-grey-200
     @extend %bf-rounded-3
+    @extend %bf-shadow-2
     @extend %bf-p-4</code></pre>
+<pre data-lang="html"><code>&lt;p&gt;&lt;span class="badge"&gt;Active&lt;/span&gt;&lt;/p&gt;
+&lt;div class="panel"&gt;A panel with a border, rounded corners and a shadow&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>A flex navigation bar that changes at a breakpoint</h2>
-            <p>Stacked in a column on small screens, and in a row from md upwards.</p>
+        <section class="example" id="flex">
+            <h2>A flex layout that changes at a breakpoint</h2>
+            <p>Stacked in a column on small screens, and in a row, spread out, from 768px.</p>
             <div class="demo">
-                <nav class="nav">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
+                <nav class="links" aria-label="Example">
+                    <a href="#flex">Home</a>
+                    <a href="#flex">About</a>
+                    <a href="#flex">Contact</a>
                 </nav>
             </div>
-<pre><code>.nav
+<div class="code">
+<pre data-lang="sass"><code>.links
     @extend %bf-d-flex
     @extend %bf-flex-column
-    @extend %bf-gap-2
     @extend %bf-flex-row-md
-    @extend %bf-flex-justify-between
-    @extend %bf-flex-align-items-centre
+    @extend %bf-flex-justify-between-md
+    @extend %bf-gap-2
     @extend %bf-gap-4-md</code></pre>
+<pre data-lang="html"><code>&lt;nav class="links" aria-label="Example"&gt;
+    &lt;a href="#flex"&gt;Home&lt;/a&gt;
+    &lt;a href="#flex"&gt;About&lt;/a&gt;
+    &lt;a href="#flex"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>A menu toggle, shown on small screens only</h2>
+        <section class="example" id="display">
+            <h2>Showing something on small screens only</h2>
             <div class="demo">
-                <span class="menu-toggle">Menu (hidden from lg upwards)</span>
+                <p class="demo-hint">The button is hidden from 992px; make the window narrower to see it.</p>
+                <button type="button" class="menu-toggle">Menu</button>
             </div>
-<pre><code>.menu-toggle
-    @extend %bf-d-block
+<div class="code">
+<pre data-lang="sass"><code>.menu-toggle
+    @extend %bf-btn
     @extend %bf-d-none-lg</code></pre>
+<pre data-lang="html"><code>&lt;button type="button" class="menu-toggle"&gt;Menu&lt;/button&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="hidden">
             <h2>A skip link for keyboard users</h2>
-            <p>Tab into the box below to see the link appear.</p>
+            <p>Press Tab until the link appears: it is hidden until it has keyboard focus.</p>
             <div class="demo">
-                <a class="skip-link" href="#main">Skip to main content</a>
+                <a class="skip-link" href="#hidden">Skip to main content</a>
             </div>
-<pre><code>.skip-link
+<div class="code">
+<pre data-lang="sass"><code>.skip-link
     @extend %bf-visually-hidden-focusable</code></pre>
-        </section>
-
-        <section class="example">
-            <h2>A lifted panel</h2>
-            <div class="demo">
-                <div class="panel">A panel with a shadow</div>
-            </div>
-<pre><code>.panel
-    @extend %bf-shadow-2
-    @extend %bf-rounded
-    @extend %bf-p-4</code></pre>
+<pre data-lang="html"><code>&lt;a class="skip-link" href="#hidden"&gt;Skip to main content&lt;/a&gt;</code></pre>
+</div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

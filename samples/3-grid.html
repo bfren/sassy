@@ -3,41 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy: 3-grid</title>
+    <title>Grid - Sassy</title>
     <link rel="stylesheet" href="css/3-grid.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html">Core</a></li>
+                <li><a href="1-forms.html">Forms</a></li>
+                <li><a href="2-components.html">Components</a></li>
+                <li><a href="3-grid.html" aria-current="page">Grid</a></li>
+                <li><a href="4-utilities.html">Utilities</a></li>
+                <li><a href="5-theme.html">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
-        <h1>3-grid: rows and columns</h1>
+        <h1>Rows and columns</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/3-grid.sass</code> into <code>css/3-grid.css</code>, which this page loads.</p>
+        <p class="lead">The grid layer, <code>src/3-grid</code>, is a 12-column flex grid: a row extends <code>%bf-d-flex-row</code>, and each column <code>%bf-col-{1-12}</code>, with a breakpoint variant for each width that changes. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/3-grid.md">docs/3-grid.md</a>.</p>
 
-        <p>A 12-column flex grid. A row extends <code>%bf-d-flex-row</code>, and each column extends <code>%bf-col-{1-12}</code>, with a breakpoint variant for each width you want to change. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/3-grid.md">docs/3-grid.md</a>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/3-grid.sass</code>, compiled to <code>css/3-grid.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. In the demos, the shaded boxes are each column's content: the white space around them is the gutter.</p>
 
-        <section class="example">
-            <h2>Two equal columns that stack on small screens</h2>
-            <p>Resize the window: the columns sit side by side from md upwards.</p>
+        <section class="example" id="halves">
+            <h2>Two columns that stack on small screens</h2>
             <div class="demo">
+                <p class="demo-hint">Side by side from 768px; make the window narrower and they stack.</p>
                 <div class="row">
-                    <div class="half">Left</div>
-                    <div class="half">Right</div>
+                    <div class="half"><div class="box">Left</div></div>
+                    <div class="half"><div class="box">Right</div></div>
                 </div>
             </div>
-<pre><code>@use "sassy/src" as sassy
+<div class="code">
+<pre data-lang="sass"><code>@use "sassy/src" as sassy
 
 .row
     @extend %bf-d-flex-row
@@ -45,47 +51,69 @@
 .half
     @extend %bf-col-12
     @extend %bf-col-6-md</code></pre>
-<pre><code>&lt;div class="row"&gt;
+<pre data-lang="html"><code>&lt;div class="row"&gt;
     &lt;div class="half"&gt;Left&lt;/div&gt;
     &lt;div class="half"&gt;Right&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>A sidebar and main content</h2>
+        <section class="example" id="sidebar">
+            <h2>Main content and a sidebar</h2>
             <div class="demo">
+                <p class="demo-hint">Eight and four columns from 992px; stacked below that.</p>
                 <div class="row">
-                    <main class="main">Main content, eight columns from lg upwards</main>
-                    <aside class="side">Side, four columns from lg upwards</aside>
+                    <div class="main"><div class="box">Main content</div></div>
+                    <div class="side"><div class="box">Sidebar</div></div>
                 </div>
             </div>
-<pre><code>.row
-    @extend %bf-d-flex-row
-
-.main
+<div class="code">
+<pre data-lang="sass"><code>.main
     @extend %bf-col-12
     @extend %bf-col-8-lg
 
 .side
     @extend %bf-col-12
     @extend %bf-col-4-lg</code></pre>
+<pre data-lang="html"><code>&lt;div class="row"&gt;
+    &lt;main class="main"&gt;Main content&lt;/main&gt;
+    &lt;aside class="side"&gt;Sidebar&lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="gutter">
             <h2>Removing a column's gutter</h2>
-            <p>A utility such as <code>%bf-p-0</code> overrides the grid, whatever order the <code>@extend</code> lines are in.</p>
+            <p>A utility such as <code>%bf-p-0</code> always overrides the grid, whatever order the <code>@extend</code> lines are in. The first column has no gutter, so its box reaches the edges.</p>
             <div class="demo">
                 <div class="row">
-                    <div class="edge">Edge: no gutter</div>
-                    <div class="half">Column with its gutter</div>
+                    <div class="edge"><div class="box">No gutter</div></div>
+                    <div class="third"><div class="box">Gutter</div></div>
+                    <div class="third"><div class="box">Gutter</div></div>
                 </div>
             </div>
-<pre><code>.edge
+<div class="code">
+<pre data-lang="sass"><code>.third
+    @extend %bf-col-4
+
+.edge
     @extend %bf-col-4
     @extend %bf-p-0</code></pre>
+<pre data-lang="html"><code>&lt;div class="row"&gt;
+    &lt;div class="edge"&gt;No gutter&lt;/div&gt;
+    &lt;div class="third"&gt;Gutter&lt;/div&gt;
+    &lt;div class="third"&gt;Gutter&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

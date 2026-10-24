@@ -1,4 +1,8 @@
+//  The demos on 1-forms.html - each example's Sass is shown on the page.
+//  The page around them is styled by _site.sass.
+
 @use "../../src" as sassy
+@use "site"
 
 .field
     @extend %bf-mb-3
@@ -12,14 +16,21 @@
 .field-text
     @extend %bf-form-text
 
-.compact
+.sizes
+    @extend %bf-d-grid
+    @extend %bf-gap-3
+
     input
         @extend %bf-form-control
-        @extend %bf-form-control-small
 
     select
         @extend %bf-form-select
-        @extend %bf-form-select-small
+
+    .small
+        @extend %bf-form-control-small
+
+    .large
+        @extend %bf-form-control-large
 
 .check
     @extend %bf-form-check
@@ -42,6 +53,9 @@
     span
         @extend %bf-input-group-text
 
+    button
+        @extend %bf-btn
+
 .search-feedback
     @extend %bf-form-feedback-invalid
 
@@ -50,6 +64,10 @@
 
     input
         @extend %bf-form-control
+
+.inputs
+    @extend %bf-d-grid
+    @extend %bf-gap-4
 
 .slider
     @extend %bf-form-range
@@ -60,56 +78,9 @@
 .swatch
     @extend %bf-form-colour
 
-.error
-    @extend %bf-form-feedback-invalid
+.field
+    .error
+        @extend %bf-form-feedback-invalid
 
-.ok
-    @extend %bf-form-feedback-valid
-
-@media (prefers-color-scheme: dark)
-    :root
-        --sassy-input-colour: #{sassy.colour("grey", 100)}
-        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}
-
-//  Chrome around the examples on the site: the header, navigation, code blocks and demo boxes.
-//  Built with Sassy itself, and not part of the examples, so it is kept apart from them.
-
-body
-    @extend %bf-body
-    @extend %bf-pb-6
-
-.site-header
-    @extend %bf-bg-grey-50
-    @extend %bf-border-bottom-1
-    @extend %bf-border-grey-200
-    @extend %bf-p-3
-
-.site-nav
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-flex-align-items-centre
-    @extend %bf-gap-x-3
-    @extend %bf-gap-y-1
-
-.site-main
-    @extend .wrap
-    @extend %bf-py-4
-
-.example
-    @extend %bf-mb-6
-
-.demo
-    @extend %bf-border-1
-    @extend %bf-border-grey-200
-    @extend %bf-rounded-2
-    @extend %bf-p-4
-    @extend %bf-mb-3
-
-pre
-    @extend %bf-bg-grey-900
-    @extend %bf-c-grey-100
-    @extend %bf-rounded-2
-    @extend %bf-p-3
-    @extend %bf-font-family-mono
-    @extend %bf-font-size-smaller
-    @extend %bf-overflow-x-auto
+    .ok
+        @extend %bf-form-feedback-valid

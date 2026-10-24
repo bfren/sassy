@@ -3,54 +3,114 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy</title>
+    <title>Sassy - a Sass framework built from placeholders</title>
     <link rel="stylesheet" href="css/index.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html">Core</a></li>
+                <li><a href="1-forms.html">Forms</a></li>
+                <li><a href="2-components.html">Components</a></li>
+                <li><a href="3-grid.html">Grid</a></li>
+                <li><a href="4-utilities.html">Utilities</a></li>
+                <li><a href="5-theme.html">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
         <h1>Sassy</h1>
 
+        <p class="lead">A Sass framework built from placeholder selectors. You extend the utilities and components you need onto your own selectors, so your HTML stays clean and your CSS holds only the rules you use.</p>
 
-        <p class="stylesheet-note">Compiled from <code>sass/index.sass</code> into <code>css/index.css</code>, which this page loads.</p>
+        <div class="code code-split hero-code">
+<pre data-lang="sass" data-shown-only><code>@use "sassy/src" as sassy
 
-        <p>Sassy is a Sass utility framework built from placeholder selectors. You <code>@extend</code> the utilities you need onto your own selectors, so your markup stays semantic and your CSS contains only the rules you use.</p>
+.card
+    @extend %bf-p-3
+    @extend %bf-p-5-md
+    @extend %bf-rounded
+    @extend %bf-shadow-1
 
-        <h2>Documentation</h2>
+.card-title
+    @extend %bf-c-primary
+    @extend %bf-font-weight-700</code></pre>
+        </div>
 
-        <ul>
-            <li><a href="0-core.html">0-core</a>: loading and configuring Sassy, and the functions and mixins it provides</li>
-            <li><a href="1-forms.html">1-forms</a>: form controls, and validation</li>
-            <li><a href="2-components.html">2-components</a>: navigation, cards and more (to come)</li>
-            <li><a href="3-grid.html">3-grid</a>: rows and columns</li>
-            <li><a href="4-utilities.html">4-utilities</a>: text, layout, colour, display, border, corners and shadow</li>
-            <li><a href="5-theme.html">5-theme</a>: theme colours, and changing them at runtime</li>
-        </ul>
+        <p>Each placeholder sets one thing, and has a version for each breakpoint, such as <code>%bf-p-5-md</code>. Sassy outputs them in a fixed order, so breakpoints override base styles and utilities override components, whichever order you extend them in.</p>
+
+        <h2>The layers</h2>
+
+        <p>Sassy is built in six layers, numbered in the order their CSS is output. Each page shows its layer working, with the Sass, HTML and CSS for every example.</p>
+
+        <ol class="layers">
+            <li>
+                <a href="0-core.html">
+                    <span class="layer-number">0</span>
+                    <span class="layer-name">Core</span>
+                    <span class="layer-text">Loading and configuring Sassy, palette colours, breakpoints, and making placeholders of your own.</span>
+                </a>
+            </li>
+            <li>
+                <a href="1-forms.html">
+                    <span class="layer-number">1</span>
+                    <span class="layer-name">Forms</span>
+                    <span class="layer-text">Labels, inputs, selects, checks, switches, input groups and floating labels, with validation.</span>
+                </a>
+            </li>
+            <li>
+                <a href="2-components.html">
+                    <span class="layer-number">2</span>
+                    <span class="layer-name">Components</span>
+                    <span class="layer-text">Buttons, navigation, cards, tabs, tooltips and dialogs.</span>
+                </a>
+            </li>
+            <li>
+                <a href="3-grid.html">
+                    <span class="layer-number">3</span>
+                    <span class="layer-name">Grid</span>
+                    <span class="layer-text">A 12-column flex grid whose columns change width at each breakpoint.</span>
+                </a>
+            </li>
+            <li>
+                <a href="4-utilities.html">
+                    <span class="layer-number">4</span>
+                    <span class="layer-name">Utilities</span>
+                    <span class="layer-text">Single-purpose placeholders for text, spacing, layout, colour, display, borders, corners and shadow.</span>
+                </a>
+            </li>
+            <li>
+                <a href="5-theme.html">
+                    <span class="layer-number">5</span>
+                    <span class="layer-name">Theme</span>
+                    <span class="layer-text">Eight named colours you can change for a site, a section or at runtime.</span>
+                </a>
+            </li>
+        </ol>
 
         <h2>Test pages</h2>
 
-        <ul>
-            <li><a href="test.html">Utilities test page</a></li>
-            <li><a href="form.html">Form controls test page</a></li>
-            <li><a href="theme.html">Theme test page</a></li>
-        </ul>
+        <p>Pages used to check Sassy in different browsers: <a href="test.html">utilities</a>, <a href="form.html">form controls</a> and <a href="theme.html">theme colours</a>.</p>
 
-        <p>The source is on <a href="https://github.com/bfren/sassy">GitHub</a>, and the <a href="https://github.com/bfren/sassy/blob/main/README.md">README</a> covers installation and naming.</p>
+        <h2>Getting started</h2>
+
+        <p>Add Sassy to your project and load it with <code>@use "sassy/src" as sassy</code>, or link <code>dist/full.css</code> to use every utility as a class. The <a href="https://github.com/bfren/sassy#readme">README</a> covers both, and the <a href="https://github.com/bfren/sassy/tree/main/docs">docs</a> cover each layer in full.</p>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -1,0 +1,329 @@
+@use "../../src" as sassy
+
+//  =================================================================
+//  The samples site: page, header, navigation, demos and code
+//  =================================================================
+
+//  Shared by every page's stylesheet, and kept apart from the examples, which each page's own
+//  Sass file holds. Built from Sassy's own placeholders, components and custom properties.
+
+:root
+    // no web fonts: a serif already on the reader's device for headings, the system sans for text
+    --site-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif
+    --sassy-font-family-mono: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace
+    --sassy-body-colour: #{sassy.colour("slate", 800)}
+
+    --site-paper: #{sassy.colour("slate", 50)}
+    --site-line: #{sassy.colour("slate", 200)}
+    --site-muted: #{sassy.colour("slate", 600)}
+    --site-link: #{sassy.colour("sky", 700)}
+    --site-mark: #{sassy.colour("orange", 600)}
+    --site-radius: 0.75rem
+    --site-width: 68rem
+
+    --site-code-bg: #{sassy.colour("slate", 900)}
+    --site-code-line: #{sassy.colour("slate", 700)}
+    --site-code-text: #{sassy.colour("slate", 200)}
+
+html
+    // anchors land below the sticky header
+    scroll-padding-top: 6rem
+
+body
+    @extend %bf-body
+    background-color: var(--site-paper)
+    margin: 0
+
+// Width and gutters shared by the header, page and footer
+.site-width
+    box-sizing: border-box
+    margin-inline: auto
+    max-width: var(--site-width)
+    padding-inline: 1.25rem
+
+    @include sassy.up(md)
+        padding-inline: 2rem
+
+
+//  =================================================================
+//  Header and navigation
+//  =================================================================
+
+.site-header
+    @extend %bf-position-sticky
+    @extend %bf-top-0
+    @extend %bf-z-index-5
+    backdrop-filter: blur(0.5rem)
+    background-color: color-mix(in oklab, #fff 85%, transparent)
+    border-bottom: 1px solid var(--site-line)
+
+.site-header-inner
+    @extend %bf-d-flex
+    @extend %bf-flex-column
+    @extend %bf-flex-row-md
+    @extend %bf-flex-align-items-centre-md
+    @extend %bf-gap-x-6
+    padding-top: 0.75rem
+
+    @include sassy.up(md)
+        padding-top: 0
+
+.brand
+    color: inherit
+    font-family: var(--site-serif)
+    font-size: 1.5rem
+    font-weight: 700
+    letter-spacing: -0.01em
+    text-decoration: none
+
+.brand-mark
+    color: var(--site-mark)
+    margin-right: 0.05em
+
+// Sassy's nav component, underline style - the current page has aria-current="page"
+.site-nav
+    @extend %bf-nav
+    @extend %bf-nav-underline
+    --sassy-nav-gap: 0
+    --sassy-nav-link-colour: var(--site-muted)
+    --sassy-nav-link-padding-x: 0.75rem
+    --sassy-nav-link-padding-y: 1rem
+    // scrolls sideways on narrow screens rather than wrapping
+    flex-wrap: nowrap
+    margin-inline: -0.75rem
+    overflow-x: auto
+    scrollbar-width: none
+
+    a
+        @extend %bf-nav-link
+        white-space: nowrap
+
+        &:hover
+            color: var(--sassy-body-colour)
+
+
+//  =================================================================
+//  Page
+//  =================================================================
+
+.site-main
+    padding-block: 3rem 5rem
+
+    > h1
+        font-family: var(--site-serif)
+        font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem)
+        font-weight: 700
+        letter-spacing: -0.02em
+        line-height: 1.1
+        margin: 0 0 1rem
+
+    > h2
+        font-family: var(--site-serif)
+        font-size: 1.75rem
+        letter-spacing: -0.01em
+        margin: 3.5rem 0 1rem
+
+    > p,
+    > ul,
+    > ol
+        max-width: 68ch
+
+    > p a,
+    > ul a,
+    .example > p a
+        color: var(--site-link)
+        text-underline-offset: 0.2em
+
+.lead
+    color: var(--site-muted)
+    font-size: 1.25rem
+    line-height: 1.55
+
+.stylesheet-note
+    color: var(--site-muted)
+    font-size: 0.875rem
+
+// inline code in the page's own text, not in demos
+.site-main > p code,
+.site-main > ul code,
+.example > p code
+    background-color: #{sassy.colour("slate", 100)}
+    border-radius: 0.25rem
+    font-size: 0.875em
+    padding: 0.1em 0.3em
+
+
+//  =================================================================
+//  Examples: a live demo with its code underneath
+//  =================================================================
+
+.example
+    margin-top: 4rem
+
+    > h2
+        font-family: var(--site-serif)
+        font-size: 1.625rem
+        letter-spacing: -0.01em
+        line-height: 1.2
+        margin: 0 0 0.75rem
+
+    > p
+        margin: 0 0 1.25rem
+        max-width: 68ch
+
+.demo
+    background-color: #fff
+    border: 1px solid var(--site-line)
+    border-radius: var(--site-radius)
+    padding: 1.5rem
+
+    @include sassy.up(md)
+        padding: 2rem
+
+    // joined to the code below it
+    &:has(+ .code)
+        border-bottom: 0
+        border-bottom-left-radius: 0
+        border-bottom-right-radius: 0
+
+        + .code
+            border-top-left-radius: 0
+            border-top-right-radius: 0
+
+// Shaded boxes that make spacing visible in demos: the white around them is margin, padding or gutter
+.box
+    background-color: #{sassy.colour("sky", 50)}
+    border: 1px dashed #{sassy.colour("sky", 300)}
+    border-radius: 0.375rem
+    color: #{sassy.colour("sky", 900)}
+    padding: 0.5rem 0.75rem
+
+// A note in a demo about what to do to see it work
+.demo-hint
+    color: var(--site-muted)
+    font-size: 0.875rem
+    margin: 0 0 1rem
+
+
+//  =================================================================
+//  Code: tabs for Sass, HTML and CSS, built from Sassy's tabs component
+//  =================================================================
+
+.code
+    background-color: var(--site-code-bg)
+    border-radius: var(--site-radius)
+    color: var(--site-code-text)
+    overflow: hidden
+
+    // before the build adds tabs, the blocks are listed one after another
+    > pre + pre
+        border-top: 1px solid var(--site-code-line)
+
+.code-tabs
+    @extend %bf-tabs
+    --sassy-tabs-border-colour: var(--site-code-line)
+    --sassy-nav-gap: 0
+    --sassy-nav-link-colour: #{sassy.colour("slate", 400)}
+    --sassy-nav-link-padding-x: 1rem
+    --sassy-nav-link-padding-y: 0.625rem
+    --sassy-nav-current-colour: #fff
+    --sassy-nav-current-border-colour: #{sassy.colour("sky", 400)}
+    --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
+    --sassy-focus-outline-offset: -2px
+    font-size: 0.875rem
+    padding-inline: 0.5rem
+
+    [role="tab"]
+        @extend %bf-tab
+
+        &:hover
+            color: #fff
+
+// a single block, or each side of a split block, has a label in place of tabs
+.code-label
+    border-bottom: 1px solid var(--site-code-line)
+    color: #{sassy.colour("slate", 400)}
+    font-size: 0.875rem
+    padding: 0.625rem 1.5rem
+
+.code pre
+    font-family: var(--sassy-font-family-mono)
+    font-size: 0.875rem
+    line-height: 1.65
+    margin: 0
+    max-height: 30rem
+    overflow: auto
+    padding: 1.25rem 1.5rem
+    tab-size: 4
+
+    &:focus-visible
+        outline: 2px solid #{sassy.colour("sky", 300)}
+        outline-offset: -2px
+
+.code-split
+    display: grid
+
+    @include sassy.up(lg)
+        grid-template-columns: 1fr 1fr
+
+        figure + figure
+            border-left: 1px solid var(--site-code-line)
+
+    figure
+        margin: 0
+        min-width: 0
+
+// Highlighting - Sassy's placeholders stand out in the same orange as the % in the logo
+.t-comment
+    color: #{sassy.colour("slate", 400)}
+    font-style: italic
+
+.t-placeholder
+    color: #{sassy.colour("orange", 300)}
+
+.t-at,
+.t-tag
+    color: #{sassy.colour("pink", 300)}
+
+.t-property,
+.t-attribute
+    color: #{sassy.colour("sky", 300)}
+
+.t-string
+    color: #{sassy.colour("emerald", 300)}
+
+.t-variable,
+.t-function
+    color: #{sassy.colour("violet", 300)}
+
+.t-selector
+    color: #fff
+
+
+//  =================================================================
+//  Footer
+//  =================================================================
+
+.site-footer
+    border-top: 1px solid var(--site-line)
+    color: var(--site-muted)
+    font-size: 0.875rem
+    padding-block: 2rem 3rem
+
+    p
+        margin: 0
+
+    a
+        color: inherit
+        text-underline-offset: 0.2em
+
+
+//  =================================================================
+//  Demo helpers
+//  =================================================================
+
+// Stripes behind a demo, so transparency shows
+.demo-stripes
+    background: repeating-linear-gradient(-45deg, #{sassy.colour("sky", 200)} 0 0.75rem, #{sassy.colour("amber", 200)} 0.75rem 1.5rem)
+    border-radius: 0.5rem
+    padding: 2rem 1.5rem

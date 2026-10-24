@@ -299,15 +299,23 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 ## Building and contributing
 
-You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows.
+You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
 
-| Script                  | Does                                                                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `compile-full.sh`       | Builds `dist/full.css` and `dist/full.css.gz`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh` |
-| `compile-full.bat`      | Runs `compile-full.sh` in Git Bash on Windows                                                                            |
-| `watch.sh`, `watch.bat` | Recompiles the sample stylesheets in `samples/sass` whenever they change - open the pages in `samples` to check them     |
-| `snippets.sh`           | Generates `dist/sassy.code-snippets` from `dist/full.css`                                                                |
-| `palette.sh`            | Generates the colour charts in `docs` from the colour and theme variables                                                |
+| Script                      | Does                                                                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `compile-full.sh`           | Builds `dist/full.css` and `dist/full.css.gz`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh`                                     |
+| `compile-full.bat`          | Runs `compile-full.sh` in Git Bash on Windows                                                                                                                |
+| `watch.sh`, `watch.bat`     | Recompiles the sample stylesheets in `samples/sass` whenever they change, to preview the pages in `samples` as you work                                      |
+| `node tools/site.mjs build` | Builds the samples site into `_site`, adding the CSS that Sassy outputs for each example - fails if an example does not compile, or its page does not use it |
+| `node tools/site.mjs check` | Checks that the CSS shown in `README.md` and `docs` is what Sassy outputs                                                                                    |
+| `snippets.sh`               | Generates `dist/sassy.code-snippets` from `dist/full.css`                                                                                                    |
+| `palette.sh`                | Generates the colour charts in `docs` from the colour and theme variables                                                                                    |
+
+### Samples and checks
+
+`samples` holds the [examples site](https://bfren.github.io/sassy/): a page for each layer, each with its own Sass file in `samples/sass`, which shares the site's own styles from `_site.sass`. Each example on a page shows its Sass and HTML; `tools/site.mjs build` adds the CSS that Sassy outputs for it, and checks that the page's stylesheet really uses that Sass. An example that is only shown, not used on its page, is marked `data-shown-only`.
+
+Two workflows run these: **Check** builds the site and checks the docs on every pull request, and **Publish GitHub Pages** builds the site and publishes it when a pull request is merged into `main`.
 
 ### Structure
 
