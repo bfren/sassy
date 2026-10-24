@@ -90,7 +90,7 @@ These are available as `sassy.name()` too.
 @use "sassy/src" as sassy
 
 .tooltip
-    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.9)
+    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.6)
     color: sassy.colour("grey", 50)
 ```
 
@@ -132,6 +132,7 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 
 ```sass
 .sidebar
+    background-color: sassy.colour("grey", 200)
     @include sassy.up-prop(width (sm: 50%, lg: 25%))
 ```
 

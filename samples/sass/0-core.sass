@@ -1,7 +1,7 @@
 @use "../../src" as sassy
 
 .tooltip
-    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.9)
+    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.6)
     color: sassy.colour("grey", 50)
 
 .hero
@@ -11,6 +11,7 @@
         font-size: 1.5rem
 
 .sidebar
+    background-color: sassy.colour("grey", 200)
     @include sassy.up-prop(width (sm: 50%, lg: 25%))
 
 @include sassy.make-passes
