@@ -250,6 +250,16 @@
 }
 
 /*
+ * Sassy: keep modal dialogs fixed to the viewport, as browsers do natively.
+ * The absolute position above, which page styles give priority over the
+ * browser's own, would otherwise scroll the page to the top when one opens.
+ */
+
+:where(dialog:modal) {
+  position: fixed;
+}
+
+/*
  * Add the correct display in all browsers.
  */
 
