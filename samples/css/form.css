@@ -316,6 +316,24 @@
 }
 
 :root {
+  --sassy-btn-bg: #fff;
+  --sassy-btn-colour: var(--sassy-body-colour);
+  --sassy-btn-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-btn-outline-colour: var(--sassy-body-colour);
+  --sassy-btn-focus-colour: var(--sassy-input-focus-colour);
+  --sassy-btn-font-weight: 500;
+  --sassy-btn-shade: #000;
+  --sassy-btn-primary-colour: #fff;
+  --sassy-btn-secondary-colour: #fff;
+  --sassy-btn-ok-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-info-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-warn-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-error-colour: #fff;
+  --sassy-btn-grey-light-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-grey-dark-colour: #fff;
+}
+
+:root {
   --sassy-nav-gap: 0.25rem;
   --sassy-nav-link-padding-y: 0.5rem;
   --sassy-nav-link-padding-x: 1rem;

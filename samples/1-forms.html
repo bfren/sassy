@@ -3,41 +3,47 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy: 1-forms</title>
+    <title>Forms - Sassy</title>
     <link rel="stylesheet" href="css/1-forms.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html">Core</a></li>
+                <li><a href="1-forms.html" aria-current="page">Forms</a></li>
+                <li><a href="2-components.html">Components</a></li>
+                <li><a href="3-grid.html">Grid</a></li>
+                <li><a href="4-utilities.html">Utilities</a></li>
+                <li><a href="5-theme.html">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
-        <h1>1-forms: form controls and validation</h1>
+        <h1>Form controls and validation</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/1-forms.sass</code> into <code>css/1-forms.css</code>, which this page loads.</p>
+        <p class="lead">The forms layer, <code>src/1-forms</code>, styles labels, text inputs, selects, checks, switches, input groups, floating labels, range, file and colour inputs, and validation. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-forms.md">docs/1-forms.md</a>.</p>
 
-        <p>Form placeholders style controls, labels, help text, selects, checks, switches, input groups, floating labels, range, file and colour inputs, and validation. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-forms.md">docs/1-forms.md</a>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-forms.sass</code>, compiled to <code>css/1-forms.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example">
+        <section class="example" id="field">
             <h2>A labelled text field with help text</h2>
             <div class="demo">
                 <div class="field">
                     <label for="name">Name</label>
-                    <input type="text" id="name" placeholder="Your name" />
-                    <div class="field-text">Your full name, as it appears on your passport.</div>
+                    <input type="text" id="name" placeholder="Your full name" />
+                    <div class="field-text">As it appears on your passport.</div>
                 </div>
             </div>
-<pre><code>@use "sassy/src" as sassy
+<div class="code">
+<pre data-lang="sass"><code>@use "sassy/src" as sassy
 
 .field
     @extend %bf-mb-3
@@ -50,44 +56,76 @@
 
 .field-text
     @extend %bf-form-text</code></pre>
-<pre><code>&lt;div class="field"&gt;
+<pre data-lang="html"><code>&lt;div class="field"&gt;
     &lt;label for="name"&gt;Name&lt;/label&gt;
-    &lt;input type="text" id="name" /&gt;
-    &lt;div class="field-text"&gt;Your full name, as it appears on your passport.&lt;/div&gt;
+    &lt;input type="text" id="name" placeholder="Your full name" /&gt;
+    &lt;div class="field-text"&gt;As it appears on your passport.&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>A small control</h2>
+        <section class="example" id="sizes">
+            <h2>Small and large controls</h2>
+            <p>A size only changes custom properties, so extend it as well as the control.</p>
             <div class="demo">
-                <div class="compact">
-                    <input type="text" placeholder="Small input" />
-                    <select>
+                <div class="sizes">
+                    <input type="text" class="small" placeholder="Small" aria-label="Small" />
+                    <input type="text" placeholder="Default" aria-label="Default" />
+                    <input type="text" class="large" placeholder="Large" aria-label="Large" />
+                    <select class="small" aria-label="Small select">
                         <option>Small select</option>
                         <option>Second option</option>
                     </select>
                 </div>
             </div>
-<pre><code>.compact
+<div class="code">
+<pre data-lang="sass"><code>.sizes
+    @extend %bf-d-grid
+    @extend %bf-gap-3
+
     input
         @extend %bf-form-control
-        @extend %bf-form-control-small
 
     select
         @extend %bf-form-select
-        @extend %bf-form-select-small</code></pre>
+
+    .small
+        @extend %bf-form-control-small
+
+    .large
+        @extend %bf-form-control-large</code></pre>
+<pre data-lang="html"><code>&lt;div class="sizes"&gt;
+    &lt;input type="text" class="small" placeholder="Small" aria-label="Small" /&gt;
+    &lt;input type="text" placeholder="Default" aria-label="Default" /&gt;
+    &lt;input type="text" class="large" placeholder="Large" aria-label="Large" /&gt;
+    &lt;select class="small" aria-label="Small select"&gt;
+        &lt;option&gt;Small select&lt;/option&gt;
+        &lt;option&gt;Second option&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="checks">
             <h2>Checkboxes and radios</h2>
+            <p>The input comes first, then the label, then any help text, which lines up under the label.</p>
             <div class="demo">
                 <div class="check">
-                    <input type="checkbox" id="news" />
+                    <input type="checkbox" id="news" checked />
                     <label for="news">Send me the newsletter</label>
                     <div class="field-text">About once a month.</div>
                 </div>
+                <div class="check">
+                    <input type="radio" name="delivery" id="post" checked />
+                    <label for="post">Post</label>
+                </div>
+                <div class="check">
+                    <input type="radio" name="delivery" id="collect" />
+                    <label for="collect">Collect from the shop</label>
+                </div>
             </div>
-<pre><code>.check
+<div class="code">
+<pre data-lang="sass"><code>.check
     @extend %bf-form-check
 
     input
@@ -95,31 +133,54 @@
 
     label
         @extend %bf-form-check-label</code></pre>
+<pre data-lang="html"><code>&lt;div class="check"&gt;
+    &lt;input type="checkbox" id="news" checked /&gt;
+    &lt;label for="news"&gt;Send me the newsletter&lt;/label&gt;
+    &lt;div class="field-text"&gt;About once a month.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="check"&gt;
+    &lt;input type="radio" name="delivery" id="post" checked /&gt;
+    &lt;label for="post"&gt;Post&lt;/label&gt;
+&lt;/div&gt;
+&lt;div class="check"&gt;
+    &lt;input type="radio" name="delivery" id="collect" /&gt;
+    &lt;label for="collect"&gt;Collect from the shop&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="switch">
             <h2>A switch</h2>
+            <p>A switch is a checkbox with <code>role="switch"</code>, so assistive technology announces it as one.</p>
             <div class="demo">
-                <input type="checkbox" role="switch" id="notify" class="toggle" />
-                <label for="notify">Notifications</label>
+                <div class="check">
+                    <input type="checkbox" role="switch" id="notify" class="toggle" checked />
+                    <label for="notify">Notifications</label>
+                </div>
             </div>
-<pre><code>.toggle
+<div class="code">
+<pre data-lang="sass"><code>.toggle
     @extend %bf-form-switch</code></pre>
-<pre><code>&lt;input type="checkbox" role="switch" id="notify" class="toggle" /&gt;
-&lt;label for="notify"&gt;Notifications&lt;/label&gt;</code></pre>
+<pre data-lang="html"><code>&lt;div class="check"&gt;
+    &lt;input type="checkbox" role="switch" id="notify" class="toggle" checked /&gt;
+    &lt;label for="notify"&gt;Notifications&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="input-group">
             <h2>Input groups</h2>
+            <p>Controls, add-on text and buttons join up, sharing their borders. Feedback goes after the group, and shows when a control inside it is invalid.</p>
             <div class="demo">
                 <div class="search">
                     <span>£</span>
-                    <input type="number" id="amount" required aria-invalid="true" />
+                    <input type="number" id="amount" aria-label="Amount" aria-invalid="true" />
                     <button type="button">Add</button>
                 </div>
                 <div class="search-feedback">Enter an amount in pounds.</div>
             </div>
-<pre><code>.search
+<div class="code">
+<pre data-lang="sass"><code>.search
     @extend %bf-input-group
 
     input
@@ -128,33 +189,57 @@
     span
         @extend %bf-input-group-text
 
+    button
+        @extend %bf-btn
+
 .search-feedback
     @extend %bf-form-feedback-invalid</code></pre>
+<pre data-lang="html"><code>&lt;div class="search"&gt;
+    &lt;span&gt;£&lt;/span&gt;
+    &lt;input type="number" id="amount" aria-label="Amount" aria-invalid="true" /&gt;
+    &lt;button type="button"&gt;Add&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="search-feedback"&gt;Enter an amount in pounds.&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="floating">
             <h2>Floating labels</h2>
+            <p>Click into the field: the label moves up out of the way. The control comes first, and needs <code>placeholder=" "</code>.</p>
             <div class="demo">
                 <div class="floating">
                     <input type="email" id="email" placeholder=" " />
                     <label for="email">Email address</label>
                 </div>
             </div>
-<pre><code>.floating
+<div class="code">
+<pre data-lang="sass"><code>.floating
     @extend %bf-form-floating
 
     input
         @extend %bf-form-control</code></pre>
+<pre data-lang="html"><code>&lt;div class="floating"&gt;
+    &lt;input type="email" id="email" placeholder=" " /&gt;
+    &lt;label for="email"&gt;Email address&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="inputs">
             <h2>Range, file and colour inputs</h2>
             <div class="demo">
-                <input type="range" class="slider" aria-label="Volume" />
-                <input type="file" class="upload" aria-label="Upload a file" />
-                <input type="color" class="swatch" aria-label="Pick a colour" />
+                <div class="inputs">
+                    <input type="range" class="slider" aria-label="Volume" />
+                    <input type="file" class="upload" aria-label="Upload a file" />
+                    <input type="color" class="swatch" value="#0284c7" aria-label="Pick a colour" />
+                </div>
             </div>
-<pre><code>.slider
+<div class="code">
+<pre data-lang="sass"><code>.inputs
+    @extend %bf-d-grid
+    @extend %bf-gap-4
+
+.slider
     @extend %bf-form-range
 
 .upload
@@ -162,44 +247,73 @@
 
 .swatch
     @extend %bf-form-colour</code></pre>
+<pre data-lang="html"><code>&lt;div class="inputs"&gt;
+    &lt;input type="range" class="slider" aria-label="Volume" /&gt;
+    &lt;input type="file" class="upload" aria-label="Upload a file" /&gt;
+    &lt;input type="color" class="swatch" value="#0284c7" aria-label="Pick a colour" /&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="validation">
             <h2>Validation</h2>
-            <p>An invalid field shows its message after it. Here the server has marked the field with <code>aria-invalid="true"</code>.</p>
+            <p>The first field has <code>aria-invalid="true"</code>, as set by a server, so its message shows. Type an invalid address in the second and leave it, and the browser shows its message.</p>
             <div class="demo">
                 <div class="field">
-                    <input type="email" id="email-error" aria-invalid="true" value="not an email" />
-                    <div class="error">Please enter a valid email address.</div>
+                    <input type="email" aria-label="Email" aria-invalid="true" value="not an email" />
+                    <div class="error">Enter an email address, like name@example.com.</div>
                 </div>
                 <div class="field">
-                    <input type="email" id="email-ok" value="ben@example.com" />
+                    <input type="email" aria-label="Another email" required />
+                    <div class="error">Enter an email address, like name@example.com.</div>
+                </div>
+                <div class="field">
+                    <input type="email" aria-label="A valid email" value="ben@example.com" />
                     <div class="ok">Looks good.</div>
                 </div>
             </div>
-<pre><code>.field
-    input
-        @extend %bf-form-control
-
+<div class="code">
+<pre data-lang="sass"><code>.field
     .error
         @extend %bf-form-feedback-invalid
 
     .ok
         @extend %bf-form-feedback-valid</code></pre>
+<pre data-lang="html"><code>&lt;div class="field"&gt;
+    &lt;input type="email" aria-label="Email" aria-invalid="true" value="not an email" /&gt;
+    &lt;div class="error"&gt;Enter an email address, like name@example.com.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="field"&gt;
+    &lt;input type="email" aria-label="Another email" required /&gt;
+    &lt;div class="error"&gt;Enter an email address, like name@example.com.&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="field"&gt;
+    &lt;input type="email" aria-label="A valid email" value="ben@example.com" /&gt;
+    &lt;div class="ok"&gt;Looks good.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="chevron">
             <h2>Select chevron in a dark theme</h2>
-            <p>Selects draw their chevron as an image, so a dark theme sets <code>--sassy-select-chevron</code> with <code>chevron()</code> as well as the text colour.</p>
-<pre><code>@use "sassy/src" as sassy
+            <p>A select draws its chevron as an image, so a dark theme sets <code>--sassy-select-chevron</code> with <code>chevron()</code>, as well as the text colour.</p>
+<div class="code">
+<pre data-lang="sass" data-shown-only><code>@use "sassy/src" as sassy
 
 @media (prefers-color-scheme: dark)
     :root
         --sassy-input-colour: #{sassy.colour("grey", 100)}
         --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}</code></pre>
+</div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

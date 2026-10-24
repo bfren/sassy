@@ -3,79 +3,144 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy: 5-theme</title>
+    <title>Theme - Sassy</title>
     <link rel="stylesheet" href="css/5-theme.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html">Core</a></li>
+                <li><a href="1-forms.html">Forms</a></li>
+                <li><a href="2-components.html">Components</a></li>
+                <li><a href="3-grid.html">Grid</a></li>
+                <li><a href="4-utilities.html">Utilities</a></li>
+                <li><a href="5-theme.html" aria-current="page">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
-        <h1>5-theme: theme colours and runtime theming</h1>
+        <h1>Theme colours and runtime theming</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/5-theme.sass</code> into <code>css/5-theme.css</code>, which this page loads.</p>
+        <p class="lead">The theme layer, <code>src/5-theme</code>, names eight colours - primary, secondary, ok, info, warn, error, grey-light and grey-dark - as custom properties, so a site, a section or a script can change them. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/5-theme.md">docs/5-theme.md</a>.</p>
 
-        <p>Theme colours are custom properties on <code>:root</code>, so a site, a section or a script can change them. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/5-theme.md">docs/5-theme.md</a>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/5-theme.sass</code>, compiled to <code>css/5-theme.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example">
+        <section class="example" id="using">
             <h2>Using theme colours</h2>
             <div class="demo">
                 <div class="alert-error">Something went wrong. Please try again.</div>
             </div>
-<pre><code>@use "sassy/src" as sassy
+<div class="code">
+<pre data-lang="sass"><code>@use "sassy/src" as sassy
 
 .alert-error
     @extend %bf-bg-error
     @extend %bf-c-grey-50
     @extend %bf-rounded-2
     @extend %bf-p-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="alert-error"&gt;Something went wrong. Please try again.&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="section">
             <h2>A section with its own theme</h2>
-            <p>The section sets <code>--sassy-theme-primary</code> for everything inside it.</p>
+            <p>The section sets <code>--sassy-theme-primary</code>, and everything inside it follows - text, and the button component too.</p>
             <div class="demo">
                 <section class="promo">
-                    <p class="promo-text">Spring offer</p>
+                    <p class="promo-text">Spring offer: 20% off</p>
+                    <button type="button" class="promo-button">Shop now</button>
                 </section>
             </div>
-<pre><code>.promo
+<div class="code">
+<pre data-lang="sass"><code>.promo
     --sassy-theme-primary: #{sassy.colour("orange", 600)}
-    --sassy-theme-secondary: #{sassy.colour("sky", 700)}
 
 .promo-text
-    @extend %bf-c-primary</code></pre>
+    @extend %bf-c-primary
+    @extend %bf-font-weight-700
+
+.promo-button
+    @extend %bf-btn
+    @extend %bf-btn-primary</code></pre>
+<pre data-lang="html"><code>&lt;section class="promo"&gt;
+    &lt;p class="promo-text"&gt;Spring offer: 20% off&lt;/p&gt;
+    &lt;button type="button" class="promo-button"&gt;Shop now&lt;/button&gt;
+&lt;/section&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>Dark mode and runtime changes</h2>
-            <p>These need a whole-site or script change, so they are shown here but not applied to this page.</p>
-<pre><code>@use "sassy/src" as sassy
+        <section class="example" id="runtime">
+            <h2>Changing the theme at runtime</h2>
+            <p>Choose a colour: a script sets <code>--sassy-theme-primary</code> on this demo, and its button and link follow, with no new stylesheet.</p>
+            <div class="demo">
+                <div class="themed" id="themed">
+                    <div class="choices">
+                        <button type="button" class="choice" data-colour="">Default</button>
+                        <button type="button" class="choice" data-colour="#0d9488">Teal</button>
+                        <button type="button" class="choice" data-colour="#7c3aed">Violet</button>
+                        <button type="button" class="choice" data-colour="#be123c">Rose</button>
+                    </div>
+                    <p><button type="button" class="themed-button">A primary button</button> <a href="#runtime" class="themed-link">A primary link</a></p>
+                </div>
+                <script>
+                    document.querySelectorAll(".choice").forEach(button => button.addEventListener("click", () =>
+                        document.getElementById("themed").style.setProperty("--sassy-theme-primary", button.dataset.colour || null)));
+                </script>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.themed-button
+    @extend %bf-btn
+    @extend %bf-btn-primary
 
-:root
-    --sassy-theme-primary: #{sassy.colour("sky", 600)}
+.themed-link
+    @extend %bf-c-primary
+    @extend %bf-font-weight-700
+
+.choices
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-gap-2
+
+.choice
+    @extend %bf-btn
+    @extend %bf-btn-small</code></pre>
+<pre data-lang="html"><code>&lt;script&gt;
+    element.style.setProperty("--sassy-theme-primary", "#0d9488");
+&lt;/script&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="dark">
+            <h2>Dark mode</h2>
+            <p>A media query changes the theme for readers who prefer dark colours. It needs a whole-site change, so it is not applied to this page.</p>
+<div class="code">
+<pre data-lang="sass" data-shown-only><code>@use "sassy/src" as sassy
 
 @media (prefers-color-scheme: dark)
     :root:not([data-theme="light"])
         --sassy-theme-primary: #{sassy.colour("sky", 400)}
+        --sassy-body-colour: #{sassy.colour("grey", 100)}
+        --sassy-btn-bg: #{sassy.colour("grey", 800)}
+        --sassy-input-bg: #{sassy.colour("grey", 800)}
         --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}</code></pre>
-<pre><code>&lt;script&gt;
-    document.documentElement.style.setProperty("--sassy-theme-primary", "#0d9488");
-&lt;/script&gt;</code></pre>
+</div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

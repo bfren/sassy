@@ -3,79 +3,103 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy: 0-core</title>
+    <title>Core - Sassy</title>
     <link rel="stylesheet" href="css/0-core.css" />
+    <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html" aria-current="page">Core</a></li>
+                <li><a href="1-forms.html">Forms</a></li>
+                <li><a href="2-components.html">Components</a></li>
+                <li><a href="3-grid.html">Grid</a></li>
+                <li><a href="4-utilities.html">Utilities</a></li>
+                <li><a href="5-theme.html">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
-        <h1>0-core: loading and configuring Sassy</h1>
+        <h1>Loading and configuring Sassy</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/0-core.sass</code> into <code>css/0-core.css</code>, which this page loads.</p>
+        <p class="lead">The core layer, <code>src/0-core</code>, holds Sassy's settings, the <code>make</code> mixins that generate placeholders, and a few helpers for your own styles. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/0-core.md">docs/0-core.md</a>.</p>
 
-        <p>The foundation of Sassy: the settings, the <code>make</code> mixins that generate placeholders, and helper mixins and functions. Load it once per site with <code>@use "sassy/src" as sassy</code>, and configure it with <code>with (...)</code>. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/0-core.md">docs/0-core.md</a>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/0-core.sass</code>, compiled to <code>css/0-core.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example">
+        <section class="example" id="colours">
             <h2>Palette colours and transparency</h2>
+            <p><code>colour()</code> returns any palette colour, and <code>with-alpha()</code> makes any colour transparent - here 60%, so the stripes show through.</p>
             <div class="demo">
-                <div class="tooltip">A tooltip-style label, with a transparent background from grey 900</div>
+                <div class="demo-stripes">
+                    <span class="tooltip">A label on a grey 900 background at 60%</span>
+                </div>
             </div>
-<pre><code>@use "sassy/src" as sassy
+<div class="code">
+<pre data-lang="sass"><code>@use "sassy/src" as sassy
 
 .tooltip
     background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.6)
-    color: sassy.colour("grey", 50)</code></pre>
+    border-radius: 0.375rem
+    color: sassy.colour("grey", 50)
+    display: inline-block
+    padding: 0.5rem 0.75rem</code></pre>
+<pre data-lang="html"><code>&lt;span class="tooltip"&gt;A label on a grey 900 background at 60%&lt;/span&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="up">
             <h2>Your own breakpoint styles</h2>
-            <p>Resize the window to see the heading grow.</p>
+            <p><code>up()</code> wraps your own styles in a media query for a breakpoint, as Sass cannot <code>@extend</code> inside one.</p>
             <div class="demo">
-                <div class="hero">This text is 1rem, and 1.5rem from md upwards.</div>
+                <p class="demo-hint">Make the window narrower than 768px and the text shrinks.</p>
+                <p class="hero">This text is 1rem, and 1.5rem from md upwards.</p>
             </div>
-<pre><code>.hero
+<div class="code">
+<pre data-lang="sass"><code>.hero
     font-size: 1rem
+    margin: 0
 
     @include sassy.up(md)
         font-size: 1.5rem</code></pre>
+<pre data-lang="html"><code>&lt;p class="hero"&gt;This text is 1rem, and 1.5rem from md upwards.&lt;/p&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="up-prop">
             <h2>Different values at different breakpoints</h2>
-            <p>The sidebar is half the width from sm, and a quarter from lg.</p>
+            <p><code>up-prop()</code> takes a property, then its value at each breakpoint you name.</p>
             <div class="demo">
+                <p class="demo-hint">The sidebar is full width at first, half from 576px, and a quarter from 992px.</p>
                 <div class="sidebar">Sidebar</div>
             </div>
-<pre><code>.sidebar
+<div class="code">
+<pre data-lang="sass"><code>.sidebar
     background-color: sassy.colour("grey", 200)
+    padding: 0.75rem 1rem
     @include sassy.up-prop(width (sm: 50%, lg: 25%))</code></pre>
+<pre data-lang="html"><code>&lt;div class="sidebar"&gt;Sidebar&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="placeholders">
             <h2>Your own placeholders, in Sassy's style</h2>
-            <p>A stack of one or two items, with a larger gap from md. The menu extends <code>%bf-stack-1</code> and <code>%bf-stack-2-md</code>.</p>
+            <p><code>make-responsive()</code> generates a placeholder for each value and breakpoint, and <code>make-passes()</code> outputs them in Sassy's order. This stack has a 0.25rem gap, and 0.5rem from md upwards.</p>
             <div class="demo">
                 <div class="menu">
-                    <span>One</span>
-                    <span>Two</span>
+                    <span class="box">One</span>
+                    <span class="box">Two</span>
+                    <span class="box">Three</span>
                 </div>
             </div>
-<pre><code>@use "sassy/src" as sassy
-
-@include sassy.make-passes
+<div class="code">
+<pre data-lang="sass"><code>@include sassy.make-passes
     @include sassy.make-responsive("stack", (1: 0.25rem, 2: 0.5rem)) using ($value)
         display: flex
         flex-direction: column
@@ -87,9 +111,21 @@
 
 .menu-named
     @extend %#{sassy.make-name("stack", 2)}</code></pre>
+<pre data-lang="html"><code>&lt;div class="menu"&gt;
+    &lt;span class="box"&gt;One&lt;/span&gt;
+    &lt;span class="box"&gt;Two&lt;/span&gt;
+    &lt;span class="box"&gt;Three&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -3,113 +3,178 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sassy: 2-components</title>
+    <title>Components - Sassy</title>
     <link rel="stylesheet" href="css/2-components.css" />
     <script src="js/sassy.js" defer></script>
 </head>
 <body>
 
     <header class="site-header">
-        <nav class="site-nav" aria-label="Documentation">
-            <a href="index.html">Sassy</a>
-            <a href="0-core.html">0-core</a>
-            <a href="1-forms.html">1-forms</a>
-            <a href="2-components.html">2-components</a>
-            <a href="3-grid.html">3-grid</a>
-            <a href="4-utilities.html">4-utilities</a>
-            <a href="5-theme.html">5-theme</a>
-        </nav>
+        <div class="site-width site-header-inner">
+            <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">%</span>Sassy</a>
+            <nav aria-label="Layers">
+                <ul class="site-nav">
+                <li><a href="0-core.html">Core</a></li>
+                <li><a href="1-forms.html">Forms</a></li>
+                <li><a href="2-components.html" aria-current="page">Components</a></li>
+                <li><a href="3-grid.html">Grid</a></li>
+                <li><a href="4-utilities.html">Utilities</a></li>
+                <li><a href="5-theme.html">Theme</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main site-width">
 
-        <h1>2-components: navigation, cards, tabs, tooltips and dialogs</h1>
+        <h1>Buttons, navigation, cards, tabs, tooltips and dialogs</h1>
 
-        <p class="stylesheet-note">Compiled from <code>sass/2-components.sass</code> into <code>css/2-components.css</code>, which this page loads. Tabs and tooltips also need <code>js/sassy.js</code>.</p>
+        <p class="lead">The components layer, <code>src/2-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/2-components.md">docs/2-components.md</a>.</p>
 
-        <p>Components are groups of styles that make up a whole interface element. Like forms, they are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/2-components.md">docs/2-components.md</a>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/2-components.sass</code>, compiled to <code>css/2-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs and tooltips also need <code>js/sassy.js</code>.</p>
 
-        <section class="example">
+        <section class="example" id="buttons">
+            <h2>Buttons</h2>
+            <p>A theme colour, the outline style and the sizes only change custom properties, so extend them as well as <code>%bf-btn</code>.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="button">Default</button>
+                    <button type="button" class="button button-primary">Primary</button>
+                    <button type="button" class="button button-ok">OK</button>
+                    <button type="button" class="button button-error">Error</button>
+                    <button type="button" class="button button-primary button-outline">Outline</button>
+                    <button type="button" class="button button-primary" disabled>Disabled</button>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="button button-primary button-small">Small</button>
+                    <button type="button" class="button button-primary">Default</button>
+                    <button type="button" class="button button-primary button-large">Large</button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>@use "sassy/src" as sassy
+
+.button
+    @extend %bf-btn
+
+.button-primary
+    @extend %bf-btn-primary
+
+.button-ok
+    @extend %bf-btn-ok
+
+.button-error
+    @extend %bf-btn-error
+
+.button-outline
+    @extend %bf-btn-outline
+
+.button-small
+    @extend %bf-btn-small
+
+.button-large
+    @extend %bf-btn-large
+
+.buttons
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-flex-align-items-centre
+    @extend %bf-gap-2
+    @extend %bf-mb-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button"&gt;Default&lt;/button&gt;
+    &lt;button type="button" class="button button-primary"&gt;Primary&lt;/button&gt;
+    &lt;button type="button" class="button button-ok"&gt;OK&lt;/button&gt;
+    &lt;button type="button" class="button button-error"&gt;Error&lt;/button&gt;
+    &lt;button type="button" class="button button-primary button-outline"&gt;Outline&lt;/button&gt;
+    &lt;button type="button" class="button button-primary" disabled&gt;Disabled&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button button-primary button-small"&gt;Small&lt;/button&gt;
+    &lt;button type="button" class="button button-primary"&gt;Default&lt;/button&gt;
+    &lt;button type="button" class="button button-primary button-large"&gt;Large&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="nav">
             <h2>Navigation</h2>
-            <p>A list of links. Mark the current page with <code>aria-current="page"</code>, which also tells screen readers.</p>
+            <p>Mark the current page with <code>aria-current="page"</code>, which also tells screen readers. The navigation at the top of this page is the underline style.</p>
             <div class="demo">
                 <nav aria-label="Example">
                     <ul class="menu">
-                        <li><a href="#home" aria-current="page">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#nav" aria-current="page">Home</a></li>
+                        <li><a href="#nav">About</a></li>
+                        <li><a href="#nav">Contact</a></li>
                     </ul>
                 </nav>
             </div>
-<pre><code>@use "sassy/src" as sassy
-
-.menu
+<div class="code">
+<pre data-lang="sass"><code>.menu
     @extend %bf-nav
 
     a
         @extend %bf-nav-link</code></pre>
-<pre><code>&lt;nav aria-label="Example"&gt;
+<pre data-lang="html"><code>&lt;nav aria-label="Example"&gt;
     &lt;ul class="menu"&gt;
-        &lt;li&gt;&lt;a href="#home" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#nav" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#nav"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#nav"&gt;Contact&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>Pills and underline</h2>
-            <p>A style only changes custom properties, so it combines with <code>%bf-nav</code> on the same element.</p>
+        <section class="example" id="nav-styles">
+            <h2>Pills, underline and vertical</h2>
+            <p>Each style combines with <code>%bf-nav</code> on the same element.</p>
             <div class="demo">
                 <ul class="menu menu-pills">
-                    <li><a href="#home" aria-current="page">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#nav-styles" aria-current="page">Home</a></li>
+                    <li><a href="#nav-styles">About</a></li>
+                    <li><a href="#nav-styles">Contact</a></li>
                 </ul>
                 <ul class="menu menu-underline">
-                    <li><a href="#home" aria-current="page">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#nav-styles" aria-current="page">Home</a></li>
+                    <li><a href="#nav-styles">About</a></li>
+                    <li><a href="#nav-styles">Contact</a></li>
+                </ul>
+                <ul class="menu menu-pills menu-vertical">
+                    <li><a href="#nav-styles" aria-current="page">Profile</a></li>
+                    <li><a href="#nav-styles">Account</a></li>
+                    <li><a href="#nav-styles">Privacy</a></li>
                 </ul>
             </div>
-<pre><code>.menu-pills
+<div class="code">
+<pre data-lang="sass"><code>.menu-pills
     @extend %bf-nav-pills
 
 .menu-underline
-    @extend %bf-nav-underline</code></pre>
-<pre><code>&lt;ul class="menu menu-pills"&gt;
-    &lt;li&gt;&lt;a href="#home" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    @extend %bf-nav-underline
+
+.menu-vertical
+    @extend %bf-nav-vertical</code></pre>
+<pre data-lang="html"><code>&lt;ul class="menu menu-pills"&gt;
+    &lt;li&gt;&lt;a href="#nav-styles" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles"&gt;Contact&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul class="menu menu-underline"&gt;
-    &lt;li&gt;&lt;a href="#home" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class="menu menu-pills menu-vertical"&gt;
+    &lt;li&gt;&lt;a href="#nav-styles" aria-current="page"&gt;Profile&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles"&gt;Account&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-styles"&gt;Privacy&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
-            <h2>Vertical navigation</h2>
-            <div class="demo">
-                <ul class="menu menu-pills menu-vertical">
-                    <li><a href="#profile" aria-current="page">Profile</a></li>
-                    <li><a href="#account">Account</a></li>
-                    <li><a href="#privacy">Privacy</a></li>
-                </ul>
-            </div>
-<pre><code>.menu-vertical
-    @extend %bf-nav-vertical</code></pre>
-<pre><code>&lt;ul class="menu menu-pills menu-vertical"&gt;
-    &lt;li&gt;&lt;a href="#profile" aria-current="page"&gt;Profile&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#account"&gt;Account&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#privacy"&gt;Privacy&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
-        </section>
-
-        <section class="example">
+        <section class="example" id="cards">
             <h2>Cards</h2>
-            <p>The card bodies grow, so the footers line up when cards in a row have different amounts of text.</p>
+            <p>Card bodies grow, so footers line up when cards in a row have different amounts of text.</p>
             <div class="demo">
                 <div class="cards">
                     <article class="card">
@@ -126,12 +191,19 @@
                             <h3>With a header</h3>
                             <p>A header and footer share the card's border and background.</p>
                         </div>
-                        <footer class="card-foot">Updated yesterday</footer>
+                        <footer class="card-foot"><a href="#cards" class="button button-primary button-small">Read more</a></footer>
                     </article>
                 </div>
             </div>
-<pre><code>.card
+<div class="code">
+<pre data-lang="sass"><code>.cards
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-gap-4
+
+.card
     @extend %bf-card
+    flex: 1 1 15rem
 
     img
         @extend %bf-card-image
@@ -147,9 +219,9 @@
 
 .card-foot
     @extend %bf-card-footer</code></pre>
-<pre><code>&lt;div class="cards"&gt;
+<pre data-lang="html"><code>&lt;div class="cards"&gt;
     &lt;article class="card"&gt;
-        &lt;img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 160'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%230284c7'/%3E%3Cstop offset='1' stop-color='%23c2410c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='160' fill='url(%23g)'/%3E%3C/svg%3E" alt="" /&gt;
+        &lt;img src="photo.jpg" alt="" /&gt;
         &lt;div class="card-body"&gt;
             &lt;h3&gt;With an image&lt;/h3&gt;
             &lt;p&gt;The image is clipped to the card's rounded corners.&lt;/p&gt;
@@ -162,14 +234,15 @@
             &lt;h3&gt;With a header&lt;/h3&gt;
             &lt;p&gt;A header and footer share the card's border and background.&lt;/p&gt;
         &lt;/div&gt;
-        &lt;footer class="card-foot"&gt;Updated yesterday&lt;/footer&gt;
+        &lt;footer class="card-foot"&gt;&lt;a href="#cards" class="button button-primary button-small"&gt;Read more&lt;/a&gt;&lt;/footer&gt;
     &lt;/article&gt;
 &lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="tabs">
             <h2>Tabs</h2>
-            <p>Click a tab, or focus one and use the arrow keys, Home and End. <code>sassy.js</code> switches the panels and keeps the ARIA attributes up to date.</p>
+            <p>Click a tab, or focus one and use the arrow keys, Home and End. <code>sassy.js</code> switches the panels. The code under each demo uses the same tabs.</p>
             <div class="demo">
                 <div class="tab-list" role="tablist" aria-label="Delivery options">
                     <button type="button" role="tab" id="tab-standard" aria-controls="panel-standard" aria-selected="true">Standard</button>
@@ -186,7 +259,8 @@
                     <p>Ready to collect from your chosen shop in two hours. Free.</p>
                 </div>
             </div>
-<pre><code>.tab-list
+<div class="code">
+<pre data-lang="sass"><code>.tab-list
     @extend %bf-tabs
 
     [role="tab"]
@@ -194,7 +268,7 @@
 
 .tab-panel
     @extend %bf-tab-panel</code></pre>
-<pre><code>&lt;div class="tab-list" role="tablist" aria-label="Delivery options"&gt;
+<pre data-lang="html"><code>&lt;div class="tab-list" role="tablist" aria-label="Delivery options"&gt;
     &lt;button type="button" role="tab" id="tab-standard" aria-controls="panel-standard" aria-selected="true"&gt;Standard&lt;/button&gt;
     &lt;button type="button" role="tab" id="tab-express" aria-controls="panel-express"&gt;Express&lt;/button&gt;
     &lt;button type="button" role="tab" id="tab-collect" aria-controls="panel-collect"&gt;Click and collect&lt;/button&gt;
@@ -208,11 +282,12 @@
 &lt;div class="tab-panel" role="tabpanel" id="panel-collect" aria-labelledby="tab-collect" tabindex="0"&gt;
     &lt;p&gt;Ready to collect from your chosen shop in two hours. Free.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="tooltips">
             <h2>Tooltips</h2>
-            <p>Hover over or tab to a button. A tooltip is a popover described by its trigger with <code>aria-describedby</code>, and anchor positioning places it above the trigger, or below if there is no room.</p>
+            <p>Hover over or tab to a button. A tooltip is a popover, described by its trigger with <code>aria-describedby</code>.</p>
             <div class="demo">
                 <div class="buttons">
                     <button type="button" class="button" aria-describedby="tip-save">Save</button>
@@ -221,22 +296,24 @@
                 <div class="tip" role="tooltip" popover="manual" id="tip-save">Saves your changes to this device</div>
                 <div class="tip" role="tooltip" popover="manual" id="tip-share">Copies a link you can send to someone</div>
             </div>
-<pre><code>.tip
+<div class="code">
+<pre data-lang="sass"><code>.tip
     @extend %bf-tooltip</code></pre>
-<pre><code>&lt;div class="buttons"&gt;
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
     &lt;button type="button" class="button" aria-describedby="tip-save"&gt;Save&lt;/button&gt;
     &lt;button type="button" class="button" aria-describedby="tip-share"&gt;Share&lt;/button&gt;
 &lt;/div&gt;
 &lt;div class="tip" role="tooltip" popover="manual" id="tip-save"&gt;Saves your changes to this device&lt;/div&gt;
 &lt;div class="tip" role="tooltip" popover="manual" id="tip-share"&gt;Copies a link you can send to someone&lt;/div&gt;</code></pre>
+</div>
         </section>
 
-        <section class="example">
+        <section class="example" id="dialogs">
             <h2>Dialogs</h2>
-            <p>The buttons open and close the dialog with <code>command</code> and <code>commandfor</code>, so no script is needed in current browsers. <code>sassy.js</code> adds the same behaviour to older ones.</p>
+            <p>The buttons open and close each dialog with <code>command</code> and <code>commandfor</code>, so no script is needed in current browsers.</p>
             <div class="demo">
                 <div class="buttons">
-                    <button type="button" class="button" commandfor="confirm" command="show-modal">Delete file…</button>
+                    <button type="button" class="button button-error button-outline" commandfor="confirm" command="show-modal">Delete file…</button>
                     <button type="button" class="button" commandfor="terms" command="show-modal">Read the terms</button>
                 </div>
 
@@ -250,7 +327,7 @@
                     </div>
                     <footer>
                         <button type="button" class="button" commandfor="confirm" command="close">Cancel</button>
-                        <button type="button" class="button button-primary" commandfor="confirm" command="close">Delete</button>
+                        <button type="button" class="button button-error" commandfor="confirm" command="close">Delete</button>
                     </footer>
                 </dialog>
 
@@ -260,7 +337,7 @@
                         <button type="button" class="dialog-close" commandfor="terms" command="close" aria-label="Close">×</button>
                     </header>
                     <div class="dialog-body">
-                        <p>A large dialog. When the content is taller than the window, the body scrolls between the header and footer.</p>
+                        <p>A large dialog. When its content is taller than the window, the body scrolls between the header and footer.</p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -271,7 +348,8 @@
                     </footer>
                 </dialog>
             </div>
-<pre><code>.dialog
+<div class="code">
+<pre data-lang="sass"><code>.dialog
     @extend %bf-dialog
 
     header
@@ -291,8 +369,8 @@
 
 .dialog-close
     @extend %bf-dialog-close</code></pre>
-<pre><code>&lt;div class="buttons"&gt;
-    &lt;button type="button" class="button" commandfor="confirm" command="show-modal"&gt;Delete file…&lt;/button&gt;
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button button-error button-outline" commandfor="confirm" command="show-modal"&gt;Delete file…&lt;/button&gt;
     &lt;button type="button" class="button" commandfor="terms" command="show-modal"&gt;Read the terms&lt;/button&gt;
 &lt;/div&gt;
 
@@ -306,7 +384,7 @@
     &lt;/div&gt;
     &lt;footer&gt;
         &lt;button type="button" class="button" commandfor="confirm" command="close"&gt;Cancel&lt;/button&gt;
-        &lt;button type="button" class="button button-primary" commandfor="confirm" command="close"&gt;Delete&lt;/button&gt;
+        &lt;button type="button" class="button button-error" commandfor="confirm" command="close"&gt;Delete&lt;/button&gt;
     &lt;/footer&gt;
 &lt;/dialog&gt;
 
@@ -316,7 +394,7 @@
         &lt;button type="button" class="dialog-close" commandfor="terms" command="close" aria-label="Close"&gt;×&lt;/button&gt;
     &lt;/header&gt;
     &lt;div class="dialog-body"&gt;
-        &lt;p&gt;A large dialog. When the content is taller than the window, the body scrolls between the header and footer.&lt;/p&gt;
+        &lt;p&gt;A large dialog. When its content is taller than the window, the body scrolls between the header and footer.&lt;/p&gt;
         &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&lt;/p&gt;
         &lt;p&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
         &lt;p&gt;Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&lt;/p&gt;
@@ -326,9 +404,16 @@
         &lt;button type="button" class="button button-primary" commandfor="terms" command="close"&gt;Close&lt;/button&gt;
     &lt;/footer&gt;
 &lt;/dialog&gt;</code></pre>
+</div>
         </section>
 
     </main>
+
+    <footer class="site-footer">
+        <div class="site-width">
+            <p>Sassy is released under the <a href="https://mit.bfren.dev/2022">MIT licence</a>, and its source is on <a href="https://github.com/bfren/sassy">GitHub</a>.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

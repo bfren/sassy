@@ -40,4 +40,4 @@ Every placeholder follows the pattern `%bf-{utility}-{value}-{breakpoint}`. The 
 
 ## Examples site
 
-The live examples site is at [bfren.github.io/sassy](https://bfren.github.io/sassy/). It has a page per layer, each with its own Sass file compiled to its own stylesheet, so you can see both the result and the source. The examples on those pages match the ones here.
+The live examples site is at [bfren.github.io/sassy](https://bfren.github.io/sassy/). It has a page per layer, each with its own Sass file compiled to its own stylesheet. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.

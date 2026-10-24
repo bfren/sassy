@@ -316,6 +316,24 @@
 }
 
 :root {
+  --sassy-btn-bg: #fff;
+  --sassy-btn-colour: var(--sassy-body-colour);
+  --sassy-btn-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-btn-outline-colour: var(--sassy-body-colour);
+  --sassy-btn-focus-colour: var(--sassy-input-focus-colour);
+  --sassy-btn-font-weight: 500;
+  --sassy-btn-shade: #000;
+  --sassy-btn-primary-colour: #fff;
+  --sassy-btn-secondary-colour: #fff;
+  --sassy-btn-ok-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-info-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-warn-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-error-colour: #fff;
+  --sassy-btn-grey-light-colour: oklch(21% 0.034 264.665deg);
+  --sassy-btn-grey-dark-colour: #fff;
+}
+
+:root {
   --sassy-nav-gap: 0.25rem;
   --sassy-nav-link-padding-y: 0.5rem;
   --sassy-nav-link-padding-x: 1rem;
@@ -1063,6 +1081,140 @@
   font-size: 0.875em;
   margin-top: 0.25rem;
   display: block;
+}
+
+.bf-btn {
+  align-items: center;
+  background-color: var(--sassy-btn-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-btn-border-colour);
+  border-radius: var(--sassy-input-radius);
+  box-sizing: border-box;
+  color: var(--sassy-btn-colour);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: var(--sassy-input-font-size);
+  font-weight: var(--sassy-btn-font-weight);
+  gap: 0.5em;
+  justify-content: center;
+  line-height: var(--sassy-input-line-height);
+  margin: 0;
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  user-select: none;
+  vertical-align: middle;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bf-btn {
+    transition: none;
+  }
+}
+.bf-btn:hover {
+  background-color: color-mix(in oklab, var(--sassy-btn-bg) 88%, var(--sassy-btn-shade));
+}
+.bf-btn:active {
+  background-color: color-mix(in oklab, var(--sassy-btn-bg) 80%, var(--sassy-btn-shade));
+}
+.bf-btn:focus-visible {
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-btn-focus-colour) 40%, transparent);
+  outline: 0;
+}
+.bf-btn:disabled, .bf-btn[aria-disabled=true] {
+  cursor: not-allowed;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+.bf-btn-primary {
+  --sassy-btn-bg: var(--sassy-theme-primary);
+  --sassy-btn-border-colour: var(--sassy-theme-primary);
+  --sassy-btn-colour: var(--sassy-btn-primary-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-primary);
+  --sassy-btn-outline-colour: var(--sassy-theme-primary);
+}
+
+.bf-btn-secondary {
+  --sassy-btn-bg: var(--sassy-theme-secondary);
+  --sassy-btn-border-colour: var(--sassy-theme-secondary);
+  --sassy-btn-colour: var(--sassy-btn-secondary-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-secondary);
+  --sassy-btn-outline-colour: var(--sassy-theme-secondary);
+}
+
+.bf-btn-ok {
+  --sassy-btn-bg: var(--sassy-theme-ok);
+  --sassy-btn-border-colour: var(--sassy-theme-ok);
+  --sassy-btn-colour: var(--sassy-btn-ok-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-ok);
+  --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-ok) 50%, var(--sassy-btn-ok-colour));
+}
+
+.bf-btn-info {
+  --sassy-btn-bg: var(--sassy-theme-info);
+  --sassy-btn-border-colour: var(--sassy-theme-info);
+  --sassy-btn-colour: var(--sassy-btn-info-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-info);
+  --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-info) 50%, var(--sassy-btn-info-colour));
+}
+
+.bf-btn-warn {
+  --sassy-btn-bg: var(--sassy-theme-warn);
+  --sassy-btn-border-colour: var(--sassy-theme-warn);
+  --sassy-btn-colour: var(--sassy-btn-warn-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-warn);
+  --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-warn) 50%, var(--sassy-btn-warn-colour));
+}
+
+.bf-btn-error {
+  --sassy-btn-bg: var(--sassy-theme-error);
+  --sassy-btn-border-colour: var(--sassy-theme-error);
+  --sassy-btn-colour: var(--sassy-btn-error-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-error);
+  --sassy-btn-outline-colour: var(--sassy-theme-error);
+}
+
+.bf-btn-grey-light {
+  --sassy-btn-bg: var(--sassy-theme-grey-light);
+  --sassy-btn-border-colour: var(--sassy-theme-grey-light);
+  --sassy-btn-colour: var(--sassy-btn-grey-light-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-grey-light);
+  --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-grey-light) 50%, var(--sassy-btn-grey-light-colour));
+}
+
+.bf-btn-grey-dark {
+  --sassy-btn-bg: var(--sassy-theme-grey-dark);
+  --sassy-btn-border-colour: var(--sassy-theme-grey-dark);
+  --sassy-btn-colour: var(--sassy-btn-grey-dark-colour);
+  --sassy-btn-focus-colour: var(--sassy-theme-grey-dark);
+  --sassy-btn-outline-colour: var(--sassy-theme-grey-dark);
+}
+
+.bf-btn-outline {
+  background-color: transparent;
+  border-color: var(--sassy-btn-outline-colour);
+  color: var(--sassy-btn-outline-colour);
+}
+.bf-btn-outline:hover {
+  background-color: color-mix(in oklab, var(--sassy-btn-outline-colour) 10%, transparent);
+}
+.bf-btn-outline:active {
+  background-color: color-mix(in oklab, var(--sassy-btn-outline-colour) 18%, transparent);
+}
+
+.bf-btn-small {
+  --sassy-input-padding-y: 0.25rem;
+  --sassy-input-padding-x: 0.5rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
+  --sassy-input-radius: 0.25rem;
+}
+
+.bf-btn-large {
+  --sassy-input-padding-y: 0.5rem;
+  --sassy-input-padding-x: 1rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
+  --sassy-input-radius: 0.5rem;
 }
 
 .bf-nav {

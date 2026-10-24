@@ -1,44 +1,52 @@
+//  The home page. The page around it is styled by _site.sass.
+
 @use "../../src" as sassy
+@use "site"
 
-//  Chrome around the examples on the site: the header, navigation, code blocks and demo boxes.
-//  Built with Sassy itself, and not part of the examples, so it is kept apart from them.
+.hero-code
+    margin-block: 2.5rem
 
-body
-    @extend %bf-body
-    @extend %bf-pb-6
+// The layers, in output order - the numbers are the folder numbers in src
+.site-main > .layers
+    border-top: 1px solid var(--site-line)
+    list-style: none
+    margin: 1.5rem 0 0
+    max-width: none
+    padding: 0
 
-.site-header
-    @extend %bf-bg-grey-50
-    @extend %bf-border-bottom-1
-    @extend %bf-border-grey-200
-    @extend %bf-p-3
+    li
+        border-bottom: 1px solid var(--site-line)
 
-.site-nav
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-flex-align-items-centre
-    @extend %bf-gap-x-3
-    @extend %bf-gap-y-1
+    a
+        color: inherit
+        column-gap: 1.25rem
+        display: grid
+        grid-template-columns: 2.5rem 1fr
+        padding: 1.25rem 0.75rem
+        text-decoration: none
+        transition: background-color 0.15s ease-in-out
 
-.site-main
-    @extend .wrap
-    @extend %bf-py-4
+        &:hover
+            background-color: #fff
 
-.example
-    @extend %bf-mb-6
+        &:focus-visible
+            outline: 2px solid var(--sassy-focus-outline-colour)
+            outline-offset: -2px
 
-.demo
-    @extend %bf-border-1
-    @extend %bf-border-grey-200
-    @extend %bf-rounded-2
-    @extend %bf-p-4
-    @extend %bf-mb-3
+        @media (prefers-reduced-motion: reduce)
+            transition: none
 
-pre
-    @extend %bf-bg-grey-900
-    @extend %bf-c-grey-100
-    @extend %bf-rounded-2
-    @extend %bf-p-3
-    @extend %bf-font-family-mono
-    @extend %bf-font-size-smaller
-    @extend %bf-overflow-x-auto
+.layer-number
+    color: #{sassy.colour("slate", 400)}
+    font-family: var(--site-serif)
+    font-size: 2.25rem
+    grid-row: span 2
+    line-height: 1
+
+.layer-name
+    font-family: var(--site-serif)
+    font-size: 1.375rem
+    font-weight: 700
+
+.layer-text
+    color: var(--site-muted)

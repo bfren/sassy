@@ -1,6 +1,36 @@
-@use "../../src" as sassy
+//  The demos on 2-components.html - each example's Sass is shown on the page.
+//  The page around them is styled by _site.sass.
 
-// Navigation
+@use "../../src" as sassy
+@use "site"
+
+.button
+    @extend %bf-btn
+
+.button-primary
+    @extend %bf-btn-primary
+
+.button-ok
+    @extend %bf-btn-ok
+
+.button-error
+    @extend %bf-btn-error
+
+.button-outline
+    @extend %bf-btn-outline
+
+.button-small
+    @extend %bf-btn-small
+
+.button-large
+    @extend %bf-btn-large
+
+.buttons
+    @extend %bf-d-flex
+    @extend %bf-flex-wrap-wrap
+    @extend %bf-flex-align-items-centre
+    @extend %bf-gap-2
+    @extend %bf-mb-3
 
 .menu
     @extend %bf-nav
@@ -16,8 +46,6 @@
 
 .menu-vertical
     @extend %bf-nav-vertical
-
-// Cards
 
 .cards
     @extend %bf-d-flex
@@ -43,8 +71,6 @@
 .card-foot
     @extend %bf-card-footer
 
-// Tabs
-
 .tab-list
     @extend %bf-tabs
 
@@ -54,12 +80,8 @@
 .tab-panel
     @extend %bf-tab-panel
 
-// Tooltips
-
 .tip
     @extend %bf-tooltip
-
-// Dialogs
 
 .dialog
     @extend %bf-dialog
@@ -81,68 +103,3 @@
 
 .dialog-close
     @extend %bf-dialog-close
-
-// Demo buttons - Sassy has no button component yet, so these are built from utilities
-
-.button
-    @extend %bf-px-3
-    @extend %bf-py-2
-    @extend %bf-rounded
-    @extend %bf-border-1
-    @extend %bf-border-grey-300
-    @extend %bf-bg-grey-50
-    cursor: pointer
-    font: inherit
-
-.button-primary
-    @extend %bf-bg-primary
-    @extend %bf-border-primary
-    @extend %bf-c-grey-50
-
-.buttons
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-gap-2
-
-//  Chrome around the examples on the site: the header, navigation, code blocks and demo boxes.
-//  Built with Sassy itself, and not part of the examples, so it is kept apart from them.
-
-body
-    @extend %bf-body
-    @extend %bf-pb-6
-
-.site-header
-    @extend %bf-bg-grey-50
-    @extend %bf-border-bottom-1
-    @extend %bf-border-grey-200
-    @extend %bf-p-3
-
-.site-nav
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-flex-align-items-centre
-    @extend %bf-gap-x-3
-    @extend %bf-gap-y-1
-
-.site-main
-    @extend .wrap
-    @extend %bf-py-4
-
-.example
-    @extend %bf-mb-6
-
-.demo
-    @extend %bf-border-1
-    @extend %bf-border-grey-200
-    @extend %bf-rounded-2
-    @extend %bf-p-4
-    @extend %bf-mb-3
-
-pre
-    @extend %bf-bg-grey-900
-    @extend %bf-c-grey-100
-    @extend %bf-rounded-2
-    @extend %bf-p-3
-    @extend %bf-font-family-mono
-    @extend %bf-font-size-smaller
-    @extend %bf-overflow-x-auto

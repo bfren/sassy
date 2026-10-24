@@ -4,5 +4,8 @@
 *.sass.map
 *.scss.map
 
-# copied from src by watch.sh, watch.bat and the Pages workflow
+# copied from src by watch.sh and watch.bat
 samples/js/
+
+# built by tools/site.mjs
+_site/
