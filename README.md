@@ -1,6 +1,6 @@
 # Sassy
 
-A Sass utility framework in the style of Bootstrap, built from [placeholder selectors](https://sass-lang.com/documentation/style-rules/placeholder-selectors/) (`%`) instead of classes.
+A Sass utility framework built from [placeholder selectors](https://sass-lang.com/documentation/style-rules/placeholder-selectors/) (`%`) instead of classes. Inspired by [Bootstrap](https://getbootstrap.com) and [Tailwind CSS](https://tailwindcss.com), it aims for the best of both: you only load the styles you use, and you don't need `npm`.
 
 You `@extend` the utilities you want onto your own selectors, so your markup stays semantic and your compiled CSS contains only the rules you actually use. If you would rather use classes in your HTML, a full build with every utility as a class is also available.
 
@@ -196,3 +196,30 @@ The main groups are:
 | `--sassy-body-*`, `--sassy-font-*`, `--sassy-line-height-base` | Text defaults used by `%bf-body` and the font utilities |
 | `--sassy-radius`, `--sassy-shadow-colour`, `--sassy-grid-gutter` | Default corner radius, shadow colour and column gutter |
 | `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-form-*` | Form controls - sizes, colours, focus ring and validation states |
+
+## Limitations
+
+- **No `@extend` inside media queries.** Sass does not allow it, which is why every responsive utility has a breakpoint variant in its name (see [Responsive](#responsive)).
+- **Every file that extends needs its own `@use`.** `@extend` only reaches placeholders in modules the file itself loads, so a partial that extends Sassy's placeholders must `@use` Sassy too. Sass only outputs a module once per compilation, so this does not duplicate anything.
+- **One entry stylesheet per site.** Each separately compiled stylesheet that loads Sassy includes Normalize and the `:root` custom properties again.
+- **Placeholders cannot be used from HTML.** If you need classes in your markup, use `dist/full.css` or set `$sassy-full: true`.
+- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap` and `rgb()` with a `/` alpha value.
+
+## Editor snippets
+
+`dist/sassy.code-snippets` is a [VS Code snippets file](https://code.visualstudio.com/docs/editing/userdefinedsnippets) listing every placeholder, so typing a name in a Sass file offers matching placeholders, each with the CSS it applies.
+
+To use it in one project, copy it into that project's `.vscode` folder. To use it everywhere, copy it into your VS Code user snippets folder - run **Snippets: Configure Snippets** from the Command Palette to find it.
+
+Then start typing a placeholder name after `@extend %` - for example `bf-p` - and pick from the list.
+
+The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full.sh` runs after each build. If you change `$sassy-prefix`, compile a full build with your prefix and generate snippets from it: `SASSY_PREFIX=<prefix> ./snippets.sh <your-full.css> <output.code-snippets>`.
+
+## Licence and credits
+
+Sassy is released under the [MIT licence](https://mit.bfren/dev/2022).
+
+It includes:
+
+- [Normalize.css](https://github.com/csstools/normalize.css), licensed under [Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+- the colour palette from [Tailwind CSS v3.0.0](https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js), licensed under [MIT](https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/LICENSE)
