@@ -1,7 +1,7 @@
 name: Publish GitHub Pages
 
-# Publishes the samples folder as the site root whenever a pull request is merged into main.
-# A merge creates a push to main, so this deploys from main itself. Deploying from the
+# Builds the samples site with tools/site.mjs and publishes it whenever a pull request is merged
+# into main. A merge creates a push to main, so this deploys from main itself. Deploying from the
 # pull request's merge ref is refused by the github-pages environment's branch rules.
 # Requires Settings > Pages > Build and deployment > Source: GitHub Actions.
 
@@ -32,21 +32,17 @@ jobs:
           node-version: 22
 
       - name: Install Dart Sass
-        run: npm install --prefix "$RUNNER_TEMP/sass" sass@1.93.2
-
-      - name: Copy sassy.js
         run: |
-          mkdir -p samples/js
-          cp src/sassy.js samples/js/sassy.js
+          npm install --prefix "$RUNNER_TEMP/sass" sass@1.93.2
+          echo "$RUNNER_TEMP/sass/node_modules/.bin" >> "$GITHUB_PATH"
 
-      - name: Compile sample stylesheets
-        run: |
-          "$RUNNER_TEMP/sass/node_modules/.bin/sass" --no-source-map --load-path=src samples/sass:samples/css
+      - name: Build the site
+        run: node tools/site.mjs build
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: samples
+          path: _site
 
   deploy:
     needs: build
@@ -58,3 +54,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
