@@ -1,5 +1,7 @@
 # 0-core: loading and configuring Sassy
 
+Live examples: [https://bfren.github.io/sassy/0-core.html](https://bfren.github.io/sassy/0-core.html)
+
 `src/0-core` is the foundation of Sassy. It holds the copyright notice, Normalize, the settings, the `make` mixins that generate placeholders, and a few helper mixins and functions. Nothing in it outputs utilities directly, but everything else depends on it.
 
 ## Loading Sassy

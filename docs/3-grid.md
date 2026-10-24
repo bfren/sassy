@@ -1,5 +1,7 @@
 # 3-grid: rows and columns
 
+Live examples: [https://bfren.github.io/sassy/3-grid.html](https://bfren.github.io/sassy/3-grid.html)
+
 `src/3-grid` provides a 12-column flex grid. A row extends `%bf-d-flex-row`, and each column extends `%bf-col-{1-12}`, with a breakpoint variant for each width you want to change. Columns are composites, so they output before the utilities and a utility such as `%bf-p-0` can override them.
 
 The grid always has 12 columns.
