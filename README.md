@@ -281,7 +281,7 @@ You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your p
 | ----------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `compile-full.sh`       | Builds `dist/full.css` and `dist/full.css.gz`, then runs `snippets.sh` and `palette.sh`                      |
 | `compile-full.bat`      | Runs `compile-full.sh` in Git Bash on Windows                                                                |
-| `watch.sh`, `watch.bat` | Recompiles the test stylesheets in `test/sass` whenever they change - open the pages in `test` to check them |
+| `watch.sh`, `watch.bat` | Recompiles the sample stylesheets in `samples/sass` whenever they change - open the pages in `samples` to check them |
 | `snippets.sh`           | Generates `dist/sassy.code-snippets` from `dist/full.css`                                                    |
 | `palette.sh`            | Generates the colour charts in `docs` from the colour and theme variables                                    |
 

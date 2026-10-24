@@ -1,0 +1,28 @@
+@use "../../src" as sassy
+@use "site"
+
+.tooltip
+    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.9)
+    color: sassy.colour("grey", 50)
+
+.hero
+    font-size: 1rem
+
+    @include sassy.up(md)
+        font-size: 1.5rem
+
+.sidebar
+    @include sassy.up-prop((width: (sm: 50%, lg: 25%)))
+
+@include sassy.make-passes
+    @include sassy.make-responsive("stack", (1: 0.25rem, 2: 0.5rem)) using ($value)
+        display: flex
+        flex-direction: column
+        gap: $value
+
+.menu
+    @extend %bf-stack-1
+    @extend %bf-stack-2-md
+
+.menu-named
+    @extend %#{sassy.make-name("stack", 2)}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sassy: 4-utilities</title>
+    <link rel="stylesheet" href="css/4-utilities.css" />
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Documentation">
+            <a href="index.html">Sassy</a>
+            <a href="0-core.html">0-core</a>
+            <a href="1-forms.html">1-forms</a>
+            <a href="2-components.html">2-components</a>
+            <a href="3-grid.html">3-grid</a>
+            <a href="4-utilities.html">4-utilities</a>
+            <a href="5-theme.html">5-theme</a>
+        </nav>
+    </header>
+
+    <main class="site-main">
+
+        <h1>4-utilities: text, layout, colour, display, border, corners and shadow</h1>
+
+        <p class="stylesheet-note">Compiled from <code>sass/4-utilities.sass</code> into <code>css/4-utilities.css</code>, which this page loads. The <code>body</code> rule applies to the whole page.</p>
+
+        <p>Single-purpose utilities, each setting one property or family of properties. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/4-utilities.md">docs/4-utilities.md</a>.</p>
+
+        <section class="example">
+            <h2>Text</h2>
+            <div class="demo">
+                <p class="caption">Photographed in the studio, spring 2026.</p>
+                <div class="card-title">A long title that stays on one line and shows an ellipsis (hover to see all of it)</div>
+            </div>
+<pre><code>body
+    @extend %bf-body
+
+.caption
+    @extend %bf-font-size-smaller
+    @extend %bf-font-style-italic
+    @extend %bf-text-align-centre
+    @extend %bf-c-grey-500
+
+.card-title
+    @extend %bf-text-wrap-hover
+    @extend %bf-font-weight-700</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>A sticky header</h2>
+            <p>The header sticks to the top of its box while you scroll it.</p>
+            <div class="demo" style="max-height: 12rem; overflow-y: auto;">
+                <div class="header">Sticky header</div>
+                <p>Scroll this box to see the header stay in place.</p>
+                <p>More content.</p>
+                <p>More content.</p>
+                <p>More content.</p>
+                <p>More content.</p>
+            </div>
+<pre><code>.header
+    @extend %bf-position-sticky
+    @extend %bf-top-0
+    @extend %bf-z-index-3
+    @extend %bf-bg-grey-50
+    @extend %bf-shadow-1
+    @extend %bf-p-3</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Responsive spacing</h2>
+            <div class="demo">
+                <div class="section">Vertical padding of 1rem, and 1.5rem from md upwards.</div>
+            </div>
+<pre><code>.section
+    @extend %bf-py-4
+    @extend %bf-py-6-md
+    @extend %bf-mx-auto</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Colour and corners</h2>
+            <div class="demo">
+                <span class="badge">Active</span>
+                <div class="card">A card with a border and rounded corners</div>
+            </div>
+<pre><code>.badge
+    @extend %bf-c-green-800
+    @extend %bf-bg-green-100
+    @extend %bf-rounded-pill
+    @extend %bf-px-2
+    @extend %bf-py-1
+
+.card
+    @extend %bf-border-1
+    @extend %bf-border-grey-200
+    @extend %bf-rounded-3
+    @extend %bf-p-4</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>A flex navigation bar that changes at a breakpoint</h2>
+            <p>Stacked in a column on small screens, and in a row from md upwards.</p>
+            <div class="demo">
+                <nav class="nav">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+<pre><code>.nav
+    @extend %bf-d-flex
+    @extend %bf-flex-column
+    @extend %bf-gap-2
+    @extend %bf-flex-row-md
+    @extend %bf-flex-justify-between
+    @extend %bf-flex-align-items-centre
+    @extend %bf-gap-4-md</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>A menu toggle, shown on small screens only</h2>
+            <div class="demo">
+                <span class="menu-toggle">Menu (hidden from lg upwards)</span>
+            </div>
+<pre><code>.menu-toggle
+    @extend %bf-d-block
+    @extend %bf-d-none-lg</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>A skip link for keyboard users</h2>
+            <p>Tab into the box below to see the link appear.</p>
+            <div class="demo">
+                <a class="skip-link" href="#main">Skip to main content</a>
+            </div>
+<pre><code>.skip-link
+    @extend %bf-visually-hidden-focusable</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>A lifted panel</h2>
+            <div class="demo">
+                <div class="panel">A panel with a shadow</div>
+            </div>
+<pre><code>.panel
+    @extend %bf-shadow-2
+    @extend %bf-rounded
+    @extend %bf-p-4</code></pre>
+        </section>
+
+    </main>
+
+</body>
+</html>

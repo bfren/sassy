@@ -1,0 +1,15 @@
+@use "../../src" as sassy
+@use "site"
+
+.alert-error
+    @extend %bf-bg-error
+    @extend %bf-c-grey-50
+    @extend %bf-rounded-2
+    @extend %bf-p-3
+
+.promo
+    --sassy-theme-primary: #{sassy.colour("orange", 600)}
+    --sassy-theme-secondary: #{sassy.colour("sky", 700)}
+
+.promo-text
+    @extend %bf-c-primary

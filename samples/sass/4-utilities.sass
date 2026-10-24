@@ -1,0 +1,66 @@
+@use "../../src" as sassy
+@use "site"
+
+body
+    @extend %bf-body
+
+.caption
+    @extend %bf-font-size-smaller
+    @extend %bf-font-style-italic
+    @extend %bf-text-align-centre
+    @extend %bf-c-grey-500
+
+.card-title
+    @extend %bf-text-wrap-hover
+    @extend %bf-font-weight-700
+
+.page
+    @extend %bf-wrap
+    @extend %bf-py-4
+
+.header
+    @extend %bf-position-sticky
+    @extend %bf-top-0
+    @extend %bf-z-index-3
+    @extend %bf-bg-grey-50
+    @extend %bf-shadow-1
+    @extend %bf-p-3
+
+.section
+    @extend %bf-py-4
+    @extend %bf-py-6-md
+    @extend %bf-mx-auto
+
+.badge
+    @extend %bf-c-green-800
+    @extend %bf-bg-green-100
+    @extend %bf-rounded-pill
+    @extend %bf-px-2
+    @extend %bf-py-1
+
+.nav
+    @extend %bf-d-flex
+    @extend %bf-flex-column
+    @extend %bf-gap-2
+    @extend %bf-flex-row-md
+    @extend %bf-flex-justify-between
+    @extend %bf-flex-align-items-centre
+    @extend %bf-gap-4-md
+
+.menu-toggle
+    @extend %bf-d-block
+    @extend %bf-d-none-lg
+
+.skip-link
+    @extend %bf-visually-hidden-focusable
+
+.card
+    @extend %bf-border-1
+    @extend %bf-border-grey-200
+    @extend %bf-rounded-3
+    @extend %bf-p-4
+
+.panel
+    @extend %bf-shadow-2
+    @extend %bf-rounded
+    @extend %bf-p-4

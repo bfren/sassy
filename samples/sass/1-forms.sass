@@ -1,0 +1,73 @@
+@use "../../src" as sassy
+@use "site"
+
+.field
+    @extend %bf-mb-3
+
+    label
+        @extend %bf-form-label
+
+    input
+        @extend %bf-form-control
+
+.field-text
+    @extend %bf-form-text
+
+.compact
+    input
+        @extend %bf-form-control
+        @extend %bf-form-control-small
+
+    select
+        @extend %bf-form-select
+        @extend %bf-form-select-small
+
+.check
+    @extend %bf-form-check
+
+    input
+        @extend %bf-form-check-input
+
+    label
+        @extend %bf-form-check-label
+
+.toggle
+    @extend %bf-form-switch
+
+.search
+    @extend %bf-input-group
+
+    input
+        @extend %bf-form-control
+
+    span
+        @extend %bf-input-group-text
+
+.search-feedback
+    @extend %bf-form-feedback-invalid
+
+.floating
+    @extend %bf-form-floating
+
+    input
+        @extend %bf-form-control
+
+.slider
+    @extend %bf-form-range
+
+.upload
+    @extend %bf-form-file
+
+.swatch
+    @extend %bf-form-colour
+
+.error
+    @extend %bf-form-feedback-invalid
+
+.ok
+    @extend %bf-form-feedback-valid
+
+@media (prefers-color-scheme: dark)
+    :root
+        --sassy-input-colour: #{sassy.colour("grey", 100)}
+        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}
