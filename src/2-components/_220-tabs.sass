@@ -1,0 +1,41 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "200-shared" as component
+
+//  =================================================================
+//  Components: tabs
+//  =================================================================
+
+//  Tabs follow the WAI-ARIA tabs pattern: role="tablist" on the list, role="tab" on each
+//  button, role="tabpanel" on each panel. sassy.js switches panels and handles the keyboard.
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // The list of tabs, with a line under it that the selected tab's underline sits on
+
+    @include make.single("tabs")
+        --sassy-nav-link-underline-width: var(--sassy-tabs-underline-width)
+        --sassy-nav-link-hover-bg: transparent
+        --sassy-nav-current-border-colour: var(--sassy-theme-primary)
+        border-bottom: var(--sassy-tabs-border-width) solid var(--sassy-tabs-border-colour)
+        display: flex
+        flex-wrap: wrap
+        gap: var(--sassy-nav-gap)
+        list-style: none
+        margin: 0
+        padding: 0
+
+    // Each tab - the same as a nav link, pulled down over the list's line
+
+    @include make.single("tab")
+        @include component.link()
+        margin-bottom: calc(var(--sassy-tabs-border-width) * -1)
+
+    // Each panel - sassy.js hides the others with the hidden attribute
+
+    @include make.single("tab-panel")
+        padding: var(--sassy-tab-panel-padding-y) 0
+
+        &:focus-visible
+            @include component.focus-outline()

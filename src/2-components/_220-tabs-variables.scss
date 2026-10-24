@@ -1,0 +1,9 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+
+:root {
+    --sassy-tabs-border-width: 1px;
+    --sassy-tabs-border-colour: #{colour("grey", 200)};
+    --sassy-tabs-underline-width: 0.125rem;
+    --sassy-tab-panel-padding-y: #{$sassy-padding-unit * 4};
+}

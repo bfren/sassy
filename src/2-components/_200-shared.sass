@@ -1,0 +1,54 @@
+//  =================================================================
+//  Components: shared mixins
+//  =================================================================
+
+//  Used by the 2xx component modules. Not forwarded from _index, so these stay
+//  internal rather than becoming part of Sassy's public API.
+
+/// A navigation link or tab. Everything it draws comes from --sassy-nav-* custom properties,
+/// so a style such as pills or underline - or a theme - only needs to change those.
+@mixin link()
+    align-items: center
+    background-color: transparent
+    border: 0
+    border-bottom: var(--sassy-nav-link-underline-width) solid transparent
+    border-radius: var(--sassy-nav-link-radius)
+    box-sizing: border-box
+    color: var(--sassy-nav-link-colour)
+    cursor: pointer
+    display: flex
+    font: inherit
+    gap: 0.5em
+    margin: 0
+    padding: var(--sassy-nav-link-padding-y) var(--sassy-nav-link-padding-x)
+    text-decoration: none
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out
+
+    @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    &:hover
+        background-color: var(--sassy-nav-link-hover-bg)
+
+    &:focus-visible
+        @include focus-outline()
+
+    // the current page in a nav, or the selected tab - after :hover, so it wins
+    &[aria-current]:not([aria-current="false"]),
+    &[aria-selected="true"]
+        background-color: var(--sassy-nav-current-bg)
+        border-bottom-color: var(--sassy-nav-current-border-colour)
+        color: var(--sassy-nav-current-colour)
+
+    &:disabled,
+    &[aria-disabled="true"]
+        cursor: not-allowed
+        opacity: 0.5
+        pointer-events: none
+
+
+
+/// A visible focus outline for components that are not form controls.
+@mixin focus-outline()
+    outline: var(--sassy-focus-outline-width) solid var(--sassy-focus-outline-colour)
+    outline-offset: var(--sassy-focus-outline-offset)

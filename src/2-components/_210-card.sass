@@ -1,0 +1,53 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: cards
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // A bordered container. overflow: hidden clips an image to the rounded corners.
+
+    @include make.single("card")
+        background-color: var(--sassy-card-bg)
+        border: var(--sassy-card-border-width) solid var(--sassy-card-border-colour)
+        border-radius: var(--sassy-card-radius)
+        box-sizing: border-box
+        display: flex
+        flex-direction: column
+        min-width: 0
+        overflow: hidden
+
+    @include make.single("card-header")
+        background-color: var(--sassy-card-cap-bg)
+        border-bottom: var(--sassy-card-border-width) solid var(--sassy-card-border-colour)
+        padding: calc(var(--sassy-card-padding-y) * 0.75) var(--sassy-card-padding-x)
+
+    // the body grows, so footers line up across cards of different heights in a row
+    @include make.single("card-body")
+        flex: 1 1 auto
+        padding: var(--sassy-card-padding-y) var(--sassy-card-padding-x)
+
+        & > :first-child
+            margin-top: 0
+
+        & > :last-child
+            margin-bottom: 0
+
+    @include make.single("card-footer")
+        background-color: var(--sassy-card-cap-bg)
+        border-top: var(--sassy-card-border-width) solid var(--sassy-card-border-colour)
+        padding: calc(var(--sassy-card-padding-y) * 0.75) var(--sassy-card-padding-x)
+
+    @include make.single("card-title")
+        font-size: calc(var(--sassy-font-size-base) * 1.25)
+        line-height: 1.2
+        margin: 0 0 $sassy-margin-unit * 2
+
+    @include make.single("card-image")
+        display: block
+        height: auto
+        object-fit: cover
+        width: 100%

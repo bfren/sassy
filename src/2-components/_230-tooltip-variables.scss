@@ -1,0 +1,13 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+
+:root {
+    --sassy-tooltip-bg: #{colour("grey", 900)};
+    --sassy-tooltip-colour: #fff;
+    --sassy-tooltip-font-size: calc(var(--sassy-font-size-base) * 0.875);
+    --sassy-tooltip-max-width: 20rem;
+    --sassy-tooltip-offset: 0.375rem;
+    --sassy-tooltip-padding-y: #{$sassy-padding-unit};
+    --sassy-tooltip-padding-x: #{$sassy-padding-unit * 2};
+    --sassy-tooltip-radius: var(--sassy-radius);
+}
