@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sassy: 5-theme</title>
+    <link rel="stylesheet" href="css/5-theme.css" />
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Documentation">
+            <a href="index.html">Sassy</a>
+            <a href="0-core.html">0-core</a>
+            <a href="1-forms.html">1-forms</a>
+            <a href="2-components.html">2-components</a>
+            <a href="3-grid.html">3-grid</a>
+            <a href="4-utilities.html">4-utilities</a>
+            <a href="5-theme.html">5-theme</a>
+        </nav>
+    </header>
+
+    <main class="site-main">
+
+        <h1>5-theme: theme colours and runtime theming</h1>
+
+        <p class="stylesheet-note">Compiled from <code>sass/5-theme.sass</code> into <code>css/5-theme.css</code>, which this page loads.</p>
+
+        <p>Theme colours are custom properties on <code>:root</code>, so a site, a section or a script can change them. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/5-theme.md">docs/5-theme.md</a>.</p>
+
+        <section class="example">
+            <h2>Using theme colours</h2>
+            <div class="demo">
+                <div class="alert-error">Something went wrong. Please try again.</div>
+            </div>
+<pre><code>@use "sassy/src" as sassy
+
+.alert-error
+    @extend %bf-bg-error
+    @extend %bf-c-grey-50
+    @extend %bf-rounded-2
+    @extend %bf-p-3</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>A section with its own theme</h2>
+            <p>The section sets <code>--sassy-theme-primary</code> for everything inside it.</p>
+            <div class="demo">
+                <section class="promo">
+                    <p class="promo-text">Spring offer</p>
+                </section>
+            </div>
+<pre><code>.promo
+    --sassy-theme-primary: #{sassy.colour("orange", 600)}
+    --sassy-theme-secondary: #{sassy.colour("sky", 700)}
+
+.promo-text
+    @extend %bf-c-primary</code></pre>
+        </section>
+
+        <section class="example">
+            <h2>Dark mode and runtime changes</h2>
+            <p>These need a whole-site or script change, so they are shown here but not applied to this page.</p>
+<pre><code>@use "sassy/src" as sassy
+
+:root
+    --sassy-theme-primary: #{sassy.colour("sky", 600)}
+
+@media (prefers-color-scheme: dark)
+    :root:not([data-theme="light"])
+        --sassy-theme-primary: #{sassy.colour("sky", 400)}
+        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}</code></pre>
+<pre><code>&lt;script&gt;
+    document.documentElement.style.setProperty("--sassy-theme-primary", "#0d9488");
+&lt;/script&gt;</code></pre>
+        </section>
+
+    </main>
+
+</body>
+</html>
