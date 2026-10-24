@@ -126,11 +126,11 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 
 ### Different values at different breakpoints
 
-`up-prop()` sets a property at each breakpoint in one map. A breakpoint missing from the map is left alone:
+`up-prop()` sets a property at each breakpoint. Give it the property name, then a map of breakpoint values. A breakpoint missing from the map is left alone:
 
 ```sass
 .sidebar
-    @include sassy.up-prop((width: (sm: 50%, lg: 25%)))
+    @include sassy.up-prop(width (sm: 50%, lg: 25%))
 ```
 
 ```css

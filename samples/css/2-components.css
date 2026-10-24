@@ -1,0 +1,489 @@
+/*!
+ *  Sassy v0.3.0 ~ https://github.com/bfren/sassy
+ *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
+/*!
+ *  Normalize.css ~  https://github.com/csstools/normalize.css
+ *  Licensed under Creative Commons Zero v1.0 Universal
+ */
+/* Document
+ * ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+:where(html) {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+ * ========================================================================== */
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Edge, Firefox, and Safari.
+ */
+:where(h1) {
+  font-size: 2em;
+  margin-block-end: 0.67em;
+  margin-block-start: 0.67em;
+}
+
+/* Grouping content
+ * ========================================================================== */
+/**
+ * Remove the margin on nested lists in Chrome, Edge, and Safari.
+ */
+:where(dl, ol, ul) :where(dl, ol, ul) {
+  margin-block-end: 0;
+  margin-block-start: 0;
+}
+
+/**
+ * Add the correct box sizing in Firefox.
+ */
+:where(hr) {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/* Text-level semantics
+ * ========================================================================== */
+/**
+ * Add the correct text decoration in Safari.
+ */
+:where(abbr[title]) {
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+:where(b, strong) {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+:where(code, kbd, pre, samp) {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+:where(small) {
+  font-size: 80%;
+}
+
+/* Tabular data
+ * ========================================================================== */
+/**
+ * Correct table border color in Chrome, Edge, and Safari.
+ */
+:where(table) {
+  border-color: currentColor;
+}
+
+/* Forms
+ * ========================================================================== */
+/**
+ * Remove the margin on controls in Safari.
+ */
+:where(button, input, select) {
+  margin: 0;
+}
+
+/**
+ * Remove the inheritance of text transform in Firefox.
+ */
+:where(button) {
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style buttons in iOS and Safari.
+ */
+:where(button, input:is([type=button i], [type=reset i], [type=submit i])) {
+  -webkit-appearance: button;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Edge, and Firefox.
+ */
+:where(progress) {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the inheritance of text transform in Firefox.
+ */
+:where(select) {
+  text-transform: none;
+}
+
+/**
+ * Remove the margin in Firefox and Safari.
+ */
+:where(textarea) {
+  margin: 0;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome, Edge, and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+:where(input[type=search i]) {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Safari.
+ */
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+/**
+ * Remove the inner padding in Chrome, Edge, and Safari on macOS.
+ */
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style upload buttons in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/**
+ * Remove the inner border and padding of focus outlines in Firefox.
+ */
+:where(button, input:is([type=button i], [type=color i], [type=reset i], [type=submit i]))::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus outline styles unset by the previous rule in Firefox.
+ */
+:where(button, input:is([type=button i], [type=color i], [type=reset i], [type=submit i]))::-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Remove the additional :invalid styles in Firefox.
+ */
+:where(:-moz-ui-invalid) {
+  box-shadow: none;
+}
+
+/* Interactive
+ * ========================================================================== */
+/*
+ * Add the correct styles in Safari.
+ */
+:where(dialog) {
+  background-color: white;
+  border: solid;
+  color: black;
+  height: -moz-fit-content;
+  height: fit-content;
+  left: 0;
+  margin: auto;
+  padding: 1em;
+  position: absolute;
+  right: 0;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+:where(dialog:not([open])) {
+  display: none;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+:where(summary) {
+  display: list-item;
+}
+
+/*
+    Colour map from Tailwind CSS v4.3.3 (with gray renamed grey)
+    https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/packages/tailwindcss/theme.css
+    See https://tailwindcss.com/docs/colors
+
+    Licensed under MIT
+    https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/LICENSE
+ */
+:root {
+  --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
+  --sassy-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sassy-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
+  --sassy-font-size-base: 1rem;
+  --sassy-font-weight-base: 400;
+  --sassy-line-height-base: 1.5;
+  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-body-font-family: var(--sassy-font-family-sans);
+  --sassy-body-font-size: var(--sassy-font-size-base);
+  --sassy-body-font-weight: var(--sassy-font-weight-base);
+  --sassy-body-line-height: var(--sassy-line-height-base);
+}
+
+:root {
+  --sassy-radius: 0.375rem;
+}
+
+:root {
+  --sassy-shadow-colour: #000;
+}
+
+:root {
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+}
+
+:root {
+  --sassy-grid-gutter: 0.5rem;
+}
+
+:root {
+  --sassy-input-font-size: var(--sassy-font-size-base);
+  --sassy-input-line-height: var(--sassy-line-height-base);
+  --sassy-input-padding-y: 0.375rem;
+  --sassy-input-padding-x: 0.75rem;
+  --sassy-input-border-width: 1px;
+  --sassy-input-radius: var(--sassy-radius);
+  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-input-bg: #fff;
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
+  --sassy-input-focus-colour: var(--sassy-theme-primary);
+  --sassy-input-focus-ring: 0.25rem;
+  --sassy-input-invalid-colour: var(--sassy-theme-error);
+  --sassy-input-valid-colour: var(--sassy-theme-ok);
+  --sassy-check-checked-colour: var(--sassy-theme-primary);
+  --sassy-check-mark-colour: #fff;
+  --sassy-check-radius: 0.25em;
+  --sassy-switch-knob-colour: var(--sassy-input-border-colour);
+  --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e2939' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-addon-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-addon-hover-bg: oklch(92.8% 0.006 264.531deg);
+  --sassy-floating-height: 3.5rem;
+  --sassy-floating-padding-y: 1rem;
+  --sassy-range-track-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-range-track-height: 0.5rem;
+  --sassy-range-thumb-colour: var(--sassy-theme-primary);
+  --sassy-range-thumb-size: 1rem;
+  --sassy-range-disabled-colour: oklch(70.7% 0.022 261.325deg);
+}
+
+body {
+  color: var(--sassy-body-colour);
+  font-family: var(--sassy-body-font-family);
+  font-size: var(--sassy-body-font-size);
+  font-weight: var(--sassy-body-font-weight);
+  line-height: var(--sassy-body-line-height);
+}
+body h1 {
+  font-size: calc(var(--sassy-font-size-base) * 2);
+}
+body h2 {
+  font-size: calc(var(--sassy-font-size-base) * 1.8);
+}
+body h3 {
+  font-size: calc(var(--sassy-font-size-base) * 1.6);
+}
+body h4 {
+  font-size: calc(var(--sassy-font-size-base) * 1.4);
+}
+body h5 {
+  font-size: calc(var(--sassy-font-size-base) * 1.2);
+}
+body h6 {
+  font-size: calc(var(--sassy-font-size-base) * 1.1);
+}
+body input {
+  font-family: var(--sassy-body-font-family);
+}
+body code, body textarea {
+  font-family: var(--sassy-font-family-mono);
+}
+
+pre {
+  font-family: var(--sassy-font-family-mono);
+}
+
+pre {
+  font-size: calc(var(--sassy-font-size-base) * 0.7);
+}
+
+.wrap-fluid, .wrap, .site-main {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .wrap, .site-main {
+    width: 576px;
+  }
+}
+@media (min-width: 768px) {
+  .wrap, .site-main {
+    width: 768px;
+  }
+}
+@media (min-width: 992px) {
+  .wrap, .site-main {
+    width: 992px;
+  }
+}
+@media (min-width: 1200px) {
+  .wrap, .site-main {
+    width: 1200px;
+  }
+}
+@media (min-width: 1400px) {
+  .wrap, .site-main {
+    width: 1400px;
+  }
+}
+@media (min-width: 1600px) {
+  .wrap, .site-main {
+    width: 1600px;
+  }
+}
+
+pre {
+  overflow-x: auto;
+}
+
+body p, body li {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+body h1 {
+  margin-top: 0rem;
+}
+
+body h5, body h6 {
+  margin-top: 0.75rem;
+}
+
+body h3, body h4 {
+  margin-top: 1rem;
+}
+
+body h2 {
+  margin-top: 1.5rem;
+}
+
+body h1, body h2, body h3, body h4, body h5, body h6 {
+  margin-bottom: 0.5rem;
+}
+
+.demo {
+  margin-bottom: 0.75rem;
+}
+
+.example {
+  margin-bottom: 1.5rem;
+}
+
+.site-header, pre {
+  padding: 0.75rem;
+}
+
+.demo {
+  padding: 1rem;
+}
+
+.site-main {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+body {
+  padding-bottom: 1.5rem;
+}
+
+pre {
+  color: oklch(96.7% 0.003 264.542deg);
+}
+
+.site-header {
+  background-color: oklch(98.5% 0.002 247.839deg);
+}
+
+pre {
+  background-color: oklch(21% 0.034 264.665deg);
+}
+
+.site-nav {
+  display: flex;
+}
+
+.site-nav {
+  align-items: center;
+}
+
+.site-nav {
+  flex-wrap: wrap;
+}
+
+.site-nav {
+  column-gap: 0.75rem;
+}
+
+.site-nav {
+  row-gap: 0.25rem;
+}
+
+.demo {
+  border-style: solid;
+  border-width: 1px;
+}
+
+.site-header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.site-header, .demo {
+  border-color: oklch(92.8% 0.006 264.531deg);
+}
+
+.demo, pre {
+  border-radius: 0.25rem;
+}
+
+/*# sourceMappingURL=2-components.css.map */
