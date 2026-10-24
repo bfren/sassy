@@ -9,9 +9,9 @@
  * Needs Node 20 or later and Dart Sass on the path as `sass` - or set SASS to run it from elsewhere.
  */
 
-import { spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { availableParallelism, tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -24,12 +24,32 @@ const out = join(root, "_site");
 //  Sass
 //  =================================================================
 
-/** Runs Dart Sass, returning its output, or throwing with its error. */
-const sass = args => {
-	const result = spawnSync(process.env.SASS ?? "sass", args, { encoding: "utf8", shell: process.platform === "win32" });
-	if (result.error) throw new Error(`could not run Sass: ${result.error.message}`);
-	if (result.status !== 0) throw new Error(result.stderr || result.stdout);
-	return result.stdout;
+/** Runs Dart Sass, resolving with its output, or rejecting with its error. */
+const sass = args => new Promise((resolve, reject) => {
+	const command = process.env.SASS ?? "sass";
+	// on Windows Sass is a .bat file, which only runs through the shell
+	const child = process.platform === "win32"
+		? spawn([command, ...args].map(a => `"${a}"`).join(" "), { shell: true })
+		: spawn(command, args);
+	let stdout = "", stderr = "";
+	child.stdout.on("data", d => (stdout += d));
+	child.stderr.on("data", d => (stderr += d));
+	child.on("error", e => reject(new Error(`could not run Sass: ${e.message}`)));
+	child.on("close", code => (code === 0 ? resolve(stdout) : reject(new Error(stderr || stdout))));
+});
+
+/** Runs async tasks in order, as many at a time as there are processors, returning their results in order. */
+const inParallel = async tasks => {
+	const results = new Array(tasks.length);
+	let next = 0;
+	const worker = async () => {
+		while (next < tasks.length) {
+			const i = next++;
+			results[i] = await tasks[i]();
+		}
+	};
+	await Promise.all(Array.from({ length: Math.min(availableParallelism(), tasks.length) }, worker));
+	return results;
 };
 
 /** An example's Sass, made to compile on its own: loading Sassy from this repository. */
@@ -39,31 +59,23 @@ const standalone = snippet =>
 		: `@use "${srcPath}" as sassy\n\n${snippet}`;
 
 /**
- * Compiles Sass examples, returning each one's CSS, or its error. The last result is Sassy on its own.
+ * Compiles Sass examples, each on its own and several at once, returning each one's CSS or its error.
+ * Every compile evaluates all of Sassy, which takes a second or two, so running them side by side
+ * is what keeps the build quick.
  * @param {{ sass: string, label: string }[]} examples
  */
-const compile = examples => {
+const compile = async examples => {
 	const dir = mkdtempSync(join(tmpdir(), "sassy-"));
 	try {
-		const input = join(dir, "in");
-		mkdirSync(input);
-		const all = [...examples.map((ex, i) => ({ ...ex, name: `example-${i}` })), { label: "Sassy on its own", sass: "", name: "baseline" }];
-		all.forEach(ex => writeFileSync(join(input, `${ex.name}.sass`), standalone(ex.sass)));
-		// one run of Sass for them all is much faster; if it fails, compile each on its own,
-		// so that every broken example is reported, with its label
-		try {
-			sass(["--no-source-map", "--quiet", `${input}:${join(dir, "out")}`]);
-			return all.map(ex => ({ css: readFileSync(join(dir, "out", `${ex.name}.css`), "utf8") }));
-		} catch {
-			return all.map(ex => {
-				const file = join(input, `${ex.name}.sass`);
-				try {
-					return { css: sass(["--no-source-map", "--quiet", file]) };
-				} catch (e) {
-					return { error: `${ex.label}: ${e.message.replaceAll(file, ex.label).trim()}` };
-				}
-			});
-		}
+		return await inParallel(examples.map((ex, i) => async () => {
+			const file = join(dir, `example-${i}.sass`);
+			writeFileSync(file, standalone(ex.sass));
+			try {
+				return { css: await sass(["--no-source-map", "--quiet", file]) };
+			} catch (e) {
+				return { error: `${ex.label}: ${e.message.replaceAll(file, ex.label).trim()}` };
+			}
+		}));
 	} finally {
 		rmSync(dir, { recursive: true, force: true });
 	}
@@ -261,46 +273,52 @@ const withCss = (block, css) => ({
 
 const pages = () => readdirSync(samples).filter(f => f.endsWith(".html"));
 
-const build = () => {
+const build = async () => {
 	const problems = [];
 	rmSync(out, { recursive: true, force: true });
 	mkdirSync(join(out, "css"), { recursive: true });
 	mkdirSync(join(out, "js"), { recursive: true });
-
-	// each page's own stylesheet
-	sass(["--no-source-map", "--quiet", `${join(samples, "sass")}:${join(out, "css")}`]);
 	cpSync(join(root, "src", "sassy.js"), join(out, "js", "sassy.js"));
 	if (existsSync(join(samples, ".nojekyll"))) cpSync(join(samples, ".nojekyll"), join(out, ".nojekyll"));
 
-	for (const page of pages()) {
+	const found = pages().map(page => {
 		const html = readFileSync(join(samples, page), "utf8");
-		const blocksOnPage = codeBlocks(html);
-		const sassPanels = blocksOnPage.flatMap(b => b.panels).filter(p => p.lang === "sass");
-		const results = compile(sassPanels.map((p, i) => ({ sass: p.code, label: `${page}, Sass example ${i + 1}` })));
-		const baseline = results.at(-1).css ?? "";
+		const blocks = codeBlocks(html);
+		const panels = blocks.flatMap(b => b.panels).filter(p => p.lang === "sass");
+		return { page, html, blocks, panels };
+	});
+	const examples = found.flatMap(f => f.panels.map((p, i) => ({ panel: p, page: f.page, label: `${f.page}, Sass example ${i + 1}`, sass: p.code })));
+
+	// every example, and Sassy on its own once, alongside each page's own stylesheet
+	const [results] = await Promise.all([
+		compile([...examples, { label: "Sassy on its own", sass: "" }]),
+		sass(["--no-source-map", "--quiet", `${join(samples, "sass")}:${join(out, "css")}`])
+	]);
+	const baseline = results.at(-1).css ?? "";
+
+	const css = new Map();
+	examples.forEach((ex, i) => {
+		const r = results[i];
+		if (r.error) return problems.push(r.error);
+		css.set(ex.panel, ownCss(r.css, baseline));
+	});
+
+	for (const { page, html, blocks, panels } of found) {
 		const stylesheet = html.match(/<link rel="stylesheet" href="(css\/[^"]+)"/)?.[1];
 		const pageCss = stylesheet && existsSync(join(out, stylesheet)) ? readFileSync(join(out, stylesheet), "utf8") : "";
 
-		const css = new Map();
-		sassPanels.forEach((p, i) => {
-			const r = results[i];
-			if (r.error) return problems.push(r.error);
-			const own = ownCss(r.css, baseline);
-			css.set(p, own);
-			// the page must actually use the Sass it shows, unless marked as shown only
-			if (!p.shownOnly) {
-				missing(own, pageCss).forEach(m => problems.push(`${page}, Sass example ${i + 1}: not in ${stylesheet}: ${m}`));
+		// the page must actually use the Sass it shows, unless marked as shown only
+		panels.forEach((p, i) => {
+			if (css.has(p) && !p.shownOnly) {
+				missing(css.get(p), pageCss).forEach(m => problems.push(`${page}, Sass example ${i + 1}: not in ${stylesheet}: ${m}`));
 			}
 		});
 
 		let n = 0;
-		const built = html.replace(codePattern, () => {
-			const block = blocksOnPage[n++];
-			return renderCode(withCss(block, css), `code-${n}`);
-		});
+		const built = html.replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`));
 		writeFileSync(join(out, page), built);
-		console.log(`built ${page}: ${blocksOnPage.length} code blocks`);
 	}
+	console.log(`built ${found.length} pages with ${examples.length} examples`);
 	return problems;
 };
 
@@ -320,10 +338,10 @@ const docExamples = (file, text) => {
 	});
 };
 
-const check = () => {
+const check = async () => {
 	const files = ["README.md", ...readdirSync(join(root, "docs")).filter(f => f.endsWith(".md")).map(f => `docs/${f}`)];
 	const examples = files.flatMap(f => docExamples(f, readFileSync(join(root, f), "utf8")));
-	const results = compile(examples);
+	const results = await compile(examples);
 	const problems = examples.flatMap((ex, i) =>
 		results[i].error ? [results[i].error] : missing(ex.css, results[i].css).map(m => `${ex.label}: the CSS shown is not output: ${m}`)
 	);
@@ -342,7 +360,9 @@ if (!command) {
 	process.exit(2);
 }
 try {
-	const problems = command();
+	const started = Date.now();
+	const problems = await command();
+	console.log(`in ${((Date.now() - started) / 1000).toFixed(1)}s, ${availableParallelism()} at a time`);
 	if (problems.length > 0) {
 		console.error(`\n${problems.length} problem(s):\n${problems.map(p => `  - ${p}`).join("\n")}`);
 		process.exit(1);
