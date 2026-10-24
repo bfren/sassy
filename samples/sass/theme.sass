@@ -81,19 +81,23 @@ body
         @extend %bf-border-grey-dark
 
 .shadow
+    div
+        @extend %bf-shadow-2
+
+    // one set of shadows, coloured by --sassy-shadow-colour
     .primary
-        @extend %bf-shadow-primary-2
+        --sassy-shadow-colour: var(--sassy-theme-primary)
     .secondary
-        @extend %bf-shadow-secondary-2
+        --sassy-shadow-colour: var(--sassy-theme-secondary)
     .ok
-        @extend %bf-shadow-ok-2
+        --sassy-shadow-colour: var(--sassy-theme-ok)
     .info
-        @extend %bf-shadow-info-2
+        --sassy-shadow-colour: var(--sassy-theme-info)
     .warn
-        @extend %bf-shadow-warn-2
+        --sassy-shadow-colour: var(--sassy-theme-warn)
     .error
-        @extend %bf-shadow-error-2
+        --sassy-shadow-colour: var(--sassy-theme-error)
     .grey-light
-        @extend %bf-shadow-grey-light-2
+        --sassy-shadow-colour: var(--sassy-theme-grey-light)
     .grey-dark
-        @extend %bf-shadow-grey-dark-2
+        --sassy-shadow-colour: var(--sassy-theme-grey-dark)

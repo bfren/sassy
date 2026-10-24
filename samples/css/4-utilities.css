@@ -739,6 +739,10 @@ body h1, body h2, body h3, body h4, body h5, body h6 {
   display: flex;
 }
 
+.shadows {
+  display: grid;
+}
+
 .skip-link:not(:focus):not(:focus-within) {
   border: 0 !important;
   clip: rect(0, 0, 0, 0) !important;
@@ -757,6 +761,10 @@ body h1, body h2, body h3, body h4, body h5, body h6 {
 
 .links {
   gap: 0.5rem;
+}
+
+.shadows {
+  gap: 1rem;
 }
 
 .site-header-inner {
@@ -1128,6 +1136,10 @@ body {
 
 .scroller {
   max-height: 11rem;
+}
+
+.panel-primary {
+  --sassy-shadow-colour: var(--sassy-theme-primary);
 }
 
 /*# sourceMappingURL=4-utilities.css.map */

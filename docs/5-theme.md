@@ -2,18 +2,17 @@
 
 Live examples: [https://bfren.github.io/sassy/5-theme.html](https://bfren.github.io/sassy/5-theme.html)
 
-`src/5-theme` provides a small set of named theme colours - `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark` - for text, backgrounds, borders and shadows. Each one is a custom property on `:root`, so a theme can change them per site, per section or at runtime.
+`src/5-theme` provides a small set of named theme colours - `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark` - for text, backgrounds and borders, and to colour shadows. Each one is a custom property on `:root`, so a theme can change them per site, per section or at runtime.
 
 Theme colours are output last, so a theme utility such as `%bf-bg-primary` always wins over any composite or single-purpose utility that sets the same property.
 
 ## Placeholders
 
-| Placeholder pattern       | Sets                                      | Example                |
-| ------------------------- | ----------------------------------------- | ---------------------- |
-| `%bf-c-{name}`            | Text colour                               | `%bf-c-primary`        |
-| `%bf-bg-{name}`           | Background colour                         | `%bf-bg-error`         |
-| `%bf-border-{name}`       | Border colour                             | `%bf-border-ok`        |
-| `%bf-shadow-{name}-{0-3}` | Box shadow in the theme colour, at a size | `%bf-shadow-primary-2` |
+| Placeholder pattern | Sets              | Example         |
+| ------------------- | ----------------- | --------------- |
+| `%bf-c-{name}`      | Text colour       | `%bf-c-primary` |
+| `%bf-bg-{name}`     | Background colour | `%bf-bg-error`  |
+| `%bf-border-{name}` | Border colour     | `%bf-border-ok` |
 
 `{name}` is one of the theme colours. Each has breakpoint variants too, such as `%bf-c-primary-md`, for a theme that changes at a breakpoint.
 
@@ -67,7 +66,15 @@ The defaults come from the palette, so `sassy.colour()` gives you the same colou
 
 Each placeholder is its own rule, output in Sassy's order: spacing, palette colours, corners, and theme colours last. That order is what lets a theme colour win over a palette colour that sets the same property.
 
-For text and a border, extend `%bf-c-primary` and `%bf-border-primary`. For a card that lifts from the page, extend `%bf-shadow-primary-1`.
+For text and a border, extend `%bf-c-primary` and `%bf-border-primary`. For a shadow in a theme colour, extend a shadow and set its colour:
+
+```sass
+.card
+    @extend %bf-shadow-2
+    --sassy-shadow-colour: var(--sassy-theme-primary)
+```
+
+Shadows have one colour, `--sassy-shadow-colour`, so this works with any colour, and setting it on a section colours every shadow inside it.
 
 ### Theming a whole site
 
@@ -145,4 +152,4 @@ Because the theme is in custom properties, a script can change it without a new 
 | ----------------------------------------------------------------------------------------------------- | ----------------------- |
 | `--sassy-theme-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | The eight theme colours |
 
-Theme colours are defined in [`src/5-theme/_500-theme-variables.scss`](../src/5-theme/_500-theme-variables.scss). To add a theme colour, add an entry to the `$sassy-theme` map and a matching `--sassy-theme-*` custom property in `:root` in the same file. The `%bf-c`, `%bf-bg`, `%bf-border` and `%bf-shadow` placeholders are then generated for it.
+Theme colours are defined in [`src/5-theme/_500-theme-variables.scss`](../src/5-theme/_500-theme-variables.scss). To add a theme colour, add an entry to the `$sassy-theme` map and a matching `--sassy-theme-*` custom property in `:root` in the same file. The `%bf-c`, `%bf-bg` and `%bf-border` placeholders are then generated for it.
