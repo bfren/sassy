@@ -1,0 +1,51 @@
+@use "0-core/040-make" as make
+@use "1-forms/110-label" as form-label
+@use "1-forms/120-control" as form-control
+@use "1-forms/130-select" as form-select
+@use "1-forms/140-check" as form-check
+@use "1-forms/150-switch" as form-switch
+@use "1-forms/160-input-group" as form-input-group
+@use "1-forms/170-floating" as form-floating
+@use "1-forms/180-inputs" as form-inputs
+@use "1-forms/190-validation" as form-validation
+@use "3-grid/300-grid" as grid
+@use "4-utilities/400-text" as text
+@use "4-utilities/410-layout" as layout
+@use "4-utilities/420-colour" as colour
+@use "4-utilities/430-display" as display
+@use "4-utilities/440-border" as border
+@use "4-utilities/450-rounded" as rounded
+@use "4-utilities/460-shadow" as shadow
+@use "5-theme/500-theme" as theme
+
+//  =================================================================
+//  Placeholders and classes
+//  =================================================================
+
+//  Every module is rendered once for base definitions, then once per breakpoint, so breakpoint
+//  overrides always come after base rules and smaller breakpoints, whichever module defines them.
+//
+//  Within each pass, modules are rendered in folder and file order: composites (forms,
+//  components, grid, and text, which has body and text-wrap-hover) first, so that single-purpose
+//  utilities always override them; theme colours last. Validation is the last form module, so
+//  its state colours win over every control, check and input it applies to.
+
+@include make.passes
+    @include form-label.utilities
+    @include form-control.utilities
+    @include form-select.utilities
+    @include form-check.utilities
+    @include form-switch.utilities
+    @include form-input-group.utilities
+    @include form-floating.utilities
+    @include form-inputs.utilities
+    @include form-validation.utilities
+    @include grid.utilities
+    @include text.utilities
+    @include layout.utilities
+    @include colour.utilities
+    @include display.utilities
+    @include border.utilities
+    @include rounded.utilities
+    @include shadow.utilities
+    @include theme.utilities

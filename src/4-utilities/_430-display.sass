@@ -1,0 +1,119 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "sass:map"
+
+$sassy-gap-loop: (inherit: inherit)
+@for $i from 0 through $sassy-loop-max
+    $sassy-gap-loop: map.merge($sassy-gap-loop, ($i: $i * $sassy-gap-unit))
+
+//  =================================================================
+//  Display, visibility, opacity, flex and gap
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Display
+
+    @include make.responsive("d", $sassy-display) using ($value)
+        display: $value
+
+        // See 3-grid for flex-row
+
+
+    // Visibility
+    // Not responsive - these are rarely changed at a breakpoint.
+    // !important so that a more specific rule can never accidentally reveal the content.
+
+    @include make.single("visually-hidden")
+        @include -visually-hidden()
+
+    @include make.single("visually-hidden-focusable")
+        &:not(:focus):not(:focus-within)
+            @include -visually-hidden()
+
+
+    // Opacity
+
+    @for $i from 0 through 10
+        @include make.responsive("opacity", ($i * 10)) using ($value)
+            opacity: calc($value / 100)
+
+
+    // Flex: Align
+
+    @include make.responsive("flex-align-content", $sassy-flex-align-content) using ($value)
+        align-content: $value
+
+    @include make.responsive("flex-align-items", $sassy-flex-align-items) using ($value)
+        align-items: $value
+
+    @include make.responsive("flex-align-self", $sassy-flex-align-self) using ($value)
+        align-self: $value
+
+
+    // Flex: Direction
+
+    @include make.responsive("flex", $sassy-flex-direction) using ($value)
+        flex-direction: $value
+
+
+    // Flex: Fill
+
+    @include make.responsive("flex", ("fill")) using ($value)
+        flex: 1 1 auto
+
+
+    // Flex: Grow / Shrink
+
+    @for $i from 0 through $sassy-loop-max
+        @include make.responsive("flex-grow", ($i)) using ($value)
+            flex-grow: $value
+
+        @include make.responsive("flex-shrink", ($i)) using ($value)
+            flex-shrink: $value
+
+
+    // Flex: Justify
+
+    @include make.responsive("flex-justify", $sassy-flex-justify) using ($value)
+        justify-content: $value
+
+
+    // Flex: Order
+
+    @include make.responsive("flex-order", $sassy-flex-order) using ($value)
+        order: $value
+
+
+    // Flex: Wrap
+
+    @include make.responsive("flex-wrap", $sassy-flex-wrap) using ($value)
+        flex-wrap: $value
+
+
+    // Gap (flex and grid)
+    // gap-x is the space between columns, gap-y the space between rows
+
+    @include make.responsive("gap", $sassy-gap-loop) using ($value)
+        gap: $value
+
+    @include make.responsive("gap-x", $sassy-gap-loop) using ($value)
+        column-gap: $value
+
+    @include make.responsive("gap-y", $sassy-gap-loop) using ($value)
+        row-gap: $value
+
+
+
+/// Hides content visually while keeping it available to screen readers.
+@mixin -visually-hidden()
+    border: 0 !important
+    clip: rect(0, 0, 0, 0) !important
+    height: 1px !important
+    margin: -1px !important
+    overflow: hidden !important
+    padding: 0 !important
+    position: absolute !important
+    white-space: nowrap !important
+    width: 1px !important

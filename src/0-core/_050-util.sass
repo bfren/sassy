@@ -1,0 +1,41 @@
+@use "030-variables" as *
+@use "sass:map"
+@use "sass:math"
+@use "sass:meta"
+
+/// Outputs minimum width (breakpoint) override definitions.
+///
+/// @param {string} $breakpoint
+///     Breakpoint value.
+@mixin up($breakpoint)
+    @media (min-width: map.get($sassy-breakpoints, $breakpoint))
+        @content
+
+
+
+/// Outputs minimum width (breakpoint) override definitions.
+///
+/// @param {string} $property-map
+///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
+@mixin up-prop($property-map...)
+    @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
+        @media (min-width: $breakpoint-value)
+            @each $property-name, $property-values in $property-map
+                #{$property-name}: map.get($property-values, $breakpoint-key)
+
+
+
+/// Rounds a number down, to three decimal places.
+/// Hat-tip https://gist.github.com/terkel/4373420
+///
+/// @param {number} $number
+///     The number to round down, e.g. 15.2656.
+/// @return {number}
+///     $number to three decimal places (rounded down), e.g. 15.265
+@function decimal-floor($number)
+    @if meta.type-of($number) != number
+        @warn "#{$number} is not a number."
+        @return $number
+
+    $precision: 1000
+    @return calc(math.floor($number * $precision) / $precision)

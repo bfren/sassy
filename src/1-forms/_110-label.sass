@@ -1,0 +1,21 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Form: labels and help text
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Label and help text
+
+    @include make.single("form-label")
+        display: inline-block
+        margin-bottom: $sassy-margin-unit * 2
+
+    @include make.single("form-text")
+        color: var(--sassy-form-text-colour)
+        display: block
+        font-size: 0.875em
+        margin-top: $sassy-margin-unit

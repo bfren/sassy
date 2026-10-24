@@ -1,0 +1,45 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Rounded corners
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Rounded corners: default
+
+    @include make.responsive("rounded", ())
+        border-radius: var(--sassy-radius)
+
+    @include make.responsive("rounded-top", ())
+        border-top-left-radius: var(--sassy-radius)
+        border-top-right-radius: var(--sassy-radius)
+
+    @include make.responsive("rounded-end", ())
+        border-top-right-radius: var(--sassy-radius)
+        border-bottom-right-radius: var(--sassy-radius)
+
+    @include make.responsive("rounded-bottom", ())
+        border-bottom-right-radius: var(--sassy-radius)
+        border-bottom-left-radius: var(--sassy-radius)
+
+    @include make.responsive("rounded-start", ())
+        border-top-left-radius: var(--sassy-radius)
+        border-bottom-left-radius: var(--sassy-radius)
+
+
+    // Rounded corners: sized
+
+    @include make.responsive("rounded", $sassy-rounded) using ($value)
+        border-radius: $value
+
+
+    // Special cases
+
+    @include make.responsive("rounded-circle", ())
+        border-radius: 50%
+
+    @include make.responsive("rounded-pill", ())
+        border-radius: 50rem

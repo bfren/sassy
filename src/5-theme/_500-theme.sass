@@ -1,0 +1,32 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Theme: text, background, border and shadow
+//  =================================================================
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Theme: Text
+
+    @include make.responsive("c", $sassy-theme) using ($value)
+        color: $value
+
+
+    // Theme: Background
+
+    @include make.responsive("bg", $sassy-theme) using ($value)
+        background-color: $value
+
+
+    // Theme: Border
+
+    @include make.responsive("border", $sassy-theme) using ($value)
+        border-color: $value
+
+
+    // Theme: Shadow
+
+    @include make.responsive("shadow", $sassy-theme-shadow) using ($value)
+        box-shadow: $value
