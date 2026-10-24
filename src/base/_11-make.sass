@@ -71,13 +71,30 @@ $-pass: null
 
 
 
+/// Returns a namespaced placeholder / class name built from $bf-prefix and $bf-separator,
+/// for use inside the framework instead of hard-coding the prefix,
+/// e.g. `@extend %#{make.name("mt", 0)}` gives %bf-mt-0 by default.
+///
+/// @param {string} $parts...
+///     Parts of the name, e.g. "wrap", "md".
+/// @return {string}
+///     Namespaced name, without the leading % or dot.
+@function name($parts...)
+    @return -get-class-name(join-values($parts))
+
+
+
 /// Creates a namespaced class name - for example 'fred' becomes 'bf-fred'.
+/// With an empty $bf-prefix the class name is returned unchanged.
 ///
 /// @param {string} $class
 ///     Class name.
 /// @return {string}
 ///     Namespaced class name.
 @function -get-class-name($class)
+    @if $bf-prefix == ""
+        @return $class
+
     // don't add the prefix if it already has been added - used during make.responsive recursion
     $prefix: $bf-prefix + $bf-separator
     @if string.slice($class, 1, string.length($prefix)) == $prefix

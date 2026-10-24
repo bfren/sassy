@@ -149,9 +149,9 @@ $bf-p-loop: (inherit: inherit)
     // Wrap classes (extend-only, so outputting them on every pass adds nothing)
 
     .wrap
-        @extend %bf-wrap
+        @extend %#{make.name("wrap")}
         @each $breakpoint-key in map.keys($bf-breakpoints)
-            @extend %#{"bf-wrap-" + $breakpoint-key}
+            @extend %#{make.name("wrap", $breakpoint-key)}
 
     .wrap-fluid
-        @extend %bf-wrap
+        @extend %#{make.name("wrap")}
