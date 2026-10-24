@@ -4,7 +4,7 @@
 @use "30-rounded-variables" as *;
 
 // Form controls read everything from custom properties, so themes can change
-// them at runtime. Colours are space-separated R G B values, as elsewhere.
+// them at runtime. Colours accept any CSS colour value.
 :root {
     --sassy-input-font-size: var(--sassy-font-size-base);
     --sassy-input-line-height: var(--sassy-line-height-base);
@@ -14,7 +14,7 @@
     --sassy-input-radius: var(--sassy-radius);
 
     --sassy-input-colour: #{colour("grey", 800)};
-    --sassy-input-bg: 255 255 255;
+    --sassy-input-bg: #fff;
     --sassy-input-border-colour: #{colour("grey", 300)};
     --sassy-input-placeholder-colour: #{colour("grey", 500)};
     --sassy-input-disabled-bg: #{colour("grey", 100)};
@@ -26,7 +26,7 @@
     --sassy-input-valid-colour: var(--sassy-theme-ok);
 
     --sassy-check-checked-colour: var(--sassy-theme-primary);
-    --sassy-check-mark-colour: 255 255 255;
+    --sassy-check-mark-colour: #fff;
     --sassy-check-radius: 0.25em;
     --sassy-switch-knob-colour: var(--sassy-input-border-colour);
 

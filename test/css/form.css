@@ -1,5 +1,5 @@
 /*!
- *  Sassy v0.2.0 ~ https://github.com/bfren/sassy
+ *  Sassy v0.3.0 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
 /*!
  *  Normalize.css ~  https://github.com/csstools/normalize.css
@@ -228,12 +228,12 @@
 }
 
 /*
-    Colour map created from TailwindCSS v3.0.0 (hex values changed to rgb)
-    https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js
-    See https://tailwindcss.com/docs/customizing-colors
+    Colour map from Tailwind CSS v4.3.3 (with gray renamed grey)
+    https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/packages/tailwindcss/theme.css
+    See https://tailwindcss.com/docs/colors
 
     Licensed under MIT
-    https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/LICENSE
+    https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/LICENSE
  */
 :root {
   --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
@@ -242,7 +242,7 @@
   --sassy-font-size-base: 1rem;
   --sassy-font-weight-base: 400;
   --sassy-line-height-base: 1.5;
-  --sassy-body-colour: 31 41 55;
+  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
   --sassy-body-font-family: var(--sassy-font-family-sans);
   --sassy-body-font-size: var(--sassy-font-size-base);
   --sassy-body-font-weight: var(--sassy-font-weight-base);
@@ -254,18 +254,18 @@
 }
 
 :root {
-  --sassy-shadow-colour: 0 0 0;
+  --sassy-shadow-colour: #000;
 }
 
 :root {
-  --sassy-theme-primary: 2 132 199;
-  --sassy-theme-secondary: 194 65 12;
-  --sassy-theme-ok: 22 163 74;
-  --sassy-theme-info: 186 230 253;
-  --sassy-theme-warn: 251 191 36;
-  --sassy-theme-error: 220 38 38;
-  --sassy-theme-grey-light: 209 213 219;
-  --sassy-theme-grey-dark: 75 85 99;
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
 }
 
 :root {
@@ -279,21 +279,21 @@
   --sassy-input-padding-x: 0.75rem;
   --sassy-input-border-width: 1px;
   --sassy-input-radius: var(--sassy-radius);
-  --sassy-input-colour: 31 41 55;
-  --sassy-input-bg: 255 255 255;
-  --sassy-input-border-colour: 209 213 219;
-  --sassy-input-placeholder-colour: 107 114 128;
-  --sassy-input-disabled-bg: 243 244 246;
-  --sassy-input-readonly-bg: 249 250 251;
+  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-input-bg: #fff;
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
   --sassy-input-focus-colour: var(--sassy-theme-primary);
   --sassy-input-focus-ring: 0.25rem;
   --sassy-input-invalid-colour: var(--sassy-theme-error);
   --sassy-input-valid-colour: var(--sassy-theme-ok);
   --sassy-check-checked-colour: var(--sassy-theme-primary);
-  --sassy-check-mark-colour: 255 255 255;
+  --sassy-check-mark-colour: #fff;
   --sassy-check-radius: 0.25em;
   --sassy-switch-knob-colour: var(--sassy-input-border-colour);
-  --sassy-form-text-colour: 107 114 128;
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
 }
 
 label {
@@ -302,7 +302,7 @@ label {
 }
 
 .help {
-  color: rgb(var(--sassy-form-text-colour));
+  color: var(--sassy-form-text-colour);
   display: block;
   font-size: 0.875em;
   margin-top: 0.25rem;
@@ -311,11 +311,11 @@ label {
 .control, .control-sm, .control-lg {
   appearance: none;
   background-clip: padding-box;
-  background-color: rgb(var(--sassy-input-bg));
-  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
+  background-color: var(--sassy-input-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
   border-radius: var(--sassy-input-radius);
   box-sizing: border-box;
-  color: rgb(var(--sassy-input-colour));
+  color: var(--sassy-input-colour);
   display: block;
   font-family: inherit;
   font-size: var(--sassy-input-font-size);
@@ -331,28 +331,28 @@ label {
   }
 }
 .control::placeholder, .control-sm::placeholder, .control-lg::placeholder {
-  color: rgb(var(--sassy-input-placeholder-colour));
+  color: var(--sassy-input-placeholder-colour);
   opacity: 1;
 }
 .control:focus-visible, .control-sm:focus-visible, .control-lg:focus-visible {
-  border-color: rgb(var(--sassy-input-focus-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
+  border-color: var(--sassy-input-focus-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
   outline: 0;
 }
 [readonly].control, [readonly].control-sm, [readonly].control-lg {
-  background-color: rgb(var(--sassy-input-readonly-bg));
+  background-color: var(--sassy-input-readonly-bg);
 }
 .control:disabled, .control-sm:disabled, .control-lg:disabled {
-  background-color: rgb(var(--sassy-input-disabled-bg));
+  background-color: var(--sassy-input-disabled-bg);
   cursor: not-allowed;
   opacity: 1;
 }
 .control:user-invalid, .control-sm:user-invalid, .control-lg:user-invalid, [aria-invalid=true].control, [aria-invalid=true].control-sm, [aria-invalid=true].control-lg {
-  border-color: rgb(var(--sassy-input-invalid-colour));
+  border-color: var(--sassy-input-invalid-colour);
 }
 .control:user-invalid:focus-visible, .control-sm:user-invalid:focus-visible, .control-lg:user-invalid:focus-visible, [aria-invalid=true].control:focus-visible, [aria-invalid=true].control-sm:focus-visible, [aria-invalid=true].control-lg:focus-visible {
-  border-color: rgb(var(--sassy-input-invalid-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
 .control:is(textarea), .control-sm:is(textarea), .control-lg:is(textarea) {
@@ -392,11 +392,11 @@ label {
 .select-sm, .select-lg, .select {
   appearance: none;
   background-clip: padding-box;
-  background-color: rgb(var(--sassy-input-bg));
-  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
+  background-color: var(--sassy-input-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
   border-radius: var(--sassy-input-radius);
   box-sizing: border-box;
-  color: rgb(var(--sassy-input-colour));
+  color: var(--sassy-input-colour);
   display: block;
   font-family: inherit;
   font-size: var(--sassy-input-font-size);
@@ -412,32 +412,32 @@ label {
   }
 }
 .select-sm::placeholder, .select-lg::placeholder, .select::placeholder {
-  color: rgb(var(--sassy-input-placeholder-colour));
+  color: var(--sassy-input-placeholder-colour);
   opacity: 1;
 }
 .select-sm:focus-visible, .select-lg:focus-visible, .select:focus-visible {
-  border-color: rgb(var(--sassy-input-focus-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
+  border-color: var(--sassy-input-focus-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
   outline: 0;
 }
 [readonly].select-sm, [readonly].select-lg, [readonly].select {
-  background-color: rgb(var(--sassy-input-readonly-bg));
+  background-color: var(--sassy-input-readonly-bg);
 }
 .select-sm:disabled, .select-lg:disabled, .select:disabled {
-  background-color: rgb(var(--sassy-input-disabled-bg));
+  background-color: var(--sassy-input-disabled-bg);
   cursor: not-allowed;
   opacity: 1;
 }
 .select-sm:user-invalid, .select-lg:user-invalid, .select:user-invalid, [aria-invalid=true].select-sm, [aria-invalid=true].select-lg, [aria-invalid=true].select {
-  border-color: rgb(var(--sassy-input-invalid-colour));
+  border-color: var(--sassy-input-invalid-colour);
 }
 .select-sm:user-invalid:focus-visible, .select-lg:user-invalid:focus-visible, .select:user-invalid:focus-visible, [aria-invalid=true].select-sm:focus-visible, [aria-invalid=true].select-lg:focus-visible, [aria-invalid=true].select:focus-visible {
-  border-color: rgb(var(--sassy-input-invalid-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
 .select-sm, .select-lg, .select {
-  background-image: linear-gradient(45deg, transparent 40%, rgb(var(--sassy-input-colour)) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, rgb(var(--sassy-input-colour)) 40% 60%, transparent 60%);
+  background-image: linear-gradient(45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%);
   background-position: calc(100% - var(--sassy-input-padding-x) - 0.8em) 50%, calc(100% - var(--sassy-input-padding-x) - 0.4em) 50%;
   background-repeat: no-repeat;
   background-size: 0.4em 0.4em;
@@ -480,8 +480,8 @@ label {
 
 .check-input {
   appearance: none;
-  background-color: rgb(var(--sassy-input-bg));
-  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
+  background-color: var(--sassy-input-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
   box-sizing: border-box;
   flex-shrink: 0;
   font-size: inherit;
@@ -507,12 +507,12 @@ label {
   }
 }
 .check-input:checked {
-  background-color: rgb(var(--sassy-check-checked-colour));
-  border-color: rgb(var(--sassy-check-checked-colour));
+  background-color: var(--sassy-check-checked-colour);
+  border-color: var(--sassy-check-checked-colour);
 }
 .check-input:focus-visible {
-  border-color: rgb(var(--sassy-input-focus-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
+  border-color: var(--sassy-input-focus-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
   outline: 0;
 }
 .check-input:disabled {
@@ -520,15 +520,15 @@ label {
   opacity: 0.5;
 }
 .check-input:user-invalid, [aria-invalid=true].check-input {
-  border-color: rgb(var(--sassy-input-invalid-colour));
+  border-color: var(--sassy-input-invalid-colour);
 }
 .check-input:user-invalid:focus-visible, [aria-invalid=true].check-input:focus-visible {
-  border-color: rgb(var(--sassy-input-invalid-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
 .check-input::before {
-  background-color: rgb(var(--sassy-check-mark-colour));
+  background-color: var(--sassy-check-mark-colour);
   transform: scale(0);
 }
 .check-input:checked::before {
@@ -542,8 +542,8 @@ label {
   mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
 }
 [type=checkbox].check-input:indeterminate {
-  background-color: rgb(var(--sassy-check-checked-colour));
-  border-color: rgb(var(--sassy-check-checked-colour));
+  background-color: var(--sassy-check-checked-colour);
+  border-color: var(--sassy-check-checked-colour);
 }
 [type=checkbox].check-input:indeterminate::before {
   -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e") center/100% no-repeat;
@@ -563,13 +563,13 @@ label {
   opacity: 0.5;
 }
 :user-invalid ~ .check-label, [aria-invalid=true] ~ .check-label {
-  color: rgb(var(--sassy-input-invalid-colour));
+  color: var(--sassy-input-invalid-colour);
 }
 
 .switch {
   appearance: none;
-  background-color: rgb(var(--sassy-input-bg));
-  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
+  background-color: var(--sassy-input-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
   box-sizing: border-box;
   flex-shrink: 0;
   font-size: inherit;
@@ -595,12 +595,12 @@ label {
   }
 }
 .switch:checked {
-  background-color: rgb(var(--sassy-check-checked-colour));
-  border-color: rgb(var(--sassy-check-checked-colour));
+  background-color: var(--sassy-check-checked-colour);
+  border-color: var(--sassy-check-checked-colour);
 }
 .switch:focus-visible {
-  border-color: rgb(var(--sassy-input-focus-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
+  border-color: var(--sassy-input-focus-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
   outline: 0;
 }
 .switch:disabled {
@@ -608,11 +608,11 @@ label {
   opacity: 0.5;
 }
 .switch:user-invalid, [aria-invalid=true].switch {
-  border-color: rgb(var(--sassy-input-invalid-colour));
+  border-color: var(--sassy-input-invalid-colour);
 }
 .switch:user-invalid:focus-visible, [aria-invalid=true].switch:focus-visible {
-  border-color: rgb(var(--sassy-input-invalid-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
 .switch {
@@ -621,36 +621,36 @@ label {
 }
 .switch::before {
   aspect-ratio: 1;
-  background-color: rgb(var(--sassy-switch-knob-colour));
+  background-color: var(--sassy-switch-knob-colour);
   border-radius: 50%;
   inset: 0.125em auto auto 0.125em;
   height: calc(100% - 0.25em);
 }
 .switch:checked::before {
-  background-color: rgb(var(--sassy-check-mark-colour));
+  background-color: var(--sassy-check-mark-colour);
   transform: translateX(1em);
 }
 
 .invalid {
-  border-color: rgb(var(--sassy-input-invalid-colour));
+  border-color: var(--sassy-input-invalid-colour);
 }
 .invalid:focus-visible {
-  border-color: rgb(var(--sassy-input-invalid-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
 
 .valid {
-  border-color: rgb(var(--sassy-input-valid-colour));
+  border-color: var(--sassy-input-valid-colour);
 }
 .valid:focus-visible {
-  border-color: rgb(var(--sassy-input-valid-colour));
-  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-valid-colour) / 0.25);
+  border-color: var(--sassy-input-valid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-valid-colour) 25%, transparent);
   outline: 0;
 }
 
 .feedback-invalid {
-  color: rgb(var(--sassy-input-invalid-colour));
+  color: var(--sassy-input-invalid-colour);
   font-size: 0.875em;
   margin-top: 0.25rem;
   display: none;
@@ -660,14 +660,14 @@ label {
 }
 
 .feedback-valid {
-  color: rgb(var(--sassy-input-valid-colour));
+  color: var(--sassy-input-valid-colour);
   font-size: 0.875em;
   margin-top: 0.25rem;
   display: block;
 }
 
 body {
-  color: rgb(var(--sassy-body-colour));
+  color: var(--sassy-body-colour);
   font-family: var(--sassy-body-font-family);
   font-size: var(--sassy-body-font-size);
   font-weight: var(--sassy-body-font-weight);
@@ -777,7 +777,5 @@ h1 {
 }
 
 :root {
-  --sassy-theme-primary: 45 212 191;
+  --sassy-theme-primary: oklch(77.7% 0.152 181.912deg);
 }
-
-/*# sourceMappingURL=form.css.map */

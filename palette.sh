@@ -5,6 +5,9 @@
 # Usage: ./palette.sh
 #   src/base/_21-colour-variables.scss -> docs/palette.svg
 #   src/base/_40-theme-variables.scss  -> docs/theme.svg
+#
+# Colours are oklch(). Each swatch is filled with the nearest sRGB hex colour, for any renderer,
+# and styled with the exact oklch() colour, which wide-gamut screens show more vividly.
 
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -17,7 +20,31 @@ mkdir -p docs
 
 # POSIX awk only, so it runs with the macOS, GNU and busybox versions.
 awk -v palette_out="$palette_out" -v theme_out="$theme_out" '
-function hex(r, g, b) { return sprintf("#%02x%02x%02x", r, g, b) }
+function trim(s) { sub(/^[ \t]+/, "", s); sub(/[ \t\r]+$/, "", s); return s }
+function clamp(x) { return x < 0 ? 0 : (x > 1 ? 1 : x) }
+function gamma(c) { return c <= 0.0031308 ? 12.92 * c : 1.055 * exp(log(c) / 2.4) - 0.055 }
+
+# "oklch(58.8% 0.158 241.966)" -> "#0084d1", clipping to sRGB as browsers do on sRGB screens
+function oklch_hex(v,    p, L, C, h, a, b, l, m, s, r, g, bl) {
+    sub(/^oklch\(/, "", v); sub(/\).*$/, "", v)
+    split(v, p, " ")
+    L = p[1]; sub(/%$/, "", L); L = L / 100
+    C = p[2] + 0
+    h = p[3]; sub(/deg$/, "", h); if (h == "none") h = 0
+    h = h * 3.141592653589793 / 180
+    a = C * cos(h); b = C * sin(h)
+    l = L + 0.3963377774 * a + 0.2158037573 * b; l = l * l * l
+    m = L - 0.1055613458 * a - 0.0638541728 * b; m = m * m * m
+    s = L - 0.0894841775 * a - 1.2914855480 * b; s = s * s * s
+    r  = clamp(+4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s)
+    g  = clamp(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s)
+    bl = clamp(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s)
+    return sprintf("#%02x%02x%02x", int(gamma(r) * 255 + 0.5), int(gamma(g) * 255 + 0.5), int(gamma(bl) * 255 + 0.5))
+}
+
+# fill attribute (works everywhere) for any CSS colour value
+function fill_of(v) { return v ~ /^oklch\(/ ? oklch_hex(v) : v }
+
 function font() { return "font-family=\"system-ui, -apple-system, Segoe UI, Roboto, sans-serif\" font-size=\"12\"" }
 
 function svg_open(file, width, height, title) {
@@ -27,8 +54,10 @@ function svg_open(file, width, height, title) {
     printf "  <g %s fill=\"#374151\">\n", font() > file
 }
 
-function swatch(file, x, y, w, h, fill, tip) {
-    printf "    <rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" rx=\"4\" fill=\"%s\" stroke=\"#000000\" stroke-opacity=\"0.08\"><title>%s</title></rect>\n", x, y, w, h, fill, tip > file
+function swatch(file, x, y, w, h, value, tip,    f) {
+    f = fill_of(value)
+    printf "    <rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" rx=\"4\" fill=\"%s\"%s stroke=\"#000000\" stroke-opacity=\"0.08\"><title>%s</title></rect>\n", \
+        x, y, w, h, f, (f == value ? "" : " style=\"fill: " value "\""), tip > file
 }
 
 function svg_close(file) { printf "  </g>\n</svg>\n" > file }
@@ -44,14 +73,14 @@ FNR == NR && /^[ \t]*"[a-z]+"[ \t]*:[ \t]*\(/ {
     next
 }
 
-# shade, e.g.           50: 248 250 252,
-FNR == NR && n > 0 && /^[ \t]*[0-9]+[ \t]*:[ \t]*[0-9]+[ \t]+[0-9]+[ \t]+[0-9]+/ {
+# shade, e.g.           50: oklch(98.4% 0.003 247.858),
+FNR == NR && n > 0 && /^[ \t]*[0-9]+[ \t]*:[ \t]*oklch\(/ {
     line = $0
-    gsub(/[:,]/, " ", line)
-    split(line, f, " ")
+    s = line; sub(/^[ \t]*/, "", s); sub(/[ \t]*:.*$/, "", s)
+    v = line; sub(/^[^:]*:[ \t]*/, "", v); sub(/\).*$/, ")", v)
     i = ++count[colours[n]]
-    shade[colours[n], i] = f[1]
-    rgb[colours[n], f[1]] = f[2] " " f[3] " " f[4]
+    shade[colours[n], i] = s
+    value[colours[n], s] = v
     if (i > shades) { shades = i; for (j = 1; j <= i; j++) header[j] = shade[colours[n], j] }
     next
 }
@@ -61,22 +90,22 @@ FNR == NR { next }
 # ---- second file: the theme -----------------------------------------------
 
 # e.g.    --sassy-theme-primary: #{colour("sky", 600)};
-# or      --sassy-theme-primary: 13 148 136;
+# or      --sassy-theme-primary: #0d9488;   (any CSS colour)
 /--sassy-theme-[a-z-]+:/ {
     line = $0
     name = line; sub(/^.*--sassy-theme-/, "", name); sub(/:.*$/, "", name)
-    value = line; sub(/^[^:]*:[ \t]*/, "", value); sub(/;.*$/, "", value)
+    v = line; sub(/^[^:]*:[ \t]*/, "", v); sub(/;.*$/, "", v); v = trim(v)
 
-    if (value ~ /colour\(/) {
-        c = value; sub(/^.*colour\([ \t]*"/, "", c); sub(/".*$/, "", c)
-        s = value; sub(/^.*,[ \t]*/, "", s); sub(/[^0-9].*$/, "", s)
+    if (v ~ /colour\(/) {
+        c = v; sub(/^.*colour\([ \t]*"/, "", c); sub(/".*$/, "", c)
+        s = v; sub(/^.*,[ \t]*/, "", s); sub(/[^0-9].*$/, "", s)
         source[++t] = c "-" s
-        theme_rgb[t] = rgb[c, s]
-        if (theme_rgb[t] == "") { printf "palette.sh: unknown colour %s-%s for %s\n", c, s, name > "/dev/stderr"; exit 1 }
+        theme_value[t] = value[c, s]
+        if (theme_value[t] == "") { printf "palette.sh: unknown colour %s-%s for %s\n", c, s, name > "/dev/stderr"; exit 1 }
     }
     else {
-        source[++t] = value
-        theme_rgb[t] = value
+        source[++t] = v
+        theme_value[t] = v
     }
     theme_name[t] = name
 }
@@ -97,8 +126,7 @@ END {
         printf "    <text x=\"%d\" y=\"%d\">%s</text>\n", pad, y + h / 2 + 4, c > palette_out
         for (j = 1; j <= count[c]; j++) {
             s = shade[c, j]
-            split(rgb[c, s], v, " ")
-            swatch(palette_out, pad + label + (j - 1) * (cell + gap), y, cell, h, hex(v[1], v[2], v[3]), c "-" s ": " hex(v[1], v[2], v[3]) " (" rgb[c, s] ")")
+            swatch(palette_out, pad + label + (j - 1) * (cell + gap), y, cell, h, value[c, s], c "-" s ": " value[c, s] " (sRGB " oklch_hex(value[c, s]) ")")
         }
     }
     svg_close(palette_out)
@@ -111,8 +139,7 @@ END {
 
     for (i = 1; i <= t; i++) {
         x = pad + (i - 1) * (cell + gap)
-        split(theme_rgb[i], v, " ")
-        swatch(theme_out, x, pad, cell, h, hex(v[1], v[2], v[3]), theme_name[i] ": " source[i] " " hex(v[1], v[2], v[3]) " (" theme_rgb[i] ")")
+        swatch(theme_out, x, pad, cell, h, theme_value[i], theme_name[i] ": " source[i] " " theme_value[i])
         printf "    <text x=\"%d\" y=\"%d\" text-anchor=\"middle\" font-weight=\"600\">%s</text>\n", x + cell / 2, pad + h + 18, theme_name[i] > theme_out
         printf "    <text x=\"%d\" y=\"%d\" text-anchor=\"middle\" fill=\"#6b7280\" font-size=\"11\">%s</text>\n", x + cell / 2, pad + h + 33, source[i] > theme_out
     }

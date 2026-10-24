@@ -33,7 +33,7 @@
         @include form.check()
 
         &::before
-            background-color: rgb(var(--sassy-check-mark-colour))
+            background-color: var(--sassy-check-mark-colour)
             transform: scale(0)
 
         &:checked::before
@@ -66,4 +66,4 @@
 
         :user-invalid ~ &,
         [aria-invalid="true"] ~ &
-            color: rgb(var(--sassy-input-invalid-colour))
+            color: var(--sassy-input-invalid-colour)

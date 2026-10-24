@@ -1,5 +1,5 @@
 /*!
- *  Sassy v0.2.0 ~ https://github.com/bfren/sassy
+ *  Sassy v0.3.0 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
 /*!
  *  Normalize.css ~  https://github.com/csstools/normalize.css
@@ -228,12 +228,12 @@
 }
 
 /*
-    Colour map created from TailwindCSS v3.0.0 (hex values changed to rgb)
-    https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js
-    See https://tailwindcss.com/docs/customizing-colors
+    Colour map from Tailwind CSS v4.3.3 (with gray renamed grey)
+    https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/packages/tailwindcss/theme.css
+    See https://tailwindcss.com/docs/colors
 
     Licensed under MIT
-    https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/LICENSE
+    https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/LICENSE
  */
 :root {
   --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
@@ -242,7 +242,7 @@
   --sassy-font-size-base: 1rem;
   --sassy-font-weight-base: 400;
   --sassy-line-height-base: 1.5;
-  --sassy-body-colour: 31 41 55;
+  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
   --sassy-body-font-family: var(--sassy-font-family-sans);
   --sassy-body-font-size: var(--sassy-font-size-base);
   --sassy-body-font-weight: var(--sassy-font-weight-base);
@@ -254,18 +254,18 @@
 }
 
 :root {
-  --sassy-shadow-colour: 0 0 0;
+  --sassy-shadow-colour: #000;
 }
 
 :root {
-  --sassy-theme-primary: 2 132 199;
-  --sassy-theme-secondary: 194 65 12;
-  --sassy-theme-ok: 22 163 74;
-  --sassy-theme-info: 186 230 253;
-  --sassy-theme-warn: 251 191 36;
-  --sassy-theme-error: 220 38 38;
-  --sassy-theme-grey-light: 209 213 219;
-  --sassy-theme-grey-dark: 75 85 99;
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
 }
 
 :root {
@@ -279,21 +279,21 @@
   --sassy-input-padding-x: 0.75rem;
   --sassy-input-border-width: 1px;
   --sassy-input-radius: var(--sassy-radius);
-  --sassy-input-colour: 31 41 55;
-  --sassy-input-bg: 255 255 255;
-  --sassy-input-border-colour: 209 213 219;
-  --sassy-input-placeholder-colour: 107 114 128;
-  --sassy-input-disabled-bg: 243 244 246;
-  --sassy-input-readonly-bg: 249 250 251;
+  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-input-bg: #fff;
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
   --sassy-input-focus-colour: var(--sassy-theme-primary);
   --sassy-input-focus-ring: 0.25rem;
   --sassy-input-invalid-colour: var(--sassy-theme-error);
   --sassy-input-valid-colour: var(--sassy-theme-ok);
   --sassy-check-checked-colour: var(--sassy-theme-primary);
-  --sassy-check-mark-colour: 255 255 255;
+  --sassy-check-mark-colour: #fff;
   --sassy-check-radius: 0.25em;
   --sassy-switch-knob-colour: var(--sassy-input-border-colour);
-  --sassy-form-text-colour: 107 114 128;
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
 }
 
 div.cols,
@@ -322,7 +322,7 @@ div.cols-reverse div {
 }
 
 body {
-  color: rgb(var(--sassy-body-colour));
+  color: var(--sassy-body-colour);
   font-family: var(--sassy-body-font-family);
   font-size: var(--sassy-body-font-size);
   font-weight: var(--sassy-body-font-weight);
@@ -458,11 +458,11 @@ div.test {
 }
 
 main {
-  background-color: rgb(239, 68, 68);
+  background-color: oklch(63.7% 0.237 25.331deg);
 }
 
 div.test {
-  background-color: rgb(34, 197, 94);
+  background-color: oklch(72.3% 0.219 149.579deg);
 }
 
 header {
@@ -500,11 +500,11 @@ div.test span {
 }
 
 div.shadow {
-  border-color: rgb(156, 163, 175);
+  border-color: oklch(70.7% 0.022 261.325deg);
 }
 
 div.test span {
-  border-color: rgb(251, 146, 60);
+  border-color: oklch(75% 0.183 55.934deg);
 }
 
 main, div.test {
@@ -512,15 +512,15 @@ main, div.test {
 }
 
 div.shadow {
-  box-shadow: 0 0.125rem 0.25rem rgb(var(--sassy-shadow-colour) / 0.075);
+  box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour) 7.5%, transparent);
 }
 
 div.shadow {
-  color: rgb(var(--sassy-theme-primary));
+  color: var(--sassy-theme-primary);
 }
 
 div.footer-gone {
-  color: rgb(var(--sassy-theme-error));
+  color: var(--sassy-theme-error);
 }
 
 @media (min-width: 576px) {
@@ -535,7 +535,7 @@ div.footer-gone {
 }
 @media (min-width: 576px) {
   div.shadow {
-    box-shadow: 0 0.5rem 1rem rgb(var(--sassy-shadow-colour) / 0.15);
+    box-shadow: 0 0.5rem 1rem color-mix(in oklab, var(--sassy-shadow-colour) 15%, transparent);
   }
 }
 @media (min-width: 768px) {
@@ -568,7 +568,7 @@ div.footer-gone {
 }
 @media (min-width: 768px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem rgb(20 83 45 / 0.175);
+    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(39.3% 0.095 152.535deg) 17.5%, transparent);
   }
 }
 @media (min-width: 992px) {
@@ -608,10 +608,10 @@ div.footer-gone {
 }
 @media (min-width: 992px) {
   div.text > div:last-child {
-    background-color: rgb(231, 229, 228);
+    background-color: oklch(92.3% 0.003 48.717deg);
   }
   main {
-    background-color: rgb(165, 243, 252);
+    background-color: oklch(91.7% 0.08 205.041deg);
   }
 }
 @media (min-width: 992px) {
@@ -629,7 +629,7 @@ div.footer-gone {
 }
 @media (min-width: 992px) {
   div.shadow {
-    box-shadow: 0 0.5rem 1rem rgb(3 105 161 / 0.15);
+    box-shadow: 0 0.5rem 1rem color-mix(in oklab, oklch(50% 0.134 242.749deg) 15%, transparent);
   }
 }
 @media (min-width: 1200px) {
@@ -663,7 +663,7 @@ div.footer-gone {
 }
 @media (min-width: 1200px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem rgb(217 70 239 / 0.175);
+    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(66.7% 0.295 322.15deg) 17.5%, transparent);
   }
 }
 @media (min-width: 1400px) {
@@ -692,7 +692,7 @@ div.footer-gone {
   }
 }
 :root {
-  --sassy-theme-primary: 234 88 12;
+  --sassy-theme-primary: oklch(64.6% 0.222 41.116deg);
 }
 
 @media (min-width: 768px) {
@@ -703,7 +703,7 @@ div.footer-gone {
 @media (min-width: 1600px) {
   body {
     font-style: italic;
-    color: 254 240 138;
+    color: oklch(94.5% 0.129 101.54deg);
   }
 }
 
@@ -722,5 +722,3 @@ div.footer-gone {
     width: 100%;
   }
 }
-
-/*# sourceMappingURL=test.css.map */
