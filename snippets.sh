@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-# Generates a VS Code snippets file listing every Sassy placeholder, so that
+# Generates a VS Code snippets file listing Sassy's placeholders, so that
 # `@extend %bf-…` autocompletes. Names come from the full build, where every
 # %bf-* placeholder has a matching .bf-* class.
+#
+# Breakpoint variants (%bf-p-2-md and so on) are left out: they would be most of the
+# file and clutter the suggestions, and they follow the same pattern everywhere.
 #
 # Usage: ./snippets.sh [input.css] [output.code-snippets]
 #   defaults: dist/full.css -> dist/sassy.code-snippets
@@ -46,7 +49,6 @@ function flush(   parts, count, i, s, start, context, rest, name, suffix, d) {
         # a breakpoint variant only exists inside its media query, so label the whole
         # placeholder with it; otherwise show the media block inline (e.g. reduced motion)
         if (media != "" && (name in has_base)) d = "@media " media " { " d " }"
-        else if (media != "") at[name] = media
         desc[name] = trim(desc[name] " " d)
     }
 }
@@ -95,15 +97,16 @@ BEGIN {
 }
 
 END {
+    # keep only placeholders with a base definition - breakpoint variants only exist inside @media
+    for (i = 1; i <= n; i++) if (order[i] in has_base) keep[++k] = order[i]
+
     print "{"
-    for (i = 1; i <= n; i++) {
-        name = order[i]
-        d = desc[name]
-        if (name in at) d = d " @media " at[name]
+    for (i = 1; i <= k; i++) {
+        name = keep[i]
         printf "  \"%%%s\": { \"scope\": \"sass,scss\", \"prefix\": \"%s\", \"body\": \"%s\", \"description\": \"%s\" }%s\n", \
-            name, name, name, esc(d), (i < n ? "," : "")
+            name, name, name, esc(desc[name]), (i < k ? "," : "")
     }
     print "}"
-    printf "snippets.sh: %d placeholders written\n", n > "/dev/stderr"
+    printf "snippets.sh: %d placeholders written (%d breakpoint variants left out)\n", k, n - k > "/dev/stderr"
 }
 ' "$in" > "$out"
