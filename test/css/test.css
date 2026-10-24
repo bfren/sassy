@@ -242,7 +242,7 @@
   --sassy-font-size-base: 1rem;
   --sassy-font-weight-base: 400;
   --sassy-line-height-base: 1.5;
-  --sassy-body-colour: oklch(27.8% 0.033 256.848);
+  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
   --sassy-body-font-family: var(--sassy-font-family-sans);
   --sassy-body-font-size: var(--sassy-font-size-base);
   --sassy-body-font-weight: var(--sassy-font-weight-base);
@@ -258,14 +258,14 @@
 }
 
 :root {
-  --sassy-theme-primary: oklch(58.8% 0.158 241.966);
-  --sassy-theme-secondary: oklch(55.3% 0.195 38.402);
-  --sassy-theme-ok: oklch(62.7% 0.194 149.214);
-  --sassy-theme-info: oklch(90.1% 0.058 230.902);
-  --sassy-theme-warn: oklch(82.8% 0.189 84.429);
-  --sassy-theme-error: oklch(57.7% 0.245 27.325);
-  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338);
-  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802);
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
 }
 
 :root {
@@ -279,12 +279,12 @@
   --sassy-input-padding-x: 0.75rem;
   --sassy-input-border-width: 1px;
   --sassy-input-radius: var(--sassy-radius);
-  --sassy-input-colour: oklch(27.8% 0.033 256.848);
+  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
   --sassy-input-bg: #fff;
-  --sassy-input-border-colour: oklch(87.2% 0.01 258.338);
-  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364);
-  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542);
-  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839);
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
   --sassy-input-focus-colour: var(--sassy-theme-primary);
   --sassy-input-focus-ring: 0.25rem;
   --sassy-input-invalid-colour: var(--sassy-theme-error);
@@ -293,7 +293,17 @@
   --sassy-check-mark-colour: #fff;
   --sassy-check-radius: 0.25em;
   --sassy-switch-knob-colour: var(--sassy-input-border-colour);
-  --sassy-form-text-colour: oklch(55.1% 0.027 264.364);
+  --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e2939' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-addon-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-addon-hover-bg: oklch(92.8% 0.006 264.531deg);
+  --sassy-floating-height: 3.5rem;
+  --sassy-floating-padding-y: 1rem;
+  --sassy-range-track-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-range-track-height: 0.5rem;
+  --sassy-range-thumb-colour: var(--sassy-theme-primary);
+  --sassy-range-thumb-size: 1rem;
+  --sassy-range-disabled-colour: oklch(70.7% 0.022 261.325deg);
 }
 
 div.cols,
@@ -458,11 +468,11 @@ div.test {
 }
 
 main {
-  background-color: oklch(63.7% 0.237 25.331);
+  background-color: oklch(63.7% 0.237 25.331deg);
 }
 
 div.test {
-  background-color: oklch(72.3% 0.219 149.579);
+  background-color: oklch(72.3% 0.219 149.579deg);
 }
 
 header {
@@ -500,11 +510,11 @@ div.test span {
 }
 
 div.shadow {
-  border-color: oklch(70.7% 0.022 261.325);
+  border-color: oklch(70.7% 0.022 261.325deg);
 }
 
 div.test span {
-  border-color: oklch(75% 0.183 55.934);
+  border-color: oklch(75% 0.183 55.934deg);
 }
 
 main, div.test {
@@ -568,7 +578,7 @@ div.footer-gone {
 }
 @media (min-width: 768px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(39.3% 0.095 152.535) 17.5%, transparent);
+    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(39.3% 0.095 152.535deg) 17.5%, transparent);
   }
 }
 @media (min-width: 992px) {
@@ -608,10 +618,10 @@ div.footer-gone {
 }
 @media (min-width: 992px) {
   div.text > div:last-child {
-    background-color: oklch(92.3% 0.003 48.717);
+    background-color: oklch(92.3% 0.003 48.717deg);
   }
   main {
-    background-color: oklch(91.7% 0.08 205.041);
+    background-color: oklch(91.7% 0.08 205.041deg);
   }
 }
 @media (min-width: 992px) {
@@ -629,7 +639,7 @@ div.footer-gone {
 }
 @media (min-width: 992px) {
   div.shadow {
-    box-shadow: 0 0.5rem 1rem color-mix(in oklab, oklch(50% 0.134 242.749) 15%, transparent);
+    box-shadow: 0 0.5rem 1rem color-mix(in oklab, oklch(50% 0.134 242.749deg) 15%, transparent);
   }
 }
 @media (min-width: 1200px) {
@@ -663,7 +673,7 @@ div.footer-gone {
 }
 @media (min-width: 1200px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(66.7% 0.295 322.15) 17.5%, transparent);
+    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(66.7% 0.295 322.15deg) 17.5%, transparent);
   }
 }
 @media (min-width: 1400px) {
@@ -692,7 +702,7 @@ div.footer-gone {
   }
 }
 :root {
-  --sassy-theme-primary: oklch(64.6% 0.222 41.116);
+  --sassy-theme-primary: oklch(64.6% 0.222 41.116deg);
 }
 
 @media (min-width: 768px) {
@@ -703,7 +713,7 @@ div.footer-gone {
 @media (min-width: 1600px) {
   body {
     font-style: italic;
-    color: oklch(94.5% 0.129 101.54);
+    color: oklch(94.5% 0.129 101.54deg);
   }
 }
 

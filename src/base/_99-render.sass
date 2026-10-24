@@ -14,6 +14,9 @@
 @use "54-form-check" as form-check
 @use "55-form-switch" as form-switch
 @use "56-form-validation" as form-validation
+@use "57-form-input-group" as form-input-group
+@use "58-form-floating" as form-floating
+@use "59-form-inputs" as form-inputs
 
 //  =================================================================
 //  Placeholders and classes
@@ -26,8 +29,8 @@
 //  Within each pass, modules with composite placeholders (form; grid; text,
 //  which has body and text-wrap-hover) come first so that single-purpose
 //  utilities always override them, e.g. col-4 + p-0, or body + c-red-500.
-//  The form modules stay in numeric order: validation must follow controls
-//  and checks so its state colours win.
+//  Validation is the last form module, out of numeric order, so its state
+//  colours win over every control, check and input it can apply to.
 
 @include make.passes
     @include form-label.utilities
@@ -35,6 +38,9 @@
     @include form-select.utilities
     @include form-check.utilities
     @include form-switch.utilities
+    @include form-input-group.utilities
+    @include form-floating.utilities
+    @include form-inputs.utilities
     @include form-validation.utilities
     @include grid.utilities
     @include text.utilities
