@@ -4,13 +4,11 @@
 //  Base
 //  =================================================================
 
-$sassy-version: 0.1;
-
-$sassy-debug: false !default;
 $sassy-full: false !default;
 
 $sassy-prefix: "bf" !default;
 $sassy-separator: "-" !default;
+
 $sassy-loop-max: 20 !default;
 
 $sassy-sides: (
