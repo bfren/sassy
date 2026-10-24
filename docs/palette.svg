@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="840" viewBox="0 0 700 840">
+  <title>Sassy colour palette</title>
+  <rect width="100%" height="100%" rx="8" fill="#ffffff"/>
+  <g font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="12" fill="#374151">
+    <text x="120" y="26" text-anchor="middle">50</text>
+    <text x="180" y="26" text-anchor="middle">100</text>
+    <text x="240" y="26" text-anchor="middle">200</text>
+    <text x="300" y="26" text-anchor="middle">300</text>
+    <text x="360" y="26" text-anchor="middle">400</text>
+    <text x="420" y="26" text-anchor="middle">500</text>
+    <text x="480" y="26" text-anchor="middle">600</text>
+    <text x="540" y="26" text-anchor="middle">700</text>
+    <text x="600" y="26" text-anchor="middle">800</text>
+    <text x="660" y="26" text-anchor="middle">900</text>
+    <text x="12" y="60">slate</text>
+    <rect x="92" y="40" width="56" height="32" rx="4" fill="#f8fafc" stroke="#000000" stroke-opacity="0.08"><title>slate-50: #f8fafc (248 250 252)</title></rect>
+    <rect x="152" y="40" width="56" height="32" rx="4" fill="#f1f5f9" stroke="#000000" stroke-opacity="0.08"><title>slate-100: #f1f5f9 (241 245 249)</title></rect>
+    <rect x="212" y="40" width="56" height="32" rx="4" fill="#e2e8f0" stroke="#000000" stroke-opacity="0.08"><title>slate-200: #e2e8f0 (226 232 240)</title></rect>
+    <rect x="272" y="40" width="56" height="32" rx="4" fill="#cbd5e1" stroke="#000000" stroke-opacity="0.08"><title>slate-300: #cbd5e1 (203 213 225)</title></rect>
+    <rect x="332" y="40" width="56" height="32" rx="4" fill="#94a3b8" stroke="#000000" stroke-opacity="0.08"><title>slate-400: #94a3b8 (148 163 184)</title></rect>
+    <rect x="392" y="40" width="56" height="32" rx="4" fill="#64748b" stroke="#000000" stroke-opacity="0.08"><title>slate-500: #64748b (100 116 139)</title></rect>
+    <rect x="452" y="40" width="56" height="32" rx="4" fill="#475569" stroke="#000000" stroke-opacity="0.08"><title>slate-600: #475569 (71 85 105)</title></rect>
+    <rect x="512" y="40" width="56" height="32" rx="4" fill="#334155" stroke="#000000" stroke-opacity="0.08"><title>slate-700: #334155 (51 65 85)</title></rect>
+    <rect x="572" y="40" width="56" height="32" rx="4" fill="#1e293b" stroke="#000000" stroke-opacity="0.08"><title>slate-800: #1e293b (30 41 59)</title></rect>
+    <rect x="632" y="40" width="56" height="32" rx="4" fill="#0f172a" stroke="#000000" stroke-opacity="0.08"><title>slate-900: #0f172a (15 23 42)</title></rect>
+    <text x="12" y="96">grey</text>
+    <rect x="92" y="76" width="56" height="32" rx="4" fill="#f9fafb" stroke="#000000" stroke-opacity="0.08"><title>grey-50: #f9fafb (249 250 251)</title></rect>
+    <rect x="152" y="76" width="56" height="32" rx="4" fill="#f3f4f6" stroke="#000000" stroke-opacity="0.08"><title>grey-100: #f3f4f6 (243 244 246)</title></rect>
+    <rect x="212" y="76" width="56" height="32" rx="4" fill="#e5e7eb" stroke="#000000" stroke-opacity="0.08"><title>grey-200: #e5e7eb (229 231 235)</title></rect>
+    <rect x="272" y="76" width="56" height="32" rx="4" fill="#d1d5db" stroke="#000000" stroke-opacity="0.08"><title>grey-300: #d1d5db (209 213 219)</title></rect>
+    <rect x="332" y="76" width="56" height="32" rx="4" fill="#9ca3af" stroke="#000000" stroke-opacity="0.08"><title>grey-400: #9ca3af (156 163 175)</title></rect>
+    <rect x="392" y="76" width="56" height="32" rx="4" fill="#6b7280" stroke="#000000" stroke-opacity="0.08"><title>grey-500: #6b7280 (107 114 128)</title></rect>
+    <rect x="452" y="76" width="56" height="32" rx="4" fill="#4b5563" stroke="#000000" stroke-opacity="0.08"><title>grey-600: #4b5563 (75 85 99)</title></rect>
+    <rect x="512" y="76" width="56" height="32" rx="4" fill="#374151" stroke="#000000" stroke-opacity="0.08"><title>grey-700: #374151 (55 65 81)</title></rect>
+    <rect x="572" y="76" width="56" height="32" rx="4" fill="#1f2937" stroke="#000000" stroke-opacity="0.08"><title>grey-800: #1f2937 (31 41 55)</title></rect>
+    <rect x="632" y="76" width="56" height="32" rx="4" fill="#111827" stroke="#000000" stroke-opacity="0.08"><title>grey-900: #111827 (17 24 39)</title></rect>
+    <text x="12" y="132">zinc</text>
+    <rect x="92" y="112" width="56" height="32" rx="4" fill="#fafafa" stroke="#000000" stroke-opacity="0.08"><title>zinc-50: #fafafa (250 250 250)</title></rect>
+    <rect x="152" y="112" width="56" height="32" rx="4" fill="#f4f4f5" stroke="#000000" stroke-opacity="0.08"><title>zinc-100: #f4f4f5 (244 244 245)</title></rect>
+    <rect x="212" y="112" width="56" height="32" rx="4" fill="#e4e4e7" stroke="#000000" stroke-opacity="0.08"><title>zinc-200: #e4e4e7 (228 228 231)</title></rect>
+    <rect x="272" y="112" width="56" height="32" rx="4" fill="#d4d4d8" stroke="#000000" stroke-opacity="0.08"><title>zinc-300: #d4d4d8 (212 212 216)</title></rect>
+    <rect x="332" y="112" width="56" height="32" rx="4" fill="#a1a1aa" stroke="#000000" stroke-opacity="0.08"><title>zinc-400: #a1a1aa (161 161 170)</title></rect>
+    <rect x="392" y="112" width="56" height="32" rx="4" fill="#71717a" stroke="#000000" stroke-opacity="0.08"><title>zinc-500: #71717a (113 113 122)</title></rect>
+    <rect x="452" y="112" width="56" height="32" rx="4" fill="#52525b" stroke="#000000" stroke-opacity="0.08"><title>zinc-600: #52525b (82 82 91)</title></rect>
+    <rect x="512" y="112" width="56" height="32" rx="4" fill="#3f3f46" stroke="#000000" stroke-opacity="0.08"><title>zinc-700: #3f3f46 (63 63 70)</title></rect>
+    <rect x="572" y="112" width="56" height="32" rx="4" fill="#27272a" stroke="#000000" stroke-opacity="0.08"><title>zinc-800: #27272a (39 39 42)</title></rect>
+    <rect x="632" y="112" width="56" height="32" rx="4" fill="#18181b" stroke="#000000" stroke-opacity="0.08"><title>zinc-900: #18181b (24 24 27)</title></rect>
+    <text x="12" y="168">neutral</text>
+    <rect x="92" y="148" width="56" height="32" rx="4" fill="#fafafa" stroke="#000000" stroke-opacity="0.08"><title>neutral-50: #fafafa (250 250 250)</title></rect>
+    <rect x="152" y="148" width="56" height="32" rx="4" fill="#f5f5f5" stroke="#000000" stroke-opacity="0.08"><title>neutral-100: #f5f5f5 (245 245 245)</title></rect>
+    <rect x="212" y="148" width="56" height="32" rx="4" fill="#e5e5e5" stroke="#000000" stroke-opacity="0.08"><title>neutral-200: #e5e5e5 (229 229 229)</title></rect>
+    <rect x="272" y="148" width="56" height="32" rx="4" fill="#d4d4d4" stroke="#000000" stroke-opacity="0.08"><title>neutral-300: #d4d4d4 (212 212 212)</title></rect>
+    <rect x="332" y="148" width="56" height="32" rx="4" fill="#a3a3a3" stroke="#000000" stroke-opacity="0.08"><title>neutral-400: #a3a3a3 (163 163 163)</title></rect>
+    <rect x="392" y="148" width="56" height="32" rx="4" fill="#737373" stroke="#000000" stroke-opacity="0.08"><title>neutral-500: #737373 (115 115 115)</title></rect>
+    <rect x="452" y="148" width="56" height="32" rx="4" fill="#525252" stroke="#000000" stroke-opacity="0.08"><title>neutral-600: #525252 (82 82 82)</title></rect>
+    <rect x="512" y="148" width="56" height="32" rx="4" fill="#404040" stroke="#000000" stroke-opacity="0.08"><title>neutral-700: #404040 (64 64 64)</title></rect>
+    <rect x="572" y="148" width="56" height="32" rx="4" fill="#262626" stroke="#000000" stroke-opacity="0.08"><title>neutral-800: #262626 (38 38 38)</title></rect>
+    <rect x="632" y="148" width="56" height="32" rx="4" fill="#171717" stroke="#000000" stroke-opacity="0.08"><title>neutral-900: #171717 (23 23 23)</title></rect>
+    <text x="12" y="204">stone</text>
+    <rect x="92" y="184" width="56" height="32" rx="4" fill="#fafaf9" stroke="#000000" stroke-opacity="0.08"><title>stone-50: #fafaf9 (250 250 249)</title></rect>
+    <rect x="152" y="184" width="56" height="32" rx="4" fill="#f5f5f4" stroke="#000000" stroke-opacity="0.08"><title>stone-100: #f5f5f4 (245 245 244)</title></rect>
+    <rect x="212" y="184" width="56" height="32" rx="4" fill="#e7e5e4" stroke="#000000" stroke-opacity="0.08"><title>stone-200: #e7e5e4 (231 229 228)</title></rect>
+    <rect x="272" y="184" width="56" height="32" rx="4" fill="#d6d3d1" stroke="#000000" stroke-opacity="0.08"><title>stone-300: #d6d3d1 (214 211 209)</title></rect>
+    <rect x="332" y="184" width="56" height="32" rx="4" fill="#a8a29e" stroke="#000000" stroke-opacity="0.08"><title>stone-400: #a8a29e (168 162 158)</title></rect>
+    <rect x="392" y="184" width="56" height="32" rx="4" fill="#78716c" stroke="#000000" stroke-opacity="0.08"><title>stone-500: #78716c (120 113 108)</title></rect>
+    <rect x="452" y="184" width="56" height="32" rx="4" fill="#57534e" stroke="#000000" stroke-opacity="0.08"><title>stone-600: #57534e (87 83 78)</title></rect>
+    <rect x="512" y="184" width="56" height="32" rx="4" fill="#44403c" stroke="#000000" stroke-opacity="0.08"><title>stone-700: #44403c (68 64 60)</title></rect>
+    <rect x="572" y="184" width="56" height="32" rx="4" fill="#292524" stroke="#000000" stroke-opacity="0.08"><title>stone-800: #292524 (41 37 36)</title></rect>
+    <rect x="632" y="184" width="56" height="32" rx="4" fill="#1c1917" stroke="#000000" stroke-opacity="0.08"><title>stone-900: #1c1917 (28 25 23)</title></rect>
+    <text x="12" y="240">red</text>
+    <rect x="92" y="220" width="56" height="32" rx="4" fill="#fef2f2" stroke="#000000" stroke-opacity="0.08"><title>red-50: #fef2f2 (254 242 242)</title></rect>
+    <rect x="152" y="220" width="56" height="32" rx="4" fill="#fee2e2" stroke="#000000" stroke-opacity="0.08"><title>red-100: #fee2e2 (254 226 226)</title></rect>
+    <rect x="212" y="220" width="56" height="32" rx="4" fill="#fecaca" stroke="#000000" stroke-opacity="0.08"><title>red-200: #fecaca (254 202 202)</title></rect>
+    <rect x="272" y="220" width="56" height="32" rx="4" fill="#fca5a5" stroke="#000000" stroke-opacity="0.08"><title>red-300: #fca5a5 (252 165 165)</title></rect>
+    <rect x="332" y="220" width="56" height="32" rx="4" fill="#f87171" stroke="#000000" stroke-opacity="0.08"><title>red-400: #f87171 (248 113 113)</title></rect>
+    <rect x="392" y="220" width="56" height="32" rx="4" fill="#ef4444" stroke="#000000" stroke-opacity="0.08"><title>red-500: #ef4444 (239 68 68)</title></rect>
+    <rect x="452" y="220" width="56" height="32" rx="4" fill="#dc2626" stroke="#000000" stroke-opacity="0.08"><title>red-600: #dc2626 (220 38 38)</title></rect>
+    <rect x="512" y="220" width="56" height="32" rx="4" fill="#b91c1c" stroke="#000000" stroke-opacity="0.08"><title>red-700: #b91c1c (185 28 28)</title></rect>
+    <rect x="572" y="220" width="56" height="32" rx="4" fill="#991b1b" stroke="#000000" stroke-opacity="0.08"><title>red-800: #991b1b (153 27 27)</title></rect>
+    <rect x="632" y="220" width="56" height="32" rx="4" fill="#7f1d1d" stroke="#000000" stroke-opacity="0.08"><title>red-900: #7f1d1d (127 29 29)</title></rect>
+    <text x="12" y="276">orange</text>
+    <rect x="92" y="256" width="56" height="32" rx="4" fill="#fff7ed" stroke="#000000" stroke-opacity="0.08"><title>orange-50: #fff7ed (255 247 237)</title></rect>
+    <rect x="152" y="256" width="56" height="32" rx="4" fill="#ffedd5" stroke="#000000" stroke-opacity="0.08"><title>orange-100: #ffedd5 (255 237 213)</title></rect>
+    <rect x="212" y="256" width="56" height="32" rx="4" fill="#fed7aa" stroke="#000000" stroke-opacity="0.08"><title>orange-200: #fed7aa (254 215 170)</title></rect>
+    <rect x="272" y="256" width="56" height="32" rx="4" fill="#fdba74" stroke="#000000" stroke-opacity="0.08"><title>orange-300: #fdba74 (253 186 116)</title></rect>
+    <rect x="332" y="256" width="56" height="32" rx="4" fill="#fb923c" stroke="#000000" stroke-opacity="0.08"><title>orange-400: #fb923c (251 146 60)</title></rect>
+    <rect x="392" y="256" width="56" height="32" rx="4" fill="#f97316" stroke="#000000" stroke-opacity="0.08"><title>orange-500: #f97316 (249 115 22)</title></rect>
+    <rect x="452" y="256" width="56" height="32" rx="4" fill="#ea580c" stroke="#000000" stroke-opacity="0.08"><title>orange-600: #ea580c (234 88 12)</title></rect>
+    <rect x="512" y="256" width="56" height="32" rx="4" fill="#c2410c" stroke="#000000" stroke-opacity="0.08"><title>orange-700: #c2410c (194 65 12)</title></rect>
+    <rect x="572" y="256" width="56" height="32" rx="4" fill="#9a3412" stroke="#000000" stroke-opacity="0.08"><title>orange-800: #9a3412 (154 52 18)</title></rect>
+    <rect x="632" y="256" width="56" height="32" rx="4" fill="#7c2d12" stroke="#000000" stroke-opacity="0.08"><title>orange-900: #7c2d12 (124 45 18)</title></rect>
+    <text x="12" y="312">amber</text>
+    <rect x="92" y="292" width="56" height="32" rx="4" fill="#fffbeb" stroke="#000000" stroke-opacity="0.08"><title>amber-50: #fffbeb (255 251 235)</title></rect>
+    <rect x="152" y="292" width="56" height="32" rx="4" fill="#fef3c7" stroke="#000000" stroke-opacity="0.08"><title>amber-100: #fef3c7 (254 243 199)</title></rect>
+    <rect x="212" y="292" width="56" height="32" rx="4" fill="#fde68a" stroke="#000000" stroke-opacity="0.08"><title>amber-200: #fde68a (253 230 138)</title></rect>
+    <rect x="272" y="292" width="56" height="32" rx="4" fill="#fcd34d" stroke="#000000" stroke-opacity="0.08"><title>amber-300: #fcd34d (252 211 77)</title></rect>
+    <rect x="332" y="292" width="56" height="32" rx="4" fill="#fbbf24" stroke="#000000" stroke-opacity="0.08"><title>amber-400: #fbbf24 (251 191 36)</title></rect>
+    <rect x="392" y="292" width="56" height="32" rx="4" fill="#f59e0b" stroke="#000000" stroke-opacity="0.08"><title>amber-500: #f59e0b (245 158 11)</title></rect>
+    <rect x="452" y="292" width="56" height="32" rx="4" fill="#d97706" stroke="#000000" stroke-opacity="0.08"><title>amber-600: #d97706 (217 119 6)</title></rect>
+    <rect x="512" y="292" width="56" height="32" rx="4" fill="#b45309" stroke="#000000" stroke-opacity="0.08"><title>amber-700: #b45309 (180 83 9)</title></rect>
+    <rect x="572" y="292" width="56" height="32" rx="4" fill="#92400e" stroke="#000000" stroke-opacity="0.08"><title>amber-800: #92400e (146 64 14)</title></rect>
+    <rect x="632" y="292" width="56" height="32" rx="4" fill="#78350f" stroke="#000000" stroke-opacity="0.08"><title>amber-900: #78350f (120 53 15)</title></rect>
+    <text x="12" y="348">yellow</text>
+    <rect x="92" y="328" width="56" height="32" rx="4" fill="#fefce8" stroke="#000000" stroke-opacity="0.08"><title>yellow-50: #fefce8 (254 252 232)</title></rect>
+    <rect x="152" y="328" width="56" height="32" rx="4" fill="#fef9c3" stroke="#000000" stroke-opacity="0.08"><title>yellow-100: #fef9c3 (254 249 195)</title></rect>
+    <rect x="212" y="328" width="56" height="32" rx="4" fill="#fef08a" stroke="#000000" stroke-opacity="0.08"><title>yellow-200: #fef08a (254 240 138)</title></rect>
+    <rect x="272" y="328" width="56" height="32" rx="4" fill="#fde047" stroke="#000000" stroke-opacity="0.08"><title>yellow-300: #fde047 (253 224 71)</title></rect>
+    <rect x="332" y="328" width="56" height="32" rx="4" fill="#facc15" stroke="#000000" stroke-opacity="0.08"><title>yellow-400: #facc15 (250 204 21)</title></rect>
+    <rect x="392" y="328" width="56" height="32" rx="4" fill="#eab308" stroke="#000000" stroke-opacity="0.08"><title>yellow-500: #eab308 (234 179 8)</title></rect>
+    <rect x="452" y="328" width="56" height="32" rx="4" fill="#ca8a04" stroke="#000000" stroke-opacity="0.08"><title>yellow-600: #ca8a04 (202 138 4)</title></rect>
+    <rect x="512" y="328" width="56" height="32" rx="4" fill="#a16207" stroke="#000000" stroke-opacity="0.08"><title>yellow-700: #a16207 (161 98 7)</title></rect>
+    <rect x="572" y="328" width="56" height="32" rx="4" fill="#854d0e" stroke="#000000" stroke-opacity="0.08"><title>yellow-800: #854d0e (133 77 14)</title></rect>
+    <rect x="632" y="328" width="56" height="32" rx="4" fill="#713f12" stroke="#000000" stroke-opacity="0.08"><title>yellow-900: #713f12 (113 63 18)</title></rect>
+    <text x="12" y="384">lime</text>
+    <rect x="92" y="364" width="56" height="32" rx="4" fill="#f7fee7" stroke="#000000" stroke-opacity="0.08"><title>lime-50: #f7fee7 (247 254 231)</title></rect>
+    <rect x="152" y="364" width="56" height="32" rx="4" fill="#ecfccb" stroke="#000000" stroke-opacity="0.08"><title>lime-100: #ecfccb (236 252 203)</title></rect>
+    <rect x="212" y="364" width="56" height="32" rx="4" fill="#d9f99d" stroke="#000000" stroke-opacity="0.08"><title>lime-200: #d9f99d (217 249 157)</title></rect>
+    <rect x="272" y="364" width="56" height="32" rx="4" fill="#bef264" stroke="#000000" stroke-opacity="0.08"><title>lime-300: #bef264 (190 242 100)</title></rect>
+    <rect x="332" y="364" width="56" height="32" rx="4" fill="#a3e635" stroke="#000000" stroke-opacity="0.08"><title>lime-400: #a3e635 (163 230 53)</title></rect>
+    <rect x="392" y="364" width="56" height="32" rx="4" fill="#84cc16" stroke="#000000" stroke-opacity="0.08"><title>lime-500: #84cc16 (132 204 22)</title></rect>
+    <rect x="452" y="364" width="56" height="32" rx="4" fill="#65a30d" stroke="#000000" stroke-opacity="0.08"><title>lime-600: #65a30d (101 163 13)</title></rect>
+    <rect x="512" y="364" width="56" height="32" rx="4" fill="#4d7c0f" stroke="#000000" stroke-opacity="0.08"><title>lime-700: #4d7c0f (77 124 15)</title></rect>
+    <rect x="572" y="364" width="56" height="32" rx="4" fill="#3f6212" stroke="#000000" stroke-opacity="0.08"><title>lime-800: #3f6212 (63 98 18)</title></rect>
+    <rect x="632" y="364" width="56" height="32" rx="4" fill="#365314" stroke="#000000" stroke-opacity="0.08"><title>lime-900: #365314 (54 83 20)</title></rect>
+    <text x="12" y="420">green</text>
+    <rect x="92" y="400" width="56" height="32" rx="4" fill="#f0fdf4" stroke="#000000" stroke-opacity="0.08"><title>green-50: #f0fdf4 (240 253 244)</title></rect>
+    <rect x="152" y="400" width="56" height="32" rx="4" fill="#dcfce7" stroke="#000000" stroke-opacity="0.08"><title>green-100: #dcfce7 (220 252 231)</title></rect>
+    <rect x="212" y="400" width="56" height="32" rx="4" fill="#bbf7d0" stroke="#000000" stroke-opacity="0.08"><title>green-200: #bbf7d0 (187 247 208)</title></rect>
+    <rect x="272" y="400" width="56" height="32" rx="4" fill="#86efac" stroke="#000000" stroke-opacity="0.08"><title>green-300: #86efac (134 239 172)</title></rect>
+    <rect x="332" y="400" width="56" height="32" rx="4" fill="#4ade80" stroke="#000000" stroke-opacity="0.08"><title>green-400: #4ade80 (74 222 128)</title></rect>
+    <rect x="392" y="400" width="56" height="32" rx="4" fill="#22c55e" stroke="#000000" stroke-opacity="0.08"><title>green-500: #22c55e (34 197 94)</title></rect>
+    <rect x="452" y="400" width="56" height="32" rx="4" fill="#16a34a" stroke="#000000" stroke-opacity="0.08"><title>green-600: #16a34a (22 163 74)</title></rect>
+    <rect x="512" y="400" width="56" height="32" rx="4" fill="#15803d" stroke="#000000" stroke-opacity="0.08"><title>green-700: #15803d (21 128 61)</title></rect>
+    <rect x="572" y="400" width="56" height="32" rx="4" fill="#166534" stroke="#000000" stroke-opacity="0.08"><title>green-800: #166534 (22 101 52)</title></rect>
+    <rect x="632" y="400" width="56" height="32" rx="4" fill="#14532d" stroke="#000000" stroke-opacity="0.08"><title>green-900: #14532d (20 83 45)</title></rect>
+    <text x="12" y="456">emerald</text>
+    <rect x="92" y="436" width="56" height="32" rx="4" fill="#ecfdf5" stroke="#000000" stroke-opacity="0.08"><title>emerald-50: #ecfdf5 (236 253 245)</title></rect>
+    <rect x="152" y="436" width="56" height="32" rx="4" fill="#d1fae5" stroke="#000000" stroke-opacity="0.08"><title>emerald-100: #d1fae5 (209 250 229)</title></rect>
+    <rect x="212" y="436" width="56" height="32" rx="4" fill="#a7f3d0" stroke="#000000" stroke-opacity="0.08"><title>emerald-200: #a7f3d0 (167 243 208)</title></rect>
+    <rect x="272" y="436" width="56" height="32" rx="4" fill="#6ee7b7" stroke="#000000" stroke-opacity="0.08"><title>emerald-300: #6ee7b7 (110 231 183)</title></rect>
+    <rect x="332" y="436" width="56" height="32" rx="4" fill="#34d399" stroke="#000000" stroke-opacity="0.08"><title>emerald-400: #34d399 (52 211 153)</title></rect>
+    <rect x="392" y="436" width="56" height="32" rx="4" fill="#10b981" stroke="#000000" stroke-opacity="0.08"><title>emerald-500: #10b981 (16 185 129)</title></rect>
+    <rect x="452" y="436" width="56" height="32" rx="4" fill="#059669" stroke="#000000" stroke-opacity="0.08"><title>emerald-600: #059669 (5 150 105)</title></rect>
+    <rect x="512" y="436" width="56" height="32" rx="4" fill="#047857" stroke="#000000" stroke-opacity="0.08"><title>emerald-700: #047857 (4 120 87)</title></rect>
+    <rect x="572" y="436" width="56" height="32" rx="4" fill="#065f46" stroke="#000000" stroke-opacity="0.08"><title>emerald-800: #065f46 (6 95 70)</title></rect>
+    <rect x="632" y="436" width="56" height="32" rx="4" fill="#064e3b" stroke="#000000" stroke-opacity="0.08"><title>emerald-900: #064e3b (6 78 59)</title></rect>
+    <text x="12" y="492">teal</text>
+    <rect x="92" y="472" width="56" height="32" rx="4" fill="#f0fdfa" stroke="#000000" stroke-opacity="0.08"><title>teal-50: #f0fdfa (240 253 250)</title></rect>
+    <rect x="152" y="472" width="56" height="32" rx="4" fill="#ccfbf1" stroke="#000000" stroke-opacity="0.08"><title>teal-100: #ccfbf1 (204 251 241)</title></rect>
+    <rect x="212" y="472" width="56" height="32" rx="4" fill="#99f6e4" stroke="#000000" stroke-opacity="0.08"><title>teal-200: #99f6e4 (153 246 228)</title></rect>
+    <rect x="272" y="472" width="56" height="32" rx="4" fill="#5eead4" stroke="#000000" stroke-opacity="0.08"><title>teal-300: #5eead4 (94 234 212)</title></rect>
+    <rect x="332" y="472" width="56" height="32" rx="4" fill="#2dd4bf" stroke="#000000" stroke-opacity="0.08"><title>teal-400: #2dd4bf (45 212 191)</title></rect>
+    <rect x="392" y="472" width="56" height="32" rx="4" fill="#14b8a6" stroke="#000000" stroke-opacity="0.08"><title>teal-500: #14b8a6 (20 184 166)</title></rect>
+    <rect x="452" y="472" width="56" height="32" rx="4" fill="#0d9488" stroke="#000000" stroke-opacity="0.08"><title>teal-600: #0d9488 (13 148 136)</title></rect>
+    <rect x="512" y="472" width="56" height="32" rx="4" fill="#0f766e" stroke="#000000" stroke-opacity="0.08"><title>teal-700: #0f766e (15 118 110)</title></rect>
+    <rect x="572" y="472" width="56" height="32" rx="4" fill="#115e59" stroke="#000000" stroke-opacity="0.08"><title>teal-800: #115e59 (17 94 89)</title></rect>
+    <rect x="632" y="472" width="56" height="32" rx="4" fill="#134e4a" stroke="#000000" stroke-opacity="0.08"><title>teal-900: #134e4a (19 78 74)</title></rect>
+    <text x="12" y="528">cyan</text>
+    <rect x="92" y="508" width="56" height="32" rx="4" fill="#ecfeff" stroke="#000000" stroke-opacity="0.08"><title>cyan-50: #ecfeff (236 254 255)</title></rect>
+    <rect x="152" y="508" width="56" height="32" rx="4" fill="#cffafe" stroke="#000000" stroke-opacity="0.08"><title>cyan-100: #cffafe (207 250 254)</title></rect>
+    <rect x="212" y="508" width="56" height="32" rx="4" fill="#a5f3fc" stroke="#000000" stroke-opacity="0.08"><title>cyan-200: #a5f3fc (165 243 252)</title></rect>
+    <rect x="272" y="508" width="56" height="32" rx="4" fill="#67e8f9" stroke="#000000" stroke-opacity="0.08"><title>cyan-300: #67e8f9 (103 232 249)</title></rect>
+    <rect x="332" y="508" width="56" height="32" rx="4" fill="#22d3ee" stroke="#000000" stroke-opacity="0.08"><title>cyan-400: #22d3ee (34 211 238)</title></rect>
+    <rect x="392" y="508" width="56" height="32" rx="4" fill="#06b6d4" stroke="#000000" stroke-opacity="0.08"><title>cyan-500: #06b6d4 (6 182 212)</title></rect>
+    <rect x="452" y="508" width="56" height="32" rx="4" fill="#0891b2" stroke="#000000" stroke-opacity="0.08"><title>cyan-600: #0891b2 (8 145 178)</title></rect>
+    <rect x="512" y="508" width="56" height="32" rx="4" fill="#0e7490" stroke="#000000" stroke-opacity="0.08"><title>cyan-700: #0e7490 (14 116 144)</title></rect>
+    <rect x="572" y="508" width="56" height="32" rx="4" fill="#155e75" stroke="#000000" stroke-opacity="0.08"><title>cyan-800: #155e75 (21 94 117)</title></rect>
+    <rect x="632" y="508" width="56" height="32" rx="4" fill="#164e63" stroke="#000000" stroke-opacity="0.08"><title>cyan-900: #164e63 (22 78 99)</title></rect>
+    <text x="12" y="564">sky</text>
+    <rect x="92" y="544" width="56" height="32" rx="4" fill="#f0f9ff" stroke="#000000" stroke-opacity="0.08"><title>sky-50: #f0f9ff (240 249 255)</title></rect>
+    <rect x="152" y="544" width="56" height="32" rx="4" fill="#e0f2fe" stroke="#000000" stroke-opacity="0.08"><title>sky-100: #e0f2fe (224 242 254)</title></rect>
+    <rect x="212" y="544" width="56" height="32" rx="4" fill="#bae6fd" stroke="#000000" stroke-opacity="0.08"><title>sky-200: #bae6fd (186 230 253)</title></rect>
+    <rect x="272" y="544" width="56" height="32" rx="4" fill="#7dd3fc" stroke="#000000" stroke-opacity="0.08"><title>sky-300: #7dd3fc (125 211 252)</title></rect>
+    <rect x="332" y="544" width="56" height="32" rx="4" fill="#38bdf8" stroke="#000000" stroke-opacity="0.08"><title>sky-400: #38bdf8 (56 189 248)</title></rect>
+    <rect x="392" y="544" width="56" height="32" rx="4" fill="#0ea5e9" stroke="#000000" stroke-opacity="0.08"><title>sky-500: #0ea5e9 (14 165 233)</title></rect>
+    <rect x="452" y="544" width="56" height="32" rx="4" fill="#0284c7" stroke="#000000" stroke-opacity="0.08"><title>sky-600: #0284c7 (2 132 199)</title></rect>
+    <rect x="512" y="544" width="56" height="32" rx="4" fill="#0369a1" stroke="#000000" stroke-opacity="0.08"><title>sky-700: #0369a1 (3 105 161)</title></rect>
+    <rect x="572" y="544" width="56" height="32" rx="4" fill="#075985" stroke="#000000" stroke-opacity="0.08"><title>sky-800: #075985 (7 89 133)</title></rect>
+    <rect x="632" y="544" width="56" height="32" rx="4" fill="#0c4a6e" stroke="#000000" stroke-opacity="0.08"><title>sky-900: #0c4a6e (12 74 110)</title></rect>
+    <text x="12" y="600">blue</text>
+    <rect x="92" y="580" width="56" height="32" rx="4" fill="#eff6ff" stroke="#000000" stroke-opacity="0.08"><title>blue-50: #eff6ff (239 246 255)</title></rect>
+    <rect x="152" y="580" width="56" height="32" rx="4" fill="#dbeafe" stroke="#000000" stroke-opacity="0.08"><title>blue-100: #dbeafe (219 234 254)</title></rect>
+    <rect x="212" y="580" width="56" height="32" rx="4" fill="#bfdbfe" stroke="#000000" stroke-opacity="0.08"><title>blue-200: #bfdbfe (191 219 254)</title></rect>
+    <rect x="272" y="580" width="56" height="32" rx="4" fill="#93c5fd" stroke="#000000" stroke-opacity="0.08"><title>blue-300: #93c5fd (147 197 253)</title></rect>
+    <rect x="332" y="580" width="56" height="32" rx="4" fill="#60a5fa" stroke="#000000" stroke-opacity="0.08"><title>blue-400: #60a5fa (96 165 250)</title></rect>
+    <rect x="392" y="580" width="56" height="32" rx="4" fill="#3b82f6" stroke="#000000" stroke-opacity="0.08"><title>blue-500: #3b82f6 (59 130 246)</title></rect>
+    <rect x="452" y="580" width="56" height="32" rx="4" fill="#2563eb" stroke="#000000" stroke-opacity="0.08"><title>blue-600: #2563eb (37 99 235)</title></rect>
+    <rect x="512" y="580" width="56" height="32" rx="4" fill="#1d4ed8" stroke="#000000" stroke-opacity="0.08"><title>blue-700: #1d4ed8 (29 78 216)</title></rect>
+    <rect x="572" y="580" width="56" height="32" rx="4" fill="#1e40af" stroke="#000000" stroke-opacity="0.08"><title>blue-800: #1e40af (30 64 175)</title></rect>
+    <rect x="632" y="580" width="56" height="32" rx="4" fill="#1e3a8a" stroke="#000000" stroke-opacity="0.08"><title>blue-900: #1e3a8a (30 58 138)</title></rect>
+    <text x="12" y="636">indigo</text>
+    <rect x="92" y="616" width="56" height="32" rx="4" fill="#eef2ff" stroke="#000000" stroke-opacity="0.08"><title>indigo-50: #eef2ff (238 242 255)</title></rect>
+    <rect x="152" y="616" width="56" height="32" rx="4" fill="#e0e7ff" stroke="#000000" stroke-opacity="0.08"><title>indigo-100: #e0e7ff (224 231 255)</title></rect>
+    <rect x="212" y="616" width="56" height="32" rx="4" fill="#c7d2fe" stroke="#000000" stroke-opacity="0.08"><title>indigo-200: #c7d2fe (199 210 254)</title></rect>
+    <rect x="272" y="616" width="56" height="32" rx="4" fill="#a5b4fc" stroke="#000000" stroke-opacity="0.08"><title>indigo-300: #a5b4fc (165 180 252)</title></rect>
+    <rect x="332" y="616" width="56" height="32" rx="4" fill="#818cf8" stroke="#000000" stroke-opacity="0.08"><title>indigo-400: #818cf8 (129 140 248)</title></rect>
+    <rect x="392" y="616" width="56" height="32" rx="4" fill="#6366f1" stroke="#000000" stroke-opacity="0.08"><title>indigo-500: #6366f1 (99 102 241)</title></rect>
+    <rect x="452" y="616" width="56" height="32" rx="4" fill="#4f46e5" stroke="#000000" stroke-opacity="0.08"><title>indigo-600: #4f46e5 (79 70 229)</title></rect>
+    <rect x="512" y="616" width="56" height="32" rx="4" fill="#4338ca" stroke="#000000" stroke-opacity="0.08"><title>indigo-700: #4338ca (67 56 202)</title></rect>
+    <rect x="572" y="616" width="56" height="32" rx="4" fill="#3730a3" stroke="#000000" stroke-opacity="0.08"><title>indigo-800: #3730a3 (55 48 163)</title></rect>
+    <rect x="632" y="616" width="56" height="32" rx="4" fill="#312e81" stroke="#000000" stroke-opacity="0.08"><title>indigo-900: #312e81 (49 46 129)</title></rect>
+    <text x="12" y="672">violet</text>
+    <rect x="92" y="652" width="56" height="32" rx="4" fill="#f5f3ff" stroke="#000000" stroke-opacity="0.08"><title>violet-50: #f5f3ff (245 243 255)</title></rect>
+    <rect x="152" y="652" width="56" height="32" rx="4" fill="#ede9fe" stroke="#000000" stroke-opacity="0.08"><title>violet-100: #ede9fe (237 233 254)</title></rect>
+    <rect x="212" y="652" width="56" height="32" rx="4" fill="#ddd6fe" stroke="#000000" stroke-opacity="0.08"><title>violet-200: #ddd6fe (221 214 254)</title></rect>
+    <rect x="272" y="652" width="56" height="32" rx="4" fill="#c4b5fd" stroke="#000000" stroke-opacity="0.08"><title>violet-300: #c4b5fd (196 181 253)</title></rect>
+    <rect x="332" y="652" width="56" height="32" rx="4" fill="#a78bfa" stroke="#000000" stroke-opacity="0.08"><title>violet-400: #a78bfa (167 139 250)</title></rect>
+    <rect x="392" y="652" width="56" height="32" rx="4" fill="#8b5cf6" stroke="#000000" stroke-opacity="0.08"><title>violet-500: #8b5cf6 (139 92 246)</title></rect>
+    <rect x="452" y="652" width="56" height="32" rx="4" fill="#7c3aed" stroke="#000000" stroke-opacity="0.08"><title>violet-600: #7c3aed (124 58 237)</title></rect>
+    <rect x="512" y="652" width="56" height="32" rx="4" fill="#6d28d9" stroke="#000000" stroke-opacity="0.08"><title>violet-700: #6d28d9 (109 40 217)</title></rect>
+    <rect x="572" y="652" width="56" height="32" rx="4" fill="#5b21b6" stroke="#000000" stroke-opacity="0.08"><title>violet-800: #5b21b6 (91 33 182)</title></rect>
+    <rect x="632" y="652" width="56" height="32" rx="4" fill="#4c1d95" stroke="#000000" stroke-opacity="0.08"><title>violet-900: #4c1d95 (76 29 149)</title></rect>
+    <text x="12" y="708">purple</text>
+    <rect x="92" y="688" width="56" height="32" rx="4" fill="#faf5ff" stroke="#000000" stroke-opacity="0.08"><title>purple-50: #faf5ff (250 245 255)</title></rect>
+    <rect x="152" y="688" width="56" height="32" rx="4" fill="#f3e8ff" stroke="#000000" stroke-opacity="0.08"><title>purple-100: #f3e8ff (243 232 255)</title></rect>
+    <rect x="212" y="688" width="56" height="32" rx="4" fill="#e9d5ff" stroke="#000000" stroke-opacity="0.08"><title>purple-200: #e9d5ff (233 213 255)</title></rect>
+    <rect x="272" y="688" width="56" height="32" rx="4" fill="#d8b4fe" stroke="#000000" stroke-opacity="0.08"><title>purple-300: #d8b4fe (216 180 254)</title></rect>
+    <rect x="332" y="688" width="56" height="32" rx="4" fill="#c084fc" stroke="#000000" stroke-opacity="0.08"><title>purple-400: #c084fc (192 132 252)</title></rect>
+    <rect x="392" y="688" width="56" height="32" rx="4" fill="#a855f7" stroke="#000000" stroke-opacity="0.08"><title>purple-500: #a855f7 (168 85 247)</title></rect>
+    <rect x="452" y="688" width="56" height="32" rx="4" fill="#9333ea" stroke="#000000" stroke-opacity="0.08"><title>purple-600: #9333ea (147 51 234)</title></rect>
+    <rect x="512" y="688" width="56" height="32" rx="4" fill="#7e22ce" stroke="#000000" stroke-opacity="0.08"><title>purple-700: #7e22ce (126 34 206)</title></rect>
+    <rect x="572" y="688" width="56" height="32" rx="4" fill="#6b21a8" stroke="#000000" stroke-opacity="0.08"><title>purple-800: #6b21a8 (107 33 168)</title></rect>
+    <rect x="632" y="688" width="56" height="32" rx="4" fill="#581c87" stroke="#000000" stroke-opacity="0.08"><title>purple-900: #581c87 (88 28 135)</title></rect>
+    <text x="12" y="744">fuchsia</text>
+    <rect x="92" y="724" width="56" height="32" rx="4" fill="#fdf4ff" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-50: #fdf4ff (253 244 255)</title></rect>
+    <rect x="152" y="724" width="56" height="32" rx="4" fill="#fae8ff" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-100: #fae8ff (250 232 255)</title></rect>
+    <rect x="212" y="724" width="56" height="32" rx="4" fill="#f5d0fe" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-200: #f5d0fe (245 208 254)</title></rect>
+    <rect x="272" y="724" width="56" height="32" rx="4" fill="#f0abfc" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-300: #f0abfc (240 171 252)</title></rect>
+    <rect x="332" y="724" width="56" height="32" rx="4" fill="#e879f9" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-400: #e879f9 (232 121 249)</title></rect>
+    <rect x="392" y="724" width="56" height="32" rx="4" fill="#d946ef" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-500: #d946ef (217 70 239)</title></rect>
+    <rect x="452" y="724" width="56" height="32" rx="4" fill="#c026d3" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-600: #c026d3 (192 38 211)</title></rect>
+    <rect x="512" y="724" width="56" height="32" rx="4" fill="#a21caf" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-700: #a21caf (162 28 175)</title></rect>
+    <rect x="572" y="724" width="56" height="32" rx="4" fill="#86198f" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-800: #86198f (134 25 143)</title></rect>
+    <rect x="632" y="724" width="56" height="32" rx="4" fill="#701a75" stroke="#000000" stroke-opacity="0.08"><title>fuchsia-900: #701a75 (112 26 117)</title></rect>
+    <text x="12" y="780">pink</text>
+    <rect x="92" y="760" width="56" height="32" rx="4" fill="#fdf2f8" stroke="#000000" stroke-opacity="0.08"><title>pink-50: #fdf2f8 (253 242 248)</title></rect>
+    <rect x="152" y="760" width="56" height="32" rx="4" fill="#fce7f3" stroke="#000000" stroke-opacity="0.08"><title>pink-100: #fce7f3 (252 231 243)</title></rect>
+    <rect x="212" y="760" width="56" height="32" rx="4" fill="#fbcfe8" stroke="#000000" stroke-opacity="0.08"><title>pink-200: #fbcfe8 (251 207 232)</title></rect>
+    <rect x="272" y="760" width="56" height="32" rx="4" fill="#f9a8d4" stroke="#000000" stroke-opacity="0.08"><title>pink-300: #f9a8d4 (249 168 212)</title></rect>
+    <rect x="332" y="760" width="56" height="32" rx="4" fill="#f472b6" stroke="#000000" stroke-opacity="0.08"><title>pink-400: #f472b6 (244 114 182)</title></rect>
+    <rect x="392" y="760" width="56" height="32" rx="4" fill="#ec4899" stroke="#000000" stroke-opacity="0.08"><title>pink-500: #ec4899 (236 72 153)</title></rect>
+    <rect x="452" y="760" width="56" height="32" rx="4" fill="#db2777" stroke="#000000" stroke-opacity="0.08"><title>pink-600: #db2777 (219 39 119)</title></rect>
+    <rect x="512" y="760" width="56" height="32" rx="4" fill="#be185d" stroke="#000000" stroke-opacity="0.08"><title>pink-700: #be185d (190 24 93)</title></rect>
+    <rect x="572" y="760" width="56" height="32" rx="4" fill="#9d174d" stroke="#000000" stroke-opacity="0.08"><title>pink-800: #9d174d (157 23 77)</title></rect>
+    <rect x="632" y="760" width="56" height="32" rx="4" fill="#831843" stroke="#000000" stroke-opacity="0.08"><title>pink-900: #831843 (131 24 67)</title></rect>
+    <text x="12" y="816">rose</text>
+    <rect x="92" y="796" width="56" height="32" rx="4" fill="#fff1f2" stroke="#000000" stroke-opacity="0.08"><title>rose-50: #fff1f2 (255 241 242)</title></rect>
+    <rect x="152" y="796" width="56" height="32" rx="4" fill="#ffe4e6" stroke="#000000" stroke-opacity="0.08"><title>rose-100: #ffe4e6 (255 228 230)</title></rect>
+    <rect x="212" y="796" width="56" height="32" rx="4" fill="#fecdd3" stroke="#000000" stroke-opacity="0.08"><title>rose-200: #fecdd3 (254 205 211)</title></rect>
+    <rect x="272" y="796" width="56" height="32" rx="4" fill="#fda4af" stroke="#000000" stroke-opacity="0.08"><title>rose-300: #fda4af (253 164 175)</title></rect>
+    <rect x="332" y="796" width="56" height="32" rx="4" fill="#fb7185" stroke="#000000" stroke-opacity="0.08"><title>rose-400: #fb7185 (251 113 133)</title></rect>
+    <rect x="392" y="796" width="56" height="32" rx="4" fill="#f43f5e" stroke="#000000" stroke-opacity="0.08"><title>rose-500: #f43f5e (244 63 94)</title></rect>
+    <rect x="452" y="796" width="56" height="32" rx="4" fill="#e11d48" stroke="#000000" stroke-opacity="0.08"><title>rose-600: #e11d48 (225 29 72)</title></rect>
+    <rect x="512" y="796" width="56" height="32" rx="4" fill="#be123c" stroke="#000000" stroke-opacity="0.08"><title>rose-700: #be123c (190 18 60)</title></rect>
+    <rect x="572" y="796" width="56" height="32" rx="4" fill="#9f1239" stroke="#000000" stroke-opacity="0.08"><title>rose-800: #9f1239 (159 18 57)</title></rect>
+    <rect x="632" y="796" width="56" height="32" rx="4" fill="#881337" stroke="#000000" stroke-opacity="0.08"><title>rose-900: #881337 (136 19 55)</title></rect>
+  </g>
+</svg>

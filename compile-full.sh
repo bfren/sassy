@@ -8,3 +8,4 @@ gzip -9 -n -k -f dist/full.css
 echo "dist/full.css: $(wc -c < dist/full.css | tr -d ' ') bytes, gzipped $(wc -c < dist/full.css.gz | tr -d ' ')"
 
 ./snippets.sh
+./palette.sh
