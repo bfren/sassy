@@ -1,7 +1,4 @@
-@use "sass:map";
-@use "../0-core/020-core" as *;
 @use "../4-utilities/420-colour-variables" as *;
-@use "../4-utilities/460-shadow-variables" as *;
 
 :root {
     --sassy-theme-primary: #{colour("sky", 600)};
@@ -25,10 +22,4 @@ $sassy-theme: (
     grey-dark: var(--sassy-theme-grey-dark)
 );
 
-$sassy-theme-shadow: ();
-@each $name, $colour in $sassy-theme {
-    @each $size, $shadow in get-shadow-colours($colour) {
-        $class: #{join-values(($name $size))};
-        $sassy-theme-shadow: map.merge($sassy-theme-shadow, ($class: $shadow));
-    }
-}
+// For a shadow in a theme colour, set --sassy-shadow-colour, e.g. to var(--sassy-theme-primary)

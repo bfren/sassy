@@ -69,7 +69,7 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/full.min.css" />
 ```
 
-It is large - around 1.9 MB, or 180 KB gzipped - because it contains everything. If you are using Sass, extending placeholders will give you much smaller CSS.
+It is large - around 950 KB, or 120 KB gzipped - because it contains everything. If you are using Sass, extending placeholders will give you much smaller CSS.
 
 ### Script
 
@@ -94,10 +94,10 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden` |
 | Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`  |
 | Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-border-grey-300`                                                                                                                                    |
-| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-border-ok`, `%bf-shadow-primary-2`                                                                                                                    |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-border-ok`                                                                                                                                            |
 | Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`                                 |
 | Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                        |
-| Shadow             | `%bf-shadow-2`, `%bf-shadow-sky-700-2`                                                                                                                                                      |
+| Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                               |
 | Grid               | `%bf-d-flex-row`, `%bf-col-6`                                                                                                                                                               |
 | Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                         |
 
@@ -198,6 +198,8 @@ Colours, fonts, the radius, the grid gutter and form styles are CSS custom prope
 Colour properties accept **any CSS colour** - hex, `rgb()`, `oklch()`, a named colour or another custom property - and Sassy adds transparency where it needs it with `color-mix()`. Use `sassy.colour(name, shade)` to get any palette colour, or write a value directly: `--sassy-theme-primary: #0d9488`.
 
 The one exception is the select chevron, an SVG image that cannot read custom properties. If you change `--sassy-input-colour`, set `--sassy-select-chevron` to match using `sassy.chevron()`, as in the example above.
+
+Shadows have one colour, `--sassy-shadow-colour`, which is black at low opacity by default. Set it for a site, a section or an element to colour every shadow there - for example `--sassy-shadow-colour: var(--sassy-theme-primary)`.
 
 The main groups are:
 

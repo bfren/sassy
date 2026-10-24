@@ -661,7 +661,7 @@ div.footer-gone {
 }
 @media (min-width: 768px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(39.3% 0.095 152.535deg) 17.5%, transparent);
+    box-shadow: 0 1rem 2rem color-mix(in oklab, var(--sassy-shadow-colour) 17.5%, transparent);
   }
 }
 @media (min-width: 992px) {
@@ -722,7 +722,7 @@ div.footer-gone {
 }
 @media (min-width: 992px) {
   div.shadow {
-    box-shadow: 0 0.5rem 1rem color-mix(in oklab, oklch(50% 0.134 242.749deg) 15%, transparent);
+    box-shadow: 0 0.5rem 1rem color-mix(in oklab, var(--sassy-shadow-colour) 15%, transparent);
   }
 }
 @media (min-width: 1200px) {
@@ -756,7 +756,7 @@ div.footer-gone {
 }
 @media (min-width: 1200px) {
   div.shadow {
-    box-shadow: 0 1rem 2rem color-mix(in oklab, oklch(66.7% 0.295 322.15deg) 17.5%, transparent);
+    box-shadow: 0 1rem 2rem color-mix(in oklab, var(--sassy-shadow-colour) 17.5%, transparent);
   }
 }
 @media (min-width: 1400px) {
@@ -813,6 +813,21 @@ div.footer-gone {
 @media (min-width: 1200px) {
   div.test {
     width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  div.shadow {
+    --sassy-shadow-colour: oklch(39.3% 0.095 152.535deg);
+  }
+}
+@media (min-width: 992px) {
+  div.shadow {
+    --sassy-shadow-colour: oklch(50% 0.134 242.749deg);
+  }
+}
+@media (min-width: 1200px) {
+  div.shadow {
+    --sassy-shadow-colour: oklch(66.7% 0.295 322.15deg);
   }
 }
 

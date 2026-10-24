@@ -135,6 +135,29 @@
 </div>
         </section>
 
+        <section class="example" id="shadows">
+            <h2>Coloured shadows</h2>
+            <p>Shadows take their colour from <code>--sassy-shadow-colour</code>, which is black at low opacity by default. Set it on an element, or a section, to colour its shadows - here to the theme's primary colour.</p>
+            <div class="demo">
+                <div class="shadows">
+                    <div class="panel">The default shadow</div>
+                    <div class="panel panel-primary">A shadow in the primary colour</div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.shadows
+    @extend %bf-d-grid
+    @extend %bf-gap-4
+
+.panel-primary
+    --sassy-shadow-colour: var(--sassy-theme-primary)</code></pre>
+<pre data-lang="html"><code>&lt;div class="shadows"&gt;
+    &lt;div class="panel"&gt;The default shadow&lt;/div&gt;
+    &lt;div class="panel panel-primary"&gt;A shadow in the primary colour&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="flex">
             <h2>A flex layout that changes at a breakpoint</h2>
             <p>Stacked in a column on small screens, and in a row, spread out, from 768px.</p>

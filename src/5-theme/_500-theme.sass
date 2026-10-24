@@ -2,7 +2,7 @@
 @use "../0-core/040-make" as make
 
 //  =================================================================
-//  Theme: text, background, border and shadow
+//  Theme: text, background and border
 //  =================================================================
 
 /// Outputs this module's utilities - called by _render inside make.passes.
@@ -24,9 +24,3 @@
 
     @include make.responsive("border", $sassy-theme) using ($value)
         border-color: $value
-
-
-    // Theme: Shadow
-
-    @include make.responsive("shadow", $sassy-theme-shadow) using ($value)
-        box-shadow: $value

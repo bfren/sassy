@@ -227,11 +227,20 @@ Border sides are spelled out in full, unlike margin and padding.
 
 ## Shadow
 
-| Placeholder                         | Sets                                                           |
-| ----------------------------------- | -------------------------------------------------------------- |
-| `%bf-shadow-{0-3}`                  | A box shadow, from none to large, in the default shadow colour |
-| `%bf-shadow-{colour}-{shade}-{0-3}` | A box shadow in a palette colour                               |
-| `%bf-shadow-{theme}-{0-3}`          | A box shadow in a theme colour. See [5-theme](5-theme.md)      |
+| Placeholder        | Sets                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| `%bf-shadow-{0-3}` | A box shadow, from none to large, in `--sassy-shadow-colour` |
+
+There is one set of shadows. They take their colour from `--sassy-shadow-colour`, which is black at low opacity by default. Set it for a whole site, a section or one element to colour every shadow there, including with a theme colour:
+
+```sass
+:root
+    --sassy-shadow-colour: #{sassy.colour("slate", 900)}
+
+.offer
+    @extend %bf-shadow-2
+    --sassy-shadow-colour: var(--sassy-theme-primary)
+```
 
 ### Example: a lifted panel
 

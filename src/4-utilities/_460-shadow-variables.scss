@@ -1,8 +1,7 @@
-@use "sass:map";
 @use "sass:string";
-@use "../0-core/020-core" as *;
-@use "420-colour-variables" as *;
 
+// One set of shadows, all in --sassy-shadow-colour, which is neutral by default. To colour shadows,
+// set it for a site, a section or one element, e.g. --sassy-shadow-colour: var(--sassy-theme-primary).
 :root {
     --sassy-shadow-colour: #000;
 }
@@ -41,15 +40,5 @@ $sassy-shadow-unit: 0.125rem !default;
     );
 }
 
-// start shadow map with default shadow colour
+// the shadow sizes, 0 (none) to 3
 $sassy-shadow: get-shadow-colours(var(--sassy-shadow-colour));
-
-// add shadow classes for each colour
-@each $name, $shades in $tailwind-colours {
-    @each $num, $shade in $shades {
-        @each $size, $shadow in get-shadow-colours($shade) {
-            $class: #{join-values(($name $num $size))};
-            $sassy-shadow: map.merge($sassy-shadow, ($class: $shadow));
-        }
-    }
-}
