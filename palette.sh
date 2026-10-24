@@ -60,11 +60,11 @@ FNR == NR { next }
 
 # ---- second file: the theme -----------------------------------------------
 
-# e.g.    --bf-theme-primary: #{colour("sky", 600)};
-# or      --bf-theme-primary: 13 148 136;
-/--bf-theme-[a-z-]+:/ {
+# e.g.    --sassy-theme-primary: #{colour("sky", 600)};
+# or      --sassy-theme-primary: 13 148 136;
+/--sassy-theme-[a-z-]+:/ {
     line = $0
-    name = line; sub(/^.*--bf-theme-/, "", name); sub(/:.*$/, "", name)
+    name = line; sub(/^.*--sassy-theme-/, "", name); sub(/:.*$/, "", name)
     value = line; sub(/^[^:]*:[ \t]*/, "", value); sub(/;.*$/, "", value)
 
     if (value ~ /colour\(/) {

@@ -1,4 +1,4 @@
-﻿$bf-breakpoints: (
+﻿$sassy-breakpoints: (
     sm: 576px,
     md: 768px,
     lg: 992px,
@@ -6,7 +6,7 @@
     2xl: 1400px,
     3xl: 1600px) !default;
 
-$bf-position: (
+$sassy-position: (
     absolute,
     fixed,
     inherit,
@@ -15,14 +15,14 @@ $bf-position: (
     sticky
 );
 
-$bf-offset: (
+$sassy-offset: (
     0: 0,
     50: 50%,
     100: 100%,
     auto: auto
 ) !default;
 
-$bf-z-index: (
+$sassy-z-index: (
     auto: auto,
     0: 0,
     1: 1,
@@ -32,7 +32,7 @@ $bf-z-index: (
     5: 5
 ) !default;
 
-$bf-overflow: (
+$sassy-overflow: (
     auto,
     hidden,
     inherit,
@@ -41,5 +41,5 @@ $bf-overflow: (
     visible
 );
 
-$bf-margin-unit: 0.25rem !default;
-$bf-padding-unit: 0.25rem !default;
+$sassy-margin-unit: 0.25rem !default;
+$sassy-padding-unit: 0.25rem !default;

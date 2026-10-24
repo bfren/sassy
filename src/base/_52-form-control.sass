@@ -15,23 +15,23 @@
         @include form.control()
 
         &:is(textarea)
-            min-height: calc(var(--bf-input-line-height) * 1em + var(--bf-input-padding-y) * 2 + var(--bf-input-border-width) * 2)
+            min-height: calc(var(--sassy-input-line-height) * 1em + var(--sassy-input-padding-y) * 2 + var(--sassy-input-border-width) * 2)
             resize: vertical
 
-    @each $size, $props in $bf-input-sizes
+    @each $size, $props in $sassy-input-sizes
         @include make.single("form-control-" + $size)
             @include form.size($props)
 
     @include make.single("form-control-plaintext")
         background-color: transparent
         border: solid transparent
-        border-width: var(--bf-input-border-width) 0
+        border-width: var(--sassy-input-border-width) 0
         box-sizing: border-box
         color: inherit
         display: block
         font-family: inherit
-        font-size: var(--bf-input-font-size)
-        line-height: var(--bf-input-line-height)
+        font-size: var(--sassy-input-font-size)
+        line-height: var(--sassy-input-line-height)
         margin: 0
-        padding: var(--bf-input-padding-y) 0
+        padding: var(--sassy-input-padding-y) 0
         width: 100%

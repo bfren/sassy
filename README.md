@@ -28,13 +28,13 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
   padding: 0.75rem;
 }
 .card {
-  border-radius: var(--bf-radius);
+  border-radius: var(--sassy-radius);
 }
 .card {
-  box-shadow: 0 0.125rem 0.25rem rgb(var(--bf-shadow-colour) / 0.075);
+  box-shadow: 0 0.125rem 0.25rem rgb(var(--sassy-shadow-colour) / 0.075);
 }
 .card-title {
-  color: rgb(var(--bf-theme-primary));
+  color: rgb(var(--sassy-theme-primary));
 }
 @media (min-width: 768px) {
   .card {
@@ -152,21 +152,21 @@ Settings are passed with `with (...)` when you load Sassy:
 
 ```sass
 @use "sassy/src/base" as sassy with (
-    $bf-breakpoints: (sm: 600px, md: 900px, lg: 1200px),
-    $bf-padding-unit: 0.5rem
+    $sassy-breakpoints: (sm: 600px, md: 900px, lg: 1200px),
+    $sassy-padding-unit: 0.5rem
 )
 ```
 
 | Setting | Default | |
 |---|---|---|
-| `$bf-breakpoints` | `sm` to `3xl`, as above | Names and minimum widths - every responsive variant is generated from this map |
-| `$bf-margin-unit`, `$bf-padding-unit`, `$bf-gap-unit` | `0.25rem` | Size of one spacing step |
-| `$bf-radius-unit` | `0.25rem` | Size of one step for `%bf-rounded-{0-6}` |
-| `$bf-shadow-unit` | `0.125rem` | Size of one step for `%bf-shadow-{0-3}` |
-| `$bf-loop-max` | `20` | Highest spacing, border width and flex grow / shrink step |
-| `$bf-prefix` | `"bf"` | Prefix for every placeholder (and class) - `""` for none |
-| `$bf-separator` | `"-"` | Joins the prefix, utility, value and breakpoint |
-| `$bf-full` | `false` | Also output every utility as a class, as in `dist/full.css` |
+| `$sassy-breakpoints` | `sm` to `3xl`, as above | Names and minimum widths - every responsive variant is generated from this map |
+| `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem` | Size of one spacing step |
+| `$sassy-radius-unit` | `0.25rem` | Size of one step for `%bf-rounded-{0-6}` |
+| `$sassy-shadow-unit` | `0.125rem` | Size of one step for `%bf-shadow-{0-3}` |
+| `$sassy-loop-max` | `20` | Highest spacing, border width and flex grow / shrink step |
+| `$sassy-prefix` | `"bf"` | Prefix for every placeholder (and class) - `""` for none |
+| `$sassy-separator` | `"-"` | Joins the prefix, utility, value and breakpoint |
+| `$sassy-full` | `false` | Also output every utility as a class, as in `dist/full.css` |
 
 The prefix keeps Sassy's placeholders apart from your own and from other libraries: placeholders with the same name are merged, so an unprefixed `%p-2` of your own would pick up Sassy's rules too. It costs nothing in your compiled CSS.
 
@@ -176,23 +176,23 @@ Colours, fonts, the radius, the grid gutter and form styles are CSS custom prope
 
 ```sass
 :root
-    --bf-theme-primary: #{sassy.colour("teal", 600)}
+    --sassy-theme-primary: #{sassy.colour("teal", 600)}
 
 @media (prefers-color-scheme: dark)
     :root
-        --bf-body-colour: #{sassy.colour("grey", 100)}
-        --bf-input-bg: #{sassy.colour("grey", 800)}
-        --bf-input-colour: #{sassy.colour("grey", 100)}
-        --bf-input-border-colour: #{sassy.colour("grey", 600)}
+        --sassy-body-colour: #{sassy.colour("grey", 100)}
+        --sassy-input-bg: #{sassy.colour("grey", 800)}
+        --sassy-input-colour: #{sassy.colour("grey", 100)}
+        --sassy-input-border-colour: #{sassy.colour("grey", 600)}
 ```
 
-Colour properties hold **space-separated R G B values**, not hex, so that Sassy can add transparency to them (`rgb(var(--bf-theme-primary) / 0.25)`). Use `sassy.colour(name, shade)` to get any Tailwind colour in this form, or write the values directly: `--bf-theme-primary: 13 148 136`.
+Colour properties hold **space-separated R G B values**, not hex, so that Sassy can add transparency to them (`rgb(var(--sassy-theme-primary) / 0.25)`). Use `sassy.colour(name, shade)` to get any Tailwind colour in this form, or write the values directly: `--sassy-theme-primary: 13 148 136`.
 
 The main groups are:
 
 | Prefix | Controls |
 |---|---|
-| `--bf-theme-*` | Theme colours: `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light`, `grey-dark` |
-| `--bf-body-*`, `--bf-font-*`, `--bf-line-height-base` | Text defaults used by `%bf-body` and the font utilities |
-| `--bf-radius`, `--bf-shadow-colour`, `--bf-grid-gutter` | Default corner radius, shadow colour and column gutter |
-| `--bf-input-*`, `--bf-check-*`, `--bf-switch-*`, `--bf-form-*` | Form controls - sizes, colours, focus ring and validation states |
+| `--sassy-theme-*` | Theme colours: `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light`, `grey-dark` |
+| `--sassy-body-*`, `--sassy-font-*`, `--sassy-line-height-base` | Text defaults used by `%bf-body` and the font utilities |
+| `--sassy-radius`, `--sassy-shadow-colour`, `--sassy-grid-gutter` | Default corner radius, shadow colour and column gutter |
+| `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-form-*` | Form controls - sizes, colours, focus ring and validation states |

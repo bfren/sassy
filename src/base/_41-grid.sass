@@ -3,7 +3,7 @@
 @use "12-util" as util
 
 @function -calc-col-width($value)
-    @return util.decimal-floor(calc(calc($value / $bf-grid-cols) * 100%))
+    @return util.decimal-floor(calc(calc($value / $sassy-grid-cols) * 100%))
 
 
 //  =================================================================
@@ -25,9 +25,9 @@
     // variants are ordered by make.passes along with everything else.
     // border-box keeps the gutter inside the column, so widths add up to 100%
     // whatever box-sizing the rest of the page uses.
-    @include make.responsive("col", $bf-col) using ($value)
+    @include make.responsive("col", $sassy-col) using ($value)
         box-sizing: border-box
         flex: 0 0 auto
         margin: 0
-        padding: var(--bf-grid-gutter)
+        padding: var(--sassy-grid-gutter)
         width: -calc-col-width($value)

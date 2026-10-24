@@ -13,41 +13,41 @@
     // Font: Defaults
 
     @include make.single("body")
-        color: rgb(var(--bf-body-colour))
-        font-family: var(--bf-body-font-family)
-        font-size: var(--bf-body-font-size)
-        font-weight: var(--bf-body-font-weight)
-        line-height: var(--bf-body-line-height)
+        color: rgb(var(--sassy-body-colour))
+        font-family: var(--sassy-body-font-family)
+        font-size: var(--sassy-body-font-size)
+        font-weight: var(--sassy-body-font-weight)
+        line-height: var(--sassy-body-line-height)
 
         // Headings
 
         h1
-            font-size: map.get($bf-font-size, 1)
+            font-size: map.get($sassy-font-size, 1)
             @extend %#{make.name("mt", 0)}
             @extend %#{make.name("mb", 2)}
 
         h2
-            font-size: map.get($bf-font-size, 2)
+            font-size: map.get($sassy-font-size, 2)
             @extend %#{make.name("mt", 6)}
             @extend %#{make.name("mb", 2)}
 
         h3
-            font-size: map.get($bf-font-size, 3)
+            font-size: map.get($sassy-font-size, 3)
             @extend %#{make.name("mt", 4)}
             @extend %#{make.name("mb", 2)}
 
         h4
-            font-size: map.get($bf-font-size, 4)
+            font-size: map.get($sassy-font-size, 4)
             @extend %#{make.name("mt", 4)}
             @extend %#{make.name("mb", 2)}
 
         h5
-            font-size: map.get($bf-font-size, 5)
+            font-size: map.get($sassy-font-size, 5)
             @extend %#{make.name("mt", 3)}
             @extend %#{make.name("mb", 2)}
 
         h6
-            font-size: map.get($bf-font-size, 6)
+            font-size: map.get($sassy-font-size, 6)
             @extend %#{make.name("mt", 3)}
             @extend %#{make.name("mb", 2)}
 
@@ -59,41 +59,41 @@
         // Inputs
 
         input
-            font-family: var(--bf-body-font-family)
+            font-family: var(--sassy-body-font-family)
 
         // Monospacing
 
         code, textarea
-            font-family: var(--bf-font-family-mono)
+            font-family: var(--sassy-font-family-mono)
 
 
     // Font: Family
 
-    @include make.responsive("font-family", $bf-font-family) using ($value)
+    @include make.responsive("font-family", $sassy-font-family) using ($value)
         font-family: $value
 
 
     // Font: Size
 
-    @include make.responsive("font-size", $bf-font-size) using ($value)
+    @include make.responsive("font-size", $sassy-font-size) using ($value)
         font-size: $value
 
 
     // Font: Style
 
-    @include make.responsive("font-style", $bf-font-style) using ($value)
+    @include make.responsive("font-style", $sassy-font-style) using ($value)
         font-style: $value
 
 
     // Font: Weight
 
-    @include make.responsive("font-weight", $bf-font-weight) using ($value)
+    @include make.responsive("font-weight", $sassy-font-weight) using ($value)
         font-weight: $value
 
 
     // Line: Height
 
-    @include make.responsive("line-height", $bf-line-height) using ($value)
+    @include make.responsive("line-height", $sassy-line-height) using ($value)
         line-height: $value
 
 
@@ -105,19 +105,19 @@
 
     // Text: Align
 
-    @include make.responsive("text-align", $bf-text-align) using ($value)
+    @include make.responsive("text-align", $sassy-text-align) using ($value)
         text-align: $value
 
 
     // Text: Decoration
 
-    @include make.responsive("text-decoration", $bf-text-decoration) using ($value)
+    @include make.responsive("text-decoration", $sassy-text-decoration) using ($value)
         text-decoration: $value
 
 
     // Text: Transform
 
-    @include make.responsive("text-transform", $bf-text-transform) using ($value)
+    @include make.responsive("text-transform", $sassy-text-transform) using ($value)
         text-transform: $value
 
 

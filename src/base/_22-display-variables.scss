@@ -1,4 +1,4 @@
-$bf-display: (
+$sassy-display: (
     block,
     contents,
     flex,
@@ -22,7 +22,7 @@ $bf-display: (
     table-row
 );
 
-$bf-flex-align-content: (
+$sassy-flex-align-content: (
     centre: center,
     inherit: inherit,
     initial: initial,
@@ -34,7 +34,7 @@ $bf-flex-align-content: (
     stretch: stretch
 );
 
-$bf-flex-align-items: (
+$sassy-flex-align-items: (
     baseline: baseline,
     centre: center,
     end: flex-end,
@@ -44,7 +44,7 @@ $bf-flex-align-items: (
     stretch: stretch
 );
 
-$bf-flex-align-self: (
+$sassy-flex-align-self: (
     auto: auto,
     baseline: baseline,
     centre: center,
@@ -55,7 +55,7 @@ $bf-flex-align-self: (
     stretch: stretch
 );
 
-$bf-flex-direction: (
+$sassy-flex-direction: (
     column,
     column-reverse,
     inherit,
@@ -64,7 +64,7 @@ $bf-flex-direction: (
     row-reverse
 );
 
-$bf-flex-order: (
+$sassy-flex-order: (
     first: -1,
     0: 0,
     1: 1,
@@ -75,7 +75,7 @@ $bf-flex-order: (
     last: 6
 );
 
-$bf-flex-wrap: (
+$sassy-flex-wrap: (
     inherit,
     initial,
     nowrap,
@@ -83,7 +83,7 @@ $bf-flex-wrap: (
     wrap-reverse
 );
 
-$bf-flex-justify: (
+$sassy-flex-justify: (
     centre: center,
     end: flex-end,
     start: flex-start,
@@ -94,4 +94,4 @@ $bf-flex-justify: (
     evenly: space-evenly
 );
 
-$bf-gap-unit: 0.25rem !default;
+$sassy-gap-unit: 0.25rem !default;

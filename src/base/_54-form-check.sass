@@ -18,46 +18,46 @@
         column-gap: 0.5em
         display: grid
         grid-template-columns: auto 1fr
-        margin-bottom: $bf-margin-unit * 0.5
+        margin-bottom: $sassy-margin-unit * 0.5
 
         & > :nth-child(n+3)
             grid-column: 2
 
     @include make.single("form-check-inline")
         display: inline-grid
-        margin-right: $bf-margin-unit * 4
+        margin-right: $sassy-margin-unit * 4
 
     // The tick, dash and dot are masks on ::before, coloured with background-color,
-    // so they follow --bf-check-mark-colour at runtime.
+    // so they follow --sassy-check-mark-colour at runtime.
     @include make.single("form-check-input")
         @include form.check()
 
         &::before
-            background-color: rgb(var(--bf-check-mark-colour))
+            background-color: rgb(var(--sassy-check-mark-colour))
             transform: scale(0)
 
         &:checked::before
             transform: scale(1)
 
         &[type="checkbox"]
-            border-radius: var(--bf-check-radius)
+            border-radius: var(--sassy-check-radius)
 
             &::before
-                @include form.mask($bf-check-tick)
+                @include form.mask($sassy-check-tick)
 
             // radios also match :indeterminate (no radio in the group checked), so only checkboxes
             &:indeterminate
                 @include form.checked()
 
                 &::before
-                    @include form.mask($bf-check-dash)
+                    @include form.mask($sassy-check-dash)
                     transform: scale(1)
 
         &[type="radio"]
             border-radius: 50%
 
             &::before
-                @include form.mask($bf-check-dot)
+                @include form.mask($sassy-check-dot)
 
     @include make.single("form-check-label")
         :disabled ~ &
@@ -66,4 +66,4 @@
 
         :user-invalid ~ &,
         [aria-invalid="true"] ~ &
-            color: rgb(var(--bf-input-invalid-colour))
+            color: rgb(var(--sassy-input-invalid-colour))
