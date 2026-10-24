@@ -242,7 +242,7 @@
   --sassy-font-size-base: 1rem;
   --sassy-font-weight-base: 400;
   --sassy-line-height-base: 1.5;
-  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-body-colour: oklch(27.8% 0.033 256.848);
   --sassy-body-font-family: var(--sassy-font-family-sans);
   --sassy-body-font-size: var(--sassy-font-size-base);
   --sassy-body-font-weight: var(--sassy-font-weight-base);
@@ -258,14 +258,14 @@
 }
 
 :root {
-  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
-  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
-  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
-  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
-  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
-  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
-  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
-  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802);
 }
 
 :root {
@@ -279,12 +279,12 @@
   --sassy-input-padding-x: 0.75rem;
   --sassy-input-border-width: 1px;
   --sassy-input-radius: var(--sassy-radius);
-  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-input-colour: oklch(27.8% 0.033 256.848);
   --sassy-input-bg: #fff;
-  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
-  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
-  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
-  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839);
   --sassy-input-focus-colour: var(--sassy-theme-primary);
   --sassy-input-focus-ring: 0.25rem;
   --sassy-input-invalid-colour: var(--sassy-theme-error);
@@ -293,7 +293,7 @@
   --sassy-check-mark-colour: #fff;
   --sassy-check-radius: 0.25em;
   --sassy-switch-knob-colour: var(--sassy-input-border-colour);
-  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364);
 }
 
 .row {
@@ -409,7 +409,7 @@ body h2 {
 }
 
 .background .primary, .background .secondary, .background .ok, .background .error, .background .grey-dark {
-  color: oklch(98.5% 0.002 247.839deg);
+  color: oklch(98.5% 0.002 247.839);
 }
 
 .text div, .background div, .border div, .shadow div {
@@ -418,7 +418,7 @@ body h2 {
 }
 
 .text div, .background div, .border div, .shadow div {
-  border-color: oklch(98.5% 0.002 247.839deg);
+  border-color: oklch(98.5% 0.002 247.839);
 }
 
 .text div, .background div, .border div, .shadow div {
@@ -569,3 +569,5 @@ body h2 {
 .text div, .background div, .border div, .shadow div {
   background-color: white;
 }
+
+/*# sourceMappingURL=theme.css.map */
