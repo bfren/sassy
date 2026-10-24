@@ -1,0 +1,6 @@
+# Shell scripts must keep Unix line endings on every platform, or bash (including
+# Git Bash on Windows) fails with "$'\r': command not found"
+*.sh text eol=lf
+
+# Windows batch files
+*.bat text eol=crlf
