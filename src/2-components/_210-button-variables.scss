@@ -1,0 +1,30 @@
+@use "sass:map";
+@use "../4-utilities/420-colour-variables" as *;
+@use "../5-theme/500-theme-variables" as *;
+
+// Text colour on each theme colour's button, chosen for contrast with the default theme:
+// dark on the light colours (and on ok, as white on green-600 is only 3.2:1), white on the rest.
+// A theme that changes a colour can change its text with --sassy-btn-<name>-colour.
+$sassy-btn-text-colours: (
+    ok: colour("grey", 900),
+    info: colour("grey", 900),
+    warn: colour("grey", 900),
+    grey-light: colour("grey", 900)
+) !default;
+
+// The default button. The theme variants (%btn-primary and so on) set these on the button itself.
+// Colours accept any CSS colour.
+:root {
+    --sassy-btn-bg: #fff;
+    --sassy-btn-colour: var(--sassy-body-colour);
+    --sassy-btn-border-colour: #{colour("grey", 300)};
+    --sassy-btn-outline-colour: var(--sassy-body-colour);
+    --sassy-btn-focus-colour: var(--sassy-input-focus-colour);
+    --sassy-btn-font-weight: 500;
+    // mixed into the background on hover and while pressed
+    --sassy-btn-shade: #000;
+
+    @each $name, $value in $sassy-theme {
+        --sassy-btn-#{$name}-colour: #{map.get($sassy-btn-text-colours, $name) or #fff};
+    }
+}

@@ -267,16 +267,17 @@ Sizes, colours, the focus ring and the validation colours all come from the `--s
 
 Component placeholders style whole interface elements, and like forms they output before the grid and utilities, so a utility can override any part of one:
 
-| Placeholder                                                                         | For                                                                   |
-| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `%bf-nav`, `%bf-nav-link`                                                           | A list of links - mark the current page with `aria-current="page"`    |
-| `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                            | Styles and layout for a nav, combined with `%bf-nav`                  |
-| `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                       | A bordered container and its parts                                    |
-| `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                              | Tabs that switch panels, using the ARIA tabs roles                    |
-| `%bf-tooltip`                                                                       | A tooltip: a popover described by its trigger with `aria-describedby` |
-| `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close` | A native `<dialog>` and its parts                                     |
+| Placeholder                                                                              | For                                                                    |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large` | Buttons, in the theme colours, outlined, and in the form control sizes |
+| `%bf-nav`, `%bf-nav-link`                                                                | A list of links - mark the current page with `aria-current="page"`     |
+| `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                 | Styles and layout for a nav, combined with `%bf-nav`                   |
+| `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                            | A bordered container and its parts                                     |
+| `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                   | Tabs that switch panels, using the ARIA tabs roles                     |
+| `%bf-tooltip`                                                                            | A tooltip: a popover described by its trigger with `aria-describedby`  |
+| `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close`      | A native `<dialog>` and its parts                                      |
 
-Navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs and tooltips need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
+Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs and tooltips need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
 
 ## Limitations
 
@@ -312,14 +313,14 @@ You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your p
 
 `src` is arranged in numbered folders, and each file is numbered with its folder's digit followed by its place in the folder - `4-utilities/_420-colour.sass`. **The numbers follow the order the placeholders are output**, because that order decides which placeholder wins when two set the same property:
 
-| Folder         | Contains                                                                                                  |
-| -------------- | --------------------------------------------------------------------------------------------------------- |
-| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers              |
-| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                      |
-| `2-components` | Navigation, cards, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
-| `3-grid`       | The grid                                                                                                  |
-| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                 |
-| `5-theme`      | Theme colours                                                                                             |
+| Folder         | Contains                                                                                                           |
+| -------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers                       |
+| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                               |
+| `2-components` | Buttons, navigation, cards, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
+| `3-grid`       | The grid                                                                                                           |
+| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                          |
+| `5-theme`      | Theme colours                                                                                                      |
 
 Composites - placeholders that set several properties at once, such as forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 

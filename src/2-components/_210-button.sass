@@ -1,0 +1,92 @@
+@use "sass:map"
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: buttons
+//  =================================================================
+
+//  Buttons use the form controls' padding, font size, line height, border width and radius,
+//  so a button lines up with the controls beside it, and form sizes and input groups apply to
+//  it as well. Colours come from --sassy-btn-* custom properties, which the variants change.
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    @include make.single("btn")
+        align-items: center
+        background-color: var(--sassy-btn-bg)
+        border: var(--sassy-input-border-width) solid var(--sassy-btn-border-colour)
+        border-radius: var(--sassy-input-radius)
+        box-sizing: border-box
+        color: var(--sassy-btn-colour)
+        cursor: pointer
+        display: inline-flex
+        font-family: inherit
+        font-size: var(--sassy-input-font-size)
+        font-weight: var(--sassy-btn-font-weight)
+        gap: 0.5em
+        justify-content: center
+        line-height: var(--sassy-input-line-height)
+        margin: 0
+        padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x)
+        text-align: center
+        text-decoration: none
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
+        user-select: none
+        vertical-align: middle
+
+        @media (prefers-reduced-motion: reduce)
+            transition: none
+
+        // darker on hover and while pressed, whatever the button's colour
+        &:hover
+            background-color: color-mix(in oklab, var(--sassy-btn-bg) 88%, var(--sassy-btn-shade))
+
+        &:active
+            background-color: color-mix(in oklab, var(--sassy-btn-bg) 80%, var(--sassy-btn-shade))
+
+        &:focus-visible
+            box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-btn-focus-colour) 40%, transparent)
+            outline: 0
+
+        &:disabled,
+        &[aria-disabled="true"]
+            cursor: not-allowed
+            opacity: 0.65
+            pointer-events: none
+
+    // A variant for each theme colour - they only change custom properties
+
+    @each $name, $value in $sassy-theme
+        @include make.single("btn-" + $name)
+            --sassy-btn-bg: #{$value}
+            --sassy-btn-border-colour: #{$value}
+            --sassy-btn-colour: var(--sassy-btn-#{$name}-colour)
+            --sassy-btn-focus-colour: #{$value}
+            // a colour light enough to need dark text is too light for outline text on its own,
+            // so it is mixed with that dark text
+            @if map.has-key($sassy-btn-text-colours, $name)
+                --sassy-btn-outline-colour: color-mix(in oklab, #{$value} 50%, var(--sassy-btn-#{$name}-colour))
+            @else
+                --sassy-btn-outline-colour: #{$value}
+
+    // Outline: the colour on the border and text, with a tint on hover - combine with a variant
+
+    @include make.single("btn-outline")
+        background-color: transparent
+        border-color: var(--sassy-btn-outline-colour)
+        color: var(--sassy-btn-outline-colour)
+
+        &:hover
+            background-color: color-mix(in oklab, var(--sassy-btn-outline-colour) 10%, transparent)
+
+        &:active
+            background-color: color-mix(in oklab, var(--sassy-btn-outline-colour) 18%, transparent)
+
+    // Sizes match the form control sizes, as they set the same custom properties
+
+    @each $size, $props in $sassy-input-sizes
+        @include make.single("btn-" + $size)
+            @each $name, $value in $props
+                --sassy-input-#{$name}: #{$value}
