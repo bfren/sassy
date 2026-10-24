@@ -249,7 +249,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                      |
 
-The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_240-dialog-variables.scss`](../src/2-components/_240-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_250-dialog-variables.scss`](../src/2-components/_250-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 
