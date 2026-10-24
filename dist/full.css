@@ -221,6 +221,15 @@
 }
 
 /*
+ * Sassy: keep modal dialogs fixed to the viewport, as browsers do natively.
+ * The absolute position above, which page styles give priority over the
+ * browser's own, would otherwise scroll the page to the top when one opens.
+ */
+:where(dialog:modal) {
+  position: fixed;
+}
+
+/*
  * Add the correct display in all browsers.
  */
 :where(summary) {
@@ -304,6 +313,62 @@
   --sassy-range-thumb-colour: var(--sassy-theme-primary);
   --sassy-range-thumb-size: 1rem;
   --sassy-range-disabled-colour: oklch(70.7% 0.022 261.325deg);
+}
+
+:root {
+  --sassy-nav-gap: 0.25rem;
+  --sassy-nav-link-padding-y: 0.5rem;
+  --sassy-nav-link-padding-x: 1rem;
+  --sassy-nav-link-colour: var(--sassy-theme-primary);
+  --sassy-nav-link-hover-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-nav-link-radius: 0;
+  --sassy-nav-link-underline-width: 0;
+  --sassy-nav-current-bg: transparent;
+  --sassy-nav-current-colour: var(--sassy-body-colour);
+  --sassy-nav-current-border-colour: transparent;
+  --sassy-focus-outline-colour: var(--sassy-theme-primary);
+  --sassy-focus-outline-width: 2px;
+  --sassy-focus-outline-offset: 2px;
+}
+
+:root {
+  --sassy-card-bg: #fff;
+  --sassy-card-border-width: 1px;
+  --sassy-card-border-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-card-radius: var(--sassy-radius);
+  --sassy-card-padding-y: 1rem;
+  --sassy-card-padding-x: 1rem;
+  --sassy-card-cap-bg: oklch(98.5% 0.002 247.839deg);
+}
+
+:root {
+  --sassy-tabs-border-width: 1px;
+  --sassy-tabs-border-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-tabs-underline-width: 0.125rem;
+  --sassy-tab-panel-padding-y: 1rem;
+}
+
+:root {
+  --sassy-tooltip-bg: oklch(21% 0.034 264.665deg);
+  --sassy-tooltip-colour: #fff;
+  --sassy-tooltip-font-size: calc(var(--sassy-font-size-base) * 0.875);
+  --sassy-tooltip-max-width: 20rem;
+  --sassy-tooltip-offset: 0.375rem;
+  --sassy-tooltip-padding-y: 0.25rem;
+  --sassy-tooltip-padding-x: 0.5rem;
+  --sassy-tooltip-radius: var(--sassy-radius);
+}
+
+:root {
+  --sassy-dialog-bg: #fff;
+  --sassy-dialog-border-width: 1px;
+  --sassy-dialog-border-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-dialog-radius: calc(var(--sassy-radius) * 2);
+  --sassy-dialog-width: 32rem;
+  --sassy-dialog-padding-y: 1rem;
+  --sassy-dialog-padding-x: 1.25rem;
+  --sassy-dialog-shadow: 0 1rem 3rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 17.5%, transparent);
+  --sassy-dialog-backdrop: color-mix(in oklab, oklch(13% 0.028 261.692deg) 50%, transparent);
 }
 
 .bf-form-label {
@@ -998,6 +1063,281 @@
   font-size: 0.875em;
   margin-top: 0.25rem;
   display: block;
+}
+
+.bf-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sassy-nav-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bf-nav-vertical {
+  flex-direction: column;
+}
+
+.bf-nav-pills {
+  --sassy-nav-link-radius: var(--sassy-radius);
+  --sassy-nav-current-bg: var(--sassy-theme-primary);
+  --sassy-nav-current-colour: #fff;
+}
+
+.bf-nav-underline {
+  --sassy-nav-link-underline-width: 0.125rem;
+  --sassy-nav-link-hover-bg: transparent;
+  --sassy-nav-current-border-colour: var(--sassy-theme-primary);
+}
+
+.bf-nav-link {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  border-bottom: var(--sassy-nav-link-underline-width) solid transparent;
+  border-radius: var(--sassy-nav-link-radius);
+  box-sizing: border-box;
+  color: var(--sassy-nav-link-colour);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: 0.5em;
+  margin: 0;
+  padding: var(--sassy-nav-link-padding-y) var(--sassy-nav-link-padding-x);
+  text-decoration: none;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bf-nav-link {
+    transition: none;
+  }
+}
+.bf-nav-link:hover {
+  background-color: var(--sassy-nav-link-hover-bg);
+}
+.bf-nav-link:focus-visible {
+  outline: var(--sassy-focus-outline-width) solid var(--sassy-focus-outline-colour);
+  outline-offset: var(--sassy-focus-outline-offset);
+}
+.bf-nav-link[aria-current]:not([aria-current=false]), .bf-nav-link[aria-selected=true] {
+  background-color: var(--sassy-nav-current-bg);
+  border-bottom-color: var(--sassy-nav-current-border-colour);
+  color: var(--sassy-nav-current-colour);
+}
+.bf-nav-link:disabled, .bf-nav-link[aria-disabled=true] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.bf-card {
+  background-color: var(--sassy-card-bg);
+  border: var(--sassy-card-border-width) solid var(--sassy-card-border-colour);
+  border-radius: var(--sassy-card-radius);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bf-card-header {
+  background-color: var(--sassy-card-cap-bg);
+  border-bottom: var(--sassy-card-border-width) solid var(--sassy-card-border-colour);
+  padding: calc(var(--sassy-card-padding-y) * 0.75) var(--sassy-card-padding-x);
+}
+
+.bf-card-body {
+  flex: 1 1 auto;
+  padding: var(--sassy-card-padding-y) var(--sassy-card-padding-x);
+}
+.bf-card-body > :first-child {
+  margin-top: 0;
+}
+.bf-card-body > :last-child {
+  margin-bottom: 0;
+}
+
+.bf-card-footer {
+  background-color: var(--sassy-card-cap-bg);
+  border-top: var(--sassy-card-border-width) solid var(--sassy-card-border-colour);
+  padding: calc(var(--sassy-card-padding-y) * 0.75) var(--sassy-card-padding-x);
+}
+
+.bf-card-title {
+  font-size: calc(var(--sassy-font-size-base) * 1.25);
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+.bf-card-image {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bf-tabs {
+  --sassy-nav-link-underline-width: var(--sassy-tabs-underline-width);
+  --sassy-nav-link-hover-bg: transparent;
+  --sassy-nav-current-border-colour: var(--sassy-theme-primary);
+  border-bottom: var(--sassy-tabs-border-width) solid var(--sassy-tabs-border-colour);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sassy-nav-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bf-tab {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  border-bottom: var(--sassy-nav-link-underline-width) solid transparent;
+  border-radius: var(--sassy-nav-link-radius);
+  box-sizing: border-box;
+  color: var(--sassy-nav-link-colour);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: 0.5em;
+  margin: 0;
+  padding: var(--sassy-nav-link-padding-y) var(--sassy-nav-link-padding-x);
+  text-decoration: none;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bf-tab {
+    transition: none;
+  }
+}
+.bf-tab:hover {
+  background-color: var(--sassy-nav-link-hover-bg);
+}
+.bf-tab:focus-visible {
+  outline: var(--sassy-focus-outline-width) solid var(--sassy-focus-outline-colour);
+  outline-offset: var(--sassy-focus-outline-offset);
+}
+.bf-tab[aria-current]:not([aria-current=false]), .bf-tab[aria-selected=true] {
+  background-color: var(--sassy-nav-current-bg);
+  border-bottom-color: var(--sassy-nav-current-border-colour);
+  color: var(--sassy-nav-current-colour);
+}
+.bf-tab:disabled, .bf-tab[aria-disabled=true] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.bf-tab {
+  margin-bottom: calc(var(--sassy-tabs-border-width) * -1);
+}
+
+.bf-tab-panel {
+  padding: var(--sassy-tab-panel-padding-y) 0;
+}
+.bf-tab-panel:focus-visible {
+  outline: var(--sassy-focus-outline-width) solid var(--sassy-focus-outline-colour);
+  outline-offset: var(--sassy-focus-outline-offset);
+}
+
+.bf-tooltip {
+  background-color: var(--sassy-tooltip-bg);
+  border: 0;
+  border-radius: var(--sassy-tooltip-radius);
+  box-sizing: border-box;
+  color: var(--sassy-tooltip-colour);
+  font-size: var(--sassy-tooltip-font-size);
+  inset: auto;
+  line-height: 1.4;
+  margin: var(--sassy-tooltip-offset);
+  max-width: var(--sassy-tooltip-max-width);
+  overflow: visible;
+  padding: var(--sassy-tooltip-padding-y) var(--sassy-tooltip-padding-x);
+  position-area: top;
+  position-try-fallbacks: flip-block;
+}
+
+.bf-dialog {
+  background-color: var(--sassy-dialog-bg);
+  border: var(--sassy-dialog-border-width) solid var(--sassy-dialog-border-colour);
+  border-radius: var(--sassy-dialog-radius);
+  box-shadow: var(--sassy-dialog-shadow);
+  box-sizing: border-box;
+  color: inherit;
+  padding: 0;
+  width: var(--sassy-dialog-width);
+}
+.bf-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.bf-dialog::backdrop {
+  background-color: var(--sassy-dialog-backdrop);
+}
+
+.bf-dialog-small {
+  --sassy-dialog-width: 20rem;
+}
+
+.bf-dialog-large {
+  --sassy-dialog-width: 50rem;
+}
+
+.bf-dialog-header {
+  align-items: center;
+  border-bottom: var(--sassy-dialog-border-width) solid var(--sassy-dialog-border-colour);
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: var(--sassy-dialog-padding-y) var(--sassy-dialog-padding-x);
+}
+
+.bf-dialog-title {
+  font-size: calc(var(--sassy-font-size-base) * 1.25);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.bf-dialog-body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: var(--sassy-dialog-padding-y) var(--sassy-dialog-padding-x);
+}
+.bf-dialog-body > :first-child {
+  margin-top: 0;
+}
+.bf-dialog-body > :last-child {
+  margin-bottom: 0;
+}
+
+.bf-dialog-footer {
+  border-top: var(--sassy-dialog-border-width) solid var(--sassy-dialog-border-colour);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  padding: var(--sassy-dialog-padding-y) var(--sassy-dialog-padding-x);
+}
+
+.bf-dialog-close {
+  background: none;
+  border: 0;
+  border-radius: var(--sassy-radius);
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.5em;
+  line-height: 1;
+  opacity: 0.6;
+  padding: 0 0.25rem;
+}
+.bf-dialog-close:hover {
+  opacity: 1;
+}
+.bf-dialog-close:focus-visible {
+  outline: var(--sassy-focus-outline-width) solid var(--sassy-focus-outline-colour);
+  outline-offset: var(--sassy-focus-outline-offset);
+  opacity: 1;
 }
 
 .bf-d-flex-row {
