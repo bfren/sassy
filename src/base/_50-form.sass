@@ -11,11 +11,11 @@
 @mixin control()
     appearance: none
     background-clip: padding-box
-    background-color: rgb(var(--sassy-input-bg))
-    border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour))
+    background-color: var(--sassy-input-bg)
+    border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour)
     border-radius: var(--sassy-input-radius)
     box-sizing: border-box
-    color: rgb(var(--sassy-input-colour))
+    color: var(--sassy-input-colour)
     display: block
     font-family: inherit
     font-size: var(--sassy-input-font-size)
@@ -29,17 +29,17 @@
         transition: none
 
     &::placeholder
-        color: rgb(var(--sassy-input-placeholder-colour))
+        color: var(--sassy-input-placeholder-colour)
         opacity: 1
 
     &:focus-visible
         @include focus-ring(var(--sassy-input-focus-colour))
 
     &[readonly]
-        background-color: rgb(var(--sassy-input-readonly-bg))
+        background-color: var(--sassy-input-readonly-bg)
 
     &:disabled
-        background-color: rgb(var(--sassy-input-disabled-bg))
+        background-color: var(--sassy-input-disabled-bg)
         cursor: not-allowed
         opacity: 1
 
@@ -56,9 +56,9 @@
 
 
 
-/// Border and focus ring in a state colour (space-separated R G B).
+/// Border and focus ring in a state colour.
 @mixin state($colour)
-    border-color: rgb($colour)
+    border-color: $colour
 
     &:focus-visible
         @include focus-ring($colour)
@@ -68,8 +68,8 @@
 /// Declarations shared by checkboxes, radios and switches.
 @mixin check()
     appearance: none
-    background-color: rgb(var(--sassy-input-bg))
-    border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour))
+    background-color: var(--sassy-input-bg)
+    border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour)
     box-sizing: border-box
     flex-shrink: 0
     font-size: inherit
@@ -109,8 +109,8 @@
 
 /// Checked colours for checks and switches.
 @mixin checked()
-    background-color: rgb(var(--sassy-check-checked-colour))
-    border-color: rgb(var(--sassy-check-checked-colour))
+    background-color: var(--sassy-check-checked-colour)
+    border-color: var(--sassy-check-checked-colour)
 
 
 
@@ -121,18 +121,18 @@
 
 
 
-/// Validation feedback text in a state colour (space-separated R G B).
+/// Validation feedback text in a state colour.
 @mixin feedback($colour)
-    color: rgb($colour)
+    color: $colour
     font-size: 0.875em
     margin-top: $sassy-margin-unit
 
 
 
-/// Focus ring in the given colour (space-separated R G B).
+/// Focus ring in the given colour.
 @mixin focus-ring($colour)
-    border-color: rgb($colour)
-    box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb-with-alpha($colour, 0.25)
+    border-color: $colour
+    box-shadow: 0 0 0 var(--sassy-input-focus-ring) with-alpha($colour, 0.25)
     outline: 0
 
 

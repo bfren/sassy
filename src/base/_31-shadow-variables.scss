@@ -1,43 +1,43 @@
 @use "sass:map";
+@use "sass:string";
 @use "10-core" as *;
 @use "21-colour-variables" as *;
 
 :root {
-    --sassy-shadow-colour: 0 0 0;
+    --sassy-shadow-colour: #000;
 }
 
 $sassy-shadow-unit: 0.125rem !default;
 
 
 
-/// Returns an rgb() definition with alpha transparency value.
+/// Returns a colour with alpha transparency, using color-mix() so that it works
+/// with any CSS colour value, including a custom property.
 ///
 /// @param {string} $colour
-///     Space-separated colour rgb (e.g. 24 68 236) or CSS var().
-/// @param {string} $alpha
+///     Any CSS colour (e.g. #0284c7, oklch(58.8% 0.158 241.966)) or CSS var().
+/// @param {number} $alpha
 ///     Alpha transparency (0-1).
 /// @return {string}
-///     rgb(R G B / ALPHA) definition
-@function rgb-with-alpha($colour, $alpha) {
-    @return #{"rgb(" + $colour + " / " + $alpha + ")"};
+///     color-mix() definition
+@function with-alpha($colour, $alpha) {
+    @return string.unquote("color-mix(in oklab, #{$colour} #{$alpha * 100}%, transparent)");
 }
 
 
 
-/// Returns an rgb() definition with alpha transparency value.
+/// Returns the map of shadow sizes for a colour.
 ///
 /// @param {string} $colour
-///     Space-separated colour rgb (e.g. 24 68 236).
-/// @param {string} $alpha
-///     Alpha transparency (0-1).
-/// @return {string}
-///     rgb(R G B / ALPHA) definition
+///     Any CSS colour or CSS var().
+/// @return {map}
+///     Box shadow definitions, keyed by size (0-3).
 @function get-shadow-colours($colour) {
     @return (
         0: none,
-        1: 0 $sassy-shadow-unit $sassy-shadow-unit * 2 rgb-with-alpha($colour, 0.075),
-        2: 0 $sassy-shadow-unit * 4 $sassy-shadow-unit * 8 rgb-with-alpha($colour, 0.15),
-        3: 0 $sassy-shadow-unit * 8 $sassy-shadow-unit * 16 rgb-with-alpha($colour, 0.175)
+        1: 0 $sassy-shadow-unit $sassy-shadow-unit * 2 with-alpha($colour, 0.075),
+        2: 0 $sassy-shadow-unit * 4 $sassy-shadow-unit * 8 with-alpha($colour, 0.15),
+        3: 0 $sassy-shadow-unit * 8 $sassy-shadow-unit * 16 with-alpha($colour, 0.175)
     );
 }
 

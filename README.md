@@ -31,10 +31,10 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
   border-radius: var(--sassy-radius);
 }
 .card {
-  box-shadow: 0 0.125rem 0.25rem rgb(var(--sassy-shadow-colour) / 0.075);
+  box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour) 7.5%, transparent);
 }
 .card-title {
-  color: rgb(var(--sassy-theme-primary));
+  color: var(--sassy-theme-primary);
 }
 @media (min-width: 768px) {
   .card {
@@ -66,10 +66,10 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 `dist/full.css` contains every utility as a class (`.bf-p-3`, `.bf-col-4-md` and so on), for use straight from HTML:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bfren/sassy@0.2.0/dist/full.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/full.min.css" />
 ```
 
-It is large - around 1.3 MB, or 140 KB gzipped - because it contains everything. If you are using Sass, extending placeholders will give you much smaller CSS.
+It is large - around 1.9 MB, or 180 KB gzipped - because it contains everything. If you are using Sass, extending placeholders will give you much smaller CSS.
 
 ## Naming
 
@@ -98,11 +98,11 @@ A few conventions:
 - **Sides** are `t`, `e`, `b` and `s` (top, end, bottom, start), so `%bf-mt-3` is `margin-top` and `%bf-ps-2` is `padding-left`. `x` is both horizontal sides and `y` both vertical sides.
 - **Spacing** (margin, padding and gap) runs from 0 to 20 in steps of 0.25rem: `%bf-p-4` is `1rem`.
 - **Sizes** run from 5 to 100 in steps of 5: `%bf-width-50` is `50%`, `%bf-viewheight-100` is `100vh`.
-- **Colours** are the [Tailwind CSS](https://tailwindcss.com/docs/customizing-colors) palette - `slate`, `grey`, `zinc`, `neutral`, `stone`, `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink` and `rose` - each with shades `50`, then `100` to `900`.
+- **Colours** are the [Tailwind CSS v4](https://tailwindcss.com/docs/colors) palette - the neutrals `slate`, `grey`, `zinc`, `neutral`, `stone`, `mauve`, `olive`, `mist` and `taupe`, and `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink` and `rose` - each with shades `50`, then `100` to `900`, and `950`. They are defined in `oklch()`, so on wide-gamut screens the most vivid shades show more vividly than sRGB allows.
 
-  ![The Sassy colour palette: 22 colours, each in shades 50 and 100 to 900](docs/palette.svg)
+  ![The Sassy colour palette: 26 colours, each in shades 50, 100 to 900 and 950](docs/palette.svg)
 
-  The R G B values for every shade are in [`src/base/_21-colour-variables.scss`](src/base/_21-colour-variables.scss).
+  The `oklch()` value of every shade is in [`src/base/_21-colour-variables.scss`](src/base/_21-colour-variables.scss).
 
 - **Theme colours** are `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark`, and can be changed at runtime - see [Theming](#theming). The defaults are:
 
@@ -186,7 +186,7 @@ Colours, fonts, the radius, the grid gutter and form styles are CSS custom prope
         --sassy-input-border-colour: #{sassy.colour("grey", 600)}
 ```
 
-Colour properties hold **space-separated R G B values**, not hex, so that Sassy can add transparency to them (`rgb(var(--sassy-theme-primary) / 0.25)`). Use `sassy.colour(name, shade)` to get any Tailwind colour in this form, or write the values directly: `--sassy-theme-primary: 13 148 136`.
+Colour properties accept **any CSS colour** - hex, `rgb()`, `oklch()`, a named colour or another custom property - and Sassy adds transparency where it needs it with `color-mix()`. Use `sassy.colour(name, shade)` to get any palette colour, or write a value directly: `--sassy-theme-primary: #0d9488`.
 
 The main groups are:
 
@@ -197,13 +197,61 @@ The main groups are:
 | `--sassy-radius`, `--sassy-shadow-colour`, `--sassy-grid-gutter` | Default corner radius, shadow colour and column gutter |
 | `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-form-*` | Form controls - sizes, colours, focus ring and validation states |
 
+## Forms
+
+Form placeholders style controls in the same way as Bootstrap's form classes, and follow the same naming:
+
+| Placeholder | For |
+|---|---|
+| `%bf-form-label`, `%bf-form-text` | Labels, and help text under a control |
+| `%bf-form-control`, `-sm`, `-lg`, `-plaintext` | Text inputs and textareas |
+| `%bf-form-select`, `-sm`, `-lg` | Selects |
+| `%bf-form-check`, `%bf-form-check-inline` | A checkbox or radio with its label |
+| `%bf-form-check-input`, `%bf-form-check-label` | The checkbox or radio, and its label |
+| `%bf-form-switch` | A checkbox shown as a switch |
+| `%bf-form-control-valid`, `%bf-form-control-invalid` | A validation state set explicitly |
+| `%bf-form-feedback-valid`, `%bf-form-feedback-invalid` | Validation messages |
+
+Sizes combine with the base placeholder: extend both `%bf-form-control` and `%bf-form-control-sm`.
+
+```sass
+.field
+    @extend %bf-mb-3
+
+    label
+        @extend %bf-form-label
+
+    input, textarea
+        @extend %bf-form-control
+
+    .error
+        @extend %bf-form-feedback-invalid
+```
+
+```html
+<div class="field">
+    <label for="email">Email</label>
+    <input type="email" id="email" required />
+    <span class="error">Please enter a valid email address.</span>
+</div>
+```
+
+The markup matters in a few places:
+
+- **Validation** shows when a control is invalid in either of two ways: the browser's own `:user-invalid`, which only applies once someone has interacted with the field, or `aria-invalid="true"`, which you set for errors found on the server. Use `aria-invalid` for server errors, because screen readers announce it too.
+- **Feedback comes after the control**, as a sibling: invalid feedback stays hidden until the control before it is invalid, so you can render the message up front and the browser reveals it. Valid feedback always shows, so only render it when the field is valid.
+- **Checks and radios** put the input first, then the label, then any help text or feedback, inside the element extending `%bf-form-check`. Long labels wrap beside the input, and help text lines up under the label.
+- **Switches** are checkboxes with `role="switch"`, so assistive technology announces them as switches.
+
+Sizes, colours, the focus ring and the validation colours all come from the `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*` and `--sassy-form-*` custom properties - see [Theming](#theming).
+
 ## Limitations
 
 - **No `@extend` inside media queries.** Sass does not allow it, which is why every responsive utility has a breakpoint variant in its name (see [Responsive](#responsive)).
 - **Every file that extends needs its own `@use`.** `@extend` only reaches placeholders in modules the file itself loads, so a partial that extends Sassy's placeholders must `@use` Sassy too. Sass only outputs a module once per compilation, so this does not duplicate anything.
 - **One entry stylesheet per site.** Each separately compiled stylesheet that loads Sassy includes Normalize and the `:root` custom properties again.
 - **Placeholders cannot be used from HTML.** If you need classes in your markup, use `dist/full.css` or set `$sassy-full: true`.
-- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap` and `rgb()` with a `/` alpha value.
+- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap`, `oklch()` and `color-mix()`.
 
 ## Editor snippets
 
@@ -215,11 +263,49 @@ Then start typing a placeholder name after `@extend %` - for example `bf-p` - an
 
 The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full.sh` runs after each build. If you change `$sassy-prefix`, compile a full build with your prefix and generate snippets from it: `SASSY_PREFIX=<prefix> ./snippets.sh <your-full.css> <output.code-snippets>`.
 
+## Building and contributing
+
+You need [Dart Sass](https://sass-lang.com/dart-sass/) on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows.
+
+| Script | Does |
+|---|---|
+| `compile-full.sh` | Builds `dist/full.css` and `dist/full.css.gz`, then runs `snippets.sh` and `palette.sh` |
+| `compile-full.bat` | Runs `compile-full.sh` in Git Bash on Windows |
+| `watch.sh`, `watch.bat` | Recompiles the test stylesheets in `test/sass` whenever they change - open the pages in `test` to check them |
+| `snippets.sh` | Generates `dist/sassy.code-snippets` from `dist/full.css` |
+| `palette.sh` | Generates the colour charts in `docs` from the colour and theme variables |
+
+### Structure
+
+The modules in `src/base` are numbered so related modules sit together, with gaps for new ones:
+
+| Numbers | Contain |
+|---|---|
+| `00`-`01` | Copyright notice and Normalize |
+| `10`-`12` | Settings, the `make` mixins that generate placeholders, and helpers |
+| `20`-`31` | Utilities: layout, colour, display, text, border, corners and shadow |
+| `40`-`41` | Theme colours and the grid |
+| `50`-`56` | Forms - `50` holds mixins shared by the form modules |
+| `99` | Render - outputs every module in the right order |
+
+Each module's settings and custom properties live in a matching `-variables.scss` file, forwarded from `_10-variables.scss`.
+
+### Adding a module
+
+1. Create `_NN-name.sass` with a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
+2. Put any settings in `_NN-name-variables.scss`, with `!default`, and forward it from `_10-variables.scss`.
+3. Forward the module from `_index.sass` with `hide utilities`.
+4. `@use` the module in `_99-render.sass` and include its `utilities` mixin - before the single-purpose utilities if its placeholders set several properties at once, so that utilities can override them.
+
+Never hard-code the `bf` prefix - use `make.name()` to build a placeholder name from `$sassy-prefix`.
+
+Pull requests are welcome. Commits to this repository must be signed.
+
 ## Licence and credits
 
-Sassy is released under the [MIT licence](https://mit.bfren/dev/2022).
+Sassy is released under the [MIT licence](https://mit.bfren.dev/2022).
 
 It includes:
 
 - [Normalize.css](https://github.com/csstools/normalize.css), licensed under [Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
-- the colour palette from [Tailwind CSS v3.0.0](https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/src/public/colors.js), licensed under [MIT](https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/LICENSE)
+- the colour palette from [Tailwind CSS v4.3.3](https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/packages/tailwindcss/theme.css), licensed under [MIT](https://github.com/tailwindlabs/tailwindcss/blob/v4.3.3/LICENSE)
