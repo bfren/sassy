@@ -242,7 +242,7 @@
   --sassy-font-size-base: 1rem;
   --sassy-font-weight-base: 400;
   --sassy-line-height-base: 1.5;
-  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-body-colour: oklch(27.8% 0.033 256.848);
   --sassy-body-font-family: var(--sassy-font-family-sans);
   --sassy-body-font-size: var(--sassy-font-size-base);
   --sassy-body-font-weight: var(--sassy-font-weight-base);
@@ -258,14 +258,14 @@
 }
 
 :root {
-  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
-  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
-  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
-  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
-  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
-  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
-  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
-  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802);
 }
 
 :root {
@@ -279,12 +279,12 @@
   --sassy-input-padding-x: 0.75rem;
   --sassy-input-border-width: 1px;
   --sassy-input-radius: var(--sassy-radius);
-  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
+  --sassy-input-colour: oklch(27.8% 0.033 256.848);
   --sassy-input-bg: #fff;
-  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
-  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
-  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
-  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839);
   --sassy-input-focus-colour: var(--sassy-theme-primary);
   --sassy-input-focus-ring: 0.25rem;
   --sassy-input-invalid-colour: var(--sassy-theme-error);
@@ -293,7 +293,7 @@
   --sassy-check-mark-colour: #fff;
   --sassy-check-radius: 0.25em;
   --sassy-switch-knob-colour: var(--sassy-input-border-colour);
-  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364);
 }
 
 label {
@@ -405,6 +405,11 @@ label {
   padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
+  background-image: linear-gradient(45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%);
+  background-position: calc(100% - var(--sassy-input-padding-x) - 0.8em) 50%, calc(100% - var(--sassy-input-padding-x) - 0.4em) 50%;
+  background-repeat: no-repeat;
+  background-size: 0.4em 0.4em;
+  padding-right: calc(var(--sassy-input-padding-x) * 2 + 0.8em);
 }
 @media (prefers-reduced-motion: reduce) {
   .select-sm, .select-lg, .select {
@@ -435,13 +440,6 @@ label {
   border-color: var(--sassy-input-invalid-colour);
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
-}
-.select-sm, .select-lg, .select {
-  background-image: linear-gradient(45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%);
-  background-position: calc(100% - var(--sassy-input-padding-x) - 0.8em) 50%, calc(100% - var(--sassy-input-padding-x) - 0.4em) 50%;
-  background-repeat: no-repeat;
-  background-size: 0.4em 0.4em;
-  padding-right: calc(var(--sassy-input-padding-x) * 2 + 0.8em);
 }
 [multiple].select-sm, [multiple].select-lg, [multiple].select, [size].select-sm:not([size="1"]), [size].select-lg:not([size="1"]), [size].select:not([size="1"]) {
   background-image: none;
@@ -579,6 +577,8 @@ label {
   print-color-adjust: exact;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 1em;
+  border-radius: 1em;
+  width: 2em;
 }
 .switch::before {
   content: "";
@@ -614,10 +614,6 @@ label {
   border-color: var(--sassy-input-invalid-colour);
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
-}
-.switch {
-  border-radius: 1em;
-  width: 2em;
 }
 .switch::before {
   aspect-ratio: 1;
@@ -777,5 +773,7 @@ h1 {
 }
 
 :root {
-  --sassy-theme-primary: oklch(77.7% 0.152 181.912deg);
+  --sassy-theme-primary: oklch(77.7% 0.152 181.912);
 }
+
+/*# sourceMappingURL=form.css.map */
