@@ -5,7 +5,7 @@
 #
 # Usage: ./snippets.sh [input.css] [output.code-snippets]
 #   defaults: dist/full.css -> dist/sassy.code-snippets
-#   set SASSY_PREFIX if you have changed $bf-prefix (default: bf)
+#   set SASSY_PREFIX if you have changed $sassy-prefix (default: bf)
 
 set -euo pipefail
 cd "$(dirname "$0")"

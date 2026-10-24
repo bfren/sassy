@@ -1,5 +1,5 @@
 /*!
- *  Sassy v0.2 ~ https://github.com/bfren/sassy
+ *  Sassy v0.2.0 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
 /*!
  *  Normalize.css ~  https://github.com/csstools/normalize.css
@@ -236,64 +236,64 @@
     https://github.com/tailwindlabs/tailwindcss/blob/v3.0.0/LICENSE
  */
 :root {
-  --bf-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
-  --bf-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --bf-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
-  --bf-font-size-base: 1rem;
-  --bf-font-weight-base: 400;
-  --bf-line-height-base: 1.5;
-  --bf-body-colour: 31 41 55;
-  --bf-body-font-family: var(--bf-font-family-sans);
-  --bf-body-font-size: var(--bf-font-size-base);
-  --bf-body-font-weight: var(--bf-font-weight-base);
-  --bf-body-line-height: var(--bf-line-height-base);
+  --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
+  --sassy-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sassy-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
+  --sassy-font-size-base: 1rem;
+  --sassy-font-weight-base: 400;
+  --sassy-line-height-base: 1.5;
+  --sassy-body-colour: 31 41 55;
+  --sassy-body-font-family: var(--sassy-font-family-sans);
+  --sassy-body-font-size: var(--sassy-font-size-base);
+  --sassy-body-font-weight: var(--sassy-font-weight-base);
+  --sassy-body-line-height: var(--sassy-line-height-base);
 }
 
 :root {
-  --bf-radius: 0.375rem;
+  --sassy-radius: 0.375rem;
 }
 
 :root {
-  --bf-shadow-colour: 0 0 0;
+  --sassy-shadow-colour: 0 0 0;
 }
 
 :root {
-  --bf-theme-primary: 2 132 199;
-  --bf-theme-secondary: 194 65 12;
-  --bf-theme-ok: 22 163 74;
-  --bf-theme-info: 186 230 253;
-  --bf-theme-warn: 251 191 36;
-  --bf-theme-error: 220 38 38;
-  --bf-theme-grey-light: 209 213 219;
-  --bf-theme-grey-dark: 75 85 99;
+  --sassy-theme-primary: 2 132 199;
+  --sassy-theme-secondary: 194 65 12;
+  --sassy-theme-ok: 22 163 74;
+  --sassy-theme-info: 186 230 253;
+  --sassy-theme-warn: 251 191 36;
+  --sassy-theme-error: 220 38 38;
+  --sassy-theme-grey-light: 209 213 219;
+  --sassy-theme-grey-dark: 75 85 99;
 }
 
 :root {
-  --bf-grid-gutter: 0.5rem;
+  --sassy-grid-gutter: 0.5rem;
 }
 
 :root {
-  --bf-input-font-size: var(--bf-font-size-base);
-  --bf-input-line-height: var(--bf-line-height-base);
-  --bf-input-padding-y: 0.375rem;
-  --bf-input-padding-x: 0.75rem;
-  --bf-input-border-width: 1px;
-  --bf-input-radius: var(--bf-radius);
-  --bf-input-colour: 31 41 55;
-  --bf-input-bg: 255 255 255;
-  --bf-input-border-colour: 209 213 219;
-  --bf-input-placeholder-colour: 107 114 128;
-  --bf-input-disabled-bg: 243 244 246;
-  --bf-input-readonly-bg: 249 250 251;
-  --bf-input-focus-colour: var(--bf-theme-primary);
-  --bf-input-focus-ring: 0.25rem;
-  --bf-input-invalid-colour: var(--bf-theme-error);
-  --bf-input-valid-colour: var(--bf-theme-ok);
-  --bf-check-checked-colour: var(--bf-theme-primary);
-  --bf-check-mark-colour: 255 255 255;
-  --bf-check-radius: 0.25em;
-  --bf-switch-knob-colour: var(--bf-input-border-colour);
-  --bf-form-text-colour: 107 114 128;
+  --sassy-input-font-size: var(--sassy-font-size-base);
+  --sassy-input-line-height: var(--sassy-line-height-base);
+  --sassy-input-padding-y: 0.375rem;
+  --sassy-input-padding-x: 0.75rem;
+  --sassy-input-border-width: 1px;
+  --sassy-input-radius: var(--sassy-radius);
+  --sassy-input-colour: 31 41 55;
+  --sassy-input-bg: 255 255 255;
+  --sassy-input-border-colour: 209 213 219;
+  --sassy-input-placeholder-colour: 107 114 128;
+  --sassy-input-disabled-bg: 243 244 246;
+  --sassy-input-readonly-bg: 249 250 251;
+  --sassy-input-focus-colour: var(--sassy-theme-primary);
+  --sassy-input-focus-ring: 0.25rem;
+  --sassy-input-invalid-colour: var(--sassy-theme-error);
+  --sassy-input-valid-colour: var(--sassy-theme-ok);
+  --sassy-check-checked-colour: var(--sassy-theme-primary);
+  --sassy-check-mark-colour: 255 255 255;
+  --sassy-check-radius: 0.25em;
+  --sassy-switch-knob-colour: var(--sassy-input-border-colour);
+  --sassy-form-text-colour: 107 114 128;
 }
 
 label {
@@ -302,7 +302,7 @@ label {
 }
 
 .help {
-  color: rgb(var(--bf-form-text-colour));
+  color: rgb(var(--sassy-form-text-colour));
   display: block;
   font-size: 0.875em;
   margin-top: 0.25rem;
@@ -311,17 +311,17 @@ label {
 .control, .control-sm, .control-lg {
   appearance: none;
   background-clip: padding-box;
-  background-color: rgb(var(--bf-input-bg));
-  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
-  border-radius: var(--bf-input-radius);
+  background-color: rgb(var(--sassy-input-bg));
+  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
+  border-radius: var(--sassy-input-radius);
   box-sizing: border-box;
-  color: rgb(var(--bf-input-colour));
+  color: rgb(var(--sassy-input-colour));
   display: block;
   font-family: inherit;
-  font-size: var(--bf-input-font-size);
-  line-height: var(--bf-input-line-height);
+  font-size: var(--sassy-input-font-size);
+  line-height: var(--sassy-input-line-height);
   margin: 0;
-  padding: var(--bf-input-padding-y) var(--bf-input-padding-x);
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
 }
@@ -331,78 +331,78 @@ label {
   }
 }
 .control::placeholder, .control-sm::placeholder, .control-lg::placeholder {
-  color: rgb(var(--bf-input-placeholder-colour));
+  color: rgb(var(--sassy-input-placeholder-colour));
   opacity: 1;
 }
 .control:focus-visible, .control-sm:focus-visible, .control-lg:focus-visible {
-  border-color: rgb(var(--bf-input-focus-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-focus-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
   outline: 0;
 }
 [readonly].control, [readonly].control-sm, [readonly].control-lg {
-  background-color: rgb(var(--bf-input-readonly-bg));
+  background-color: rgb(var(--sassy-input-readonly-bg));
 }
 .control:disabled, .control-sm:disabled, .control-lg:disabled {
-  background-color: rgb(var(--bf-input-disabled-bg));
+  background-color: rgb(var(--sassy-input-disabled-bg));
   cursor: not-allowed;
   opacity: 1;
 }
 .control:user-invalid, .control-sm:user-invalid, .control-lg:user-invalid, [aria-invalid=true].control, [aria-invalid=true].control-sm, [aria-invalid=true].control-lg {
-  border-color: rgb(var(--bf-input-invalid-colour));
+  border-color: rgb(var(--sassy-input-invalid-colour));
 }
 .control:user-invalid:focus-visible, .control-sm:user-invalid:focus-visible, .control-lg:user-invalid:focus-visible, [aria-invalid=true].control:focus-visible, [aria-invalid=true].control-sm:focus-visible, [aria-invalid=true].control-lg:focus-visible {
-  border-color: rgb(var(--bf-input-invalid-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-invalid-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
   outline: 0;
 }
 .control:is(textarea), .control-sm:is(textarea), .control-lg:is(textarea) {
-  min-height: calc(var(--bf-input-line-height) * 1em + var(--bf-input-padding-y) * 2 + var(--bf-input-border-width) * 2);
+  min-height: calc(var(--sassy-input-line-height) * 1em + var(--sassy-input-padding-y) * 2 + var(--sassy-input-border-width) * 2);
   resize: vertical;
 }
 
 .control-sm {
-  --bf-input-padding-y: 0.25rem;
-  --bf-input-padding-x: 0.5rem;
-  --bf-input-font-size: calc(var(--bf-font-size-base) * 0.875);
-  --bf-input-radius: 0.25rem;
+  --sassy-input-padding-y: 0.25rem;
+  --sassy-input-padding-x: 0.5rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
+  --sassy-input-radius: 0.25rem;
 }
 
 .control-lg {
-  --bf-input-padding-y: 0.5rem;
-  --bf-input-padding-x: 1rem;
-  --bf-input-font-size: calc(var(--bf-font-size-base) * 1.25);
-  --bf-input-radius: 0.5rem;
+  --sassy-input-padding-y: 0.5rem;
+  --sassy-input-padding-x: 1rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
+  --sassy-input-radius: 0.5rem;
 }
 
 .plaintext {
   background-color: transparent;
   border: solid transparent;
-  border-width: var(--bf-input-border-width) 0;
+  border-width: var(--sassy-input-border-width) 0;
   box-sizing: border-box;
   color: inherit;
   display: block;
   font-family: inherit;
-  font-size: var(--bf-input-font-size);
-  line-height: var(--bf-input-line-height);
+  font-size: var(--sassy-input-font-size);
+  line-height: var(--sassy-input-line-height);
   margin: 0;
-  padding: var(--bf-input-padding-y) 0;
+  padding: var(--sassy-input-padding-y) 0;
   width: 100%;
 }
 
 .select-sm, .select-lg, .select {
   appearance: none;
   background-clip: padding-box;
-  background-color: rgb(var(--bf-input-bg));
-  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
-  border-radius: var(--bf-input-radius);
+  background-color: rgb(var(--sassy-input-bg));
+  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
+  border-radius: var(--sassy-input-radius);
   box-sizing: border-box;
-  color: rgb(var(--bf-input-colour));
+  color: rgb(var(--sassy-input-colour));
   display: block;
   font-family: inherit;
-  font-size: var(--bf-input-font-size);
-  line-height: var(--bf-input-line-height);
+  font-size: var(--sassy-input-font-size);
+  line-height: var(--sassy-input-line-height);
   margin: 0;
-  padding: var(--bf-input-padding-y) var(--bf-input-padding-x);
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
 }
@@ -412,54 +412,54 @@ label {
   }
 }
 .select-sm::placeholder, .select-lg::placeholder, .select::placeholder {
-  color: rgb(var(--bf-input-placeholder-colour));
+  color: rgb(var(--sassy-input-placeholder-colour));
   opacity: 1;
 }
 .select-sm:focus-visible, .select-lg:focus-visible, .select:focus-visible {
-  border-color: rgb(var(--bf-input-focus-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-focus-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
   outline: 0;
 }
 [readonly].select-sm, [readonly].select-lg, [readonly].select {
-  background-color: rgb(var(--bf-input-readonly-bg));
+  background-color: rgb(var(--sassy-input-readonly-bg));
 }
 .select-sm:disabled, .select-lg:disabled, .select:disabled {
-  background-color: rgb(var(--bf-input-disabled-bg));
+  background-color: rgb(var(--sassy-input-disabled-bg));
   cursor: not-allowed;
   opacity: 1;
 }
 .select-sm:user-invalid, .select-lg:user-invalid, .select:user-invalid, [aria-invalid=true].select-sm, [aria-invalid=true].select-lg, [aria-invalid=true].select {
-  border-color: rgb(var(--bf-input-invalid-colour));
+  border-color: rgb(var(--sassy-input-invalid-colour));
 }
 .select-sm:user-invalid:focus-visible, .select-lg:user-invalid:focus-visible, .select:user-invalid:focus-visible, [aria-invalid=true].select-sm:focus-visible, [aria-invalid=true].select-lg:focus-visible, [aria-invalid=true].select:focus-visible {
-  border-color: rgb(var(--bf-input-invalid-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-invalid-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
   outline: 0;
 }
 .select-sm, .select-lg, .select {
-  background-image: linear-gradient(45deg, transparent 40%, rgb(var(--bf-input-colour)) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, rgb(var(--bf-input-colour)) 40% 60%, transparent 60%);
-  background-position: calc(100% - var(--bf-input-padding-x) - 0.8em) 50%, calc(100% - var(--bf-input-padding-x) - 0.4em) 50%;
+  background-image: linear-gradient(45deg, transparent 40%, rgb(var(--sassy-input-colour)) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, rgb(var(--sassy-input-colour)) 40% 60%, transparent 60%);
+  background-position: calc(100% - var(--sassy-input-padding-x) - 0.8em) 50%, calc(100% - var(--sassy-input-padding-x) - 0.4em) 50%;
   background-repeat: no-repeat;
   background-size: 0.4em 0.4em;
-  padding-right: calc(var(--bf-input-padding-x) * 2 + 0.8em);
+  padding-right: calc(var(--sassy-input-padding-x) * 2 + 0.8em);
 }
 [multiple].select-sm, [multiple].select-lg, [multiple].select, [size].select-sm:not([size="1"]), [size].select-lg:not([size="1"]), [size].select:not([size="1"]) {
   background-image: none;
-  padding-right: var(--bf-input-padding-x);
+  padding-right: var(--sassy-input-padding-x);
 }
 
 .select-sm {
-  --bf-input-padding-y: 0.25rem;
-  --bf-input-padding-x: 0.5rem;
-  --bf-input-font-size: calc(var(--bf-font-size-base) * 0.875);
-  --bf-input-radius: 0.25rem;
+  --sassy-input-padding-y: 0.25rem;
+  --sassy-input-padding-x: 0.5rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
+  --sassy-input-radius: 0.25rem;
 }
 
 .select-lg {
-  --bf-input-padding-y: 0.5rem;
-  --bf-input-padding-x: 1rem;
-  --bf-input-font-size: calc(var(--bf-font-size-base) * 1.25);
-  --bf-input-radius: 0.5rem;
+  --sassy-input-padding-y: 0.5rem;
+  --sassy-input-padding-x: 1rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
+  --sassy-input-radius: 0.5rem;
 }
 
 .check, .check-inline {
@@ -480,13 +480,13 @@ label {
 
 .check-input {
   appearance: none;
-  background-color: rgb(var(--bf-input-bg));
-  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
+  background-color: rgb(var(--sassy-input-bg));
+  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
   box-sizing: border-box;
   flex-shrink: 0;
   font-size: inherit;
   height: 1em;
-  margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0;
+  margin: calc((var(--sassy-line-height-base) - 1) * 0.5em) 0 0;
   position: relative;
   print-color-adjust: exact;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -507,12 +507,12 @@ label {
   }
 }
 .check-input:checked {
-  background-color: rgb(var(--bf-check-checked-colour));
-  border-color: rgb(var(--bf-check-checked-colour));
+  background-color: rgb(var(--sassy-check-checked-colour));
+  border-color: rgb(var(--sassy-check-checked-colour));
 }
 .check-input:focus-visible {
-  border-color: rgb(var(--bf-input-focus-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-focus-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
   outline: 0;
 }
 .check-input:disabled {
@@ -520,30 +520,30 @@ label {
   opacity: 0.5;
 }
 .check-input:user-invalid, [aria-invalid=true].check-input {
-  border-color: rgb(var(--bf-input-invalid-colour));
+  border-color: rgb(var(--sassy-input-invalid-colour));
 }
 .check-input:user-invalid:focus-visible, [aria-invalid=true].check-input:focus-visible {
-  border-color: rgb(var(--bf-input-invalid-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-invalid-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
   outline: 0;
 }
 .check-input::before {
-  background-color: rgb(var(--bf-check-mark-colour));
+  background-color: rgb(var(--sassy-check-mark-colour));
   transform: scale(0);
 }
 .check-input:checked::before {
   transform: scale(1);
 }
 [type=checkbox].check-input {
-  border-radius: var(--bf-check-radius);
+  border-radius: var(--sassy-check-radius);
 }
 [type=checkbox].check-input::before {
   -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
   mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e") center/100% no-repeat;
 }
 [type=checkbox].check-input:indeterminate {
-  background-color: rgb(var(--bf-check-checked-colour));
-  border-color: rgb(var(--bf-check-checked-colour));
+  background-color: rgb(var(--sassy-check-checked-colour));
+  border-color: rgb(var(--sassy-check-checked-colour));
 }
 [type=checkbox].check-input:indeterminate::before {
   -webkit-mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e") center/100% no-repeat;
@@ -563,18 +563,18 @@ label {
   opacity: 0.5;
 }
 :user-invalid ~ .check-label, [aria-invalid=true] ~ .check-label {
-  color: rgb(var(--bf-input-invalid-colour));
+  color: rgb(var(--sassy-input-invalid-colour));
 }
 
 .switch {
   appearance: none;
-  background-color: rgb(var(--bf-input-bg));
-  border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour));
+  background-color: rgb(var(--sassy-input-bg));
+  border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour));
   box-sizing: border-box;
   flex-shrink: 0;
   font-size: inherit;
   height: 1em;
-  margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0;
+  margin: calc((var(--sassy-line-height-base) - 1) * 0.5em) 0 0;
   position: relative;
   print-color-adjust: exact;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -595,12 +595,12 @@ label {
   }
 }
 .switch:checked {
-  background-color: rgb(var(--bf-check-checked-colour));
-  border-color: rgb(var(--bf-check-checked-colour));
+  background-color: rgb(var(--sassy-check-checked-colour));
+  border-color: rgb(var(--sassy-check-checked-colour));
 }
 .switch:focus-visible {
-  border-color: rgb(var(--bf-input-focus-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-focus-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-focus-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-focus-colour) / 0.25);
   outline: 0;
 }
 .switch:disabled {
@@ -608,11 +608,11 @@ label {
   opacity: 0.5;
 }
 .switch:user-invalid, [aria-invalid=true].switch {
-  border-color: rgb(var(--bf-input-invalid-colour));
+  border-color: rgb(var(--sassy-input-invalid-colour));
 }
 .switch:user-invalid:focus-visible, [aria-invalid=true].switch:focus-visible {
-  border-color: rgb(var(--bf-input-invalid-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-invalid-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
   outline: 0;
 }
 .switch {
@@ -621,36 +621,36 @@ label {
 }
 .switch::before {
   aspect-ratio: 1;
-  background-color: rgb(var(--bf-switch-knob-colour));
+  background-color: rgb(var(--sassy-switch-knob-colour));
   border-radius: 50%;
   inset: 0.125em auto auto 0.125em;
   height: calc(100% - 0.25em);
 }
 .switch:checked::before {
-  background-color: rgb(var(--bf-check-mark-colour));
+  background-color: rgb(var(--sassy-check-mark-colour));
   transform: translateX(1em);
 }
 
 .invalid {
-  border-color: rgb(var(--bf-input-invalid-colour));
+  border-color: rgb(var(--sassy-input-invalid-colour));
 }
 .invalid:focus-visible {
-  border-color: rgb(var(--bf-input-invalid-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-invalid-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-invalid-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-invalid-colour) / 0.25);
   outline: 0;
 }
 
 .valid {
-  border-color: rgb(var(--bf-input-valid-colour));
+  border-color: rgb(var(--sassy-input-valid-colour));
 }
 .valid:focus-visible {
-  border-color: rgb(var(--bf-input-valid-colour));
-  box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb(var(--bf-input-valid-colour) / 0.25);
+  border-color: rgb(var(--sassy-input-valid-colour));
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb(var(--sassy-input-valid-colour) / 0.25);
   outline: 0;
 }
 
 .feedback-invalid {
-  color: rgb(var(--bf-input-invalid-colour));
+  color: rgb(var(--sassy-input-invalid-colour));
   font-size: 0.875em;
   margin-top: 0.25rem;
   display: none;
@@ -660,42 +660,42 @@ label {
 }
 
 .feedback-valid {
-  color: rgb(var(--bf-input-valid-colour));
+  color: rgb(var(--sassy-input-valid-colour));
   font-size: 0.875em;
   margin-top: 0.25rem;
   display: block;
 }
 
 body {
-  color: rgb(var(--bf-body-colour));
-  font-family: var(--bf-body-font-family);
-  font-size: var(--bf-body-font-size);
-  font-weight: var(--bf-body-font-weight);
-  line-height: var(--bf-body-line-height);
+  color: rgb(var(--sassy-body-colour));
+  font-family: var(--sassy-body-font-family);
+  font-size: var(--sassy-body-font-size);
+  font-weight: var(--sassy-body-font-weight);
+  line-height: var(--sassy-body-line-height);
 }
 body h1 {
-  font-size: calc(var(--bf-font-size-base) * 2);
+  font-size: calc(var(--sassy-font-size-base) * 2);
 }
 body h2 {
-  font-size: calc(var(--bf-font-size-base) * 1.8);
+  font-size: calc(var(--sassy-font-size-base) * 1.8);
 }
 body h3 {
-  font-size: calc(var(--bf-font-size-base) * 1.6);
+  font-size: calc(var(--sassy-font-size-base) * 1.6);
 }
 body h4 {
-  font-size: calc(var(--bf-font-size-base) * 1.4);
+  font-size: calc(var(--sassy-font-size-base) * 1.4);
 }
 body h5 {
-  font-size: calc(var(--bf-font-size-base) * 1.2);
+  font-size: calc(var(--sassy-font-size-base) * 1.2);
 }
 body h6 {
-  font-size: calc(var(--bf-font-size-base) * 1.1);
+  font-size: calc(var(--sassy-font-size-base) * 1.1);
 }
 body input {
-  font-family: var(--bf-body-font-family);
+  font-family: var(--sassy-body-font-family);
 }
 body code, body textarea {
-  font-family: var(--bf-font-family-mono);
+  font-family: var(--sassy-font-family-mono);
 }
 
 .wrap-fluid, .wrap {
@@ -777,7 +777,5 @@ h1 {
 }
 
 :root {
-  --bf-theme-primary: 45 212 191;
+  --sassy-theme-primary: 45 212 191;
 }
-
-/*# sourceMappingURL=form.css.map */

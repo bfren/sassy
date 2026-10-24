@@ -3,7 +3,7 @@
 //  =================================================================
 
 // Forwarded first so that any configuration passed to the framework
-// (e.g. `with ($bf-full: true)`) reaches it before anything else loads it.
+// (e.g. `with ($sassy-full: true)`) reaches it before anything else loads it.
 @forward "10-core";
 
 

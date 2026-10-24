@@ -15,13 +15,13 @@
         $steps: map.merge($steps, ($step: calc($step * $unit)))
     @return $steps
 
-$bf-m-loop: (auto: auto, inherit: inherit)
-@for $i from 0 through $bf-loop-max
-    $bf-m-loop: map.merge($bf-m-loop, ($i: $i * $bf-margin-unit))
+$sassy-m-loop: (auto: auto, inherit: inherit)
+@for $i from 0 through $sassy-loop-max
+    $sassy-m-loop: map.merge($sassy-m-loop, ($i: $i * $sassy-margin-unit))
 
-$bf-p-loop: (inherit: inherit)
-@for $i from 0 through $bf-loop-max
-    $bf-p-loop: map.merge($bf-p-loop, ($i: $i * $bf-padding-unit))
+$sassy-p-loop: (inherit: inherit)
+@for $i from 0 through $sassy-loop-max
+    $sassy-p-loop: map.merge($sassy-p-loop, ($i: $i * $sassy-padding-unit))
 
 
 
@@ -39,33 +39,33 @@ $bf-p-loop: (inherit: inherit)
         padding: 0
         width: 100%
 
-        @include make.up((width, $bf-breakpoints))
+        @include make.up((width, $sassy-breakpoints))
 
     // Position
 
-    @include make.responsive("position", $bf-position) using ($value)
+    @include make.responsive("position", $sassy-position) using ($value)
         position: $value
 
     // Offset
 
-    @each $key, $val in $bf-sides
-        @include make.responsive($val, $bf-offset) using ($value)
+    @each $key, $val in $sassy-sides
+        @include make.responsive($val, $sassy-offset) using ($value)
             #{$val}: $value
 
     // Z-index
 
-    @include make.responsive("z-index", $bf-z-index) using ($value)
+    @include make.responsive("z-index", $sassy-z-index) using ($value)
         z-index: $value
 
     // Overflow
 
-    @include make.responsive("overflow", $bf-overflow) using ($value)
+    @include make.responsive("overflow", $sassy-overflow) using ($value)
         overflow: $value
 
-    @include make.responsive("overflow-x", $bf-overflow) using ($value)
+    @include make.responsive("overflow-x", $sassy-overflow) using ($value)
         overflow-x: $value
 
-    @include make.responsive("overflow-y", $bf-overflow) using ($value)
+    @include make.responsive("overflow-y", $sassy-overflow) using ($value)
         overflow-y: $value
 
     // Height
@@ -113,36 +113,36 @@ $bf-p-loop: (inherit: inherit)
     @include make.responsive("m", ("centre")) using ($value)
         margin: 0 auto
 
-    @include make.responsive("m", $bf-m-loop) using ($value)
+    @include make.responsive("m", $sassy-m-loop) using ($value)
         margin: $value
 
-    @include make.responsive("mx", $bf-m-loop) using ($value)
+    @include make.responsive("mx", $sassy-m-loop) using ($value)
         margin-left: $value
         margin-right: $value
 
-    @include make.responsive("my", $bf-m-loop) using ($value)
+    @include make.responsive("my", $sassy-m-loop) using ($value)
         margin-top: $value
         margin-bottom: $value
 
-    @each $key, $val in $bf-sides
-        @include make.responsive("m" + $key, $bf-m-loop) using ($value)
+    @each $key, $val in $sassy-sides
+        @include make.responsive("m" + $key, $sassy-m-loop) using ($value)
             #{"margin-" + $val}: $value
 
     // Padding
 
-    @include make.responsive("p", $bf-p-loop) using ($value)
+    @include make.responsive("p", $sassy-p-loop) using ($value)
         padding: $value
 
-    @include make.responsive("px", $bf-p-loop) using ($value)
+    @include make.responsive("px", $sassy-p-loop) using ($value)
         padding-left: $value
         padding-right: $value
 
-    @include make.responsive("py", $bf-p-loop) using ($value)
+    @include make.responsive("py", $sassy-p-loop) using ($value)
         padding-top: $value
         padding-bottom: $value
 
-    @each $key, $val in $bf-sides
-        @include make.responsive("p" + $key, $bf-p-loop) using ($value)
+    @each $key, $val in $sassy-sides
+        @include make.responsive("p" + $key, $sassy-p-loop) using ($value)
             #{"padding-" + $val}: $value
 
 
@@ -150,7 +150,7 @@ $bf-p-loop: (inherit: inherit)
 
     .wrap
         @extend %#{make.name("wrap")}
-        @each $breakpoint-key in map.keys($bf-breakpoints)
+        @each $breakpoint-key in map.keys($sassy-breakpoints)
             @extend %#{make.name("wrap", $breakpoint-key)}
 
     .wrap-fluid

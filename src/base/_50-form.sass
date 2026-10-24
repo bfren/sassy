@@ -11,17 +11,17 @@
 @mixin control()
     appearance: none
     background-clip: padding-box
-    background-color: rgb(var(--bf-input-bg))
-    border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour))
-    border-radius: var(--bf-input-radius)
+    background-color: rgb(var(--sassy-input-bg))
+    border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour))
+    border-radius: var(--sassy-input-radius)
     box-sizing: border-box
-    color: rgb(var(--bf-input-colour))
+    color: rgb(var(--sassy-input-colour))
     display: block
     font-family: inherit
-    font-size: var(--bf-input-font-size)
-    line-height: var(--bf-input-line-height)
+    font-size: var(--sassy-input-font-size)
+    line-height: var(--sassy-input-line-height)
     margin: 0
-    padding: var(--bf-input-padding-y) var(--bf-input-padding-x)
+    padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x)
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
     width: 100%
 
@@ -29,17 +29,17 @@
         transition: none
 
     &::placeholder
-        color: rgb(var(--bf-input-placeholder-colour))
+        color: rgb(var(--sassy-input-placeholder-colour))
         opacity: 1
 
     &:focus-visible
-        @include focus-ring(var(--bf-input-focus-colour))
+        @include focus-ring(var(--sassy-input-focus-colour))
 
     &[readonly]
-        background-color: rgb(var(--bf-input-readonly-bg))
+        background-color: rgb(var(--sassy-input-readonly-bg))
 
     &:disabled
-        background-color: rgb(var(--bf-input-disabled-bg))
+        background-color: rgb(var(--sassy-input-disabled-bg))
         cursor: not-allowed
         opacity: 1
 
@@ -52,7 +52,7 @@
 @mixin invalid()
     &:user-invalid,
     &[aria-invalid="true"]
-        @include state(var(--bf-input-invalid-colour))
+        @include state(var(--sassy-input-invalid-colour))
 
 
 
@@ -68,14 +68,14 @@
 /// Declarations shared by checkboxes, radios and switches.
 @mixin check()
     appearance: none
-    background-color: rgb(var(--bf-input-bg))
-    border: var(--bf-input-border-width) solid rgb(var(--bf-input-border-colour))
+    background-color: rgb(var(--sassy-input-bg))
+    border: var(--sassy-input-border-width) solid rgb(var(--sassy-input-border-colour))
     box-sizing: border-box
     flex-shrink: 0
     font-size: inherit
     height: 1em
     // centres the input on the first line of the label
-    margin: calc((var(--bf-line-height-base) - 1) * 0.5em) 0 0
+    margin: calc((var(--sassy-line-height-base) - 1) * 0.5em) 0 0
     position: relative
     print-color-adjust: exact
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
@@ -97,7 +97,7 @@
         @include checked()
 
     &:focus-visible
-        @include focus-ring(var(--bf-input-focus-colour))
+        @include focus-ring(var(--sassy-input-focus-colour))
 
     &:disabled
         cursor: not-allowed
@@ -109,8 +109,8 @@
 
 /// Checked colours for checks and switches.
 @mixin checked()
-    background-color: rgb(var(--bf-check-checked-colour))
-    border-color: rgb(var(--bf-check-checked-colour))
+    background-color: rgb(var(--sassy-check-checked-colour))
+    border-color: rgb(var(--sassy-check-checked-colour))
 
 
 
@@ -125,14 +125,14 @@
 @mixin feedback($colour)
     color: rgb($colour)
     font-size: 0.875em
-    margin-top: $bf-margin-unit
+    margin-top: $sassy-margin-unit
 
 
 
 /// Focus ring in the given colour (space-separated R G B).
 @mixin focus-ring($colour)
     border-color: rgb($colour)
-    box-shadow: 0 0 0 var(--bf-input-focus-ring) rgb-with-alpha($colour, 0.25)
+    box-shadow: 0 0 0 var(--sassy-input-focus-ring) rgb-with-alpha($colour, 0.25)
     outline: 0
 
 
@@ -140,4 +140,4 @@
 /// Redefines the control custom properties for a size variant.
 @mixin size($props)
     @each $name, $value in $props
-        --bf-input-#{$name}: #{$value}
+        --sassy-input-#{$name}: #{$value}

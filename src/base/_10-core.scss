@@ -4,16 +4,16 @@
 //  Base
 //  =================================================================
 
-$bf-version: 0.1;
+$sassy-version: 0.1;
 
-$bf-debug: false !default;
-$bf-full: false !default;
+$sassy-debug: false !default;
+$sassy-full: false !default;
 
-$bf-prefix: "bf" !default;
-$bf-separator: "-" !default;
-$bf-loop-max: 20 !default;
+$sassy-prefix: "bf" !default;
+$sassy-separator: "-" !default;
+$sassy-loop-max: 20 !default;
 
-$bf-sides: (
+$sassy-sides: (
     t: top,
     e: right,
     b: bottom,
@@ -21,12 +21,12 @@ $bf-sides: (
 );
 
 
-/// Joins a list of items using $bf-separator.
+/// Joins a list of items using $sassy-separator.
 ///
 /// @param {any} $var
 ///     String or list of strings.
 /// @return {string}
-///     Values separated by $bf-separator.
+///     Values separated by $sassy-separator.
 @function join-values($val) {
     // a single value is treated as a one-item list
     $joined: null;
@@ -35,7 +35,7 @@ $bf-sides: (
             $joined: "#{$item}";
         }
         @else {
-            $joined: $joined + $bf-separator + $item;
+            $joined: $joined + $sassy-separator + $item;
         }
     }
     @return string.unquote($joined);

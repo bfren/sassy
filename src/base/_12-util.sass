@@ -8,7 +8,7 @@
 /// @param {string} $breakpoint
 ///     Breakpoint value.
 @mixin up($breakpoint)
-    @media (min-width: map.get($bf-breakpoints, $breakpoint))
+    @media (min-width: map.get($sassy-breakpoints, $breakpoint))
         @content
 
 
@@ -18,7 +18,7 @@
 /// @param {string} $property-map
 ///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
 @mixin up-prop($property-map...)
-    @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
+    @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
         @media (min-width: $breakpoint-value)
             @each $property-name, $property-values in $property-map
                 #{$property-name}: map.get($property-values, $breakpoint-key)

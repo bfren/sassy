@@ -18,7 +18,7 @@ $-pass: null
 @mixin passes()
     $-pass: "base" !global
     @content
-    @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
+    @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
         $-pass: $breakpoint-key !global
         @content
     $-pass: null !global
@@ -31,7 +31,7 @@ $-pass: null
     @include -in-base
         %#{-get-class-name($class)}
             @content
-        @if $bf-full
+        @if $sassy-full
             .#{-get-class-name($class)}
                 @content
 
@@ -65,13 +65,13 @@ $-pass: null
 ///     Map of CSS definitions, e.g. (sm: 150px, md: 200px, lg: 250px).
 @mixin up($property-map...)
     @include -up(false) using ($breakpoint)
-        &#{$bf-separator + $breakpoint}
+        &#{$sassy-separator + $breakpoint}
             @each $property-name, $property-values in $property-map
                 #{$property-name}: map.get($property-values, $breakpoint)
 
 
 
-/// Returns a namespaced placeholder / class name built from $bf-prefix and $bf-separator,
+/// Returns a namespaced placeholder / class name built from $sassy-prefix and $sassy-separator,
 /// for use inside the framework instead of hard-coding the prefix,
 /// e.g. `@extend %#{make.name("mt", 0)}` gives %bf-mt-0 by default.
 ///
@@ -85,22 +85,22 @@ $-pass: null
 
 
 /// Creates a namespaced class name - for example 'fred' becomes 'bf-fred'.
-/// With an empty $bf-prefix the class name is returned unchanged.
+/// With an empty $sassy-prefix the class name is returned unchanged.
 ///
 /// @param {string} $class
 ///     Class name.
 /// @return {string}
 ///     Namespaced class name.
 @function -get-class-name($class)
-    @if $bf-prefix == ""
+    @if $sassy-prefix == ""
         @return $class
 
     // don't add the prefix if it already has been added - used during make.responsive recursion
-    $prefix: $bf-prefix + $bf-separator
+    $prefix: $sassy-prefix + $sassy-separator
     @if string.slice($class, 1, string.length($prefix)) == $prefix
         @return $class
     @else
-        @return join-values(($bf-prefix $class))
+        @return join-values(($sassy-prefix $class))
 
 
 
@@ -126,7 +126,7 @@ $-pass: null
     @include -in-base
         %#{$class}
             @content
-        @if $bf-full
+        @if $sassy-full
             .#{$class}
                 @content
 
@@ -135,7 +135,7 @@ $-pass: null
         @include -up() using ($breakpoint)
             %#{-get-sub-class-name($class, $breakpoint)}
                 @content
-            @if $bf-full
+            @if $sassy-full
                 .#{-get-sub-class-name($class, $breakpoint)}
                     @content
 
@@ -156,7 +156,7 @@ $-pass: null
         @include -each-leaf($base-class, $sub-class-map, null) using ($class, $value)
             %#{$class}
                 @content($value)
-            @if $bf-full
+            @if $sassy-full
                 .#{$class}
                     @content($value)
 
@@ -166,7 +166,7 @@ $-pass: null
             @include -each-leaf($base-class, $sub-class-map, $breakpoint) using ($class, $value)
                 %#{$class}
                     @content($value)
-                @if $bf-full
+                @if $sassy-full
                     .#{$class}
                         @content($value)
 
@@ -225,7 +225,7 @@ $-pass: null
 ///     When true (default) and inside make.passes, only the current pass's breakpoint is output.
 ///     make.up uses false because its media queries are part of a base definition.
 @mixin -up($by-pass: true)
-    @each $breakpoint-key, $breakpoint-value in $bf-breakpoints
+    @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
         @if not $by-pass or $-pass == null or $-pass == $breakpoint-key
             @media (min-width: $breakpoint-value)
                 @content($breakpoint-key)

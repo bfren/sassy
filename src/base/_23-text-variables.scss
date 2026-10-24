@@ -1,39 +1,39 @@
 @use "21-colour-variables" as *;
 
 :root {
-    --bf-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
-    --bf-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-    --bf-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
-    --bf-font-size-base: 1rem;
-    --bf-font-weight-base: 400;
-    --bf-line-height-base: 1.5;
+    --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
+    --sassy-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --sassy-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
+    --sassy-font-size-base: 1rem;
+    --sassy-font-weight-base: 400;
+    --sassy-line-height-base: 1.5;
 
-    --bf-body-colour: #{colour("grey", 800)};
-    --bf-body-font-family: var(--bf-font-family-sans);
-    --bf-body-font-size: var(--bf-font-size-base);
-    --bf-body-font-weight: var(--bf-font-weight-base);
-    --bf-body-line-height: var(--bf-line-height-base);
+    --sassy-body-colour: #{colour("grey", 800)};
+    --sassy-body-font-family: var(--sassy-font-family-sans);
+    --sassy-body-font-size: var(--sassy-font-size-base);
+    --sassy-body-font-weight: var(--sassy-font-weight-base);
+    --sassy-body-line-height: var(--sassy-line-height-base);
 }
 
-$bf-font-family: (
-    mono: var(--bf-font-family-mono),
-    sans: var(--bf-font-family-sans),
-    serif: var(--bf-font-family-serif)
+$sassy-font-family: (
+    mono: var(--sassy-font-family-mono),
+    sans: var(--sassy-font-family-sans),
+    serif: var(--sassy-font-family-serif)
 );
 
-$bf-font-size: (
-    1: calc(var(--bf-font-size-base) * 2),
-    2: calc(var(--bf-font-size-base) * 1.8),
-    3: calc(var(--bf-font-size-base) * 1.6),
-    4: calc(var(--bf-font-size-base) * 1.4),
-    5: calc(var(--bf-font-size-base) * 1.2),
-    6: calc(var(--bf-font-size-base) * 1.1),
-    base: var(--bf-font-size-base),
-    small: calc(var(--bf-font-size-base) * 0.8),
-    smaller: calc(var(--bf-font-size-base) * 0.7),
-    smallest: calc(var(--bf-font-size-base) * 0.6)) !default;
+$sassy-font-size: (
+    1: calc(var(--sassy-font-size-base) * 2),
+    2: calc(var(--sassy-font-size-base) * 1.8),
+    3: calc(var(--sassy-font-size-base) * 1.6),
+    4: calc(var(--sassy-font-size-base) * 1.4),
+    5: calc(var(--sassy-font-size-base) * 1.2),
+    6: calc(var(--sassy-font-size-base) * 1.1),
+    base: var(--sassy-font-size-base),
+    small: calc(var(--sassy-font-size-base) * 0.8),
+    smaller: calc(var(--sassy-font-size-base) * 0.7),
+    smallest: calc(var(--sassy-font-size-base) * 0.6)) !default;
 
-$bf-font-style: (
+$sassy-font-style: (
     inherit,
     initial,
     italic,
@@ -41,7 +41,7 @@ $bf-font-style: (
     oblique
 );
 
-$bf-font-weight: (
+$sassy-font-weight: (
     100,
     200,
     300,
@@ -57,14 +57,14 @@ $bf-font-weight: (
     normal
 );
 
-$bf-line-height: (
-    base: var(--bf-line-height-base),
+$sassy-line-height: (
+    base: var(--sassy-line-height-base),
     double: 2,
     single: 1,
     triple: 3,
 );
 
-$bf-text-align: (
+$sassy-text-align: (
     centre: center,
     inherit: inherit,
     initial: initial,
@@ -73,7 +73,7 @@ $bf-text-align: (
     end: right
 );
 
-$bf-text-decoration: (
+$sassy-text-decoration: (
     through: line-through,
     inherit: inherit,
     initial: initial,
@@ -82,7 +82,7 @@ $bf-text-decoration: (
     under: underline
 );
 
-$bf-text-transform: (
+$sassy-text-transform: (
     capitalise: capitalize,
     inherit: inherit,
     initial: initial,
