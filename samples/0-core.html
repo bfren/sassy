@@ -36,7 +36,7 @@
 <pre><code>@use "sassy/src" as sassy
 
 .tooltip
-    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.9)
+    background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.6)
     color: sassy.colour("grey", 50)</code></pre>
         </section>
 
@@ -60,6 +60,7 @@
                 <div class="sidebar">Sidebar</div>
             </div>
 <pre><code>.sidebar
+    background-color: sassy.colour("grey", 200)
     @include sassy.up-prop(width (sm: 50%, lg: 25%))</code></pre>
         </section>
 
