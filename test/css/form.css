@@ -242,7 +242,7 @@
   --sassy-font-size-base: 1rem;
   --sassy-font-weight-base: 400;
   --sassy-line-height-base: 1.5;
-  --sassy-body-colour: oklch(27.8% 0.033 256.848);
+  --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
   --sassy-body-font-family: var(--sassy-font-family-sans);
   --sassy-body-font-size: var(--sassy-font-size-base);
   --sassy-body-font-weight: var(--sassy-font-weight-base);
@@ -258,14 +258,14 @@
 }
 
 :root {
-  --sassy-theme-primary: oklch(58.8% 0.158 241.966);
-  --sassy-theme-secondary: oklch(55.3% 0.195 38.402);
-  --sassy-theme-ok: oklch(62.7% 0.194 149.214);
-  --sassy-theme-info: oklch(90.1% 0.058 230.902);
-  --sassy-theme-warn: oklch(82.8% 0.189 84.429);
-  --sassy-theme-error: oklch(57.7% 0.245 27.325);
-  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338);
-  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802);
+  --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+  --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+  --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+  --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+  --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+  --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+  --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+  --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
 }
 
 :root {
@@ -279,12 +279,12 @@
   --sassy-input-padding-x: 0.75rem;
   --sassy-input-border-width: 1px;
   --sassy-input-radius: var(--sassy-radius);
-  --sassy-input-colour: oklch(27.8% 0.033 256.848);
+  --sassy-input-colour: oklch(27.8% 0.033 256.848deg);
   --sassy-input-bg: #fff;
-  --sassy-input-border-colour: oklch(87.2% 0.01 258.338);
-  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364);
-  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542);
-  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839);
+  --sassy-input-border-colour: oklch(87.2% 0.01 258.338deg);
+  --sassy-input-placeholder-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-disabled-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-readonly-bg: oklch(98.5% 0.002 247.839deg);
   --sassy-input-focus-colour: var(--sassy-theme-primary);
   --sassy-input-focus-ring: 0.25rem;
   --sassy-input-invalid-colour: var(--sassy-theme-error);
@@ -293,7 +293,17 @@
   --sassy-check-mark-colour: #fff;
   --sassy-check-radius: 0.25em;
   --sassy-switch-knob-colour: var(--sassy-input-border-colour);
-  --sassy-form-text-colour: oklch(55.1% 0.027 264.364);
+  --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e2939' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  --sassy-form-text-colour: oklch(55.1% 0.027 264.364deg);
+  --sassy-input-addon-bg: oklch(96.7% 0.003 264.542deg);
+  --sassy-input-addon-hover-bg: oklch(92.8% 0.006 264.531deg);
+  --sassy-floating-height: 3.5rem;
+  --sassy-floating-padding-y: 1rem;
+  --sassy-range-track-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-range-track-height: 0.5rem;
+  --sassy-range-thumb-colour: var(--sassy-theme-primary);
+  --sassy-range-thumb-size: 1rem;
+  --sassy-range-disabled-colour: oklch(70.7% 0.022 261.325deg);
 }
 
 label {
@@ -308,7 +318,7 @@ label {
   margin-top: 0.25rem;
 }
 
-.control, .control-sm, .control-lg {
+.control, .control-small, .control-large {
   appearance: none;
   background-clip: padding-box;
   background-color: var(--sassy-input-bg);
@@ -326,48 +336,48 @@ label {
   width: 100%;
 }
 @media (prefers-reduced-motion: reduce) {
-  .control, .control-sm, .control-lg {
+  .control, .control-small, .control-large {
     transition: none;
   }
 }
-.control::placeholder, .control-sm::placeholder, .control-lg::placeholder {
+.control::placeholder, .control-small::placeholder, .control-large::placeholder {
   color: var(--sassy-input-placeholder-colour);
   opacity: 1;
 }
-.control:focus-visible, .control-sm:focus-visible, .control-lg:focus-visible {
+.control:focus-visible, .control-small:focus-visible, .control-large:focus-visible {
   border-color: var(--sassy-input-focus-colour);
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
   outline: 0;
 }
-[readonly].control, [readonly].control-sm, [readonly].control-lg {
+[readonly].control, [readonly].control-small, [readonly].control-large {
   background-color: var(--sassy-input-readonly-bg);
 }
-.control:disabled, .control-sm:disabled, .control-lg:disabled {
+.control:disabled, .control-small:disabled, .control-large:disabled {
   background-color: var(--sassy-input-disabled-bg);
   cursor: not-allowed;
   opacity: 1;
 }
-.control:user-invalid, .control-sm:user-invalid, .control-lg:user-invalid, [aria-invalid=true].control, [aria-invalid=true].control-sm, [aria-invalid=true].control-lg {
+.control:user-invalid, .control-small:user-invalid, .control-large:user-invalid, [aria-invalid=true].control, [aria-invalid=true].control-small, [aria-invalid=true].control-large {
   border-color: var(--sassy-input-invalid-colour);
 }
-.control:user-invalid:focus-visible, .control-sm:user-invalid:focus-visible, .control-lg:user-invalid:focus-visible, [aria-invalid=true].control:focus-visible, [aria-invalid=true].control-sm:focus-visible, [aria-invalid=true].control-lg:focus-visible {
+.control:user-invalid:focus-visible, .control-small:user-invalid:focus-visible, .control-large:user-invalid:focus-visible, [aria-invalid=true].control:focus-visible, [aria-invalid=true].control-small:focus-visible, [aria-invalid=true].control-large:focus-visible {
   border-color: var(--sassy-input-invalid-colour);
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
-.control:is(textarea), .control-sm:is(textarea), .control-lg:is(textarea) {
+.control:is(textarea), .control-small:is(textarea), .control-large:is(textarea) {
   min-height: calc(var(--sassy-input-line-height) * 1em + var(--sassy-input-padding-y) * 2 + var(--sassy-input-border-width) * 2);
   resize: vertical;
 }
 
-.control-sm {
+.control-small {
   --sassy-input-padding-y: 0.25rem;
   --sassy-input-padding-x: 0.5rem;
   --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
   --sassy-input-radius: 0.25rem;
 }
 
-.control-lg {
+.control-large {
   --sassy-input-padding-y: 0.5rem;
   --sassy-input-padding-x: 1rem;
   --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
@@ -389,7 +399,7 @@ label {
   width: 100%;
 }
 
-.select-sm, .select-lg, .select {
+.select-small, .select-large, .select {
   appearance: none;
   background-clip: padding-box;
   background-color: var(--sassy-input-bg);
@@ -405,55 +415,60 @@ label {
   padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
-  background-image: linear-gradient(45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%), linear-gradient(-45deg, transparent 40%, var(--sassy-input-colour) 40% 60%, transparent 60%);
-  background-position: calc(100% - var(--sassy-input-padding-x) - 0.8em) 50%, calc(100% - var(--sassy-input-padding-x) - 0.4em) 50%;
-  background-repeat: no-repeat;
-  background-size: 0.4em 0.4em;
-  padding-right: calc(var(--sassy-input-padding-x) * 2 + 0.8em);
 }
 @media (prefers-reduced-motion: reduce) {
-  .select-sm, .select-lg, .select {
+  .select-small, .select-large, .select {
     transition: none;
   }
 }
-.select-sm::placeholder, .select-lg::placeholder, .select::placeholder {
+.select-small::placeholder, .select-large::placeholder, .select::placeholder {
   color: var(--sassy-input-placeholder-colour);
   opacity: 1;
 }
-.select-sm:focus-visible, .select-lg:focus-visible, .select:focus-visible {
+.select-small:focus-visible, .select-large:focus-visible, .select:focus-visible {
   border-color: var(--sassy-input-focus-colour);
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
   outline: 0;
 }
-[readonly].select-sm, [readonly].select-lg, [readonly].select {
+[readonly].select-small, [readonly].select-large, [readonly].select {
   background-color: var(--sassy-input-readonly-bg);
 }
-.select-sm:disabled, .select-lg:disabled, .select:disabled {
+.select-small:disabled, .select-large:disabled, .select:disabled {
   background-color: var(--sassy-input-disabled-bg);
   cursor: not-allowed;
   opacity: 1;
 }
-.select-sm:user-invalid, .select-lg:user-invalid, .select:user-invalid, [aria-invalid=true].select-sm, [aria-invalid=true].select-lg, [aria-invalid=true].select {
+.select-small:user-invalid, .select-large:user-invalid, .select:user-invalid, [aria-invalid=true].select-small, [aria-invalid=true].select-large, [aria-invalid=true].select {
   border-color: var(--sassy-input-invalid-colour);
 }
-.select-sm:user-invalid:focus-visible, .select-lg:user-invalid:focus-visible, .select:user-invalid:focus-visible, [aria-invalid=true].select-sm:focus-visible, [aria-invalid=true].select-lg:focus-visible, [aria-invalid=true].select:focus-visible {
+.select-small:user-invalid:focus-visible, .select-large:user-invalid:focus-visible, .select:user-invalid:focus-visible, [aria-invalid=true].select-small:focus-visible, [aria-invalid=true].select-large:focus-visible, [aria-invalid=true].select:focus-visible {
   border-color: var(--sassy-input-invalid-colour);
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
-[multiple].select-sm, [multiple].select-lg, [multiple].select, [size].select-sm:not([size="1"]), [size].select-lg:not([size="1"]), [size].select:not([size="1"]) {
+.select-small, .select-large, .select {
+  background-image: var(--sassy-select-chevron);
+  background-position: right var(--sassy-input-padding-x) center;
+  background-repeat: no-repeat;
+  background-size: 1em 0.75em;
+  padding-right: calc(var(--sassy-input-padding-x) * 2 + 1em);
+}
+.select-small option, .select-large option, .select option, .select-small optgroup, .select-large optgroup, .select optgroup {
+  font: inherit;
+}
+[multiple].select-small, [multiple].select-large, [multiple].select, [size].select-small:not([size="1"]), [size].select-large:not([size="1"]), [size].select:not([size="1"]) {
   background-image: none;
   padding-right: var(--sassy-input-padding-x);
 }
 
-.select-sm {
+.select-small {
   --sassy-input-padding-y: 0.25rem;
   --sassy-input-padding-x: 0.5rem;
   --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
   --sassy-input-radius: 0.25rem;
 }
 
-.select-lg {
+.select-large {
   --sassy-input-padding-y: 0.5rem;
   --sassy-input-padding-x: 1rem;
   --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
@@ -577,8 +592,6 @@ label {
   print-color-adjust: exact;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 1em;
-  border-radius: 1em;
-  width: 2em;
 }
 .switch::before {
   content: "";
@@ -615,6 +628,10 @@ label {
   box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
   outline: 0;
 }
+.switch {
+  border-radius: 1em;
+  width: 2em;
+}
 .switch::before {
   aspect-ratio: 1;
   background-color: var(--sassy-switch-knob-colour);
@@ -625,6 +642,327 @@ label {
 .switch:checked::before {
   background-color: var(--sassy-check-mark-colour);
   transform: translateX(1em);
+}
+
+.group, .group-small, .group-large {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+}
+.group > input, .group-small > input, .group-large > input, .group > select, .group-small > select, .group-large > select, .group > textarea, .group-small > textarea, .group-large > textarea {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+  width: 1%;
+}
+.group > :not(:first-child), .group-small > :not(:first-child), .group-large > :not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  margin-left: calc(var(--sassy-input-border-width) * -1);
+}
+.group > :not(:last-child), .group-small > :not(:last-child), .group-large > :not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.group > :user-invalid, .group-small > :user-invalid, .group-large > :user-invalid, .group > [aria-invalid=true], .group-small > [aria-invalid=true], .group-large > [aria-invalid=true] {
+  z-index: 2;
+}
+.group > :focus-visible, .group-small > :focus-visible, .group-large > :focus-visible {
+  z-index: 3;
+}
+
+.group-small {
+  --sassy-input-padding-y: 0.25rem;
+  --sassy-input-padding-x: 0.5rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
+  --sassy-input-radius: 0.25rem;
+}
+
+.group-large {
+  --sassy-input-padding-y: 0.5rem;
+  --sassy-input-padding-x: 1rem;
+  --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
+  --sassy-input-radius: 0.5rem;
+}
+
+.group-text {
+  align-items: center;
+  background-color: var(--sassy-input-addon-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
+  border-radius: var(--sassy-input-radius);
+  box-sizing: border-box;
+  color: var(--sassy-input-colour);
+  display: flex;
+  font-size: var(--sassy-input-font-size);
+  line-height: var(--sassy-input-line-height);
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.floating {
+  position: relative;
+}
+.floating > input, .floating > select, .floating > textarea {
+  height: calc(var(--sassy-floating-height) + var(--sassy-input-border-width) * 2);
+  line-height: 1.25;
+  min-height: calc(var(--sassy-floating-height) + var(--sassy-input-border-width) * 2);
+  padding: var(--sassy-floating-padding-y) var(--sassy-input-padding-x);
+}
+.floating > input::placeholder, .floating > textarea::placeholder {
+  color: transparent;
+}
+.floating > input:focus, .floating > input:not(:placeholder-shown), .floating > textarea:focus, .floating > textarea:not(:placeholder-shown), .floating > select {
+  padding-bottom: calc(var(--sassy-floating-padding-y) * 0.625);
+  padding-top: calc(var(--sassy-floating-padding-y) * 1.625);
+}
+.floating > label {
+  border: var(--sassy-input-border-width) solid transparent;
+  box-sizing: border-box;
+  color: var(--sassy-input-placeholder-colour);
+  height: 100%;
+  left: 0;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding: var(--sassy-floating-padding-y) var(--sassy-input-padding-x);
+  pointer-events: none;
+  position: absolute;
+  text-align: start;
+  text-overflow: ellipsis;
+  top: 0;
+  transform-origin: 0 0;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  white-space: nowrap;
+  z-index: 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating > label {
+    transition: none;
+  }
+}
+.floating > :focus ~ label, .floating > :not(:placeholder-shown) ~ label, .floating > select ~ label {
+  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+.range {
+  appearance: none;
+  background-color: transparent;
+  box-sizing: border-box;
+  display: block;
+  height: calc(var(--sassy-range-thumb-size) + var(--sassy-input-focus-ring) * 2);
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.range:focus-visible {
+  outline: 0;
+}
+.range::-webkit-slider-runnable-track {
+  background-color: var(--sassy-range-track-colour);
+  border: 0;
+  border-radius: var(--sassy-range-track-height);
+  color: transparent;
+  cursor: pointer;
+  height: var(--sassy-range-track-height);
+  width: 100%;
+}
+.range::-moz-range-track {
+  background-color: var(--sassy-range-track-colour);
+  border: 0;
+  border-radius: var(--sassy-range-track-height);
+  color: transparent;
+  cursor: pointer;
+  height: var(--sassy-range-track-height);
+  width: 100%;
+}
+.range::-webkit-slider-thumb {
+  appearance: none;
+  background-color: var(--sassy-range-thumb-colour);
+  border: 0;
+  border-radius: 50%;
+  height: var(--sassy-range-thumb-size);
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: var(--sassy-range-thumb-size);
+}
+@media (prefers-reduced-motion: reduce) {
+  .range::-webkit-slider-thumb {
+    transition: none;
+  }
+}
+.range::-webkit-slider-thumb {
+  margin-top: calc((var(--sassy-range-track-height) - var(--sassy-range-thumb-size)) / 2);
+}
+.range::-moz-range-thumb {
+  appearance: none;
+  background-color: var(--sassy-range-thumb-colour);
+  border: 0;
+  border-radius: 50%;
+  height: var(--sassy-range-thumb-size);
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: var(--sassy-range-thumb-size);
+}
+@media (prefers-reduced-motion: reduce) {
+  .range::-moz-range-thumb {
+    transition: none;
+  }
+}
+.range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 1px var(--sassy-input-bg), 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
+}
+.range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 1px var(--sassy-input-bg), 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
+}
+.range:disabled {
+  cursor: not-allowed;
+}
+.range:disabled::-webkit-slider-thumb {
+  background-color: var(--sassy-range-disabled-colour);
+}
+.range:disabled::-moz-range-thumb {
+  background-color: var(--sassy-range-disabled-colour);
+}
+
+.file {
+  appearance: none;
+  background-clip: padding-box;
+  background-color: var(--sassy-input-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
+  border-radius: var(--sassy-input-radius);
+  box-sizing: border-box;
+  color: var(--sassy-input-colour);
+  display: block;
+  font-family: inherit;
+  font-size: var(--sassy-input-font-size);
+  line-height: var(--sassy-input-line-height);
+  margin: 0;
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .file {
+    transition: none;
+  }
+}
+.file::placeholder {
+  color: var(--sassy-input-placeholder-colour);
+  opacity: 1;
+}
+.file:focus-visible {
+  border-color: var(--sassy-input-focus-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
+  outline: 0;
+}
+[readonly].file {
+  background-color: var(--sassy-input-readonly-bg);
+}
+.file:disabled {
+  background-color: var(--sassy-input-disabled-bg);
+  cursor: not-allowed;
+  opacity: 1;
+}
+.file:user-invalid, [aria-invalid=true].file {
+  border-color: var(--sassy-input-invalid-colour);
+}
+.file:user-invalid:focus-visible, [aria-invalid=true].file:focus-visible {
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
+  outline: 0;
+}
+.file {
+  overflow: hidden;
+}
+.file:not(:disabled):not([readonly]) {
+  cursor: pointer;
+}
+.file::file-selector-button {
+  background-color: var(--sassy-input-addon-bg);
+  border: 0 solid var(--sassy-input-border-colour);
+  border-inline-end-width: var(--sassy-input-border-width);
+  border-radius: 0;
+  color: var(--sassy-input-colour);
+  font: inherit;
+  margin: calc(var(--sassy-input-padding-y) * -1) calc(var(--sassy-input-padding-x) * -1);
+  margin-inline-end: var(--sassy-input-padding-x);
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+  pointer-events: none;
+  transition: background-color 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .file::file-selector-button {
+    transition: none;
+  }
+}
+.file:hover:not(:disabled):not([readonly])::file-selector-button {
+  background-color: var(--sassy-input-addon-hover-bg);
+}
+
+.colour {
+  appearance: none;
+  background-clip: padding-box;
+  background-color: var(--sassy-input-bg);
+  border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour);
+  border-radius: var(--sassy-input-radius);
+  box-sizing: border-box;
+  color: var(--sassy-input-colour);
+  display: block;
+  font-family: inherit;
+  font-size: var(--sassy-input-font-size);
+  line-height: var(--sassy-input-line-height);
+  margin: 0;
+  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .colour {
+    transition: none;
+  }
+}
+.colour::placeholder {
+  color: var(--sassy-input-placeholder-colour);
+  opacity: 1;
+}
+.colour:focus-visible {
+  border-color: var(--sassy-input-focus-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-focus-colour) 25%, transparent);
+  outline: 0;
+}
+[readonly].colour {
+  background-color: var(--sassy-input-readonly-bg);
+}
+.colour:disabled {
+  background-color: var(--sassy-input-disabled-bg);
+  cursor: not-allowed;
+  opacity: 1;
+}
+.colour:user-invalid, [aria-invalid=true].colour {
+  border-color: var(--sassy-input-invalid-colour);
+}
+.colour:user-invalid:focus-visible, [aria-invalid=true].colour:focus-visible {
+  border-color: var(--sassy-input-invalid-colour);
+  box-shadow: 0 0 0 var(--sassy-input-focus-ring) color-mix(in oklab, var(--sassy-input-invalid-colour) 25%, transparent);
+  outline: 0;
+}
+.colour {
+  cursor: pointer;
+  height: calc(var(--sassy-input-line-height) * var(--sassy-input-font-size) + var(--sassy-input-padding-y) * 2 + var(--sassy-input-border-width) * 2);
+  padding: var(--sassy-input-padding-y);
+  width: 3rem;
+}
+.colour::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.colour::-webkit-color-swatch {
+  border: 0;
+  border-radius: var(--sassy-input-radius);
+}
+.colour::-moz-color-swatch {
+  border: 0;
+  border-radius: var(--sassy-input-radius);
 }
 
 .invalid {
@@ -651,7 +989,7 @@ label {
   margin-top: 0.25rem;
   display: none;
 }
-:user-invalid ~ .feedback-invalid, [aria-invalid=true] ~ .feedback-invalid {
+:user-invalid ~ .feedback-invalid, [aria-invalid=true] ~ .feedback-invalid, :has(> :user-invalid) ~ .feedback-invalid, :has(> [aria-invalid=true]) ~ .feedback-invalid {
   display: block;
 }
 
@@ -773,7 +1111,7 @@ h1 {
 }
 
 :root {
-  --sassy-theme-primary: oklch(77.7% 0.152 181.912);
+  --sassy-theme-primary: oklch(60.6% 0.25 292.717deg);
 }
 
 /*# sourceMappingURL=form.css.map */

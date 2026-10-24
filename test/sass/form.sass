@@ -1,7 +1,7 @@
 @use "../../src/base/" as sassy
 
 :root
-    --sassy-theme-primary: #{sassy.colour("teal", 400)}
+    --sassy-theme-primary: #{sassy.colour("violet", 500)}
 
 body
     @extend %bf-body
@@ -25,7 +25,7 @@ label
 .control
     @extend %bf-form-control
 
-@each $size in (sm, lg)
+@each $size in (small, large)
     .control-#{$size}
         @extend %bf-form-control
         @extend %bf-form-control-#{$size}
@@ -67,3 +67,29 @@ label
 
 .feedback-valid
     @extend %bf-form-feedback-valid
+
+.group
+    @extend %bf-input-group
+
+.group-small
+    @extend %bf-input-group
+    @extend %bf-input-group-small
+
+.group-large
+    @extend %bf-input-group
+    @extend %bf-input-group-large
+
+.group-text
+    @extend %bf-input-group-text
+
+.floating
+    @extend %bf-form-floating
+
+.range
+    @extend %bf-form-range
+
+.file
+    @extend %bf-form-file
+
+.colour
+    @extend %bf-form-colour

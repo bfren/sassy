@@ -31,12 +31,12 @@
 
             <div class="field">
                 <label for="small">Small</label>
-                <input type="text" id="small" class="control-sm" placeholder="Small" />
+                <input type="text" id="small" class="control-small" placeholder="Small" />
             </div>
 
             <div class="field">
                 <label for="large">Large</label>
-                <input type="text" id="large" class="control-lg" placeholder="Large" />
+                <input type="text" id="large" class="control-large" placeholder="Large" />
             </div>
 
             <div class="field">
@@ -71,15 +71,15 @@
             </div>
 
             <div class="field">
-                <label for="select-sm">Small</label>
-                <select id="select-sm" class="select-sm">
+                <label for="select-small">Small</label>
+                <select id="select-small" class="select-small">
                     <option>Small select</option>
                 </select>
             </div>
 
             <div class="field">
-                <label for="select-lg">Large</label>
-                <select id="select-lg" class="select-lg">
+                <label for="select-large">Large</label>
+                <select id="select-large" class="select-large">
                     <option>Large select</option>
                 </select>
             </div>
@@ -207,6 +207,94 @@
                     <label for="terms" class="check-label">Agree to terms (required - tick then untick)</label>
                     <span id="terms-feedback" class="feedback-invalid">You must agree before submitting.</span>
                 </div>
+            </div>
+
+            <h2>Input groups</h2>
+
+            <div class="field">
+                <label for="username">Username</label>
+                <div class="group">
+                    <span class="group-text">@</span>
+                    <input type="text" id="username" class="control" placeholder="Username" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="amount">Amount</label>
+                <div class="group">
+                    <span class="group-text">&pound;</span>
+                    <input type="number" id="amount" class="control" />
+                    <span class="group-text">.00</span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="site">Website (required - type fewer than 3 characters, then leave the field)</label>
+                <div class="group">
+                    <span class="group-text">https://</span>
+                    <input type="text" id="site" class="control" minlength="3" required aria-describedby="site-feedback" />
+                    <select class="select" aria-label="Domain">
+                        <option>.co.uk</option>
+                        <option>.org</option>
+                    </select>
+                </div>
+                <span id="site-feedback" class="feedback-invalid">Please enter at least 3 characters.</span>
+            </div>
+
+            <div class="field">
+                <div class="group-small">
+                    <span class="group-text">Small</span>
+                    <input type="text" class="control" aria-label="Small group" />
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="group-large">
+                    <span class="group-text">Large</span>
+                    <input type="text" class="control" aria-label="Large group" />
+                </div>
+            </div>
+
+            <h2>Floating labels</h2>
+
+            <div class="field floating">
+                <input type="email" id="float-email" class="control" placeholder=" " />
+                <label for="float-email">Email address</label>
+            </div>
+
+            <div class="field floating">
+                <input type="text" id="float-filled" class="control" placeholder=" " value="Already filled" />
+                <label for="float-filled">Filled</label>
+            </div>
+
+            <div class="field floating">
+                <select id="float-select" class="select">
+                    <option>One</option>
+                    <option>Two</option>
+                </select>
+                <label for="float-select">Select</label>
+            </div>
+
+            <h2>Range, file and colour</h2>
+
+            <div class="field">
+                <label for="range">Range</label>
+                <input type="range" id="range" class="range" />
+            </div>
+
+            <div class="field">
+                <label for="range-disabled">Disabled range</label>
+                <input type="range" id="range-disabled" class="range" disabled />
+            </div>
+
+            <div class="field">
+                <label for="file">File</label>
+                <input type="file" id="file" class="file" />
+            </div>
+
+            <div class="field">
+                <label for="colour">Colour</label>
+                <input type="color" id="colour" class="colour" value="#0d9488" />
             </div>
 
         </form>

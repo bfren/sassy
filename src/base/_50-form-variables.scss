@@ -1,7 +1,35 @@
+@use "sass:color";
+@use "sass:math";
+@use "sass:string";
 @use "20-layout-variables" as *;
 @use "21-colour-variables" as *;
 @use "24-border-variables" as *;
 @use "30-rounded-variables" as *;
+
+/// Returns a select chevron in the given colour, as an SVG data URI - for example
+/// `--sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}` in a dark theme.
+///
+/// @param {color} $colour
+///     Any Sass colour (not a CSS var(), which an SVG background cannot read).
+/// @return {string}
+///     url() containing the chevron SVG.
+@function chevron($colour) {
+    $rgb: color.to-gamut(color.to-space($colour, rgb), $method: local-minde);
+    $hex: "%23";
+    @each $channel in ("red", "green", "blue") {
+        $hex: $hex + -hex-byte(color.channel($rgb, $channel, $space: rgb));
+    }
+    @return url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='#{$hex}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/// Returns a number from 0 to 255 as two hex digits.
+@function -hex-byte($n) {
+    $digits: "0123456789abcdef";
+    $n: math.round($n);
+    $high: math.floor(math.div($n, 16)) + 1;
+    $low: $n % 16 + 1;
+    @return string.slice($digits, $high, $high) + string.slice($digits, $low, $low);
+}
 
 // Form controls read everything from custom properties, so themes can change
 // them at runtime. Colours accept any CSS colour value.
@@ -30,7 +58,23 @@
     --sassy-check-radius: 0.25em;
     --sassy-switch-knob-colour: var(--sassy-input-border-colour);
 
+    // an SVG background cannot read custom properties, so a theme that changes
+    // --sassy-input-colour should set this too, using chevron()
+    --sassy-select-chevron: #{chevron(colour("grey", 800))};
+
     --sassy-form-text-colour: #{colour("grey", 500)};
+
+    --sassy-input-addon-bg: #{colour("grey", 100)};
+    --sassy-input-addon-hover-bg: #{colour("grey", 200)};
+
+    --sassy-floating-height: 3.5rem;
+    --sassy-floating-padding-y: 1rem;
+
+    --sassy-range-track-colour: #{colour("grey", 200)};
+    --sassy-range-track-height: 0.5rem;
+    --sassy-range-thumb-colour: var(--sassy-theme-primary);
+    --sassy-range-thumb-size: 1rem;
+    --sassy-range-disabled-colour: #{colour("grey", 400)};
 }
 
 // Check marks, used as masks - only their shape matters, the colour comes from
@@ -40,14 +84,15 @@ $sassy-check-dash: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'
 $sassy-check-dot: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23000'/%3e%3c/svg%3e" !default;
 
 // Size variants only redefine the custom properties above.
+// Named small and large, not sm and lg, so they are not mistaken for breakpoints.
 $sassy-input-sizes: (
-    sm: (
+    small: (
         padding-y: $sassy-padding-unit,
         padding-x: $sassy-padding-unit * 2,
         font-size: calc(var(--sassy-font-size-base) * 0.875),
         radius: $sassy-radius-unit
     ),
-    lg: (
+    large: (
         padding-y: $sassy-padding-unit * 2,
         padding-x: $sassy-padding-unit * 4,
         font-size: calc(var(--sassy-font-size-base) * 1.25),

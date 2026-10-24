@@ -47,7 +47,7 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 
 ### Sass
 
-Sassy uses the Sass module system, so it needs [Dart Sass](https://sass-lang.com/dart-sass/). Add it to your project, for example as a git submodule:
+Sassy needs [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later, the first version that understands `oklch()` colours. Add it to your project, for example as a git submodule:
 
 ```sh
 git submodule add https://github.com/bfren/sassy.git sassy
@@ -81,17 +81,17 @@ Every placeholder follows the same pattern:
 
 The breakpoint is optional - see [Responsive](#responsive). Names use British spelling: `centre`, `colour`, `capitalise`, `grey`.
 
-| Module | Examples |
-|---|---|
-| Layout | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden` |
-| Display and flex | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden` |
-| Colour | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-border-grey-300` |
-| Theme | `%bf-c-primary`, `%bf-bg-error`, `%bf-border-ok`, `%bf-shadow-primary-2` |
-| Text | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper` |
-| Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill` |
-| Shadow | `%bf-shadow-2`, `%bf-shadow-sky-700-2` |
-| Grid | `%bf-d-flex-row`, `%bf-col-6` |
-| Forms | `%bf-form-control`, `%bf-form-select-sm`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid` |
+| Module             | Examples                                                                                                                                                                                    |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden` |
+| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`  |
+| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-border-grey-300`                                                                                                                                    |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-border-ok`, `%bf-shadow-primary-2`                                                                                                                    |
+| Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`                                 |
+| Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                        |
+| Shadow             | `%bf-shadow-2`, `%bf-shadow-sky-700-2`                                                                                                                                                      |
+| Grid               | `%bf-d-flex-row`, `%bf-col-6`                                                                                                                                                               |
+| Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                         |
 
 A few conventions:
 
@@ -115,13 +115,13 @@ A few conventions:
 Most utilities have a variant for each breakpoint, which applies from that width upwards:
 
 | Breakpoint | Applies from |
-|---|---|
-| `sm` | 576px |
-| `md` | 768px |
-| `lg` | 992px |
-| `xl` | 1200px |
-| `2xl` | 1400px |
-| `3xl` | 1600px |
+| ---------- | ------------ |
+| `sm`       | 576px        |
+| `md`       | 768px        |
+| `lg`       | 992px        |
+| `xl`       | 1200px       |
+| `2xl`      | 1400px       |
+| `3xl`      | 1600px       |
 
 ```sass
 .sidebar
@@ -157,16 +157,16 @@ Settings are passed with `with (...)` when you load Sassy:
 )
 ```
 
-| Setting | Default | |
-|---|---|---|
-| `$sassy-breakpoints` | `sm` to `3xl`, as above | Names and minimum widths - every responsive variant is generated from this map |
-| `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem` | Size of one spacing step |
-| `$sassy-radius-unit` | `0.25rem` | Size of one step for `%bf-rounded-{0-6}` |
-| `$sassy-shadow-unit` | `0.125rem` | Size of one step for `%bf-shadow-{0-3}` |
-| `$sassy-loop-max` | `20` | Highest spacing, border width and flex grow / shrink step |
-| `$sassy-prefix` | `"bf"` | Prefix for every placeholder (and class) - `""` for none |
-| `$sassy-separator` | `"-"` | Joins the prefix, utility, value and breakpoint |
-| `$sassy-full` | `false` | Also output every utility as a class, as in `dist/full.css` |
+| Setting                                                        | Default                 | Description                                                                    |
+| -------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------ |
+| `$sassy-breakpoints`                                           | `sm` to `3xl`, as above | Names and minimum widths - every responsive variant is generated from this map |
+| `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem`               | Size of one spacing step                                                       |
+| `$sassy-radius-unit`                                           | `0.25rem`               | Size of one step for `%bf-rounded-{0-6}`                                       |
+| `$sassy-shadow-unit`                                           | `0.125rem`              | Size of one step for `%bf-shadow-{0-3}`                                        |
+| `$sassy-loop-max`                                              | `20`                    | Highest spacing, border width and flex grow / shrink step                      |
+| `$sassy-prefix`                                                | `"bf"`                  | Prefix for every placeholder (and class) - `""` for none                       |
+| `$sassy-separator`                                             | `"-"`                   | Joins the prefix, utility, value and breakpoint                                |
+| `$sassy-full`                                                  | `false`                 | Also output every utility as a class, as in `dist/full.css`                    |
 
 The prefix keeps Sassy's placeholders apart from your own and from other libraries: placeholders with the same name are merged, so an unprefixed `%p-2` of your own would pick up Sassy's rules too. It costs nothing in your compiled CSS.
 
@@ -184,35 +184,43 @@ Colours, fonts, the radius, the grid gutter and form styles are CSS custom prope
         --sassy-input-bg: #{sassy.colour("grey", 800)}
         --sassy-input-colour: #{sassy.colour("grey", 100)}
         --sassy-input-border-colour: #{sassy.colour("grey", 600)}
+        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}
 ```
 
 Colour properties accept **any CSS colour** - hex, `rgb()`, `oklch()`, a named colour or another custom property - and Sassy adds transparency where it needs it with `color-mix()`. Use `sassy.colour(name, shade)` to get any palette colour, or write a value directly: `--sassy-theme-primary: #0d9488`.
 
+The one exception is the select chevron, an SVG image that cannot read custom properties. If you change `--sassy-input-colour`, set `--sassy-select-chevron` to match using `sassy.chevron()`, as in the example above.
+
 The main groups are:
 
-| Prefix | Controls |
-|---|---|
-| `--sassy-theme-*` | Theme colours: `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light`, `grey-dark` |
-| `--sassy-body-*`, `--sassy-font-*`, `--sassy-line-height-base` | Text defaults used by `%bf-body` and the font utilities |
-| `--sassy-radius`, `--sassy-shadow-colour`, `--sassy-grid-gutter` | Default corner radius, shadow colour and column gutter |
-| `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-form-*` | Form controls - sizes, colours, focus ring and validation states |
+| Prefix                                                                                                              | Controls                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--sassy-theme-*`                                                                                                   | Theme colours: `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light`, `grey-dark` |
+| `--sassy-body-*`, `--sassy-font-*`, `--sassy-line-height-base`                                                      | Text defaults used by `%bf-body` and the font utilities                                         |
+| `--sassy-radius`, `--sassy-shadow-colour`, `--sassy-grid-gutter`                                                    | Default corner radius, shadow colour and column gutter                                          |
+| `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-floating-*`, `--sassy-range-*`, `--sassy-form-*` | Form controls - sizes, colours, focus ring and validation states                                |
 
 ## Forms
 
 Form placeholders style controls in the same way as Bootstrap's form classes, and follow the same naming:
 
-| Placeholder | For |
-|---|---|
-| `%bf-form-label`, `%bf-form-text` | Labels, and help text under a control |
-| `%bf-form-control`, `-sm`, `-lg`, `-plaintext` | Text inputs and textareas |
-| `%bf-form-select`, `-sm`, `-lg` | Selects |
-| `%bf-form-check`, `%bf-form-check-inline` | A checkbox or radio with its label |
-| `%bf-form-check-input`, `%bf-form-check-label` | The checkbox or radio, and its label |
-| `%bf-form-switch` | A checkbox shown as a switch |
-| `%bf-form-control-valid`, `%bf-form-control-invalid` | A validation state set explicitly |
-| `%bf-form-feedback-valid`, `%bf-form-feedback-invalid` | Validation messages |
+| Placeholder                                                   | For                                          |
+| ------------------------------------------------------------- | -------------------------------------------- |
+| `%bf-form-label`, `%bf-form-text`                             | Labels, and help text under a control        |
+| `%bf-form-control`, `-small`, `-large`, `-plaintext`          | Text inputs and textareas                    |
+| `%bf-form-select`, `-small`, `-large`                         | Selects                                      |
+| `%bf-form-check`, `%bf-form-check-inline`                     | A checkbox or radio with its label           |
+| `%bf-form-check-input`, `%bf-form-check-label`                | The checkbox or radio, and its label         |
+| `%bf-form-switch`                                             | A checkbox shown as a switch                 |
+| `%bf-input-group`, `-small`, `-large`, `%bf-input-group-text` | Controls and add-on text joined side by side |
+| `%bf-form-floating`                                           | A control with its label floating inside it  |
+| `%bf-form-range`                                              | Range sliders                                |
+| `%bf-form-file`                                               | File inputs                                  |
+| `%bf-form-colour`                                             | Colour pickers                               |
+| `%bf-form-control-valid`, `%bf-form-control-invalid`          | A validation state set explicitly            |
+| `%bf-form-feedback-valid`, `%bf-form-feedback-invalid`        | Validation messages                          |
 
-Sizes combine with the base placeholder: extend both `%bf-form-control` and `%bf-form-control-sm`.
+Sizes combine with the base placeholder: extend both `%bf-form-control` and `%bf-form-control-small`. Sizes are `small` and `large` rather than `sm` and `lg`, which are breakpoints. A size only changes custom properties, so it works on any control - and on an input group, where everything inside follows it.
 
 ```sass
 .field
@@ -242,8 +250,10 @@ The markup matters in a few places:
 - **Feedback comes after the control**, as a sibling: invalid feedback stays hidden until the control before it is invalid, so you can render the message up front and the browser reveals it. Valid feedback always shows, so only render it when the field is valid.
 - **Checks and radios** put the input first, then the label, then any help text or feedback, inside the element extending `%bf-form-check`. Long labels wrap beside the input, and help text lines up under the label.
 - **Switches** are checkboxes with `role="switch"`, so assistive technology announces them as switches.
+- **Input groups** contain the controls and add-ons directly. Put feedback after the group, not inside it: it shows when any control in the group is invalid.
+- **Floating labels** put the control first and the label after it, and the control needs `placeholder=" "` - an empty placeholder is how CSS tells that the control has no value.
 
-Sizes, colours, the focus ring and the validation colours all come from the `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*` and `--sassy-form-*` custom properties - see [Theming](#theming).
+Sizes, colours, the focus ring and the validation colours all come from the `--sassy-input-*`, `--sassy-check-*`, `--sassy-switch-*`, `--sassy-floating-*`, `--sassy-range-*` and `--sassy-form-*` custom properties - see [Theming](#theming).
 
 ## Limitations
 
@@ -251,7 +261,7 @@ Sizes, colours, the focus ring and the validation colours all come from the `--s
 - **Every file that extends needs its own `@use`.** `@extend` only reaches placeholders in modules the file itself loads, so a partial that extends Sassy's placeholders must `@use` Sassy too. Sass only outputs a module once per compilation, so this does not duplicate anything.
 - **One entry stylesheet per site.** Each separately compiled stylesheet that loads Sassy includes Normalize and the `:root` custom properties again.
 - **Placeholders cannot be used from HTML.** If you need classes in your markup, use `dist/full.css` or set `$sassy-full: true`.
-- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap`, `oklch()` and `color-mix()`.
+- **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap`, `:has()`, `oklch()` and `color-mix()`.
 
 ## Editor snippets
 
@@ -265,28 +275,28 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 ## Building and contributing
 
-You need [Dart Sass](https://sass-lang.com/dart-sass/) on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows.
+You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows.
 
-| Script | Does |
-|---|---|
-| `compile-full.sh` | Builds `dist/full.css` and `dist/full.css.gz`, then runs `snippets.sh` and `palette.sh` |
-| `compile-full.bat` | Runs `compile-full.sh` in Git Bash on Windows |
+| Script                  | Does                                                                                                         |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `compile-full.sh`       | Builds `dist/full.css` and `dist/full.css.gz`, then runs `snippets.sh` and `palette.sh`                      |
+| `compile-full.bat`      | Runs `compile-full.sh` in Git Bash on Windows                                                                |
 | `watch.sh`, `watch.bat` | Recompiles the test stylesheets in `test/sass` whenever they change - open the pages in `test` to check them |
-| `snippets.sh` | Generates `dist/sassy.code-snippets` from `dist/full.css` |
-| `palette.sh` | Generates the colour charts in `docs` from the colour and theme variables |
+| `snippets.sh`           | Generates `dist/sassy.code-snippets` from `dist/full.css`                                                    |
+| `palette.sh`            | Generates the colour charts in `docs` from the colour and theme variables                                    |
 
 ### Structure
 
 The modules in `src/base` are numbered so related modules sit together, with gaps for new ones:
 
-| Numbers | Contain |
-|---|---|
-| `00`-`01` | Copyright notice and Normalize |
-| `10`-`12` | Settings, the `make` mixins that generate placeholders, and helpers |
+| Numbers   | Contain                                                              |
+| --------- | -------------------------------------------------------------------- |
+| `00`-`01` | Copyright notice and Normalize                                       |
+| `10`-`12` | Settings, the `make` mixins that generate placeholders, and helpers  |
 | `20`-`31` | Utilities: layout, colour, display, text, border, corners and shadow |
-| `40`-`41` | Theme colours and the grid |
-| `50`-`56` | Forms - `50` holds mixins shared by the form modules |
-| `99` | Render - outputs every module in the right order |
+| `40`-`41` | Theme colours and the grid                                           |
+| `50`-`59` | Forms - `50` holds mixins shared by the form modules                 |
+| `99`      | Render - outputs every module in the right order                     |
 
 Each module's settings and custom properties live in a matching `-variables.scss` file, forwarded from `_10-variables.scss`.
 
