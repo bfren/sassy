@@ -8,11 +8,11 @@ The grid always has 12 columns.
 
 ## Placeholders
 
-| Placeholder               | For                                                                                              |
-| ------------------------- | ------------------------------------------------------------------------------------------------ |
-| `%bf-d-flex-row`          | A row. Flex, wrapping, with no margin or padding                                                 |
-| `%bf-col-{1-12}`          | A column of that many twelfths of the row. Add a breakpoint, such as `%bf-col-6-md`, for a width from that breakpoint |
-| `%bf-col-{1-12}-{breakpoint}` | The same, from a breakpoint: `sm`, `md`, `lg`, `xl`, `2xl` or `3xl`                       |
+| Placeholder                   | For                                                                                                                   |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `%bf-d-flex-row`              | A row. Flex, wrapping, with no margin or padding                                                                      |
+| `%bf-col-{1-12}`              | A column of that many twelfths of the row. Add a breakpoint, such as `%bf-col-6-md`, for a width from that breakpoint |
+| `%bf-col-{1-12}-{breakpoint}` | The same, from a breakpoint: `sm`, `md`, `lg`, `xl`, `2xl` or `3xl`                                                   |
 
 Columns have `box-sizing: border-box`, so their gutter sits inside their width and the widths add up to 100% whatever `box-sizing` the rest of the page uses.
 
@@ -56,12 +56,16 @@ The `.wrap` container, which centres a page's content, is in [4-utilities](4-uti
 }
 @media (min-width: 768px) {
   .half {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: var(--sassy-grid-gutter);
     width: 50%;
   }
 }
 ```
 
-Each column stacks at full width below `md`, then sits side by side from `md` upwards.
+Each column stacks at full width below `md`, then sits side by side from `md` upwards. Every column placeholder is complete in itself, which is why the `md` rule repeats the column's other declarations.
 
 ### A sidebar and main content
 
@@ -112,8 +116,8 @@ Because the row has no padding, the gutter only sits around columns. Spacing bet
 
 ## Settings and custom properties
 
-| Name                    | Default | Description                                                                     |
-| ----------------------- | ------- | ------------------------------------------------------------------------------- |
-| `--sassy-grid-gutter`   | `0.5rem`| Padding on each side of a column, which is the space between columns            |
+| Name                  | Default  | Description                                                          |
+| --------------------- | -------- | -------------------------------------------------------------------- |
+| `--sassy-grid-gutter` | `0.5rem` | Padding on each side of a column, which is the space between columns |
 
 The grid's columns and breakpoints are set in [`src/3-grid/_300-grid-variables.scss`](../src/3-grid/_300-grid-variables.scss) and the breakpoints in [0-core](0-core.md#configuring-sassy).
