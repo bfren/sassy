@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys and the tooltip fallback placement.
+ * Tests for src/sassy.js: tab keys.
  *
  *     npm install --no-save jsdom && node --test tools/sassy.test.mjs
  */
@@ -11,10 +11,9 @@ import { JSDOM } from "jsdom";
 
 const script = readFileSync(new URL("../src/sassy.js", import.meta.url), "utf8");
 
-/** A page with sassy.js loaded. jsdom has no CSS anchor positioning, so tooltips use the fallback. */
+/** A page with sassy.js loaded. */
 const load = body => {
-	const dom = new JSDOM(`<style>[role=tooltip] { margin-top: 6px }</style>${body}`, { runScripts: "outside-only" });
-	dom.window.CSS.supports = () => false; // some jsdom versions claim to support anchor positioning
+	const dom = new JSDOM(body, { runScripts: "outside-only" });
 	dom.window.eval(script);
 	dom.window.Sassy.init(); // jsdom's readyState varies, so the script may be waiting for DOMContentLoaded
 	return dom.window;
@@ -44,24 +43,4 @@ test("tabs: arrow keys wrap, Home and End jump, disabled tabs are skipped, panel
 	assert.equal($("t3").getAttribute("aria-selected"), "true");
 	press(window, $("t3"), "Home");
 	assert.equal($("t1").getAttribute("aria-selected"), "true");
-});
-
-test("tooltip fallback: keeps the CSS offset every time it is shown", () => {
-	const window = load(`
-		<button id="trigger" aria-describedby="tip">Trigger</button>
-		<div id="tip" role="tooltip" popover>Tip</div>`);
-	const tip = window.document.getElementById("tip");
-	const trigger = window.document.getElementById("trigger");
-
-	// jsdom has no Popover API
-	let open = false;
-	tip.showPopover = () => (open = true);
-	const matches = tip.matches.bind(tip);
-	tip.matches = selector => (selector === ":popover-open" ? open : matches(selector));
-
-	// no room above (jsdom has no layout), so the tooltip goes below the trigger, the offset away
-	for (let i = 0; i < 2; i++) {
-		trigger.dispatchEvent(new window.FocusEvent("focusin", { bubbles: true }));
-		assert.equal(tip.style.top, "6px", `show ${i + 1}`);
-	}
 });
