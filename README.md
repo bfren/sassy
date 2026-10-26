@@ -43,6 +43,19 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 }
 ```
 
+## Is it for you?
+
+Sassy suits:
+
+- static sites and site generators, such as Hugo, Jekyll or Eleventy
+- component libraries and design systems
+
+It is less suited to:
+
+- projects without a Sass build - Sassy needs one
+- teams who want utility classes in their HTML - a class-based framework such as Tailwind will suit them better
+- sites that must support older browsers - see [Limitations](#limitations)
+
 ## Getting started
 
 ### Sass
@@ -68,8 +81,6 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/full.min.css" />
 ```
-
-It is large - around 950 KB, or 120 KB gzipped - because it contains everything. If you are using Sass, extending placeholders will give you much smaller CSS.
 
 ### Script
 
