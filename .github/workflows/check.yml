@@ -15,17 +15,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Dart Sass
-        run: |
-          version=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/sass/dart-sass/releases/latest)
-          version=${version##*/}
-          curl -fsSL "https://github.com/sass/dart-sass/releases/download/$version/dart-sass-$version-linux-x64.tar.gz" | tar -xz -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/dart-sass" >> "$GITHUB_PATH"
+        uses: ./.github/actions/setup-sass
 
-      - name: Compile Sassy
-        run: sass --no-source-map src/full.sass "$RUNNER_TEMP/full.css"
+      - name: Rebuild dist and check it is committed
+        run: |
+          ./compile-full.sh
+          git diff --exit-code dist docs || { echo "::error::dist/ or docs/*.svg is out of date - run ./compile-full.sh and commit the result"; exit 1; }
+
+      - name: Test sassy.js
+        run: |
+          npm install --no-save jsdom@26.1.0
+          node --test tools/sassy.test.mjs
 
       - name: Check the docs
         run: node tools/site.mjs check

@@ -124,6 +124,7 @@
 
 	/** Places a tooltip above its trigger (or below, if there is no room) without anchor positioning. */
 	const place = (trigger, tooltip) => {
+		tooltip.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
 		const offset = parseFloat(getComputedStyle(tooltip).marginTop) || 0;
 		const t = trigger.getBoundingClientRect();
 		const r = tooltip.getBoundingClientRect();

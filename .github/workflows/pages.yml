@@ -24,20 +24,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Dart Sass
-        run: |
-          version=$(curl -fsSL -o /dev/null -w '%{url_effective}' https://github.com/sass/dart-sass/releases/latest)
-          version=${version##*/}
-          curl -fsSL "https://github.com/sass/dart-sass/releases/download/$version/dart-sass-$version-linux-x64.tar.gz" | tar -xz -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/dart-sass" >> "$GITHUB_PATH"
+        uses: ./.github/actions/setup-sass
 
       - name: Build the site
         run: node tools/site.mjs build
 
       - name: Upload site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -50,5 +46,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         
