@@ -284,6 +284,17 @@ A modal dialog also closes when Escape is pressed, and returns focus to the butt
 
 While a modal dialog is open the page behind it does not scroll. Sassy does this by hiding the overflow of `:root` (the `<html>` element), so it has no effect if your page scrolls inside another element instead. A dialog opened with `show` rather than `show-modal` does not lock the page.
 
+```sass
+.dialog
+    @extend %bf-dialog
+```
+
+```css
+:root:has(.dialog:modal) {
+  overflow: hidden;
+}
+```
+
 The dialog is a column with a maximum height, so when its content is taller than the window, the body scrolls between the header and footer. Extend `%bf-dialog-small` or `%bf-dialog-large` with `%bf-dialog` for a narrower or wider dialog.
 
 `dialog.show()` opens a dialog without a backdrop, as part of the page. It uses the same styles.
