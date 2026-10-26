@@ -287,12 +287,13 @@ Component placeholders style whole interface elements, and like forms they outpu
 | `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large` | Buttons, in the theme colours, outlined, and in the form control sizes |
 | `%bf-nav`, `%bf-nav-link`                                                                | A list of links - mark the current page with `aria-current="page"`     |
 | `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                 | Styles and layout for a nav, combined with `%bf-nav`                   |
+| `%bf-nav-toggle`, `%bf-nav-collapse-{breakpoint}`                                        | The button that opens a collapsed nav, and the panel it opens          |
 | `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                            | A bordered container and its parts                                     |
 | `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                   | Tabs that switch panels, using the ARIA tabs roles                     |
 | `%bf-tooltip`                                                                            | A tooltip: a popover described by its trigger with `aria-describedby`  |
 | `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close`      | A native `<dialog>` and its parts                                      |
 
-Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs and tooltips need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
+Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
 
 ## Limitations
 

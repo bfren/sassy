@@ -6,6 +6,11 @@
 //  Components: navigation
 //  =================================================================
 
+// a collapsed nav wipes down as it is shown - see %nav-collapse-{breakpoint}
+@keyframes sassy-nav-wipe
+    from
+        clip-path: inset(0 -2rem 100%)
+
 /// Outputs this module's utilities - called by _render inside make.passes.
 @mixin utilities()
 
@@ -38,3 +43,47 @@
 
     @include make.single("nav-link")
         @include component.link()
+
+    // The button that opens and closes a collapsed nav. Give it aria-label, aria-expanded and
+    // aria-controls (the id of what it opens) - sassy.js does the rest. Hide it from the breakpoint
+    // where the nav stays open with %d-none-{breakpoint}.
+
+    @include make.single("nav-toggle")
+        @include component.link()
+
+        // three bars, drawn in the link colour so they follow the theme
+        &::before
+            background-color: currentColor
+            box-shadow: 0 -0.35em currentColor, 0 0.35em currentColor
+            content: ""
+            height: 0.125em
+            width: 1.25em
+
+    // What the button opens: below the breakpoint it is a panel over the content that follows, which
+    // wipes down and up as sassy.js shows and hides it, and from the breakpoint it is always shown, in the page.
+    // The panel is positioned against the nearest positioned ancestor, so give that position: relative.
+
+    @each $breakpoint, $width in $sassy-breakpoints
+        @include make.single("nav-collapse" + $sassy-separator + $breakpoint)
+            @media (width < #{$width})
+                background-color: var(--sassy-nav-collapse-bg)
+                border-bottom: 1px solid var(--sassy-nav-collapse-border-colour)
+                box-shadow: var(--sassy-nav-collapse-shadow)
+                box-sizing: border-box
+                // the extra inset leaves room for the shadow
+                clip-path: inset(0 -2rem -2rem)
+                inset: 100% 0 auto
+                position: absolute
+                animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease
+                transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete
+
+                @media (prefers-reduced-motion: reduce)
+                    animation: none
+                    transition: none
+
+                // sassy.js sets hidden: the panel wipes up, then the browser removes it when that finishes
+                &[hidden]
+                    clip-path: inset(0 -2rem 100%)
+
+            @media (width >= #{$width})
+                display: block

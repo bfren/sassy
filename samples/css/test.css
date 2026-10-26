@@ -344,6 +344,10 @@
   --sassy-nav-current-bg: transparent;
   --sassy-nav-current-colour: var(--sassy-body-colour);
   --sassy-nav-current-border-colour: transparent;
+  --sassy-nav-collapse-bg: #fff;
+  --sassy-nav-collapse-border-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-nav-collapse-shadow: 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent);
+  --sassy-nav-collapse-duration: 0.2s;
   --sassy-focus-outline-colour: var(--sassy-theme-primary);
   --sassy-focus-outline-width: 2px;
   --sassy-focus-outline-offset: 2px;
@@ -389,6 +393,11 @@
   --sassy-dialog-backdrop: color-mix(in oklab, oklch(13% 0.028 261.692deg) 50%, transparent);
 }
 
+@keyframes sassy-nav-wipe {
+  from {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
 div.cols,
 div.cols-reverse {
   display: flex;
