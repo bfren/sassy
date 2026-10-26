@@ -11,3 +11,9 @@ samples/images/
 
 # built by tools/site.mjs
 _site/
+
+# built by sass --watch (watch.sh), or by tools/site.mjs into _site
+samples/css/
+
+# installed by CI for tools/sassy.test.mjs
+node_modules/

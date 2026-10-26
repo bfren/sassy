@@ -10,7 +10,8 @@ Requires Dart Sass 1.79+ on the path (`sass`), plus bash, `gzip` and `awk`. The 
 - Compile the sample stylesheets while editing: `./watch.sh` (or `watch.bat`), then open the `samples/*.html` pages
 - Build the samples site: `node tools/site.mjs build` - writes `_site`, adds each example's compiled CSS, and fails if an example does not compile or its page's stylesheet does not use it. The Pages workflow runs this and publishes `_site` on merge to `main`.
 - Check the docs: `node tools/site.mjs check` - fails if the CSS shown after a Sass example in `README.md` or `docs/*.md` is not what Sassy outputs
-- Verify a change: run both `tools/site.mjs` commands, and open the matching page in `_site`. The `Check` workflow runs them on every pull request, after compiling `src/full.sass`.
+- Test `src/sassy.js`: `npm install --no-save jsdom && node --test tools/sassy.test.mjs`
+- Verify a change: run both `tools/site.mjs` commands, and open the matching page in `_site`. The `Check` workflow runs them on every pull request, after `./compile-full.sh` (it fails if `dist/` or `docs/*.svg` differ from what is committed) and the `sassy.js` tests. CI uses the Dart Sass version pinned in `.github/actions/setup-sass/action.yml`; bump it there.
 
 ## Architecture
 
@@ -35,4 +36,4 @@ Requires Dart Sass 1.79+ on the path (`sass`), plus bash, `gzip` and `awk`. The 
 - British spelling in all names and docs: `centre`, `colour`, `grey`.
 - Shell scripts must keep LF line endings and `.bat` files CRLF (enforced by `.gitattributes`).
 - Commits must be signed, per the README.
-- `samples/js/` and `samples/images/` are build copies and are gitignored; `test/` contains only untracked local leftovers and is not part of the project.
+- `samples/js/`, `samples/images/` and `samples/css/` are build copies and are gitignored; `test/` contains only untracked local leftovers and is not part of the project.
