@@ -30,6 +30,10 @@
         &::backdrop
             background-color: var(--sassy-dialog-backdrop)
 
+        // the page behind a modal doesn't scroll
+        :root:has(&:modal)
+            overflow: hidden
+
     // Sizes only change the width, so combine them with %dialog
 
     @each $size, $width in $sassy-dialog-sizes

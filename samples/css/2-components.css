@@ -693,6 +693,9 @@
 .dialog::backdrop {
   background-color: var(--sassy-dialog-backdrop);
 }
+:root:has(.dialog:modal) {
+  overflow: hidden;
+}
 
 .dialog-large {
   --sassy-dialog-width: 50rem;
