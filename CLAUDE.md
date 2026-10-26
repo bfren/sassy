@@ -35,4 +35,4 @@ Requires Dart Sass 1.79+ on the path (`sass`), plus bash, `gzip` and `awk`. The 
 - British spelling in all names and docs: `centre`, `colour`, `grey`.
 - Shell scripts must keep LF line endings and `.bat` files CRLF (enforced by `.gitattributes`).
 - Commits must be signed, per the README.
-- `samples/js/` is a build copy and is gitignored; `test/` contains only untracked local leftovers and is not part of the project.
+- `samples/js/` and `samples/images/` are build copies and are gitignored; `test/` contains only untracked local leftovers and is not part of the project.
