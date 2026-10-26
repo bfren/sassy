@@ -1,5 +1,6 @@
 @use "../4-utilities/410-layout-variables" as *;
 @use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/460-shadow-variables" as *;
 
 // Navigation links (and tabs) read everything from custom properties, so the pill
 // and underline styles - and themes - only change these. Colours accept any CSS colour.
@@ -14,6 +15,12 @@
     --sassy-nav-current-bg: transparent;
     --sassy-nav-current-colour: var(--sassy-body-colour);
     --sassy-nav-current-border-colour: transparent;
+
+    // a collapsed nav's panel, below the breakpoint where it collapses
+    --sassy-nav-collapse-bg: #fff;
+    --sassy-nav-collapse-border-colour: #{colour("grey", 200)};
+    --sassy-nav-collapse-shadow: 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.1)};
+    --sassy-nav-collapse-duration: 0.2s;
 
     // shared by every component that is not a form control
     --sassy-focus-outline-colour: var(--sassy-theme-primary);

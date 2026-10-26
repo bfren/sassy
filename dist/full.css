@@ -344,6 +344,10 @@
   --sassy-nav-current-bg: transparent;
   --sassy-nav-current-colour: var(--sassy-body-colour);
   --sassy-nav-current-border-colour: transparent;
+  --sassy-nav-collapse-bg: #fff;
+  --sassy-nav-collapse-border-colour: oklch(92.8% 0.006 264.531deg);
+  --sassy-nav-collapse-shadow: 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent);
+  --sassy-nav-collapse-duration: 0.2s;
   --sassy-focus-outline-colour: var(--sassy-theme-primary);
   --sassy-focus-outline-width: 2px;
   --sassy-focus-outline-offset: 2px;
@@ -389,6 +393,11 @@
   --sassy-dialog-backdrop: color-mix(in oklab, oklch(13% 0.028 261.692deg) 50%, transparent);
 }
 
+@keyframes sassy-nav-wipe {
+  from {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
 .bf-form-label {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -1280,6 +1289,233 @@
   cursor: not-allowed;
   opacity: 0.5;
   pointer-events: none;
+}
+
+.bf-nav-toggle {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  border-bottom: var(--sassy-nav-link-underline-width) solid transparent;
+  border-radius: var(--sassy-nav-link-radius);
+  box-sizing: border-box;
+  color: var(--sassy-nav-link-colour);
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  gap: 0.5em;
+  margin: 0;
+  padding: var(--sassy-nav-link-padding-y) var(--sassy-nav-link-padding-x);
+  text-decoration: none;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bf-nav-toggle {
+    transition: none;
+  }
+}
+.bf-nav-toggle:hover {
+  background-color: var(--sassy-nav-link-hover-bg);
+}
+.bf-nav-toggle:focus-visible {
+  outline: var(--sassy-focus-outline-width) solid var(--sassy-focus-outline-colour);
+  outline-offset: var(--sassy-focus-outline-offset);
+}
+.bf-nav-toggle[aria-current]:not([aria-current=false]), .bf-nav-toggle[aria-selected=true] {
+  background-color: var(--sassy-nav-current-bg);
+  border-bottom-color: var(--sassy-nav-current-border-colour);
+  color: var(--sassy-nav-current-colour);
+}
+.bf-nav-toggle:disabled, .bf-nav-toggle[aria-disabled=true] {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.bf-nav-toggle::before {
+  background-color: currentColor;
+  box-shadow: 0 -0.35em currentColor, 0 0.35em currentColor;
+  content: "";
+  height: 0.125em;
+  width: 1.25em;
+}
+
+@media (width < 576px) {
+  .bf-nav-collapse-sm {
+    background-color: var(--sassy-nav-collapse-bg);
+    border-bottom: 1px solid var(--sassy-nav-collapse-border-colour);
+    box-shadow: var(--sassy-nav-collapse-shadow);
+    box-sizing: border-box;
+    clip-path: inset(0 -2rem -2rem);
+    inset: 100% 0 auto;
+    position: absolute;
+    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease;
+    transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete;
+  }
+}
+@media (width < 576px) and (prefers-reduced-motion: reduce) {
+  .bf-nav-collapse-sm {
+    animation: none;
+    transition: none;
+  }
+}
+@media (width < 576px) {
+  .bf-nav-collapse-sm[hidden] {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
+@media (width >= 576px) {
+  .bf-nav-collapse-sm {
+    display: block;
+  }
+}
+
+@media (width < 768px) {
+  .bf-nav-collapse-md {
+    background-color: var(--sassy-nav-collapse-bg);
+    border-bottom: 1px solid var(--sassy-nav-collapse-border-colour);
+    box-shadow: var(--sassy-nav-collapse-shadow);
+    box-sizing: border-box;
+    clip-path: inset(0 -2rem -2rem);
+    inset: 100% 0 auto;
+    position: absolute;
+    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease;
+    transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete;
+  }
+}
+@media (width < 768px) and (prefers-reduced-motion: reduce) {
+  .bf-nav-collapse-md {
+    animation: none;
+    transition: none;
+  }
+}
+@media (width < 768px) {
+  .bf-nav-collapse-md[hidden] {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
+@media (width >= 768px) {
+  .bf-nav-collapse-md {
+    display: block;
+  }
+}
+
+@media (width < 992px) {
+  .bf-nav-collapse-lg {
+    background-color: var(--sassy-nav-collapse-bg);
+    border-bottom: 1px solid var(--sassy-nav-collapse-border-colour);
+    box-shadow: var(--sassy-nav-collapse-shadow);
+    box-sizing: border-box;
+    clip-path: inset(0 -2rem -2rem);
+    inset: 100% 0 auto;
+    position: absolute;
+    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease;
+    transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete;
+  }
+}
+@media (width < 992px) and (prefers-reduced-motion: reduce) {
+  .bf-nav-collapse-lg {
+    animation: none;
+    transition: none;
+  }
+}
+@media (width < 992px) {
+  .bf-nav-collapse-lg[hidden] {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
+@media (width >= 992px) {
+  .bf-nav-collapse-lg {
+    display: block;
+  }
+}
+
+@media (width < 1200px) {
+  .bf-nav-collapse-xl {
+    background-color: var(--sassy-nav-collapse-bg);
+    border-bottom: 1px solid var(--sassy-nav-collapse-border-colour);
+    box-shadow: var(--sassy-nav-collapse-shadow);
+    box-sizing: border-box;
+    clip-path: inset(0 -2rem -2rem);
+    inset: 100% 0 auto;
+    position: absolute;
+    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease;
+    transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete;
+  }
+}
+@media (width < 1200px) and (prefers-reduced-motion: reduce) {
+  .bf-nav-collapse-xl {
+    animation: none;
+    transition: none;
+  }
+}
+@media (width < 1200px) {
+  .bf-nav-collapse-xl[hidden] {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
+@media (width >= 1200px) {
+  .bf-nav-collapse-xl {
+    display: block;
+  }
+}
+
+@media (width < 1400px) {
+  .bf-nav-collapse-2xl {
+    background-color: var(--sassy-nav-collapse-bg);
+    border-bottom: 1px solid var(--sassy-nav-collapse-border-colour);
+    box-shadow: var(--sassy-nav-collapse-shadow);
+    box-sizing: border-box;
+    clip-path: inset(0 -2rem -2rem);
+    inset: 100% 0 auto;
+    position: absolute;
+    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease;
+    transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete;
+  }
+}
+@media (width < 1400px) and (prefers-reduced-motion: reduce) {
+  .bf-nav-collapse-2xl {
+    animation: none;
+    transition: none;
+  }
+}
+@media (width < 1400px) {
+  .bf-nav-collapse-2xl[hidden] {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
+@media (width >= 1400px) {
+  .bf-nav-collapse-2xl {
+    display: block;
+  }
+}
+
+@media (width < 1600px) {
+  .bf-nav-collapse-3xl {
+    background-color: var(--sassy-nav-collapse-bg);
+    border-bottom: 1px solid var(--sassy-nav-collapse-border-colour);
+    box-shadow: var(--sassy-nav-collapse-shadow);
+    box-sizing: border-box;
+    clip-path: inset(0 -2rem -2rem);
+    inset: 100% 0 auto;
+    position: absolute;
+    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease;
+    transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete;
+  }
+}
+@media (width < 1600px) and (prefers-reduced-motion: reduce) {
+  .bf-nav-collapse-3xl {
+    animation: none;
+    transition: none;
+  }
+}
+@media (width < 1600px) {
+  .bf-nav-collapse-3xl[hidden] {
+    clip-path: inset(0 -2rem 100%);
+  }
+}
+@media (width >= 1600px) {
+  .bf-nav-collapse-3xl {
+    display: block;
+  }
 }
 
 .bf-card {

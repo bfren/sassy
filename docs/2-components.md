@@ -8,19 +8,20 @@ Every component reads its colours, spacing and sizes from custom properties, so 
 
 ## Behaviour and browser support
 
-Buttons, navigation, cards and dialogs need no script. Tabs and tooltips need `sassy.js`, which you load once:
+Buttons, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips and collapsible navigation need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
 ```
 
-`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does three things:
+`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does four things:
 
-| Feature  | What `sassy.js` does                                                                                                      |
-| -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Tabs     | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
-| Tooltips | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
-| Commands | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
+| Feature          | What `sassy.js` does                                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Collapsible navs | Opens and closes what a button with `aria-expanded` and `aria-controls` controls                                          |
+| Tabs             | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
+| Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
+| Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 
 The components rely on these browser features:
 
@@ -46,6 +47,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-nav-link`                                                                                  | Each link. Mark the current page with `aria-current="page"`                             |
 | `%bf-nav-pills`, `%bf-nav-underline`                                                            | Pill or underline style for the current link, combined with `%bf-nav`                   |
 | `%bf-nav-vertical`                                                                              | Stacks the links, combined with `%bf-nav`                                               |
+| `%bf-nav-toggle`                                                                                | The button that opens and closes a collapsed nav                                        |
+| `%bf-nav-collapse-{breakpoint}`                                                                 | What the button opens: a panel below the breakpoint, and part of the page from it       |
 | `%bf-card`                                                                                      | A bordered container                                                                    |
 | `%bf-card-header`, `%bf-card-body`, `%bf-card-footer`                                           | The parts of a card                                                                     |
 | `%bf-card-title`, `%bf-card-image`                                                              | A title in the body, and an image that fills the card's width                           |
@@ -138,6 +141,40 @@ A navigation list is a flex row of links. Styles such as pills only change custo
 ```
 
 The current page is marked with `aria-current="page"` rather than a class, so screen readers announce it too. Extend `%bf-nav-underline` instead of `%bf-nav-pills` for an underline, or neither for the current link in the body text colour. Extend `%bf-nav-vertical` as well to stack the links.
+
+### Collapsible navigation
+
+On a small screen a nav can sit behind a button. Extend `%bf-nav-toggle` on a `<button>` that has `aria-label`, `aria-expanded` and `aria-controls`, naming the `id` of what it opens, and `%bf-nav-collapse-{breakpoint}` on that element. The nav collapses below the breakpoint and stays open from it, so hide the button from the same breakpoint with `%bf-d-none-{breakpoint}`:
+
+```sass
+.menu-bar
+    @extend %bf-position-relative
+
+.menu-toggle
+    @extend %bf-nav-toggle
+    @extend %bf-d-none-md
+
+.menu-collapse
+    @extend %bf-nav-collapse-md
+```
+
+```html
+<div class="menu-bar">
+    <button type="button" class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="menu"></button>
+    <nav id="menu" class="menu-collapse" aria-label="Main">
+        <ul class="menu">
+            <li><a href="/" aria-current="page">Home</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+</div>
+```
+
+`sassy.js` flips `aria-expanded` when the button is clicked and sets `hidden` on the element it controls, so the menu is closed when the page loads and open again after a second click. Below the breakpoint the open menu is a panel on top of the content that follows, as wide as its nearest positioned ancestor - that is why `.menu-bar` is `position: relative` - and it wipes down when it opens and up when it closes. From the breakpoint the menu is a normal part of the page, shown whatever its `hidden` state.
+
+The wipe is a CSS transition and animation, so it needs a recent browser (the `display` transition is Baseline since August 2024). Older browsers show and hide the panel straight away. It is skipped for visitors who prefer reduced motion. `--sassy-nav-collapse-*` sets the panel's colours, shadow and duration.
+
+Without the script the menu stays open, so navigation still works. The menu may show briefly before the script closes it. The script ignores buttons with a `role`, `command` or `aria-haspopup`, so it does not interfere with tabs, dialogs or menus. If you add a collapsible nav after the page has loaded, call `Sassy.init(element)` on the element that contains it.
 
 Only use `role="tablist"` and the tab roles for tabs that switch panels on the page, not for navigation between pages.
 
@@ -312,6 +349,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                               |
 | `--sassy-nav-link-radius`, `--sassy-nav-link-underline-width`                                                                        | Link corners and underline width - set by the pill and underline styles            |
 | `--sassy-nav-current-colour`, `--sassy-nav-current-bg`, `--sassy-nav-current-border-colour`                                          | The current link or selected tab                                                   |
+| `--sassy-nav-collapse-bg`, `--sassy-nav-collapse-border-colour`, `--sassy-nav-collapse-shadow`, `--sassy-nav-collapse-duration`     | The panel of a collapsed nav, and how long it takes to wipe                        |
 | `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels and close buttons                         |
 | `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                |
 | `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                 |

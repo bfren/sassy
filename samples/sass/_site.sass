@@ -59,14 +59,29 @@ body
 
 .site-header-inner
     @extend %bf-d-flex
-    @extend %bf-flex-column
-    @extend %bf-flex-row-md
-    @extend %bf-flex-align-items-centre-md
+    @extend %bf-flex-align-items-centre
     @extend %bf-gap-x-6
-    padding-top: 0.75rem
+    flex-wrap: wrap
+    @extend %bf-p-3
+    @extend %bf-p-0-md
 
     @include sassy.up(md)
-        padding-top: 0
+        flex-wrap: nowrap
+
+// below md the menu is behind this button (sassy.js opens and closes it); from md it is always open
+.site-nav-toggle
+    @extend %bf-nav-toggle
+    @extend %bf-d-none-md
+    --sassy-nav-link-colour: var(--site-muted)
+    margin-left: auto
+
+// below md the open menu is a panel under the header, wiping down over the page
+.site-menu
+    @extend %bf-nav-collapse-md
+    padding-inline: 1.25rem
+
+    @include sassy.up(md)
+        padding-inline: 0
 
 .brand
     display: block
@@ -84,14 +99,14 @@ body
     --sassy-nav-link-colour: var(--site-muted)
     --sassy-nav-link-padding-x: 0.75rem
     --sassy-nav-link-padding-y: 1rem
-    // scrolls sideways on narrow screens rather than wrapping
-    flex-wrap: nowrap
+    @extend %bf-flex-column
+    @extend %bf-flex-row-md
     margin-inline: -0.75rem
-    overflow-x: auto
-    scrollbar-width: none
 
     a
         @extend %bf-nav-link
+        @extend %bf-p-1
+        @extend %bf-p-5-md
         white-space: nowrap
 
         &:hover

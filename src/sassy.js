@@ -5,12 +5,14 @@
  * - Tabs: switches panels, with arrow keys, Home and End (the WAI-ARIA tabs pattern).
  * - Tooltips: shows popover tooltips on hover and focus, and positions them in browsers
  *   without CSS anchor positioning.
+ * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
+ *   for navs that collapse on small screens.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
  *
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
  * whatever selectors you extend Sassy's placeholders onto. Load it once, with defer:
  *     <script src="sassy.js" defer></script>
- * Content added later is handled too, except new tab lists: call Sassy.init(element) for those.
+ * Content added later is handled too, except new tab lists and collapsed content: call Sassy.init(element) for those.
  */
 (() => {
 	"use strict";
@@ -173,6 +175,27 @@
 	});
 
 	//  =================================================================
+	//  Collapsible content
+	//  =================================================================
+
+	/** A disclosure button: not a tab, and not something that opens a menu or runs a command. */
+	const toggleSelector = "button[aria-expanded][aria-controls]:not([role], [command], [aria-haspopup])";
+
+	/** Shows or hides what a button controls, to match its aria-expanded. */
+	const sync = button => {
+		const target = document.getElementById(button.getAttribute("aria-controls"));
+		if (target) target.hidden = button.getAttribute("aria-expanded") !== "true";
+	};
+
+	document.addEventListener("click", e => {
+		const button = e.target.closest?.(toggleSelector);
+		if (button) {
+			button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
+			sync(button);
+		}
+	});
+
+	//  =================================================================
 	//  Commands: fallback for browsers without command / commandfor
 	//  =================================================================
 
@@ -199,8 +222,11 @@
 	//  Start
 	//  =================================================================
 
-	/** Sets up the tab lists in an element (the whole page by default). */
-	const init = (root = document) => root.querySelectorAll('[role="tablist"]').forEach(initTabs);
+	/** Sets up the tab lists and collapsible content in an element (the whole page by default). */
+	const init = (root = document) => {
+		root.querySelectorAll('[role="tablist"]').forEach(initTabs);
+		root.querySelectorAll(toggleSelector).forEach(sync);
+	};
 
 	window.Sassy = { init };
 
