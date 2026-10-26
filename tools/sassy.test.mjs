@@ -14,7 +14,9 @@ const script = readFileSync(new URL("../src/sassy.js", import.meta.url), "utf8")
 /** A page with sassy.js loaded. jsdom has no CSS anchor positioning, so tooltips use the fallback. */
 const load = body => {
 	const dom = new JSDOM(`<style>[role=tooltip] { margin-top: 6px }</style>${body}`, { runScripts: "outside-only" });
+	dom.window.CSS.supports = () => false; // some jsdom versions claim to support anchor positioning
 	dom.window.eval(script);
+	dom.window.Sassy.init(); // jsdom's readyState varies, so the script may be waiting for DOMContentLoaded
 	return dom.window;
 };
 
