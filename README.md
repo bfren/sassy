@@ -43,25 +43,17 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 }
 ```
 
-## Why placeholders
-
-- **Only what you use is output.** Each placeholder you extend adds its rules to your stylesheet, and nothing else.
-- **Semantic markup.** Your HTML keeps its own meaningful class names, or none at all, instead of a list of utility classes.
-- **No name clashes.** Placeholders are not classes, so they can't collide with class names in your own CSS or in other libraries.
-- **The cost:** you need a Sass build step, and placeholders can't be used from HTML - see [Classes](#classes) for the alternative.
-
 ## Is it for you?
 
 Sassy suits:
 
 - static sites and site generators, such as Hugo, Jekyll or Eleventy
 - component libraries and design systems
-- projects that want minimal CSS and semantic HTML
 
 It is less suited to:
 
-- projects without a Sass build - use [Classes](#classes) instead, or another framework
-- teams who want Tailwind's approach of utility classes in HTML - use [Classes](#classes) for that
+- projects without a Sass build - Sassy needs one
+- teams who want utility classes in their HTML - a class-based framework such as Tailwind will suit them better
 - sites that must support older browsers - see [Limitations](#limitations)
 
 ## Getting started
