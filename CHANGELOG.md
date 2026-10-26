@@ -1,0 +1,31 @@
+# Changelog
+
+All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## [0.3.0]
+
+### Added
+
+- Components (`src/2-components`): buttons (`%bf-btn`, with colour, outline and size variants), navigation (base, pills, underline and vertical), cards, tabs, tooltips and modal dialogs.
+- Collapsible navigation. `%bf-nav-toggle` is the menu button and `%bf-nav-collapse-{breakpoint}` is the menu it opens. Below the breakpoint the open menu is a panel over the content that wipes down and up in CSS; from the breakpoint it is an ordinary part of the page. Panel colours, shadow and speed are set with `--sassy-nav-collapse-*`.
+- `sassy.js`, an optional script for tabs, tooltips (with a positioning fallback where CSS anchor positioning is missing), `command` / `commandfor` buttons in older browsers, and collapsible navigation. It finds elements by ARIA role and standard attributes, never by class name.
+- Forms (`src/1-forms`): validation states, input groups, floating labels, range and file inputs, and selects.
+- A samples site, published to GitHub Pages, with a page for each layer. Every example shows its Sass, HTML and compiled CSS.
+- Worked examples for each layer in `docs/`, and an "Is it for you?" section in the README.
+- The project logo, in `logo/` (light and dark, SVG and PNG).
+- A `Check` workflow that compiles Sassy, checks that the CSS shown in the README and docs is what Sassy outputs, and builds the samples site.
+
+### Changed
+
+- Modal dialogs stop the page behind them scrolling, and opening one no longer scrolls the page to the top.
+- The colour palette is updated to Tailwind 4.3, so some shade values differ.
+- The source is reorganised into numbered folders (`0-core` to `5-theme`) and files (`_NNN-name`). The numbers are the output order.
+- Components are rendered after forms, with buttons first among them.
+- The Check and Pages workflows use the native Dart Sass release, which is faster than the npm package.
+
+### Removed
+
+- Coloured shadow placeholders: `%bf-shadow-{colour}-{shade}-{0-3}` and `%bf-shadow-{theme}-{0-3}`. Use `%bf-shadow-{0-3}` and set `--sassy-shadow-colour` for a site, a section or one element, for example `--sassy-shadow-colour: var(--sassy-theme-primary)`.
+- `src/base`, replaced by the numbered folders. Update any `@use` that points at a file inside it.
+
+[0.3.0]: https://github.com/bfren/sassy/releases/tag/v0.3.0
