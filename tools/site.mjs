@@ -279,6 +279,8 @@ const build = async () => {
 	mkdirSync(join(out, "css"), { recursive: true });
 	mkdirSync(join(out, "js"), { recursive: true });
 	cpSync(join(root, "src", "sassy.js"), join(out, "js", "sassy.js"));
+	mkdirSync(join(out, "images"), { recursive: true });
+	cpSync(join(root, "logo", "logo-light.svg"), join(out, "images", "logo.svg"));
 	if (existsSync(join(samples, ".nojekyll"))) cpSync(join(samples, ".nojekyll"), join(out, ".nojekyll"));
 
 	const found = pages().map(page => {

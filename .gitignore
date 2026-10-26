@@ -4,8 +4,9 @@
 *.sass.map
 *.scss.map
 
-# copied from src by watch.sh and watch.bat
+# copied from src and logo by watch.sh and watch.bat
 samples/js/
+samples/images/
 
 # built by tools/site.mjs
 _site/

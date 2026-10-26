@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 43" width="135" height="43" role="img" aria-label="Sassy logo">
+  <style>
+    .logo-text {
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      fill: #1e293b;
+    }
+    .logo-mark {
+      fill: #ea580c;
+    }
+  </style>
+  <text x="3" y="30" class="logo-text"><tspan class="logo-mark">%</tspan><tspan dx="1.8">Sassy</tspan></text>
+</svg>

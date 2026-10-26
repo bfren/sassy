@@ -1,4 +1,6 @@
-# Sassy
+![Sassy logo](logo/logo-light.svg)
+
+# Styling your sites with Sass...
 
 A Sass utility framework built from [placeholder selectors](https://sass-lang.com/documentation/style-rules/placeholder-selectors/) (`%`) instead of classes. Inspired by [Bootstrap](https://getbootstrap.com) and [Tailwind CSS](https://tailwindcss.com), it aims for the best of both: you only load the styles you use, and you don't need `npm`.
 

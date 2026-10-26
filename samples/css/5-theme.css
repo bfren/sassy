@@ -771,17 +771,12 @@ body {
 }
 
 .brand {
-  color: inherit;
-  font-family: var(--site-serif);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  text-decoration: none;
+  display: block;
+  line-height: 0;
 }
-
-.brand-mark {
-  color: var(--site-mark);
-  margin-right: 0.05em;
+.brand img {
+  height: 1.8rem;
+  width: auto;
 }
 
 .site-nav {
