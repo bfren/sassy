@@ -2,7 +2,7 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [0.3.0]
+## [0.3.0] - 2026-10-26
 
 > **Breaking: the `@use` path has changed.** `src/base` is gone. Load Sassy from `src` instead:
 >
@@ -14,7 +14,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 > @use "sassy/src" as sassy
 > ```
 >
-> Configuration with `with (...)` works as before. If you load individual files inside `src/base`, they have moved to the numbered folders (`0-core` to `5-theme`), for example `src/base/_22-display.sass` is now `src/4-utilities/_430-display.sass`.
+> Configuration with `with (...)` works as before, except that `$sassy-debug` is gone. It did nothing, so remove it. If you load individual files inside `src/base`, they have moved to the numbered folders (`0-core` to `5-theme`), for example `src/base/_22-display.sass` is now `src/4-utilities/_430-display.sass`.
 
 ### Added
 
@@ -30,7 +30,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 ### Changed
 
 - Modal dialogs stop the page behind them scrolling, and opening one no longer scrolls the page to the top.
-- The colour palette is updated to Tailwind 4.3, so some shade values differ.
+- **Breaking:** colour custom properties take any CSS colour (hex, `rgb()`, `oklch()`, a named colour or another custom property) instead of space-separated R G B values, and `sassy.colour()` returns an `oklch()` colour. A value such as `--sassy-theme-primary: 13 148 136` must become `rgb(13 148 136)` or `#0d9488`.
+- The colour palette is updated to Tailwind 4.3, in `oklch()`, so shade values differ. It adds the neutrals `mauve`, `olive`, `mist` and `taupe`, and shade `950`. Sassy now needs Dart Sass 1.79 or later.
 - The source is reorganised into numbered folders (`0-core` to `5-theme`) and files (`_NNN-name`). The numbers are the output order.
 - Components are rendered after forms, with buttons first among them.
 - The Check and Pages workflows use the native Dart Sass release, which is faster than the npm package.
@@ -40,7 +41,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - Coloured shadow placeholders: `%bf-shadow-{colour}-{shade}-{0-3}` and `%bf-shadow-{theme}-{0-3}`. Use `%bf-shadow-{0-3}` and set `--sassy-shadow-colour` for a site, a section or one element, for example `--sassy-shadow-colour: var(--sassy-theme-primary)`.
 - `src/base`, replaced by `src` and its numbered folders. See the note at the top of this release for the new `@use` path.
 
-## [0.2.0]
+## [0.2.0] - 2026-10-24
 
 ### Added
 
@@ -72,7 +73,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 - `dist/form.css` and `src/form`. The form styles are part of `src/base` and `dist/full.css`.
 
-## [0.1.0]
+## [0.1.0] - 2024-10-17
 
 Initial release.
 
