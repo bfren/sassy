@@ -4,6 +4,18 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ## [0.3.0]
 
+> **Breaking: the `@use` path has changed.** `src/base` is gone. Load Sassy from `src` instead:
+>
+> ```sass
+> // before (0.2.0)
+> @use "sassy/src/base" as sassy
+>
+> // now
+> @use "sassy/src" as sassy
+> ```
+>
+> Configuration with `with (...)` works as before. If you load individual files inside `src/base`, they have moved to the numbered folders (`0-core` to `5-theme`), for example `src/base/_22-display.sass` is now `src/4-utilities/_430-display.sass`.
+
 ### Added
 
 - Components (`src/2-components`): buttons (`%bf-btn`, with colour, outline and size variants), navigation (base, pills, underline and vertical), cards, tabs, tooltips and modal dialogs.
@@ -26,7 +38,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 ### Removed
 
 - Coloured shadow placeholders: `%bf-shadow-{colour}-{shade}-{0-3}` and `%bf-shadow-{theme}-{0-3}`. Use `%bf-shadow-{0-3}` and set `--sassy-shadow-colour` for a site, a section or one element, for example `--sassy-shadow-colour: var(--sassy-theme-primary)`.
-- `src/base`, replaced by the numbered folders. Update any `@use` that points at a file inside it.
+- `src/base`, replaced by `src` and its numbered folders. See the note at the top of this release for the new `@use` path.
 
 ## [0.2.0]
 
