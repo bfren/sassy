@@ -1,12 +1,11 @@
 @use "../4-utilities/410-layout-variables" as *;
 @use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
 
-:root {
-    --sassy-card-bg: #fff;
-    --sassy-card-border-width: 1px;
-    --sassy-card-border-colour: #{colour("grey", 200)};
-    --sassy-card-radius: var(--sassy-radius);
-    --sassy-card-padding-y: #{$sassy-padding-unit * 4};
-    --sassy-card-padding-x: #{$sassy-padding-unit * 4};
-    --sassy-card-cap-bg: #{colour("grey", 50)};
-}
+$sassy-card-bg: var(--sassy-card-bg, #fff);
+$sassy-card-border-width: var(--sassy-card-border-width, 1px);
+$sassy-card-border-colour: var(--sassy-card-border-colour, #{colour("grey", 200)});
+$sassy-card-radius: var(--sassy-card-radius, $sassy-radius);
+$sassy-card-padding-y: var(--sassy-card-padding-y, #{$sassy-padding-unit * 4});
+$sassy-card-padding-x: var(--sassy-card-padding-x, #{$sassy-padding-unit * 4});
+$sassy-card-cap-bg: var(--sassy-card-cap-bg, #{colour("grey", 50)});

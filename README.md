@@ -30,10 +30,10 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
   padding: 0.75rem;
 }
 .card {
-  border-radius: var(--sassy-radius);
+  border-radius: var(--sassy-radius, 0.375rem);
 }
 .card {
-  box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour) 7.5%, transparent);
+  box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour, #000) 7.5%, transparent);
 }
 .card-title {
   color: var(--sassy-theme-primary);
@@ -74,7 +74,7 @@ then load it once, in your site's main stylesheet:
 @use "sassy/src" as sassy
 ```
 
-Use a single entry stylesheet per site: each stylesheet that loads Sassy also outputs Normalize and Sassy's `:root` custom properties.
+Use a single entry stylesheet per site: each stylesheet that loads Sassy also outputs Normalize and the font and theme custom properties on `:root`.
 
 ### Classes
 
@@ -193,7 +193,7 @@ The prefix keeps Sassy's placeholders apart from your own and from other librari
 
 ### Theming
 
-Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties on `:root`, so you can change them per site, per section or at runtime - for example in dark mode:
+Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime - for example in dark mode:
 
 ```sass
 :root
@@ -209,6 +209,8 @@ Colours, fonts, the radius, the grid gutter and form styles are CSS custom prope
 ```
 
 Colour properties accept **any CSS colour** - hex, `rgb()`, `oklch()`, a named colour or another custom property - and Sassy adds transparency where it needs it with `color-mix()`. Use `sassy.colour(name, shade)` to get any palette colour, or write a value directly: `--sassy-theme-primary: #0d9488`.
+
+Only the fonts, body text and theme colours are defined on `:root`. Every other property's default is the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so your CSS only contains the defaults of the placeholders you extend. Set any of them, anywhere, to change it. To read one in your own Sass, use its Sass variable, which includes the default: `border-radius: sassy.$sassy-radius`. A bare `var(--sassy-radius)` has no value unless you set it.
 
 The one exception is the select chevron, an SVG image that cannot read custom properties. If you change `--sassy-input-colour`, set `--sassy-select-chevron` to match using `sassy.chevron()`, as in the example above.
 
@@ -299,7 +301,7 @@ Buttons, navigation, cards and dialogs need no script: dialogs open and close wi
 
 - **No `@extend` inside media queries.** Sass does not allow it, which is why every responsive utility has a breakpoint variant in its name (see [Responsive](#responsive)).
 - **Every file that extends needs its own `@use`.** `@extend` only reaches placeholders in modules the file itself loads, so a partial that extends Sassy's placeholders must `@use` Sassy too. Sass only outputs a module once per compilation, so this does not duplicate anything.
-- **One entry stylesheet per site.** Each separately compiled stylesheet that loads Sassy includes Normalize and the `:root` custom properties again.
+- **One entry stylesheet per site.** Each separately compiled stylesheet that loads Sassy includes Normalize and the font and theme custom properties again.
 - **Placeholders cannot be used from HTML.** If you need classes in your markup, use `dist/full.css` or set `$sassy-full: true`.
 - **Current browsers only.** Sassy relies on features that have been [Baseline](https://web.dev/baseline) since 2023 or earlier, including `:user-invalid`, `:focus-visible`, `:is()`, CSS masks, `inset`, `gap`, `:has()`, `oklch()` and `color-mix()`. Tooltips need the Popover API (Baseline since April 2024). They and dialogs also use CSS anchor positioning and `command` / `commandfor`, which are newer (Baseline since January 2026 and December 2025), so `sassy.js` covers them in older browsers.
 
@@ -319,7 +321,7 @@ You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your p
 
 | Script                      | Does                                                                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `compile-full.sh`           | Builds `dist/full.css` and `dist/full.css.gz`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh`                                     |
+| `compile-full.sh`           | Builds `dist/full.css`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh`                                     |
 | `compile-full.bat`          | Runs `compile-full.sh` in Git Bash on Windows                                                                                                                |
 | `watch.sh`, `watch.bat`     | Recompiles the sample stylesheets in `samples/sass` whenever they change, to preview the pages in `samples` as you work                                      |
 | `node tools/site.mjs build` | Builds the samples site into `_site`, adding the CSS that Sassy outputs for each example - fails if an example does not compile, or its page does not use it |
@@ -355,7 +357,7 @@ Each module's settings and custom properties live in a `-variables.scss` file wi
 ### Adding a module
 
 1. Create `_NNN-name.sass` in the folder for its kind - a component goes in `2-components`, a single-purpose utility in `4-utilities` - numbered with the folder's digit and its place in the output order. Give it a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
-2. Put any settings in `_NNN-name-variables.scss`, with `!default`, and forward it from `0-core/_030-variables.scss`.
+2. Put any settings in `_NNN-name-variables.scss`, with `!default`, and forward it from `0-core/_030-variables.scss`. Give each custom property a Sass variable holding its default as a fallback - `$sassy-name-bg: var(--sassy-name-bg, #fff);` - and read it through that variable, not `var()`, so the default is only output where it is used.
 3. Forward the module from its folder's `_index.sass` with `hide utilities`.
 4. `@use` the module in `_render.sass` and include its `utilities` mixin, in folder and file order.
 

@@ -12,7 +12,7 @@ Load Sassy once per site, in your main stylesheet:
 @use "sassy/src" as sassy
 ```
 
-Every stylesheet that loads Sassy outputs Normalize and the `:root` custom properties again, so use a single entry stylesheet per site. Every file that extends a placeholder needs its own `@use` as well: `@extend` only reaches placeholders from modules the file loads.
+Every stylesheet that loads Sassy outputs Normalize and the font and theme custom properties again, so use a single entry stylesheet per site. Every file that extends a placeholder needs its own `@use` as well: `@extend` only reaches placeholders from modules the file loads.
 
 ## Configuring Sassy
 

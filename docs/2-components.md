@@ -88,20 +88,20 @@ A button uses the form controls' padding, font size, line height, border and cor
 ```css
 .button {
   align-items: center;
-  background-color: var(--sassy-btn-bg);
-  border: var(--sassy-input-border-width) solid var(--sassy-btn-border-colour);
-  border-radius: var(--sassy-input-radius);
-  color: var(--sassy-btn-colour);
+  background-color: var(--sassy-btn-bg, #fff);
+  border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, oklch(87.2% 0.01 258.338deg));
+  border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
+  color: var(--sassy-btn-colour, var(--sassy-body-colour));
   display: inline-flex;
-  padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x);
+  padding: var(--sassy-input-padding-y, 0.375rem) var(--sassy-input-padding-x, 0.75rem);
 }
 .button:hover {
-  background-color: color-mix(in oklab, var(--sassy-btn-bg) 88%, var(--sassy-btn-shade));
+  background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
 }
 .button-save {
   --sassy-btn-bg: var(--sassy-theme-primary);
   --sassy-btn-border-colour: var(--sassy-theme-primary);
-  --sassy-btn-colour: var(--sassy-btn-primary-colour);
+  --sassy-btn-colour: var(--sassy-btn-primary-colour, #fff);
   --sassy-btn-focus-colour: var(--sassy-theme-primary);
   --sassy-btn-outline-colour: var(--sassy-theme-primary);
 }

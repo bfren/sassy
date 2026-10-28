@@ -33,49 +33,47 @@
 
 // Form controls read everything from custom properties, so themes can change
 // them at runtime. Colours accept any CSS colour value.
-:root {
-    --sassy-input-font-size: var(--sassy-font-size-base);
-    --sassy-input-line-height: var(--sassy-line-height-base);
-    --sassy-input-padding-y: #{$sassy-padding-unit * 1.5};
-    --sassy-input-padding-x: #{$sassy-padding-unit * 3};
-    --sassy-input-border-width: #{$sassy-border-width-unit};
-    --sassy-input-radius: var(--sassy-radius);
+$sassy-input-font-size: var(--sassy-input-font-size, var(--sassy-font-size-base));
+$sassy-input-line-height: var(--sassy-input-line-height, var(--sassy-line-height-base));
+$sassy-input-padding-y: var(--sassy-input-padding-y, #{$sassy-padding-unit * 1.5});
+$sassy-input-padding-x: var(--sassy-input-padding-x, #{$sassy-padding-unit * 3});
+$sassy-input-border-width: var(--sassy-input-border-width, #{$sassy-border-width-unit});
+$sassy-input-radius: var(--sassy-input-radius, $sassy-radius);
 
-    --sassy-input-colour: #{colour("grey", 800)};
-    --sassy-input-bg: #fff;
-    --sassy-input-border-colour: #{colour("grey", 300)};
-    --sassy-input-placeholder-colour: #{colour("grey", 500)};
-    --sassy-input-disabled-bg: #{colour("grey", 100)};
-    --sassy-input-readonly-bg: #{colour("grey", 50)};
+$sassy-input-colour: var(--sassy-input-colour, #{colour("grey", 800)});
+$sassy-input-bg: var(--sassy-input-bg, #fff);
+$sassy-input-border-colour: var(--sassy-input-border-colour, #{colour("grey", 300)});
+$sassy-input-placeholder-colour: var(--sassy-input-placeholder-colour, #{colour("grey", 500)});
+$sassy-input-disabled-bg: var(--sassy-input-disabled-bg, #{colour("grey", 100)});
+$sassy-input-readonly-bg: var(--sassy-input-readonly-bg, #{colour("grey", 50)});
 
-    --sassy-input-focus-colour: var(--sassy-theme-primary);
-    --sassy-input-focus-ring: 0.25rem;
-    --sassy-input-invalid-colour: var(--sassy-theme-error);
-    --sassy-input-valid-colour: var(--sassy-theme-ok);
+$sassy-input-focus-colour: var(--sassy-input-focus-colour, var(--sassy-theme-primary));
+$sassy-input-focus-ring: var(--sassy-input-focus-ring, 0.25rem);
+$sassy-input-invalid-colour: var(--sassy-input-invalid-colour, var(--sassy-theme-error));
+$sassy-input-valid-colour: var(--sassy-input-valid-colour, var(--sassy-theme-ok));
 
-    --sassy-check-checked-colour: var(--sassy-theme-primary);
-    --sassy-check-mark-colour: #fff;
-    --sassy-check-radius: 0.25em;
-    --sassy-switch-knob-colour: var(--sassy-input-border-colour);
+$sassy-check-checked-colour: var(--sassy-check-checked-colour, var(--sassy-theme-primary));
+$sassy-check-mark-colour: var(--sassy-check-mark-colour, #fff);
+$sassy-check-radius: var(--sassy-check-radius, 0.25em);
+$sassy-switch-knob-colour: var(--sassy-switch-knob-colour, $sassy-input-border-colour);
 
-    // an SVG background cannot read custom properties, so a theme that changes
-    // --sassy-input-colour should set this too, using chevron()
-    --sassy-select-chevron: #{chevron(colour("grey", 800))};
+// an SVG background cannot read custom properties, so a theme that changes
+// --sassy-input-colour should set this too, using chevron()
+$sassy-select-chevron: var(--sassy-select-chevron, #{chevron(colour("grey", 800))});
 
-    --sassy-form-text-colour: #{colour("grey", 500)};
+$sassy-form-text-colour: var(--sassy-form-text-colour, #{colour("grey", 500)});
 
-    --sassy-input-addon-bg: #{colour("grey", 100)};
-    --sassy-input-addon-hover-bg: #{colour("grey", 200)};
+$sassy-input-addon-bg: var(--sassy-input-addon-bg, #{colour("grey", 100)});
+$sassy-input-addon-hover-bg: var(--sassy-input-addon-hover-bg, #{colour("grey", 200)});
 
-    --sassy-floating-height: 3.5rem;
-    --sassy-floating-padding-y: 1rem;
+$sassy-floating-height: var(--sassy-floating-height, 3.5rem);
+$sassy-floating-padding-y: var(--sassy-floating-padding-y, 1rem);
 
-    --sassy-range-track-colour: #{colour("grey", 200)};
-    --sassy-range-track-height: 0.5rem;
-    --sassy-range-thumb-colour: var(--sassy-theme-primary);
-    --sassy-range-thumb-size: 1rem;
-    --sassy-range-disabled-colour: #{colour("grey", 400)};
-}
+$sassy-range-track-colour: var(--sassy-range-track-colour, #{colour("grey", 200)});
+$sassy-range-track-height: var(--sassy-range-track-height, 0.5rem);
+$sassy-range-thumb-colour: var(--sassy-range-thumb-colour, var(--sassy-theme-primary));
+$sassy-range-thumb-size: var(--sassy-range-thumb-size, 1rem);
+$sassy-range-disabled-colour: var(--sassy-range-disabled-colour, #{colour("grey", 400)});
 
 // Check marks, used as masks - only their shape matters, the colour comes from
 // --sassy-check-mark-colour so it can change at runtime.

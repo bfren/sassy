@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "../4-utilities/420-colour-variables" as *;
 @use "../5-theme/500-theme-variables" as *;
+@use "../1-forms/100-variables" as *;
 
 // Text colour on each theme colour's button, chosen for contrast with the default theme:
 // dark on the light colours (and on ok, as white on green-600 is only 3.2:1), white on the rest.
@@ -14,17 +15,16 @@ $sassy-btn-text-colours: (
 
 // The default button. The theme variants (%btn-primary and so on) set these on the button itself.
 // Colours accept any CSS colour.
-:root {
-    --sassy-btn-bg: #fff;
-    --sassy-btn-colour: var(--sassy-body-colour);
-    --sassy-btn-border-colour: #{colour("grey", 300)};
-    --sassy-btn-outline-colour: var(--sassy-body-colour);
-    --sassy-btn-focus-colour: var(--sassy-input-focus-colour);
-    --sassy-btn-font-weight: 500;
-    // mixed into the background on hover and while pressed
-    --sassy-btn-shade: #000;
+$sassy-btn-bg: var(--sassy-btn-bg, #fff);
+$sassy-btn-colour: var(--sassy-btn-colour, var(--sassy-body-colour));
+$sassy-btn-border-colour: var(--sassy-btn-border-colour, #{colour("grey", 300)});
+$sassy-btn-outline-colour: var(--sassy-btn-outline-colour, var(--sassy-body-colour));
+$sassy-btn-focus-colour: var(--sassy-btn-focus-colour, $sassy-input-focus-colour);
+$sassy-btn-font-weight: var(--sassy-btn-font-weight, 500);
+// mixed into the background on hover and while pressed
+$sassy-btn-shade: var(--sassy-btn-shade, #000);
 
-    @each $name, $value in $sassy-theme {
-        --sassy-btn-#{$name}-colour: #{map.get($sassy-btn-text-colours, $name) or #fff};
-    }
+$sassy-btn-text: ();
+@each $name, $value in $sassy-theme {
+    $sassy-btn-text: map.set($sassy-btn-text, $name, var(--sassy-btn-#{$name}-colour, #{map.get($sassy-btn-text-colours, $name) or #fff}));
 }

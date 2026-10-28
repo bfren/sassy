@@ -19,7 +19,7 @@
     @include make.single("nav")
         display: flex
         flex-wrap: wrap
-        gap: var(--sassy-nav-gap)
+        gap: $sassy-nav-gap
         list-style: none
         margin: 0
         padding: 0
@@ -30,7 +30,7 @@
     // Styles only change custom properties, so they combine with %nav and %nav-vertical
 
     @include make.single("nav-pills")
-        --sassy-nav-link-radius: var(--sassy-radius)
+        --sassy-nav-link-radius: #{$sassy-radius}
         --sassy-nav-current-bg: var(--sassy-theme-primary)
         --sassy-nav-current-colour: #fff
 
@@ -66,16 +66,16 @@
     @each $breakpoint, $width in $sassy-breakpoints
         @include make.single("nav-collapse" + $sassy-separator + $breakpoint)
             @media (width < #{$width})
-                background-color: var(--sassy-nav-collapse-bg)
-                border-bottom: 1px solid var(--sassy-nav-collapse-border-colour)
-                box-shadow: var(--sassy-nav-collapse-shadow)
+                background-color: $sassy-nav-collapse-bg
+                border-bottom: 1px solid $sassy-nav-collapse-border-colour
+                box-shadow: $sassy-nav-collapse-shadow
                 box-sizing: border-box
                 // the extra inset leaves room for the shadow
                 clip-path: inset(0 -2rem -2rem)
                 inset: 100% 0 auto
                 position: absolute
-                animation: sassy-nav-wipe var(--sassy-nav-collapse-duration) ease
-                transition: clip-path var(--sassy-nav-collapse-duration) ease, display var(--sassy-nav-collapse-duration) allow-discrete
+                animation: sassy-nav-wipe $sassy-nav-collapse-duration ease
+                transition: clip-path $sassy-nav-collapse-duration ease, display $sassy-nav-collapse-duration allow-discrete
 
                 @media (prefers-reduced-motion: reduce)
                     animation: none

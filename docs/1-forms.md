@@ -237,7 +237,7 @@ Selects draw their chevron as an SVG image, which cannot read custom properties.
 
 ## Settings and custom properties
 
-Every form value is a custom property on `:root`, so you can change it per site, per section or at runtime. The main groups:
+Every form value is a custom property, so you can change it per site, per section or at runtime. Its default is the fallback in the `var()` that reads it, so it is only in your CSS when you extend a control that uses it. The main groups:
 
 | Property                                                                                                                                              | Controls                                     |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |

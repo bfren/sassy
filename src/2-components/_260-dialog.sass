@@ -13,14 +13,14 @@
 @mixin utilities()
 
     @include make.single("dialog")
-        background-color: var(--sassy-dialog-bg)
-        border: var(--sassy-dialog-border-width) solid var(--sassy-dialog-border-colour)
-        border-radius: var(--sassy-dialog-radius)
-        box-shadow: var(--sassy-dialog-shadow)
+        background-color: $sassy-dialog-bg
+        border: $sassy-dialog-border-width solid $sassy-dialog-border-colour
+        border-radius: $sassy-dialog-radius
+        box-shadow: $sassy-dialog-shadow
         box-sizing: border-box
         color: inherit
         padding: 0
-        width: var(--sassy-dialog-width)
+        width: $sassy-dialog-width
 
         // a column, so a long body scrolls between a fixed header and footer
         &[open]
@@ -28,7 +28,7 @@
             flex-direction: column
 
         &::backdrop
-            background-color: var(--sassy-dialog-backdrop)
+            background-color: $sassy-dialog-backdrop
 
         // the page behind a modal doesn't scroll
         :root:has(&:modal)
@@ -42,11 +42,11 @@
 
     @include make.single("dialog-header")
         align-items: center
-        border-bottom: var(--sassy-dialog-border-width) solid var(--sassy-dialog-border-colour)
+        border-bottom: $sassy-dialog-border-width solid $sassy-dialog-border-colour
         display: flex
         gap: $sassy-margin-unit * 4
         justify-content: space-between
-        padding: var(--sassy-dialog-padding-y) var(--sassy-dialog-padding-x)
+        padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
 
     @include make.single("dialog-title")
         font-size: calc(var(--sassy-font-size-base) * 1.25)
@@ -56,7 +56,7 @@
     @include make.single("dialog-body")
         flex: 1 1 auto
         overflow-y: auto
-        padding: var(--sassy-dialog-padding-y) var(--sassy-dialog-padding-x)
+        padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
 
         & > :first-child
             margin-top: 0
@@ -65,19 +65,19 @@
             margin-bottom: 0
 
     @include make.single("dialog-footer")
-        border-top: var(--sassy-dialog-border-width) solid var(--sassy-dialog-border-colour)
+        border-top: $sassy-dialog-border-width solid $sassy-dialog-border-colour
         display: flex
         flex-wrap: wrap
         gap: $sassy-margin-unit * 2
         justify-content: flex-end
-        padding: var(--sassy-dialog-padding-y) var(--sassy-dialog-padding-x)
+        padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
 
     // A close button for the header - give it aria-label="Close"
 
     @include make.single("dialog-close")
         background: none
         border: 0
-        border-radius: var(--sassy-radius)
+        border-radius: $sassy-radius
         color: inherit
         cursor: pointer
         font-size: 1.5em

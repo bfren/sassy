@@ -33,7 +33,7 @@
         & > :not(:first-child)
             border-bottom-left-radius: 0
             border-top-left-radius: 0
-            margin-left: calc(var(--sassy-input-border-width) * -1)
+            margin-left: calc($sassy-input-border-width * -1)
 
         & > :not(:last-child)
             border-bottom-right-radius: 0
@@ -55,14 +55,14 @@
 
     @include make.single("input-group-text")
         align-items: center
-        background-color: var(--sassy-input-addon-bg)
-        border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour)
-        border-radius: var(--sassy-input-radius)
+        background-color: $sassy-input-addon-bg
+        border: $sassy-input-border-width solid $sassy-input-border-colour
+        border-radius: $sassy-input-radius
         box-sizing: border-box
-        color: var(--sassy-input-colour)
+        color: $sassy-input-colour
         display: flex
-        font-size: var(--sassy-input-font-size)
-        line-height: var(--sassy-input-line-height)
-        padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x)
+        font-size: $sassy-input-font-size
+        line-height: $sassy-input-line-height
+        padding: $sassy-input-padding-y $sassy-input-padding-x
         text-align: center
         white-space: nowrap

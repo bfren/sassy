@@ -4,26 +4,24 @@
 
 // Navigation links (and tabs) read everything from custom properties, so the pill
 // and underline styles - and themes - only change these. Colours accept any CSS colour.
-:root {
-    --sassy-nav-gap: #{$sassy-margin-unit};
-    --sassy-nav-link-padding-y: #{$sassy-padding-unit * 2};
-    --sassy-nav-link-padding-x: #{$sassy-padding-unit * 4};
-    --sassy-nav-link-colour: var(--sassy-theme-primary);
-    --sassy-nav-link-hover-bg: #{colour("grey", 100)};
-    --sassy-nav-link-radius: 0;
-    --sassy-nav-link-underline-width: 0;
-    --sassy-nav-current-bg: transparent;
-    --sassy-nav-current-colour: var(--sassy-body-colour);
-    --sassy-nav-current-border-colour: transparent;
+$sassy-nav-gap: var(--sassy-nav-gap, #{$sassy-margin-unit});
+$sassy-nav-link-padding-y: var(--sassy-nav-link-padding-y, #{$sassy-padding-unit * 2});
+$sassy-nav-link-padding-x: var(--sassy-nav-link-padding-x, #{$sassy-padding-unit * 4});
+$sassy-nav-link-colour: var(--sassy-nav-link-colour, var(--sassy-theme-primary));
+$sassy-nav-link-hover-bg: var(--sassy-nav-link-hover-bg, #{colour("grey", 100)});
+$sassy-nav-link-radius: var(--sassy-nav-link-radius, 0);
+$sassy-nav-link-underline-width: var(--sassy-nav-link-underline-width, 0);
+$sassy-nav-current-bg: var(--sassy-nav-current-bg, transparent);
+$sassy-nav-current-colour: var(--sassy-nav-current-colour, var(--sassy-body-colour));
+$sassy-nav-current-border-colour: var(--sassy-nav-current-border-colour, transparent);
 
-    // a collapsed nav's panel, below the breakpoint where it collapses
-    --sassy-nav-collapse-bg: #fff;
-    --sassy-nav-collapse-border-colour: #{colour("grey", 200)};
-    --sassy-nav-collapse-shadow: 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.1)};
-    --sassy-nav-collapse-duration: 0.2s;
+// a collapsed nav's panel, below the breakpoint where it collapses
+$sassy-nav-collapse-bg: var(--sassy-nav-collapse-bg, #fff);
+$sassy-nav-collapse-border-colour: var(--sassy-nav-collapse-border-colour, #{colour("grey", 200)});
+$sassy-nav-collapse-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.1)});
+$sassy-nav-collapse-duration: var(--sassy-nav-collapse-duration, 0.2s);
 
-    // shared by every component that is not a form control
-    --sassy-focus-outline-colour: var(--sassy-theme-primary);
-    --sassy-focus-outline-width: 2px;
-    --sassy-focus-outline-offset: 2px;
-}
+// shared by every component that is not a form control
+$sassy-focus-outline-colour: var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+$sassy-focus-outline-width: var(--sassy-focus-outline-width, 2px);
+$sassy-focus-outline-offset: var(--sassy-focus-outline-offset, 2px);

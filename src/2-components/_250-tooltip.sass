@@ -14,18 +14,18 @@
 @mixin utilities()
 
     @include make.single("tooltip")
-        background-color: var(--sassy-tooltip-bg)
+        background-color: $sassy-tooltip-bg
         border: 0
-        border-radius: var(--sassy-tooltip-radius)
+        border-radius: $sassy-tooltip-radius
         box-sizing: border-box
-        color: var(--sassy-tooltip-colour)
-        font-size: var(--sassy-tooltip-font-size)
+        color: $sassy-tooltip-colour
+        font-size: $sassy-tooltip-font-size
         // popovers are centred in the viewport by default - anchor positioning replaces that
         inset: auto
         line-height: 1.4
-        margin: var(--sassy-tooltip-offset)
-        max-width: var(--sassy-tooltip-max-width)
+        margin: $sassy-tooltip-offset
+        max-width: $sassy-tooltip-max-width
         overflow: visible
-        padding: var(--sassy-tooltip-padding-y) var(--sassy-tooltip-padding-x)
+        padding: $sassy-tooltip-padding-y $sassy-tooltip-padding-x
         position-area: top
         position-try-fallbacks: flip-block

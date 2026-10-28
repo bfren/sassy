@@ -2,9 +2,7 @@
 
 // One set of shadows, all in --sassy-shadow-colour, which is neutral by default. To colour shadows,
 // set it for a site, a section or one element, e.g. --sassy-shadow-colour: var(--sassy-theme-primary).
-:root {
-    --sassy-shadow-colour: #000;
-}
+$sassy-shadow-colour: var(--sassy-shadow-colour, #000);
 
 $sassy-shadow-unit: 0.125rem !default;
 
@@ -41,4 +39,4 @@ $sassy-shadow-unit: 0.125rem !default;
 }
 
 // the shadow sizes, 0 (none) to 3
-$sassy-shadow: get-shadow-colours(var(--sassy-shadow-colour));
+$sassy-shadow: get-shadow-colours($sassy-shadow-colour);
