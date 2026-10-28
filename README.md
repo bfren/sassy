@@ -321,7 +321,7 @@ You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your p
 
 | Script                      | Does                                                                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `compile-full.sh`           | Builds `dist/full.css` and `dist/full.css.gz`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh`                                     |
+| `compile-full.sh`           | Builds `dist/full.css`, copies `src/sassy.js` to `dist`, then runs `snippets.sh` and `palette.sh`                                     |
 | `compile-full.bat`          | Runs `compile-full.sh` in Git Bash on Windows                                                                                                                |
 | `watch.sh`, `watch.bat`     | Recompiles the sample stylesheets in `samples/sass` whenever they change, to preview the pages in `samples` as you work                                      |
 | `node tools/site.mjs build` | Builds the samples site into `_site`, adding the CSS that Sassy outputs for each example - fails if an example does not compile, or its page does not use it |

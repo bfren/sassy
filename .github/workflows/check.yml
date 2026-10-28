@@ -23,9 +23,7 @@ jobs:
       - name: Rebuild dist and check it is committed
         run: |
           ./compile-full.sh
-          git diff --exit-code -- dist docs ':!dist/full.css.gz' || { echo "::error::dist/ or docs/*.svg is out of date - run ./compile-full.sh and commit the result"; exit 1; }
-          # GNU and Apple gzip compress differently, so check what the committed .gz holds, not its bytes
-          git show HEAD:dist/full.css.gz | gunzip | cmp -s - dist/full.css || { echo "::error::dist/full.css.gz does not match dist/full.css - run ./compile-full.sh and commit the result"; exit 1; }
+          git diff --exit-code dist docs || { echo "::error::dist/ or docs/*.svg is out of date - run ./compile-full.sh and commit the result"; exit 1; }
 
       - name: Test sassy.js
         run: |

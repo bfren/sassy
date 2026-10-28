@@ -14,6 +14,10 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 - `node tools/site.mjs check` also fails if Sassy reads a custom property with a bare `var()` that has no default.
 
+### Removed
+
+- `dist/full.css.gz`. Nothing read it, and gzip on macOS and Linux compress differently, so it could not be checked. Servers and CDNs compress `full.css` themselves.
+
 ## [0.3.0] - 2026-10-26
 
 > **Breaking: the `@use` path has changed.** `src/base` is gone. Load Sassy from `src` instead:

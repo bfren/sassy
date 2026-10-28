@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Requires Dart Sass 1.79+ on the path (`sass`), plus bash, `gzip` and `awk`. The site and checks also need Node.js 20+. There is no `package.json` and no lint config.
+Requires Dart Sass 1.79+ on the path (`sass`), plus bash and `awk`. The site and checks also need Node.js 20+. There is no `package.json` and no lint config.
 
 - Full build (regenerates the committed `dist/` files, then runs `snippets.sh` and `palette.sh`): `./compile-full.sh`
 - Compile the sample stylesheets while editing: `./watch.sh` (or `watch.bat`), then open the `samples/*.html` pages
@@ -21,7 +21,7 @@ Requires Dart Sass 1.79+ on the path (`sass`), plus bash, `gzip` and `awk`. The 
 
 **Module layout.** Folders and files are numbered by their output order (`0-core` → `5-theme`, file `_NNN-name.sass`). Each module's settings live in a sibling `-variables.scss` with `!default`, forwarded through `src/0-core/_030-variables.scss` so `@use … with (…)` configuration reaches them. Only the font/body (`400-text`) and theme custom properties are defined on `:root`; every other one is a Sass variable such as `$sassy-card-bg: var(--sassy-card-bg, #fff)`, and modules read it through that variable, so its default is only output by the rules that use it. Never write a bare `var(--sassy-…)` for one of those, as it has no value unless the consumer sets it. `src/_index.sass` forwards the folders, and `src/full.sass` is the full-build entry point. Placeholder and class names are built with `make.name()` / `make.single` / `make.responsive`, never by hand-writing the `bf` prefix. In `2-components`, `_200-shared.sass` holds private mixins and the components start at 210 (button first, as other components contain buttons).
 
-**Generated output is committed.** `dist/` (CSS, the `.gz`, `sassy.js` copy, snippets) changes whenever `src` changes, and `docs/*.svg` changes when the colour or theme variables do. Rebuild with `./compile-full.sh` and include the results in the same change. `_site/` is built, not committed.
+**Generated output is committed.** `dist/` (CSS, `sassy.js` copy, snippets) changes whenever `src` changes, and `docs/*.svg` changes when the colour or theme variables do. Rebuild with `./compile-full.sh` and include the results in the same change. `_site/` is built, not committed.
 
 **Version string appears in several places.** `VERSION`, the header comments in `src/0-core/_000-sassy.scss` and `src/sassy.js`, and the `@0.3.0` CDN URLs in `README.md` should all move together.
 
