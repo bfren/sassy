@@ -3,7 +3,8 @@
  * Builds the samples site, and checks that the CSS shown in examples is what Sassy outputs.
  *
  *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output
- *     node tools/site.mjs check    checks the CSS shown in README.md and docs/*.md
+ *     node tools/site.mjs check    checks the CSS shown in README.md and docs/*.md, and that every
+ *                                  custom property Sassy reads has a value or a fallback
  *
  * Both fail if an example does not compile, or shows CSS that Sassy does not output.
  * Needs Node 20 or later and Dart Sass on the path as `sass` - or set SASS to run it from elsewhere.
@@ -340,6 +341,15 @@ const docExamples = (file, text) => {
 	});
 };
 
+/** Lists custom properties the full build reads with a bare var() but never defines - they have no value. */
+const undefinedProperties = async () => {
+	const css = await sass(["--no-source-map", join(root, "src", "full.sass")]);
+	const defined = new Set([...css.matchAll(/(?:^|[{;\s])(--sassy-[a-z0-9-]+)\s*:/g)].map(m => m[1]));
+	const bare = new Set([...css.matchAll(/var\((--sassy-[a-z0-9-]+)\)/g)].map(m => m[1]));
+	return [...bare].filter(p => !defined.has(p))
+		.map(p => `src: var(${p}) has no fallback and is never defined - read it through its $sassy- variable`);
+};
+
 const check = async () => {
 	const files = ["README.md", ...readdirSync(join(root, "docs")).filter(f => f.endsWith(".md")).map(f => `docs/${f}`)];
 	const examples = files.flatMap(f => docExamples(f, readFileSync(join(root, f), "utf8")));
@@ -348,7 +358,7 @@ const check = async () => {
 		results[i].error ? [results[i].error] : missing(ex.css, results[i].css).map(m => `${ex.label}: the CSS shown is not output: ${m}`)
 	);
 	console.log(`checked ${examples.length} examples in ${files.length} files`);
-	return problems;
+	return [...problems, ...(await undefinedProperties())];
 };
 
 //  =================================================================

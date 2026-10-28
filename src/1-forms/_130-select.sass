@@ -15,11 +15,11 @@
 
     @include make.single("form-select")
         @include form.control()
-        background-image: var(--sassy-select-chevron)
-        background-position: right var(--sassy-input-padding-x) center
+        background-image: $sassy-select-chevron
+        background-position: right $sassy-input-padding-x center
         background-repeat: no-repeat
         background-size: 1em 0.75em
-        padding-right: calc(var(--sassy-input-padding-x) * 2 + 1em)
+        padding-right: calc($sassy-input-padding-x * 2 + 1em)
 
         // options do not inherit the select's font by default - browsers that draw the open
         // list themselves (e.g. Firefox on desktop) use it; native menus (macOS, mobile) ignore it
@@ -30,7 +30,7 @@
         &[multiple],
         &[size]:not([size="1"])
             background-image: none
-            padding-right: var(--sassy-input-padding-x)
+            padding-right: $sassy-input-padding-x
 
     @each $size, $props in $sassy-input-sizes
         @include make.single("form-select-" + $size)

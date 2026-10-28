@@ -2,6 +2,18 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+
+- Smaller output: only the font, body and theme custom properties are defined on `:root`. Every other default is now the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so it is only in your CSS when you extend a placeholder that uses it. Setting any of them, on `:root` or anywhere else, works as before.
+- **Breaking:** if your own CSS reads one of those properties, such as `var(--sassy-radius)`, it now has no value unless you set it. Read it through its Sass variable instead, which includes the default: `border-radius: sassy.$sassy-radius`.
+- A default that points to another property now follows that property where it is set, not only on `:root`. For example, `--sassy-radius` set on a section now also changes the corners of cards, inputs and dialogs inside it.
+
+### Added
+
+- `node tools/site.mjs check` also fails if Sassy reads a custom property with a bare `var()` that has no default.
+
 ## [0.3.0] - 2026-10-26
 
 > **Breaking: the `@use` path has changed.** `src/base` is gone. Load Sassy from `src` instead:

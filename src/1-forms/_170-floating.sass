@@ -19,10 +19,10 @@
         & > input,
         & > select,
         & > textarea
-            height: calc(var(--sassy-floating-height) + var(--sassy-input-border-width) * 2)
+            height: calc($sassy-floating-height + $sassy-input-border-width * 2)
             line-height: 1.25
-            min-height: calc(var(--sassy-floating-height) + var(--sassy-input-border-width) * 2)
-            padding: var(--sassy-floating-padding-y) var(--sassy-input-padding-x)
+            min-height: calc($sassy-floating-height + $sassy-input-border-width * 2)
+            padding: $sassy-floating-padding-y $sassy-input-padding-x
 
         // the label stands in for the placeholder
         & > input::placeholder,
@@ -35,19 +35,19 @@
         & > textarea:focus,
         & > textarea:not(:placeholder-shown),
         & > select
-            padding-bottom: calc(var(--sassy-floating-padding-y) * 0.625)
-            padding-top: calc(var(--sassy-floating-padding-y) * 1.625)
+            padding-bottom: calc($sassy-floating-padding-y * 0.625)
+            padding-top: calc($sassy-floating-padding-y * 1.625)
 
         & > label
-            border: var(--sassy-input-border-width) solid transparent
+            border: $sassy-input-border-width solid transparent
             box-sizing: border-box
-            color: var(--sassy-input-placeholder-colour)
+            color: $sassy-input-placeholder-colour
             height: 100%
             left: 0
             margin: 0
             max-width: 100%
             overflow: hidden
-            padding: var(--sassy-floating-padding-y) var(--sassy-input-padding-x)
+            padding: $sassy-floating-padding-y $sassy-input-padding-x
             pointer-events: none
             position: absolute
             text-align: start

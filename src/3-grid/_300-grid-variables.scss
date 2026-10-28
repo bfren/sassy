@@ -1,8 +1,6 @@
 @use "sass:list";
 
-:root {
-    --sassy-grid-gutter: 0.5rem;
-}
+$sassy-grid-gutter: var(--sassy-grid-gutter, 0.5rem);
 
 $sassy-grid-cols: 12;
 

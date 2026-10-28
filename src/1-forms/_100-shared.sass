@@ -11,17 +11,17 @@
 @mixin control()
     appearance: none
     background-clip: padding-box
-    background-color: var(--sassy-input-bg)
-    border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour)
-    border-radius: var(--sassy-input-radius)
+    background-color: $sassy-input-bg
+    border: $sassy-input-border-width solid $sassy-input-border-colour
+    border-radius: $sassy-input-radius
     box-sizing: border-box
-    color: var(--sassy-input-colour)
+    color: $sassy-input-colour
     display: block
     font-family: inherit
-    font-size: var(--sassy-input-font-size)
-    line-height: var(--sassy-input-line-height)
+    font-size: $sassy-input-font-size
+    line-height: $sassy-input-line-height
     margin: 0
-    padding: var(--sassy-input-padding-y) var(--sassy-input-padding-x)
+    padding: $sassy-input-padding-y $sassy-input-padding-x
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out
     width: 100%
 
@@ -29,17 +29,17 @@
         transition: none
 
     &::placeholder
-        color: var(--sassy-input-placeholder-colour)
+        color: $sassy-input-placeholder-colour
         opacity: 1
 
     &:focus-visible
-        @include focus-ring(var(--sassy-input-focus-colour))
+        @include focus-ring($sassy-input-focus-colour)
 
     &[readonly]
-        background-color: var(--sassy-input-readonly-bg)
+        background-color: $sassy-input-readonly-bg
 
     &:disabled
-        background-color: var(--sassy-input-disabled-bg)
+        background-color: $sassy-input-disabled-bg
         cursor: not-allowed
         opacity: 1
 
@@ -52,7 +52,7 @@
 @mixin invalid()
     &:user-invalid,
     &[aria-invalid="true"]
-        @include state(var(--sassy-input-invalid-colour))
+        @include state($sassy-input-invalid-colour)
 
 
 
@@ -68,8 +68,8 @@
 /// Declarations shared by checkboxes, radios and switches.
 @mixin check()
     appearance: none
-    background-color: var(--sassy-input-bg)
-    border: var(--sassy-input-border-width) solid var(--sassy-input-border-colour)
+    background-color: $sassy-input-bg
+    border: $sassy-input-border-width solid $sassy-input-border-colour
     box-sizing: border-box
     flex-shrink: 0
     font-size: inherit
@@ -97,7 +97,7 @@
         @include checked()
 
     &:focus-visible
-        @include focus-ring(var(--sassy-input-focus-colour))
+        @include focus-ring($sassy-input-focus-colour)
 
     &:disabled
         cursor: not-allowed
@@ -109,8 +109,8 @@
 
 /// Checked colours for checks and switches.
 @mixin checked()
-    background-color: var(--sassy-check-checked-colour)
-    border-color: var(--sassy-check-checked-colour)
+    background-color: $sassy-check-checked-colour
+    border-color: $sassy-check-checked-colour
 
 
 
@@ -132,7 +132,7 @@
 /// Focus ring in the given colour.
 @mixin focus-ring($colour)
     border-color: $colour
-    box-shadow: 0 0 0 var(--sassy-input-focus-ring) with-alpha($colour, 0.25)
+    box-shadow: 0 0 0 $sassy-input-focus-ring with-alpha($colour, 0.25)
     outline: 0
 
 

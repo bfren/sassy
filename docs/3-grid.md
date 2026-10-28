@@ -51,7 +51,7 @@ The `.wrap` container, which centres a page's content, is in [4-utilities](4-uti
   box-sizing: border-box;
   flex: 0 0 auto;
   margin: 0;
-  padding: var(--sassy-grid-gutter);
+  padding: var(--sassy-grid-gutter, 0.5rem);
   width: 100%;
 }
 @media (min-width: 768px) {
@@ -59,7 +59,7 @@ The `.wrap` container, which centres a page's content, is in [4-utilities](4-uti
     box-sizing: border-box;
     flex: 0 0 auto;
     margin: 0;
-    padding: var(--sassy-grid-gutter);
+    padding: var(--sassy-grid-gutter, 0.5rem);
     width: 50%;
   }
 }

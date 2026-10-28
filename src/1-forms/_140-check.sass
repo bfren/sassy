@@ -33,14 +33,14 @@
         @include form.check()
 
         &::before
-            background-color: var(--sassy-check-mark-colour)
+            background-color: $sassy-check-mark-colour
             transform: scale(0)
 
         &:checked::before
             transform: scale(1)
 
         &[type="checkbox"]
-            border-radius: var(--sassy-check-radius)
+            border-radius: $sassy-check-radius
 
             &::before
                 @include form.mask($sassy-check-tick)
@@ -66,4 +66,4 @@
 
         :user-invalid ~ &,
         [aria-invalid="true"] ~ &
-            color: var(--sassy-input-invalid-colour)
+            color: $sassy-input-invalid-colour
