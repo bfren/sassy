@@ -65,6 +65,11 @@ body
 | `%bf-top-{0, 50, 100, auto}`, `%bf-bottom-…`, `%bf-left-…`, `%bf-right-…`                                    | Offsets from the edge, as a percentage or `auto`                                              |
 | `%bf-z-index-{3, 4, 5}`                                                                                      | `z-index`                                                                                     |
 | `%bf-overflow-{auto, hidden, scroll, visible}`, `%bf-overflow-x-…`, `%bf-overflow-y-…`                       | `overflow`, or by axis                                                                        |
+| `%bf-float-{start, end, none}`                                                                               | `float`, using the logical `inline-start` and `inline-end`                                    |
+| `%bf-vertical-align-{baseline, top, middle, bottom, text-top, text-bottom}`                                  | `vertical-align`                                                                              |
+| `%bf-object-fit-{contain, cover, fill, scale, none}`                                                         | How an image or video fills its box. `scale` is `scale-down`                                  |
+| `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}`                                                                    | `aspect-ratio`. Add or change ratios with `$sassy-aspect-ratio`                               |
+| `%bf-pointer-events-{auto, none}`, `%bf-user-select-{all, auto, none}`                                       | Whether an element takes clicks, and how its text is selected                                 |
 | `%bf-height-{5-100}`, `%bf-viewheight-{5-100}`                                                               | Height as a percentage of the parent, or of the viewport                                      |
 | `%bf-min-width-…`, `%bf-min-height-…`, `%bf-min-viewwidth-…`, `%bf-min-viewheight-…`                         | Minimum sizes, as a percentage or of the viewport                                             |
 | `%bf-width-{5-100}`, `%bf-viewwidth-{5-100}`                                                                 | Width, as a percentage of the parent, or of the viewport                                      |
@@ -100,6 +105,30 @@ Margin and padding steps are in multiples of `$sassy-margin-unit` and `$sassy-pa
 ```
 
 The sticky header stays at the top of the viewport while the page scrolls. `z-index` keeps it above the content, and the shadow separates it from the page.
+
+### Example: a 16:9 frame
+
+```sass
+.frame
+    @extend %bf-aspect-ratio-16x9
+    @extend %bf-width-100
+    @extend %bf-object-fit-cover
+```
+
+```css
+.frame {
+  aspect-ratio: 16 / 9;
+}
+.frame {
+  object-fit: cover;
+}
+```
+
+```html
+<img class="frame" src="photo.jpg" alt="…">
+```
+
+The image keeps a 16:9 shape at any width, and `cover` crops it to fill the frame rather than stretching it.
 
 ### Example: responsive spacing
 

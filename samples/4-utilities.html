@@ -95,6 +95,23 @@
 </div>
         </section>
 
+        <section class="example" id="frame">
+            <h2>A 16:9 frame</h2>
+            <p>The frame keeps its shape at any width. <code>contain</code> fits the whole image inside it, and the grey shows the space left over.</p>
+            <div class="demo">
+                <img class="frame" src="images/logo.svg" alt="Sassy logo">
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.frame
+    @extend %bf-aspect-ratio-16x9
+    @extend %bf-width-50
+    @extend %bf-object-fit-contain
+    @extend %bf-bg-grey-100
+    @extend %bf-rounded</code></pre>
+<pre data-lang="html"><code>&lt;img class="frame" src="images/logo.svg" alt="Sassy logo"&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="spacing">
             <h2>Responsive spacing</h2>
             <p>The grey is the section's padding: 1rem above and below, then 1.5rem from 768px.</p>

@@ -13,6 +13,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Layout utilities: `%bf-float-…`, `%bf-vertical-align-…`, `%bf-object-fit-…`, `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}` (set by `$sassy-aspect-ratio`), `%bf-pointer-events-…` and `%bf-user-select-…`.
 - A navbar: `%bf-navbar-expand-{breakpoint}` with `%bf-navbar-brand`, `%bf-navbar-toggle` and `%bf-navbar-menu`. The breakpoint is set once, and the menu does not flash open before `sassy.js` runs.
 - `%bf-navbar-push`: below the breakpoint, the open menu pushes the page down rather than covering it.
 - `%bf-nav-fill` and `%bf-nav-justified`: links that share the width of the row. In a navbar, the menu grows to make room for them.
