@@ -155,13 +155,36 @@ const declarations = (css, context = "") =>
 		return splitTop(b.head, ",").map(s => [context + normaliseSelector(s), declarationsIn(b.body)]);
 	});
 
+/**
+ * A selector, plus a copy for each selector in a :has(), :is() or :where() list, since @extend merges
+ * every selector that extends a placeholder into that list: .a:has(> .b, > .c) also gives .a:has( > .b) and .a:has( > .c).
+ */
+const expandLists = (selector, from = 0) => {
+	const pseudo = /:(?:has|is|where)\(/g;
+	pseudo.lastIndex = from;
+	const match = pseudo.exec(selector);
+	if (!match) return [selector];
+	const open = match.index + match[0].length;
+	let close = open;
+	for (let depth = 1; depth > 0; close++) {
+		if (selector[close] === "(") depth++;
+		else if (selector[close] === ")") depth--;
+	}
+	close--;
+	const items = splitTop(selector.slice(open, close), ",");
+	const copies = items.length > 1 ? items.map(item => selector.slice(0, open) + normaliseSelector(item) + selector.slice(close)) : [];
+	return [selector, ...copies].flatMap(s => expandLists(s, open));
+};
+
 /** The declarations shown that are not in the compiled CSS, as readable strings. */
 const missing = (shown, compiled) => {
 	const index = new Map();
-	for (const [key, decls] of declarations(compiled)) {
-		const set = index.get(key) ?? new Set();
-		decls.forEach(d => set.add(d));
-		index.set(key, set);
+	for (const [selector, decls] of declarations(compiled)) {
+		for (const key of expandLists(selector)) {
+			const set = index.get(key) ?? new Set();
+			decls.forEach(d => set.add(d));
+			index.set(key, set);
+		}
 	}
 	return declarations(shown).flatMap(([key, decls]) =>
 		decls.filter(d => !index.get(key)?.has(d)).map(d => `${key} { ${d} }`)
