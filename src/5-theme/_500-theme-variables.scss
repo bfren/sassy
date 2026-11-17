@@ -9,6 +9,16 @@
     --sassy-theme-error: #{colour("red", 600)};
     --sassy-theme-grey-light: #{colour("grey", 300)};
     --sassy-theme-grey-dark: #{colour("grey", 600)};
+
+    // text that contrasts with each theme colour, for %bf-text-bg-{name} - set it with the colour
+    --sassy-theme-primary-contrast: #{contrast-colour(colour("sky", 600))};
+    --sassy-theme-secondary-contrast: #{contrast-colour(colour("orange", 700))};
+    --sassy-theme-ok-contrast: #{contrast-colour(colour("green", 600))};
+    --sassy-theme-info-contrast: #{contrast-colour(colour("sky", 200))};
+    --sassy-theme-warn-contrast: #{contrast-colour(colour("amber", 400))};
+    --sassy-theme-error-contrast: #{contrast-colour(colour("red", 600))};
+    --sassy-theme-grey-light-contrast: #{contrast-colour(colour("grey", 300))};
+    --sassy-theme-grey-dark-contrast: #{contrast-colour(colour("grey", 600))};
 }
 
 $sassy-theme: (

@@ -1,4 +1,6 @@
+@use "sass:color";
 @use "sass:map";
+@use "sass:math";
 
 /*
     Colour map from Tailwind CSS v4.3.3 (with gray renamed grey)
@@ -378,4 +380,31 @@ $tailwind-colours: (
 
     // return the shade for the colour
     @return map.get(map.get($tailwind-colours, $name), $shade);
+}
+
+// Text colours that contrast-colour() chooses between
+$sassy-contrast-dark: colour("grey", 950) !default;
+$sassy-contrast-light: #fff !default;
+
+/// Returns whichever of $sassy-contrast-dark and $sassy-contrast-light has the higher
+/// WCAG contrast ratio against $colour, for text on a $colour background.
+///
+/// @param {color} $colour
+///     Background colour.
+/// @return {color}
+///     $sassy-contrast-dark or $sassy-contrast-light
+@function contrast-colour($colour) {
+    $dark: -contrast-ratio($colour, $sassy-contrast-dark);
+    $light: -contrast-ratio($colour, $sassy-contrast-light);
+    @if $dark >= $light {
+        @return $sassy-contrast-dark;
+    }
+    @return $sassy-contrast-light;
+}
+
+// WCAG contrast ratio between two colours, from their relative luminance (Y in XYZ)
+@function -contrast-ratio($a, $b) {
+    $ya: color.channel($a, "y", $space: xyz) + 0.05;
+    $yb: color.channel($b, "y", $space: xyz) + 0.05;
+    @return math.div(math.max($ya, $yb), math.min($ya, $yb));
 }

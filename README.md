@@ -102,17 +102,17 @@ Every placeholder follows the same pattern:
 
 The breakpoint is optional - see [Responsive](#responsive). Names use British spelling: `centre`, `colour`, `capitalise`, `grey`.
 
-| Module             | Examples                                                                                                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Module             | Examples                                                                                                                                                                                                                                     |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
-| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`  |
-| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-border-grey-300`                                                                                                                                    |
-| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-border-ok`                                                                                                                                            |
-| Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                                 |
-| Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                        |
-| Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                               |
-| Grid               | `%bf-d-flex-row`, `%bf-col-6`                                                                                                                                                               |
-| Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                         |
+| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`                                                   |
+| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                              |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`                                                                                                                                                                         |
+| Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                         |
+| Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                         |
+| Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                |
+| Grid               | `%bf-d-flex-row`, `%bf-col-6`                                                                                                                                                                                                                |
+| Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                                                                          |
 
 A few conventions:
 
