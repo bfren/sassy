@@ -104,6 +104,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 
 | Module             | Examples                                                                                                                                                                                                                                     |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Content            | `%bf-h2`, `%bf-lead`, `%bf-display-1`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote`, `%bf-blockquote-caption`                                                                                     |
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
 | Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`                                                   |
 | Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                              |
@@ -111,7 +112,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 | Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                         |
 | Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                         |
 | Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                |
-| Grid               | `%bf-d-flex-row`, `%bf-col-6`                                                                                                                                                                                                                |
+| Grid               | `%bf-d-flex-row`, `%bf-col-6`, `%bf-col`, `%bf-col-offset-2`, `%bf-row-cols-3`, `%bf-gutter-4`, `%bf-grid`, `%bf-grid-col-4`                                                                                                                 |
 | Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                                                                          |
 
 A few conventions:
@@ -129,7 +130,7 @@ A few conventions:
 
   ![The default theme colours: primary sky-600, secondary orange-700, ok green-600, info sky-200, warn amber-400, error red-600, grey-light grey-300 and grey-dark grey-600](docs/theme.svg)
 
-- **Grid** columns are out of 12: extend `%bf-d-flex-row` on the container and `%bf-col-{1-12}` on each column.
+- **Grid** columns are out of 12: extend `%bf-d-flex-row` on the container and `%bf-col-{1-12}` on each column, or `%bf-grid` and `%bf-grid-col-{1-12}` for a CSS grid.
 
 ## Responsive
 
@@ -284,19 +285,20 @@ Sizes, colours, the focus ring and the validation colours all come from the `--s
 
 Component placeholders style whole interface elements, and like forms they output before the grid and utilities, so a utility can override any part of one:
 
-| Placeholder                                                                              | For                                                                    |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large` | Buttons, in the theme colours, outlined, and in the form control sizes |
-| `%bf-nav`, `%bf-nav-link`                                                                | A list of links - mark the current page with `aria-current="page"`     |
-| `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                 | Styles and layout for a nav, combined with `%bf-nav`                   |
-| `%bf-nav-fill`, `%bf-nav-justified`                                                      | Links that share the width of the row, combined with `%bf-nav`         |
-| `%bf-nav-toggle`, `%bf-nav-collapse-{breakpoint}`                                        | The button that opens a collapsed nav, and the panel it opens          |
-| `%bf-navbar-expand-{breakpoint}`, `%bf-navbar-brand`, `-toggle`, `-menu`                 | A header row whose menu collapses below the breakpoint                 |
-| `%bf-navbar-push`                                                                        | A navbar whose open menu pushes the page down, rather than covering it |
-| `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                            | A bordered container and its parts                                     |
-| `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                   | Tabs that switch panels, using the ARIA tabs roles                     |
-| `%bf-tooltip`                                                                            | A tooltip: a popover described by its trigger with `aria-describedby`  |
-| `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close`      | A native `<dialog>` and its parts                                      |
+| Placeholder                                                                                             | For                                                                                    |
+| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large`                | Buttons, in the theme colours, outlined, and in the form control sizes                 |
+| `%bf-nav`, `%bf-nav-link`                                                                               | A list of links - mark the current page with `aria-current="page"`                     |
+| `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                                | Styles and layout for a nav, combined with `%bf-nav`                                   |
+| `%bf-nav-fill`, `%bf-nav-justified`                                                                     | Links that share the width of the row, combined with `%bf-nav`                         |
+| `%bf-nav-toggle`, `%bf-nav-collapse-{breakpoint}`                                                       | The button that opens a collapsed nav, and the panel it opens                          |
+| `%bf-navbar-expand-{breakpoint}`, `%bf-navbar-brand`, `-toggle`, `-menu`                                | A header row whose menu collapses below the breakpoint                                 |
+| `%bf-navbar-push`                                                                                       | A navbar whose open menu pushes the page down, rather than covering it                 |
+| `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                                           | A bordered container and its parts                                                     |
+| `%bf-table`, `-striped`, `-hover`, `-bordered`, `-small`, `-{theme colour}`, `-responsive-{breakpoint}` | Tables: striped, with hover, bordered, compact, tinted, and scrolling on small screens |
+| `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                                  | Tabs that switch panels, using the ARIA tabs roles                                     |
+| `%bf-tooltip`                                                                                           | A tooltip: a popover described by its trigger with `aria-describedby`                  |
+| `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close`                     | A native `<dialog>` and its parts                                                      |
 
 Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
 
@@ -342,16 +344,16 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 
 `src` is arranged in numbered folders, and each file is numbered with its folder's digit followed by its place in the folder - `4-utilities/_420-colour.sass`. **The numbers follow the order the placeholders are output**, because that order decides which placeholder wins when two set the same property:
 
-| Folder         | Contains                                                                                                           |
-| -------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers                       |
-| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                               |
-| `2-components` | Buttons, navigation, cards, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
-| `3-grid`       | The grid                                                                                                           |
-| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                          |
-| `5-theme`      | Theme colours                                                                                                      |
+| Folder         | Contains                                                                                                                   |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles               |
+| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                                       |
+| `2-components` | Buttons, navigation, cards, tables, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
+| `3-grid`       | The grid                                                                                                                   |
+| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                  |
+| `5-theme`      | Theme colours                                                                                                              |
 
-Composites - placeholders that set several properties at once, such as forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
+Composites - placeholders that set several properties at once, such as content, forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 
 `src/_render.sass` outputs every module in this order, and is the one place the order is set. Each folder's `_index.sass` forwards its modules, and `src/_index.sass` forwards the folders.
 

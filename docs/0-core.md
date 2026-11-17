@@ -2,7 +2,7 @@
 
 Live examples: [https://bfren.github.io/sassy/0-core.html](https://bfren.github.io/sassy/0-core.html)
 
-`src/0-core` is the foundation of Sassy. It holds the copyright notice, Normalize, the settings, the `make` mixins that generate placeholders, and a few helper mixins and functions. Nothing in it outputs utilities directly, but everything else depends on it.
+`src/0-core` is the foundation of Sassy. It holds the copyright notice, Normalize, the settings, the `make` mixins that generate placeholders, a few helper mixins and functions, and styles for content: quotes, figures, lists and large headings. Everything else depends on it.
 
 ## Loading Sassy
 
@@ -82,7 +82,94 @@ These are available as `sassy.name()` too.
 | `make-passes()`                 | Wraps your own `make-*` calls so their output is ordered like Sassy's                  |
 | `make-name($parts...)`          | A placeholder or class name built from the prefix and separator, for example `"mt", 0` |
 
+## Content
+
+Sassy is meant to style the whole site, so `0-core` sets a few defaults on elements, after Normalize:
+
+| Element                                     | Default                                                                                          |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `h1` to `h6`                                | Weight 500, line height 1.2, no top margin and `0.5rem` below, and sizes from `2.5rem` to `1rem` |
+| `blockquote`, `figure`                      | No side margins, and `$sassy-content-margin` (`1rem`) below                                      |
+| `table`                                     | Borders that join, and the caption below the table                                               |
+| `caption`                                   | Grey, aligned to the start, with `0.5rem` above and below                                        |
+| `th`                                        | Aligned like the rest of its row, not centred                                                    |
+| `thead`, `tbody`, `tfoot`, `tr`, `td`, `th` | Solid borders of no width, so `%bf-table` only has to set a width                                |
+| `img`, `svg`                                | `vertical-align: middle`, so they line up with text beside them                                  |
+
+They use `:where()`, so they have no specificity and any placeholder or class overrides them.
+
+Heading sizes are set by `$sassy-heading`, and the large heading sizes by `$sassy-display-heading`. Any size larger than `$sassy-fluid-min` (`1.25rem`) shrinks on screens narrower than the `xl` breakpoint, down to `1.25rem` plus a tenth of the difference, so `h1` runs from `1.375rem` to `2.5rem`. From `xl` up each heading is its full size.
+
+The rest are placeholders. They are output before forms and components, so a utility such as `%bf-font-size-4` overrides `%bf-display-1`:
+
+| Placeholder              | Use it on                       | Does                                                                               |
+| ------------------------ | ------------------------------- | ---------------------------------------------------------------------------------- |
+| `%bf-h{1-6}`             | Any element                     | The same as `h1` to `h6`, for text that should look like a heading but is not one  |
+| `%bf-lead`               | An introductory paragraph       | Larger, lighter text                                                               |
+| `%bf-display-{1-6}`      | A large heading                 | From `5rem` to `2.5rem`, shrinking on small screens like the headings, and lighter |
+| `%bf-initialism`         | An `abbr` said letter by letter | Upper case, a little smaller                                                       |
+| `%bf-list-unstyled`      | A `ul` or `ol`                  | Removes the markers and indent                                                     |
+| `%bf-list-inline`        | A `ul` or `ol`                  | Puts its `li` items in a row, with `--sassy-list-inline-gap` between them          |
+| `%bf-img-fluid`          | An `img`                        | Shrinks to fit its container, keeping its shape                                    |
+| `%bf-figure`             | A `figure`                      | Space under the image, and a smaller, grey `figcaption`                            |
+| `%bf-blockquote`         | A `blockquote`                  | Larger text                                                                        |
+| `%bf-blockquote-caption` | The `figcaption` after a quote  | Smaller, grey, starting with an em dash                                            |
+
+`%bf-h{1-6}` and `%bf-display-{1-6}` have breakpoint variants, such as `%bf-display-4-md`.
+
 ## Worked examples
+
+### A large heading
+
+```sass
+.hero-title
+    @extend %bf-display-1
+```
+
+```css
+.hero-title {
+  font-size: min(5rem, 1.625rem + 4.5vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+```
+
+At 1200px, the `xl` breakpoint, `1.625rem + 4.5vw` reaches `5rem`, and `min()` keeps it there on wider screens. On a 375px phone it is about `2.68rem`.
+
+### A quote with its source
+
+```sass
+.quote
+    @extend %bf-blockquote
+
+.quote-source
+    @extend %bf-blockquote-caption
+```
+
+```css
+.quote {
+  font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
+}
+.quote-source {
+  color: var(--sassy-blockquote-caption-colour, oklch(44.6% 0.03 256.802deg));
+  font-size: var(--sassy-blockquote-caption-font-size, 0.875em);
+  margin-block: -1rem 1rem;
+}
+.quote-source::before {
+  content: "— ";
+}
+```
+
+```html
+<figure>
+    <blockquote class="quote">
+        <p>Simplicity is prerequisite for reliability.</p>
+    </blockquote>
+    <figcaption class="quote-source">Edsger W. Dijkstra</figcaption>
+</figure>
+```
+
+The source goes in a `figcaption` outside the `blockquote`, because it is not part of the quote. Its negative top margin pulls it up under the quote, over the quote's bottom margin.
 
 ### Palette colours and transparency
 

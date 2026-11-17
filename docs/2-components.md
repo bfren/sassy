@@ -1,8 +1,8 @@
-# 2-components: buttons, navigation, cards, tabs, tooltips and dialogs
+# 2-components: buttons, navigation, cards, tables, tabs, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/2-components.html](https://bfren.github.io/sassy/2-components.html)
 
-`src/2-components` styles whole interface elements: buttons, navigation, cards, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/2-components` styles whole interface elements: buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
@@ -267,6 +267,61 @@ Only use `role="tablist"` and the tab roles for tabs that switch panels on the p
 
 A card is a flex column. The body grows to fill it, so in a row of cards of different heights, such as a flex row with `%bf-d-flex` and `%bf-gap-4`, the footers line up. The card clips its content to its rounded corners, so an image needs no radius of its own.
 
+## Tables
+
+```sass
+.prices
+    @extend %bf-table
+    @extend %bf-table-striped
+    @extend %bf-table-hover
+
+.prices-wrap
+    @extend %bf-table-responsive-md
+
+.price-sale
+    @extend %bf-table-ok
+```
+
+```css
+.prices > :not(caption) > tr > * {
+  --sassy-table-accent: transparent;
+  background-color: var(--sassy-table-bg, transparent);
+  background-image: linear-gradient(var(--sassy-table-accent), var(--sassy-table-accent));
+}
+.prices > tbody > tr:nth-of-type(odd) > * {
+  --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent));
+}
+```
+
+```html
+<div class="prices-wrap">
+    <table class="prices">
+        <caption>Prices from 1 March</caption>
+        <thead>
+            <tr><th scope="col">Plan</th><th scope="col">Monthly</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Basic</td><td>£5</td></tr>
+            <tr aria-current="true"><td>Standard</td><td>£10</td></tr>
+            <tr class="price-sale"><td>Premium</td><td>£15</td></tr>
+        </tbody>
+    </table>
+</div>
+```
+
+| Placeholder                                        | Does                                                                                                   |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `%bf-table`                                        | Full width, with padding and a line under every row. Mark a row with `aria-current="true"` to shade it |
+| `%bf-table-striped`, `%bf-table-striped-columns`   | Shades every other row, or every other column                                                          |
+| `%bf-table-hover`                                  | Shades the row under the pointer                                                                       |
+| `%bf-table-bordered`, `%bf-table-borderless`       | Borders on every side of every cell, or none                                                           |
+| `%bf-table-small`                                  | Half the padding                                                                                       |
+| `%bf-table-caption-top`                            | Puts the caption above the table                                                                       |
+| `%bf-table-{theme colour}`                         | Tints a table, row or cell with a theme colour, for example `%bf-table-warn`                           |
+| `%bf-table-responsive`, `-responsive-{breakpoint}` | On a wrapper: scrolls a wide table sideways, always or below the breakpoint                            |
+
+Each cell paints the table background, then shades it for stripes, hover and the current row. The shades mix the text colour with transparency, so they work over a theme tint and in a dark theme. Without `%bf-table`, a table still has joined borders and its caption below it - see [0-core](0-core.md#content).
+
 ## Tabs
 
 Tabs follow the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/), as Bootstrap's do: `role="tablist"` on the list, `role="tab"` on each button with `aria-controls` naming its panel, and `role="tabpanel"` on each panel with `aria-labelledby` naming its tab:
@@ -395,32 +450,35 @@ The dialog is a column with a maximum height, so when its content is taller than
 
 ## Settings and custom properties
 
-| Property                                                                                                                             | Controls                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| `--sassy-btn-bg`, `--sassy-btn-colour`, `--sassy-btn-border-colour`                                                                  | The default button's background, text and border - the theme colours set their own |
-| `--sassy-btn-<name>-colour`                                                                                                          | Text on each theme colour's button, for example `--sassy-btn-warn-colour`          |
-| `--sassy-btn-outline-colour`, `--sassy-btn-focus-colour`                                                                             | The outline style's colour, and the focus ring                                     |
-| `--sassy-btn-font-weight`, `--sassy-btn-shade`                                                                                       | Text weight, and the colour mixed in on hover and press                            |
-| `--sassy-nav-gap`                                                                                                                    | Space between links and between tabs                                               |
-| `--sassy-nav-link-padding-y`, `--sassy-nav-link-padding-x`                                                                           | Padding of links and tabs                                                          |
-| `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                               |
-| `--sassy-nav-link-justify`                                                                                                           | Where the text sits in a link - set to `center` by fill and justified              |
-| `--sassy-nav-link-radius`, `--sassy-nav-link-underline-width`                                                                        | Link corners and underline width - set by the pill and underline styles            |
-| `--sassy-nav-current-colour`, `--sassy-nav-current-bg`, `--sassy-nav-current-border-colour`                                          | The current link or selected tab                                                   |
-| `--sassy-nav-collapse-bg`, `--sassy-nav-collapse-border-colour`, `--sassy-nav-collapse-shadow`, `--sassy-nav-collapse-duration`     | The panel of a collapsed nav, and how long it takes to wipe                        |
-| `--sassy-nav-collapse-max-height`                                                                                                    | The tallest the panel grows before it scrolls                                      |
-| `--sassy-navbar-gap`, `--sassy-navbar-brand-colour`, `--sassy-navbar-brand-font-size`                                                | Space between a navbar's parts, and the brand's colour and size                    |
-| `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels, close buttons and `%bf-focus-ring`      |
-| `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                |
-| `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                 |
-| `--sassy-tabs-border-width`, `--sassy-tabs-border-colour`, `--sassy-tabs-underline-width`                                            | The line under the tabs, and the selected tab's underline                          |
-| `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                            |
-| `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                      |
-| `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                             |
-| `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                              |
-| `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                                      |
-| `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                           |
-| `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                 |
+| Property                                                                                                                             | Controls                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| `--sassy-btn-bg`, `--sassy-btn-colour`, `--sassy-btn-border-colour`                                                                  | The default button's background, text and border - the theme colours set their own                |
+| `--sassy-btn-<name>-colour`                                                                                                          | Text on each theme colour's button, for example `--sassy-btn-warn-colour`                         |
+| `--sassy-btn-outline-colour`, `--sassy-btn-focus-colour`                                                                             | The outline style's colour, and the focus ring                                                    |
+| `--sassy-btn-font-weight`, `--sassy-btn-shade`                                                                                       | Text weight, and the colour mixed in on hover and press                                           |
+| `--sassy-nav-gap`                                                                                                                    | Space between links and between tabs                                                              |
+| `--sassy-nav-link-padding-y`, `--sassy-nav-link-padding-x`                                                                           | Padding of links and tabs                                                                         |
+| `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                                              |
+| `--sassy-nav-link-justify`                                                                                                           | Where the text sits in a link - set to `center` by fill and justified                             |
+| `--sassy-nav-link-radius`, `--sassy-nav-link-underline-width`                                                                        | Link corners and underline width - set by the pill and underline styles                           |
+| `--sassy-nav-current-colour`, `--sassy-nav-current-bg`, `--sassy-nav-current-border-colour`                                          | The current link or selected tab                                                                  |
+| `--sassy-nav-collapse-bg`, `--sassy-nav-collapse-border-colour`, `--sassy-nav-collapse-shadow`, `--sassy-nav-collapse-duration`      | The panel of a collapsed nav, and how long it takes to wipe                                       |
+| `--sassy-nav-collapse-max-height`                                                                                                    | The tallest the panel grows before it scrolls                                                     |
+| `--sassy-navbar-gap`, `--sassy-navbar-brand-colour`, `--sassy-navbar-brand-font-size`                                                | Space between a navbar's parts, and the brand's colour and size                                   |
+| `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels, close buttons and `%bf-focus-ring`                      |
+| `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                               |
+| `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                                |
+| `--sassy-table-bg`, `--sassy-table-colour`, `--sassy-table-border-width`, `--sassy-table-border-colour`                              | Table background, text and lines - `%bf-table-{theme colour}` sets the background and line colour |
+| `--sassy-table-padding-y`, `--sassy-table-padding-x`, `--sassy-table-small-padding`                                                  | Cell padding, and the padding of a small table                                                    |
+| `--sassy-table-striped-bg`, `--sassy-table-hover-bg`, `--sassy-table-current-bg`                                                     | The shades laid over a striped row or column, the row under the pointer, and the current row      |
+| `--sassy-tabs-border-width`, `--sassy-tabs-border-colour`, `--sassy-tabs-underline-width`                                            | The line under the tabs, and the selected tab's underline                                         |
+| `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                                           |
+| `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
+| `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
+| `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |
+| `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                                                     |
+| `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
+| `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
 Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_260-dialog-variables.scss`](../src/2-components/_260-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 

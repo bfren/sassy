@@ -1,0 +1,129 @@
+@use "030-variables" as *
+@use "040-make" as make
+@use "sass:map"
+@use "sass:math"
+
+//  =================================================================
+//  Content: element defaults, and placeholders for headings, text, lists, images and quotes
+//  =================================================================
+
+/// Returns a font size that shrinks on screens narrower than the xl breakpoint, and is $size from xl up.
+/// Sizes no larger than $sassy-fluid-min stay fixed.
+@function -fluid($size)
+    @if $size <= $sassy-fluid-min
+        @return $size
+    $smallest: $sassy-fluid-min + math.div($size - $sassy-fluid-min, $sassy-fluid-factor)
+    // grows from $smallest at 0 to $size at xl (1rem = 16px)
+    $vw: math.div(math.div($size - $smallest, 1rem) * 16, math.div(map.get($sassy-breakpoints, xl), 1px)) * 100vw
+    @return min($size, calc($smallest + $vw))
+
+// Element defaults, output once. :where() keeps them at zero specificity, like normalise,
+// so any placeholder or class overrides them.
+
+:where(h1, h2, h3, h4, h5, h6)
+    font-weight: $sassy-heading-font-weight
+    line-height: $sassy-heading-line-height
+    margin-block: 0 calc($sassy-content-margin / 2)
+
+@each $level, $size in $sassy-heading
+    :where(h#{$level})
+        font-size: -fluid($size)
+
+:where(blockquote, figure)
+    margin: 0 0 $sassy-content-margin
+
+:where(img, svg)
+    vertical-align: middle
+
+// tables: borders that join, set per cell by %bf-table; the caption below, in grey
+:where(table)
+    border-collapse: collapse
+    caption-side: bottom
+
+:where(caption)
+    color: $sassy-caption-colour
+    padding-block: calc($sassy-content-margin / 2)
+    text-align: start
+
+:where(th)
+    text-align: inherit
+
+:where(thead, tbody, tfoot, tr, td, th)
+    border-color: inherit
+    border-style: solid
+    border-width: 0
+
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Text
+
+    @include make.single("lead")
+        font-size: $sassy-lead-font-size
+        font-weight: $sassy-lead-font-weight
+
+    // heading styles for any element, e.g. a <p> that looks like an h2
+    @each $level, $size in $sassy-heading
+        @include make.responsive("h#{$level}", ())
+            font-size: -fluid($size)
+            font-weight: $sassy-heading-font-weight
+            line-height: $sassy-heading-line-height
+            margin-block: 0 calc($sassy-content-margin / 2)
+
+    @include make.responsive("display", $sassy-display-heading) using ($value)
+        font-size: -fluid($value)
+        font-weight: $sassy-display-heading-font-weight
+        line-height: $sassy-display-heading-line-height
+
+    // an abbreviation said letter by letter, a little smaller so capitals do not shout
+    @include make.single("initialism")
+        font-size: 0.875em
+        text-transform: uppercase
+
+    // Lists
+
+    @include make.single("list-unstyled")
+        list-style: none
+        padding-inline-start: 0
+
+    @include make.single("list-inline")
+        list-style: none
+        padding-inline-start: 0
+
+        & > li
+            display: inline-block
+
+            &:not(:last-child)
+                margin-inline-end: $sassy-list-inline-gap
+
+    // Images
+
+    @include make.single("img-fluid")
+        block-size: auto
+        max-inline-size: 100%
+
+    // a figure with an image and a <figcaption>
+    @include make.single("figure")
+        display: inline-block
+
+        & > :is(img, svg, picture, video)
+            margin-block-end: calc($sassy-content-margin / 2)
+
+        & > figcaption
+            color: $sassy-figure-caption-colour
+            font-size: $sassy-figure-caption-font-size
+
+    // Quotes
+
+    @include make.single("blockquote")
+        font-size: $sassy-blockquote-font-size
+
+    // who said it - a <figcaption> after the blockquote, in a <figure>
+    @include make.single("blockquote-caption")
+        color: $sassy-blockquote-caption-colour
+        font-size: $sassy-blockquote-caption-font-size
+        margin-block: calc($sassy-content-margin * -1) $sassy-content-margin
+
+        &::before
+            content: "\2014\00A0"

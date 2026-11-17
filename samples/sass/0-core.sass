@@ -4,6 +4,21 @@
 @use "../../src" as sassy
 @use "site"
 
+.intro
+    @extend %bf-lead
+
+.headline
+    @extend %bf-display-4
+
+.quote
+    @extend %bf-blockquote
+
+.quote-source
+    @extend %bf-blockquote-caption
+
+.tags
+    @extend %bf-list-inline
+
 .tooltip
     background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.6)
     border-radius: 0.375rem

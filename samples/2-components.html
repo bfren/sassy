@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, navigation, cards, tabs, tooltips and dialogs</h1>
+        <h1>Buttons, navigation, cards, tables, tabs, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/2-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/2-components.md">docs/2-components.md</a>.</p>
 
@@ -386,6 +386,52 @@
         &lt;/div&gt;
         &lt;footer class="card-foot"&gt;&lt;a href="#cards" class="button button-primary button-small"&gt;Read more&lt;/a&gt;&lt;/footer&gt;
     &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="tables">
+            <h2>A table</h2>
+            <p>Striped rows, a shade under the pointer, the current row marked with <code>aria-current</code>, and a row tinted with the <code>ok</code> theme colour. Below 768px the table scrolls sideways.</p>
+            <div class="demo">
+                <div class="prices-wrap">
+                    <table class="prices">
+                        <caption>Prices from 1 March</caption>
+                        <thead>
+                            <tr><th scope="col">Plan</th><th scope="col">Monthly</th><th scope="col">Yearly</th><th scope="col">Users</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Basic</td><td>£5</td><td>£50</td><td>1</td></tr>
+                            <tr aria-current="true"><td>Standard</td><td>£10</td><td>£100</td><td>5</td></tr>
+                            <tr><td>Team</td><td>£25</td><td>£250</td><td>20</td></tr>
+                            <tr class="price-sale"><td>Premium</td><td>£15</td><td>£150</td><td>10</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.prices
+    @extend %bf-table
+    @extend %bf-table-striped
+    @extend %bf-table-hover
+
+.prices-wrap
+    @extend %bf-table-responsive-md
+
+.price-sale
+    @extend %bf-table-ok</code></pre>
+<pre data-lang="html"><code>&lt;div class="prices-wrap"&gt;
+    &lt;table class="prices"&gt;
+        &lt;caption&gt;Prices from 1 March&lt;/caption&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;&lt;th scope="col"&gt;Plan&lt;/th&gt;&lt;th scope="col"&gt;Monthly&lt;/th&gt;…&lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;&lt;td&gt;Basic&lt;/td&gt;&lt;td&gt;£5&lt;/td&gt;…&lt;/tr&gt;
+            &lt;tr aria-current="true"&gt;&lt;td&gt;Standard&lt;/td&gt;&lt;td&gt;£10&lt;/td&gt;…&lt;/tr&gt;
+            &lt;tr class="price-sale"&gt;&lt;td&gt;Premium&lt;/td&gt;&lt;td&gt;£15&lt;/td&gt;…&lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

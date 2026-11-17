@@ -8,3 +8,27 @@ $sassy-col: ();
 @for $i from 1 through $sassy-grid-cols {
     $sassy-col: list.append($sassy-col, $i);
 }
+
+// %bf-gutter-{step}: the gutter on each side of a column, so the space between columns is twice this
+$sassy-grid-gutters: (
+    0: 0,
+    1: 0.125rem,
+    2: 0.25rem,
+    3: 0.5rem,
+    4: 0.75rem,
+    5: 1.5rem
+) !default;
+
+// %bf-row-cols-{n}: how many columns a row's children make
+$sassy-row-cols: (1, 2, 3, 4, 5, 6);
+
+// space between the cells of %bf-grid
+$sassy-grid-gap: var(--sassy-grid-gap, 1rem);
+
+// %bf-col-offset-{0-11} and %bf-grid-start-{1-11}
+$sassy-col-offset: (0,);
+$sassy-grid-start: ();
+@for $i from 1 to $sassy-grid-cols {
+    $sassy-col-offset: list.append($sassy-col-offset, $i);
+    $sassy-grid-start: list.append($sassy-grid-start, $i);
+}

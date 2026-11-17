@@ -1,0 +1,17 @@
+@use "../4-utilities/420-colour-variables" as *;
+
+$sassy-table-bg: var(--sassy-table-bg, transparent);
+$sassy-table-colour: var(--sassy-table-colour, currentColor);
+$sassy-table-border-width: var(--sassy-table-border-width, 1px);
+$sassy-table-border-colour: var(--sassy-table-border-colour, #{colour("grey", 200)});
+$sassy-table-padding-y: var(--sassy-table-padding-y, 0.5rem);
+$sassy-table-padding-x: var(--sassy-table-padding-x, 0.5rem);
+$sassy-table-small-padding: var(--sassy-table-small-padding, 0.25rem);
+
+// laid over a cell's background, so they work on any table or theme colour
+$sassy-table-striped-bg: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent));
+$sassy-table-hover-bg: var(--sassy-table-hover-bg, color-mix(in oklab, currentColor 7.5%, transparent));
+$sassy-table-current-bg: var(--sassy-table-current-bg, color-mix(in oklab, currentColor 10%, transparent));
+
+// how much of a theme colour tints the background of %bf-table-{name}
+$sassy-table-tint: 15% !default;

@@ -1,0 +1,47 @@
+@use "../4-utilities/420-colour-variables" as *;
+
+// space below blocks of content, such as blockquotes and figures
+$sassy-content-margin: 1rem !default;
+
+$sassy-lead-font-size: var(--sassy-lead-font-size, calc(var(--sassy-font-size-base) * 1.25));
+$sassy-lead-font-weight: var(--sassy-lead-font-weight, 300);
+
+// Sizes above $sassy-fluid-min shrink on screens narrower than the xl breakpoint:
+// the smallest is $sassy-fluid-min plus a $sassy-fluid-factor-th of the difference.
+$sassy-fluid-min: 1.25rem !default;
+$sassy-fluid-factor: 10 !default;
+
+// h1 to h6, and %bf-h1 to %bf-h6
+$sassy-heading: (
+    1: 2.5rem,
+    2: 2rem,
+    3: 1.75rem,
+    4: 1.5rem,
+    5: 1.25rem,
+    6: 1rem
+) !default;
+$sassy-heading-font-weight: var(--sassy-heading-font-weight, 500);
+$sassy-heading-line-height: var(--sassy-heading-line-height, 1.2);
+
+// large headings, %bf-display-1 to %bf-display-6
+$sassy-display-heading: (
+    1: 5rem,
+    2: 4.5rem,
+    3: 4rem,
+    4: 3.5rem,
+    5: 3rem,
+    6: 2.5rem
+) !default;
+$sassy-display-heading-font-weight: var(--sassy-display-heading-font-weight, 300);
+$sassy-display-heading-line-height: var(--sassy-display-heading-line-height, 1.2);
+
+$sassy-list-inline-gap: var(--sassy-list-inline-gap, 0.5rem);
+
+$sassy-caption-colour: colour("grey", 600) !default;
+
+$sassy-figure-caption-colour: var(--sassy-figure-caption-colour, #{colour("grey", 600)});
+$sassy-figure-caption-font-size: var(--sassy-figure-caption-font-size, 0.875em);
+
+$sassy-blockquote-font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
+$sassy-blockquote-caption-colour: var(--sassy-blockquote-caption-colour, #{colour("grey", 600)});
+$sassy-blockquote-caption-font-size: var(--sassy-blockquote-caption-font-size, 0.875em);

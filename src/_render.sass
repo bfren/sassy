@@ -1,4 +1,5 @@
 @use "0-core/040-make" as make
+@use "0-core/060-content" as content
 @use "1-forms/110-label" as form-label
 @use "1-forms/120-control" as form-control
 @use "1-forms/130-select" as form-select
@@ -11,6 +12,7 @@
 @use "2-components/210-button" as button
 @use "2-components/220-nav" as nav
 @use "2-components/230-card" as card
+@use "2-components/233-table" as table
 @use "2-components/240-tabs" as tabs
 @use "2-components/250-tooltip" as tooltip
 @use "2-components/260-dialog" as dialog
@@ -31,12 +33,13 @@
 //  Every module is rendered once for base definitions, then once per breakpoint, so breakpoint
 //  overrides always come after base rules and smaller breakpoints, whichever module defines them.
 //
-//  Within each pass, modules are rendered in folder and file order: composites (forms,
+//  Within each pass, modules are rendered in folder and file order: composites (content, forms,
 //  components, grid, and text, which has body and text-truncate) first, so that single-purpose
 //  utilities always override them; theme colours last. Validation is the last form module, so
 //  its state colours win over every control, check and input it applies to.
 
 @include make.passes
+    @include content.utilities
     @include form-label.utilities
     @include form-control.utilities
     @include form-select.utilities
@@ -49,6 +52,7 @@
     @include button.utilities
     @include nav.utilities
     @include card.utilities
+    @include table.utilities
     @include tabs.utilities
     @include tooltip.utilities
     @include dialog.utilities
