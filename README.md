@@ -310,7 +310,7 @@ Buttons, navigation, cards and dialogs need no script: dialogs open and close wi
 
 ## Editor snippets
 
-`dist/sassy.code-snippets` is a [VS Code snippets file](https://code.visualstudio.com/docs/editing/userdefinedsnippets) listing every placeholder, so typing a name in a Sass file offers matching placeholders, each with the CSS it applies. Breakpoint variants are left out to keep the list short - add the breakpoint yourself, for example `-md`.
+`dist/sassy.code-snippets` is a [VS Code snippets file](https://code.visualstudio.com/docs/editing/userdefinedsnippets) listing every placeholder, so typing a name in a Sass file offers matching placeholders, each with the CSS it applies - or, where that CSS is long, as it is for most components, the placeholder's description from the tables in `docs`. Breakpoint variants are left out to keep the list short - add the breakpoint yourself, for example `-md`.
 
 To use it in one project, copy it into that project's `.vscode` folder. To use it everywhere, copy it into your VS Code user snippets folder - run **Snippets: Configure Snippets** from the Command Palette to find it.
 

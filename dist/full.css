@@ -269,11 +269,6 @@
   --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
 }
 
-@keyframes sassy-nav-wipe {
-  from {
-    clip-path: inset(0 -2rem 100%);
-  }
-}
 .bf-form-label {
   display: inline-block;
   margin-bottom: 0.5rem;
@@ -1272,19 +1267,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 576px) and (prefers-reduced-motion: reduce) {
   .bf-nav-collapse-sm {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 576px) {
   .bf-nav-collapse-sm[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 576px) {
@@ -1305,19 +1300,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 768px) and (prefers-reduced-motion: reduce) {
   .bf-nav-collapse-md {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 768px) {
   .bf-nav-collapse-md[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 768px) {
@@ -1338,19 +1333,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 992px) and (prefers-reduced-motion: reduce) {
   .bf-nav-collapse-lg {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 992px) {
   .bf-nav-collapse-lg[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 992px) {
@@ -1371,19 +1366,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1200px) and (prefers-reduced-motion: reduce) {
   .bf-nav-collapse-xl {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 1200px) {
   .bf-nav-collapse-xl[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 1200px) {
@@ -1404,19 +1399,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1400px) and (prefers-reduced-motion: reduce) {
   .bf-nav-collapse-2xl {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 1400px) {
   .bf-nav-collapse-2xl[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 1400px) {
@@ -1437,19 +1432,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1600px) and (prefers-reduced-motion: reduce) {
   .bf-nav-collapse-3xl {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 1600px) {
   .bf-nav-collapse-3xl[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 1600px) {
@@ -1545,18 +1540,6 @@
   }
 }
 
-@media (width < 576px) {
-  @starting-style {}
-}
-@media (width < 576px) {
-  @starting-style {}
-}
-@media (width < 576px) {
-  @starting-style {}
-}
-@media (width < 576px) {
-  @starting-style {}
-}
 .bf-navbar-expand-sm {
   align-items: center;
   display: flex;
@@ -1582,19 +1565,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 576px) and (prefers-reduced-motion: reduce) {
   .bf-navbar-expand-sm .bf-navbar-menu {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 576px) {
   .bf-navbar-expand-sm .bf-navbar-menu[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 576px) {
@@ -1606,32 +1589,23 @@
   flex-grow: 1;
 }
 @media (width < 576px) {
-  @starting-style {}
-}
-@media (width < 576px) {
-  @starting-style {}
-}
-@media (width < 576px) {
   .bf-navbar-expand-sm.bf-navbar-push {
     row-gap: 0;
   }
 }
 @media (width < 576px) {
-  @starting-style {}
-}
-@media (width < 576px) {
   .bf-navbar-expand-sm.bf-navbar-push .bf-navbar-menu {
-    animation: none;
     background-color: transparent;
     border-bottom: 0;
     box-shadow: none;
     clip-path: none;
+    display: grid;
     flex-basis: 100%;
     grid-template-rows: minmax(0, 1fr);
     max-height: none;
     overflow: hidden;
     position: static;
-    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 576px) and (prefers-reduced-motion: reduce) {
@@ -1640,16 +1614,9 @@
   }
 }
 @media (width < 576px) {
-  .bf-navbar-expand-sm.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-    display: grid;
-  }
-  @starting-style {
-    .bf-navbar-expand-sm.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-      grid-template-rows: minmax(0, 0fr);
-    }
-  }
   .bf-navbar-expand-sm.bf-navbar-push .bf-navbar-menu[hidden] {
     clip-path: none;
+    display: grid;
     grid-template-rows: minmax(0, 0fr);
   }
   .bf-navbar-expand-sm.bf-navbar-push .bf-navbar-menu > * {
@@ -1659,22 +1626,11 @@
 }
 @media (width < 576px) and (scripting: enabled) {
   .bf-navbar-expand-sm:has(> .bf-navbar-toggle[aria-expanded=false]) .bf-navbar-menu {
-    display: none;
+    grid-template-rows: minmax(0, 0fr);
+    visibility: hidden;
   }
 }
 
-@media (width < 768px) {
-  @starting-style {}
-}
-@media (width < 768px) {
-  @starting-style {}
-}
-@media (width < 768px) {
-  @starting-style {}
-}
-@media (width < 768px) {
-  @starting-style {}
-}
 .bf-navbar-expand-md {
   align-items: center;
   display: flex;
@@ -1700,19 +1656,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 768px) and (prefers-reduced-motion: reduce) {
   .bf-navbar-expand-md .bf-navbar-menu {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 768px) {
   .bf-navbar-expand-md .bf-navbar-menu[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 768px) {
@@ -1724,32 +1680,23 @@
   flex-grow: 1;
 }
 @media (width < 768px) {
-  @starting-style {}
-}
-@media (width < 768px) {
-  @starting-style {}
-}
-@media (width < 768px) {
   .bf-navbar-expand-md.bf-navbar-push {
     row-gap: 0;
   }
 }
 @media (width < 768px) {
-  @starting-style {}
-}
-@media (width < 768px) {
   .bf-navbar-expand-md.bf-navbar-push .bf-navbar-menu {
-    animation: none;
     background-color: transparent;
     border-bottom: 0;
     box-shadow: none;
     clip-path: none;
+    display: grid;
     flex-basis: 100%;
     grid-template-rows: minmax(0, 1fr);
     max-height: none;
     overflow: hidden;
     position: static;
-    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 768px) and (prefers-reduced-motion: reduce) {
@@ -1758,16 +1705,9 @@
   }
 }
 @media (width < 768px) {
-  .bf-navbar-expand-md.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-    display: grid;
-  }
-  @starting-style {
-    .bf-navbar-expand-md.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-      grid-template-rows: minmax(0, 0fr);
-    }
-  }
   .bf-navbar-expand-md.bf-navbar-push .bf-navbar-menu[hidden] {
     clip-path: none;
+    display: grid;
     grid-template-rows: minmax(0, 0fr);
   }
   .bf-navbar-expand-md.bf-navbar-push .bf-navbar-menu > * {
@@ -1777,22 +1717,11 @@
 }
 @media (width < 768px) and (scripting: enabled) {
   .bf-navbar-expand-md:has(> .bf-navbar-toggle[aria-expanded=false]) .bf-navbar-menu {
-    display: none;
+    grid-template-rows: minmax(0, 0fr);
+    visibility: hidden;
   }
 }
 
-@media (width < 992px) {
-  @starting-style {}
-}
-@media (width < 992px) {
-  @starting-style {}
-}
-@media (width < 992px) {
-  @starting-style {}
-}
-@media (width < 992px) {
-  @starting-style {}
-}
 .bf-navbar-expand-lg {
   align-items: center;
   display: flex;
@@ -1818,19 +1747,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 992px) and (prefers-reduced-motion: reduce) {
   .bf-navbar-expand-lg .bf-navbar-menu {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 992px) {
   .bf-navbar-expand-lg .bf-navbar-menu[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 992px) {
@@ -1842,32 +1771,23 @@
   flex-grow: 1;
 }
 @media (width < 992px) {
-  @starting-style {}
-}
-@media (width < 992px) {
-  @starting-style {}
-}
-@media (width < 992px) {
   .bf-navbar-expand-lg.bf-navbar-push {
     row-gap: 0;
   }
 }
 @media (width < 992px) {
-  @starting-style {}
-}
-@media (width < 992px) {
   .bf-navbar-expand-lg.bf-navbar-push .bf-navbar-menu {
-    animation: none;
     background-color: transparent;
     border-bottom: 0;
     box-shadow: none;
     clip-path: none;
+    display: grid;
     flex-basis: 100%;
     grid-template-rows: minmax(0, 1fr);
     max-height: none;
     overflow: hidden;
     position: static;
-    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 992px) and (prefers-reduced-motion: reduce) {
@@ -1876,16 +1796,9 @@
   }
 }
 @media (width < 992px) {
-  .bf-navbar-expand-lg.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-    display: grid;
-  }
-  @starting-style {
-    .bf-navbar-expand-lg.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-      grid-template-rows: minmax(0, 0fr);
-    }
-  }
   .bf-navbar-expand-lg.bf-navbar-push .bf-navbar-menu[hidden] {
     clip-path: none;
+    display: grid;
     grid-template-rows: minmax(0, 0fr);
   }
   .bf-navbar-expand-lg.bf-navbar-push .bf-navbar-menu > * {
@@ -1895,22 +1808,11 @@
 }
 @media (width < 992px) and (scripting: enabled) {
   .bf-navbar-expand-lg:has(> .bf-navbar-toggle[aria-expanded=false]) .bf-navbar-menu {
-    display: none;
+    grid-template-rows: minmax(0, 0fr);
+    visibility: hidden;
   }
 }
 
-@media (width < 1200px) {
-  @starting-style {}
-}
-@media (width < 1200px) {
-  @starting-style {}
-}
-@media (width < 1200px) {
-  @starting-style {}
-}
-@media (width < 1200px) {
-  @starting-style {}
-}
 .bf-navbar-expand-xl {
   align-items: center;
   display: flex;
@@ -1936,19 +1838,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1200px) and (prefers-reduced-motion: reduce) {
   .bf-navbar-expand-xl .bf-navbar-menu {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 1200px) {
   .bf-navbar-expand-xl .bf-navbar-menu[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 1200px) {
@@ -1960,32 +1862,23 @@
   flex-grow: 1;
 }
 @media (width < 1200px) {
-  @starting-style {}
-}
-@media (width < 1200px) {
-  @starting-style {}
-}
-@media (width < 1200px) {
   .bf-navbar-expand-xl.bf-navbar-push {
     row-gap: 0;
   }
 }
 @media (width < 1200px) {
-  @starting-style {}
-}
-@media (width < 1200px) {
   .bf-navbar-expand-xl.bf-navbar-push .bf-navbar-menu {
-    animation: none;
     background-color: transparent;
     border-bottom: 0;
     box-shadow: none;
     clip-path: none;
+    display: grid;
     flex-basis: 100%;
     grid-template-rows: minmax(0, 1fr);
     max-height: none;
     overflow: hidden;
     position: static;
-    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1200px) and (prefers-reduced-motion: reduce) {
@@ -1994,16 +1887,9 @@
   }
 }
 @media (width < 1200px) {
-  .bf-navbar-expand-xl.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-    display: grid;
-  }
-  @starting-style {
-    .bf-navbar-expand-xl.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-      grid-template-rows: minmax(0, 0fr);
-    }
-  }
   .bf-navbar-expand-xl.bf-navbar-push .bf-navbar-menu[hidden] {
     clip-path: none;
+    display: grid;
     grid-template-rows: minmax(0, 0fr);
   }
   .bf-navbar-expand-xl.bf-navbar-push .bf-navbar-menu > * {
@@ -2013,22 +1899,11 @@
 }
 @media (width < 1200px) and (scripting: enabled) {
   .bf-navbar-expand-xl:has(> .bf-navbar-toggle[aria-expanded=false]) .bf-navbar-menu {
-    display: none;
+    grid-template-rows: minmax(0, 0fr);
+    visibility: hidden;
   }
 }
 
-@media (width < 1400px) {
-  @starting-style {}
-}
-@media (width < 1400px) {
-  @starting-style {}
-}
-@media (width < 1400px) {
-  @starting-style {}
-}
-@media (width < 1400px) {
-  @starting-style {}
-}
 .bf-navbar-expand-2xl {
   align-items: center;
   display: flex;
@@ -2054,19 +1929,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1400px) and (prefers-reduced-motion: reduce) {
   .bf-navbar-expand-2xl .bf-navbar-menu {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 1400px) {
   .bf-navbar-expand-2xl .bf-navbar-menu[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 1400px) {
@@ -2078,32 +1953,23 @@
   flex-grow: 1;
 }
 @media (width < 1400px) {
-  @starting-style {}
-}
-@media (width < 1400px) {
-  @starting-style {}
-}
-@media (width < 1400px) {
   .bf-navbar-expand-2xl.bf-navbar-push {
     row-gap: 0;
   }
 }
 @media (width < 1400px) {
-  @starting-style {}
-}
-@media (width < 1400px) {
   .bf-navbar-expand-2xl.bf-navbar-push .bf-navbar-menu {
-    animation: none;
     background-color: transparent;
     border-bottom: 0;
     box-shadow: none;
     clip-path: none;
+    display: grid;
     flex-basis: 100%;
     grid-template-rows: minmax(0, 1fr);
     max-height: none;
     overflow: hidden;
     position: static;
-    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1400px) and (prefers-reduced-motion: reduce) {
@@ -2112,16 +1978,9 @@
   }
 }
 @media (width < 1400px) {
-  .bf-navbar-expand-2xl.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-    display: grid;
-  }
-  @starting-style {
-    .bf-navbar-expand-2xl.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-      grid-template-rows: minmax(0, 0fr);
-    }
-  }
   .bf-navbar-expand-2xl.bf-navbar-push .bf-navbar-menu[hidden] {
     clip-path: none;
+    display: grid;
     grid-template-rows: minmax(0, 0fr);
   }
   .bf-navbar-expand-2xl.bf-navbar-push .bf-navbar-menu > * {
@@ -2131,22 +1990,11 @@
 }
 @media (width < 1400px) and (scripting: enabled) {
   .bf-navbar-expand-2xl:has(> .bf-navbar-toggle[aria-expanded=false]) .bf-navbar-menu {
-    display: none;
+    grid-template-rows: minmax(0, 0fr);
+    visibility: hidden;
   }
 }
 
-@media (width < 1600px) {
-  @starting-style {}
-}
-@media (width < 1600px) {
-  @starting-style {}
-}
-@media (width < 1600px) {
-  @starting-style {}
-}
-@media (width < 1600px) {
-  @starting-style {}
-}
 .bf-navbar-expand-3xl {
   align-items: center;
   display: flex;
@@ -2172,19 +2020,19 @@
     overflow-y: auto;
     overscroll-behavior: contain;
     position: absolute;
-    animation: sassy-nav-wipe var(--sassy-nav-collapse-duration, 0.2s) ease;
-    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: clip-path var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1600px) and (prefers-reduced-motion: reduce) {
   .bf-navbar-expand-3xl .bf-navbar-menu {
-    animation: none;
     transition: none;
   }
 }
 @media (width < 1600px) {
   .bf-navbar-expand-3xl .bf-navbar-menu[hidden] {
     clip-path: inset(0 -2rem 100%);
+    display: block;
+    visibility: hidden;
   }
 }
 @media (width >= 1600px) {
@@ -2196,32 +2044,23 @@
   flex-grow: 1;
 }
 @media (width < 1600px) {
-  @starting-style {}
-}
-@media (width < 1600px) {
-  @starting-style {}
-}
-@media (width < 1600px) {
   .bf-navbar-expand-3xl.bf-navbar-push {
     row-gap: 0;
   }
 }
 @media (width < 1600px) {
-  @starting-style {}
-}
-@media (width < 1600px) {
   .bf-navbar-expand-3xl.bf-navbar-push .bf-navbar-menu {
-    animation: none;
     background-color: transparent;
     border-bottom: 0;
     box-shadow: none;
     clip-path: none;
+    display: grid;
     flex-basis: 100%;
     grid-template-rows: minmax(0, 1fr);
     max-height: none;
     overflow: hidden;
     position: static;
-    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, display var(--sassy-nav-collapse-duration, 0.2s) allow-discrete;
+    transition: grid-template-rows var(--sassy-nav-collapse-duration, 0.2s) ease, visibility var(--sassy-nav-collapse-duration, 0.2s);
   }
 }
 @media (width < 1600px) and (prefers-reduced-motion: reduce) {
@@ -2230,16 +2069,9 @@
   }
 }
 @media (width < 1600px) {
-  .bf-navbar-expand-3xl.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-    display: grid;
-  }
-  @starting-style {
-    .bf-navbar-expand-3xl.bf-navbar-push .bf-navbar-menu:not([hidden]) {
-      grid-template-rows: minmax(0, 0fr);
-    }
-  }
   .bf-navbar-expand-3xl.bf-navbar-push .bf-navbar-menu[hidden] {
     clip-path: none;
+    display: grid;
     grid-template-rows: minmax(0, 0fr);
   }
   .bf-navbar-expand-3xl.bf-navbar-push .bf-navbar-menu > * {
@@ -2249,7 +2081,8 @@
 }
 @media (width < 1600px) and (scripting: enabled) {
   .bf-navbar-expand-3xl:has(> .bf-navbar-toggle[aria-expanded=false]) .bf-navbar-menu {
-    display: none;
+    grid-template-rows: minmax(0, 0fr);
+    visibility: hidden;
   }
 }
 
