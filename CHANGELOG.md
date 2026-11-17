@@ -14,6 +14,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- `%bf-focus-ring`: the focus outline components use, for anything else that takes focus.
 - Link utilities: `%bf-stretched-link`, `%bf-icon-link`, `%bf-text-underline-offset-…` and `%bf-text-decoration-opacity-{0-100}`.
 - Layout utilities: `%bf-float-…`, `%bf-vertical-align-…`, `%bf-object-fit-…`, `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}` (set by `$sassy-aspect-ratio`), `%bf-pointer-events-…` and `%bf-user-select-…`.
 - `%bf-text-break`: long words and URLs break anywhere rather than overflow their box.

@@ -102,6 +102,13 @@
     @include make.responsive("outline-none", ())
         outline: 0 none
 
+    // Outline: focus ring - the outline components draw, set by --sassy-focus-outline-*
+
+    @include make.single("focus-ring")
+        &:focus-visible
+            outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+            outline-offset: $sassy-focus-outline-offset
+
 
     // Text: Align
 

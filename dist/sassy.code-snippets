@@ -122,6 +122,7 @@
   "%bf-line-height-single": { "scope": "sass,scss", "prefix": "bf-line-height-single", "body": "bf-line-height-single", "description": "line-height: 1;" },
   "%bf-line-height-triple": { "scope": "sass,scss", "prefix": "bf-line-height-triple", "body": "bf-line-height-triple", "description": "line-height: 3;" },
   "%bf-outline-none": { "scope": "sass,scss", "prefix": "bf-outline-none", "body": "bf-outline-none", "description": "outline: 0 none;" },
+  "%bf-focus-ring": { "scope": "sass,scss", "prefix": "bf-focus-ring", "body": "bf-focus-ring", "description": "&:focus-visible { outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary)); outline-offset: var(--sassy-focus-outline-offset, 2px); }" },
   "%bf-text-align-centre": { "scope": "sass,scss", "prefix": "bf-text-align-centre", "body": "bf-text-align-centre", "description": "text-align: center;" },
   "%bf-text-align-inherit": { "scope": "sass,scss", "prefix": "bf-text-align-inherit", "body": "bf-text-align-inherit", "description": "text-align: inherit;" },
   "%bf-text-align-initial": { "scope": "sass,scss", "prefix": "bf-text-align-initial", "body": "bf-text-align-initial", "description": "text-align: initial;" },

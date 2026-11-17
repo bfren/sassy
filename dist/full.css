@@ -2746,6 +2746,11 @@
   outline: 0 none;
 }
 
+.bf-focus-ring:focus-visible {
+  outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+  outline-offset: var(--sassy-focus-outline-offset, 2px);
+}
+
 .bf-text-align-centre {
   text-align: center;
 }

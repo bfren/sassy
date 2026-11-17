@@ -95,6 +95,20 @@
 </div>
         </section>
 
+        <section class="example" id="focus">
+            <h2>A focus ring</h2>
+            <p>Press Tab to move to the link: the ring shows for the keyboard, but not when you click it.</p>
+            <div class="demo">
+                <a class="result" href="#focus">A search result</a>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.result
+    @extend %bf-focus-ring
+    --sassy-focus-outline-offset: 4px</code></pre>
+<pre data-lang="html"><code>&lt;a class="result" href="/post"&gt;A search result&lt;/a&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="links">
             <h2>A clickable card and an icon link</h2>
             <p>The whole card follows its link. The underline sits a little lower and is faded, and the arrow is sized to the text.</p>

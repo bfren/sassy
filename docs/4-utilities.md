@@ -30,6 +30,7 @@ Most utilities have a breakpoint variant. Add the breakpoint to the end of the n
 | `%bf-stretched-link`                                       | Makes the nearest positioned ancestor clickable as the link              |
 | `%bf-icon-link`                                            | A link with an icon: in a row, centred, with a `1em` square `svg`        |
 | `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
+| `%bf-focus-ring`                                           | The focus outline that links, tabs and buttons in components use         |
 
 ### Example: a page heading and a caption
 
@@ -60,6 +61,27 @@ body
     @extend %bf-text-truncate
     @extend %bf-font-weight-700
 ```
+
+### Example: a focus ring
+
+```sass
+.result
+    @extend %bf-focus-ring
+    --sassy-focus-outline-offset: 4px
+```
+
+```css
+.result:focus-visible {
+  outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+  outline-offset: var(--sassy-focus-outline-offset, 2px);
+}
+```
+
+```html
+<a class="result" href="/post">A search result</a>
+```
+
+The ring only shows when the keyboard moves focus, not on a click. It reads the same `--sassy-focus-outline-*` properties as the components, so a site that changes them gets the same ring everywhere, and one element can change them for itself.
 
 ### Example: a clickable card
 
