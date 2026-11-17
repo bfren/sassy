@@ -139,7 +139,7 @@ Vertical padding is 1rem on small screens and 1.5rem from `md`. `%bf-mx-auto` ce
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `%bf-d-{block, inline, inline-block, flex, inline-flex, grid, none, …}` | `display`. Responsive                                               |
 | `%bf-visually-hidden`                                                   | Hides content visually, but not from screen readers. Not responsive |
-| `%bf-visually-hidden-focusable`                                         | As above, but visible when focused, for skip links                  |
+| `%bf-visually-hidden-focusable`                                         | Hidden like `%bf-visually-hidden` until focused, for skip links     |
 | `%bf-opacity-{0-100}`                                                   | `opacity`, in steps of 10                                           |
 | `%bf-flex-{column, column-reverse, row, row-reverse}`                   | `flex-direction`                                                    |
 | `%bf-flex-wrap-{nowrap, wrap, wrap-reverse}`                            | `flex-wrap`                                                         |
