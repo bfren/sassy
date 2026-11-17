@@ -166,7 +166,8 @@ const expandLists = (selector, from = 0) => {
 	if (!match) return [selector];
 	const open = match.index + match[0].length;
 	let close = open;
-	for (let depth = 1; depth > 0; close++) {
+	// stops at the end too, so a "(" inside a quoted attribute value cannot keep it looking for ")" forever
+	for (let depth = 1; depth > 0 && close < selector.length; close++) {
 		if (selector[close] === "(") depth++;
 		else if (selector[close] === ")") depth--;
 	}
