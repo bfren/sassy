@@ -62,7 +62,7 @@ It is less suited to:
 
 ### Sass
 
-Sassy needs [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later, the first version that understands `oklch()` colours. Add it to your project, for example as a git submodule:
+Sassy needs [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later. Add it to your project, for example as a git submodule:
 
 ```sh
 git submodule add https://github.com/bfren/sassy.git sassy
@@ -317,7 +317,7 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 ## Building and contributing
 
-You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
+You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
 
 | Script                      | Does                                                                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
