@@ -91,7 +91,7 @@ FNR == NR { next }
 
 # e.g.    --sassy-theme-primary: #{colour("sky", 600)};
 # or      --sassy-theme-primary: #0d9488;   (any CSS colour)
-/--sassy-theme-[a-z-]+:/ {
+/--sassy-theme-[a-z-]+:/ && !/-contrast:/ {
     line = $0
     name = line; sub(/^.*--sassy-theme-/, "", name); sub(/:.*$/, "", name)
     v = line; sub(/^[^:]*:[ \t]*/, "", v); sub(/;.*$/, "", v); v = trim(v)

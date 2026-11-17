@@ -1,8 +1,9 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
+@use "sass:map"
 
 //  =================================================================
-//  Theme: text, background and border
+//  Theme: text, background, background with contrasting text, and border
 //  =================================================================
 
 /// Outputs this module's utilities - called by _render inside make.passes.
@@ -18,6 +19,13 @@
 
     @include make.responsive("bg", $sassy-theme) using ($value)
         background-color: $value
+
+
+    // Theme: Background with contrasting text
+
+    @include make.responsive("text-bg", map.keys($sassy-theme)) using ($name)
+        background-color: var(--sassy-theme-#{$name})
+        color: var(--sassy-theme-#{$name}-contrast)
 
 
     // Theme: Border

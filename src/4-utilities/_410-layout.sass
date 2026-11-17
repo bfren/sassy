@@ -26,7 +26,7 @@ $sassy-p-loop: (inherit: inherit)
 
 
 //  =================================================================
-//  Layout: wrap, position, offset, z-index, overflow, height, width, margin, padding
+//  Layout: wrap, position, offset, z-index, overflow, float, vertical align, object fit, aspect ratio, pointer events, user select, height, width, margin, padding
 //  =================================================================
 
 /// Outputs this module's utilities - called by _render inside make.passes.
@@ -67,6 +67,28 @@ $sassy-p-loop: (inherit: inherit)
 
     @include make.responsive("overflow-y", $sassy-overflow) using ($value)
         overflow-y: $value
+
+    // Float, vertical align, object fit and aspect ratio
+
+    @include make.responsive("float", $sassy-float) using ($value)
+        float: $value
+
+    @include make.responsive("vertical-align", $sassy-vertical-align) using ($value)
+        vertical-align: $value
+
+    @include make.responsive("object-fit", $sassy-object-fit) using ($value)
+        object-fit: $value
+
+    @include make.responsive("aspect-ratio", $sassy-aspect-ratio) using ($value)
+        aspect-ratio: #{$value}
+
+    // Pointer events and user select
+
+    @include make.responsive("pointer-events", $sassy-pointer-events) using ($value)
+        pointer-events: $value
+
+    @include make.responsive("user-select", $sassy-user-select) using ($value)
+        user-select: $value
 
     // Height
 

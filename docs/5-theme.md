@@ -8,11 +8,12 @@ Theme colours are output last, so a theme utility such as `%bf-bg-primary` alway
 
 ## Placeholders
 
-| Placeholder pattern | Sets              | Example         |
-| ------------------- | ----------------- | --------------- |
-| `%bf-c-{name}`      | Text colour       | `%bf-c-primary` |
-| `%bf-bg-{name}`     | Background colour | `%bf-bg-error`  |
-| `%bf-border-{name}` | Border colour     | `%bf-border-ok` |
+| Placeholder pattern  | Sets                                     | Example             |
+| -------------------- | ---------------------------------------- | ------------------- |
+| `%bf-c-{name}`       | Text colour                              | `%bf-c-primary`     |
+| `%bf-bg-{name}`      | Background colour                        | `%bf-bg-error`      |
+| `%bf-text-bg-{name}` | Background colour, with contrasting text | `%bf-text-bg-error` |
+| `%bf-border-{name}`  | Border colour                            | `%bf-border-ok`     |
 
 `{name}` is one of the theme colours. Each has breakpoint variants too, such as `%bf-c-primary-md`, for a theme that changes at a breakpoint.
 
@@ -30,6 +31,8 @@ Theme colours are output last, so a theme utility such as `%bf-bg-primary` alway
 | `grey-dark`  | `grey-600`     | `--sassy-theme-grey-dark`  |
 
 The defaults come from the palette, so `sassy.colour()` gives you the same colours to use elsewhere. The [README](../README.md#naming) shows them.
+
+Each theme colour also has a `-contrast` property, such as `--sassy-theme-primary-contrast`, for the text on it. Its default is whichever of `grey-950` and white has the higher WCAG contrast ratio with the default colour. `primary` (`sky-600`) gets dark text, as white text on it is below the 4.5:1 that WCAG AA asks for.
 
 ## Worked examples
 
@@ -76,6 +79,24 @@ For text and a border, extend `%bf-c-primary` and `%bf-border-primary`. For a sh
 
 Shadows have one colour, `--sassy-shadow-colour`, so this works with any colour, and setting it on a section colours every shadow inside it.
 
+### Text that contrasts with a theme colour
+
+```sass
+.alert-warn
+    @extend %bf-text-bg-warn
+    @extend %bf-rounded-2
+    @extend %bf-p-3
+```
+
+```css
+.alert-warn {
+  background-color: var(--sassy-theme-warn);
+  color: var(--sassy-theme-warn-contrast);
+}
+```
+
+The text colour comes from `--sassy-theme-warn-contrast`, so it changes with the theme rather than being fixed in the rule.
+
 ### Theming a whole site
 
 Set the theme once on `:root` in your main stylesheet. Use `sassy.colour()` for a palette colour, or write any CSS colour directly:
@@ -86,6 +107,14 @@ Set the theme once on `:root` in your main stylesheet. Use `sassy.colour()` for 
 :root
     --sassy-theme-primary: #{sassy.colour("teal", 600)}
     --sassy-theme-secondary: #0d9488
+```
+
+When you change a theme colour, set its `-contrast` property too if `%bf-text-bg-{name}` is used. `sassy.contrast-colour()` works it out for a Sass colour:
+
+```sass
+:root
+    --sassy-theme-primary: #{sassy.colour("teal", 600)}
+    --sassy-theme-primary-contrast: #{sassy.contrast-colour(sassy.colour("teal", 600))}
 ```
 
 Theme colours accept any CSS colour: hex, `rgb()`, `oklch()`, a named colour or another custom property. Sassy adds transparency where it needs it with `color-mix()`, so you do not need separate values for shadows.
@@ -151,5 +180,6 @@ Because the theme is in custom properties, a script can change it without a new 
 | Property                                                                                              | Controls                |
 | ----------------------------------------------------------------------------------------------------- | ----------------------- |
 | `--sassy-theme-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | The eight theme colours |
+| `--sassy-theme-{name}-contrast`                                                                       | Text on each one        |
 
-Theme colours are defined in [`src/5-theme/_500-theme-variables.scss`](../src/5-theme/_500-theme-variables.scss). To add a theme colour, add an entry to the `$sassy-theme` map and a matching `--sassy-theme-*` custom property in `:root` in the same file. The `%bf-c`, `%bf-bg` and `%bf-border` placeholders are then generated for it.
+Theme colours are defined in [`src/5-theme/_500-theme-variables.scss`](../src/5-theme/_500-theme-variables.scss). To add a theme colour, add an entry to the `$sassy-theme` map and matching `--sassy-theme-*` and `--sassy-theme-*-contrast` custom properties in `:root` in the same file. The `%bf-c`, `%bf-bg`, `%bf-text-bg` and `%bf-border` placeholders are then generated for it.

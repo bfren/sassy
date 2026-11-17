@@ -51,6 +51,34 @@
 </div>
         </section>
 
+        <section class="example" id="contrast">
+            <h2>Text that contrasts</h2>
+            <p>Each chip's text is dark or white, whichever has the higher contrast with its theme colour.</p>
+            <div class="demo">
+                <span class="chip chip-primary">primary</span>
+                <span class="chip chip-secondary">secondary</span>
+                <span class="chip chip-ok">ok</span>
+                <span class="chip chip-info">info</span>
+                <span class="chip chip-warn">warn</span>
+                <span class="chip chip-error">error</span>
+                <span class="chip chip-grey-light">grey-light</span>
+                <span class="chip chip-grey-dark">grey-dark</span>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.chip
+    @extend %bf-rounded-pill
+    @extend %bf-px-3
+    @extend %bf-py-1
+
+.chip-primary
+    @extend %bf-text-bg-primary
+.chip-warn
+    @extend %bf-text-bg-warn</code></pre>
+<pre data-lang="html"><code>&lt;span class="chip chip-primary"&gt;primary&lt;/span&gt;
+&lt;span class="chip chip-warn"&gt;warn&lt;/span&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="section">
             <h2>A section with its own theme</h2>
             <p>The section sets <code>--sassy-theme-primary</code>, and everything inside it follows - text, and the button component too.</p>

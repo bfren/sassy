@@ -2,7 +2,7 @@
 @use "../0-core/040-make" as make
 
 //  =================================================================
-//  Colour: text and background
+//  Colour: text, background, and background with contrasting text
 //  =================================================================
 
 /// Outputs this module's utilities - called by _render inside make.passes.
@@ -20,6 +20,14 @@
 
     @include make.responsive("bg", $tailwind-colours) using ($value)
         background-color: $value
+
+
+    // Background Colour with contrasting text
+    // See also 5-theme
+
+    @include make.responsive("text-bg", $tailwind-colours) using ($value)
+        background-color: $value
+        color: contrast-colour($value)
 
 
     // Border Colour

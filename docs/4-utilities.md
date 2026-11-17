@@ -23,8 +23,14 @@ Most utilities have a breakpoint variant. Add the breakpoint to the end of the n
 | `%bf-text-transform-{upper, lower, capitalise, none}`      | Upper or lower case, capitalised or none                                 |
 | `%bf-text-wrap`                                            | Text wraps as normal                                                     |
 | `%bf-text-wrap-overflow`                                   | Text stays on one line and overflows                                     |
-| `%bf-text-wrap-hover`                                      | Text stays on one line, truncated with an ellipsis, and expands on hover |
+| `%bf-text-truncate`                                        | Text stays on one line, truncated with an ellipsis, and expands on hover |
+| `%bf-text-break`                                           | Long words and URLs break anywhere rather than overflow                  |
+| `%bf-text-underline-offset-{auto, 1, 2, 3}`                | Gap between text and its underline, from `0.125em` to `0.375em`          |
+| `%bf-text-decoration-opacity-{0-100}`                      | Fades the underline in steps of 10, without fading the text              |
+| `%bf-stretched-link`                                       | Makes the nearest positioned ancestor clickable as the link              |
+| `%bf-icon-link`                                            | A link with an icon: in a row, centred, with a `1em` square `svg`        |
 | `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
+| `%bf-focus-ring`                                           | The focus outline that links, tabs and buttons in components use         |
 
 ### Example: a page heading and a caption
 
@@ -52,9 +58,63 @@ body
 
 ```sass
 .card-title
-    @extend %bf-text-wrap-hover
+    @extend %bf-text-truncate
     @extend %bf-font-weight-700
 ```
+
+### Example: a focus ring
+
+```sass
+.result
+    @extend %bf-focus-ring
+    --sassy-focus-outline-offset: 4px
+```
+
+```css
+.result:focus-visible {
+  outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+  outline-offset: var(--sassy-focus-outline-offset, 2px);
+}
+```
+
+```html
+<a class="result" href="/post">A search result</a>
+```
+
+The ring only shows when the keyboard moves focus, not on a click. It reads the same `--sassy-focus-outline-*` properties as the components, so a site that changes them gets the same ring everywhere, and one element can change them for itself.
+
+### Example: a clickable card
+
+```sass
+.teaser
+    @extend %bf-position-relative
+
+.teaser-link
+    @extend %bf-stretched-link
+    @extend %bf-text-underline-offset-2
+    @extend %bf-text-decoration-opacity-50
+```
+
+```css
+.teaser-link::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+.teaser-link {
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+}
+```
+
+```html
+<article class="teaser">
+    <h3><a class="teaser-link" href="/post">A post title</a></h3>
+    <p>Clicking anywhere on the card follows the link.</p>
+</article>
+```
+
+The link's `::after` covers the card, because the card is the nearest positioned ancestor. Keep other links and buttons out of the card, as the cover sits over them.
 
 ## Layout
 
@@ -65,6 +125,11 @@ body
 | `%bf-top-{0, 50, 100, auto}`, `%bf-bottom-…`, `%bf-left-…`, `%bf-right-…`                                    | Offsets from the edge, as a percentage or `auto`                                              |
 | `%bf-z-index-{3, 4, 5}`                                                                                      | `z-index`                                                                                     |
 | `%bf-overflow-{auto, hidden, scroll, visible}`, `%bf-overflow-x-…`, `%bf-overflow-y-…`                       | `overflow`, or by axis                                                                        |
+| `%bf-float-{start, end, none}`                                                                               | `float`, using the logical `inline-start` and `inline-end`                                    |
+| `%bf-vertical-align-{baseline, top, middle, bottom, text-top, text-bottom}`                                  | `vertical-align`                                                                              |
+| `%bf-object-fit-{contain, cover, fill, scale, none}`                                                         | How an image or video fills its box. `scale` is `scale-down`                                  |
+| `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}`                                                                    | `aspect-ratio`. Add or change ratios with `$sassy-aspect-ratio`                               |
+| `%bf-pointer-events-{auto, none}`, `%bf-user-select-{all, auto, none}`                                       | Whether an element takes clicks, and how its text is selected                                 |
 | `%bf-height-{5-100}`, `%bf-viewheight-{5-100}`                                                               | Height as a percentage of the parent, or of the viewport                                      |
 | `%bf-min-width-…`, `%bf-min-height-…`, `%bf-min-viewwidth-…`, `%bf-min-viewheight-…`                         | Minimum sizes, as a percentage or of the viewport                                             |
 | `%bf-width-{5-100}`, `%bf-viewwidth-{5-100}`                                                                 | Width, as a percentage of the parent, or of the viewport                                      |
@@ -101,6 +166,30 @@ Margin and padding steps are in multiples of `$sassy-margin-unit` and `$sassy-pa
 
 The sticky header stays at the top of the viewport while the page scrolls. `z-index` keeps it above the content, and the shadow separates it from the page.
 
+### Example: a 16:9 frame
+
+```sass
+.frame
+    @extend %bf-aspect-ratio-16x9
+    @extend %bf-width-100
+    @extend %bf-object-fit-cover
+```
+
+```css
+.frame {
+  aspect-ratio: 16 / 9;
+}
+.frame {
+  object-fit: cover;
+}
+```
+
+```html
+<img class="frame" src="photo.jpg" alt="…">
+```
+
+The image keeps a 16:9 shape at any width, and `cover` crops it to fill the frame rather than stretching it.
+
 ### Example: responsive spacing
 
 ```sass
@@ -114,13 +203,32 @@ Vertical padding is 1rem on small screens and 1.5rem from `md`. `%bf-mx-auto` ce
 
 ## Colour
 
-| Placeholder                   | Sets                          |
-| ----------------------------- | ----------------------------- |
-| `%bf-c-{colour}-{shade}`      | Text colour, from the palette |
-| `%bf-bg-{colour}-{shade}`     | Background colour             |
-| `%bf-border-{colour}-{shade}` | Border colour                 |
+| Placeholder                    | Sets                                                |
+| ------------------------------ | --------------------------------------------------- |
+| `%bf-c-{colour}-{shade}`       | Text colour, from the palette                       |
+| `%bf-bg-{colour}-{shade}`      | Background colour                                   |
+| `%bf-text-bg-{colour}-{shade}` | Background colour, with text that contrasts with it |
+| `%bf-border-{colour}-{shade}`  | Border colour                                       |
 
 `{colour}` is one of the 26 palette colours and `{shade}` is `50`, `100` to `900`, or `950`. See the [README](../README.md#naming) for the list, and the [theme](5-theme.md) for the colours with their own names.
+
+`%bf-text-bg-…` picks the text colour when Sass compiles, using the WCAG contrast ratio: `$sassy-contrast-dark` (`grey-950`) or `$sassy-contrast-light` (white), whichever contrasts more with the background. `sassy.contrast-colour()` gives the same choice for any colour.
+
+### Example: a coloured tag
+
+```sass
+.tag
+    @extend %bf-text-bg-violet-700
+    @extend %bf-rounded-pill
+    @extend %bf-px-2
+```
+
+```css
+.tag {
+  background-color: oklch(49.1% 0.27 292.581deg);
+  color: #fff;
+}
+```
 
 ### Example: a status badge
 
