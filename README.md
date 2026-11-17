@@ -104,6 +104,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 
 | Module             | Examples                                                                                                                                                                                                                                     |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Content            | `%bf-h2`, `%bf-lead`, `%bf-display-1`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote`, `%bf-blockquote-caption`                                                                                     |
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
 | Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`                                                   |
 | Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                              |
@@ -344,14 +345,14 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 
 | Folder         | Contains                                                                                                           |
 | -------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers                       |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles       |
 | `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                               |
 | `2-components` | Buttons, navigation, cards, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
 | `3-grid`       | The grid                                                                                                           |
 | `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                          |
 | `5-theme`      | Theme colours                                                                                                      |
 
-Composites - placeholders that set several properties at once, such as forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
+Composites - placeholders that set several properties at once, such as content, forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 
 `src/_render.sass` outputs every module in this order, and is the one place the order is set. Each folder's `_index.sass` forwards its modules, and `src/_index.sass` forwards the folders.
 

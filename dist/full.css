@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  *  Sassy v0.3.0 ~ https://github.com/bfren/sassy
  *  Licensed under MIT ~ https://mit.bfren.dev/2022 */
@@ -275,6 +276,177 @@
   --sassy-theme-error-contrast: #fff;
   --sassy-theme-grey-light-contrast: oklch(13% 0.028 261.692deg);
   --sassy-theme-grey-dark-contrast: #fff;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+:where(h1) {
+  font-size: min(2.5rem, 1.375rem + 1.5vw);
+}
+
+:where(h2) {
+  font-size: min(2rem, 1.325rem + 0.9vw);
+}
+
+:where(h3) {
+  font-size: min(1.75rem, 1.3rem + 0.6vw);
+}
+
+:where(h4) {
+  font-size: min(1.5rem, 1.275rem + 0.3vw);
+}
+
+:where(h5) {
+  font-size: 1.25rem;
+}
+
+:where(h6) {
+  font-size: 1rem;
+}
+
+:where(blockquote, figure) {
+  margin: 0 0 1rem;
+}
+
+:where(img, svg) {
+  vertical-align: middle;
+}
+
+.bf-lead {
+  font-size: var(--sassy-lead-font-size, calc(var(--sassy-font-size-base) * 1.25));
+  font-weight: var(--sassy-lead-font-weight, 300);
+}
+
+.bf-h1 {
+  font-size: min(2.5rem, 1.375rem + 1.5vw);
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+.bf-h2 {
+  font-size: min(2rem, 1.325rem + 0.9vw);
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+.bf-h3 {
+  font-size: min(1.75rem, 1.3rem + 0.6vw);
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+.bf-h4 {
+  font-size: min(1.5rem, 1.275rem + 0.3vw);
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+.bf-h5 {
+  font-size: 1.25rem;
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+.bf-h6 {
+  font-size: 1rem;
+  font-weight: var(--sassy-heading-font-weight, 500);
+  line-height: var(--sassy-heading-line-height, 1.2);
+  margin-block: 0 0.5rem;
+}
+
+.bf-display-1 {
+  font-size: min(5rem, 1.625rem + 4.5vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+
+.bf-display-2 {
+  font-size: min(4.5rem, 1.575rem + 3.9vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+
+.bf-display-3 {
+  font-size: min(4rem, 1.525rem + 3.3vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+
+.bf-display-4 {
+  font-size: min(3.5rem, 1.475rem + 2.7vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+
+.bf-display-5 {
+  font-size: min(3rem, 1.425rem + 2.1vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+
+.bf-display-6 {
+  font-size: min(2.5rem, 1.375rem + 1.5vw);
+  font-weight: var(--sassy-display-heading-font-weight, 300);
+  line-height: var(--sassy-display-heading-line-height, 1.2);
+}
+
+.bf-initialism {
+  font-size: 0.875em;
+  text-transform: uppercase;
+}
+
+.bf-list-unstyled {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.bf-list-inline {
+  list-style: none;
+  padding-inline-start: 0;
+}
+.bf-list-inline > li {
+  display: inline-block;
+}
+.bf-list-inline > li:not(:last-child) {
+  margin-inline-end: var(--sassy-list-inline-gap, 0.5rem);
+}
+
+.bf-img-fluid {
+  block-size: auto;
+  max-inline-size: 100%;
+}
+
+.bf-figure {
+  display: inline-block;
+}
+.bf-figure > :is(img, svg, picture, video) {
+  margin-block-end: 0.5rem;
+}
+.bf-figure > figcaption {
+  color: var(--sassy-figure-caption-colour, oklch(44.6% 0.03 256.802deg));
+  font-size: var(--sassy-figure-caption-font-size, 0.875em);
+}
+
+.bf-blockquote {
+  font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
+}
+
+.bf-blockquote-caption {
+  color: var(--sassy-blockquote-caption-colour, oklch(44.6% 0.03 256.802deg));
+  font-size: var(--sassy-blockquote-caption-font-size, 0.875em);
+  margin-block: -1rem 1rem;
+}
+.bf-blockquote-caption::before {
+  content: "— ";
 }
 
 .bf-form-label {
@@ -12139,6 +12311,86 @@
 }
 
 @media (width >= 576px) {
+  .bf-h1-sm {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 576px) {
+  .bf-h2-sm {
+    font-size: min(2rem, 1.325rem + 0.9vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 576px) {
+  .bf-h3-sm {
+    font-size: min(1.75rem, 1.3rem + 0.6vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 576px) {
+  .bf-h4-sm {
+    font-size: min(1.5rem, 1.275rem + 0.3vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 576px) {
+  .bf-h5-sm {
+    font-size: 1.25rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 576px) {
+  .bf-h6-sm {
+    font-size: 1rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 576px) {
+  .bf-display-1-sm {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-2-sm {
+    font-size: min(4.5rem, 1.575rem + 3.9vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-3-sm {
+    font-size: min(4rem, 1.525rem + 3.3vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-4-sm {
+    font-size: min(3.5rem, 1.475rem + 2.7vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-5-sm {
+    font-size: min(3rem, 1.425rem + 2.1vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-6-sm {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+}
+@media (width >= 576px) {
   .bf-d-flex-row-sm {
     display: flex;
     flex-wrap: wrap;
@@ -19842,6 +20094,86 @@
   }
   .bf-border-grey-dark-sm {
     border-color: var(--sassy-theme-grey-dark);
+  }
+}
+@media (width >= 768px) {
+  .bf-h1-md {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 768px) {
+  .bf-h2-md {
+    font-size: min(2rem, 1.325rem + 0.9vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 768px) {
+  .bf-h3-md {
+    font-size: min(1.75rem, 1.3rem + 0.6vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 768px) {
+  .bf-h4-md {
+    font-size: min(1.5rem, 1.275rem + 0.3vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 768px) {
+  .bf-h5-md {
+    font-size: 1.25rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 768px) {
+  .bf-h6-md {
+    font-size: 1rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 768px) {
+  .bf-display-1-md {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-2-md {
+    font-size: min(4.5rem, 1.575rem + 3.9vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-3-md {
+    font-size: min(4rem, 1.525rem + 3.3vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-4-md {
+    font-size: min(3.5rem, 1.475rem + 2.7vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-5-md {
+    font-size: min(3rem, 1.425rem + 2.1vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-6-md {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
   }
 }
 @media (width >= 768px) {
@@ -27551,6 +27883,86 @@
   }
 }
 @media (width >= 992px) {
+  .bf-h1-lg {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 992px) {
+  .bf-h2-lg {
+    font-size: min(2rem, 1.325rem + 0.9vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 992px) {
+  .bf-h3-lg {
+    font-size: min(1.75rem, 1.3rem + 0.6vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 992px) {
+  .bf-h4-lg {
+    font-size: min(1.5rem, 1.275rem + 0.3vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 992px) {
+  .bf-h5-lg {
+    font-size: 1.25rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 992px) {
+  .bf-h6-lg {
+    font-size: 1rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 992px) {
+  .bf-display-1-lg {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-2-lg {
+    font-size: min(4.5rem, 1.575rem + 3.9vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-3-lg {
+    font-size: min(4rem, 1.525rem + 3.3vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-4-lg {
+    font-size: min(3.5rem, 1.475rem + 2.7vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-5-lg {
+    font-size: min(3rem, 1.425rem + 2.1vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-6-lg {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+}
+@media (width >= 992px) {
   .bf-d-flex-row-lg {
     display: flex;
     flex-wrap: wrap;
@@ -35254,6 +35666,86 @@
   }
   .bf-border-grey-dark-lg {
     border-color: var(--sassy-theme-grey-dark);
+  }
+}
+@media (width >= 1200px) {
+  .bf-h1-xl {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1200px) {
+  .bf-h2-xl {
+    font-size: min(2rem, 1.325rem + 0.9vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1200px) {
+  .bf-h3-xl {
+    font-size: min(1.75rem, 1.3rem + 0.6vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1200px) {
+  .bf-h4-xl {
+    font-size: min(1.5rem, 1.275rem + 0.3vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1200px) {
+  .bf-h5-xl {
+    font-size: 1.25rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1200px) {
+  .bf-h6-xl {
+    font-size: 1rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1200px) {
+  .bf-display-1-xl {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-2-xl {
+    font-size: min(4.5rem, 1.575rem + 3.9vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-3-xl {
+    font-size: min(4rem, 1.525rem + 3.3vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-4-xl {
+    font-size: min(3.5rem, 1.475rem + 2.7vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-5-xl {
+    font-size: min(3rem, 1.425rem + 2.1vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-6-xl {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
   }
 }
 @media (width >= 1200px) {
@@ -42963,6 +43455,86 @@
   }
 }
 @media (width >= 1400px) {
+  .bf-h1-2xl {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1400px) {
+  .bf-h2-2xl {
+    font-size: min(2rem, 1.325rem + 0.9vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1400px) {
+  .bf-h3-2xl {
+    font-size: min(1.75rem, 1.3rem + 0.6vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1400px) {
+  .bf-h4-2xl {
+    font-size: min(1.5rem, 1.275rem + 0.3vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1400px) {
+  .bf-h5-2xl {
+    font-size: 1.25rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1400px) {
+  .bf-h6-2xl {
+    font-size: 1rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1400px) {
+  .bf-display-1-2xl {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-2-2xl {
+    font-size: min(4.5rem, 1.575rem + 3.9vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-3-2xl {
+    font-size: min(4rem, 1.525rem + 3.3vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-4-2xl {
+    font-size: min(3.5rem, 1.475rem + 2.7vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-5-2xl {
+    font-size: min(3rem, 1.425rem + 2.1vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-6-2xl {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+}
+@media (width >= 1400px) {
   .bf-d-flex-row-2xl {
     display: flex;
     flex-wrap: wrap;
@@ -50666,6 +51238,86 @@
   }
   .bf-border-grey-dark-2xl {
     border-color: var(--sassy-theme-grey-dark);
+  }
+}
+@media (width >= 1600px) {
+  .bf-h1-3xl {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1600px) {
+  .bf-h2-3xl {
+    font-size: min(2rem, 1.325rem + 0.9vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1600px) {
+  .bf-h3-3xl {
+    font-size: min(1.75rem, 1.3rem + 0.6vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1600px) {
+  .bf-h4-3xl {
+    font-size: min(1.5rem, 1.275rem + 0.3vw);
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1600px) {
+  .bf-h5-3xl {
+    font-size: 1.25rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1600px) {
+  .bf-h6-3xl {
+    font-size: 1rem;
+    font-weight: var(--sassy-heading-font-weight, 500);
+    line-height: var(--sassy-heading-line-height, 1.2);
+    margin-block: 0 0.5rem;
+  }
+}
+@media (width >= 1600px) {
+  .bf-display-1-3xl {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-2-3xl {
+    font-size: min(4.5rem, 1.575rem + 3.9vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-3-3xl {
+    font-size: min(4rem, 1.525rem + 3.3vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-4-3xl {
+    font-size: min(3.5rem, 1.475rem + 2.7vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-5-3xl {
+    font-size: min(3rem, 1.425rem + 2.1vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
+  .bf-display-6-3xl {
+    font-size: min(2.5rem, 1.375rem + 1.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
   }
 }
 @media (width >= 1600px) {
