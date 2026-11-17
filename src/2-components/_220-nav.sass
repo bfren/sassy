@@ -6,11 +6,6 @@
 //  Components: navigation
 //  =================================================================
 
-// a collapsed nav wipes down as it is shown - see %nav-collapse-{breakpoint}
-@keyframes sassy-nav-wipe
-    from
-        clip-path: inset(0 -2rem 100%)
-
 /// Outputs this module's utilities - called by _render inside make.passes.
 @mixin utilities()
 
@@ -124,7 +119,9 @@
             // without scripting the menu stays open, so the links still work
             @media (width < #{$width}) and (scripting: enabled)
                 @include component.part-when-closed("navbar-toggle", "navbar-menu")
-                    display: none
+                    // the closed values of -collapse() and -push(), so closing still animates once sassy.js runs
+                    grid-template-rows: minmax(0, 0fr)
+                    visibility: hidden
 
 
 
@@ -179,30 +176,25 @@
 /// and the menu clips its child (the list), which keeps its full height so its links do not reflow as the row grows.
 /// Undoes the panel that -collapse() makes below the breakpoint.
 @mixin -push($width)
-    animation: none
     background-color: transparent
     border-bottom: 0
     box-shadow: none
     clip-path: none
+    display: grid
     flex-basis: 100%
     grid-template-rows: minmax(0, 1fr)
     max-height: none
     overflow: hidden
     position: static
-    transition: grid-template-rows $sassy-nav-collapse-duration ease, display $sassy-nav-collapse-duration allow-discrete
+    transition: grid-template-rows $sassy-nav-collapse-duration ease, visibility $sassy-nav-collapse-duration
 
     @media (prefers-reduced-motion: reduce)
         transition: none
 
-    // only when shown, as display: grid would otherwise override hidden
-    &:not([hidden])
-        display: grid
-
-        @starting-style
-            grid-template-rows: minmax(0, 0fr)
-
+    // closed: the row shrinks to nothing, then visibility hides the menu (see -collapse)
     &[hidden]
         clip-path: none
+        display: grid
         grid-template-rows: minmax(0, 0fr)
 
     // align-self keeps the list at its full height as the row grows, and the margin is the space above the menu
@@ -227,16 +219,18 @@
         // scrolling to the end of the menu does not carry on into the page behind it
         overscroll-behavior: contain
         position: absolute
-        animation: sassy-nav-wipe $sassy-nav-collapse-duration ease
-        transition: clip-path $sassy-nav-collapse-duration ease, display $sassy-nav-collapse-duration allow-discrete
+        transition: clip-path $sassy-nav-collapse-duration ease, visibility $sassy-nav-collapse-duration
 
         @media (prefers-reduced-motion: reduce)
-            animation: none
             transition: none
 
-        // sassy.js sets hidden: the panel wipes up, then the browser removes it when that finishes
+        // sassy.js sets hidden: rather than display: none, which no transition can delay in every browser, the panel stays
+        // in the page and wipes up, and visibility (which stays visible until a transition ends) then hides it from view,
+        // the keyboard and screen readers
         &[hidden]
             clip-path: inset(0 -2rem 100%)
+            display: block
+            visibility: hidden
 
     @media (width >= #{$width})
         display: block
