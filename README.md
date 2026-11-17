@@ -38,7 +38,7 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 .card-title {
   color: var(--sassy-theme-primary);
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .card {
     padding: 1.25rem;
   }

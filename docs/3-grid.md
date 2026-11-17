@@ -54,7 +54,7 @@ The `.wrap` container, which centres a page's content, is in [4-utilities](4-uti
   padding: var(--sassy-grid-gutter, 0.5rem);
   width: 100%;
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .half {
     box-sizing: border-box;
     flex: 0 0 auto;
@@ -107,7 +107,7 @@ The gutter is a custom property, so you can change it per site or at a breakpoin
 :root
     --sassy-grid-gutter: 0.5rem
 
-@media (min-width: 768px)
+@media (width >= 768px)
     :root
         --sassy-grid-gutter: 1.5rem
 ```
