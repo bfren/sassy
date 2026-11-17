@@ -6,6 +6,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- Grid columns set `margin-block: 0` and their start margin from `--sassy-col-offset`, rather than `margin: 0`, so offsets work. Rows set `--sassy-col-offset: 0`.
 - **Breaking:** `%bf-text-wrap-hover` is now `%bf-text-truncate`, which says what it does. It still expands on hover.
 - **Breaking:** Sassy now needs Dart Sass 1.108 or later, so it can use current Sass syntax.
 - Smaller output: only the font, body and theme custom properties are defined on `:root`. Every other default is now the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so it is only in your CSS when you extend a placeholder that uses it. Setting any of them, on `:root` or anywhere else, works as before.
@@ -14,6 +15,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Grid: `%bf-col` and `%bf-col-auto` columns, `%bf-col-offset-{0-11}`, `%bf-row-cols-{1-6}` and `-auto` for a row whose children are columns, `%bf-gutter-{0-5}` to change a row's gutter, and an opt-in CSS grid with `%bf-grid`, `%bf-grid-col-{1-12}` and `%bf-grid-start-{1-11}`.
 - Tables: `%bf-table`, with `-striped`, `-striped-columns`, `-hover`, `-bordered`, `-borderless`, `-small`, `-caption-top`, a tint in each theme colour, and `-responsive` wrappers. A row with `aria-current="true"` is shaded. Without them, tables get joined borders and a grey caption below.
 - Content styles in `0-core`: `h1` to `h6` get sizes, weight, line height and margins, `blockquote` and `figure` get a bottom margin and no side margins, and `img` and `svg` line up with text. Placeholders for the rest: `%bf-h{1-6}`, `%bf-lead`, `%bf-display-{1-6}`, `%bf-initialism`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote` and `%bf-blockquote-caption`. Headings and large headings above `1.25rem` shrink on screens narrower than the `xl` breakpoint.
 - `%bf-text-bg-{colour}-{shade}` and `%bf-text-bg-{theme}`: a background with text that contrasts with it, chosen by WCAG contrast ratio. Each theme colour has a `--sassy-theme-{name}-contrast` property for its text, and `sassy.contrast-colour()` works one out for any Sass colour.

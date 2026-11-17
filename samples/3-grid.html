@@ -83,6 +83,77 @@
 </div>
         </section>
 
+        <section class="example" id="offset">
+            <h2>A centred column</h2>
+            <div class="demo">
+                <p class="demo-hint">Two thirds wide, then half wide from 992px, centred by its offset at both widths.</p>
+                <div class="row">
+                    <div class="narrow"><div class="box">Centred</div></div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.narrow
+    @extend %bf-col-8
+    @extend %bf-col-offset-2
+    @extend %bf-col-6-lg
+    @extend %bf-col-offset-3-lg</code></pre>
+<pre data-lang="html"><code>&lt;div class="row"&gt;
+    &lt;div class="narrow"&gt;Centred&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="row-cols">
+            <h2>Cards in a row</h2>
+            <div class="demo">
+                <p class="demo-hint">The children have no placeholder: the row makes them columns, one to a row, then three from 768px, with a wider gutter.</p>
+                <div class="cards">
+                    <div><div class="box">One</div></div>
+                    <div><div class="box">Two</div></div>
+                    <div><div class="box">Three</div></div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.cards
+    @extend %bf-d-flex-row
+    @extend %bf-row-cols-1
+    @extend %bf-row-cols-3-md
+    @extend %bf-gutter-4</code></pre>
+<pre data-lang="html"><code>&lt;div class="cards"&gt;
+    &lt;article&gt;One&lt;/article&gt;
+    &lt;article&gt;Two&lt;/article&gt;
+    &lt;article&gt;Three&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="css-grid">
+            <h2>A CSS grid</h2>
+            <div class="demo">
+                <p class="demo-hint">Stacked, then eight and four columns from 992px. The gap is only between the cells.</p>
+                <div class="layout">
+                    <div class="layout-main"><div class="box">Main</div></div>
+                    <div class="layout-side"><div class="box">Side</div></div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.layout
+    @extend %bf-grid
+
+.layout-main
+    @extend %bf-grid-col-12
+    @extend %bf-grid-col-8-lg
+
+.layout-side
+    @extend %bf-grid-col-12
+    @extend %bf-grid-col-4-lg</code></pre>
+<pre data-lang="html"><code>&lt;div class="layout"&gt;
+    &lt;main class="layout-main"&gt;Main&lt;/main&gt;
+    &lt;aside class="layout-side"&gt;Side&lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="gutter">
             <h2>Removing a column's gutter</h2>
             <p>A utility such as <code>%bf-p-0</code> always overrides the grid, whatever order the <code>@extend</code> lines are in. The first column has no gutter, so its box reaches the edges.</p>

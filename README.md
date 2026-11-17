@@ -112,7 +112,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 | Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                         |
 | Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                         |
 | Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                |
-| Grid               | `%bf-d-flex-row`, `%bf-col-6`                                                                                                                                                                                                                |
+| Grid               | `%bf-d-flex-row`, `%bf-col-6`, `%bf-col`, `%bf-col-offset-2`, `%bf-row-cols-3`, `%bf-gutter-4`, `%bf-grid`, `%bf-grid-col-4`                                                                                                                 |
 | Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                                                                          |
 
 A few conventions:
@@ -130,7 +130,7 @@ A few conventions:
 
   ![The default theme colours: primary sky-600, secondary orange-700, ok green-600, info sky-200, warn amber-400, error red-600, grey-light grey-300 and grey-dark grey-600](docs/theme.svg)
 
-- **Grid** columns are out of 12: extend `%bf-d-flex-row` on the container and `%bf-col-{1-12}` on each column.
+- **Grid** columns are out of 12: extend `%bf-d-flex-row` on the container and `%bf-col-{1-12}` on each column, or `%bf-grid` and `%bf-grid-col-{1-12}` for a CSS grid.
 
 ## Responsive
 

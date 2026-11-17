@@ -5,9 +5,21 @@
 @function -calc-col-width($value)
     @return util.decimal-floor(calc(calc($value / $sassy-grid-cols) * 100%))
 
+// a column's offset, set by %bf-col-offset-{n} and reset by each row so it is not inherited
+$-col-offset: var(--sassy-col-offset, 0)
+
+/// A flex column. Every column placeholder is complete in itself.
+@mixin -col($flex, $width)
+    box-sizing: border-box
+    flex: $flex
+    margin-block: 0
+    margin-inline: $-col-offset 0
+    padding: $sassy-grid-gutter
+    width: $width
+
 
 //  =================================================================
-//  Grid: flex rows and columns
+//  Grid: flex rows and columns, and a CSS grid
 //  =================================================================
 
 /// Outputs this module's utilities - called by _render inside make.passes.
@@ -16,18 +28,53 @@
     // Flex Rows and Columns
 
     @include make.responsive("d-flex-row", ())
+        --sassy-col-offset: 0
         display: flex
         flex-wrap: wrap
         margin: 0
         padding: 0
 
+    @include make.responsive("gutter", $sassy-grid-gutters) using ($value)
+        --sassy-grid-gutter: #{$value}
+
+    // Before the columns, so a column placeholder on a child beats the row's in the same pass
+    @include make.responsive("row-cols", $sassy-row-cols) using ($value)
+        & > *
+            @include -col(0 0 auto, -calc-col-width(calc($sassy-grid-cols / $value)))
+
+    @include make.responsive("row-cols-auto", ())
+        & > *
+            @include -col(0 0 auto, auto)
+
     // Columns are not nested inside d-flex-row so that their responsive
     // variants are ordered by make.passes along with everything else.
     // border-box keeps the gutter inside the column, so widths add up to 100%
     // whatever box-sizing the rest of the page uses.
+
+    // shares the row equally with the other %bf-col columns
+    @include make.responsive("col", ())
+        @include -col(1 0 0%, auto)
+
+    // as wide as its content
+    @include make.responsive("col-auto", ())
+        @include -col(0 0 auto, auto)
+
     @include make.responsive("col", $sassy-col) using ($value)
-        box-sizing: border-box
-        flex: 0 0 auto
-        margin: 0
-        padding: $sassy-grid-gutter
-        width: -calc-col-width($value)
+        @include -col(0 0 auto, -calc-col-width($value))
+
+    // moves a column along by that many twelfths, at every width the column has
+    @include make.responsive("col-offset", $sassy-col-offset) using ($value)
+        --sassy-col-offset: #{-calc-col-width($value)}
+
+    // CSS Grid: an opt-in alternative, with columns that span and start where you say
+
+    @include make.responsive("grid", ())
+        display: grid
+        gap: $sassy-grid-gap
+        grid-template-columns: repeat(#{$sassy-grid-cols}, minmax(0, 1fr))
+
+    @include make.responsive("grid-col", $sassy-col) using ($value)
+        grid-column: auto / span $value
+
+    @include make.responsive("grid-start", $sassy-grid-start) using ($value)
+        grid-column-start: $value
