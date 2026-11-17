@@ -23,7 +23,8 @@ Most utilities have a breakpoint variant. Add the breakpoint to the end of the n
 | `%bf-text-transform-{upper, lower, capitalise, none}`      | Upper or lower case, capitalised or none                                 |
 | `%bf-text-wrap`                                            | Text wraps as normal                                                     |
 | `%bf-text-wrap-overflow`                                   | Text stays on one line and overflows                                     |
-| `%bf-text-wrap-hover`                                      | Text stays on one line, truncated with an ellipsis, and expands on hover |
+| `%bf-text-truncate`                                        | Text stays on one line, truncated with an ellipsis, and expands on hover |
+| `%bf-text-break`                                           | Long words and URLs break anywhere rather than overflow                  |
 | `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
 
 ### Example: a page heading and a caption
@@ -52,7 +53,7 @@ body
 
 ```sass
 .card-title
-    @extend %bf-text-wrap-hover
+    @extend %bf-text-truncate
     @extend %bf-font-weight-700
 ```
 

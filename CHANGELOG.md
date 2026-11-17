@@ -6,6 +6,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- **Breaking:** `%bf-text-wrap-hover` is now `%bf-text-truncate`, which says what it does. It still expands on hover.
 - **Breaking:** Sassy now needs Dart Sass 1.108 or later, so it can use current Sass syntax.
 - Smaller output: only the font, body and theme custom properties are defined on `:root`. Every other default is now the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so it is only in your CSS when you extend a placeholder that uses it. Setting any of them, on `:root` or anywhere else, works as before.
 - **Breaking:** if your own CSS reads one of those properties, such as `var(--sassy-radius)`, it now has no value unless you set it. Read it through its Sass variable instead, which includes the default: `border-radius: sassy.$sassy-radius`.
@@ -14,6 +15,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 ### Added
 
 - Layout utilities: `%bf-float-…`, `%bf-vertical-align-…`, `%bf-object-fit-…`, `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}` (set by `$sassy-aspect-ratio`), `%bf-pointer-events-…` and `%bf-user-select-…`.
+- `%bf-text-break`: long words and URLs break anywhere rather than overflow their box.
 - A navbar: `%bf-navbar-expand-{breakpoint}` with `%bf-navbar-brand`, `%bf-navbar-toggle` and `%bf-navbar-menu`. The breakpoint is set once, and the menu does not flash open before `sassy.js` runs.
 - `%bf-navbar-push`: below the breakpoint, the open menu pushes the page down rather than covering it.
 - `%bf-nav-fill` and `%bf-nav-justified`: links that share the width of the row. In a navbar, the menu grows to make room for them.

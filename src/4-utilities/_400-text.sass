@@ -126,7 +126,7 @@
     @include make.responsive("text-wrap", ())
         white-space: normal
 
-    @include make.responsive("text-wrap-hover", ())
+    @include make.responsive("text-truncate", ())
         overflow: hidden
         text-overflow: ellipsis
         white-space: nowrap
@@ -136,3 +136,6 @@
 
     @include make.responsive("text-wrap-overflow", ())
         white-space: nowrap
+
+    @include make.responsive("text-break", ())
+        overflow-wrap: anywhere

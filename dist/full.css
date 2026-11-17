@@ -2822,17 +2822,21 @@
   white-space: normal;
 }
 
-.bf-text-wrap-hover {
+.bf-text-truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.bf-text-wrap-hover:hover {
+.bf-text-truncate:hover {
   overflow: visible;
 }
 
 .bf-text-wrap-overflow {
   white-space: nowrap;
+}
+
+.bf-text-break {
+  overflow-wrap: anywhere;
 }
 
 .wrap-fluid, .wrap {
@@ -11020,18 +11024,23 @@
   }
 }
 @media (width >= 576px) {
-  .bf-text-wrap-hover-sm {
+  .bf-text-truncate-sm {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .bf-text-wrap-hover-sm:hover {
+  .bf-text-truncate-sm:hover {
     overflow: visible;
   }
 }
 @media (width >= 576px) {
   .bf-text-wrap-overflow-sm {
     white-space: nowrap;
+  }
+}
+@media (width >= 576px) {
+  .bf-text-break-sm {
+    overflow-wrap: anywhere;
   }
 }
 @media (width >= 576px) {
@@ -17472,18 +17481,23 @@
   }
 }
 @media (width >= 768px) {
-  .bf-text-wrap-hover-md {
+  .bf-text-truncate-md {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .bf-text-wrap-hover-md:hover {
+  .bf-text-truncate-md:hover {
     overflow: visible;
   }
 }
 @media (width >= 768px) {
   .bf-text-wrap-overflow-md {
     white-space: nowrap;
+  }
+}
+@media (width >= 768px) {
+  .bf-text-break-md {
+    overflow-wrap: anywhere;
   }
 }
 @media (width >= 768px) {
@@ -23924,18 +23938,23 @@
   }
 }
 @media (width >= 992px) {
-  .bf-text-wrap-hover-lg {
+  .bf-text-truncate-lg {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .bf-text-wrap-hover-lg:hover {
+  .bf-text-truncate-lg:hover {
     overflow: visible;
   }
 }
 @media (width >= 992px) {
   .bf-text-wrap-overflow-lg {
     white-space: nowrap;
+  }
+}
+@media (width >= 992px) {
+  .bf-text-break-lg {
+    overflow-wrap: anywhere;
   }
 }
 @media (width >= 992px) {
@@ -30376,18 +30395,23 @@
   }
 }
 @media (width >= 1200px) {
-  .bf-text-wrap-hover-xl {
+  .bf-text-truncate-xl {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .bf-text-wrap-hover-xl:hover {
+  .bf-text-truncate-xl:hover {
     overflow: visible;
   }
 }
 @media (width >= 1200px) {
   .bf-text-wrap-overflow-xl {
     white-space: nowrap;
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-break-xl {
+    overflow-wrap: anywhere;
   }
 }
 @media (width >= 1200px) {
@@ -36828,18 +36852,23 @@
   }
 }
 @media (width >= 1400px) {
-  .bf-text-wrap-hover-2xl {
+  .bf-text-truncate-2xl {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .bf-text-wrap-hover-2xl:hover {
+  .bf-text-truncate-2xl:hover {
     overflow: visible;
   }
 }
 @media (width >= 1400px) {
   .bf-text-wrap-overflow-2xl {
     white-space: nowrap;
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-break-2xl {
+    overflow-wrap: anywhere;
   }
 }
 @media (width >= 1400px) {
@@ -43280,18 +43309,23 @@
   }
 }
 @media (width >= 1600px) {
-  .bf-text-wrap-hover-3xl {
+  .bf-text-truncate-3xl {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .bf-text-wrap-hover-3xl:hover {
+  .bf-text-truncate-3xl:hover {
     overflow: visible;
   }
 }
 @media (width >= 1600px) {
   .bf-text-wrap-overflow-3xl {
     white-space: nowrap;
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-break-3xl {
+    overflow-wrap: anywhere;
   }
 }
 @media (width >= 1600px) {
