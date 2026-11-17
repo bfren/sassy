@@ -289,7 +289,10 @@ Component placeholders style whole interface elements, and like forms they outpu
 | `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large` | Buttons, in the theme colours, outlined, and in the form control sizes |
 | `%bf-nav`, `%bf-nav-link`                                                                | A list of links - mark the current page with `aria-current="page"`     |
 | `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                 | Styles and layout for a nav, combined with `%bf-nav`                   |
+| `%bf-nav-fill`, `%bf-nav-justified`                                                      | Links that share the width of the row, combined with `%bf-nav`         |
 | `%bf-nav-toggle`, `%bf-nav-collapse-{breakpoint}`                                        | The button that opens a collapsed nav, and the panel it opens          |
+| `%bf-navbar-expand-{breakpoint}`, `%bf-navbar-brand`, `-toggle`, `-menu`                 | A header row whose menu collapses below the breakpoint                 |
+| `%bf-navbar-push`                                                                        | A navbar whose open menu pushes the page down, rather than covering it |
 | `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                            | A bordered container and its parts                                     |
 | `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                   | Tabs that switch panels, using the ARIA tabs roles                     |
 | `%bf-tooltip`                                                                            | A tooltip: a popover described by its trigger with `aria-describedby`  |

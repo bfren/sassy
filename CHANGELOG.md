@@ -13,7 +13,16 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- A navbar: `%bf-navbar-expand-{breakpoint}` with `%bf-navbar-brand`, `%bf-navbar-toggle` and `%bf-navbar-menu`. The breakpoint is set once, and the menu does not flash open before `sassy.js` runs.
+- `%bf-navbar-push`: below the breakpoint, the open menu pushes the page down rather than covering it.
+- `%bf-nav-fill` and `%bf-nav-justified`: links that share the width of the row. In a navbar, the menu grows to make room for them.
+- The bars on a nav toggle turn into a cross while its menu is open.
+- A collapsed nav's panel stops at the bottom of the screen and scrolls, set by `--sassy-nav-collapse-max-height`.
 - `node tools/site.mjs check` also fails if Sassy reads a custom property with a bare `var()` that has no default.
+
+### Fixed
+
+- The toggle button that opens a collapsed nav is now as tall as a link, so its hover background has space above and below the bars.
 
 ### Removed
 
