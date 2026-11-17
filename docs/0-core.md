@@ -119,7 +119,7 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 .hero {
   font-size: 1rem;
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .hero {
     font-size: 1.5rem;
   }
@@ -140,12 +140,12 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 .sidebar {
   background-color: oklch(92.8% 0.006 264.531deg);
 }
-@media (min-width: 576px) {
+@media (width >= 576px) {
   .sidebar {
     width: 50%;
   }
 }
-@media (min-width: 992px) {
+@media (width >= 992px) {
   .sidebar {
     width: 25%;
   }

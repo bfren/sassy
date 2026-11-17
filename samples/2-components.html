@@ -173,6 +173,40 @@
 </div>
         </section>
 
+        <section class="example" id="nav-fill">
+            <h2>Navigation that fills the row</h2>
+            <p>Extend <code>%bf-nav-fill</code> and the links share the row's spare width, so longer links stay wider (top); extend <code>%bf-nav-justified</code> and every link is the same width (bottom).</p>
+            <div class="demo">
+                <ul class="menu menu-pills menu-fill">
+                    <li><a href="#nav-fill" aria-current="page">Home</a></li>
+                    <li><a href="#nav-fill">Frequently asked questions</a></li>
+                    <li><a href="#nav-fill">Contact</a></li>
+                </ul>
+                <ul class="menu menu-pills menu-justified">
+                    <li><a href="#nav-fill" aria-current="page">Home</a></li>
+                    <li><a href="#nav-fill">Frequently asked questions</a></li>
+                    <li><a href="#nav-fill">Contact</a></li>
+                </ul>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.menu-fill
+    @extend %bf-nav-fill
+
+.menu-justified
+    @extend %bf-nav-justified</code></pre>
+<pre data-lang="html"><code>&lt;ul class="menu menu-pills menu-fill"&gt;
+    &lt;li&gt;&lt;a href="#nav-fill" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-fill"&gt;Frequently asked questions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-fill"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class="menu menu-pills menu-justified"&gt;
+    &lt;li&gt;&lt;a href="#nav-fill" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-fill"&gt;Frequently asked questions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#nav-fill"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="nav-collapse">
             <h2>Collapsible navigation</h2>
             <p>A button with <code>aria-expanded</code> and <code>aria-controls</code> opens and closes what it controls: <code>sassy.js</code> keeps the two in step. Extend <code>%bf-nav-collapse-md</code> on what it controls and <code>%bf-d-none-md</code> on the button, and below <code>md</code> the navigation is a panel that wipes down over the content that follows, and from <code>md</code> it stays open. Narrow the window to try it: the navigation at the top of this page works the same way.</p>
@@ -208,6 +242,83 @@
         &lt;/ul&gt;
     &lt;/nav&gt;
 &lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="navbar">
+            <h2>Navbar</h2>
+            <p>A navbar holds a brand, a toggle and a menu in one row, and names the breakpoint once. Extend <code>%bf-navbar-expand-md</code> on the row, and below <code>md</code> the toggle shows and the menu wipes down under the row when it is clicked; from <code>md</code> the toggle hides and the menu sits at the end of the row. Narrow the window to try it.</p>
+            <div class="demo">
+                <header class="navbar">
+                    <a class="navbar-brand" href="#navbar">Example</a>
+                    <button type="button" class="navbar-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navbar-menu"></button>
+                    <nav id="navbar-menu" class="navbar-menu" aria-label="Navbar example">
+                        <ul class="menu">
+                            <li><a href="#navbar" aria-current="page">Home</a></li>
+                            <li><a href="#navbar">About</a></li>
+                            <li><a href="#navbar">Contact</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.navbar
+    @extend %bf-navbar-expand-md
+
+.navbar-brand
+    @extend %bf-navbar-brand
+
+.navbar-toggle
+    @extend %bf-navbar-toggle
+
+.navbar-menu
+    @extend %bf-navbar-menu</code></pre>
+<pre data-lang="html"><code>&lt;header class="navbar"&gt;
+    &lt;a class="navbar-brand" href="#navbar"&gt;Example&lt;/a&gt;
+    &lt;button type="button" class="navbar-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navbar-menu"&gt;&lt;/button&gt;
+    &lt;nav id="navbar-menu" class="navbar-menu" aria-label="Navbar example"&gt;
+        &lt;ul class="menu"&gt;
+            &lt;li&gt;&lt;a href="#navbar" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#navbar"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#navbar"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="navbar-push">
+            <h2>Navbar that pushes the page down</h2>
+            <p>Extend <code>%bf-navbar-push</code> as well, and below <code>md</code> the open menu is a row under the brand and toggle that pushes the content below it down, rather than a panel over it. Narrow the window to try it.</p>
+            <div class="demo">
+                <header class="navbar navbar-push">
+                    <a class="navbar-brand" href="#navbar-push">Example</a>
+                    <button type="button" class="navbar-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navbar-push-menu"></button>
+                    <nav id="navbar-push-menu" class="navbar-menu" aria-label="Push-down navbar example">
+                        <ul class="menu menu-vertical">
+                            <li><a href="#navbar-push" aria-current="page">Home</a></li>
+                            <li><a href="#navbar-push">About</a></li>
+                            <li><a href="#navbar-push">Contact</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <p>The content that follows moves down as the menu opens.</p>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.navbar-push
+    @extend %bf-navbar-push</code></pre>
+<pre data-lang="html"><code>&lt;header class="navbar navbar-push"&gt;
+    &lt;a class="navbar-brand" href="#navbar-push"&gt;Example&lt;/a&gt;
+    &lt;button type="button" class="navbar-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navbar-push-menu"&gt;&lt;/button&gt;
+    &lt;nav id="navbar-push-menu" class="navbar-menu" aria-label="Push-down navbar example"&gt;
+        &lt;ul class="menu menu-vertical"&gt;
+            &lt;li&gt;&lt;a href="#navbar-push" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#navbar-push"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#navbar-push"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+&lt;p&gt;The content that follows moves down as the menu opens.&lt;/p&gt;</code></pre>
 </div>
         </section>
 

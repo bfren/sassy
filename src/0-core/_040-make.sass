@@ -227,7 +227,7 @@ $-pass: null
 @mixin -up($by-pass: true)
     @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
         @if not $by-pass or $-pass == null or $-pass == $breakpoint-key
-            @media (min-width: $breakpoint-value)
+            @media (width >= #{$breakpoint-value})
                 @content($breakpoint-key)
 
 

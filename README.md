@@ -38,7 +38,7 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 .card-title {
   color: var(--sassy-theme-primary);
 }
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .card {
     padding: 1.25rem;
   }
@@ -62,7 +62,7 @@ It is less suited to:
 
 ### Sass
 
-Sassy needs [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later, the first version that understands `oklch()` colours. Add it to your project, for example as a git submodule:
+Sassy needs [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later. Add it to your project, for example as a git submodule:
 
 ```sh
 git submodule add https://github.com/bfren/sassy.git sassy
@@ -289,7 +289,10 @@ Component placeholders style whole interface elements, and like forms they outpu
 | `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large` | Buttons, in the theme colours, outlined, and in the form control sizes |
 | `%bf-nav`, `%bf-nav-link`                                                                | A list of links - mark the current page with `aria-current="page"`     |
 | `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                 | Styles and layout for a nav, combined with `%bf-nav`                   |
+| `%bf-nav-fill`, `%bf-nav-justified`                                                      | Links that share the width of the row, combined with `%bf-nav`         |
 | `%bf-nav-toggle`, `%bf-nav-collapse-{breakpoint}`                                        | The button that opens a collapsed nav, and the panel it opens          |
+| `%bf-navbar-expand-{breakpoint}`, `%bf-navbar-brand`, `-toggle`, `-menu`                 | A header row whose menu collapses below the breakpoint                 |
+| `%bf-navbar-push`                                                                        | A navbar whose open menu pushes the page down, rather than covering it |
 | `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                            | A bordered container and its parts                                     |
 | `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                   | Tabs that switch panels, using the ARIA tabs roles                     |
 | `%bf-tooltip`                                                                            | A tooltip: a popover described by its trigger with `aria-describedby`  |
@@ -317,7 +320,7 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 ## Building and contributing
 
-You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.79.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
+You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
 
 | Script                      | Does                                                                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

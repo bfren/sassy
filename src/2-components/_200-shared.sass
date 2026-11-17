@@ -1,4 +1,6 @@
+@use "sass:list"
 @use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
 
 //  =================================================================
 //  Components: shared mixins
@@ -21,6 +23,7 @@
     display: flex
     font: inherit
     gap: 0.5em
+    justify-content: $sassy-nav-link-justify
     margin: 0
     padding: $sassy-nav-link-padding-y $sassy-nav-link-padding-x
     text-decoration: none
@@ -47,6 +50,55 @@
         cursor: not-allowed
         opacity: 0.5
         pointer-events: none
+
+
+
+/// Styles a part from inside the component that contains it, for example the toggle inside a navbar.
+/// Outputs `%outer %part`, and in the full build `.outer .part` as well.
+@mixin part($name)
+    %#{make.name($name)}
+        @content
+    @if $sassy-full
+        .#{make.name($name)}
+            @content
+
+
+
+/// Styles a component when another placeholder is extended with it, for example a navbar that pushes the page down.
+/// Outputs `%outer%modifier`, and in the full build `.outer.modifier` as well.
+@mixin modifier($name)
+    &%#{make.name($name)}
+        @content
+    @if $sassy-full
+        &.#{make.name($name)}
+            @content
+
+
+
+/// Styles a component that has a direct child extending any of the named placeholders.
+/// Outputs `%outer:has(> %a, > %b)`, and in the full build `.outer:has(> .a, > .b)` as well.
+@mixin has-child($names...)
+    $placeholders: ()
+    $classes: ()
+    @each $name in $names
+        $placeholders: list.append($placeholders, "> %#{make.name($name)}", $separator: comma)
+        $classes: list.append($classes, "> .#{make.name($name)}", $separator: comma)
+    &:has(#{$placeholders})
+        @content
+    @if $sassy-full
+        &:has(#{$classes})
+            @content
+
+
+
+/// Styles a part while the toggle beside it says it is closed (aria-expanded="false"), from inside the
+/// component that holds both. Outputs `%outer:has(> %toggle[aria-expanded="false"]) %part`, and the classes in the full build.
+@mixin part-when-closed($toggle, $name)
+    &:has(> %#{make.name($toggle)}[aria-expanded="false"]) %#{make.name($name)}
+        @content
+    @if $sassy-full
+        &:has(> .#{make.name($toggle)}[aria-expanded="false"]) .#{make.name($name)}
+            @content
 
 
 

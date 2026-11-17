@@ -27,6 +27,21 @@
     @include make.single("nav-vertical")
         flex-direction: column
 
+    // Each item grows to share the row's spare width: in proportion to its text with fill, or equally with justified.
+    // The links centre their text in the space, through a custom property so it reaches them however they are styled.
+
+    @include make.single("nav-fill")
+        --sassy-nav-link-justify: center
+
+        > *
+            flex: 1 1 auto
+
+    @include make.single("nav-justified")
+        --sassy-nav-link-justify: center
+
+        > *
+            flex: 1 1 0
+
     // Styles only change custom properties, so they combine with %nav and %nav-vertical
 
     @include make.single("nav-pills")
@@ -49,15 +64,7 @@
     // where the nav stays open with %d-none-{breakpoint}.
 
     @include make.single("nav-toggle")
-        @include component.link()
-
-        // three bars, drawn in the link colour so they follow the theme
-        &::before
-            background-color: currentColor
-            box-shadow: 0 -0.35em currentColor, 0 0.35em currentColor
-            content: ""
-            height: 0.125em
-            width: 1.25em
+        @include -toggle()
 
     // What the button opens: below the breakpoint it is a panel over the content that follows, which
     // wipes down and up as sassy.js shows and hides it, and from the breakpoint it is always shown, in the page.
@@ -65,25 +72,171 @@
 
     @each $breakpoint, $width in $sassy-breakpoints
         @include make.single("nav-collapse" + $sassy-separator + $breakpoint)
-            @media (width < #{$width})
-                background-color: $sassy-nav-collapse-bg
-                border-bottom: 1px solid $sassy-nav-collapse-border-colour
-                box-shadow: $sassy-nav-collapse-shadow
-                box-sizing: border-box
-                // the extra inset leaves room for the shadow
-                clip-path: inset(0 -2rem -2rem)
-                inset: 100% 0 auto
-                position: absolute
-                animation: sassy-nav-wipe $sassy-nav-collapse-duration ease
-                transition: clip-path $sassy-nav-collapse-duration ease, display $sassy-nav-collapse-duration allow-discrete
+            @include -collapse($width)
 
-                @media (prefers-reduced-motion: reduce)
-                    animation: none
-                    transition: none
+    // A navbar is the row that holds a brand, a toggle and a menu, and sets the breakpoint once:
+    // below it the toggle shows and the menu is a collapsed panel under the row, from it the toggle hides.
 
-                // sassy.js sets hidden: the panel wipes up, then the browser removes it when that finishes
-                &[hidden]
-                    clip-path: inset(0 -2rem 100%)
+    @include make.single("navbar-brand")
+        align-items: center
+        color: $sassy-navbar-brand-colour
+        display: inline-flex
+        font-size: $sassy-navbar-brand-font-size
+        gap: 0.5em
+        text-decoration: none
 
-            @media (width >= #{$width})
-                display: block
+    @include make.single("navbar-toggle")
+        @include -toggle()
+
+    @each $breakpoint, $width in $sassy-breakpoints
+        @include make.single("navbar-expand" + $sassy-separator + $breakpoint)
+            align-items: center
+            display: flex
+            flex-wrap: wrap
+            gap: $sassy-navbar-gap
+            justify-content: space-between
+            // the collapsed menu is positioned against the navbar
+            position: relative
+
+            @include component.part("navbar-toggle")
+                @media (width >= #{$width})
+                    display: none
+
+            @include component.part("navbar-menu")
+                @include -collapse($width)
+
+                // a menu whose list fills or is justified takes the rest of the row, so the list has space to share
+                @include component.has-child("nav-fill", "nav-justified")
+                    flex-grow: 1
+
+            // extended with %navbar-push, the open menu is a row under the brand and toggle that pushes the page down,
+            // rather than a panel over it - before the rule below, so that rule still keeps it closed until sassy.js runs
+            @include component.modifier("navbar-push")
+                // the space above the menu is inside it instead, so it grows and shrinks with the menu rather than jumping
+                @media (width < #{$width})
+                    row-gap: 0
+
+                @include component.part("navbar-menu")
+                    @media (width < #{$width})
+                        @include -push($width)
+
+            // until sassy.js runs and sets hidden, the toggle's aria-expanded keeps the menu closed, so it does not flash open;
+            // without scripting the menu stays open, so the links still work
+            @media (width < #{$width}) and (scripting: enabled)
+                @include component.part-when-closed("navbar-toggle", "navbar-menu")
+                    display: none
+
+
+
+/// The look of a toggle button: a link with three bars, drawn in the link colour so they follow the theme,
+/// which turn into a cross while the button is expanded. The outer bars are ::before and ::after, stacked in one
+/// grid cell so they can turn separately, and the middle bar is a background image, which shrinks away.
+@mixin -toggle()
+    @include component.link()
+    background-image: linear-gradient(currentColor, currentColor)
+    background-position: center
+    background-repeat: no-repeat
+    background-size: 1.25em 0.125em
+    display: grid
+    transition: background-color 0.15s ease-in-out, background-size $sassy-nav-collapse-duration ease, border-color 0.15s ease-in-out, color 0.15s ease-in-out
+
+    &::before,
+    &::after
+        background-color: currentColor
+        content: ""
+        grid-area: 1 / 1
+        height: 0.125em
+        // the bars take no more space than one, so this makes the button as tall as a line of link text
+        margin-block: calc((1lh - 0.125em) / 2)
+        transition: transform $sassy-nav-collapse-duration ease
+        width: 1.25em
+
+    &::before
+        transform: translateY(-0.35em)
+
+    &::after
+        transform: translateY(0.35em)
+
+    &[aria-expanded="true"]
+        background-size: 0 0.125em
+
+        &::before
+            transform: rotate(45deg)
+
+        &::after
+            transform: rotate(-45deg)
+
+    @media (prefers-reduced-motion: reduce)
+        &,
+        &::before,
+        &::after
+            transition: none
+
+
+
+/// A menu in the page that grows down as it opens and shrinks as it closes: its one grid row animates between 0fr and 1fr
+/// (with a minimum of 0, so neither the list nor its margin holds the row open),
+/// and the menu clips its child (the list), which keeps its full height so its links do not reflow as the row grows.
+/// Undoes the panel that -collapse() makes below the breakpoint.
+@mixin -push($width)
+    animation: none
+    background-color: transparent
+    border-bottom: 0
+    box-shadow: none
+    clip-path: none
+    flex-basis: 100%
+    grid-template-rows: minmax(0, 1fr)
+    max-height: none
+    overflow: hidden
+    position: static
+    transition: grid-template-rows $sassy-nav-collapse-duration ease, display $sassy-nav-collapse-duration allow-discrete
+
+    @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    // only when shown, as display: grid would otherwise override hidden
+    &:not([hidden])
+        display: grid
+
+        @starting-style
+            grid-template-rows: minmax(0, 0fr)
+
+    &[hidden]
+        clip-path: none
+        grid-template-rows: minmax(0, 0fr)
+
+    // align-self keeps the list at its full height as the row grows, and the margin is the space above the menu
+    > *
+        align-self: start
+        margin-block-start: $sassy-navbar-gap
+
+
+
+/// What a toggle opens: a panel that wipes down below $width, and part of the page from it.
+@mixin -collapse($width)
+    @media (width < #{$width})
+        background-color: $sassy-nav-collapse-bg
+        border-bottom: 1px solid $sassy-nav-collapse-border-colour
+        box-shadow: $sassy-nav-collapse-shadow
+        box-sizing: border-box
+        // the extra inset leaves room for the shadow
+        clip-path: inset(0 -2rem -2rem)
+        inset: 100% 0 auto
+        max-height: $sassy-nav-collapse-max-height
+        overflow-y: auto
+        // scrolling to the end of the menu does not carry on into the page behind it
+        overscroll-behavior: contain
+        position: absolute
+        animation: sassy-nav-wipe $sassy-nav-collapse-duration ease
+        transition: clip-path $sassy-nav-collapse-duration ease, display $sassy-nav-collapse-duration allow-discrete
+
+        @media (prefers-reduced-motion: reduce)
+            animation: none
+            transition: none
+
+        // sassy.js sets hidden: the panel wipes up, then the browser removes it when that finishes
+        &[hidden]
+            clip-path: inset(0 -2rem 100%)
+
+    @media (width >= #{$width})
+        display: block

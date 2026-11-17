@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Requires Dart Sass 1.79+ on the path (`sass`), plus bash and `awk`. The site and checks also need Node.js 20+. There is no `package.json` and no lint config.
+Requires Dart Sass 1.108+ on the path (`sass`), plus bash and `awk`. The site and checks also need Node.js 20+. There is no `package.json` and no lint config.
 
 - Full build (regenerates the committed `dist/` files, then runs `snippets.sh` and `palette.sh`): `./compile-full.sh`
 - Compile the sample stylesheets while editing: `./watch.sh` (or `watch.bat`), then open the `samples/*.html` pages

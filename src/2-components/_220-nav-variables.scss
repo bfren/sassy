@@ -11,6 +11,7 @@ $sassy-nav-link-colour: var(--sassy-nav-link-colour, var(--sassy-theme-primary))
 $sassy-nav-link-hover-bg: var(--sassy-nav-link-hover-bg, #{colour("grey", 100)});
 $sassy-nav-link-radius: var(--sassy-nav-link-radius, 0);
 $sassy-nav-link-underline-width: var(--sassy-nav-link-underline-width, 0);
+$sassy-nav-link-justify: var(--sassy-nav-link-justify, flex-start);
 $sassy-nav-current-bg: var(--sassy-nav-current-bg, transparent);
 $sassy-nav-current-colour: var(--sassy-nav-current-colour, var(--sassy-body-colour));
 $sassy-nav-current-border-colour: var(--sassy-nav-current-border-colour, transparent);
@@ -20,6 +21,13 @@ $sassy-nav-collapse-bg: var(--sassy-nav-collapse-bg, #fff);
 $sassy-nav-collapse-border-colour: var(--sassy-nav-collapse-border-colour, #{colour("grey", 200)});
 $sassy-nav-collapse-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.1)});
 $sassy-nav-collapse-duration: var(--sassy-nav-collapse-duration, 0.2s);
+// the viewport less the height of what the panel opens under, so a long menu scrolls inside itself
+$sassy-nav-collapse-max-height: var(--sassy-nav-collapse-max-height, calc(100dvh - 100%));
+
+// a navbar: the row that holds the brand, the toggle and the menu
+$sassy-navbar-gap: var(--sassy-navbar-gap, #{$sassy-margin-unit * 4});
+$sassy-navbar-brand-colour: var(--sassy-navbar-brand-colour, var(--sassy-body-colour));
+$sassy-navbar-brand-font-size: var(--sassy-navbar-brand-font-size, 1.25rem);
 
 // shared by every component that is not a form control
 $sassy-focus-outline-colour: var(--sassy-focus-outline-colour, var(--sassy-theme-primary));

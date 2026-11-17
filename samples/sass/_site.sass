@@ -57,34 +57,33 @@ body
     background-color: color-mix(in oklab, #fff 85%, transparent)
     border-bottom: 1px solid var(--site-line)
 
+// Sassy's navbar: below md the menu is behind the toggle (sassy.js opens and closes it), from md it is always open
 .site-header-inner
-    @extend %bf-d-flex
-    @extend %bf-flex-align-items-centre
-    @extend %bf-gap-x-6
-    flex-wrap: wrap
+    @extend %bf-navbar-expand-md
     @extend %bf-p-3
     @extend %bf-p-0-md
+    --sassy-navbar-gap: 1.5rem
+    // the menu follows the brand rather than going to the end of the row
+    justify-content: start
 
     @include sassy.up(md)
         flex-wrap: nowrap
 
-// below md the menu is behind this button (sassy.js opens and closes it); from md it is always open
 .site-nav-toggle
-    @extend %bf-nav-toggle
-    @extend %bf-d-none-md
+    @extend %bf-navbar-toggle
     --sassy-nav-link-colour: var(--site-muted)
     margin-left: auto
 
 // below md the open menu is a panel under the header, wiping down over the page
 .site-menu
-    @extend %bf-nav-collapse-md
+    @extend %bf-navbar-menu
     padding-inline: 1.25rem
 
     @include sassy.up(md)
         padding-inline: 0
 
 .brand
-    display: block
+    @extend %bf-navbar-brand
     line-height: 0
 
     img

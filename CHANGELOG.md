@@ -6,13 +6,23 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- **Breaking:** Sassy now needs Dart Sass 1.108 or later, so it can use current Sass syntax.
 - Smaller output: only the font, body and theme custom properties are defined on `:root`. Every other default is now the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so it is only in your CSS when you extend a placeholder that uses it. Setting any of them, on `:root` or anywhere else, works as before.
 - **Breaking:** if your own CSS reads one of those properties, such as `var(--sassy-radius)`, it now has no value unless you set it. Read it through its Sass variable instead, which includes the default: `border-radius: sassy.$sassy-radius`.
 - A default that points to another property now follows that property where it is set, not only on `:root`. For example, `--sassy-radius` set on a section now also changes the corners of cards, inputs and dialogs inside it.
 
 ### Added
 
+- A navbar: `%bf-navbar-expand-{breakpoint}` with `%bf-navbar-brand`, `%bf-navbar-toggle` and `%bf-navbar-menu`. The breakpoint is set once, and the menu does not flash open before `sassy.js` runs.
+- `%bf-navbar-push`: below the breakpoint, the open menu pushes the page down rather than covering it.
+- `%bf-nav-fill` and `%bf-nav-justified`: links that share the width of the row. In a navbar, the menu grows to make room for them.
+- The bars on a nav toggle turn into a cross while its menu is open.
+- A collapsed nav's panel stops at the bottom of the screen and scrolls, set by `--sassy-nav-collapse-max-height`.
 - `node tools/site.mjs check` also fails if Sassy reads a custom property with a bare `var()` that has no default.
+
+### Fixed
+
+- The toggle button that opens a collapsed nav is now as tall as a link, so its hover background has space above and below the bars.
 
 ### Removed
 
