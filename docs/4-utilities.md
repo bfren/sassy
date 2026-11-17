@@ -25,6 +25,10 @@ Most utilities have a breakpoint variant. Add the breakpoint to the end of the n
 | `%bf-text-wrap-overflow`                                   | Text stays on one line and overflows                                     |
 | `%bf-text-truncate`                                        | Text stays on one line, truncated with an ellipsis, and expands on hover |
 | `%bf-text-break`                                           | Long words and URLs break anywhere rather than overflow                  |
+| `%bf-text-underline-offset-{auto, 1, 2, 3}`                | Gap between text and its underline, from `0.125em` to `0.375em`          |
+| `%bf-text-decoration-opacity-{0-100}`                      | Fades the underline in steps of 10, without fading the text              |
+| `%bf-stretched-link`                                       | Makes the nearest positioned ancestor clickable as the link              |
+| `%bf-icon-link`                                            | A link with an icon: in a row, centred, with a `1em` square `svg`        |
 | `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
 
 ### Example: a page heading and a caption
@@ -56,6 +60,39 @@ body
     @extend %bf-text-truncate
     @extend %bf-font-weight-700
 ```
+
+### Example: a clickable card
+
+```sass
+.teaser
+    @extend %bf-position-relative
+
+.teaser-link
+    @extend %bf-stretched-link
+    @extend %bf-text-underline-offset-2
+    @extend %bf-text-decoration-opacity-50
+```
+
+```css
+.teaser-link::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+.teaser-link {
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+}
+```
+
+```html
+<article class="teaser">
+    <h3><a class="teaser-link" href="/post">A post title</a></h3>
+    <p>Clicking anywhere on the card follows the link.</p>
+</article>
+```
+
+The link's `::after` covers the card, because the card is the nearest positioned ancestor. Keep other links and buttons out of the card, as the cover sits over them.
 
 ## Layout
 

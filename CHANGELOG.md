@@ -14,6 +14,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Link utilities: `%bf-stretched-link`, `%bf-icon-link`, `%bf-text-underline-offset-…` and `%bf-text-decoration-opacity-{0-100}`.
 - Layout utilities: `%bf-float-…`, `%bf-vertical-align-…`, `%bf-object-fit-…`, `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}` (set by `$sassy-aspect-ratio`), `%bf-pointer-events-…` and `%bf-user-select-…`.
 - `%bf-text-break`: long words and URLs break anywhere rather than overflow their box.
 - A navbar: `%bf-navbar-expand-{breakpoint}` with `%bf-navbar-brand`, `%bf-navbar-toggle` and `%bf-navbar-menu`. The breakpoint is set once, and the menu does not flash open before `sassy.js` runs.

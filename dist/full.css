@@ -2839,6 +2839,84 @@
   overflow-wrap: anywhere;
 }
 
+.bf-text-underline-offset-auto {
+  text-underline-offset: auto;
+}
+
+.bf-text-underline-offset-1 {
+  text-underline-offset: 0.125em;
+}
+
+.bf-text-underline-offset-2 {
+  text-underline-offset: 0.25em;
+}
+
+.bf-text-underline-offset-3 {
+  text-underline-offset: 0.375em;
+}
+
+.bf-text-decoration-opacity-0 {
+  text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+}
+
+.bf-text-decoration-opacity-10 {
+  text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.bf-text-decoration-opacity-20 {
+  text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+}
+
+.bf-text-decoration-opacity-30 {
+  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+}
+
+.bf-text-decoration-opacity-40 {
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+.bf-text-decoration-opacity-50 {
+  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+}
+
+.bf-text-decoration-opacity-60 {
+  text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+}
+
+.bf-text-decoration-opacity-70 {
+  text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+}
+
+.bf-text-decoration-opacity-80 {
+  text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+}
+
+.bf-text-decoration-opacity-90 {
+  text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+}
+
+.bf-text-decoration-opacity-100 {
+  text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
+}
+
+.bf-stretched-link::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.bf-icon-link {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.375em;
+}
+.bf-icon-link > svg {
+  block-size: 1em;
+  flex-shrink: 0;
+  inline-size: 1em;
+}
+
 .wrap-fluid, .wrap {
   margin: 0 auto;
   padding: 0;
@@ -11044,6 +11122,75 @@
   }
 }
 @media (width >= 576px) {
+  .bf-text-underline-offset-auto-sm {
+    text-underline-offset: auto;
+  }
+  .bf-text-underline-offset-1-sm {
+    text-underline-offset: 0.125em;
+  }
+  .bf-text-underline-offset-2-sm {
+    text-underline-offset: 0.25em;
+  }
+  .bf-text-underline-offset-3-sm {
+    text-underline-offset: 0.375em;
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-0-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-10-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-20-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-30-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-40-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-50-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-60-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-70-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-80-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-90-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+  }
+}
+@media (width >= 576px) {
+  .bf-text-decoration-opacity-100-sm {
+    text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
+  }
+}
+@media (width >= 576px) {
   .bf-position-absolute-sm {
     position: absolute;
   }
@@ -17498,6 +17645,75 @@
 @media (width >= 768px) {
   .bf-text-break-md {
     overflow-wrap: anywhere;
+  }
+}
+@media (width >= 768px) {
+  .bf-text-underline-offset-auto-md {
+    text-underline-offset: auto;
+  }
+  .bf-text-underline-offset-1-md {
+    text-underline-offset: 0.125em;
+  }
+  .bf-text-underline-offset-2-md {
+    text-underline-offset: 0.25em;
+  }
+  .bf-text-underline-offset-3-md {
+    text-underline-offset: 0.375em;
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-0-md {
+    text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-10-md {
+    text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-20-md {
+    text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-30-md {
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-40-md {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-50-md {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-60-md {
+    text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-70-md {
+    text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-80-md {
+    text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-90-md {
+    text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+  }
+}
+@media (width >= 768px) {
+  .bf-text-decoration-opacity-100-md {
+    text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
   }
 }
 @media (width >= 768px) {
@@ -23958,6 +24174,75 @@
   }
 }
 @media (width >= 992px) {
+  .bf-text-underline-offset-auto-lg {
+    text-underline-offset: auto;
+  }
+  .bf-text-underline-offset-1-lg {
+    text-underline-offset: 0.125em;
+  }
+  .bf-text-underline-offset-2-lg {
+    text-underline-offset: 0.25em;
+  }
+  .bf-text-underline-offset-3-lg {
+    text-underline-offset: 0.375em;
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-0-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-10-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-20-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-30-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-40-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-50-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-60-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-70-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-80-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-90-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+  }
+}
+@media (width >= 992px) {
+  .bf-text-decoration-opacity-100-lg {
+    text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
+  }
+}
+@media (width >= 992px) {
   .bf-position-absolute-lg {
     position: absolute;
   }
@@ -30412,6 +30697,75 @@
 @media (width >= 1200px) {
   .bf-text-break-xl {
     overflow-wrap: anywhere;
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-underline-offset-auto-xl {
+    text-underline-offset: auto;
+  }
+  .bf-text-underline-offset-1-xl {
+    text-underline-offset: 0.125em;
+  }
+  .bf-text-underline-offset-2-xl {
+    text-underline-offset: 0.25em;
+  }
+  .bf-text-underline-offset-3-xl {
+    text-underline-offset: 0.375em;
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-0-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-10-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-20-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-30-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-40-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-50-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-60-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-70-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-80-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-90-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+  }
+}
+@media (width >= 1200px) {
+  .bf-text-decoration-opacity-100-xl {
+    text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
   }
 }
 @media (width >= 1200px) {
@@ -36872,6 +37226,75 @@
   }
 }
 @media (width >= 1400px) {
+  .bf-text-underline-offset-auto-2xl {
+    text-underline-offset: auto;
+  }
+  .bf-text-underline-offset-1-2xl {
+    text-underline-offset: 0.125em;
+  }
+  .bf-text-underline-offset-2-2xl {
+    text-underline-offset: 0.25em;
+  }
+  .bf-text-underline-offset-3-2xl {
+    text-underline-offset: 0.375em;
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-0-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-10-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-20-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-30-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-40-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-50-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-60-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-70-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-80-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-90-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+  }
+}
+@media (width >= 1400px) {
+  .bf-text-decoration-opacity-100-2xl {
+    text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
+  }
+}
+@media (width >= 1400px) {
   .bf-position-absolute-2xl {
     position: absolute;
   }
@@ -43326,6 +43749,75 @@
 @media (width >= 1600px) {
   .bf-text-break-3xl {
     overflow-wrap: anywhere;
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-underline-offset-auto-3xl {
+    text-underline-offset: auto;
+  }
+  .bf-text-underline-offset-1-3xl {
+    text-underline-offset: 0.125em;
+  }
+  .bf-text-underline-offset-2-3xl {
+    text-underline-offset: 0.25em;
+  }
+  .bf-text-underline-offset-3-3xl {
+    text-underline-offset: 0.375em;
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-0-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-10-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-20-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-30-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-40-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-50-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-60-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 60%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-70-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-80-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 80%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-90-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 90%, transparent);
+  }
+}
+@media (width >= 1600px) {
+  .bf-text-decoration-opacity-100-3xl {
+    text-decoration-color: color-mix(in srgb, currentColor 100%, transparent);
   }
 }
 @media (width >= 1600px) {

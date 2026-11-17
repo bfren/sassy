@@ -90,3 +90,12 @@ $sassy-text-transform: (
     none: none,
     upper: uppercase
 );
+
+$sassy-text-underline-offset: (
+    auto: auto,
+    1: 0.125em,
+    2: 0.25em,
+    3: 0.375em
+) !default;
+
+$sassy-icon-link-gap: 0.375em !default;

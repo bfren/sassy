@@ -4,7 +4,7 @@
 @use "sass:map"
 
 //  =================================================================
-//  Text: body defaults, font, line height, alignment, decoration, transform, wrap
+//  Text: body defaults, font, line height, alignment, decoration, transform, wrap, links
 //  =================================================================
 
 /// Outputs this module's utilities - called by _render inside make.passes.
@@ -139,3 +139,32 @@
 
     @include make.responsive("text-break", ())
         overflow-wrap: anywhere
+
+
+    // Text: Links
+
+    @include make.responsive("text-underline-offset", $sassy-text-underline-offset) using ($value)
+        text-underline-offset: $value
+
+    // Fades the underline (or any decoration) without changing the text colour
+    @for $i from 0 through 10
+        @include make.responsive("text-decoration-opacity", ($i * 10)) using ($value)
+            text-decoration-color: color-mix(in srgb, currentColor #{$value * 1%}, transparent)
+
+    // Makes the whole of the nearest positioned ancestor clickable
+    @include make.single("stretched-link")
+        &::after
+            content: ""
+            inset: 0
+            position: absolute
+            z-index: 1
+
+    @include make.single("icon-link")
+        align-items: center
+        display: inline-flex
+        gap: $sassy-icon-link-gap
+
+        & > svg
+            block-size: 1em
+            flex-shrink: 0
+            inline-size: 1em
