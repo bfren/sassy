@@ -35,6 +35,24 @@
 :where(img, svg)
     vertical-align: middle
 
+// tables: borders that join, set per cell by %bf-table; the caption below, in grey
+:where(table)
+    border-collapse: collapse
+    caption-side: bottom
+
+:where(caption)
+    color: $sassy-caption-colour
+    padding-block: calc($sassy-content-margin / 2)
+    text-align: start
+
+:where(th)
+    text-align: inherit
+
+:where(thead, tbody, tfoot, tr, td, th)
+    border-color: inherit
+    border-style: solid
+    border-width: 0
+
 
 /// Outputs this module's utilities - called by _render inside make.passes.
 @mixin utilities()

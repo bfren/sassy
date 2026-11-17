@@ -1,0 +1,80 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "sass:map"
+
+//  =================================================================
+//  Components: tables
+//  =================================================================
+
+// every cell of a table's head, body and foot, but not of a table nested in a cell
+$-cells: "& > :not(caption) > tr > *"
+
+/// Outputs this module's utilities - called by _render inside make.passes.
+@mixin utilities()
+
+    // Each cell draws the table background, then --sassy-table-accent over it as a gradient,
+    // so stripes, hover and the current row shade any background colour.
+
+    @include make.single("table")
+        border-color: $sassy-table-border-colour
+        color: $sassy-table-colour
+        margin-block-end: $sassy-content-margin
+        vertical-align: top
+        width: 100%
+
+        #{$-cells}
+            --sassy-table-accent: transparent
+            background-color: $sassy-table-bg
+            background-image: linear-gradient(var(--sassy-table-accent), var(--sassy-table-accent))
+            border-block-end-width: $sassy-table-border-width
+            padding: $sassy-table-padding-y $sassy-table-padding-x
+
+        & > thead
+            vertical-align: bottom
+
+        // a row marked with aria-current="true", such as the selected item
+        & > tbody > tr[aria-current]:not([aria-current="false"]) > *
+            --sassy-table-accent: #{$sassy-table-current-bg}
+
+    @include make.single("table-striped")
+        & > tbody > tr:nth-of-type(odd) > *
+            --sassy-table-accent: #{$sassy-table-striped-bg}
+
+    @include make.single("table-striped-columns")
+        & > :not(caption) > tr > :nth-child(even)
+            --sassy-table-accent: #{$sassy-table-striped-bg}
+
+    @include make.single("table-hover")
+        & > tbody > tr:hover > *
+            --sassy-table-accent: #{$sassy-table-hover-bg}
+
+    @include make.single("table-bordered")
+        #{$-cells}
+            border-width: $sassy-table-border-width
+
+    @include make.single("table-borderless")
+        #{$-cells}
+            border-width: 0
+
+    @include make.single("table-small")
+        #{$-cells}
+            padding: $sassy-table-small-padding
+
+    @include make.single("table-caption-top")
+        caption-side: top
+
+    // a table, row or cell tinted with a theme colour
+    @each $name, $value in $sassy-theme
+        @include make.single("table-#{$name}")
+            --sassy-table-bg: color-mix(in oklab, #{$value} #{$sassy-table-tint}, transparent)
+            border-color: color-mix(in oklab, #{$value} #{$sassy-table-tint * 2}, transparent)
+
+    // A wrapper that scrolls a wide table sideways, always or below a breakpoint
+
+    @include make.single("table-responsive")
+        overflow-x: auto
+
+    @each $breakpoint, $width in $sassy-breakpoints
+        @include make.single("table-responsive-#{$breakpoint}")
+            @media (width < #{$width})
+                overflow-x: auto

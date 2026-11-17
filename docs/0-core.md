@@ -86,11 +86,15 @@ These are available as `sassy.name()` too.
 
 Sassy is meant to style the whole site, so `0-core` sets a few defaults on elements, after Normalize:
 
-| Element                | Default                                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------ |
-| `h1` to `h6`           | Weight 500, line height 1.2, no top margin and `0.5rem` below, and sizes from `2.5rem` to `1rem` |
-| `blockquote`, `figure` | No side margins, and `$sassy-content-margin` (`1rem`) below                                      |
-| `img`, `svg`           | `vertical-align: middle`, so they line up with text beside them                                  |
+| Element                                     | Default                                                                                          |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `h1` to `h6`                                | Weight 500, line height 1.2, no top margin and `0.5rem` below, and sizes from `2.5rem` to `1rem` |
+| `blockquote`, `figure`                      | No side margins, and `$sassy-content-margin` (`1rem`) below                                      |
+| `table`                                     | Borders that join, and the caption below the table                                               |
+| `caption`                                   | Grey, aligned to the start, with `0.5rem` above and below                                        |
+| `th`                                        | Aligned like the rest of its row, not centred                                                    |
+| `thead`, `tbody`, `tfoot`, `tr`, `td`, `th` | Solid borders of no width, so `%bf-table` only has to set a width                                |
+| `img`, `svg`                                | `vertical-align: middle`, so they line up with text beside them                                  |
 
 They use `:where()`, so they have no specificity and any placeholder or class overrides them.
 

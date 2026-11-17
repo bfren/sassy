@@ -14,6 +14,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Tables: `%bf-table`, with `-striped`, `-striped-columns`, `-hover`, `-bordered`, `-borderless`, `-small`, `-caption-top`, a tint in each theme colour, and `-responsive` wrappers. A row with `aria-current="true"` is shaded. Without them, tables get joined borders and a grey caption below.
 - Content styles in `0-core`: `h1` to `h6` get sizes, weight, line height and margins, `blockquote` and `figure` get a bottom margin and no side margins, and `img` and `svg` line up with text. Placeholders for the rest: `%bf-h{1-6}`, `%bf-lead`, `%bf-display-{1-6}`, `%bf-initialism`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote` and `%bf-blockquote-caption`. Headings and large headings above `1.25rem` shrink on screens narrower than the `xl` breakpoint.
 - `%bf-text-bg-{colour}-{shade}` and `%bf-text-bg-{theme}`: a background with text that contrasts with it, chosen by WCAG contrast ratio. Each theme colour has a `--sassy-theme-{name}-contrast` property for its text, and `sassy.contrast-colour()` works one out for any Sass colour.
 - `%bf-focus-ring`: the focus outline components use, for anything else that takes focus.

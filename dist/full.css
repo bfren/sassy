@@ -316,6 +316,27 @@
   vertical-align: middle;
 }
 
+:where(table) {
+  border-collapse: collapse;
+  caption-side: bottom;
+}
+
+:where(caption) {
+  color: oklch(44.6% 0.03 256.802deg);
+  padding-block: 0.5rem;
+  text-align: start;
+}
+
+:where(th) {
+  text-align: inherit;
+}
+
+:where(thead, tbody, tfoot, tr, td, th) {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
 .bf-lead {
   font-size: var(--sassy-lead-font-size, calc(var(--sassy-font-size-base) * 1.25));
   font-weight: var(--sassy-lead-font-weight, 300);
@@ -2311,6 +2332,135 @@
   height: auto;
   object-fit: cover;
   width: 100%;
+}
+
+.bf-table {
+  border-color: var(--sassy-table-border-colour, oklch(92.8% 0.006 264.531deg));
+  color: var(--sassy-table-colour, currentColor);
+  margin-block-end: 1rem;
+  vertical-align: top;
+  width: 100%;
+}
+.bf-table > :not(caption) > tr > * {
+  --sassy-table-accent: transparent;
+  background-color: var(--sassy-table-bg, transparent);
+  background-image: linear-gradient(var(--sassy-table-accent), var(--sassy-table-accent));
+  border-block-end-width: var(--sassy-table-border-width, 1px);
+  padding: var(--sassy-table-padding-y, 0.5rem) var(--sassy-table-padding-x, 0.5rem);
+}
+.bf-table > thead {
+  vertical-align: bottom;
+}
+.bf-table > tbody > tr[aria-current]:not([aria-current=false]) > * {
+  --sassy-table-accent: var(--sassy-table-current-bg, color-mix(in oklab, currentColor 10%, transparent));
+}
+
+.bf-table-striped > tbody > tr:nth-of-type(odd) > * {
+  --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent));
+}
+
+.bf-table-striped-columns > :not(caption) > tr > :nth-child(even) {
+  --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent));
+}
+
+.bf-table-hover > tbody > tr:hover > * {
+  --sassy-table-accent: var(--sassy-table-hover-bg, color-mix(in oklab, currentColor 7.5%, transparent));
+}
+
+.bf-table-bordered > :not(caption) > tr > * {
+  border-width: var(--sassy-table-border-width, 1px);
+}
+
+.bf-table-borderless > :not(caption) > tr > * {
+  border-width: 0;
+}
+
+.bf-table-small > :not(caption) > tr > * {
+  padding: var(--sassy-table-small-padding, 0.25rem);
+}
+
+.bf-table-caption-top {
+  caption-side: top;
+}
+
+.bf-table-primary {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-primary) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-primary) 30%, transparent);
+}
+
+.bf-table-secondary {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-secondary) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-secondary) 30%, transparent);
+}
+
+.bf-table-ok {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-ok) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-ok) 30%, transparent);
+}
+
+.bf-table-info {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-info) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-info) 30%, transparent);
+}
+
+.bf-table-warn {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-warn) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-warn) 30%, transparent);
+}
+
+.bf-table-error {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-error) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-error) 30%, transparent);
+}
+
+.bf-table-grey-light {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-grey-light) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-grey-light) 30%, transparent);
+}
+
+.bf-table-grey-dark {
+  --sassy-table-bg: color-mix(in oklab, var(--sassy-theme-grey-dark) 15%, transparent);
+  border-color: color-mix(in oklab, var(--sassy-theme-grey-dark) 30%, transparent);
+}
+
+.bf-table-responsive {
+  overflow-x: auto;
+}
+
+@media (width < 576px) {
+  .bf-table-responsive-sm {
+    overflow-x: auto;
+  }
+}
+
+@media (width < 768px) {
+  .bf-table-responsive-md {
+    overflow-x: auto;
+  }
+}
+
+@media (width < 992px) {
+  .bf-table-responsive-lg {
+    overflow-x: auto;
+  }
+}
+
+@media (width < 1200px) {
+  .bf-table-responsive-xl {
+    overflow-x: auto;
+  }
+}
+
+@media (width < 1400px) {
+  .bf-table-responsive-2xl {
+    overflow-x: auto;
+  }
+}
+
+@media (width < 1600px) {
+  .bf-table-responsive-3xl {
+    overflow-x: auto;
+  }
 }
 
 .bf-tabs {

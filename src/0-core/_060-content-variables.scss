@@ -37,6 +37,8 @@ $sassy-display-heading-line-height: var(--sassy-display-heading-line-height, 1.2
 
 $sassy-list-inline-gap: var(--sassy-list-inline-gap, 0.5rem);
 
+$sassy-caption-colour: colour("grey", 600) !default;
+
 $sassy-figure-caption-colour: var(--sassy-figure-caption-colour, #{colour("grey", 600)});
 $sassy-figure-caption-font-size: var(--sassy-figure-caption-font-size, 0.875em);
 
