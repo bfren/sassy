@@ -1,0 +1,6 @@
+$sassy-close-size: var(--sassy-close-size, 1em);
+$sassy-close-opacity: var(--sassy-close-opacity, 0.5);
+$sassy-close-hover-opacity: var(--sassy-close-hover-opacity, 0.75);
+
+// The ×, used as a mask - only its shape matters, the colour is the text colour.
+$sassy-close-icon: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-width='2' d='m3 3 10 10M13 3 3 13'/%3e%3c/svg%3e" !default;

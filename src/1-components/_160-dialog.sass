@@ -1,13 +1,13 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
-@use "100-shared" as component
 
 //  =================================================================
 //  Components: dialogs
 //  =================================================================
 
 //  Styles the native <dialog> element, modal or not. Open a modal with
-//  <button commandfor="id" command="show-modal">, and close it with command="close".
+//  <button commandfor="id" command="show-modal">, and close it with command="close" -
+//  in the header, on a %bf-close button.
 
 /// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
@@ -71,23 +71,3 @@
         gap: $sassy-margin-unit * 2
         justify-content: flex-end
         padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
-
-    // A close button for the header - give it aria-label="Close"
-
-    @include make.single("dialog-close")
-        background: none
-        border: 0
-        border-radius: $sassy-radius
-        color: inherit
-        cursor: pointer
-        font-size: 1.5em
-        line-height: 1
-        opacity: 0.6
-        padding: 0 $sassy-padding-unit
-
-        &:hover
-            opacity: 1
-
-        &:focus-visible
-            @include component.focus-outline()
-            opacity: 1
