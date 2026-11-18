@@ -22,6 +22,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Badges: `%bf-badge`, a small label sized from the text around it, coloured with `%bf-text-bg-*` and made a pill with `%bf-rounded-pill`. `%bf-badge-count` puts one on the corner of a button or other parent, which it makes `position: relative` itself. An empty badge is hidden.
 - Alerts: `%bf-alert`, tinted with `%bf-alert-{theme colour}`, with `%bf-alert-title` for a heading. Links inside an alert take its text colour, in bold. `%bf-alert-dismissible` makes room for a close button with `command="--dismiss"`, which `sassy.js` turns into hiding the alert.
 - `sassy.js` hides the element named by any `commandfor` button with `command="--dismiss"`.
 - `%bf-close`: a close button, an empty `<button>` with `aria-label="Close"` whose × is drawn in the text colour, so it shows on any background. Its size and opacity are set by `--sassy-close-size`, `--sassy-close-opacity` and `--sassy-close-hover-opacity`.

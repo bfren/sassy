@@ -329,6 +329,7 @@ Component placeholders style whole interface elements, and they output before fo
 | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `%bf-btn`, `%bf-btn-{theme colour}`, `%bf-btn-outline`, `%bf-btn-small`, `%bf-btn-large`                | Buttons, in the theme colours, outlined, and in the form control sizes                 |
 | `%bf-close`                                                                                             | A close button, drawn in the text colour                                               |
+| `%bf-badge`, `%bf-badge-count`                                                                          | A small label, and one on the corner of a button - colour it with `%bf-text-bg-*`      |
 | `%bf-nav`, `%bf-nav-link`                                                                               | A list of links - mark the current page with `aria-current="page"`                     |
 | `%bf-nav-pills`, `%bf-nav-underline`, `%bf-nav-vertical`                                                | Styles and layout for a nav, combined with `%bf-nav`                                   |
 | `%bf-nav-fill`, `%bf-nav-justified`                                                                     | Links that share the width of the row, combined with `%bf-nav`                         |
@@ -386,14 +387,14 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 
 `src` is arranged in numbered folders, and each file is numbered with its folder's digit followed by its place in the folder - `4-utilities/_420-colour.sass`. **The numbers follow the order the placeholders are output**, because that order decides which placeholder wins when two set the same property:
 
-| Folder         | Contains                                                                                                                                          |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles                                      |
-| `1-components` | Buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
-| `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                              |
-| `3-grid`       | The grid                                                                                                                                          |
-| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                         |
-| `5-theme`      | Theme colours                                                                                                                                     |
+| Folder         | Contains                                                                                                                                                  |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles                                              |
+| `1-components` | Buttons, close buttons, badges, navigation, cards, tables, tabs, alerts, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
+| `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                                      |
+| `3-grid`       | The grid                                                                                                                                                  |
+| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                                 |
+| `5-theme`      | Theme colours                                                                                                                                             |
 
 Composites - placeholders that set several properties at once, such as content, components, forms and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 

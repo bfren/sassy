@@ -598,6 +598,35 @@
       opacity: 0.25;
       pointer-events: none;
     }
+    .bf-badge {
+      background-color: var(--sassy-badge-bg, var(--sassy-theme-grey-dark));
+      border-radius: var(--sassy-badge-radius, var(--sassy-radius, 0.375rem));
+      box-sizing: border-box;
+      color: var(--sassy-badge-colour, var(--sassy-theme-grey-dark-contrast));
+      display: inline-block;
+      font-size: var(--sassy-badge-font-size, 0.75em);
+      font-weight: 700;
+      line-height: 1;
+      padding: var(--sassy-badge-padding-y, 0.35em) var(--sassy-badge-padding-x, 0.65em);
+      text-align: center;
+      vertical-align: baseline;
+      white-space: nowrap;
+    }
+    .bf-badge:empty {
+      display: none;
+    }
+    .bf-badge-count {
+      inset-block-start: 0;
+      inset-inline-start: 100%;
+      position: absolute;
+      translate: -50% -50%;
+    }
+    .bf-badge-count:dir(rtl) {
+      translate: 50% -50%;
+    }
+    :where(*:has(> .bf-badge-count)) {
+      position: relative;
+    }
     .bf-nav {
       display: flex;
       flex-wrap: wrap;

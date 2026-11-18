@@ -3,6 +3,7 @@
 @use "0-core/060-content" as content
 @use "1-components/110-button" as button
 @use "1-components/112-close" as close
+@use "1-components/113-badge" as badge
 @use "1-components/120-nav" as nav
 @use "1-components/130-card" as card
 @use "1-components/133-table" as table
@@ -56,6 +57,7 @@
     @include make.layer(components)
         @include button.utilities
         @include close.utilities
+        @include badge.utilities
         @include nav.utilities
         @include card.utilities
         @include table.utilities

@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs</h1>
+        <h1>Buttons, close buttons, badges, navigation, cards, tables, tabs, alerts, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -125,6 +125,74 @@
     &lt;span class="on-dark"&gt;
         &lt;button type="button" class="close" aria-label="Close"&gt;&lt;/button&gt;
     &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="badges">
+            <h2>Badges</h2>
+            <p>A badge is sized from the text around it. Colour it with <code>%bf-text-bg-*</code> and round it with <code>%bf-rounded-pill</code>. The second count is empty, so it is hidden.</p>
+            <div class="demo">
+                <h3>Releases <span class="badge">v0.4</span> <span class="badge badge-new">New</span></h3>
+                <p>
+                    <span class="badge badge-ok">Passed</span>
+                    <span class="badge badge-warn">Pending</span>
+                    <span class="badge badge-violet">Violet 600</span>
+                    <span class="badge badge-violet badge-pill">Pill</span>
+                </p>
+                <div class="buttons">
+                    <button type="button" class="button">
+                        Inbox
+                        <span class="badge badge-count">4 <span class="visually-hidden">unread messages</span></span>
+                    </button>
+                    <button type="button" class="button">
+                        Alerts
+                        <span class="badge badge-count"></span>
+                    </button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.badge
+    @extend %bf-badge
+
+.badge-new
+    @extend %bf-text-bg-primary
+
+.badge-ok
+    @extend %bf-text-bg-ok
+
+.badge-warn
+    @extend %bf-text-bg-warn
+
+.badge-violet
+    @extend %bf-text-bg-violet-600
+
+.badge-pill
+    @extend %bf-rounded-pill
+
+.badge-count
+    @extend %bf-badge-count
+    @extend %bf-text-bg-error
+    @extend %bf-rounded-pill
+
+.visually-hidden
+    @extend %bf-visually-hidden</code></pre>
+<pre data-lang="html"><code>&lt;h3&gt;Releases &lt;span class="badge"&gt;v0.4&lt;/span&gt; &lt;span class="badge badge-new"&gt;New&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;
+    &lt;span class="badge badge-ok"&gt;Passed&lt;/span&gt;
+    &lt;span class="badge badge-warn"&gt;Pending&lt;/span&gt;
+    &lt;span class="badge badge-violet"&gt;Violet 600&lt;/span&gt;
+    &lt;span class="badge badge-violet badge-pill"&gt;Pill&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button"&gt;
+        Inbox
+        &lt;span class="badge badge-count"&gt;4 &lt;span class="visually-hidden"&gt;unread messages&lt;/span&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button type="button" class="button"&gt;
+        Alerts
+        &lt;span class="badge badge-count"&gt;&lt;/span&gt;
+    &lt;/button&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

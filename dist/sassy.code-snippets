@@ -33,6 +33,8 @@
   "%bf-btn-small": { "scope": "sass,scss", "prefix": "bf-btn-small", "body": "bf-btn-small", "description": "--sassy-input-padding-y: 0.25rem; --sassy-input-padding-x: 0.5rem; --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875); --sassy-input-radius: 0.25rem;" },
   "%bf-btn-large": { "scope": "sass,scss", "prefix": "bf-btn-large", "body": "bf-btn-large", "description": "--sassy-input-padding-y: 0.5rem; --sassy-input-padding-x: 1rem; --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25); --sassy-input-radius: 0.5rem;" },
   "%bf-close": { "scope": "sass,scss", "prefix": "bf-close", "body": "bf-close", "description": "A close button: an empty <button> with aria-label=\"Close\"" },
+  "%bf-badge": { "scope": "sass,scss", "prefix": "bf-badge", "body": "bf-badge", "description": "A small label, sized from the text around it. Colour it with %bf-text-bg-{theme}" },
+  "%bf-badge-count": { "scope": "sass,scss", "prefix": "bf-badge-count", "body": "bf-badge-count", "description": "inset-block-start: 0; inset-inline-start: 100%; position: absolute; translate: -50% -50%; &:dir(rtl) { translate: 50% -50%; }" },
   "%bf-nav": { "scope": "sass,scss", "prefix": "bf-nav", "body": "bf-nav", "description": "display: flex; flex-wrap: wrap; gap: var(--sassy-nav-gap, 0.25rem); list-style: none; margin: 0; padding: 0;" },
   "%bf-nav-vertical": { "scope": "sass,scss", "prefix": "bf-nav-vertical", "body": "bf-nav-vertical", "description": "flex-direction: column;" },
   "%bf-nav-fill": { "scope": "sass,scss", "prefix": "bf-nav-fill", "body": "bf-nav-fill", "description": "Links that share the row's width, by their text or equally, combined with %bf-nav" },

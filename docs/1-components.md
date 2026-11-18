@@ -1,14 +1,14 @@
-# 1-components: buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, close buttons, badges, navigation, cards, tables, tabs, alerts, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, close buttons, badges, navigation, cards, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, close buttons, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, close buttons, badges, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -45,6 +45,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-btn-outline`                                                                               | The colour on the border and text only, combined with `%bf-btn` and a colour            |
 | `%bf-btn-small`, `%bf-btn-large`                                                                | Smaller or larger, the same as the form control sizes                                   |
 | `%bf-close`                                                                                     | A close button: an empty `<button>` with `aria-label="Close"`                           |
+| `%bf-badge`                                                                                     | A small label, sized from the text around it. Colour it with `%bf-text-bg-{theme}`      |
+| `%bf-badge-count`                                                                               | A badge on the top end corner of its parent, such as a button                           |
 | `%bf-nav`                                                                                       | A list of links, side by side - on a `<ul>`, or on a `<nav>` holding the links directly |
 | `%bf-nav-link`                                                                                  | Each link. Mark the current page with `aria-current="page"`                             |
 | `%bf-nav-pills`, `%bf-nav-underline`                                                            | Pill or underline style for the current link, combined with `%bf-nav`                   |
@@ -167,6 +169,64 @@ A close button is an empty `<button>`. The × is drawn in the text colour, so it
 - **It is `1em` square**, so it follows the text size around it. Set `--sassy-close-size` to change it.
 - **It fades until the pointer is over it**, and shows in full with the focus outline when it has keyboard focus. Disable it with `disabled`, or `aria-disabled="true"`.
 - **A close button does nothing by itself.** Give it `command="close"` and `commandfor` to close a [dialog](#dialogs), or `command="--dismiss"` to dismiss an [alert](#alerts).
+
+## Badges
+
+A badge is a small label, sized from the text around it, so it fits a heading or a button as well as a sentence. It is grey by default. Colour it with `%bf-text-bg-{theme}` or `%bf-text-bg-{colour}-{shade}`, which choose a text colour that contrasts, and round it into a pill with `%bf-rounded-pill`:
+
+```sass
+.badge
+    @extend %bf-badge
+
+.badge-new
+    @extend %bf-badge
+    @extend %bf-text-bg-primary
+    @extend %bf-rounded-pill
+
+.badge-count
+    @extend %bf-badge
+    @extend %bf-badge-count
+    @extend %bf-text-bg-error
+    @extend %bf-rounded-pill
+```
+
+```css
+@layer sassy.base.components {
+  .badge-count, .badge-new, .badge {
+    background-color: var(--sassy-badge-bg, var(--sassy-theme-grey-dark));
+    color: var(--sassy-badge-colour, var(--sassy-theme-grey-dark-contrast));
+    display: inline-block;
+    font-size: var(--sassy-badge-font-size, 0.75em);
+    padding: var(--sassy-badge-padding-y, 0.35em) var(--sassy-badge-padding-x, 0.65em);
+  }
+  .badge-count:empty, .badge-new:empty, .badge:empty {
+    display: none;
+  }
+  .badge-count {
+    inset-block-start: 0;
+    inset-inline-start: 100%;
+    position: absolute;
+    translate: -50% -50%;
+  }
+  :where(*:has(> .badge-count)) {
+    position: relative;
+  }
+}
+```
+
+```html
+<h2>Releases <span class="badge-new">New</span></h2>
+
+<button type="button" class="button">
+    Inbox
+    <span class="badge-count">4 <span class="visually-hidden">unread messages</span></span>
+</button>
+```
+
+- **`%bf-badge-count` places the badge on the top end corner** of its parent, half outside it, and makes the parent `position: relative` itself, with no specificity, so it needs nothing else.
+- **A count needs words for screen readers.** "4" on its own means nothing when read aloud, so add the rest in a `%bf-visually-hidden` span, or put it in the parent's `aria-label`.
+- **An empty badge is hidden**, so a count that drops to nothing disappears without any script.
+- **A badge is text, not a control.** To make one a link or a button, put the badge inside the link or button.
 
 ## Navigation
 
@@ -562,6 +622,8 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-btn-outline-colour`, `--sassy-btn-focus-colour`                                                                             | The outline style's colour, and the focus ring                                                    |
 | `--sassy-btn-font-weight`, `--sassy-btn-shade`                                                                                       | Text weight, and the colour mixed in on hover and press                                           |
 | `--sassy-close-size`, `--sassy-close-opacity`, `--sassy-close-hover-opacity`                                                         | Close button size, and how faint it is, normally and under the pointer                            |
+| `--sassy-badge-bg`, `--sassy-badge-colour`, `--sassy-badge-font-size`                                                                | Badge colours and text size - `%bf-text-bg-*` sets the colours instead                            |
+| `--sassy-badge-padding-y`, `--sassy-badge-padding-x`, `--sassy-badge-radius`                                                         | Badge spacing and corners - `%bf-rounded-pill` makes a pill                                       |
 | `--sassy-nav-gap`                                                                                                                    | Space between links and between tabs                                                              |
 | `--sassy-nav-link-padding-y`, `--sassy-nav-link-padding-x`                                                                           | Padding of links and tabs                                                                         |
 | `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                                              |
