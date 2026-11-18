@@ -1,0 +1,57 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "100-shared" as component
+
+//  =================================================================
+//  Components: pagination
+//  =================================================================
+
+//  On the <ul> of a <nav aria-label="Pages">. Each <li> holds a link to a page, or a <span> for an
+//  ellipsis or a link that can't be used. The boxes share their borders, as a button group's do.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("pagination")
+        @include component.joined(inline, "> *")
+        list-style: none
+        margin: 0
+        padding: 0
+
+        & > * > *
+            background-color: $sassy-pagination-bg
+            border: $sassy-input-border-width solid $sassy-pagination-border-colour
+            border-radius: $sassy-input-radius
+            box-sizing: border-box
+            color: $sassy-pagination-colour
+            display: block
+            font-size: $sassy-input-font-size
+            line-height: $sassy-input-line-height
+            padding: $sassy-input-padding-y $sassy-input-padding-x
+            text-align: center
+            text-decoration: none
+
+        // :where() so the current page below wins over :hover
+        & > * > :where(a):hover
+            background-color: $sassy-pagination-hover-bg
+
+        & > * > :where(a):focus-visible
+            @include component.focus-outline()
+
+        // an ellipsis, or a link that can't be used
+        & > * > span,
+        & > * > [aria-disabled="true"]
+            color: $sassy-pagination-disabled-colour
+            pointer-events: none
+
+        & > * > [aria-current="page"]
+            background-color: $sassy-pagination-current-bg
+            border-color: $sassy-pagination-current-bg
+            color: $sassy-pagination-current-colour
+
+    // Sizes set the form control custom properties on the list, so every box follows
+
+    @each $size, $props in $sassy-input-sizes
+        @include make.single("pagination-" + $size)
+            @each $name, $value in $props
+                --sassy-input-#{$name}: #{$value}

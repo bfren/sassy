@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -526,6 +526,57 @@
         &lt;li&gt;&lt;a href="#breadcrumbs"&gt;Library&lt;/a&gt;&lt;/li&gt;
         &lt;li&gt;&lt;a href="#breadcrumbs" aria-current="page"&gt;Data&lt;/a&gt;&lt;/li&gt;
     &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="pagination">
+            <h2>Pagination</h2>
+            <p>The page links share their borders, like a button group. The current page has <code>aria-current="page"</code>, and Previous is a <code>&lt;span&gt;</code> on the first page, so it can't be used.</p>
+            <div class="demo">
+                <nav aria-label="Pages">
+                    <ul class="pages">
+                        <li><span aria-label="Previous page">‹</span></li>
+                        <li><a href="#pagination" aria-current="page">1</a></li>
+                        <li><a href="#pagination">2</a></li>
+                        <li><a href="#pagination">3</a></li>
+                        <li><span aria-hidden="true">…</span></li>
+                        <li><a href="#pagination">9</a></li>
+                        <li><a href="#pagination" aria-label="Next page">›</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Pages, small">
+                    <ul class="pages pages-small">
+                        <li><a href="#pagination">1</a></li>
+                        <li><a href="#pagination" aria-current="page">2</a></li>
+                        <li><a href="#pagination">3</a></li>
+                    </ul>
+                </nav>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.pages
+    @extend %bf-pagination
+    @extend %bf-mb-3
+
+.pages-small
+    @extend %bf-pagination-small</code></pre>
+<pre data-lang="html"><code>&lt;nav aria-label="Pages"&gt;
+    &lt;ul class="pages"&gt;
+        &lt;li&gt;&lt;span aria-label="Previous page"&gt;‹&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination" aria-current="page"&gt;1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;span aria-hidden="true"&gt;…&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;9&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination" aria-label="Next page"&gt;›&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;nav aria-label="Pages, small"&gt;
+    &lt;ul class="pages pages-small"&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination" aria-current="page"&gt;2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
 </div>
         </section>

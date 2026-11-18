@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -63,6 +63,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-navbar-brand`, `%bf-navbar-toggle`, `%bf-navbar-menu`                                      | The parts of a navbar: the site name or logo, the button, and what the button opens     |
 | `%bf-navbar-push`                                                                               | The open menu pushes the page down, combined with `%bf-navbar-expand-{breakpoint}`      |
 | `%bf-breadcrumb`                                                                                | A trail of links to the current page - on the `<ol>` in a `<nav>`                       |
+| `%bf-pagination`                                                                                | Links to numbered pages in a joined row - on the `<ul>` in a `<nav>`                    |
+| `%bf-pagination-small`, `%bf-pagination-large`                                                  | Smaller or larger, the same as the form control sizes                                   |
 | `%bf-card`                                                                                      | A bordered container                                                                    |
 | `%bf-card-header`, `%bf-card-body`, `%bf-card-footer`                                           | The parts of a card                                                                     |
 | `%bf-card-title`, `%bf-card-image`                                                              | A title in the body, and an image that fills the card's width                           |
@@ -455,6 +457,56 @@ A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf
 - **The divider is decoration.** Its alternative text is empty, so screen readers read the links, not the slashes.
 - **Change the divider with `--sassy-breadcrumb-divider`**, to any CSS `content` value: a string such as `"›"`, or an image with `url()`.
 
+## Pagination
+
+Pagination links to numbered pages. Extend `%bf-pagination` on the `<ul>`: each item's link is a box, and the boxes share their borders, like the buttons in a [button group](#button-groups):
+
+```sass
+.pages
+    @extend %bf-pagination
+```
+
+```css
+@layer sassy.base.components {
+  .pages > :not(:first-child) > * {
+    margin-inline-start: calc(var(--sassy-input-border-width, 1px) * -1);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  .pages > * > * {
+    color: var(--sassy-pagination-colour, var(--sassy-theme-primary));
+    padding: var(--sassy-input-padding-y, 0.375rem) var(--sassy-input-padding-x, 0.75rem);
+  }
+  .pages > * > span, .pages > * > [aria-disabled=true] {
+    pointer-events: none;
+  }
+  .pages > * > [aria-current=page] {
+    background-color: var(--sassy-pagination-current-bg, var(--sassy-theme-primary));
+    color: var(--sassy-pagination-current-colour, var(--sassy-theme-primary-contrast));
+  }
+}
+```
+
+```html
+<nav aria-label="Pages">
+    <ul class="pages">
+        <li><a href="?page=1" aria-label="Previous page">‹</a></li>
+        <li><a href="?page=1">1</a></li>
+        <li><a href="?page=2" aria-current="page">2</a></li>
+        <li><a href="?page=3">3</a></li>
+        <li><span aria-hidden="true">…</span></li>
+        <li><a href="?page=9">9</a></li>
+        <li><a href="?page=3" aria-label="Next page">›</a></li>
+    </ul>
+</nav>
+```
+
+- **Put it in a `<nav>` with `aria-label`**, such as "Pages", so it is listed as a landmark.
+- **Mark the current page with `aria-current="page"`**, and it takes the primary colour.
+- **A link that can't be used** - Previous on the first page - is a `<span>`, or a link with `aria-disabled="true"` and no `href`. It is grey and ignores clicks. Use a `<span>` for an ellipsis too, with `aria-hidden="true"`.
+- **Label arrows**, such as `‹` and `›`, with `aria-label`, as screen readers would read them as symbols.
+- **The boxes take the form control sizes**, as buttons do, so `%bf-pagination-small` and `%bf-pagination-large` match buttons and controls of the same size.
+
 ## Cards
 
 ```sass
@@ -793,6 +845,8 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels, close buttons and `%bf-focus-ring`                      |
 | `--sassy-breadcrumb-divider`, `--sassy-breadcrumb-divider-colour`, `--sassy-breadcrumb-gap`                                          | The divider between breadcrumb items - any CSS `content` value - its colour, and the space either side |
 | `--sassy-breadcrumb-link-colour`, `--sassy-breadcrumb-current-colour`, `--sassy-breadcrumb-margin-bottom`                            | Breadcrumb link and current page colours, and the space below                                     |
+| `--sassy-pagination-bg`, `--sassy-pagination-colour`, `--sassy-pagination-border-colour`, `--sassy-pagination-hover-bg`              | Page link background, text, border, and background under the pointer                              |
+| `--sassy-pagination-current-bg`, `--sassy-pagination-current-colour`, `--sassy-pagination-disabled-colour`                           | The current page, and an ellipsis or a link that can't be used                                    |
 | `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                               |
 | `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                                |
 | `--sassy-list-group-bg`, `--sassy-list-group-colour`, `--sassy-list-group-border-width`, `--sassy-list-group-border-colour`, `--sassy-list-group-radius` | List group background, text, border and corners                                                   |

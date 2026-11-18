@@ -22,6 +22,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Pagination: `%bf-pagination` on the `<ul>` of a `<nav>` joins its page links into a row of boxes that share their borders, with the current page marked by `aria-current="page"` and links that can't be used as a `<span>` or with `aria-disabled`. `%bf-pagination-small` and `-large` match the form control sizes.
 - Button groups: `%bf-btn-group` joins buttons into a row that shares borders, `%bf-btn-group-vertical` stacks them, and `%bf-btn-group-small` and `-large` size every button in a group. `%bf-btn-toolbar` lays groups out in a row.
 - `sassy.js` makes a `role="toolbar"` one stop in the tab order, and moves between its controls with the arrow keys, Home and End.
 - A `%bf-btn` with `aria-pressed="true"` looks pressed, for toggle buttons.
