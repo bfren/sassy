@@ -59,6 +59,7 @@
   "%bf-navbar-expand-xl": { "scope": "sass,scss", "prefix": "bf-navbar-expand-xl", "body": "bf-navbar-expand-xl", "description": "align-items: center; display: flex; flex-wrap: wrap; gap: var(--sassy-navbar-gap, 1rem); justify-content: space-between; position: relative;" },
   "%bf-navbar-expand-2xl": { "scope": "sass,scss", "prefix": "bf-navbar-expand-2xl", "body": "bf-navbar-expand-2xl", "description": "align-items: center; display: flex; flex-wrap: wrap; gap: var(--sassy-navbar-gap, 1rem); justify-content: space-between; position: relative;" },
   "%bf-navbar-expand-3xl": { "scope": "sass,scss", "prefix": "bf-navbar-expand-3xl", "body": "bf-navbar-expand-3xl", "description": "align-items: center; display: flex; flex-wrap: wrap; gap: var(--sassy-navbar-gap, 1rem); justify-content: space-between; position: relative;" },
+  "%bf-breadcrumb": { "scope": "sass,scss", "prefix": "bf-breadcrumb", "body": "bf-breadcrumb", "description": "display: flex; flex-wrap: wrap; list-style: none; margin: 0 0 var(--sassy-breadcrumb-margin-bottom, 1rem); padding: 0;" },
   "%bf-card": { "scope": "sass,scss", "prefix": "bf-card", "body": "bf-card", "description": "A bordered container" },
   "%bf-card-header": { "scope": "sass,scss", "prefix": "bf-card-header", "body": "bf-card-header", "description": "The parts of a card" },
   "%bf-card-body": { "scope": "sass,scss", "prefix": "bf-card-body", "body": "bf-card-body", "description": "flex: 1 1 auto; padding: var(--sassy-card-padding-y, 1rem) var(--sassy-card-padding-x, 1rem);" },

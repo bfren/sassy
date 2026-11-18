@@ -1594,6 +1594,24 @@
         visibility: hidden;
       }
     }
+    .bf-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      margin: 0 0 var(--sassy-breadcrumb-margin-bottom, 1rem);
+      padding: 0;
+    }
+    .bf-breadcrumb a {
+      color: var(--sassy-breadcrumb-link-colour, var(--sassy-theme-primary));
+    }
+    .bf-breadcrumb > li + li::before {
+      color: var(--sassy-breadcrumb-divider-colour, oklch(70.7% 0.022 261.325deg));
+      content: var(--sassy-breadcrumb-divider, "/")/"";
+      padding-inline: var(--sassy-breadcrumb-gap, 0.5rem);
+    }
+    .bf-breadcrumb > [aria-current=page], .bf-breadcrumb > li > [aria-current=page] {
+      color: var(--sassy-breadcrumb-current-colour, oklch(55.1% 0.027 264.364deg));
+    }
     .bf-card {
       background-color: var(--sassy-card-bg, #fff);
       border: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, oklch(92.8% 0.006 264.531deg));

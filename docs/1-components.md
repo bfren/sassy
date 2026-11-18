@@ -1,14 +1,14 @@
-# 1-components: buttons, close buttons, badges, navigation, cards, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, close buttons, badges, navigation, breadcrumbs, cards, tables, tabs, alerts, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, close buttons, badges, navigation, cards, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, close buttons, badges, navigation, breadcrumbs, cards, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, close buttons, badges, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, close buttons, badges, navigation, breadcrumbs, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -57,6 +57,7 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-navbar-expand-{breakpoint}`                                                                | A row holding a brand, a toggle and a menu, which collapses below the breakpoint        |
 | `%bf-navbar-brand`, `%bf-navbar-toggle`, `%bf-navbar-menu`                                      | The parts of a navbar: the site name or logo, the button, and what the button opens     |
 | `%bf-navbar-push`                                                                               | The open menu pushes the page down, combined with `%bf-navbar-expand-{breakpoint}`      |
+| `%bf-breadcrumb`                                                                                | A trail of links to the current page - on the `<ol>` in a `<nav>`                       |
 | `%bf-card`                                                                                      | A bordered container                                                                    |
 | `%bf-card-header`, `%bf-card-body`, `%bf-card-footer`                                           | The parts of a card                                                                     |
 | `%bf-card-title`, `%bf-card-image`                                                              | A title in the body, and an image that fills the card's width                           |
@@ -343,6 +344,50 @@ By default the open menu is a panel over the page. Extend `%bf-navbar-push` as w
 The menu grows by animating its one grid row from `0fr` to `1fr`, so it needs a single child, such as the `<ul>` above. As the menu is part of the page, a long one scrolls with the page rather than inside the menu. From the breakpoint it makes no difference. `--sassy-navbar-*` sets the space between the parts and the brand's colour and size.
 
 Only use `role="tablist"` and the tab roles for tabs that switch panels on the page, not for navigation between pages.
+
+## Breadcrumbs
+
+A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf-breadcrumb` on the `<ol>`, and it styles the items:
+
+```sass
+.crumbs
+    @extend %bf-breadcrumb
+```
+
+```css
+@layer sassy.base.components {
+  .crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+  }
+  .crumbs a {
+    color: var(--sassy-breadcrumb-link-colour, var(--sassy-theme-primary));
+  }
+  .crumbs > li + li::before {
+    content: var(--sassy-breadcrumb-divider, "/")/"";
+    padding-inline: var(--sassy-breadcrumb-gap, 0.5rem);
+  }
+  .crumbs > [aria-current=page], .crumbs > li > [aria-current=page] {
+    color: var(--sassy-breadcrumb-current-colour, oklch(55.1% 0.027 264.364deg));
+  }
+}
+```
+
+```html
+<nav aria-label="Breadcrumb">
+    <ol class="crumbs">
+        <li><a href="/">Home</a></li>
+        <li><a href="/docs">Docs</a></li>
+        <li aria-current="page">Breadcrumbs</li>
+    </ol>
+</nav>
+```
+
+- **Put it in a `<nav>` with `aria-label`**, so it is listed as a landmark, and use an `<ol>`, as the order of the items matters.
+- **Mark the current page with `aria-current="page"`**, on the last item or on a link in it, and it is shown in grey.
+- **The divider is decoration.** Its alternative text is empty, so screen readers read the links, not the slashes.
+- **Change the divider with `--sassy-breadcrumb-divider`**, to any CSS `content` value: a string such as `"›"`, or an image with `url()`.
 
 ## Cards
 
@@ -634,6 +679,8 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-nav-collapse-max-height`                                                                                                    | The tallest the panel grows before it scrolls                                                     |
 | `--sassy-navbar-gap`, `--sassy-navbar-brand-colour`, `--sassy-navbar-brand-font-size`                                                | Space between a navbar's parts, and the brand's colour and size                                   |
 | `--sassy-focus-outline-colour`, `-width`, `-offset`                                                                                  | The focus outline on links, tabs, panels, close buttons and `%bf-focus-ring`                      |
+| `--sassy-breadcrumb-divider`, `--sassy-breadcrumb-divider-colour`, `--sassy-breadcrumb-gap`                                          | The divider between breadcrumb items - any CSS `content` value - its colour, and the space either side |
+| `--sassy-breadcrumb-link-colour`, `--sassy-breadcrumb-current-colour`, `--sassy-breadcrumb-margin-bottom`                            | Breadcrumb link and current page colours, and the space below                                     |
 | `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                               |
 | `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                                |
 | `--sassy-table-bg`, `--sassy-table-colour`, `--sassy-table-border-width`, `--sassy-table-border-colour`                              | Table background, text and lines - `%bf-table-{theme colour}` sets the background and line colour |
