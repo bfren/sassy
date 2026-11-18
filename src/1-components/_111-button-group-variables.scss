@@ -1,0 +1,4 @@
+@use "../4-utilities/410-layout-variables" as *;
+
+// space between the groups in a toolbar
+$sassy-btn-toolbar-gap: var(--sassy-btn-toolbar-gap, #{$sassy-margin-unit * 2});

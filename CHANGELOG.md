@@ -22,6 +22,9 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Button groups: `%bf-btn-group` joins buttons into a row that shares borders, `%bf-btn-group-vertical` stacks them, and `%bf-btn-group-small` and `-large` size every button in a group. `%bf-btn-toolbar` lays groups out in a row.
+- `sassy.js` makes a `role="toolbar"` one stop in the tab order, and moves between its controls with the arrow keys, Home and End.
+- A `%bf-btn` with `aria-pressed="true"` looks pressed, for toggle buttons.
 - List groups: `%bf-list-group` styles its direct children as items - `<li>`, or `<a>` and `<button>` that shade under the pointer - with the current item marked by `aria-current` and disabled ones by `disabled` or `aria-disabled`. Combine `-flush` for inside a card, `-numbered` for an `<ol>`, and `-horizontal` or `-horizontal-{breakpoint}` for a row.
 - Breadcrumbs: `%bf-breadcrumb` on the `<ol>` of a `<nav>` styles its items, with a divider screen readers skip, set by `--sassy-breadcrumb-divider`. The current page is marked with `aria-current="page"`.
 - Badges: `%bf-badge`, a small label sized from the text around it, coloured with `%bf-text-bg-*` and made a pill with `%bf-rounded-pill`. `%bf-badge-count` puts one on the corner of a button or other parent, which it makes `position: relative` itself. An empty badge is hidden.

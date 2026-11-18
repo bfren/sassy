@@ -43,7 +43,9 @@
         &:hover
             background-color: color-mix(in oklab, $sassy-btn-bg 88%, $sassy-btn-shade)
 
-        &:active
+        // a toggle button that is on looks pressed
+        &:active,
+        &[aria-pressed="true"]
             background-color: color-mix(in oklab, $sassy-btn-bg 80%, $sassy-btn-shade)
 
         &:focus-visible
@@ -81,7 +83,8 @@
         &:hover
             background-color: color-mix(in oklab, $sassy-btn-outline-colour 10%, transparent)
 
-        &:active
+        &:active,
+        &[aria-pressed="true"]
             background-color: color-mix(in oklab, $sassy-btn-outline-colour 18%, transparent)
 
     // Sizes match the form control sizes, as they set the same custom properties

@@ -2,6 +2,7 @@
 @use "sass:meta"
 @use "0-core/060-content" as content
 @use "1-components/110-button" as button
+@use "1-components/111-button-group" as button-group
 @use "1-components/112-close" as close
 @use "1-components/113-badge" as badge
 @use "1-components/120-nav" as nav
@@ -58,6 +59,7 @@
         @include text.defaults
     @include make.layer(components)
         @include button.utilities
+        @include button-group.utilities
         @include close.utilities
         @include badge.utilities
         @include nav.utilities

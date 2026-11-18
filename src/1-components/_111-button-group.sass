@@ -1,0 +1,73 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: button groups and toolbars
+//  =================================================================
+
+//  A group is a <div role="group" aria-label="..."> of %bf-btn buttons, which share their borders,
+//  with only the group's outer corners rounded. A toolbar is a role="toolbar" holding groups -
+//  sassy.js moves between its buttons with the arrow keys.
+
+/// Joins a group's children into one row or column: the borders between them overlap, the corners
+/// inside the group are square, and the child being used sits on top so its border and ring show.
+///
+/// @param {string} $axis
+///     inline for a row, block for a column.
+@mixin -joined($axis)
+    // the corners before and after each child, along the axis
+    $before: (start-start, start-end)
+    $after: (end-start, end-end)
+    $direction: column
+    @if $axis == inline
+        $before: (start-start, end-start)
+        $after: (start-end, end-end)
+        $direction: row
+
+    display: inline-flex
+    flex-direction: $direction
+    position: relative
+    vertical-align: middle
+
+    & > *
+        flex: 1 1 auto
+        position: relative
+
+    & > :not(:first-child)
+        margin-#{$axis}-start: calc(#{$sassy-input-border-width} * -1)
+        @each $corner in $before
+            border-#{$corner}-radius: 0
+
+    & > :not(:last-child)
+        @each $corner in $after
+            border-#{$corner}-radius: 0
+
+    & > :hover,
+    & > :focus-visible,
+    & > :active,
+    & > [aria-pressed="true"]
+        z-index: 1
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("btn-group")
+        @include -joined(inline)
+
+    // Use instead of %bf-btn-group, for buttons stacked one above the other
+
+    @include make.single("btn-group-vertical")
+        @include -joined(block)
+
+    // Sizes set the button custom properties on the group, so every button in it follows
+
+    @each $size, $props in $sassy-input-sizes
+        @include make.single("btn-group-" + $size)
+            @each $name, $value in $props
+                --sassy-input-#{$name}: #{$value}
+
+    @include make.single("btn-toolbar")
+        align-items: center
+        display: flex
+        flex-wrap: wrap
+        gap: $sassy-btn-toolbar-gap

@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, tooltips and dismissible alerts also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips and dismissible alerts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -94,6 +94,73 @@
     &lt;button type="button" class="button button-primary button-small"&gt;Small&lt;/button&gt;
     &lt;button type="button" class="button button-primary"&gt;Default&lt;/button&gt;
     &lt;button type="button" class="button button-primary button-large"&gt;Large&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="button-groups">
+            <h2>Button groups</h2>
+            <p>Buttons in a group share their borders. The toolbar is one stop in the tab order: with <code>js/sassy.js</code> the arrow keys move between its buttons. Bold and Week have <code>aria-pressed="true"</code>.</p>
+            <div class="demo">
+                <div class="toolbar" role="toolbar" aria-label="Formatting">
+                    <div class="group" role="group" aria-label="Style">
+                        <button type="button" class="button" aria-pressed="true">Bold</button>
+                        <button type="button" class="button" aria-pressed="false">Italic</button>
+                        <button type="button" class="button" aria-pressed="false">Underline</button>
+                    </div>
+                    <div class="group" role="group" aria-label="History">
+                        <button type="button" class="button">Undo</button>
+                        <button type="button" class="button" disabled>Redo</button>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="group group-small" role="group" aria-label="Small">
+                        <button type="button" class="button button-primary button-outline">Day</button>
+                        <button type="button" class="button button-primary button-outline" aria-pressed="true">Week</button>
+                        <button type="button" class="button button-primary button-outline">Month</button>
+                    </div>
+                    <div class="group-vertical" role="group" aria-label="Vertical">
+                        <button type="button" class="button">Top</button>
+                        <button type="button" class="button">Middle</button>
+                        <button type="button" class="button">Bottom</button>
+                    </div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.group
+    @extend %bf-btn-group
+
+.group-small
+    @extend %bf-btn-group-small
+
+.group-vertical
+    @extend %bf-btn-group-vertical
+
+.toolbar
+    @extend %bf-btn-toolbar
+    @extend %bf-mb-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="toolbar" role="toolbar" aria-label="Formatting"&gt;
+    &lt;div class="group" role="group" aria-label="Style"&gt;
+        &lt;button type="button" class="button" aria-pressed="true"&gt;Bold&lt;/button&gt;
+        &lt;button type="button" class="button" aria-pressed="false"&gt;Italic&lt;/button&gt;
+        &lt;button type="button" class="button" aria-pressed="false"&gt;Underline&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="group" role="group" aria-label="History"&gt;
+        &lt;button type="button" class="button"&gt;Undo&lt;/button&gt;
+        &lt;button type="button" class="button" disabled&gt;Redo&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;div class="group group-small" role="group" aria-label="Small"&gt;
+        &lt;button type="button" class="button button-primary button-outline"&gt;Day&lt;/button&gt;
+        &lt;button type="button" class="button button-primary button-outline" aria-pressed="true"&gt;Week&lt;/button&gt;
+        &lt;button type="button" class="button button-primary button-outline"&gt;Month&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="group-vertical" role="group" aria-label="Vertical"&gt;
+        &lt;button type="button" class="button"&gt;Top&lt;/button&gt;
+        &lt;button type="button" class="button"&gt;Middle&lt;/button&gt;
+        &lt;button type="button" class="button"&gt;Bottom&lt;/button&gt;
+    &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

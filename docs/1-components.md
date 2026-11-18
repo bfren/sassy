@@ -1,25 +1,26 @@
-# 1-components: buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
 ```
 
-`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does five things:
+`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does six things:
 
 | Feature          | What `sassy.js` does                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Collapsible navs | Opens and closes what a button with `aria-expanded` and `aria-controls` controls                                          |
 | Tabs             | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
+| Toolbars         | Makes a toolbar one stop in the tab order, and moves between its controls with the arrow keys, Home and End               |
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 | Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |
@@ -44,6 +45,10 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-btn-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | A button in a theme colour, combined with `%bf-btn`                                     |
 | `%bf-btn-outline`                                                                               | The colour on the border and text only, combined with `%bf-btn` and a colour            |
 | `%bf-btn-small`, `%bf-btn-large`                                                                | Smaller or larger, the same as the form control sizes                                   |
+| `%bf-btn-group`                                                                                 | Buttons side by side that share their borders - on a `role="group"`                     |
+| `%bf-btn-group-vertical`                                                                        | Buttons stacked one above the other, instead of `%bf-btn-group`                         |
+| `%bf-btn-group-small`, `%bf-btn-group-large`                                                    | Every button in a group smaller or larger, combined with a group                        |
+| `%bf-btn-toolbar`                                                                               | Groups in a wrapping row - on a `role="toolbar"`                                        |
 | `%bf-close`                                                                                     | A close button: an empty `<button>` with `aria-label="Close"`                           |
 | `%bf-badge`                                                                                     | A small label, sized from the text around it. Colour it with `%bf-text-bg-{theme}`      |
 | `%bf-badge-count`                                                                               | A badge on the top end corner of its parent, such as a button                           |
@@ -129,9 +134,66 @@ Hover and press darken whatever colour the button is, by mixing `--sassy-btn-sha
 
 - **Use `<button>` for actions and `<a>` for links to other pages**, even when they look the same, so keyboards and screen readers treat them correctly. Give a `<button>` a `type`: inside a form it submits by default.
 - **Disable with the `disabled` attribute**, or `aria-disabled="true"` on a link, and the button fades and ignores clicks.
+- **A toggle button that is on has `aria-pressed="true"`**, and looks pressed. Set it to `"false"` when it is off.
 - **In an input group**, a button joins the controls beside it, as an add-on does, and follows the group's size.
 
 The text colour on each theme colour is chosen for contrast with the default theme: dark text on `info`, `warn`, `grey-light` and `ok`, white on the rest. If you change a theme colour, check its text still contrasts, and change it with `--sassy-btn-<name>-colour` if not - for example `--sassy-btn-primary-colour`.
+
+## Button groups
+
+A button group joins buttons into one row: they share their borders, and only the group's outer corners are rounded. A toolbar holds groups, with a gap between them:
+
+```sass
+.group
+    @extend %bf-btn-group
+
+.toolbar
+    @extend %bf-btn-toolbar
+
+.button
+    @extend %bf-btn
+```
+
+```css
+@layer sassy.base.components {
+  .group {
+    display: inline-flex;
+    flex-direction: row;
+  }
+  .group > :not(:first-child) {
+    margin-inline-start: calc(var(--sassy-input-border-width, 1px) * -1);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  .group > :not(:last-child) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sassy-btn-toolbar-gap, 0.5rem);
+  }
+}
+```
+
+```html
+<div class="toolbar" role="toolbar" aria-label="Formatting">
+    <div class="group" role="group" aria-label="Style">
+        <button type="button" class="button" aria-pressed="true">Bold</button>
+        <button type="button" class="button" aria-pressed="false">Italic</button>
+    </div>
+    <div class="group" role="group" aria-label="History">
+        <button type="button" class="button">Undo</button>
+        <button type="button" class="button">Redo</button>
+    </div>
+</div>
+```
+
+- **Give a group `role="group"` and an `aria-label`**, so screen readers announce what its buttons are for.
+- **A toolbar is one stop in the tab order.** With `sassy.js`, Tab moves into a toolbar and out again in one step, and the arrow keys, Home and End move between its controls. Set `aria-orientation="vertical"` on a vertical toolbar, so the up and down keys move instead. Arrow keys in a text field or list still move its caret or choice.
+- **Size every button in a group at once** with `%bf-btn-group-small` or `%bf-btn-group-large`, and **stack them** with `%bf-btn-group-vertical` instead of `%bf-btn-group`.
+- **The button being used sits above its neighbours**, so its border and focus ring show in full.
 
 ## Close buttons
 
@@ -715,6 +777,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-btn-<name>-colour`                                                                                                          | Text on each theme colour's button, for example `--sassy-btn-warn-colour`                         |
 | `--sassy-btn-outline-colour`, `--sassy-btn-focus-colour`                                                                             | The outline style's colour, and the focus ring                                                    |
 | `--sassy-btn-font-weight`, `--sassy-btn-shade`                                                                                       | Text weight, and the colour mixed in on hover and press                                           |
+| `--sassy-btn-toolbar-gap`                                                                                                            | Space between the groups in a toolbar                                                             |
 | `--sassy-close-size`, `--sassy-close-opacity`, `--sassy-close-hover-opacity`                                                         | Close button size, and how faint it is, normally and under the pointer                            |
 | `--sassy-badge-bg`, `--sassy-badge-colour`, `--sassy-badge-font-size`                                                                | Badge colours and text size - `%bf-text-bg-*` sets the colours instead                            |
 | `--sassy-badge-padding-y`, `--sassy-badge-padding-x`, `--sassy-badge-radius`                                                         | Badge spacing and corners - `%bf-rounded-pill` makes a pill                                       |

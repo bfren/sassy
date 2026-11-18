@@ -472,7 +472,7 @@
     .bf-btn:hover {
       background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
     }
-    .bf-btn:active {
+    .bf-btn:active, .bf-btn[aria-pressed=true] {
       background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 80%, var(--sassy-btn-shade, #000));
     }
     .bf-btn:focus-visible {
@@ -548,7 +548,7 @@
     .bf-btn-outline:hover {
       background-color: color-mix(in oklab, var(--sassy-btn-outline-colour, var(--sassy-body-colour)) 10%, transparent);
     }
-    .bf-btn-outline:active {
+    .bf-btn-outline:active, .bf-btn-outline[aria-pressed=true] {
       background-color: color-mix(in oklab, var(--sassy-btn-outline-colour, var(--sassy-body-colour)) 18%, transparent);
     }
     .bf-btn-small {
@@ -562,6 +562,68 @@
       --sassy-input-padding-x: 1rem;
       --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
       --sassy-input-radius: 0.5rem;
+    }
+    .bf-btn-group {
+      display: inline-flex;
+      flex-direction: row;
+      position: relative;
+      vertical-align: middle;
+    }
+    .bf-btn-group > * {
+      flex: 1 1 auto;
+      position: relative;
+    }
+    .bf-btn-group > :not(:first-child) {
+      margin-inline-start: calc(var(--sassy-input-border-width, 1px) * -1);
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
+    .bf-btn-group > :not(:last-child) {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+    .bf-btn-group > :hover, .bf-btn-group > :focus-visible, .bf-btn-group > :active, .bf-btn-group > [aria-pressed=true] {
+      z-index: 1;
+    }
+    .bf-btn-group-vertical {
+      display: inline-flex;
+      flex-direction: column;
+      position: relative;
+      vertical-align: middle;
+    }
+    .bf-btn-group-vertical > * {
+      flex: 1 1 auto;
+      position: relative;
+    }
+    .bf-btn-group-vertical > :not(:first-child) {
+      margin-block-start: calc(var(--sassy-input-border-width, 1px) * -1);
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
+    }
+    .bf-btn-group-vertical > :not(:last-child) {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
+    }
+    .bf-btn-group-vertical > :hover, .bf-btn-group-vertical > :focus-visible, .bf-btn-group-vertical > :active, .bf-btn-group-vertical > [aria-pressed=true] {
+      z-index: 1;
+    }
+    .bf-btn-group-small {
+      --sassy-input-padding-y: 0.25rem;
+      --sassy-input-padding-x: 0.5rem;
+      --sassy-input-font-size: calc(var(--sassy-font-size-base) * 0.875);
+      --sassy-input-radius: 0.25rem;
+    }
+    .bf-btn-group-large {
+      --sassy-input-padding-y: 0.5rem;
+      --sassy-input-padding-x: 1rem;
+      --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
+      --sassy-input-radius: 0.5rem;
+    }
+    .bf-btn-toolbar {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sassy-btn-toolbar-gap, 0.5rem);
     }
     .bf-close {
       background: none;
