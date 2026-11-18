@@ -1,10 +1,10 @@
-# 1-forms: form controls and validation
+# 2-forms: form controls and validation
 
-Live examples: [https://bfren.github.io/sassy/1-forms.html](https://bfren.github.io/sassy/1-forms.html)
+Live examples: [https://bfren.github.io/sassy/2-forms.html](https://bfren.github.io/sassy/2-forms.html)
 
-`src/1-forms` styles form controls: labels, text inputs, selects, checks, radios, switches, input groups, floating labels, range sliders, file and colour inputs, and validation. Each control reads its colours, sizes and spacing from custom properties, so a theme can change them at runtime.
+`src/2-forms` styles form controls: labels, text inputs, selects, checks, radios, switches, input groups, floating labels, range sliders, file and colour inputs, and validation. Each control reads its colours, sizes and spacing from custom properties, so a theme can change them at runtime.
 
-Forms are composites, so they output before the grid and utilities. A single-purpose utility such as `%bf-mb-3` always overrides a form placeholder's margin.
+Forms are composites, so they output before the grid and utilities, and after components, as an input group styles the buttons inside it. A single-purpose utility such as `%bf-mb-3` always overrides a form placeholder's margin.
 
 ## Placeholders
 
@@ -60,17 +60,22 @@ Sizes are `small` and `large`, not `sm` and `lg`, which are breakpoints. A size 
 ```
 
 ```css
-.field {
-  margin-bottom: 0.75rem;
+@layer sassy.base.forms {
+  .field label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .field input {
+    display: block;
+    width: 100%;
+    /* …other control rules */
+  }
 }
-.field label {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-}
-.field input {
-  display: block;
-  width: 100%;
-  /* …other control rules */
+
+@layer sassy.base.utilities {
+  .field {
+    margin-bottom: 0.75rem;
+  }
 }
 ```
 
@@ -256,7 +261,7 @@ Every form value is a custom property, so you can change it per site, per sectio
 | `--sassy-range-track-colour`, `--sassy-range-track-height`, `--sassy-range-thumb-colour`, `--sassy-range-thumb-size`, `--sassy-range-disabled-colour` | Range sliders                                |
 | `--sassy-select-chevron`                                                                                                                              | The select's chevron image (use `chevron()`) |
 
-The sizes `small` and `large` are defined in `$sassy-input-sizes` in [`src/1-forms/_100-variables.scss`](../src/1-forms/_100-variables.scss), and the check and switch shapes in `$sassy-check-tick`, `$sassy-check-dash` and `$sassy-check-dot`.
+The sizes `small` and `large` are defined in `$sassy-input-sizes` in [`src/2-forms/_200-variables.scss`](../src/2-forms/_200-variables.scss), and the check and switch shapes in `$sassy-check-tick`, `$sassy-check-dash` and `$sassy-check-dot`.
 
 Colours accept any CSS colour, including `oklch()`, `rgb()` and another custom property. The exception is the chevron, which must be an SVG built with `chevron()`.
 

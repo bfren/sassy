@@ -1,13 +1,18 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
+@use "500-theme-variables" as vars
 @use "sass:map"
 
 //  =================================================================
 //  Theme: text, background, background with contrasting text, and border
 //  =================================================================
 
-/// Outputs this module's utilities - called by _render inside make.passes.
+/// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
+
+    @include make.in-base
+        @include vars.theme-properties
+
 
     // Theme: Text
 

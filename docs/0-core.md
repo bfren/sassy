@@ -64,7 +64,7 @@ These are available as `sassy.name()`.
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `colour($name, $shade)`       | A palette colour in `oklch()`, for example `colour("sky", 600)`. Unknown names or shades warn and return black             |
 | `with-alpha($colour, $alpha)` | Any colour with transparency (`$alpha` from 0 to 1), as `color-mix()`                                                      |
-| `chevron($colour)`            | An SVG select chevron as a `url()`, for `--sassy-select-chevron`. See [1-forms](1-forms.md#select-chevron-in-a-dark-theme) |
+| `chevron($colour)`            | An SVG select chevron as a `url()`, for `--sassy-select-chevron`. See [2-forms](2-forms.md#select-chevron-in-a-dark-theme) |
 | `decimal-floor($number)`      | `$number` rounded down to three decimal places                                                                             |
 
 `colour()` takes a shade of `50`, `100` to `900`, or `950`. The full list of colours is in the [README](../README.md#naming).
@@ -79,7 +79,7 @@ These are available as `sassy.name()` too.
 | `up-prop($property-map...)`     | Property values by breakpoint, inside a rule                                           |
 | `make-single($class)`           | A placeholder for the base definition only                                             |
 | `make-responsive($class, $map)` | A placeholder for the base definition and each breakpoint                              |
-| `make-passes()`                 | Wraps your own `make-*` calls so their output is ordered like Sassy's                  |
+| `make-layers()`                 | Wraps your own `make-*` calls in cascade layers, so they are ordered like Sassy's      |
 | `make-name($parts...)`          | A placeholder or class name built from the prefix and separator, for example `"mt", 0` |
 
 ## Content
@@ -100,7 +100,7 @@ They use `:where()`, so they have no specificity and any placeholder or class ov
 
 Heading sizes are set by `$sassy-heading`, and the large heading sizes by `$sassy-display-heading`. Any size larger than `$sassy-fluid-min` (`1.25rem`) shrinks on screens narrower than the `xl` breakpoint, down to `1.25rem` plus a tenth of the difference, so `h1` runs from `1.375rem` to `2.5rem`. From `xl` up each heading is its full size.
 
-The rest are placeholders. They are output before forms and components, so a utility such as `%bf-font-size-4` overrides `%bf-display-1`:
+The rest are placeholders. They are output before components and forms, so a utility such as `%bf-font-size-4` overrides `%bf-display-1`:
 
 | Placeholder              | Use it on                       | Does                                                                               |
 | ------------------------ | ------------------------------- | ---------------------------------------------------------------------------------- |
@@ -127,10 +127,12 @@ The rest are placeholders. They are output before forms and components, so a uti
 ```
 
 ```css
-.hero-title {
-  font-size: min(5rem, 1.625rem + 4.5vw);
-  font-weight: var(--sassy-display-heading-font-weight, 300);
-  line-height: var(--sassy-display-heading-line-height, 1.2);
+@layer sassy.base.core {
+  .hero-title {
+    font-size: min(5rem, 1.625rem + 4.5vw);
+    font-weight: var(--sassy-display-heading-font-weight, 300);
+    line-height: var(--sassy-display-heading-line-height, 1.2);
+  }
 }
 ```
 
@@ -147,16 +149,18 @@ At 1200px, the `xl` breakpoint, `1.625rem + 4.5vw` reaches `5rem`, and `min()` k
 ```
 
 ```css
-.quote {
-  font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
-}
-.quote-source {
-  color: var(--sassy-blockquote-caption-colour, oklch(44.6% 0.03 256.802deg));
-  font-size: var(--sassy-blockquote-caption-font-size, 0.875em);
-  margin-block: -1rem 1rem;
-}
-.quote-source::before {
-  content: "— ";
+@layer sassy.base.core {
+  .quote {
+    font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
+  }
+  .quote-source {
+    color: var(--sassy-blockquote-caption-colour, oklch(44.6% 0.03 256.802deg));
+    font-size: var(--sassy-blockquote-caption-font-size, 0.875em);
+    margin-block: -1rem 1rem;
+  }
+  .quote-source::before {
+    content: "— ";
+  }
 }
 ```
 
@@ -241,12 +245,12 @@ Sass cannot `@extend` inside a media query, so for styles that belong to one rul
 
 ### Your own placeholders, in Sassy's style
 
-Use `make-passes()` around any `make-*` call so that your breakpoint variants are ordered after your base rules, as Sassy's own are:
+Use `make-layers()` around any `make-*` call so that your breakpoint variants beat your base rules, as Sassy's own do. It outputs each pass in a [cascade layer](../README.md#cascade-layers) - by default Sassy's own, `sassy.base`, `sassy.sm` and so on, where your placeholders beat Sassy's at the same breakpoint. Pass `$name: "app"` to use layers of your own instead:
 
 ```sass
 @use "sassy/src" as sassy
 
-@include sassy.make-passes
+@include sassy.make-layers
     @include sassy.make-responsive("stack", (1: 0.25rem, 2: 0.5rem)) using ($value)
         display: flex
         flex-direction: column
@@ -268,4 +272,4 @@ To build a name yourself - for example in a placeholder inside a loop, or a name
     @extend %#{sassy.make-name("stack", 2)}
 ```
 
-Without `make-passes()`, a breakpoint variant could be output before a base rule and lose to it. Use `make-single()` on its own when you do not need breakpoint variants.
+Without `make-layers()`, a breakpoint variant could be output before a base rule and lose to it. Use `make-single()` on its own when you do not need breakpoint variants.

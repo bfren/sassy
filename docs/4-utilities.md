@@ -71,9 +71,11 @@ body
 ```
 
 ```css
-.result:focus-visible {
-  outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
-  outline-offset: var(--sassy-focus-outline-offset, 2px);
+@layer sassy.base.utilities {
+  .result:focus-visible {
+    outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+    outline-offset: var(--sassy-focus-outline-offset, 2px);
+  }
 }
 ```
 
@@ -96,14 +98,16 @@ The ring only shows when the keyboard moves focus, not on a click. It reads the 
 ```
 
 ```css
-.teaser-link::after {
-  content: "";
-  inset: 0;
-  position: absolute;
-  z-index: 1;
-}
-.teaser-link {
-  text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+@layer sassy.base.utilities {
+  .teaser-link::after {
+    content: "";
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+  }
+  .teaser-link {
+    text-decoration-color: color-mix(in srgb, currentColor 50%, transparent);
+  }
 }
 ```
 
@@ -176,11 +180,13 @@ The sticky header stays at the top of the viewport while the page scrolls. `z-in
 ```
 
 ```css
-.frame {
-  aspect-ratio: 16 / 9;
-}
-.frame {
-  object-fit: cover;
+@layer sassy.base.utilities {
+  .frame {
+    aspect-ratio: 16 / 9;
+  }
+  .frame {
+    object-fit: cover;
+  }
 }
 ```
 
@@ -224,9 +230,11 @@ Vertical padding is 1rem on small screens and 1.5rem from `md`. `%bf-mx-auto` ce
 ```
 
 ```css
-.tag {
-  background-color: oklch(49.1% 0.27 292.581deg);
-  color: #fff;
+@layer sassy.base.utilities {
+  .tag {
+    background-color: oklch(49.1% 0.27 292.581deg);
+    color: #fff;
+  }
 }
 ```
 

@@ -23,24 +23,32 @@ You `@extend` the utilities you want onto your own selectors, so your markup sta
 compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap) classes):
 
 ```css
-.card-title {
-  font-weight: 700;
-}
-.card {
-  padding: 0.75rem;
-}
-.card {
-  border-radius: var(--sassy-radius, 0.375rem);
-}
-.card {
-  box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour, #000) 7.5%, transparent);
-}
-.card-title {
-  color: var(--sassy-theme-primary);
-}
-@media (width >= 768px) {
+@layer sassy.base.utilities {
+  .card-title {
+    font-weight: 700;
+  }
   .card {
-    padding: 1.25rem;
+    padding: 0.75rem;
+  }
+  .card {
+    border-radius: var(--sassy-radius, 0.375rem);
+  }
+  .card {
+    box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour, #000) 7.5%, transparent);
+  }
+}
+
+@layer sassy.base.theme {
+  .card-title {
+    color: var(--sassy-theme-primary);
+  }
+}
+
+@layer sassy.md.utilities {
+  @media (width >= 768px) {
+    .card {
+      padding: 1.25rem;
+    }
   }
 }
 ```
@@ -155,12 +163,43 @@ Most utilities have a variant for each breakpoint, which applies from that width
 
 Sass cannot `@extend` inside a media query, which is why breakpoints are part of the name rather than written with `@media`.
 
-Sassy guarantees the order of its output, so combinations behave as you would expect whatever order you extend them in:
+Sassy guarantees the order of its output with [cascade layers](#cascade-layers), so combinations behave as you would expect whatever order you extend them in, and however specific the selectors that extend them:
 
 - a breakpoint variant always overrides the base utility and any smaller breakpoint - `%bf-d-none` + `%bf-d-block-lg` is hidden until `lg`
 - single-purpose utilities always override composite ones - `%bf-col-4` + `%bf-p-0` removes the column's gutter, and `%bf-form-control` + `%bf-mb-3` adds a margin to the control
 
 Form placeholders, `%bf-visually-hidden` and `%bf-body` have no breakpoint variants.
+
+### Cascade layers
+
+Everything Sassy outputs is in a [cascade layer](https://developer.mozilla.org/docs/Web/CSS/@layer): one for each breakpoint pass, smallest first, and inside each pass one for each folder. A layer later in the list beats every earlier one, whatever the specificity of their selectors. The first rule in the output declares the whole list:
+
+```css
+@layer sassy.base.core, sassy.base.components, sassy.base.forms, sassy.base.grid, sassy.base.utilities, sassy.base.theme,
+       sassy.sm.core, …, sassy.\33 xl.theme;
+```
+
+`core` holds Normalize, the element defaults and `%bf-body`, so everything else overrides them. A layer name cannot start with a digit, so `2xl` and `3xl` are written `\32 xl` and `\33 xl`.
+
+**Your own CSS always beats Sassy's**, unless you put it in a layer of your own. Overriding Sassy never needs a more specific selector or `!important`. It also means a plain rule wins where you might expect Sassy to: `a { color: red }` overrides the colour of every link that extends `%bf-nav-link`, however specific that link's selector is.
+
+To place Sassy in a stack of your own, declare the order in a file you `@use` before Sassy, so it comes first in the output:
+
+```scss
+// _layers.scss
+@layer reset, sassy, app;
+```
+
+```sass
+@use "layers"
+@use "sassy/src" as sassy
+```
+
+Set `$sassy-layer` to put Sassy inside another layer instead, for example `"vendor.sassy"` - it is a string, as Sass cannot read a dotted name otherwise.
+
+`@extend` moves the extending selector into the placeholder's rule, so it takes the placeholder's layer: `@layer app { .link { @extend %bf-p-2 } }` gives `.link` Sassy's padding in `sassy.base.utilities`, not in `app`. Declarations written in the rule itself stay in `app`.
+
+Sassy uses no `!important`, apart from `%bf-visually-hidden` and `%bf-visually-hidden-focusable`, so that no other rule can make hidden content visible.
 
 ### Wrap
 
@@ -189,6 +228,7 @@ Settings are passed with `with (...)` when you load Sassy:
 | `$sassy-prefix`                                                | `"bf"`                  | Prefix for every placeholder (and class) - `""` for none                       |
 | `$sassy-separator`                                             | `"-"`                   | Joins the prefix, utility, value and breakpoint                                |
 | `$sassy-full`                                                  | `false`                 | Also output every utility as a class, as in `dist/full.css`                    |
+| `$sassy-layer`                                                 | `"sassy"`               | The [cascade layer](#cascade-layers) everything is output in                   |
 
 The prefix keeps Sassy's placeholders apart from your own and from other libraries: placeholders with the same name are merged, so an unprefixed `%p-2` of your own would pick up Sassy's rules too. It costs nothing in your compiled CSS.
 
@@ -283,7 +323,7 @@ Sizes, colours, the focus ring and the validation colours all come from the `--s
 
 ## Components
 
-Component placeholders style whole interface elements, and like forms they output before the grid and utilities, so a utility can override any part of one:
+Component placeholders style whole interface elements, and they output before forms, the grid and utilities, so a utility can override any part of one:
 
 | Placeholder                                                                                             | For                                                                                    |
 | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -300,7 +340,7 @@ Component placeholders style whole interface elements, and like forms they outpu
 | `%bf-tooltip`                                                                                           | A tooltip: a popover described by its trigger with `aria-describedby`                  |
 | `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close`                     | A native `<dialog>` and its parts                                                      |
 
-Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
+Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
 
 ## Limitations
 
@@ -347,21 +387,21 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 | Folder         | Contains                                                                                                                   |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles               |
-| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                                       |
-| `2-components` | Buttons, navigation, cards, tables, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
+| `1-components` | Buttons, navigation, cards, tables, tabs, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
+| `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                       |
 | `3-grid`       | The grid                                                                                                                   |
 | `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                  |
 | `5-theme`      | Theme colours                                                                                                              |
 
-Composites - placeholders that set several properties at once, such as content, forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
+Composites - placeholders that set several properties at once, such as content, components, forms and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 
 `src/_render.sass` outputs every module in this order, and is the one place the order is set. Each folder's `_index.sass` forwards its modules, and `src/_index.sass` forwards the folders.
 
-Each module's settings and custom properties live in a `-variables.scss` file with the module's number (in `1-forms`, a single `100-variables.scss`), all forwarded from `0-core/_030-variables.scss`.
+Each module's settings and custom properties live in a `-variables.scss` file with the module's number (in `2-forms`, a single `200-variables.scss`), all forwarded from `0-core/_030-variables.scss`.
 
 ### Adding a module
 
-1. Create `_NNN-name.sass` in the folder for its kind - a component goes in `2-components`, a single-purpose utility in `4-utilities` - numbered with the folder's digit and its place in the output order. Give it a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
+1. Create `_NNN-name.sass` in the folder for its kind - a component goes in `1-components`, a single-purpose utility in `4-utilities` - numbered with the folder's digit and its place in the output order. Give it a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
 2. Put any settings in `_NNN-name-variables.scss`, with `!default`, and forward it from `0-core/_030-variables.scss`. Give each custom property a Sass variable holding its default as a fallback - `$sassy-name-bg: var(--sassy-name-bg, #fff);` - and read it through that variable, not `var()`, so the default is only output where it is used.
 3. Forward the module from its folder's `_index.sass` with `hide utilities`.
 4. `@use` the module in `_render.sass` and include its `utilities` mixin, in folder and file order.

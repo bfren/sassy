@@ -1,6 +1,6 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
-@use "200-shared" as component
+@use "100-shared" as component
 
 //  =================================================================
 //  Components: tooltips
@@ -10,7 +10,7 @@
 //  trigger with aria-describedby. sassy.js shows it on hover and focus, and anchors it to the
 //  trigger. CSS anchor positioning places it above the trigger, or below if there is no room.
 
-/// Outputs this module's utilities - called by _render inside make.passes.
+/// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
     @include make.single("tooltip")

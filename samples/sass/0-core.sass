@@ -38,7 +38,7 @@
     padding: 0.75rem 1rem
     @include sassy.up-prop(width (sm: 50%, lg: 25%))
 
-@include sassy.make-passes
+@include sassy.make-layers
     @include sassy.make-responsive("stack", (1: 0.25rem, 2: 0.5rem)) using ($value)
         display: flex
         flex-direction: column

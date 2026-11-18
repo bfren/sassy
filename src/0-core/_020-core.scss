@@ -9,6 +9,9 @@ $sassy-full: false !default;
 $sassy-prefix: "bf" !default;
 $sassy-separator: "-" !default;
 
+// cascade layer every rule is output in - a string, so it can be nested, e.g. "vendor.sassy"
+$sassy-layer: "sassy" !default;
+
 $sassy-loop-max: 20 !default;
 
 $sassy-sides: (

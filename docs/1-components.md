@@ -1,8 +1,8 @@
-# 2-components: buttons, navigation, cards, tables, tabs, tooltips and dialogs
+# 1-components: buttons, navigation, cards, tables, tabs, tooltips and dialogs
 
-Live examples: [https://bfren.github.io/sassy/2-components.html](https://bfren.github.io/sassy/2-components.html)
+Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/2-components` styles whole interface elements: buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
@@ -90,24 +90,26 @@ A button uses the form controls' padding, font size, line height, border and cor
 ```
 
 ```css
-.button {
-  align-items: center;
-  background-color: var(--sassy-btn-bg, #fff);
-  border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, oklch(87.2% 0.01 258.338deg));
-  border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
-  color: var(--sassy-btn-colour, var(--sassy-body-colour));
-  display: inline-flex;
-  padding: var(--sassy-input-padding-y, 0.375rem) var(--sassy-input-padding-x, 0.75rem);
-}
-.button:hover {
-  background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
-}
-.button-save {
-  --sassy-btn-bg: var(--sassy-theme-primary);
-  --sassy-btn-border-colour: var(--sassy-theme-primary);
-  --sassy-btn-colour: var(--sassy-btn-primary-colour, #fff);
-  --sassy-btn-focus-colour: var(--sassy-theme-primary);
-  --sassy-btn-outline-colour: var(--sassy-theme-primary);
+@layer sassy.base.components {
+  .button {
+    align-items: center;
+    background-color: var(--sassy-btn-bg, #fff);
+    border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, oklch(87.2% 0.01 258.338deg));
+    border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
+    color: var(--sassy-btn-colour, var(--sassy-body-colour));
+    display: inline-flex;
+    padding: var(--sassy-input-padding-y, 0.375rem) var(--sassy-input-padding-x, 0.75rem);
+  }
+  .button:hover {
+    background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
+  }
+  .button-save {
+    --sassy-btn-bg: var(--sassy-theme-primary);
+    --sassy-btn-border-colour: var(--sassy-theme-primary);
+    --sassy-btn-colour: var(--sassy-btn-primary-colour, #fff);
+    --sassy-btn-focus-colour: var(--sassy-theme-primary);
+    --sassy-btn-outline-colour: var(--sassy-theme-primary);
+  }
 }
 ```
 
@@ -283,13 +285,15 @@ A card is a flex column. The body grows to fill it, so in a row of cards of diff
 ```
 
 ```css
-.prices > :not(caption) > tr > * {
-  --sassy-table-accent: transparent;
-  background-color: var(--sassy-table-bg, transparent);
-  background-image: linear-gradient(var(--sassy-table-accent), var(--sassy-table-accent));
-}
-.prices > tbody > tr:nth-of-type(odd) > * {
-  --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent));
+@layer sassy.base.components {
+  .prices > :not(caption) > tr > * {
+    --sassy-table-accent: transparent;
+    background-color: var(--sassy-table-bg, transparent);
+    background-image: linear-gradient(var(--sassy-table-accent), var(--sassy-table-accent));
+  }
+  .prices > tbody > tr:nth-of-type(odd) > * {
+    --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent));
+  }
 }
 ```
 
@@ -439,8 +443,10 @@ While a modal dialog is open the page behind it does not scroll. Sassy does this
 ```
 
 ```css
-:root:has(.dialog:modal) {
-  overflow: hidden;
+@layer sassy.base.components {
+  :root:has(.dialog:modal) {
+    overflow: hidden;
+  }
 }
 ```
 
@@ -480,7 +486,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_260-dialog-variables.scss`](../src/2-components/_260-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_160-dialog-variables.scss`](../src/1-components/_160-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 

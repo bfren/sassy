@@ -44,7 +44,7 @@
 //  Utilities: text
 //  =================================================================
 
-@forward "../4-utilities/400-text-variables";
+@forward "../4-utilities/400-text-variables" hide text-properties;
 
 
 
@@ -76,7 +76,7 @@
 //  Theme
 //  =================================================================
 
-@forward "../5-theme/500-theme-variables";
+@forward "../5-theme/500-theme-variables" hide theme-properties;
 
 
 
@@ -89,21 +89,21 @@
 
 
 //  =================================================================
-//  Forms
-//  =================================================================
-
-@forward "../1-forms/100-variables";
-
-
-
-//  =================================================================
 //  Components
 //  =================================================================
 
-@forward "../2-components/210-button-variables";
-@forward "../2-components/220-nav-variables";
-@forward "../2-components/230-card-variables";
-@forward "../2-components/233-table-variables";
-@forward "../2-components/240-tabs-variables";
-@forward "../2-components/250-tooltip-variables";
-@forward "../2-components/260-dialog-variables";
+@forward "../1-components/110-button-variables";
+@forward "../1-components/120-nav-variables";
+@forward "../1-components/130-card-variables";
+@forward "../1-components/133-table-variables";
+@forward "../1-components/140-tabs-variables";
+@forward "../1-components/150-tooltip-variables";
+@forward "../1-components/160-dialog-variables";
+
+
+
+//  =================================================================
+//  Forms
+//  =================================================================
+
+@forward "../2-forms/200-variables";

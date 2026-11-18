@@ -1,21 +1,22 @@
 @use "0-core/040-make" as make
+@use "sass:meta"
 @use "0-core/060-content" as content
-@use "1-forms/110-label" as form-label
-@use "1-forms/120-control" as form-control
-@use "1-forms/130-select" as form-select
-@use "1-forms/140-check" as form-check
-@use "1-forms/150-switch" as form-switch
-@use "1-forms/160-input-group" as form-input-group
-@use "1-forms/170-floating" as form-floating
-@use "1-forms/180-inputs" as form-inputs
-@use "1-forms/190-validation" as form-validation
-@use "2-components/210-button" as button
-@use "2-components/220-nav" as nav
-@use "2-components/230-card" as card
-@use "2-components/233-table" as table
-@use "2-components/240-tabs" as tabs
-@use "2-components/250-tooltip" as tooltip
-@use "2-components/260-dialog" as dialog
+@use "1-components/110-button" as button
+@use "1-components/120-nav" as nav
+@use "1-components/130-card" as card
+@use "1-components/133-table" as table
+@use "1-components/140-tabs" as tabs
+@use "1-components/150-tooltip" as tooltip
+@use "1-components/160-dialog" as dialog
+@use "2-forms/210-label" as form-label
+@use "2-forms/220-control" as form-control
+@use "2-forms/230-select" as form-select
+@use "2-forms/240-check" as form-check
+@use "2-forms/250-switch" as form-switch
+@use "2-forms/260-input-group" as form-input-group
+@use "2-forms/270-floating" as form-floating
+@use "2-forms/280-inputs" as form-inputs
+@use "2-forms/290-validation" as form-validation
 @use "3-grid/300-grid" as grid
 @use "4-utilities/400-text" as text
 @use "4-utilities/410-layout" as layout
@@ -30,38 +31,53 @@
 //  Placeholders and classes
 //  =================================================================
 
-//  Every module is rendered once for base definitions, then once per breakpoint, so breakpoint
-//  overrides always come after base rules and smaller breakpoints, whichever module defines them.
+//  Every module is rendered once for base definitions, then once per breakpoint, each pass in its
+//  own cascade layer, so breakpoint overrides always beat base rules and smaller breakpoints,
+//  whichever module defines them and whatever the specificity of the selectors that extend them.
+//  Within each pass, each folder is a layer too ($sassy-layer.md.utilities and so on), so the
+//  folder order below is the precedence: Normalize, content and body defaults lowest, theme highest.
+//  A rule in a higher layer wins whatever its specificity, so a composite that styles what is
+//  inside it must be in a layer at or above what it styles: forms come after components because
+//  input groups style the buttons inside them, and body defaults are in core so everything beats them.
 //
-//  Within each pass, modules are rendered in folder and file order: composites (content, forms,
-//  components, grid, and text, which has body and text-truncate) first, so that single-purpose
+//  Within each folder, modules are rendered in file order: composites (content, components,
+//  forms, grid, and text, which has body and text-truncate) first, so that single-purpose
 //  utilities always override them; theme colours last. Validation is the last form module, so
 //  its state colours win over every control, check and input it applies to.
 
-@include make.passes
-    @include content.utilities
-    @include form-label.utilities
-    @include form-control.utilities
-    @include form-select.utilities
-    @include form-check.utilities
-    @include form-switch.utilities
-    @include form-input-group.utilities
-    @include form-floating.utilities
-    @include form-inputs.utilities
-    @include form-validation.utilities
-    @include button.utilities
-    @include nav.utilities
-    @include card.utilities
-    @include table.utilities
-    @include tabs.utilities
-    @include tooltip.utilities
-    @include dialog.utilities
-    @include grid.utilities
-    @include text.utilities
-    @include layout.utilities
-    @include colour.utilities
-    @include display.utilities
-    @include border.utilities
-    @include rounded.utilities
-    @include shadow.utilities
-    @include theme.utilities
+@include make.layers($folders: (core, components, forms, grid, utilities, theme))
+    @include make.layer(core)
+        @include make.in-base
+            @include meta.load-css("0-core/010-normalise")
+        @include content.utilities
+        @include text.defaults
+    @include make.layer(components)
+        @include button.utilities
+        @include nav.utilities
+        @include card.utilities
+        @include table.utilities
+        @include tabs.utilities
+        @include tooltip.utilities
+        @include dialog.utilities
+    @include make.layer(forms)
+        @include form-label.utilities
+        @include form-control.utilities
+        @include form-select.utilities
+        @include form-check.utilities
+        @include form-switch.utilities
+        @include form-input-group.utilities
+        @include form-floating.utilities
+        @include form-inputs.utilities
+        @include form-validation.utilities
+    @include make.layer(grid)
+        @include grid.utilities
+    @include make.layer(utilities)
+        @include text.utilities
+        @include layout.utilities
+        @include colour.utilities
+        @include display.utilities
+        @include border.utilities
+        @include rounded.utilities
+        @include shadow.utilities
+    @include make.layer(theme)
+        @include theme.utilities

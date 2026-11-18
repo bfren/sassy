@@ -53,17 +53,22 @@ Each theme colour also has a `-contrast` property, such as `--sassy-theme-primar
 ```
 
 ```css
-.alert-error {
-  padding: 0.75rem;
+@layer sassy.base.utilities {
+  .alert-error {
+    padding: 0.75rem;
+  }
+  .alert-error {
+    color: oklch(98.5% 0.002 247.839deg);
+  }
+  .alert-error {
+    border-radius: 0.25rem;
+  }
 }
-.alert-error {
-  color: oklch(98.5% 0.002 247.839deg);
-}
-.alert-error {
-  border-radius: 0.25rem;
-}
-.alert-error {
-  background-color: var(--sassy-theme-error);
+
+@layer sassy.base.theme {
+  .alert-error {
+    background-color: var(--sassy-theme-error);
+  }
 }
 ```
 
@@ -89,9 +94,11 @@ Shadows have one colour, `--sassy-shadow-colour`, so this works with any colour,
 ```
 
 ```css
-.alert-warn {
-  background-color: var(--sassy-theme-warn);
-  color: var(--sassy-theme-warn-contrast);
+@layer sassy.base.theme {
+  .alert-warn {
+    background-color: var(--sassy-theme-warn);
+    color: var(--sassy-theme-warn-contrast);
+  }
 }
 ```
 
@@ -163,7 +170,7 @@ Change the theme in a media query, or in a `data-theme` selector if your site ha
     --sassy-theme-primary: #{sassy.colour("sky", 400)}
 ```
 
-The `data-theme="light"` check stops the media query from overriding a light theme a visitor has chosen. The select chevron has to be set with `chevron()`, as it is an image - see [1-forms](1-forms.md#select-chevron-in-a-dark-theme).
+The `data-theme="light"` check stops the media query from overriding a light theme a visitor has chosen. The select chevron has to be set with `chevron()`, as it is an image - see [2-forms](2-forms.md#select-chevron-in-a-dark-theme).
 
 ### Changing a theme colour at runtime
 

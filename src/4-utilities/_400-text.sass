@@ -1,14 +1,20 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
 @use "410-layout" as *
+@use "400-text-variables" as vars
 @use "sass:map"
 
 //  =================================================================
 //  Text: body defaults, font, line height, alignment, decoration, transform, wrap, links
 //  =================================================================
 
-/// Outputs this module's utilities - called by _render inside make.passes.
-@mixin utilities()
+/// Outputs the body defaults and :root custom properties - called by _render in the core layer,
+/// so that every placeholder, from content to theme, overrides them.
+@mixin defaults()
+
+    @include make.in-base
+        @include vars.text-properties
+
 
     // Font: Defaults
 
@@ -23,38 +29,38 @@
 
         h1
             font-size: map.get($sassy-font-size, 1)
-            @extend %#{make.name("mt", 0)}
-            @extend %#{make.name("mb", 2)}
+            margin-top: map.get($sassy-m-loop, 0)
+            margin-bottom: map.get($sassy-m-loop, 2)
 
         h2
             font-size: map.get($sassy-font-size, 2)
-            @extend %#{make.name("mt", 6)}
-            @extend %#{make.name("mb", 2)}
+            margin-top: map.get($sassy-m-loop, 6)
+            margin-bottom: map.get($sassy-m-loop, 2)
 
         h3
             font-size: map.get($sassy-font-size, 3)
-            @extend %#{make.name("mt", 4)}
-            @extend %#{make.name("mb", 2)}
+            margin-top: map.get($sassy-m-loop, 4)
+            margin-bottom: map.get($sassy-m-loop, 2)
 
         h4
             font-size: map.get($sassy-font-size, 4)
-            @extend %#{make.name("mt", 4)}
-            @extend %#{make.name("mb", 2)}
+            margin-top: map.get($sassy-m-loop, 4)
+            margin-bottom: map.get($sassy-m-loop, 2)
 
         h5
             font-size: map.get($sassy-font-size, 5)
-            @extend %#{make.name("mt", 3)}
-            @extend %#{make.name("mb", 2)}
+            margin-top: map.get($sassy-m-loop, 3)
+            margin-bottom: map.get($sassy-m-loop, 2)
 
         h6
             font-size: map.get($sassy-font-size, 6)
-            @extend %#{make.name("mt", 3)}
-            @extend %#{make.name("mb", 2)}
+            margin-top: map.get($sassy-m-loop, 3)
+            margin-bottom: map.get($sassy-m-loop, 2)
 
         // Paragraph
 
         p, li
-            @extend %#{make.name("my", 2)}
+            margin-block: map.get($sassy-m-loop, 2)
 
         // Inputs
 
@@ -66,6 +72,9 @@
         code, textarea
             font-family: var(--sassy-font-family-mono)
 
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
 
     // Font: Family
 
