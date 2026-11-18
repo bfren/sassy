@@ -170,7 +170,7 @@ Change the theme in a media query, or in a `data-theme` selector if your site ha
     --sassy-theme-primary: #{sassy.colour("sky", 400)}
 ```
 
-The `data-theme="light"` check stops the media query from overriding a light theme a visitor has chosen. The select chevron has to be set with `chevron()`, as it is an image - see [1-forms](1-forms.md#select-chevron-in-a-dark-theme).
+The `data-theme="light"` check stops the media query from overriding a light theme a visitor has chosen. The select chevron has to be set with `chevron()`, as it is an image - see [2-forms](2-forms.md#select-chevron-in-a-dark-theme).
 
 ### Changing a theme colour at runtime
 

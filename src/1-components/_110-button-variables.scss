@@ -1,7 +1,7 @@
 @use "sass:map";
 @use "../4-utilities/420-colour-variables" as *;
 @use "../5-theme/500-theme-variables" as *;
-@use "../1-forms/100-variables" as *;
+@use "../2-forms/200-variables" as *;
 
 // Text colour on each theme colour's button, chosen for contrast with the default theme:
 // dark on the light colours (and on ok, as white on green-600 is only 3.2:1), white on the rest.

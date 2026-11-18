@@ -64,7 +64,7 @@ These are available as `sassy.name()`.
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `colour($name, $shade)`       | A palette colour in `oklch()`, for example `colour("sky", 600)`. Unknown names or shades warn and return black             |
 | `with-alpha($colour, $alpha)` | Any colour with transparency (`$alpha` from 0 to 1), as `color-mix()`                                                      |
-| `chevron($colour)`            | An SVG select chevron as a `url()`, for `--sassy-select-chevron`. See [1-forms](1-forms.md#select-chevron-in-a-dark-theme) |
+| `chevron($colour)`            | An SVG select chevron as a `url()`, for `--sassy-select-chevron`. See [2-forms](2-forms.md#select-chevron-in-a-dark-theme) |
 | `decimal-floor($number)`      | `$number` rounded down to three decimal places                                                                             |
 
 `colour()` takes a shade of `50`, `100` to `900`, or `950`. The full list of colours is in the [README](../README.md#naming).
@@ -100,7 +100,7 @@ They use `:where()`, so they have no specificity and any placeholder or class ov
 
 Heading sizes are set by `$sassy-heading`, and the large heading sizes by `$sassy-display-heading`. Any size larger than `$sassy-fluid-min` (`1.25rem`) shrinks on screens narrower than the `xl` breakpoint, down to `1.25rem` plus a tenth of the difference, so `h1` runs from `1.375rem` to `2.5rem`. From `xl` up each heading is its full size.
 
-The rest are placeholders. They are output before forms and components, so a utility such as `%bf-font-size-4` overrides `%bf-display-1`:
+The rest are placeholders. They are output before components and forms, so a utility such as `%bf-font-size-4` overrides `%bf-display-1`:
 
 | Placeholder              | Use it on                       | Does                                                                               |
 | ------------------------ | ------------------------------- | ---------------------------------------------------------------------------------- |

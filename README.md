@@ -323,7 +323,7 @@ Sizes, colours, the focus ring and the validation colours all come from the `--s
 
 ## Components
 
-Component placeholders style whole interface elements, and like forms they output before the grid and utilities, so a utility can override any part of one:
+Component placeholders style whole interface elements, and they output before forms, the grid and utilities, so a utility can override any part of one:
 
 | Placeholder                                                                                             | For                                                                                    |
 | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -340,7 +340,7 @@ Component placeholders style whole interface elements, and like forms they outpu
 | `%bf-tooltip`                                                                                           | A tooltip: a popover described by its trigger with `aria-describedby`                  |
 | `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`, `-close`                     | A native `<dialog>` and its parts                                                      |
 
-Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/2-components.md](docs/2-components.md) has the markup each one expects.
+Buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
 
 ## Limitations
 
@@ -387,21 +387,21 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 | Folder         | Contains                                                                                                                   |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles               |
-| `1-forms`      | Form controls - `100-shared` holds mixins shared by the form modules                                                       |
-| `2-components` | Buttons, navigation, cards, tables, tabs, tooltips and dialogs - `200-shared` holds mixins shared by the component modules |
+| `1-components` | Buttons, navigation, cards, tables, tabs, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
+| `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                       |
 | `3-grid`       | The grid                                                                                                                   |
 | `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                  |
 | `5-theme`      | Theme colours                                                                                                              |
 
-Composites - placeholders that set several properties at once, such as content, forms, components and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
+Composites - placeholders that set several properties at once, such as content, components, forms and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 
 `src/_render.sass` outputs every module in this order, and is the one place the order is set. Each folder's `_index.sass` forwards its modules, and `src/_index.sass` forwards the folders.
 
-Each module's settings and custom properties live in a `-variables.scss` file with the module's number (in `1-forms`, a single `100-variables.scss`), all forwarded from `0-core/_030-variables.scss`.
+Each module's settings and custom properties live in a `-variables.scss` file with the module's number (in `2-forms`, a single `200-variables.scss`), all forwarded from `0-core/_030-variables.scss`.
 
 ### Adding a module
 
-1. Create `_NNN-name.sass` in the folder for its kind - a component goes in `2-components`, a single-purpose utility in `4-utilities` - numbered with the folder's digit and its place in the output order. Give it a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
+1. Create `_NNN-name.sass` in the folder for its kind - a component goes in `1-components`, a single-purpose utility in `4-utilities` - numbered with the folder's digit and its place in the output order. Give it a `utilities` mixin that generates its placeholders using `make.single` (no breakpoint variants) or `make.responsive`.
 2. Put any settings in `_NNN-name-variables.scss`, with `!default`, and forward it from `0-core/_030-variables.scss`. Give each custom property a Sass variable holding its default as a fallback - `$sassy-name-bg: var(--sassy-name-bg, #fff);` - and read it through that variable, not `var()`, so the default is only output where it is used.
 3. Forward the module from its folder's `_index.sass` with `hide utilities`.
 4. `@use` the module in `_render.sass` and include its `utilities` mixin, in folder and file order.

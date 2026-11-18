@@ -1,8 +1,8 @@
-# 2-components: buttons, navigation, cards, tables, tabs, tooltips and dialogs
+# 1-components: buttons, navigation, cards, tables, tabs, tooltips and dialogs
 
-Live examples: [https://bfren.github.io/sassy/2-components.html](https://bfren.github.io/sassy/2-components.html)
+Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/2-components` styles whole interface elements: buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
@@ -486,7 +486,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/2-components/_260-dialog-variables.scss`](../src/2-components/_260-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_160-dialog-variables.scss`](../src/1-components/_160-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 

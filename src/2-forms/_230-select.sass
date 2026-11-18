@@ -1,6 +1,6 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
-@use "100-shared" as form
+@use "200-shared" as form
 
 //  =================================================================
 //  Form: selects
@@ -10,7 +10,7 @@
 @mixin utilities()
 
     // Selects
-    // The chevron is an SVG in --sassy-select-chevron - see chevron() in 100-variables.
+    // The chevron is an SVG in --sassy-select-chevron - see chevron() in 200-variables.
     // It is sized in em, so it scales with the select's font size.
 
     @include make.single("form-select")
