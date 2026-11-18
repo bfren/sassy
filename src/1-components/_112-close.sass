@@ -1,0 +1,49 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "100-shared" as component
+
+//  =================================================================
+//  Components: close button
+//  =================================================================
+
+//  An empty <button aria-label="Close">. The × is a mask filled with the text colour,
+//  so it suits any background without a light or dark variant.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("close")
+        background: none
+        border: 0
+        border-radius: $sassy-radius
+        box-sizing: content-box
+        color: inherit
+        cursor: pointer
+        flex-shrink: 0
+        // buttons do not inherit the text size, and the size is in em
+        font: inherit
+        height: $sassy-close-size
+        opacity: $sassy-close-opacity
+        padding: 0.25em
+        width: $sassy-close-size
+
+        &::before
+            background-color: currentColor
+            content: ""
+            display: block
+            height: 100%
+            -webkit-mask: url($sassy-close-icon) center / 100% no-repeat
+            mask: url($sassy-close-icon) center / 100% no-repeat
+
+        &:hover
+            opacity: $sassy-close-hover-opacity
+
+        &:focus-visible
+            @include component.focus-outline()
+            opacity: 1
+
+        &:disabled,
+        &[aria-disabled="true"]
+            cursor: not-allowed
+            opacity: 0.25
+            pointer-events: none

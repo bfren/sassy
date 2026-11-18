@@ -1,14 +1,14 @@
-# 1-components: buttons, navigation, cards, tables, tabs, tooltips and dialogs
+# 1-components: buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips and collapsible navigation need `sassy.js`, which you load once:
+Buttons, close buttons, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips and collapsible navigation need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -43,6 +43,7 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-btn-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | A button in a theme colour, combined with `%bf-btn`                                     |
 | `%bf-btn-outline`                                                                               | The colour on the border and text only, combined with `%bf-btn` and a colour            |
 | `%bf-btn-small`, `%bf-btn-large`                                                                | Smaller or larger, the same as the form control sizes                                   |
+| `%bf-close`                                                                                     | A close button: an empty `<button>` with `aria-label="Close"`                           |
 | `%bf-nav`                                                                                       | A list of links, side by side - on a `<ul>`, or on a `<nav>` holding the links directly |
 | `%bf-nav-link`                                                                                  | Each link. Mark the current page with `aria-current="page"`                             |
 | `%bf-nav-pills`, `%bf-nav-underline`                                                            | Pill or underline style for the current link, combined with `%bf-nav`                   |
@@ -63,7 +64,6 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
 | `%bf-dialog-title`                                                                              | The dialog's heading                                                                    |
-| `%bf-dialog-close`                                                                              | A close button for the header. Give it `aria-label="Close"`                             |
 
 ## Buttons
 
@@ -120,6 +120,48 @@ Hover and press darken whatever colour the button is, by mixing `--sassy-btn-sha
 - **In an input group**, a button joins the controls beside it, as an add-on does, and follows the group's size.
 
 The text colour on each theme colour is chosen for contrast with the default theme: dark text on `info`, `warn`, `grey-light` and `ok`, white on the rest. If you change a theme colour, check its text still contrasts, and change it with `--sassy-btn-<name>-colour` if not - for example `--sassy-btn-primary-colour`.
+
+## Close buttons
+
+A close button is an empty `<button>`. The × is drawn in the text colour, so it shows on any background without a light or dark version:
+
+```sass
+.close
+    @extend %bf-close
+```
+
+```css
+@layer sassy.base.components {
+  .close {
+    background: none;
+    border: 0;
+    box-sizing: content-box;
+    color: inherit;
+    height: var(--sassy-close-size, 1em);
+    opacity: var(--sassy-close-opacity, 0.5);
+    padding: 0.25em;
+    width: var(--sassy-close-size, 1em);
+  }
+  .close::before {
+    background-color: currentColor;
+    content: "";
+    display: block;
+    height: 100%;
+  }
+  .close:hover {
+    opacity: var(--sassy-close-hover-opacity, 0.75);
+  }
+}
+```
+
+```html
+<button type="button" class="close" aria-label="Close"></button>
+```
+
+- **Give it `aria-label="Close"`**, or a label that says what it closes, as the button has no text.
+- **It is `1em` square**, so it follows the text size around it. Set `--sassy-close-size` to change it.
+- **It fades until the pointer is over it**, and shows in full with the focus outline when it has keyboard focus. Disable it with `disabled`, or `aria-disabled="true"`.
+- **A close button does nothing by itself.** Give it `command="close"` and `commandfor` to close a [dialog](#dialogs).
 
 ## Navigation
 
@@ -388,7 +430,7 @@ A tooltip should be a short description of something that already has a name. To
 
 ## Dialogs
 
-Dialogs style the native `<dialog>` element. Buttons open and close them with `command` and `commandfor`, so no script is needed in current browsers:
+Dialogs style the native `<dialog>` element. Buttons open and close them with `command` and `commandfor`, so no script is needed in current browsers. The button in the header is a [close button](#close-buttons):
 
 ```sass
 .dialog
@@ -406,8 +448,8 @@ Dialogs style the native `<dialog>` element. Buttons open and close them with `c
 .dialog-body
     @extend %bf-dialog-body
 
-.dialog-close
-    @extend %bf-dialog-close
+.close
+    @extend %bf-close
 ```
 
 ```html
@@ -416,7 +458,7 @@ Dialogs style the native `<dialog>` element. Buttons open and close them with `c
 <dialog class="dialog" id="confirm" aria-labelledby="confirm-title">
     <header>
         <h2 id="confirm-title">Delete this file?</h2>
-        <button type="button" class="dialog-close" commandfor="confirm" command="close" aria-label="Close">×</button>
+        <button type="button" class="close" commandfor="confirm" command="close" aria-label="Close"></button>
     </header>
     <div class="dialog-body">
         <p>You can't undo this.</p>
@@ -462,6 +504,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-btn-<name>-colour`                                                                                                          | Text on each theme colour's button, for example `--sassy-btn-warn-colour`                         |
 | `--sassy-btn-outline-colour`, `--sassy-btn-focus-colour`                                                                             | The outline style's colour, and the focus ring                                                    |
 | `--sassy-btn-font-weight`, `--sassy-btn-shade`                                                                                       | Text weight, and the colour mixed in on hover and press                                           |
+| `--sassy-close-size`, `--sassy-close-opacity`, `--sassy-close-hover-opacity`                                                         | Close button size, and how faint it is, normally and under the pointer                            |
 | `--sassy-nav-gap`                                                                                                                    | Space between links and between tabs                                                              |
 | `--sassy-nav-link-padding-y`, `--sassy-nav-link-padding-x`                                                                           | Padding of links and tabs                                                                         |
 | `--sassy-nav-link-colour`, `--sassy-nav-link-hover-bg`                                                                               | Link colour, and background on hover                                                              |

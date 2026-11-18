@@ -6,6 +6,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- **Breaking:** `%bf-dialog-close` is gone. Use `%bf-close` in the dialog header, on an empty button.
 - **Breaking:** everything Sassy outputs is now in cascade layers - `sassy.base.core` to `sassy.3xl.theme`, one per breakpoint and folder, declared in one `@layer` statement at the top. Breakpoint variants and utilities now win whatever the specificity of the selectors that extend them: `nav .link` extending `%bf-nav-link` no longer beats `.link-alert` extending `%bf-c-error`.
 - **Breaking:** your own unlayered CSS now always beats Sassy's, whatever its specificity. A plain `a { color: red }` overrides every link that extends `%bf-nav-link`. Put your CSS in a layer after Sassy's - `@layer reset, sassy, app;` - to keep Sassy's precedence over it.
 - **Breaking:** `make-passes()` is now `make-layers()`, and outputs each pass in a layer - Sassy's by default, or your own with `$name`.
@@ -21,6 +22,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- `%bf-close`: a close button, an empty `<button>` with `aria-label="Close"` whose × is drawn in the text colour, so it shows on any background. Its size and opacity are set by `--sassy-close-size`, `--sassy-close-opacity` and `--sassy-close-hover-opacity`.
 - `$sassy-layer`, the layer everything is output in, so Sassy can sit inside a stack of your own, such as `"vendor.sassy"`.
 - `node tools/site.mjs check` also checks the full build's layer order, that nothing is outside a layer, and that only `%bf-visually-hidden` uses `!important`.
 

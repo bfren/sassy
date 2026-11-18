@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, navigation, cards, tables, tabs, tooltips and dialogs</h1>
+        <h1>Buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -94,6 +94,37 @@
     &lt;button type="button" class="button button-primary button-small"&gt;Small&lt;/button&gt;
     &lt;button type="button" class="button button-primary"&gt;Default&lt;/button&gt;
     &lt;button type="button" class="button button-primary button-large"&gt;Large&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="close">
+            <h2>Close buttons</h2>
+            <p>An empty button with <code>aria-label</code>. The × is drawn in the text colour, so it shows on a dark background too.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="close" aria-label="Close"></button>
+                    <button type="button" class="close" aria-label="Close" disabled></button>
+                    <span class="on-dark">
+                        <button type="button" class="close" aria-label="Close"></button>
+                    </span>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.close
+    @extend %bf-close
+
+.on-dark
+    @extend %bf-d-inline-flex
+    @extend %bf-text-bg-grey-dark
+    @extend %bf-p-2
+    @extend %bf-rounded-2</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="close" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;button type="button" class="close" aria-label="Close" disabled&gt;&lt;/button&gt;
+    &lt;span class="on-dark"&gt;
+        &lt;button type="button" class="close" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;/span&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>
@@ -516,7 +547,7 @@
                 <dialog class="dialog" id="confirm" aria-labelledby="confirm-title">
                     <header>
                         <h2 id="confirm-title">Delete this file?</h2>
-                        <button type="button" class="dialog-close" commandfor="confirm" command="close" aria-label="Close">×</button>
+                        <button type="button" class="close" commandfor="confirm" command="close" aria-label="Close"></button>
                     </header>
                     <div class="dialog-body">
                         <p>You can't undo this.</p>
@@ -530,7 +561,7 @@
                 <dialog class="dialog dialog-large" id="terms" aria-labelledby="terms-title">
                     <header>
                         <h2 id="terms-title">Terms</h2>
-                        <button type="button" class="dialog-close" commandfor="terms" command="close" aria-label="Close">×</button>
+                        <button type="button" class="close" commandfor="terms" command="close" aria-label="Close"></button>
                     </header>
                     <div class="dialog-body">
                         <p>A large dialog. When its content is taller than the window, the body scrolls between the header and footer.</p>
@@ -563,8 +594,8 @@
 .dialog-body
     @extend %bf-dialog-body
 
-.dialog-close
-    @extend %bf-dialog-close</code></pre>
+.close
+    @extend %bf-close</code></pre>
 <pre data-lang="html"><code>&lt;div class="buttons"&gt;
     &lt;button type="button" class="button button-error button-outline" commandfor="confirm" command="show-modal"&gt;Delete file…&lt;/button&gt;
     &lt;button type="button" class="button" commandfor="terms" command="show-modal"&gt;Read the terms&lt;/button&gt;
@@ -573,7 +604,7 @@
 &lt;dialog class="dialog" id="confirm" aria-labelledby="confirm-title"&gt;
     &lt;header&gt;
         &lt;h2 id="confirm-title"&gt;Delete this file?&lt;/h2&gt;
-        &lt;button type="button" class="dialog-close" commandfor="confirm" command="close" aria-label="Close"&gt;×&lt;/button&gt;
+        &lt;button type="button" class="close" commandfor="confirm" command="close" aria-label="Close"&gt;&lt;/button&gt;
     &lt;/header&gt;
     &lt;div class="dialog-body"&gt;
         &lt;p&gt;You can't undo this.&lt;/p&gt;
@@ -587,7 +618,7 @@
 &lt;dialog class="dialog dialog-large" id="terms" aria-labelledby="terms-title"&gt;
     &lt;header&gt;
         &lt;h2 id="terms-title"&gt;Terms&lt;/h2&gt;
-        &lt;button type="button" class="dialog-close" commandfor="terms" command="close" aria-label="Close"&gt;×&lt;/button&gt;
+        &lt;button type="button" class="close" commandfor="terms" command="close" aria-label="Close"&gt;&lt;/button&gt;
     &lt;/header&gt;
     &lt;div class="dialog-body"&gt;
         &lt;p&gt;A large dialog. When its content is taller than the window, the body scrolls between the header and footer.&lt;/p&gt;
