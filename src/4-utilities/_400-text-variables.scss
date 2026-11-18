@@ -1,18 +1,21 @@
 @use "420-colour-variables" as *;
 
-:root {
-    --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
-    --sassy-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-    --sassy-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
-    --sassy-font-size-base: 1rem;
-    --sassy-font-weight-base: 400;
-    --sassy-line-height-base: 1.5;
+/// Outputs the :root custom properties - called on the base pass by this module's utilities.
+@mixin text-properties() {
+    :root {
+        --sassy-font-family-mono: "Fira Code", Monaco, Consolas, monospace;
+        --sassy-font-family-sans: system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+        --sassy-font-family-serif: "Minion Pro", Georgia, "Times New Roman", serif;
+        --sassy-font-size-base: 1rem;
+        --sassy-font-weight-base: 400;
+        --sassy-line-height-base: 1.5;
 
-    --sassy-body-colour: #{colour("grey", 800)};
-    --sassy-body-font-family: var(--sassy-font-family-sans);
-    --sassy-body-font-size: var(--sassy-font-size-base);
-    --sassy-body-font-weight: var(--sassy-font-weight-base);
-    --sassy-body-line-height: var(--sassy-line-height-base);
+        --sassy-body-colour: #{colour("grey", 800)};
+        --sassy-body-font-family: var(--sassy-font-family-sans);
+        --sassy-body-font-size: var(--sassy-font-size-base);
+        --sassy-body-font-weight: var(--sassy-font-weight-base);
+        --sassy-body-line-height: var(--sassy-line-height-base);
+    }
 }
 
 $sassy-font-family: (

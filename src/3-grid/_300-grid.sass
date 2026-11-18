@@ -22,7 +22,7 @@ $-col-offset: var(--sassy-col-offset, 0)
 //  Grid: flex rows and columns, and a CSS grid
 //  =================================================================
 
-/// Outputs this module's utilities - called by _render inside make.passes.
+/// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
     // Flex Rows and Columns
@@ -47,7 +47,7 @@ $-col-offset: var(--sassy-col-offset, 0)
             @include -col(0 0 auto, auto)
 
     // Columns are not nested inside d-flex-row so that their responsive
-    // variants are ordered by make.passes along with everything else.
+    // variants are ordered by make.layers along with everything else.
     // border-box keeps the gutter inside the column, so widths add up to 100%
     // whatever box-sizing the rest of the page uses.
 

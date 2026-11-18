@@ -4,24 +4,71 @@
 @use "sass:meta"
 @use "sass:string"
 
-// which pass make.passes is rendering: "base", a breakpoint key, or null when not inside make.passes
+// which pass make.layers is rendering: "base", a breakpoint key, or null when not inside make.layers
 $-pass: null
 
+// the folder layers make.layer may open, set by make.layers
+$-folders: ()
 
 
-/// Renders its content once for base definitions, then once per breakpoint (smallest first).
+
+/// Renders its content once for base definitions, then once per breakpoint (smallest first),
+/// each pass in its own cascade layer: $name.base, then $name.sm, $name.md and so on.
 ///
-/// Wrap every make.* call in the framework in a single make.passes so the output is ordered:
-/// all base rules, then all sm rules, then all md rules, and so on. That way a breakpoint
-/// override always comes after - and so beats - base rules and smaller breakpoints,
-/// whichever module they were defined in.
-@mixin passes()
-    $-pass: "base" !global
-    @content
-    @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
-        $-pass: $breakpoint-key !global
-        @content
+/// Wrap every make.* call in the framework in a single make.layers so the output is ordered:
+/// all base rules, then all sm rules, then all md rules, and so on. Because each pass is a layer,
+/// a breakpoint override always beats base rules and smaller breakpoints, whichever module
+/// defined them and whatever the specificity of the selectors that extend them.
+///
+/// Starts with one @layer statement declaring the whole stack, so the order is fixed up front.
+///
+/// @param {string} $name
+///     Layer to render into.
+/// @param {list} $folders
+///     Layers to open inside each pass with make.layer, lowest first, e.g. (core, utilities).
+@mixin layers($name: $sassy-layer, $folders: ())
+    $passes: list.join(("base",), map.keys($sassy-breakpoints), $separator: comma)
+    $stack: ()
+    @each $pass in $passes
+        @if list.length($folders) == 0
+            $stack: list.append($stack, "#{$name}.#{-layer-name($pass)}", comma)
+        @each $folder in $folders
+            $stack: list.append($stack, "#{$name}.#{-layer-name($pass)}.#{$folder}", comma)
+    @layer #{$stack}
+
+    $-folders: $folders !global
+    @each $pass in $passes
+        $-pass: $pass !global
+        @layer #{$name}.#{-layer-name($pass)}
+            @content
     $-pass: null !global
+    $-folders: () !global
+
+/// Returns a pass name that is a valid layer name: one starting with a digit, such as 2xl,
+/// has the digit escaped (\32 xl), as a CSS identifier cannot start with one.
+@function -layer-name($pass)
+    // a breakpoint key such as 2xl is a number with a unit, so make it a string first
+    $pass: "#{$pass}"
+    $first: string.slice($pass, 1, 1)
+    @if string.index("0123456789", $first)
+        @return string.unquote("\\3#{$first} #{string.slice($pass, 2)}")
+    @return $pass
+
+/// Opens one of the folder layers declared by make.layers, inside the current pass's layer.
+///
+/// @param {string} $folder
+///     Folder layer, e.g. utilities.
+@mixin layer($folder)
+    @if not list.index($-folders, $folder)
+        @error "make.layer: #{$folder} is not one of the layers passed to make.layers (#{$-folders})"
+    @layer #{$folder}
+        @content
+
+/// Outputs @content on the base pass, or always when not inside make.layers -
+/// for real selectors, such as :root custom properties, that must be output once.
+@mixin in-base()
+    @include -in-base
+        @content
 
 /// Outputs a single namespaced class definition (base pass only).
 ///
@@ -130,7 +177,7 @@ $-pass: null
             .#{$class}
                 @content
 
-    // min-width overrides - inside make.passes these are output on the breakpoint passes
+    // min-width overrides - inside make.layers these are output on the breakpoint passes
     @include -in-breakpoints
         @include -up() using ($breakpoint)
             %#{-get-sub-class-name($class, $breakpoint)}
@@ -160,7 +207,7 @@ $-pass: null
                 .#{$class}
                     @content($value)
 
-    // min-width overrides - inside make.passes these are output on the breakpoint passes
+    // min-width overrides - inside make.layers these are output on the breakpoint passes
     @include -in-breakpoints
         @include -up() using ($breakpoint)
             @include -each-leaf($base-class, $sub-class-map, $breakpoint) using ($class, $value)
@@ -222,7 +269,7 @@ $-pass: null
 /// Loops through breakpoints and calls @content for each one, passing the breakpoint key.
 ///
 /// @param {bool} $by-pass
-///     When true (default) and inside make.passes, only the current pass's breakpoint is output.
+///     When true (default) and inside make.layers, only the current pass's breakpoint is output.
 ///     make.up uses false because its media queries are part of a base definition.
 @mixin -up($by-pass: true)
     @each $breakpoint-key, $breakpoint-value in $sassy-breakpoints
@@ -232,14 +279,14 @@ $-pass: null
 
 
 
-/// Outputs @content on the base pass, or always when not inside make.passes.
+/// Outputs @content on the base pass, or always when not inside make.layers.
 @mixin -in-base()
     @if $-pass == null or $-pass == "base"
         @content
 
 
 
-/// Outputs @content on the breakpoint passes, or always when not inside make.passes.
+/// Outputs @content on the breakpoint passes, or always when not inside make.layers.
 /// (-up filters to the current breakpoint.)
 @mixin -in-breakpoints()
     @if $-pass != "base"

@@ -192,12 +192,32 @@ const missing = (shown, compiled) => {
 	);
 };
 
+/** CSS indented two spaces per level of nesting, as Sass writes it, after ownCss has unwrapped and rewrapped blocks. */
+const reindent = css => {
+	let depth = 0;
+	return css.split("\n").map(line => {
+		const text = line.trim();
+		if (text.startsWith("}")) depth--;
+		const out = text && "  ".repeat(Math.max(depth, 0)) + text;
+		if (text.endsWith("{")) depth++;
+		return out;
+	}).join("\n");
+};
+
 /** An example's own CSS: everything it outputs that loading Sassy on its own does not. */
 const ownCss = (css, baseline) => {
-	const base = new Set(blocks(stripComments(baseline)).map(b => squash(b.text)));
+	const baseBlocks = blocks(stripComments(baseline));
+	const base = new Set(baseBlocks.map(b => squash(b.text)));
 	return blocks(stripComments(css))
 		.filter(b => !b.head.startsWith("@charset") && !base.has(squash(b.text)))
-		.map(b => b.text)
+		.map(b => {
+			// Sassy's output is a few large @layer blocks, so compare inside them, keeping the layer around what is left
+			const layer = b.head.startsWith("@layer") && b.body !== null && baseBlocks.find(o => o.head === b.head);
+			if (!layer) return b.text;
+			const inner = ownCss(b.body, layer.body);
+			return inner && `${b.head} {\n${inner}\n}`;
+		})
+		.filter(Boolean)
 		.join("\n");
 };
 
@@ -327,7 +347,7 @@ const build = async () => {
 	examples.forEach((ex, i) => {
 		const r = results[i];
 		if (r.error) return problems.push(r.error);
-		css.set(ex.panel, ownCss(r.css, baseline));
+		css.set(ex.panel, reindent(ownCss(r.css, baseline)));
 	});
 
 	for (const { page, html, blocks, panels } of found) {

@@ -1,24 +1,27 @@
 @use "../4-utilities/420-colour-variables" as *;
 
-:root {
-    --sassy-theme-primary: #{colour("sky", 600)};
-    --sassy-theme-secondary: #{colour("orange", 700)};
-    --sassy-theme-ok: #{colour("green", 600)};
-    --sassy-theme-info: #{colour("sky", 200)};
-    --sassy-theme-warn: #{colour("amber", 400)};
-    --sassy-theme-error: #{colour("red", 600)};
-    --sassy-theme-grey-light: #{colour("grey", 300)};
-    --sassy-theme-grey-dark: #{colour("grey", 600)};
+/// Outputs the :root custom properties - called on the base pass by this module's utilities.
+@mixin theme-properties() {
+    :root {
+        --sassy-theme-primary: #{colour("sky", 600)};
+        --sassy-theme-secondary: #{colour("orange", 700)};
+        --sassy-theme-ok: #{colour("green", 600)};
+        --sassy-theme-info: #{colour("sky", 200)};
+        --sassy-theme-warn: #{colour("amber", 400)};
+        --sassy-theme-error: #{colour("red", 600)};
+        --sassy-theme-grey-light: #{colour("grey", 300)};
+        --sassy-theme-grey-dark: #{colour("grey", 600)};
 
-    // text that contrasts with each theme colour, for %bf-text-bg-{name} - set it with the colour
-    --sassy-theme-primary-contrast: #{contrast-colour(colour("sky", 600))};
-    --sassy-theme-secondary-contrast: #{contrast-colour(colour("orange", 700))};
-    --sassy-theme-ok-contrast: #{contrast-colour(colour("green", 600))};
-    --sassy-theme-info-contrast: #{contrast-colour(colour("sky", 200))};
-    --sassy-theme-warn-contrast: #{contrast-colour(colour("amber", 400))};
-    --sassy-theme-error-contrast: #{contrast-colour(colour("red", 600))};
-    --sassy-theme-grey-light-contrast: #{contrast-colour(colour("grey", 300))};
-    --sassy-theme-grey-dark-contrast: #{contrast-colour(colour("grey", 600))};
+        // text that contrasts with each theme colour, for %bf-text-bg-{name} - set it with the colour
+        --sassy-theme-primary-contrast: #{contrast-colour(colour("sky", 600))};
+        --sassy-theme-secondary-contrast: #{contrast-colour(colour("orange", 700))};
+        --sassy-theme-ok-contrast: #{contrast-colour(colour("green", 600))};
+        --sassy-theme-info-contrast: #{contrast-colour(colour("sky", 200))};
+        --sassy-theme-warn-contrast: #{contrast-colour(colour("amber", 400))};
+        --sassy-theme-error-contrast: #{contrast-colour(colour("red", 600))};
+        --sassy-theme-grey-light-contrast: #{contrast-colour(colour("grey", 300))};
+        --sassy-theme-grey-dark-contrast: #{contrast-colour(colour("grey", 600))};
+    }
 }
 
 $sassy-theme: (

@@ -142,7 +142,7 @@
 
         <section class="example" id="placeholders">
             <h2>Your own placeholders, in Sassy's style</h2>
-            <p><code>make-responsive()</code> generates a placeholder for each value and breakpoint, and <code>make-passes()</code> outputs them in Sassy's order. This stack has a 0.25rem gap, and 0.5rem from md upwards.</p>
+            <p><code>make-responsive()</code> generates a placeholder for each value and breakpoint, and <code>make-layers()</code> outputs them in Sassy's cascade layers, so each breakpoint beats the one before. This stack has a 0.25rem gap, and 0.5rem from md upwards.</p>
             <div class="demo">
                 <div class="menu">
                     <span class="box">One</span>
@@ -151,7 +151,7 @@
                 </div>
             </div>
 <div class="code">
-<pre data-lang="sass"><code>@include sassy.make-passes
+<pre data-lang="sass"><code>@include sassy.make-layers
     @include sassy.make-responsive("stack", (1: 0.25rem, 2: 0.5rem)) using ($value)
         display: flex
         flex-direction: column

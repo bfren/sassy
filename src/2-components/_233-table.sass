@@ -9,7 +9,7 @@
 // every cell of a table's head, body and foot, but not of a table nested in a cell
 $-cells: "& > :not(caption) > tr > *"
 
-/// Outputs this module's utilities - called by _render inside make.passes.
+/// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
     // Each cell draws the table background, then --sassy-table-accent over it as a gradient,
