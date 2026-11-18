@@ -395,6 +395,34 @@ const undefinedProperties = async () => {
 		.map(p => `src: var(${p}) has no fallback and is never defined - read it through its $sassy- variable`);
 };
 
+/** The cascade layers the full build must declare, lowest first - keep in step with src/_render.sass. */
+const layerStack = ["base", "sm", "md", "lg", "xl", "\\32 xl", "\\33 xl"]
+	.flatMap(pass => ["core", "components", "forms", "grid", "utilities", "theme"].map(folder => `sassy.${pass}.${folder}`));
+
+/** The visually-hidden placeholders are the only rules allowed !important - see 4-utilities/_430-display.sass. */
+const importantAllowed = /^\.bf-visually-hidden(?:-focusable:not\(:focus\):not\(:focus-within\))?$/;
+
+/**
+ * Checks the full build's cascade layers: one statement declaring the expected stack, nothing outside a layer,
+ * and no !important outside visually-hidden - within layers !important reverses, and beats consumers' own.
+ */
+const layerProblems = css => {
+	const problems = [];
+	const top = blocks(stripComments(css)).filter(b => !b.head.startsWith("@charset"));
+	const statement = top.find(b => b.body === null && b.head.startsWith("@layer "));
+	const declared = statement ? splitTop(statement.head.slice(7), ",").join(", ") : "none";
+	if (declared !== layerStack.join(", ")) problems.push(`dist: the layer order is ${declared}, not ${layerStack.join(", ")}`);
+	if (top[0] !== statement) problems.push("dist: the @layer order statement must come before every other rule");
+	top.filter(b => b.body !== null && !b.head.startsWith("@layer "))
+		.forEach(b => problems.push(`dist: ${squash(b.head)} is not in a cascade layer`));
+	for (const [selector, decls] of declarations(css)) {
+		const rule = selector.replace(/^.* > /, "");
+		if (decls.some(d => d.includes("!important")) && !splitTop(rule, ",").every(s => importantAllowed.test(s)))
+			problems.push(`dist: ${selector} uses !important`);
+	}
+	return problems;
+};
+
 const check = async () => {
 	const files = ["README.md", ...readdirSync(join(root, "docs")).filter(f => f.endsWith(".md")).map(f => `docs/${f}`)];
 	const examples = files.flatMap(f => docExamples(f, readFileSync(join(root, f), "utf8")));
@@ -403,7 +431,7 @@ const check = async () => {
 		results[i].error ? [results[i].error] : missing(ex.css, results[i].css).map(m => `${ex.label}: the CSS shown is not output: ${m}`)
 	);
 	console.log(`checked ${examples.length} examples in ${files.length} files`);
-	return [...problems, ...(await undefinedProperties())];
+	return [...problems, ...(await undefinedProperties()), ...layerProblems(readFileSync(join(root, "dist", "full.css"), "utf8"))];
 };
 
 //  =================================================================
