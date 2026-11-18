@@ -52,29 +52,34 @@ The `.wrap` container, which centres a page's content, is in [4-utilities](4-uti
 ```
 
 ```css
-.row {
-  --sassy-col-offset: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-}
-.half {
-  box-sizing: border-box;
-  flex: 0 0 auto;
-  margin-block: 0;
-  margin-inline: var(--sassy-col-offset, 0) 0;
-  padding: var(--sassy-grid-gutter, 0.5rem);
-  width: 100%;
-}
-@media (width >= 768px) {
+@layer sassy.base.grid {
+  .row {
+    --sassy-col-offset: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
   .half {
     box-sizing: border-box;
     flex: 0 0 auto;
     margin-block: 0;
     margin-inline: var(--sassy-col-offset, 0) 0;
     padding: var(--sassy-grid-gutter, 0.5rem);
-    width: 50%;
+    width: 100%;
+  }
+}
+
+@layer sassy.md.grid {
+  @media (width >= 768px) {
+    .half {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      margin-block: 0;
+      margin-inline: var(--sassy-col-offset, 0) 0;
+      padding: var(--sassy-grid-gutter, 0.5rem);
+      width: 50%;
+    }
   }
 }
 ```
@@ -114,8 +119,10 @@ Each column stacks at full width below `md`, then sits side by side from `md` up
 ```
 
 ```css
-.narrow {
-  --sassy-col-offset: 16.666%;
+@layer sassy.base.grid {
+  .narrow {
+    --sassy-col-offset: 16.666%;
+  }
 }
 ```
 
@@ -132,8 +139,10 @@ The column is two thirds wide with a sixth either side, then half wide with a qu
 ```
 
 ```css
-.cards {
-  --sassy-grid-gutter: 0.75rem;
+@layer sassy.base.grid {
+  .cards {
+    --sassy-grid-gutter: 0.75rem;
+  }
 }
 ```
 
@@ -163,10 +172,12 @@ The children need no placeholder of their own. They stack below `md`, then sit t
 ```
 
 ```css
-.layout {
-  display: grid;
-  gap: var(--sassy-grid-gap, 1rem);
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+@layer sassy.base.grid {
+  .layout {
+    display: grid;
+    gap: var(--sassy-grid-gap, 1rem);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
 }
 ```
 

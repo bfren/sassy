@@ -53,17 +53,22 @@ Each theme colour also has a `-contrast` property, such as `--sassy-theme-primar
 ```
 
 ```css
-.alert-error {
-  padding: 0.75rem;
+@layer sassy.base.utilities {
+  .alert-error {
+    padding: 0.75rem;
+  }
+  .alert-error {
+    color: oklch(98.5% 0.002 247.839deg);
+  }
+  .alert-error {
+    border-radius: 0.25rem;
+  }
 }
-.alert-error {
-  color: oklch(98.5% 0.002 247.839deg);
-}
-.alert-error {
-  border-radius: 0.25rem;
-}
-.alert-error {
-  background-color: var(--sassy-theme-error);
+
+@layer sassy.base.theme {
+  .alert-error {
+    background-color: var(--sassy-theme-error);
+  }
 }
 ```
 
@@ -89,9 +94,11 @@ Shadows have one colour, `--sassy-shadow-colour`, so this works with any colour,
 ```
 
 ```css
-.alert-warn {
-  background-color: var(--sassy-theme-warn);
-  color: var(--sassy-theme-warn-contrast);
+@layer sassy.base.theme {
+  .alert-warn {
+    background-color: var(--sassy-theme-warn);
+    color: var(--sassy-theme-warn-contrast);
+  }
 }
 ```
 

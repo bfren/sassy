@@ -60,17 +60,22 @@ Sizes are `small` and `large`, not `sm` and `lg`, which are breakpoints. A size 
 ```
 
 ```css
-.field {
-  margin-bottom: 0.75rem;
+@layer sassy.base.forms {
+  .field label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .field input {
+    display: block;
+    width: 100%;
+    /* …other control rules */
+  }
 }
-.field label {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-}
-.field input {
-  display: block;
-  width: 100%;
-  /* …other control rules */
+
+@layer sassy.base.utilities {
+  .field {
+    margin-bottom: 0.75rem;
+  }
 }
 ```
 

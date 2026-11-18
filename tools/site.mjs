@@ -149,7 +149,8 @@ const declarations = (css, context = "") =>
 	blocks(stripComments(css)).flatMap(b => {
 		if (b.body === null) return [];
 		if (b.head.startsWith("@")) {
-			const at = `${context}${squash(b.head)} > `;
+			// a layer nested in a layer is the same as its dotted name, which the docs show: @layer sassy.base.utilities
+			const at = `${context}${squash(b.head)} > `.replace(/(@layer [^>]+?) > @layer /, "$1.");
 			return b.body.includes("{") ? declarations(b.body, at) : [[at, declarationsIn(b.body)]];
 		}
 		return splitTop(b.head, ",").map(s => [context + normaliseSelector(s), declarationsIn(b.body)]);

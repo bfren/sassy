@@ -6,6 +6,11 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- **Breaking:** everything Sassy outputs is now in cascade layers - `sassy.base.core` to `sassy.3xl.theme`, one per breakpoint and folder, declared in one `@layer` statement at the top. Breakpoint variants and utilities now win whatever the specificity of the selectors that extend them: `nav .link` extending `%bf-nav-link` no longer beats `.link-alert` extending `%bf-c-error`.
+- **Breaking:** your own unlayered CSS now always beats Sassy's, whatever its specificity. A plain `a { color: red }` overrides every link that extends `%bf-nav-link`. Put your CSS in a layer after Sassy's - `@layer reset, sassy, app;` - to keep Sassy's precedence over it.
+- **Breaking:** `make-passes()` is now `make-layers()`, and outputs each pass in a layer - Sassy's by default, or your own with `$name`.
+- `%bf-body` is output with the element defaults, below every other placeholder, and sets its heading and paragraph margins itself rather than extending the margin utilities. A margin utility on a heading inside it now always wins.
+
 - Grid columns set `margin-block: 0` and their start margin from `--sassy-col-offset`, rather than `margin: 0`, so offsets work. Rows set `--sassy-col-offset: 0`.
 - **Breaking:** `%bf-text-wrap-hover` is now `%bf-text-truncate`, which says what it does. It still expands on hover.
 - **Breaking:** Sassy now needs Dart Sass 1.108 or later, so it can use current Sass syntax.
@@ -14,6 +19,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - A default that points to another property now follows that property where it is set, not only on `:root`. For example, `--sassy-radius` set on a section now also changes the corners of cards, inputs and dialogs inside it.
 
 ### Added
+
+- `$sassy-layer`, the layer everything is output in, so Sassy can sit inside a stack of your own, such as `"vendor.sassy"`.
 
 - Grid: `%bf-col` and `%bf-col-auto` columns, `%bf-col-offset-{0-11}`, `%bf-row-cols-{1-6}` and `-auto` for a row whose children are columns, `%bf-gutter-{0-5}` to change a row's gutter, and an opt-in CSS grid with `%bf-grid`, `%bf-grid-col-{1-12}` and `%bf-grid-start-{1-11}`.
 - Tables: `%bf-table`, with `-striped`, `-striped-columns`, `-hover`, `-bordered`, `-borderless`, `-small`, `-caption-top`, a tint in each theme colour, and `-responsive` wrappers. A row with `aria-current="true"` is shaded. Without them, tables get joined borders and a grey caption below.

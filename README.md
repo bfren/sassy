@@ -23,24 +23,32 @@ You `@extend` the utilities you want onto your own selectors, so your markup sta
 compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap) classes):
 
 ```css
-.card-title {
-  font-weight: 700;
-}
-.card {
-  padding: 0.75rem;
-}
-.card {
-  border-radius: var(--sassy-radius, 0.375rem);
-}
-.card {
-  box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour, #000) 7.5%, transparent);
-}
-.card-title {
-  color: var(--sassy-theme-primary);
-}
-@media (width >= 768px) {
+@layer sassy.base.utilities {
+  .card-title {
+    font-weight: 700;
+  }
   .card {
-    padding: 1.25rem;
+    padding: 0.75rem;
+  }
+  .card {
+    border-radius: var(--sassy-radius, 0.375rem);
+  }
+  .card {
+    box-shadow: 0 0.125rem 0.25rem color-mix(in oklab, var(--sassy-shadow-colour, #000) 7.5%, transparent);
+  }
+}
+
+@layer sassy.base.theme {
+  .card-title {
+    color: var(--sassy-theme-primary);
+  }
+}
+
+@layer sassy.md.utilities {
+  @media (width >= 768px) {
+    .card {
+      padding: 1.25rem;
+    }
   }
 }
 ```
@@ -155,12 +163,43 @@ Most utilities have a variant for each breakpoint, which applies from that width
 
 Sass cannot `@extend` inside a media query, which is why breakpoints are part of the name rather than written with `@media`.
 
-Sassy guarantees the order of its output, so combinations behave as you would expect whatever order you extend them in:
+Sassy guarantees the order of its output with [cascade layers](#cascade-layers), so combinations behave as you would expect whatever order you extend them in, and however specific the selectors that extend them:
 
 - a breakpoint variant always overrides the base utility and any smaller breakpoint - `%bf-d-none` + `%bf-d-block-lg` is hidden until `lg`
 - single-purpose utilities always override composite ones - `%bf-col-4` + `%bf-p-0` removes the column's gutter, and `%bf-form-control` + `%bf-mb-3` adds a margin to the control
 
 Form placeholders, `%bf-visually-hidden` and `%bf-body` have no breakpoint variants.
+
+### Cascade layers
+
+Everything Sassy outputs is in a [cascade layer](https://developer.mozilla.org/docs/Web/CSS/@layer): one for each breakpoint pass, smallest first, and inside each pass one for each folder. A layer later in the list beats every earlier one, whatever the specificity of their selectors. The first rule in the output declares the whole list:
+
+```css
+@layer sassy.base.core, sassy.base.components, sassy.base.forms, sassy.base.grid, sassy.base.utilities, sassy.base.theme,
+       sassy.sm.core, …, sassy.\33 xl.theme;
+```
+
+`core` holds Normalize, the element defaults and `%bf-body`, so everything else overrides them. A layer name cannot start with a digit, so `2xl` and `3xl` are written `\32 xl` and `\33 xl`.
+
+**Your own CSS always beats Sassy's**, unless you put it in a layer of your own. Overriding Sassy never needs a more specific selector or `!important`. It also means a plain rule wins where you might expect Sassy to: `a { color: red }` overrides the colour of every link that extends `%bf-nav-link`, however specific that link's selector is.
+
+To place Sassy in a stack of your own, declare the order in a file you `@use` before Sassy, so it comes first in the output:
+
+```scss
+// _layers.scss
+@layer reset, sassy, app;
+```
+
+```sass
+@use "layers"
+@use "sassy/src" as sassy
+```
+
+Set `$sassy-layer` to put Sassy inside another layer instead, for example `"vendor.sassy"` - it is a string, as Sass cannot read a dotted name otherwise.
+
+`@extend` moves the extending selector into the placeholder's rule, so it takes the placeholder's layer: `@layer app { .link { @extend %bf-p-2 } }` gives `.link` Sassy's padding in `sassy.base.utilities`, not in `app`. Declarations written in the rule itself stay in `app`.
+
+Sassy uses no `!important`, apart from `%bf-visually-hidden` and `%bf-visually-hidden-focusable`, so that no other rule can make hidden content visible.
 
 ### Wrap
 
@@ -189,6 +228,7 @@ Settings are passed with `with (...)` when you load Sassy:
 | `$sassy-prefix`                                                | `"bf"`                  | Prefix for every placeholder (and class) - `""` for none                       |
 | `$sassy-separator`                                             | `"-"`                   | Joins the prefix, utility, value and breakpoint                                |
 | `$sassy-full`                                                  | `false`                 | Also output every utility as a class, as in `dist/full.css`                    |
+| `$sassy-layer`                                                 | `"sassy"`               | The [cascade layer](#cascade-layers) everything is output in                   |
 
 The prefix keeps Sassy's placeholders apart from your own and from other libraries: placeholders with the same name are merged, so an unprefixed `%p-2` of your own would pick up Sassy's rules too. It costs nothing in your compiled CSS.
 
