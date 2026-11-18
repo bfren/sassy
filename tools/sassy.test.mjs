@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys.
+ * Tests for src/sassy.js: tab keys and dismissing.
  *
  *     npm install --no-save jsdom && node --test tools/sassy.test.mjs
  */
@@ -43,4 +43,18 @@ test("tabs: arrow keys wrap, Home and End jump, disabled tabs are skipped, panel
 	assert.equal($("t3").getAttribute("aria-selected"), "true");
 	press(window, $("t3"), "Home");
 	assert.equal($("t1").getAttribute("aria-selected"), "true");
+});
+
+test("dismissing: a --dismiss button hides the element it names, and other commands do not", () => {
+	const window = load(`
+		<div id="alert">
+			<button id="other" commandfor="alert" command="--other"></button>
+			<button id="close" commandfor="alert" command="--dismiss"><span id="icon"></span></button>
+		</div>`);
+	const $ = id => window.document.getElementById(id);
+
+	$("other").click();
+	assert.equal($("alert").hidden, false);
+	$("icon").click(); // a click on something inside the button
+	assert.equal($("alert").hidden, true);
 });

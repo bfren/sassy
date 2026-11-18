@@ -7,6 +7,7 @@
 @use "1-components/130-card" as card
 @use "1-components/133-table" as table
 @use "1-components/140-tabs" as tabs
+@use "1-components/140-alert" as alert
 @use "1-components/150-tooltip" as tooltip
 @use "1-components/160-dialog" as dialog
 @use "2-forms/210-label" as form-label
@@ -59,6 +60,7 @@
         @include card.utilities
         @include table.utilities
         @include tabs.utilities
+        @include alert.utilities
         @include tooltip.utilities
         @include dialog.utilities
     @include make.layer(forms)

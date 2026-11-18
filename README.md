@@ -94,7 +94,7 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 
 ### Script
 
-Tabs and tooltips also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
+Tabs, tooltips and dismissible alerts also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -338,10 +338,11 @@ Component placeholders style whole interface elements, and they output before fo
 | `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                                           | A bordered container and its parts                                                     |
 | `%bf-table`, `-striped`, `-hover`, `-bordered`, `-small`, `-{theme colour}`, `-responsive-{breakpoint}` | Tables: striped, with hover, bordered, compact, tinted, and scrolling on small screens |
 | `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                                  | Tabs that switch panels, using the ARIA tabs roles                                     |
+| `%bf-alert`, `-{theme colour}`, `-title`, `-dismissible`                                                | A message box, tinted with a theme colour, that can be dismissed                       |
 | `%bf-tooltip`                                                                                           | A tooltip: a popover described by its trigger with `aria-describedby`                  |
 | `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`                               | A native `<dialog>` and its parts                                                      |
 
-Buttons, close buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips and navigation that collapses need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
+Buttons, close buttons, navigation, cards and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, tooltips, navigation that collapses and dismissible alerts need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
 
 ## Limitations
 
@@ -385,14 +386,14 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 
 `src` is arranged in numbered folders, and each file is numbered with its folder's digit followed by its place in the folder - `4-utilities/_420-colour.sass`. **The numbers follow the order the placeholders are output**, because that order decides which placeholder wins when two set the same property:
 
-| Folder         | Contains                                                                                                                                  |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles                              |
-| `1-components` | Buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
-| `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                      |
-| `3-grid`       | The grid                                                                                                                                  |
-| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                 |
-| `5-theme`      | Theme colours                                                                                                                             |
+| Folder         | Contains                                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles                                      |
+| `1-components` | Buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
+| `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                              |
+| `3-grid`       | The grid                                                                                                                                          |
+| `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                         |
+| `5-theme`      | Theme colours                                                                                                                                     |
 
 Composites - placeholders that set several properties at once, such as content, components, forms and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 

@@ -22,6 +22,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Alerts: `%bf-alert`, tinted with `%bf-alert-{theme colour}`, with `%bf-alert-title` for a heading. Links inside an alert take its text colour, in bold. `%bf-alert-dismissible` makes room for a close button with `command="--dismiss"`, which `sassy.js` turns into hiding the alert.
+- `sassy.js` hides the element named by any `commandfor` button with `command="--dismiss"`.
 - `%bf-close`: a close button, an empty `<button>` with `aria-label="Close"` whose × is drawn in the text colour, so it shows on any background. Its size and opacity are set by `--sassy-close-size`, `--sassy-close-opacity` and `--sassy-close-hover-opacity`.
 - `$sassy-layer`, the layer everything is output in, so Sassy can sit inside a stack of your own, such as `"vendor.sassy"`.
 - `node tools/site.mjs check` also checks the full build's layer order, that nothing is outside a layer, and that only `%bf-visually-hidden` uses `!important`.

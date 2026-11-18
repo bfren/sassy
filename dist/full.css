@@ -1774,6 +1774,79 @@
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
       outline-offset: var(--sassy-focus-outline-offset, 2px);
     }
+    .bf-alert {
+      background-color: var(--sassy-alert-bg, oklch(96.7% 0.003 264.542deg));
+      border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-radius: var(--sassy-alert-radius, var(--sassy-radius, 0.375rem));
+      box-sizing: border-box;
+      color: var(--sassy-alert-colour, currentColor);
+      margin-bottom: var(--sassy-alert-margin-bottom, 1rem);
+      padding: var(--sassy-alert-padding-y, 1rem) var(--sassy-alert-padding-x, 1rem);
+      position: relative;
+    }
+    .bf-alert > :nth-child(1 of :not([command])) {
+      margin-top: 0;
+    }
+    .bf-alert > :nth-last-child(1 of :not([command])) {
+      margin-bottom: 0;
+    }
+    .bf-alert a {
+      color: inherit;
+      font-weight: 700;
+    }
+    .bf-alert-primary {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-primary) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-primary) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-primary) 40%, currentColor);
+    }
+    .bf-alert-secondary {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-secondary) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-secondary) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-secondary) 40%, currentColor);
+    }
+    .bf-alert-ok {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-ok) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-ok) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-ok) 40%, currentColor);
+    }
+    .bf-alert-info {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-info) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-info) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-info) 40%, currentColor);
+    }
+    .bf-alert-warn {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-warn) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-warn) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-warn) 40%, currentColor);
+    }
+    .bf-alert-error {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-error) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-error) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-error) 40%, currentColor);
+    }
+    .bf-alert-grey-light {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-grey-light) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-grey-light) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-grey-light) 40%, currentColor);
+    }
+    .bf-alert-grey-dark {
+      --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-grey-dark) 15%, transparent);
+      --sassy-alert-border-colour: color-mix(in oklab, var(--sassy-theme-grey-dark) 35%, transparent);
+      --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-grey-dark) 40%, currentColor);
+    }
+    .bf-alert-title {
+      color: inherit;
+      font-size: calc(var(--sassy-font-size-base) * 1.25);
+      margin: 0 0 0.5rem;
+    }
+    .bf-alert-dismissible {
+      padding-inline-end: calc(var(--sassy-alert-padding-x, 1rem) * 2 + 1.5em);
+    }
+    .bf-alert-dismissible > [command="--dismiss"] {
+      inset-block-start: var(--sassy-alert-padding-y, 1rem);
+      inset-inline-end: var(--sassy-alert-padding-x, 1rem);
+      position: absolute;
+    }
     .bf-tooltip {
       background-color: var(--sassy-tooltip-bg, oklch(21% 0.034 264.665deg));
       border: 0;

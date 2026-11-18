@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs</h1>
+        <h1>Buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs and tooltips also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, tooltips and dismissible alerts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -508,6 +508,80 @@
 &lt;/div&gt;
 &lt;div class="tab-panel" role="tabpanel" id="panel-collect" aria-labelledby="tab-collect" tabindex="0"&gt;
     &lt;p&gt;Ready to collect from your chosen shop in two hours. Free.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="alerts">
+            <h2>Alerts</h2>
+            <p>A theme colour tints the background, border and text. The last alert can be dismissed: its close button has <code>command="--dismiss"</code>, which <code>sassy.js</code> handles.</p>
+            <div class="demo">
+                <div class="alert" role="status">
+                    <p>A plain alert, with <a href="#alerts">a link</a>.</p>
+                </div>
+                <div class="alert alert-primary" role="status">
+                    <h3 class="alert-title">Primary</h3>
+                    <p>An alert can hold a heading and several paragraphs.</p>
+                    <p>The last one has no margin below it.</p>
+                </div>
+                <div class="alert alert-ok" role="status">
+                    <p>Your changes are saved. <a href="#alerts">See the history</a>.</p>
+                </div>
+                <div class="alert alert-info" role="status">
+                    <p>Info, on a light theme colour.</p>
+                </div>
+                <div class="alert alert-warn" role="alert">
+                    <p>Warn, on a light theme colour.</p>
+                </div>
+                <div class="alert alert-error alert-dismissible" id="upload-failed" role="alert">
+                    <p>The upload failed. <a href="#alerts">Try again</a>.</p>
+                    <button type="button" class="close" commandfor="upload-failed" command="--dismiss" aria-label="Close"></button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.alert
+    @extend %bf-alert
+
+.alert-primary
+    @extend %bf-alert-primary
+
+.alert-ok
+    @extend %bf-alert-ok
+
+.alert-info
+    @extend %bf-alert-info
+
+.alert-warn
+    @extend %bf-alert-warn
+
+.alert-error
+    @extend %bf-alert-error
+
+.alert-title
+    @extend %bf-alert-title
+
+.alert-dismissible
+    @extend %bf-alert-dismissible</code></pre>
+<pre data-lang="html"><code>&lt;div class="alert" role="status"&gt;
+    &lt;p&gt;A plain alert, with &lt;a href="#alerts"&gt;a link&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-primary" role="status"&gt;
+    &lt;h3 class="alert-title"&gt;Primary&lt;/h3&gt;
+    &lt;p&gt;An alert can hold a heading and several paragraphs.&lt;/p&gt;
+    &lt;p&gt;The last one has no margin below it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-ok" role="status"&gt;
+    &lt;p&gt;Your changes are saved. &lt;a href="#alerts"&gt;See the history&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-info" role="status"&gt;
+    &lt;p&gt;Info, on a light theme colour.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-warn" role="alert"&gt;
+    &lt;p&gt;Warn, on a light theme colour.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-error alert-dismissible" id="upload-failed" role="alert"&gt;
+    &lt;p&gt;The upload failed. &lt;a href="#alerts"&gt;Try again&lt;/a&gt;.&lt;/p&gt;
+    &lt;button type="button" class="close" commandfor="upload-failed" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

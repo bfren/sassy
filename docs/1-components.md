@@ -1,20 +1,20 @@
-# 1-components: buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs
+# 1-components: buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, close buttons, navigation, cards, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, close buttons, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips and collapsible navigation need `sassy.js`, which you load once:
+Buttons, close buttons, navigation, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
 ```
 
-`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does four things:
+`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does five things:
 
 | Feature          | What `sassy.js` does                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -22,6 +22,7 @@ Buttons, close buttons, navigation, cards and dialogs need no script - except fo
 | Tabs             | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
+| Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |
 
 The components rely on these browser features:
 
@@ -60,6 +61,10 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-tabs`                                                                                      | The list of tabs (`role="tablist"`)                                                     |
 | `%bf-tab`                                                                                       | Each tab (`role="tab"`)                                                                 |
 | `%bf-tab-panel`                                                                                 | Each panel (`role="tabpanel"`)                                                          |
+| `%bf-alert`                                                                                     | A message box - see [Alerts](#alerts) for its `role`                                    |
+| `%bf-alert-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | An alert tinted with a theme colour, combined with `%bf-alert`                          |
+| `%bf-alert-title`                                                                               | A heading in an alert                                                                   |
+| `%bf-alert-dismissible`                                                                         | Room for a close button, combined with `%bf-alert`                                      |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
@@ -161,7 +166,7 @@ A close button is an empty `<button>`. The × is drawn in the text colour, so it
 - **Give it `aria-label="Close"`**, or a label that says what it closes, as the button has no text.
 - **It is `1em` square**, so it follows the text size around it. Set `--sassy-close-size` to change it.
 - **It fades until the pointer is over it**, and shows in full with the focus outline when it has keyboard focus. Disable it with `disabled`, or `aria-disabled="true"`.
-- **A close button does nothing by itself.** Give it `command="close"` and `commandfor` to close a [dialog](#dialogs).
+- **A close button does nothing by itself.** Give it `command="close"` and `commandfor` to close a [dialog](#dialogs), or `command="--dismiss"` to dismiss an [alert](#alerts).
 
 ## Navigation
 
@@ -406,6 +411,58 @@ For a vertical list, add `aria-orientation="vertical"` to the tab list, and Up a
 
 `tabindex="0"` on each panel lets keyboard users reach it when it contains nothing else that can be focused.
 
+## Alerts
+
+An alert is a message box. A theme colour tints its background, border and text, and links inside it take the alert's text colour, in bold:
+
+```sass
+.alert
+    @extend %bf-alert
+
+.alert-ok
+    @extend %bf-alert-ok
+
+.alert-dismissible
+    @extend %bf-alert-dismissible
+
+.close
+    @extend %bf-close
+```
+
+```css
+@layer sassy.base.components {
+  .alert {
+    background-color: var(--sassy-alert-bg, oklch(96.7% 0.003 264.542deg));
+    border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, oklch(92.8% 0.006 264.531deg));
+    color: var(--sassy-alert-colour, currentColor);
+    padding: var(--sassy-alert-padding-y, 1rem) var(--sassy-alert-padding-x, 1rem);
+  }
+  .alert a {
+    color: inherit;
+    font-weight: 700;
+  }
+  .alert-ok {
+    --sassy-alert-bg: color-mix(in oklab, var(--sassy-theme-ok) 15%, transparent);
+    --sassy-alert-colour: color-mix(in oklab, var(--sassy-theme-ok) 40%, currentColor);
+  }
+  .alert-dismissible > [command="--dismiss"] {
+    position: absolute;
+  }
+}
+```
+
+```html
+<div class="alert alert-ok alert-dismissible" id="saved" role="status">
+    <p>Your changes are saved. <a href="/history">See the history</a>.</p>
+    <button type="button" class="close" commandfor="saved" command="--dismiss" aria-label="Close"></button>
+</div>
+```
+
+- **Choose the role by how urgent the message is.** `role="alert"` makes screen readers announce it at once, interrupting the user, so keep it for errors and warnings that need action. Use `role="status"` for a quieter update, such as a saved form, or no role for a message that is part of the page when it loads.
+- **Alert text is the theme colour mixed with the text around it**, so it stays readable on the light theme colours, and follows a dark theme. Change how much colour is mixed in with `$sassy-alert-tint`, `$sassy-alert-border-tint` and `$sassy-alert-text-tint`.
+- **To dismiss an alert**, put a [close button](#close-buttons) in it with `commandfor` set to the alert's `id` and `command="--dismiss"`, and load `sassy.js`, which hides the alert. Extend `%bf-alert-dismissible` too, which makes room for the button in the top corner. The close button can come anywhere in the alert.
+- **A dismissed alert is hidden with the `hidden` attribute**, so don't give it a `display` placeholder, which would override `hidden`.
+
 ## Tooltips
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
@@ -522,6 +579,8 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-table-striped-bg`, `--sassy-table-hover-bg`, `--sassy-table-current-bg`                                                     | The shades laid over a striped row or column, the row under the pointer, and the current row      |
 | `--sassy-tabs-border-width`, `--sassy-tabs-border-colour`, `--sassy-tabs-underline-width`                                            | The line under the tabs, and the selected tab's underline                                         |
 | `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                                           |
+| `--sassy-alert-bg`, `--sassy-alert-colour`, `--sassy-alert-border-width`, `--sassy-alert-border-colour`, `--sassy-alert-radius`      | Alert background, text, border and corners - the theme colours set the colours                    |
+| `--sassy-alert-padding-y`, `--sassy-alert-padding-x`, `--sassy-alert-margin-bottom`                                                  | Alert spacing                                                                                     |
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |

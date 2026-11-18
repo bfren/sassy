@@ -1,0 +1,19 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+
+$sassy-alert-bg: var(--sassy-alert-bg, #{colour("grey", 100)});
+$sassy-alert-colour: var(--sassy-alert-colour, currentColor);
+$sassy-alert-border-width: var(--sassy-alert-border-width, 1px);
+$sassy-alert-border-colour: var(--sassy-alert-border-colour, #{colour("grey", 200)});
+$sassy-alert-radius: var(--sassy-alert-radius, $sassy-radius);
+$sassy-alert-padding-y: var(--sassy-alert-padding-y, #{$sassy-padding-unit * 4});
+$sassy-alert-padding-x: var(--sassy-alert-padding-x, #{$sassy-padding-unit * 4});
+$sassy-alert-margin-bottom: var(--sassy-alert-margin-bottom, 1rem);
+
+// How much of a theme colour %bf-alert-{name} mixes into its background, border and text.
+// The text is mixed with the text colour around the alert, so it stays readable on light theme colours:
+// at 40% every default theme colour has a contrast of at least 5:1 on its tint.
+$sassy-alert-tint: 15% !default;
+$sassy-alert-border-tint: 35% !default;
+$sassy-alert-text-tint: 40% !default;

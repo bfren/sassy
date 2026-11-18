@@ -8,6 +8,7 @@
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
+ * - Dismissing: a button with commandfor and command="--dismiss" hides the element it names, such as an alert.
  *
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
  * whatever selectors you extend Sassy's placeholders onto. Load it once, with defer:
@@ -218,6 +219,17 @@
 			if (target && command) command(target);
 		});
 	}
+
+	//  =================================================================
+	//  Dismissing: command="--dismiss" hides the element named by commandfor
+	//  =================================================================
+
+	// A custom command does nothing by itself, so this runs in every browser, with or without command support.
+	document.addEventListener("click", e => {
+		const button = e.target.closest?.('button[commandfor][command="--dismiss"]');
+		const target = button && document.getElementById(button.getAttribute("commandfor"));
+		if (target) target.hidden = true;
+	});
 
 	//  =================================================================
 	//  Start

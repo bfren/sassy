@@ -1,0 +1,59 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: alerts
+//  =================================================================
+
+//  A message box. Give it role="alert" only when screen readers should announce it at once,
+//  role="status" for a quieter update, or no role for a message that is part of the page.
+//  A dismissible alert holds a %bf-close button with commandfor="<the alert's id>" command="--dismiss",
+//  which sassy.js turns into hidden on the alert.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("alert")
+        background-color: $sassy-alert-bg
+        border: $sassy-alert-border-width solid $sassy-alert-border-colour
+        border-radius: $sassy-alert-radius
+        box-sizing: border-box
+        color: $sassy-alert-colour
+        margin-bottom: $sassy-alert-margin-bottom
+        padding: $sassy-alert-padding-y $sassy-alert-padding-x
+        position: relative
+
+        // the close button of a dismissible alert is left out, wherever it is
+        & > :nth-child(1 of :not([command]))
+            margin-top: 0
+
+        & > :nth-last-child(1 of :not([command]))
+            margin-bottom: 0
+
+        // links show on every tint
+        a
+            color: inherit
+            font-weight: 700
+
+    // Theme colours only change the custom properties, so combine them with %bf-alert
+
+    @each $name, $value in $sassy-theme
+        @include make.single("alert-#{$name}")
+            --sassy-alert-bg: color-mix(in oklab, #{$value} #{$sassy-alert-tint}, transparent)
+            --sassy-alert-border-colour: color-mix(in oklab, #{$value} #{$sassy-alert-border-tint}, transparent)
+            --sassy-alert-colour: color-mix(in oklab, #{$value} #{$sassy-alert-text-tint}, currentColor)
+
+    @include make.single("alert-title")
+        color: inherit
+        font-size: calc(var(--sassy-font-size-base) * 1.25)
+        margin: 0 0 $sassy-margin-unit * 2
+
+    // Room at the end for a %bf-close button, which sits in the top corner
+
+    @include make.single("alert-dismissible")
+        padding-inline-end: calc($sassy-alert-padding-x * 2 + 1.5em)
+
+        & > [command="--dismiss"]
+            inset-block-start: $sassy-alert-padding-y
+            inset-inline-end: $sassy-alert-padding-x
+            position: absolute
