@@ -1,14 +1,14 @@
-# 1-components: buttons, close buttons, badges, navigation, breadcrumbs, cards, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, close buttons, badges, navigation, breadcrumbs, cards, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, close buttons, badges, navigation, breadcrumbs, cards and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -61,6 +61,10 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-card`                                                                                      | A bordered container                                                                    |
 | `%bf-card-header`, `%bf-card-body`, `%bf-card-footer`                                           | The parts of a card                                                                     |
 | `%bf-card-title`, `%bf-card-image`                                                              | A title in the body, and an image that fills the card's width                           |
+| `%bf-list-group`                                                                                | A bordered list whose direct children are its items - `<li>`, or `<a>` and `<button>`   |
+| `%bf-list-group-flush`                                                                          | No outer border or corners, for a list that fills a card                                |
+| `%bf-list-group-numbered`                                                                       | Numbers the items of an `<ol>`                                                          |
+| `%bf-list-group-horizontal`, `-horizontal-{breakpoint}`                                         | Items side by side, always or from a breakpoint                                         |
 | `%bf-tabs`                                                                                      | The list of tabs (`role="tablist"`)                                                     |
 | `%bf-tab`                                                                                       | Each tab (`role="tab"`)                                                                 |
 | `%bf-tab-panel`                                                                                 | Each panel (`role="tabpanel"`)                                                          |
@@ -421,6 +425,51 @@ A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf
 
 A card is a flex column. The body grows to fill it, so in a row of cards of different heights, such as a flex row with `%bf-d-flex` and `%bf-gap-4`, the footers line up. The card clips its content to its rounded corners, so an image needs no radius of its own.
 
+## List groups
+
+A list group is a bordered list. Its direct children are its items, so extend one placeholder on the list:
+
+```sass
+.inbox
+    @extend %bf-list-group
+```
+
+```css
+@layer sassy.base.components {
+  .inbox {
+    border-radius: var(--sassy-list-group-radius, var(--sassy-radius, 0.375rem));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .inbox > * + * {
+    border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+  }
+  .inbox > :where(a, button):hover {
+    background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, #fff)));
+  }
+  .inbox > [aria-current]:not([aria-current=false]) {
+    background-color: var(--sassy-list-group-current-bg, var(--sassy-theme-primary));
+    color: var(--sassy-list-group-current-colour, var(--sassy-theme-primary-contrast));
+  }
+}
+```
+
+```html
+<nav class="inbox" aria-label="Folders">
+    <a href="/inbox" aria-current="page">Inbox</a>
+    <a href="/sent">Sent</a>
+    <a href="/drafts">Drafts</a>
+    <a href="/archive" aria-disabled="true">Archive</a>
+</nav>
+```
+
+- **Items are `<li>` in a `<ul>` or `<ol>`**, for a list of things, or `<a>` and `<button>` in a `<div>` or `<nav>`, for a list of things to do. Links and buttons fill the width, shade under the pointer, and show the focus outline inside the item.
+- **Mark the current item with `aria-current`** - `"page"` for a link to the current page, `"true"` otherwise - and it takes the primary colour, with text that contrasts.
+- **Disable an item with `disabled`**, or `aria-disabled="true"` on a link, and it fades and ignores clicks.
+- **The list clips its items to its corners**, so a current item's background follows them. Something that pops out of an item, such as a menu, must use a popover, which is drawn above the page.
+- **Combine `%bf-list-group-flush`** for a list with no outer border or corners, such as one that fills a card, **`%bf-list-group-numbered`** to number the items of an `<ol>`, and **`%bf-list-group-horizontal`** or **`-horizontal-{breakpoint}`** to set the items side by side.
+
 ## Tables
 
 ```sass
@@ -683,6 +732,9 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-breadcrumb-link-colour`, `--sassy-breadcrumb-current-colour`, `--sassy-breadcrumb-margin-bottom`                            | Breadcrumb link and current page colours, and the space below                                     |
 | `--sassy-card-bg`, `--sassy-card-border-width`, `--sassy-card-border-colour`, `--sassy-card-radius`                                  | Card background, border and corners                                                               |
 | `--sassy-card-padding-y`, `--sassy-card-padding-x`, `--sassy-card-cap-bg`                                                            | Card spacing, and the header and footer background                                                |
+| `--sassy-list-group-bg`, `--sassy-list-group-colour`, `--sassy-list-group-border-width`, `--sassy-list-group-border-colour`, `--sassy-list-group-radius` | List group background, text, border and corners                                                   |
+| `--sassy-list-group-padding-y`, `--sassy-list-group-padding-x`                                                                       | List group item padding                                                                           |
+| `--sassy-list-group-hover-bg`, `--sassy-list-group-current-bg`, `--sassy-list-group-current-colour`, `--sassy-list-group-disabled-colour` | An actionable item under the pointer, the current item, and a disabled item                       |
 | `--sassy-table-bg`, `--sassy-table-colour`, `--sassy-table-border-width`, `--sassy-table-border-colour`                              | Table background, text and lines - `%bf-table-{theme colour}` sets the background and line colour |
 | `--sassy-table-padding-y`, `--sassy-table-padding-x`, `--sassy-table-small-padding`                                                  | Cell padding, and the padding of a small table                                                    |
 | `--sassy-table-striped-bg`, `--sassy-table-hover-bg`, `--sassy-table-current-bg`                                                     | The shades laid over a striped row or column, the row under the pointer, and the current row      |

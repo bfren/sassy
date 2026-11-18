@@ -1653,6 +1653,69 @@
       object-fit: cover;
       width: 100%;
     }
+    .bf-list-group {
+      border: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-radius: var(--sassy-list-group-radius, var(--sassy-radius, 0.375rem));
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      padding: 0;
+    }
+    .bf-list-group > * {
+      background-color: var(--sassy-list-group-bg, #fff);
+      border: 0;
+      box-sizing: border-box;
+      color: var(--sassy-list-group-colour, inherit);
+      margin: 0;
+      padding: var(--sassy-list-group-padding-y, 0.5rem) var(--sassy-list-group-padding-x, 1rem);
+    }
+    .bf-list-group > * + * {
+      border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+    }
+    .bf-list-group > :where(a, button) {
+      cursor: pointer;
+      display: block;
+      font: inherit;
+      text-align: start;
+      text-decoration: none;
+      width: 100%;
+    }
+    .bf-list-group > :where(a, button):hover {
+      background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, #fff)));
+    }
+    .bf-list-group > :where(a, button):focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: calc(var(--sassy-focus-outline-width, 2px) * -1);
+    }
+    .bf-list-group > [aria-current]:not([aria-current=false]) {
+      background-color: var(--sassy-list-group-current-bg, var(--sassy-theme-primary));
+      color: var(--sassy-list-group-current-colour, var(--sassy-theme-primary-contrast));
+    }
+    .bf-list-group > :disabled, .bf-list-group > [aria-disabled=true] {
+      color: var(--sassy-list-group-disabled-colour, oklch(70.7% 0.022 261.325deg));
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .bf-list-group-flush {
+      border-radius: 0;
+      border-width: 0;
+    }
+    .bf-list-group-numbered {
+      list-style: decimal inside;
+    }
+    .bf-list-group-horizontal {
+      flex-direction: row;
+    }
+    .bf-list-group-horizontal > * {
+      width: auto;
+    }
+    .bf-list-group-horizontal > * + * {
+      border-block-start: 0;
+      border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+    }
     .bf-table {
       border-color: var(--sassy-table-border-colour, oklch(92.8% 0.006 264.531deg));
       color: var(--sassy-table-colour, currentColor);
@@ -10462,7 +10525,20 @@
       }
     }
   }
-  @layer components {}
+  @layer components {
+    @media (width >= 576px) {
+      .bf-list-group-horizontal-sm {
+        flex-direction: row;
+      }
+      .bf-list-group-horizontal-sm > * {
+        width: auto;
+      }
+      .bf-list-group-horizontal-sm > * + * {
+        border-block-start: 0;
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      }
+    }
+  }
   @layer forms {}
   @layer grid {
     @media (width >= 576px) {
@@ -18491,7 +18567,20 @@
       }
     }
   }
-  @layer components {}
+  @layer components {
+    @media (width >= 768px) {
+      .bf-list-group-horizontal-md {
+        flex-direction: row;
+      }
+      .bf-list-group-horizontal-md > * {
+        width: auto;
+      }
+      .bf-list-group-horizontal-md > * + * {
+        border-block-start: 0;
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      }
+    }
+  }
   @layer forms {}
   @layer grid {
     @media (width >= 768px) {
@@ -26520,7 +26609,20 @@
       }
     }
   }
-  @layer components {}
+  @layer components {
+    @media (width >= 992px) {
+      .bf-list-group-horizontal-lg {
+        flex-direction: row;
+      }
+      .bf-list-group-horizontal-lg > * {
+        width: auto;
+      }
+      .bf-list-group-horizontal-lg > * + * {
+        border-block-start: 0;
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      }
+    }
+  }
   @layer forms {}
   @layer grid {
     @media (width >= 992px) {
@@ -34549,7 +34651,20 @@
       }
     }
   }
-  @layer components {}
+  @layer components {
+    @media (width >= 1200px) {
+      .bf-list-group-horizontal-xl {
+        flex-direction: row;
+      }
+      .bf-list-group-horizontal-xl > * {
+        width: auto;
+      }
+      .bf-list-group-horizontal-xl > * + * {
+        border-block-start: 0;
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      }
+    }
+  }
   @layer forms {}
   @layer grid {
     @media (width >= 1200px) {
@@ -42578,7 +42693,20 @@
       }
     }
   }
-  @layer components {}
+  @layer components {
+    @media (width >= 1400px) {
+      .bf-list-group-horizontal-2xl {
+        flex-direction: row;
+      }
+      .bf-list-group-horizontal-2xl > * {
+        width: auto;
+      }
+      .bf-list-group-horizontal-2xl > * + * {
+        border-block-start: 0;
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      }
+    }
+  }
   @layer forms {}
   @layer grid {
     @media (width >= 1400px) {
@@ -50607,7 +50735,20 @@
       }
     }
   }
-  @layer components {}
+  @layer components {
+    @media (width >= 1600px) {
+      .bf-list-group-horizontal-3xl {
+        flex-direction: row;
+      }
+      .bf-list-group-horizontal-3xl > * {
+        width: auto;
+      }
+      .bf-list-group-horizontal-3xl > * + * {
+        border-block-start: 0;
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      }
+    }
+  }
   @layer forms {}
   @layer grid {
     @media (width >= 1600px) {

@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, close buttons, badges, navigation, breadcrumbs, cards, tables, tabs, alerts, tooltips and dialogs</h1>
+        <h1>Buttons, close buttons, badges, navigation, breadcrumbs, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -528,6 +528,64 @@
         &lt;footer class="card-foot"&gt;&lt;a href="#cards" class="button button-primary button-small"&gt;Read more&lt;/a&gt;&lt;/footer&gt;
     &lt;/article&gt;
 &lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="list-groups">
+            <h2>List groups</h2>
+            <p>The list's direct children are its items. Links and buttons shade under the pointer, the current item is marked with <code>aria-current</code>, and the last list sits in a row from the <code>md</code> breakpoint.</p>
+            <div class="demo">
+                <div class="list-demos">
+                    <nav class="items" aria-label="Folders">
+                        <a href="#list-groups" aria-current="page">Inbox</a>
+                        <a href="#list-groups">Sent</a>
+                        <a href="#list-groups">Drafts</a>
+                        <a href="#list-groups" aria-disabled="true">Archive</a>
+                    </nav>
+                    <ol class="items items-numbered">
+                        <li>Choose a plan</li>
+                        <li>Add your details</li>
+                        <li>Pay</li>
+                    </ol>
+                </div>
+                <ul class="items items-row">
+                    <li>Side by side</li>
+                    <li>from the md</li>
+                    <li>breakpoint</li>
+                </ul>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.items
+    @extend %bf-list-group
+
+.items-numbered
+    @extend %bf-list-group-numbered
+
+.items-row
+    @extend %bf-list-group-horizontal-md
+
+.list-demos
+    @extend %bf-d-grid
+    @extend %bf-gap-3
+    @extend %bf-mb-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="list-demos"&gt;
+    &lt;nav class="items" aria-label="Folders"&gt;
+        &lt;a href="#list-groups" aria-current="page"&gt;Inbox&lt;/a&gt;
+        &lt;a href="#list-groups"&gt;Sent&lt;/a&gt;
+        &lt;a href="#list-groups"&gt;Drafts&lt;/a&gt;
+        &lt;a href="#list-groups" aria-disabled="true"&gt;Archive&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;ol class="items items-numbered"&gt;
+        &lt;li&gt;Choose a plan&lt;/li&gt;
+        &lt;li&gt;Add your details&lt;/li&gt;
+        &lt;li&gt;Pay&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/div&gt;
+&lt;ul class="items items-row"&gt;
+    &lt;li&gt;Side by side&lt;/li&gt;
+    &lt;li&gt;from the md&lt;/li&gt;
+    &lt;li&gt;breakpoint&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
 </div>
         </section>
 

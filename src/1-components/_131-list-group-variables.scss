@@ -1,0 +1,17 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+
+$sassy-list-group-bg: var(--sassy-list-group-bg, #fff);
+$sassy-list-group-colour: var(--sassy-list-group-colour, inherit);
+$sassy-list-group-border-width: var(--sassy-list-group-border-width, 1px);
+$sassy-list-group-border-colour: var(--sassy-list-group-border-colour, #{colour("grey", 200)});
+$sassy-list-group-radius: var(--sassy-list-group-radius, $sassy-radius);
+$sassy-list-group-padding-y: var(--sassy-list-group-padding-y, #{$sassy-padding-unit * 2});
+$sassy-list-group-padding-x: var(--sassy-list-group-padding-x, #{$sassy-padding-unit * 4});
+
+// an actionable item under the pointer, mixed from the text colour so it shades any background
+$sassy-list-group-hover-bg: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, #{$sassy-list-group-bg}));
+$sassy-list-group-current-bg: var(--sassy-list-group-current-bg, var(--sassy-theme-primary));
+$sassy-list-group-current-colour: var(--sassy-list-group-current-colour, var(--sassy-theme-primary-contrast));
+$sassy-list-group-disabled-colour: var(--sassy-list-group-disabled-colour, #{colour("grey", 400)});

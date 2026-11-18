@@ -1,0 +1,86 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: list groups
+//  =================================================================
+
+//  A bordered list whose direct children are its items: <li> in a <ul> or <ol>, or <a> and <button>
+//  in a <div> or <nav> for items that do something. The list draws the outer border and clips
+//  the items to its corners, and each item draws the line above it, so nothing else is needed.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("list-group")
+        border: $sassy-list-group-border-width solid $sassy-list-group-border-colour
+        border-radius: $sassy-list-group-radius
+        box-sizing: border-box
+        display: flex
+        flex-direction: column
+        list-style: none
+        margin: 0
+        overflow: hidden
+        padding: 0
+
+        & > *
+            background-color: $sassy-list-group-bg
+            border: 0
+            box-sizing: border-box
+            color: $sassy-list-group-colour
+            margin: 0
+            padding: $sassy-list-group-padding-y $sassy-list-group-padding-x
+
+        & > * + *
+            border-block-start: $sassy-list-group-border-width solid $sassy-list-group-border-colour
+
+        // :where() so the current and disabled items below win over :hover
+        & > :where(a, button)
+            cursor: pointer
+            display: block
+            font: inherit
+            text-align: start
+            text-decoration: none
+            width: 100%
+
+            &:hover
+                background-color: $sassy-list-group-hover-bg
+
+            // inside the item, as the list clips anything outside it
+            &:focus-visible
+                outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+                outline-offset: calc(#{$sassy-focus-outline-width} * -1)
+
+        & > [aria-current]:not([aria-current="false"])
+            background-color: $sassy-list-group-current-bg
+            color: $sassy-list-group-current-colour
+
+        & > :disabled,
+        & > [aria-disabled="true"]
+            color: $sassy-list-group-disabled-colour
+            cursor: not-allowed
+            pointer-events: none
+
+    // No outer border or corners, for a list that fills a card
+
+    @include make.single("list-group-flush")
+        border-radius: 0
+        border-width: 0
+
+    // Numbers the items of an <ol>, with the list's own markers
+
+    @include make.single("list-group-numbered")
+        list-style: decimal inside
+
+    // Side by side, with the lines between the items turned upright - from a breakpoint with -{breakpoint}
+
+    @include make.responsive("list-group-horizontal", ())
+        flex-direction: row
+
+        // links and buttons fit their text, rather than each filling the row
+        & > *
+            width: auto
+
+        & > * + *
+            border-block-start: 0
+            border-inline-start: $sassy-list-group-border-width solid $sassy-list-group-border-colour
