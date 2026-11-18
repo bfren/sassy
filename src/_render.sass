@@ -2,11 +2,17 @@
 @use "sass:meta"
 @use "0-core/060-content" as content
 @use "1-components/110-button" as button
+@use "1-components/111-button-group" as button-group
 @use "1-components/112-close" as close
+@use "1-components/113-badge" as badge
 @use "1-components/120-nav" as nav
+@use "1-components/121-breadcrumb" as breadcrumb
+@use "1-components/122-pagination" as pagination
 @use "1-components/130-card" as card
+@use "1-components/131-list-group" as list-group
 @use "1-components/133-table" as table
 @use "1-components/140-tabs" as tabs
+@use "1-components/140-alert" as alert
 @use "1-components/150-tooltip" as tooltip
 @use "1-components/160-dialog" as dialog
 @use "2-forms/210-label" as form-label
@@ -54,11 +60,17 @@
         @include text.defaults
     @include make.layer(components)
         @include button.utilities
+        @include button-group.utilities
         @include close.utilities
+        @include badge.utilities
         @include nav.utilities
+        @include breadcrumb.utilities
+        @include pagination.utilities
         @include card.utilities
+        @include list-group.utilities
         @include table.utilities
         @include tabs.utilities
+        @include alert.utilities
         @include tooltip.utilities
         @include dialog.utilities
     @include make.layer(forms)

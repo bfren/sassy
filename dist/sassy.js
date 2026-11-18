@@ -3,19 +3,40 @@
  * https://github.com/bfren/sassy - MIT licence
  *
  * - Tabs: switches panels, with arrow keys, Home and End (the WAI-ARIA tabs pattern).
+ * - Toolbars: one stop in the tab order, with arrow keys, Home and End between the controls in it
+ *   (the WAI-ARIA toolbar pattern).
  * - Tooltips: shows popover tooltips on hover and focus, and positions them in browsers
  *   without CSS anchor positioning.
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
+ * - Dismissing: a button with commandfor and command="--dismiss" hides the element it names, such as an alert.
  *
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
  * whatever selectors you extend Sassy's placeholders onto. Load it once, with defer:
  *     <script src="sassy.js" defer></script>
- * Content added later is handled too, except new tab lists and collapsed content: call Sassy.init(element) for those.
+ * Content added later is handled too, except new tab lists, toolbars and collapsed content: call Sassy.init(element) for those.
  */
 (() => {
 	"use strict";
+
+	//  =================================================================
+	//  Arrow keys, shared by tabs and toolbars
+	//  =================================================================
+
+	/** The item a key moves to from the current one, or null if the key does not move. */
+	const itemForKey = (items, current, key, vertical) => {
+		const i = items.indexOf(current);
+		const step = { [vertical ? "ArrowDown" : "ArrowRight"]: 1, [vertical ? "ArrowUp" : "ArrowLeft"]: -1 }[key];
+		if (i < 0) return null;
+		if (step) return items[(i + step + items.length) % items.length];
+		if (key === "Home") return items[0];
+		if (key === "End") return items[items.length - 1];
+		return null;
+	};
+
+	/** Whether an element is laid out top to bottom, from its aria-orientation. */
+	const isVertical = el => el.getAttribute("aria-orientation") === "vertical";
 
 	//  =================================================================
 	//  Tabs
@@ -42,17 +63,7 @@
 		});
 
 	/** The tab a key moves to from the current one, or null if the key does not move. */
-	const tabForKey = (list, current, key) => {
-		const tabs = tabsOf(list).filter(enabled);
-		const i = tabs.indexOf(current);
-		const vertical = list.getAttribute("aria-orientation") === "vertical";
-		const step = { [vertical ? "ArrowDown" : "ArrowRight"]: 1, [vertical ? "ArrowUp" : "ArrowLeft"]: -1 }[key];
-		if (i < 0) return null;
-		if (step) return tabs[(i + step + tabs.length) % tabs.length];
-		if (key === "Home") return tabs[0];
-		if (key === "End") return tabs[tabs.length - 1];
-		return null;
-	};
+	const tabForKey = (list, current, key) => itemForKey(tabsOf(list).filter(enabled), current, key, isVertical(list));
 
 	/** Sets up a tab list: selects the tab marked aria-selected="true", or the first. */
 	const initTabs = list => {
@@ -80,6 +91,48 @@
 		if (next) {
 			e.preventDefault();
 			select(hit.list, next);
+			next.focus();
+		}
+	});
+
+	//  =================================================================
+	//  Toolbars
+	//  =================================================================
+
+	/** The controls in a toolbar that can take focus (not those of a toolbar nested in it). */
+	const toolbarItems = bar =>
+		[...bar.querySelectorAll("button, a[href], input, select, textarea, [tabindex]")]
+			.filter(el => el.closest('[role="toolbar"]') === bar && !el.disabled);
+
+	/** Makes one control the toolbar's stop in the tab order. */
+	const rove = (bar, current) => toolbarItems(bar).forEach(el => (el.tabIndex = el === current ? 0 : -1));
+
+	/** Sets up a toolbar: its first control is in the tab order, the rest are reached with the arrow keys. */
+	const initToolbar = bar => {
+		const items = toolbarItems(bar);
+		if (items.length > 0) rove(bar, items[0]);
+	};
+
+	/** The toolbar and control an event happened on, if any. */
+	const toolbarEvent = e => {
+		const bar = e.target.closest?.('[role="toolbar"]');
+		return bar && toolbarItems(bar).includes(e.target) ? { bar, item: e.target } : null;
+	};
+
+	// Tab comes back to the control last used, however it was reached
+	document.addEventListener("focusin", e => {
+		const hit = toolbarEvent(e);
+		if (hit) rove(hit.bar, hit.item);
+	});
+
+	document.addEventListener("keydown", e => {
+		// in a text field or list the arrow keys move the caret or the choice instead
+		if (e.target.matches?.("input, select, textarea")) return;
+		const hit = toolbarEvent(e);
+		const next = hit && itemForKey(toolbarItems(hit.bar), hit.item, e.key, isVertical(hit.bar));
+		if (next) {
+			e.preventDefault();
+			rove(hit.bar, next);
 			next.focus();
 		}
 	});
@@ -220,12 +273,24 @@
 	}
 
 	//  =================================================================
+	//  Dismissing: command="--dismiss" hides the element named by commandfor
+	//  =================================================================
+
+	// A custom command does nothing by itself, so this runs in every browser, with or without command support.
+	document.addEventListener("click", e => {
+		const button = e.target.closest?.('button[commandfor][command="--dismiss"]');
+		const target = button && document.getElementById(button.getAttribute("commandfor"));
+		if (target) target.hidden = true;
+	});
+
+	//  =================================================================
 	//  Start
 	//  =================================================================
 
-	/** Sets up the tab lists and collapsible content in an element (the whole page by default). */
+	/** Sets up the tab lists, toolbars and collapsible content in an element (the whole page by default). */
 	const init = (root = document) => {
 		root.querySelectorAll('[role="tablist"]').forEach(initTabs);
+		root.querySelectorAll('[role="toolbar"]').forEach(initToolbar);
 		root.querySelectorAll(toggleSelector).forEach(sync);
 	};
 

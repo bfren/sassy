@@ -22,6 +22,15 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Pagination: `%bf-pagination` on the `<ul>` of a `<nav>` joins its page links into a row of boxes that share their borders, with the current page marked by `aria-current="page"` and links that can't be used as a `<span>` or with `aria-disabled`. `%bf-pagination-small` and `-large` match the form control sizes.
+- Button groups: `%bf-btn-group` joins buttons into a row that shares borders, `%bf-btn-group-vertical` stacks them, and `%bf-btn-group-small` and `-large` size every button in a group. `%bf-btn-toolbar` lays groups out in a row.
+- `sassy.js` makes a `role="toolbar"` one stop in the tab order, and moves between its controls with the arrow keys, Home and End.
+- A `%bf-btn` with `aria-pressed="true"` looks pressed, for toggle buttons.
+- List groups: `%bf-list-group` styles its direct children as items - `<li>`, or `<a>` and `<button>` that shade under the pointer - with the current item marked by `aria-current` and disabled ones by `disabled` or `aria-disabled`. Combine `-flush` for inside a card, `-numbered` for an `<ol>`, and `-horizontal` or `-horizontal-{breakpoint}` for a row.
+- Breadcrumbs: `%bf-breadcrumb` on the `<ol>` of a `<nav>` styles its items, with a divider screen readers skip, set by `--sassy-breadcrumb-divider`. The current page is marked with `aria-current="page"`.
+- Badges: `%bf-badge`, a small label sized from the text around it, coloured with `%bf-text-bg-*` and made a pill with `%bf-rounded-pill`. `%bf-badge-count` puts one on the corner of a button or other parent, which it makes `position: relative` itself. An empty badge is hidden.
+- Alerts: `%bf-alert`, tinted with `%bf-alert-{theme colour}`, with `%bf-alert-title` for a heading. Links inside an alert take its text colour, in bold. `%bf-alert-dismissible` makes room for a close button with `command="--dismiss"`, which `sassy.js` turns into hiding the alert.
+- `sassy.js` hides the element named by any `commandfor` button with `command="--dismiss"`.
 - `%bf-close`: a close button, an empty `<button>` with `aria-label="Close"` whose × is drawn in the text colour, so it shows on any background. Its size and opacity are set by `--sassy-close-size`, `--sassy-close-opacity` and `--sassy-close-hover-opacity`.
 - `$sassy-layer`, the layer everything is output in, so Sassy can sit inside a stack of your own, such as `"vendor.sassy"`.
 - `node tools/site.mjs check` also checks the full build's layer order, that nothing is outside a layer, and that only `%bf-visually-hidden` uses `!important`.

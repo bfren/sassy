@@ -1,0 +1,35 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+@use "100-shared" as component
+
+//  =================================================================
+//  Components: button groups and toolbars
+//  =================================================================
+
+//  A group is a <div role="group" aria-label="..."> of %bf-btn buttons, which share their borders,
+//  with only the group's outer corners rounded. A toolbar is a role="toolbar" holding groups -
+//  sassy.js moves between its buttons with the arrow keys.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("btn-group")
+        @include component.joined(inline)
+
+    // Use instead of %bf-btn-group, for buttons stacked one above the other
+
+    @include make.single("btn-group-vertical")
+        @include component.joined(block)
+
+    // Sizes set the button custom properties on the group, so every button in it follows
+
+    @each $size, $props in $sassy-input-sizes
+        @include make.single("btn-group-" + $size)
+            @each $name, $value in $props
+                --sassy-input-#{$name}: #{$value}
+
+    @include make.single("btn-toolbar")
+        align-items: center
+        display: flex
+        flex-wrap: wrap
+        gap: $sassy-btn-toolbar-gap

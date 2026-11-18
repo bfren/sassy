@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, close buttons, navigation, cards, tables, tabs, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs and tooltips also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips and dismissible alerts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -98,6 +98,73 @@
 </div>
         </section>
 
+        <section class="example" id="button-groups">
+            <h2>Button groups</h2>
+            <p>Buttons in a group share their borders. The toolbar is one stop in the tab order: with <code>js/sassy.js</code> the arrow keys move between its buttons. Bold and Week have <code>aria-pressed="true"</code>.</p>
+            <div class="demo">
+                <div class="toolbar" role="toolbar" aria-label="Formatting">
+                    <div class="group" role="group" aria-label="Style">
+                        <button type="button" class="button" aria-pressed="true">Bold</button>
+                        <button type="button" class="button" aria-pressed="false">Italic</button>
+                        <button type="button" class="button" aria-pressed="false">Underline</button>
+                    </div>
+                    <div class="group" role="group" aria-label="History">
+                        <button type="button" class="button">Undo</button>
+                        <button type="button" class="button" disabled>Redo</button>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="group group-small" role="group" aria-label="Small">
+                        <button type="button" class="button button-primary button-outline">Day</button>
+                        <button type="button" class="button button-primary button-outline" aria-pressed="true">Week</button>
+                        <button type="button" class="button button-primary button-outline">Month</button>
+                    </div>
+                    <div class="group-vertical" role="group" aria-label="Vertical">
+                        <button type="button" class="button">Top</button>
+                        <button type="button" class="button">Middle</button>
+                        <button type="button" class="button">Bottom</button>
+                    </div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.group
+    @extend %bf-btn-group
+
+.group-small
+    @extend %bf-btn-group-small
+
+.group-vertical
+    @extend %bf-btn-group-vertical
+
+.toolbar
+    @extend %bf-btn-toolbar
+    @extend %bf-mb-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="toolbar" role="toolbar" aria-label="Formatting"&gt;
+    &lt;div class="group" role="group" aria-label="Style"&gt;
+        &lt;button type="button" class="button" aria-pressed="true"&gt;Bold&lt;/button&gt;
+        &lt;button type="button" class="button" aria-pressed="false"&gt;Italic&lt;/button&gt;
+        &lt;button type="button" class="button" aria-pressed="false"&gt;Underline&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="group" role="group" aria-label="History"&gt;
+        &lt;button type="button" class="button"&gt;Undo&lt;/button&gt;
+        &lt;button type="button" class="button" disabled&gt;Redo&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="buttons"&gt;
+    &lt;div class="group group-small" role="group" aria-label="Small"&gt;
+        &lt;button type="button" class="button button-primary button-outline"&gt;Day&lt;/button&gt;
+        &lt;button type="button" class="button button-primary button-outline" aria-pressed="true"&gt;Week&lt;/button&gt;
+        &lt;button type="button" class="button button-primary button-outline"&gt;Month&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="group-vertical" role="group" aria-label="Vertical"&gt;
+        &lt;button type="button" class="button"&gt;Top&lt;/button&gt;
+        &lt;button type="button" class="button"&gt;Middle&lt;/button&gt;
+        &lt;button type="button" class="button"&gt;Bottom&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="close">
             <h2>Close buttons</h2>
             <p>An empty button with <code>aria-label</code>. The × is drawn in the text colour, so it shows on a dark background too.</p>
@@ -125,6 +192,74 @@
     &lt;span class="on-dark"&gt;
         &lt;button type="button" class="close" aria-label="Close"&gt;&lt;/button&gt;
     &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="badges">
+            <h2>Badges</h2>
+            <p>A badge is sized from the text around it. Colour it with <code>%bf-text-bg-*</code> and round it with <code>%bf-rounded-pill</code>. The second count is empty, so it is hidden.</p>
+            <div class="demo">
+                <h3>Releases <span class="badge">v0.4</span> <span class="badge badge-new">New</span></h3>
+                <p>
+                    <span class="badge badge-ok">Passed</span>
+                    <span class="badge badge-warn">Pending</span>
+                    <span class="badge badge-violet">Violet 600</span>
+                    <span class="badge badge-violet badge-pill">Pill</span>
+                </p>
+                <div class="buttons">
+                    <button type="button" class="button">
+                        Inbox
+                        <span class="badge badge-count">4 <span class="visually-hidden">unread messages</span></span>
+                    </button>
+                    <button type="button" class="button">
+                        Alerts
+                        <span class="badge badge-count"></span>
+                    </button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.badge
+    @extend %bf-badge
+
+.badge-new
+    @extend %bf-text-bg-primary
+
+.badge-ok
+    @extend %bf-text-bg-ok
+
+.badge-warn
+    @extend %bf-text-bg-warn
+
+.badge-violet
+    @extend %bf-text-bg-violet-600
+
+.badge-pill
+    @extend %bf-rounded-pill
+
+.badge-count
+    @extend %bf-badge-count
+    @extend %bf-text-bg-error
+    @extend %bf-rounded-pill
+
+.visually-hidden
+    @extend %bf-visually-hidden</code></pre>
+<pre data-lang="html"><code>&lt;h3&gt;Releases &lt;span class="badge"&gt;v0.4&lt;/span&gt; &lt;span class="badge badge-new"&gt;New&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;
+    &lt;span class="badge badge-ok"&gt;Passed&lt;/span&gt;
+    &lt;span class="badge badge-warn"&gt;Pending&lt;/span&gt;
+    &lt;span class="badge badge-violet"&gt;Violet 600&lt;/span&gt;
+    &lt;span class="badge badge-violet badge-pill"&gt;Pill&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button"&gt;
+        Inbox
+        &lt;span class="badge badge-count"&gt;4 &lt;span class="visually-hidden"&gt;unread messages&lt;/span&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button type="button" class="button"&gt;
+        Alerts
+        &lt;span class="badge badge-count"&gt;&lt;/span&gt;
+    &lt;/button&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>
@@ -353,6 +488,99 @@
 </div>
         </section>
 
+        <section class="example" id="breadcrumbs">
+            <h2>Breadcrumbs</h2>
+            <p>Extend <code>%bf-breadcrumb</code> on the list, and it styles the items. The divider is set by a custom property, and screen readers skip it.</p>
+            <div class="demo">
+                <nav aria-label="Breadcrumb">
+                    <ol class="crumbs">
+                        <li><a href="#breadcrumbs">Home</a></li>
+                        <li><a href="#breadcrumbs">Docs</a></li>
+                        <li aria-current="page">Breadcrumbs</li>
+                    </ol>
+                </nav>
+                <nav aria-label="Breadcrumb, with a chevron">
+                    <ol class="crumbs crumbs-chevron">
+                        <li><a href="#breadcrumbs">Home</a></li>
+                        <li><a href="#breadcrumbs">Library</a></li>
+                        <li><a href="#breadcrumbs" aria-current="page">Data</a></li>
+                    </ol>
+                </nav>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.crumbs
+    @extend %bf-breadcrumb
+
+.crumbs-chevron
+    --sassy-breadcrumb-divider: "›"</code></pre>
+<pre data-lang="html"><code>&lt;nav aria-label="Breadcrumb"&gt;
+    &lt;ol class="crumbs"&gt;
+        &lt;li&gt;&lt;a href="#breadcrumbs"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#breadcrumbs"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+        &lt;li aria-current="page"&gt;Breadcrumbs&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/nav&gt;
+&lt;nav aria-label="Breadcrumb, with a chevron"&gt;
+    &lt;ol class="crumbs crumbs-chevron"&gt;
+        &lt;li&gt;&lt;a href="#breadcrumbs"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#breadcrumbs"&gt;Library&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#breadcrumbs" aria-current="page"&gt;Data&lt;/a&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="pagination">
+            <h2>Pagination</h2>
+            <p>The page links share their borders, like a button group. The current page has <code>aria-current="page"</code>, and Previous is a <code>&lt;span&gt;</code> on the first page, so it can't be used.</p>
+            <div class="demo">
+                <nav aria-label="Pages">
+                    <ul class="pages">
+                        <li><span aria-label="Previous page">‹</span></li>
+                        <li><a href="#pagination" aria-current="page">1</a></li>
+                        <li><a href="#pagination">2</a></li>
+                        <li><a href="#pagination">3</a></li>
+                        <li><span aria-hidden="true">…</span></li>
+                        <li><a href="#pagination">9</a></li>
+                        <li><a href="#pagination" aria-label="Next page">›</a></li>
+                    </ul>
+                </nav>
+                <nav aria-label="Pages, small">
+                    <ul class="pages pages-small">
+                        <li><a href="#pagination">1</a></li>
+                        <li><a href="#pagination" aria-current="page">2</a></li>
+                        <li><a href="#pagination">3</a></li>
+                    </ul>
+                </nav>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.pages
+    @extend %bf-pagination
+    @extend %bf-mb-3
+
+.pages-small
+    @extend %bf-pagination-small</code></pre>
+<pre data-lang="html"><code>&lt;nav aria-label="Pages"&gt;
+    &lt;ul class="pages"&gt;
+        &lt;li&gt;&lt;span aria-label="Previous page"&gt;‹&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination" aria-current="page"&gt;1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;3&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;span aria-hidden="true"&gt;…&lt;/span&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;9&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination" aria-label="Next page"&gt;›&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;nav aria-label="Pages, small"&gt;
+    &lt;ul class="pages pages-small"&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination" aria-current="page"&gt;2&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#pagination"&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="cards">
             <h2>Cards</h2>
             <p>Card bodies grow, so footers line up when cards in a row have different amounts of text.</p>
@@ -418,6 +646,64 @@
         &lt;footer class="card-foot"&gt;&lt;a href="#cards" class="button button-primary button-small"&gt;Read more&lt;/a&gt;&lt;/footer&gt;
     &lt;/article&gt;
 &lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="list-groups">
+            <h2>List groups</h2>
+            <p>The list's direct children are its items. Links and buttons shade under the pointer, the current item is marked with <code>aria-current</code>, and the last list sits in a row from the <code>md</code> breakpoint.</p>
+            <div class="demo">
+                <div class="list-demos">
+                    <nav class="items" aria-label="Folders">
+                        <a href="#list-groups" aria-current="page">Inbox</a>
+                        <a href="#list-groups">Sent</a>
+                        <a href="#list-groups">Drafts</a>
+                        <a href="#list-groups" aria-disabled="true">Archive</a>
+                    </nav>
+                    <ol class="items items-numbered">
+                        <li>Choose a plan</li>
+                        <li>Add your details</li>
+                        <li>Pay</li>
+                    </ol>
+                </div>
+                <ul class="items items-row">
+                    <li>Side by side</li>
+                    <li>from the md</li>
+                    <li>breakpoint</li>
+                </ul>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.items
+    @extend %bf-list-group
+
+.items-numbered
+    @extend %bf-list-group-numbered
+
+.items-row
+    @extend %bf-list-group-horizontal-md
+
+.list-demos
+    @extend %bf-d-grid
+    @extend %bf-gap-3
+    @extend %bf-mb-3</code></pre>
+<pre data-lang="html"><code>&lt;div class="list-demos"&gt;
+    &lt;nav class="items" aria-label="Folders"&gt;
+        &lt;a href="#list-groups" aria-current="page"&gt;Inbox&lt;/a&gt;
+        &lt;a href="#list-groups"&gt;Sent&lt;/a&gt;
+        &lt;a href="#list-groups"&gt;Drafts&lt;/a&gt;
+        &lt;a href="#list-groups" aria-disabled="true"&gt;Archive&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;ol class="items items-numbered"&gt;
+        &lt;li&gt;Choose a plan&lt;/li&gt;
+        &lt;li&gt;Add your details&lt;/li&gt;
+        &lt;li&gt;Pay&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/div&gt;
+&lt;ul class="items items-row"&gt;
+    &lt;li&gt;Side by side&lt;/li&gt;
+    &lt;li&gt;from the md&lt;/li&gt;
+    &lt;li&gt;breakpoint&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
 </div>
         </section>
 
@@ -508,6 +794,80 @@
 &lt;/div&gt;
 &lt;div class="tab-panel" role="tabpanel" id="panel-collect" aria-labelledby="tab-collect" tabindex="0"&gt;
     &lt;p&gt;Ready to collect from your chosen shop in two hours. Free.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="alerts">
+            <h2>Alerts</h2>
+            <p>A theme colour tints the background, border and text. The last alert can be dismissed: its close button has <code>command="--dismiss"</code>, which <code>sassy.js</code> handles.</p>
+            <div class="demo">
+                <div class="alert" role="status">
+                    <p>A plain alert, with <a href="#alerts">a link</a>.</p>
+                </div>
+                <div class="alert alert-primary" role="status">
+                    <h3 class="alert-title">Primary</h3>
+                    <p>An alert can hold a heading and several paragraphs.</p>
+                    <p>The last one has no margin below it.</p>
+                </div>
+                <div class="alert alert-ok" role="status">
+                    <p>Your changes are saved. <a href="#alerts">See the history</a>.</p>
+                </div>
+                <div class="alert alert-info" role="status">
+                    <p>Info, on a light theme colour.</p>
+                </div>
+                <div class="alert alert-warn" role="alert">
+                    <p>Warn, on a light theme colour.</p>
+                </div>
+                <div class="alert alert-error alert-dismissible" id="upload-failed" role="alert">
+                    <p>The upload failed. <a href="#alerts">Try again</a>.</p>
+                    <button type="button" class="close" commandfor="upload-failed" command="--dismiss" aria-label="Close"></button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.alert
+    @extend %bf-alert
+
+.alert-primary
+    @extend %bf-alert-primary
+
+.alert-ok
+    @extend %bf-alert-ok
+
+.alert-info
+    @extend %bf-alert-info
+
+.alert-warn
+    @extend %bf-alert-warn
+
+.alert-error
+    @extend %bf-alert-error
+
+.alert-title
+    @extend %bf-alert-title
+
+.alert-dismissible
+    @extend %bf-alert-dismissible</code></pre>
+<pre data-lang="html"><code>&lt;div class="alert" role="status"&gt;
+    &lt;p&gt;A plain alert, with &lt;a href="#alerts"&gt;a link&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-primary" role="status"&gt;
+    &lt;h3 class="alert-title"&gt;Primary&lt;/h3&gt;
+    &lt;p&gt;An alert can hold a heading and several paragraphs.&lt;/p&gt;
+    &lt;p&gt;The last one has no margin below it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-ok" role="status"&gt;
+    &lt;p&gt;Your changes are saved. &lt;a href="#alerts"&gt;See the history&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-info" role="status"&gt;
+    &lt;p&gt;Info, on a light theme colour.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-warn" role="alert"&gt;
+    &lt;p&gt;Warn, on a light theme colour.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="alert alert-error alert-dismissible" id="upload-failed" role="alert"&gt;
+    &lt;p&gt;The upload failed. &lt;a href="#alerts"&gt;Try again&lt;/a&gt;.&lt;/p&gt;
+    &lt;button type="button" class="close" commandfor="upload-failed" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

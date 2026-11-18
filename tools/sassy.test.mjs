@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys.
+ * Tests for src/sassy.js: tab keys, toolbar keys and dismissing.
  *
  *     npm install --no-save jsdom && node --test tools/sassy.test.mjs
  */
@@ -43,4 +43,46 @@ test("tabs: arrow keys wrap, Home and End jump, disabled tabs are skipped, panel
 	assert.equal($("t3").getAttribute("aria-selected"), "true");
 	press(window, $("t3"), "Home");
 	assert.equal($("t1").getAttribute("aria-selected"), "true");
+});
+
+test("dismissing: a --dismiss button hides the element it names, and other commands do not", () => {
+	const window = load(`
+		<div id="alert">
+			<button id="other" commandfor="alert" command="--other"></button>
+			<button id="close" commandfor="alert" command="--dismiss"><span id="icon"></span></button>
+		</div>`);
+	const $ = id => window.document.getElementById(id);
+
+	$("other").click();
+	assert.equal($("alert").hidden, false);
+	$("icon").click(); // a click on something inside the button
+	assert.equal($("alert").hidden, true);
+});
+
+test("toolbars: one tab stop, arrow keys wrap, Home and End jump, disabled controls and text fields are skipped", () => {
+	const window = load(`
+		<div role="toolbar">
+			<div role="group"><button id="b1">1</button><button id="b2" disabled>2</button><button id="b3">3</button></div>
+			<div role="group"><button id="b4">4</button><input id="text"></div>
+		</div>`);
+	const $ = id => window.document.getElementById(id);
+	const tabStops = () => ["b1", "b3", "b4", "text"].filter(id => $(id).tabIndex === 0);
+
+	assert.deepEqual(tabStops(), ["b1"]);
+	$("b1").focus();
+	press(window, $("b1"), "ArrowRight");
+	assert.equal(window.document.activeElement, $("b3"));
+	assert.deepEqual(tabStops(), ["b3"]);
+	press(window, $("b3"), "End");
+	assert.equal(window.document.activeElement, $("text"));
+	press(window, $("text"), "ArrowRight"); // moves the caret, not the focus
+	assert.equal(window.document.activeElement, $("text"));
+	$("b4").focus();
+	press(window, $("b4"), "ArrowRight");
+	assert.equal(window.document.activeElement, $("text"));
+	$("b1").focus();
+	press(window, $("b1"), "ArrowLeft");
+	assert.equal(window.document.activeElement, $("text"));
+	press(window, $("b4"), "Home");
+	assert.equal(window.document.activeElement, $("b1"));
 });

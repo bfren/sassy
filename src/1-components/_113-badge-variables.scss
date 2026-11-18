@@ -1,0 +1,10 @@
+@use "../4-utilities/450-rounded-variables" as *;
+
+// The colours default to the grey-dark theme colour and its contrasting text.
+// For another colour, combine %bf-badge with %bf-text-bg-{theme} or %bf-text-bg-{colour}-{shade}.
+$sassy-badge-bg: var(--sassy-badge-bg, var(--sassy-theme-grey-dark));
+$sassy-badge-colour: var(--sassy-badge-colour, var(--sassy-theme-grey-dark-contrast));
+$sassy-badge-font-size: var(--sassy-badge-font-size, 0.75em);
+$sassy-badge-padding-y: var(--sassy-badge-padding-y, 0.35em);
+$sassy-badge-padding-x: var(--sassy-badge-padding-x, 0.65em);
+$sassy-badge-radius: var(--sassy-badge-radius, $sassy-radius);

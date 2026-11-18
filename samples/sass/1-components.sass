@@ -25,6 +25,19 @@
 .button-large
     @extend %bf-btn-large
 
+.group
+    @extend %bf-btn-group
+
+.group-small
+    @extend %bf-btn-group-small
+
+.group-vertical
+    @extend %bf-btn-group-vertical
+
+.toolbar
+    @extend %bf-btn-toolbar
+    @extend %bf-mb-3
+
 .buttons
     @extend %bf-d-flex
     @extend %bf-flex-wrap-wrap
@@ -40,6 +53,32 @@
     @extend %bf-text-bg-grey-dark
     @extend %bf-p-2
     @extend %bf-rounded-2
+
+.badge
+    @extend %bf-badge
+
+.badge-new
+    @extend %bf-text-bg-primary
+
+.badge-ok
+    @extend %bf-text-bg-ok
+
+.badge-warn
+    @extend %bf-text-bg-warn
+
+.badge-violet
+    @extend %bf-text-bg-violet-600
+
+.badge-pill
+    @extend %bf-rounded-pill
+
+.badge-count
+    @extend %bf-badge-count
+    @extend %bf-text-bg-error
+    @extend %bf-rounded-pill
+
+.visually-hidden
+    @extend %bf-visually-hidden
 
 .menu
     @extend %bf-nav
@@ -92,6 +131,19 @@
     @extend %bf-flex-wrap-wrap
     @extend %bf-gap-4
 
+.crumbs
+    @extend %bf-breadcrumb
+
+.crumbs-chevron
+    --sassy-breadcrumb-divider: "›"
+
+.pages
+    @extend %bf-pagination
+    @extend %bf-mb-3
+
+.pages-small
+    @extend %bf-pagination-small
+
 .card
     @extend %bf-card
     flex: 1 1 15rem
@@ -120,6 +172,30 @@
 .tab-panel
     @extend %bf-tab-panel
 
+.alert
+    @extend %bf-alert
+
+.alert-primary
+    @extend %bf-alert-primary
+
+.alert-ok
+    @extend %bf-alert-ok
+
+.alert-info
+    @extend %bf-alert-info
+
+.alert-warn
+    @extend %bf-alert-warn
+
+.alert-error
+    @extend %bf-alert-error
+
+.alert-title
+    @extend %bf-alert-title
+
+.alert-dismissible
+    @extend %bf-alert-dismissible
+
 .tip
     @extend %bf-tooltip
 
@@ -140,6 +216,20 @@
 
 .dialog-body
     @extend %bf-dialog-body
+
+.items
+    @extend %bf-list-group
+
+.items-numbered
+    @extend %bf-list-group-numbered
+
+.items-row
+    @extend %bf-list-group-horizontal-md
+
+.list-demos
+    @extend %bf-d-grid
+    @extend %bf-gap-3
+    @extend %bf-mb-3
 
 .prices
     @extend %bf-table

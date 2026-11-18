@@ -1,0 +1,47 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: badges
+//  =================================================================
+
+//  A small label, sized from the text around it. Colour it with %bf-text-bg-{theme},
+//  and make it a pill with %bf-rounded-pill - both are utilities, so they win.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("badge")
+        background-color: $sassy-badge-bg
+        border-radius: $sassy-badge-radius
+        box-sizing: border-box
+        color: $sassy-badge-colour
+        display: inline-block
+        font-size: $sassy-badge-font-size
+        font-weight: 700
+        line-height: 1
+        padding: $sassy-badge-padding-y $sassy-badge-padding-x
+        text-align: center
+        vertical-align: baseline
+        white-space: nowrap
+
+        // a count that drops to nothing disappears
+        &:empty
+            display: none
+
+    // A badge on the top end corner of its parent, such as a button, half outside it.
+    // The parent is made position: relative, with no specificity, so there is nothing else to add.
+
+    @include make.single("badge-count")
+        inset-block-start: 0
+        inset-inline-start: 100%
+        position: absolute
+        translate: -50% -50%
+
+        // inset-inline-start is the right edge in a right-to-left page, so move the other way
+        &:dir(rtl)
+            translate: 50% -50%
+
+        // the * is needed: Sass 1.108 crashes extending into :where(:has(> &))
+        :where(*:has(> &))
+            position: relative

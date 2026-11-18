@@ -1,0 +1,32 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: breadcrumbs
+//  =================================================================
+
+//  On the <ol> of a <nav aria-label="Breadcrumb">. Its <li> items are styled for you,
+//  and the last one, the current page, has aria-current="page" - on the item or on a link in it.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("breadcrumb")
+        display: flex
+        flex-wrap: wrap
+        list-style: none
+        margin: 0 0 $sassy-breadcrumb-margin-bottom
+        padding: 0
+
+        a
+            color: $sassy-breadcrumb-link-colour
+
+        // the divider is decoration, so its alternative text is empty and screen readers skip it
+        & > li + li::before
+            color: $sassy-breadcrumb-divider-colour
+            content: #{$sassy-breadcrumb-divider} / ""
+            padding-inline: $sassy-breadcrumb-gap
+
+        & > [aria-current="page"],
+        & > li > [aria-current="page"]
+            color: $sassy-breadcrumb-current-colour
