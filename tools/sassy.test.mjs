@@ -13,7 +13,7 @@ import { JSDOM } from "jsdom";
 
 const script = readFileSync(new URL("../src/sassy.js", import.meta.url), "utf8");
 
-/** A page with sassy.js loaded. `before` runs first, to change what the browser supports. */
+/** A page with sassy.js loaded. `before` runs first, to change what the browser supports (older jsdom has no window.CSS). */
 const load = (body, before) => {
 	const dom = new JSDOM(body, { runScripts: "outside-only" });
 	before?.(dom.window);
@@ -107,7 +107,7 @@ const tooltipPage = before => {
 };
 
 test("positioning without anchor positioning: above and centred, below if no room, kept on screen", () => {
-	const { $, box, focus } = tooltipPage(window => (window.CSS.supports = () => false));
+	const { $, box, focus } = tooltipPage(window => (window.CSS = { supports: () => false }));
 	const at = () => [$("tip").style.top, $("tip").style.left];
 
 	box($("a"), 400, 200, 50, 20);
@@ -130,7 +130,7 @@ test("positioning without anchor positioning: above and centred, below if no roo
 });
 
 test("positioning with anchor positioning: the tooltip anchors to whichever trigger opened it", () => {
-	const { $, focus } = tooltipPage(window => (window.CSS.supports = () => true));
+	const { $, focus } = tooltipPage(window => (window.CSS = { supports: () => true }));
 	const anchorOf = el => el.style.getPropertyValue("anchor-name");
 
 	focus($("a"));
