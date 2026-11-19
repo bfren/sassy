@@ -9,6 +9,43 @@
 //  <button commandfor="id" command="show-modal">, and close it with command="close" -
 //  in the header, on a %bf-close button.
 
+// A dialog styles its parts from their elements: a <header> with a heading in it, a <footer>, and whatever
+// is between them as the body. They can be inside a <form method="dialog"> that holds the whole dialog.
+
+$-headings: "h1, h2, h3, h4, h5, h6"
+
+@mixin -header
+    align-items: center
+    border-bottom: $sassy-dialog-border-width solid $sassy-dialog-border-colour
+    display: flex
+    gap: $sassy-margin-unit * 4
+    justify-content: space-between
+    padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
+
+@mixin -title
+    font-size: calc(var(--sassy-font-size-base) * 1.25)
+    line-height: 1.2
+    margin: 0
+
+@mixin -body
+    flex: 1 1 auto
+    overflow-y: auto
+    padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
+
+    & > :first-child
+        margin-top: 0
+
+    & > :last-child
+        margin-bottom: 0
+
+@mixin -footer
+    border-top: $sassy-dialog-border-width solid $sassy-dialog-border-colour
+    display: flex
+    flex-wrap: wrap
+    gap: $sassy-margin-unit * 2
+    justify-content: flex-end
+    padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
+
 /// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
@@ -34,40 +71,45 @@
         :root:has(&:modal)
             overflow: hidden
 
+        // a form that holds the header and footer lays them out as if they were the dialog's own
+        & > form:has(> header, > footer)
+            display: contents
+
+        // the parts, with no specificity from the dialog, so where a part also extends a component,
+        // that component's rules win
+
+        :where(&) > header,
+        :where(&) > form > header
+            @include -header
+
+        :where(&) > header > :is(#{$-headings}),
+        :where(&) > form > header > :is(#{$-headings})
+            @include -title
+
+        :where(&) > :not(header, footer, form:has(> header, > footer)),
+        :where(&) > form:has(> header, > footer) > :not(header, footer)
+            @include -body
+
+        :where(&) > footer,
+        :where(&) > form > footer
+            @include -footer
+
     // Sizes only change the width, so combine them with %dialog
 
     @each $size, $width in $sassy-dialog-sizes
         @include make.single("dialog-" + $size)
             --sassy-dialog-width: #{$width}
 
+    // The parts also have placeholders of their own, for markup that doesn't match: a <div> header, say
+
     @include make.single("dialog-header")
-        align-items: center
-        border-bottom: $sassy-dialog-border-width solid $sassy-dialog-border-colour
-        display: flex
-        gap: $sassy-margin-unit * 4
-        justify-content: space-between
-        padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
+        @include -header
 
     @include make.single("dialog-title")
-        font-size: calc(var(--sassy-font-size-base) * 1.25)
-        line-height: 1.2
-        margin: 0
+        @include -title
 
     @include make.single("dialog-body")
-        flex: 1 1 auto
-        overflow-y: auto
-        padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
-
-        & > :first-child
-            margin-top: 0
-
-        & > :last-child
-            margin-bottom: 0
+        @include -body
 
     @include make.single("dialog-footer")
-        border-top: $sassy-dialog-border-width solid $sassy-dialog-border-colour
-        display: flex
-        flex-wrap: wrap
-        gap: $sassy-margin-unit * 2
-        justify-content: flex-end
-        padding: $sassy-dialog-padding-y $sassy-dialog-padding-x
+        @include -footer

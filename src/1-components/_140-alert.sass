@@ -10,6 +10,11 @@
 //  A dismissible alert holds a %bf-close button with commandfor="<the alert's id>" command="--dismiss",
 //  which sassy.js turns into hidden on the alert.
 
+@mixin -title
+    color: inherit
+    font-size: calc(var(--sassy-font-size-base) * 1.25)
+    margin: 0 0 $sassy-margin-unit * 2
+
 /// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
@@ -30,6 +35,10 @@
         & > :nth-last-child(1 of :not([command]))
             margin-bottom: 0
 
+        // a heading the alert starts with is its title
+        & > :is(h1, h2, h3, h4, h5, h6):first-child
+            @include -title
+
         // links show on every tint
         a
             color: inherit
@@ -43,10 +52,9 @@
             --sassy-alert-border-colour: color-mix(in oklab, #{$value} #{$sassy-alert-border-tint}, transparent)
             --sassy-alert-colour: color-mix(in oklab, #{$value} #{$sassy-alert-text-tint}, currentColor)
 
+    // for a title that isn't a heading, or isn't first
     @include make.single("alert-title")
-        color: inherit
-        font-size: calc(var(--sassy-font-size-base) * 1.25)
-        margin: 0 0 $sassy-margin-unit * 2
+        @include -title
 
     // Room at the end for a %bf-close button, which sits in the top corner
 

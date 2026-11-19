@@ -10,9 +10,6 @@ A dropdown is a menu in a popover, opened by a button's `popovertarget`. The bro
 
 .dropdown-toggle
     @extend %bf-dropdown-toggle
-
-.dropdown-divider
-    @extend %bf-dropdown-divider
 ```
 
 ```css
@@ -34,7 +31,7 @@ A dropdown is a menu in a popover, opened by a button's `popovertarget`. The bro
 <div class="dropdown" id="file-menu" popover role="menu" aria-label="File">
     <button type="button" role="menuitem">New</button>
     <button type="button" role="menuitem">Open…</button>
-    <hr class="dropdown-divider" />
+    <hr />
     <button type="button" role="menuitem">Print…</button>
 </div>
 ```
@@ -42,7 +39,7 @@ A dropdown is a menu in a popover, opened by a button's `popovertarget`. The bro
 - **Choose the pattern by what the items do.** For actions, give the popover `role="menu"`, its items `role="menuitem"` and the button `aria-haspopup="menu"`: `sassy.js` then focuses the first item when the menu opens, and moves between items with the arrow keys, Home and End. For links to other pages, leave the roles out: people reach the links with Tab, as in any list, and the popover can be a `<ul>`.
 - **`sassy.js` also** keeps the button's `aria-expanded` up to date, which turns the chevron of `%bf-dropdown-toggle`, closes the menu when an item is chosen or Tab leaves it, and places the menu in browsers without CSS anchor positioning.
 - **Extend `%bf-dropdown-up` to open above the button, and `%bf-dropdown-end` to line the menu up with its end.** They combine.
-- **Group items** with `%bf-dropdown-header`, a label that can't be chosen, and `%bf-dropdown-divider`, on an `<hr>`. Mark the current page with `aria-current="page"`, and items that can't be used with `disabled` or `aria-disabled="true"`.
+- **Group items** with a heading, a label that can't be chosen, and an `<hr>` or `role="separator"` between groups: the dropdown styles them itself. `%bf-dropdown-header` and `%bf-dropdown-divider` are for labels and lines that are other elements. Mark the current page with `aria-current="page"`, and items that can't be used with `disabled` or `aria-disabled="true"`.
 - **For a split button**, put an action button and a chevron-only button that extends `%bf-dropdown-toggle` and `%bf-dropdown-split` in a [button group](111-button-group.md). Give the chevron button an `aria-label`, such as "More ways to publish".
 - **In a navbar**, a link-styled button can open a dropdown in the same way. The menu floats below it even while the navbar is collapsed.
 

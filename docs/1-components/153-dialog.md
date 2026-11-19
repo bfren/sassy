@@ -8,18 +8,6 @@ Dialogs style the native `<dialog>` element. Buttons open and close them with `c
 .dialog
     @extend %bf-dialog
 
-    header
-        @extend %bf-dialog-header
-
-    h2
-        @extend %bf-dialog-title
-
-    footer
-        @extend %bf-dialog-footer
-
-.dialog-body
-    @extend %bf-dialog-body
-
 .close
     @extend %bf-close
 ```
@@ -32,7 +20,7 @@ Dialogs style the native `<dialog>` element. Buttons open and close them with `c
         <h2 id="confirm-title">Delete this file?</h2>
         <button type="button" class="close" commandfor="confirm" command="close" aria-label="Close"></button>
     </header>
-    <div class="dialog-body">
+    <div>
         <p>You can't undo this.</p>
     </div>
     <footer>
@@ -41,6 +29,8 @@ Dialogs style the native `<dialog>` element. Buttons open and close them with `c
     </footer>
 </dialog>
 ```
+
+`%bf-dialog` styles its parts from their elements: a `<header>` (and the heading in it), a `<footer>`, and whatever is between them as the body, which scrolls when the dialog is taller than the window. They can also be inside a `<form method="dialog">` that holds the whole dialog. For markup that doesn't match, such as a `<div>` header, extend `%bf-dialog-header`, `-title`, `-body` or `-footer` on it instead. The parts have no specificity from the dialog, so where a part also extends a component, that component's rules win; anything it doesn't set, such as the body's padding, still applies.
 
 | `command`    | Does                                                              |
 | ------------ | ----------------------------------------------------------------- |

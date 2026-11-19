@@ -11,7 +11,7 @@
 
     <header class="site-header">
         <div class="site-width site-header-inner">
-            <a class="brand" href="index.html"><img src="images/logo.svg" alt="Sassy" /></a>
+            <a class="brand" href="index.html"><img src="images/logo.svg" alt="Sassy" height="29" /></a>
             <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-menu"></button>
             <nav id="site-menu" class="site-menu" aria-label="Layers">
                 <ul class="site-nav">
@@ -278,10 +278,7 @@
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.menu
-    @extend %bf-nav
-
-    a
-        @extend %bf-nav-link</code></pre>
+    @extend %bf-nav</code></pre>
 <pre data-lang="html"><code>&lt;nav aria-label="Example"&gt;
     &lt;ul class="menu"&gt;
         &lt;li&gt;&lt;a href="#nav" aria-current="page"&gt;Home&lt;/a&gt;&lt;/li&gt;
@@ -592,15 +589,15 @@
                             <h3>With an image</h3>
                             <p>The image is clipped to the card's rounded corners.</p>
                         </div>
-                        <footer class="card-foot">Updated today</footer>
+                        <footer>Updated today</footer>
                     </article>
                     <article class="card">
-                        <header class="card-head">Featured</header>
+                        <header>Featured</header>
                         <div class="card-body">
                             <h3>With a header</h3>
                             <p>A header and footer share the card's border and background.</p>
                         </div>
-                        <footer class="card-foot"><a href="#cards" class="button button-primary button-small">Read more</a></footer>
+                        <footer><a href="#cards" class="button button-primary button-small">Read more</a></footer>
                     </article>
                 </div>
             </div>
@@ -614,20 +611,11 @@
     @extend %bf-card
     flex: 1 1 15rem
 
-    img
-        @extend %bf-card-image
-
     h3
         @extend %bf-card-title
 
-.card-head
-    @extend %bf-card-header
-
 .card-body
-    @extend %bf-card-body
-
-.card-foot
-    @extend %bf-card-footer</code></pre>
+    @extend %bf-card-body</code></pre>
 <pre data-lang="html"><code>&lt;div class="cards"&gt;
     &lt;article class="card"&gt;
         &lt;img src="photo.jpg" alt="" /&gt;
@@ -635,15 +623,15 @@
             &lt;h3&gt;With an image&lt;/h3&gt;
             &lt;p&gt;The image is clipped to the card's rounded corners.&lt;/p&gt;
         &lt;/div&gt;
-        &lt;footer class="card-foot"&gt;Updated today&lt;/footer&gt;
+        &lt;footer&gt;Updated today&lt;/footer&gt;
     &lt;/article&gt;
     &lt;article class="card"&gt;
-        &lt;header class="card-head"&gt;Featured&lt;/header&gt;
+        &lt;header&gt;Featured&lt;/header&gt;
         &lt;div class="card-body"&gt;
             &lt;h3&gt;With a header&lt;/h3&gt;
             &lt;p&gt;A header and footer share the card's border and background.&lt;/p&gt;
         &lt;/div&gt;
-        &lt;footer class="card-foot"&gt;&lt;a href="#cards" class="button button-primary button-small"&gt;Read more&lt;/a&gt;&lt;/footer&gt;
+        &lt;footer&gt;&lt;a href="#cards" class="button button-primary button-small"&gt;Read more&lt;/a&gt;&lt;/footer&gt;
     &lt;/article&gt;
 &lt;/div&gt;</code></pre>
 </div>
@@ -815,9 +803,6 @@
 <pre data-lang="sass"><code>.tab-list
     @extend %bf-tabs
 
-    [role="tab"]
-        @extend %bf-tab
-
 .tab-panel
     @extend %bf-tab-panel</code></pre>
 <pre data-lang="html"><code>&lt;div class="tab-list" role="tablist" aria-label="Delivery options"&gt;
@@ -845,7 +830,7 @@
                     <p>A plain alert, with <a href="#alerts">a link</a>.</p>
                 </div>
                 <div class="alert alert-primary" role="status">
-                    <h3 class="alert-title">Primary</h3>
+                    <h3>Primary</h3>
                     <p>An alert can hold a heading and several paragraphs.</p>
                     <p>The last one has no margin below it.</p>
                 </div>
@@ -882,16 +867,13 @@
 .alert-error
     @extend %bf-alert-error
 
-.alert-title
-    @extend %bf-alert-title
-
 .alert-dismissible
     @extend %bf-alert-dismissible</code></pre>
 <pre data-lang="html"><code>&lt;div class="alert" role="status"&gt;
     &lt;p&gt;A plain alert, with &lt;a href="#alerts"&gt;a link&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="alert alert-primary" role="status"&gt;
-    &lt;h3 class="alert-title"&gt;Primary&lt;/h3&gt;
+    &lt;h3&gt;Primary&lt;/h3&gt;
     &lt;p&gt;An alert can hold a heading and several paragraphs.&lt;/p&gt;
     &lt;p&gt;The last one has no margin below it.&lt;/p&gt;
 &lt;/div&gt;
@@ -1249,11 +1231,11 @@
                 <div class="buttons">
                     <button type="button" class="button dropdown-toggle" popovertarget="file-menu" aria-haspopup="menu">File</button>
                     <div class="dropdown" id="file-menu" popover role="menu" aria-label="File">
-                        <h3 class="dropdown-header">Document</h3>
+                        <h3>Document</h3>
                         <button type="button" role="menuitem">New</button>
                         <button type="button" role="menuitem">Open…</button>
                         <button type="button" role="menuitem" disabled>Save</button>
-                        <hr class="dropdown-divider" />
+                        <hr />
                         <button type="button" role="menuitem">Print…</button>
                     </div>
 
@@ -1284,12 +1266,6 @@
 .dropdown-up
     @extend %bf-dropdown-up
 
-.dropdown-header
-    @extend %bf-dropdown-header
-
-.dropdown-divider
-    @extend %bf-dropdown-divider
-
 .dropdown-toggle
     @extend %bf-dropdown-toggle
 
@@ -1298,11 +1274,11 @@
 <pre data-lang="html"><code>&lt;div class="buttons"&gt;
     &lt;button type="button" class="button dropdown-toggle" popovertarget="file-menu" aria-haspopup="menu"&gt;File&lt;/button&gt;
     &lt;div class="dropdown" id="file-menu" popover role="menu" aria-label="File"&gt;
-        &lt;h3 class="dropdown-header"&gt;Document&lt;/h3&gt;
+        &lt;h3&gt;Document&lt;/h3&gt;
         &lt;button type="button" role="menuitem"&gt;New&lt;/button&gt;
         &lt;button type="button" role="menuitem"&gt;Open…&lt;/button&gt;
         &lt;button type="button" role="menuitem" disabled&gt;Save&lt;/button&gt;
-        &lt;hr class="dropdown-divider" /&gt;
+        &lt;hr /&gt;
         &lt;button type="button" role="menuitem"&gt;Print…&lt;/button&gt;
     &lt;/div&gt;
 
@@ -1368,15 +1344,6 @@
 <div class="code">
 <pre data-lang="sass"><code>.dialog
     @extend %bf-dialog
-
-    header
-        @extend %bf-dialog-header
-
-    h2
-        @extend %bf-dialog-title
-
-    footer
-        @extend %bf-dialog-footer
 
 .dialog-large
     @extend %bf-dialog-large
@@ -1592,90 +1559,6 @@
                         </div>
                     </div>
                 </section>
-
-        <section class="example" id="scrollspy">
-            <h2>Scrollspy</h2>
-            <p>A nav of links to sections, one with <code>aria-current="location"</code>, follows the scrolling: <code>sassy.js</code> moves <code>aria-current</code> to the link of the section in view. It needs no Sass of its own.</p>
-            <div class="demo">
-                <div class="with-sidebar">
-                    <nav class="menu menu-vertical menu-pills" aria-label="On this demo">
-                        <a href="#spy-intro" aria-current="location">Introduction</a>
-                        <a href="#spy-setup">Setting up</a>
-                        <a href="#spy-usage">Using it</a>
-                        <a href="#spy-faq">Questions</a>
-                    </nav>
-                    <div class="spy-area" tabindex="0">
-                        <section id="spy-intro">
-                            <h3>Introduction</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                        <section id="spy-setup">
-                            <h3>Setting up</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                        <section id="spy-usage">
-                            <h3>Using it</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                        <section id="spy-faq">
-                            <h3>Questions</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                    </div>
-                </div>
-            </div>
-<div class="code">
-<pre data-lang="sass"><code>.menu
-    @extend %bf-nav
-
-    a
-        @extend %bf-nav-link
-
-.menu-pills
-    @extend %bf-nav-pills
-
-.menu-vertical
-    @extend %bf-nav-vertical
-
-.spy-area
-    @extend %bf-overflow-y-auto
-    block-size: 16rem</code></pre>
-<pre data-lang="html"><code>&lt;div class="with-sidebar"&gt;
-    &lt;nav class="menu menu-vertical menu-pills" aria-label="On this demo"&gt;
-        &lt;a href="#spy-intro" aria-current="location"&gt;Introduction&lt;/a&gt;
-        &lt;a href="#spy-setup"&gt;Setting up&lt;/a&gt;
-        &lt;a href="#spy-usage"&gt;Using it&lt;/a&gt;
-        &lt;a href="#spy-faq"&gt;Questions&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;div class="spy-area" tabindex="0"&gt;
-        &lt;section id="spy-intro"&gt;
-            &lt;h3&gt;Introduction&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;section id="spy-setup"&gt;
-            &lt;h3&gt;Setting up&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;section id="spy-usage"&gt;
-            &lt;h3&gt;Using it&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;section id="spy-faq"&gt;
-            &lt;h3&gt;Questions&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</div>
-        </section>
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.carousel
@@ -1761,6 +1644,87 @@
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/section&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="scrollspy">
+            <h2>Scrollspy</h2>
+            <p>A nav of links to sections, one with <code>aria-current="location"</code>, follows the scrolling: <code>sassy.js</code> moves <code>aria-current</code> to the link of the section in view. It needs no Sass of its own.</p>
+            <div class="demo">
+                <div class="with-sidebar">
+                    <nav class="menu menu-vertical menu-pills" aria-label="On this demo">
+                        <a href="#spy-intro" aria-current="location">Introduction</a>
+                        <a href="#spy-setup">Setting up</a>
+                        <a href="#spy-usage">Using it</a>
+                        <a href="#spy-faq">Questions</a>
+                    </nav>
+                    <div class="spy-area" tabindex="0">
+                        <section id="spy-intro">
+                            <h3>Introduction</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-setup">
+                            <h3>Setting up</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-usage">
+                            <h3>Using it</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-faq">
+                            <h3>Questions</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.menu
+    @extend %bf-nav
+
+.menu-pills
+    @extend %bf-nav-pills
+
+.menu-vertical
+    @extend %bf-nav-vertical
+
+.spy-area
+    @extend %bf-overflow-y-auto
+    block-size: 16rem</code></pre>
+<pre data-lang="html"><code>&lt;div class="with-sidebar"&gt;
+    &lt;nav class="menu menu-vertical menu-pills" aria-label="On this demo"&gt;
+        &lt;a href="#spy-intro" aria-current="location"&gt;Introduction&lt;/a&gt;
+        &lt;a href="#spy-setup"&gt;Setting up&lt;/a&gt;
+        &lt;a href="#spy-usage"&gt;Using it&lt;/a&gt;
+        &lt;a href="#spy-faq"&gt;Questions&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class="spy-area" tabindex="0"&gt;
+        &lt;section id="spy-intro"&gt;
+            &lt;h3&gt;Introduction&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-setup"&gt;
+            &lt;h3&gt;Setting up&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-usage"&gt;
+            &lt;h3&gt;Using it&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-faq"&gt;
+            &lt;h3&gt;Questions&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 

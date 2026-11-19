@@ -8,9 +8,6 @@ Tabs follow the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 .tab-list
     @extend %bf-tabs
 
-    [role="tab"]
-        @extend %bf-tab
-
 .tab-panel
     @extend %bf-tab-panel
 ```
@@ -27,6 +24,8 @@ Tabs follow the [WAI-ARIA tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns
     <p>Delivered the next working day.</p>
 </div>
 ```
+
+`%bf-tabs` styles its `role="tab"` children itself. The panels aren't inside the tab list, so they extend `%bf-tab-panel`. `%bf-tab` is for a tab that isn't a child of the list.
 
 When the page loads, `sassy.js` selects the tab with `aria-selected="true"`, or the first, and hides the other panels with the `hidden` attribute. So without the script every panel stays visible, and nothing is lost. Then:
 

@@ -6,55 +6,37 @@
 .hero-code
     @extend %bf-my-10
 
-// The layers, in output order - the numbers are the folder numbers in src
-.site-main > .layers
-    @extend %bf-list-unstyled
+// The layers, in output order - Sassy's list group, flush, of links - the numbers are the folder numbers in src
+.layers
+    @extend %bf-list-group
+    @extend %bf-list-group-flush
     @extend %bf-border-top-1
+    @extend %bf-border-bottom-1
     @extend %bf-border-slate-200
     @extend %bf-mt-6
-    @extend %bf-mb-0
-    @extend %bf-p-0
-    // gap: max-width none (the page's own text has a readable max-width)
-    max-width: none
-
-    li
-        @extend %bf-border-bottom-1
-        @extend %bf-border-slate-200
+    --sassy-list-group-bg: transparent
+    --sassy-list-group-border-colour: #{sassy.colour("slate", 200)}
 
     a
-        @extend %bf-d-grid
+        @extend %bf-d-flex
         @extend %bf-gap-x-5
         @extend %bf-py-5
         @extend %bf-px-3
-        @extend %bf-text-decoration-none
-        // gap: colour inherit, grid columns and a transition
-        color: inherit
-        grid-template-columns: 2.5rem 1fr
-        transition: background-color 0.15s ease-in-out
-
-        &:hover
-            // gap: white
-            background-color: var(--sassy-surface)
-
-        &:focus-visible
-            outline: 2px solid sassy.$sassy-focus-outline-colour
-            outline-offset: -2px
-
-        @media (prefers-reduced-motion: reduce)
-            transition: none
 
 .layer-number
     @extend .site-heading
     @extend %bf-c-slate-400
     @extend %bf-font-size-1
     @extend %bf-line-height-single
-    // gap: grid placement
-    grid-row: span 2
+    // gap: a flex basis in rem - the number's column, so the names line up
+    flex: 0 0 2.5rem
 
 .layer-name
     @extend .site-heading
+    @extend %bf-d-block
     @extend %bf-font-size-4
     @extend %bf-font-weight-700
 
 .layer-text
+    @extend %bf-d-block
     @extend %bf-c-slate-600
