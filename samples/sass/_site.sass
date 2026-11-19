@@ -5,44 +5,39 @@
 //  =================================================================
 
 //  Shared by every page's stylesheet, and kept apart from the examples, which each page's own
-//  Sass file holds. Built from Sassy's own placeholders, components and custom properties.
+//  Sass file holds. Built from Sassy's placeholders wherever one fits, to show Sassy at work.
+//  A declaration Sassy has no placeholder for is marked "gap:" - each is a possible new utility.
 
 :root
     // no web fonts: a serif already on the reader's device for headings, the system sans for text
-    --site-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif
+    --sassy-font-family-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif
     --sassy-font-family-mono: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace
     --sassy-body-colour: #{sassy.colour("slate", 800)}
-
-    --site-paper: #{sassy.colour("slate", 50)}
-    --site-line: #{sassy.colour("slate", 200)}
-    --site-muted: #{sassy.colour("slate", 600)}
-    --site-link: #{sassy.colour("sky", 700)}
-    --site-mark: #{sassy.colour("orange", 600)}
-    --site-radius: 0.75rem
-    --site-width: 68rem
-
-    --site-code-bg: #{sassy.colour("slate", 900)}
-    --site-code-line: #{sassy.colour("slate", 700)}
-    --site-code-text: #{sassy.colour("slate", 200)}
+    --site-width: 80rem
 
 html
-    // anchors land below the sticky header
+    // gap: scroll-padding - anchors land below the sticky header
     scroll-padding-top: 6rem
 
 body
     @extend %bf-body
-    background-color: var(--site-paper)
-    margin: 0
+    @extend %bf-bg-slate-50
+    @extend %bf-m-0
 
 // Width and gutters shared by the header, page and footer
 .site-width
+    @extend %bf-mx-auto
+    @extend %bf-px-5
+    @extend %bf-px-8-md
     box-sizing: border-box
-    margin-inline: auto
+    // gap: a max-width in rem (the max-width utilities are percentages)
     max-width: var(--site-width)
-    padding-inline: 1.25rem
 
-    @include sassy.up(md)
-        padding-inline: 2rem
+// Headings in the page's own text, in the serif
+.site-heading
+    @extend %bf-font-family-serif
+    // gap: letter-spacing
+    letter-spacing: -0.01em
 
 
 //  =================================================================
@@ -53,63 +48,64 @@ body
     @extend %bf-position-sticky
     @extend %bf-top-0
     @extend %bf-z-index-5
+    @extend %bf-border-bottom-1
+    @extend %bf-border-slate-200
+    // gap: backdrop-filter, and a background with transparency
     backdrop-filter: blur(0.5rem)
     background-color: color-mix(in oklab, #fff 85%, transparent)
-    border-bottom: 1px solid var(--site-line)
 
 // Sassy's navbar: below md the menu is behind the toggle (sassy.js opens and closes it), from md it is always open
 .site-header-inner
     @extend %bf-navbar-expand-md
     @extend %bf-p-3
     @extend %bf-p-0-md
-    --sassy-navbar-gap: 1.5rem
     // the menu follows the brand rather than going to the end of the row
-    justify-content: start
-
-    @include sassy.up(md)
-        flex-wrap: nowrap
+    @extend %bf-flex-justify-start
+    @extend %bf-flex-wrap-nowrap-md
+    --sassy-navbar-gap: 1.5rem
 
 .site-nav-toggle
     @extend %bf-navbar-toggle
-    --sassy-nav-link-colour: var(--site-muted)
-    margin-left: auto
+    @extend %bf-ms-auto
+    --sassy-nav-link-colour: #{sassy.colour("slate", 600)}
 
 // below md the open menu is a panel under the header, wiping down over the page
 .site-menu
     @extend %bf-navbar-menu
-    padding-inline: 1.25rem
-
-    @include sassy.up(md)
-        padding-inline: 0
+    @extend %bf-px-5
+    @extend %bf-px-0-md
 
 .brand
     @extend %bf-navbar-brand
+    // gap: line-height 0
     line-height: 0
 
     img
+        @extend %bf-width-auto
+        // gap: a height in rem
         height: 1.8rem
-        width: auto
 
 // Sassy's nav component, underline style - the current page has aria-current="page"
 .site-nav
     @extend %bf-nav
     @extend %bf-nav-underline
-    --sassy-nav-gap: 0
-    --sassy-nav-link-colour: var(--site-muted)
-    --sassy-nav-link-padding-x: 0.75rem
-    --sassy-nav-link-padding-y: 1rem
     @extend %bf-flex-column
     @extend %bf-flex-row-md
+    --sassy-nav-gap: 0
+    --sassy-nav-link-colour: #{sassy.colour("slate", 600)}
+    --sassy-nav-link-padding-x: 0.75rem
+    --sassy-nav-link-padding-y: 1rem
+    // gap: negative margins
     margin-inline: -0.75rem
 
     a
         @extend %bf-nav-link
         @extend %bf-p-1
         @extend %bf-p-5-md
-        white-space: nowrap
+        @extend %bf-text-wrap-overflow
 
         &:hover
-            color: var(--sassy-body-colour)
+            @extend %bf-c-slate-800
 
 
 //  =================================================================
@@ -117,50 +113,118 @@ body
 //  =================================================================
 
 .site-main
-    padding-block: 3rem 5rem
+    @extend %bf-pt-12
+    @extend %bf-pb-20
 
     > h1
-        font-family: var(--site-serif)
+        @extend .site-heading
+        @extend %bf-font-weight-700
+        @extend %bf-line-height-single
+        @extend %bf-mt-0
+        @extend %bf-mb-4
+        // gap: a fluid size with clamp()
         font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem)
-        font-weight: 700
-        letter-spacing: -0.02em
-        line-height: 1.1
-        margin: 0 0 1rem
 
     > h2
-        font-family: var(--site-serif)
-        font-size: 1.75rem
-        letter-spacing: -0.01em
-        margin: 3.5rem 0 1rem
+        @extend .site-heading
+        @extend %bf-font-size-3
+        @extend %bf-mt-14
+        @extend %bf-mb-4
 
     > p,
     > ul,
     > ol
+        // gap: a max-width in ch, for a readable line length
         max-width: 68ch
 
     > p a,
     > ul a,
     .example > p a
-        color: var(--site-link)
-        text-underline-offset: 0.2em
+        @extend %bf-c-sky-700
+        @extend %bf-text-underline-offset-2
 
 .lead
-    color: var(--site-muted)
-    font-size: 1.25rem
-    line-height: 1.55
+    @extend %bf-c-slate-600
+    @extend %bf-font-size-5
 
 .stylesheet-note
-    color: var(--site-muted)
-    font-size: 0.875rem
+    @extend %bf-c-slate-600
+    @extend %bf-font-size-small
 
 // inline code in the page's own text, not in demos
 .site-main > p code,
 .site-main > ul code,
 .example > p code
-    background-color: #{sassy.colour("slate", 100)}
-    border-radius: 0.25rem
+    @extend %bf-bg-slate-100
+    @extend %bf-rounded-2
+    // gap: sizes and padding in em, relative to the text around it
     font-size: 0.875em
     padding: 0.1em 0.3em
+
+
+//  =================================================================
+//  Sections: Sassy's offcanvas below lg, opened by a button, and a sticky sidebar from lg,
+//  with scrollspy (sassy.js) marking the section in view. tools/site.mjs build writes them.
+//  =================================================================
+
+.site-sections-open
+    @extend %bf-btn
+    @extend %bf-btn-small
+    @extend %bf-d-none-lg
+    @extend %bf-mb-6
+
+.site-sections
+    @extend %bf-dialog
+    @extend %bf-offcanvas-start
+    @extend %bf-offcanvas-lg
+    @extend %bf-position-sticky-lg
+    @extend %bf-flex-align-self-start-lg
+    @extend %bf-overflow-y-auto-lg
+    --sassy-offcanvas-width: 18rem
+
+    @include sassy.up(lg)
+        // gap: grid placement, a top in rem, and a height from calc()
+        grid-column: 1
+        grid-row: 1 / span 100
+        max-block-size: calc(100vh - 7rem)
+        top: 5.5rem
+
+    > header
+        @extend %bf-dialog-header
+
+        h2
+            @extend %bf-dialog-title
+            @extend %bf-font-size-base
+
+    .close
+        @extend %bf-close
+
+.site-sections-nav
+    @extend %bf-dialog-body
+    @extend %bf-nav
+    @extend %bf-nav-vertical
+    @extend %bf-nav-pills
+    // one column that scrolls, rather than wrapping into a second
+    @extend %bf-flex-wrap-nowrap
+    --sassy-nav-gap: 0.125rem
+    --sassy-nav-link-padding-y: 0.375rem
+    --sassy-nav-link-padding-x: 0.75rem
+
+    a
+        @extend %bf-nav-link
+        @extend %bf-font-size-small
+
+// from lg the sections sit beside the content
+.site-main:has(> .site-sections)
+    @extend %bf-d-grid-lg
+    @extend %bf-gap-x-12-lg
+
+    @include sassy.up(lg)
+        // gap: grid columns
+        grid-template-columns: 13rem minmax(0, 1fr)
+
+        > :not(.site-sections, script)
+            grid-column: 2
 
 
 //  =================================================================
@@ -168,30 +232,34 @@ body
 //  =================================================================
 
 .example
-    margin-top: 4rem
+    @extend %bf-mt-16
 
     > h2
-        font-family: var(--site-serif)
-        font-size: 1.625rem
-        letter-spacing: -0.01em
+        @extend .site-heading
+        @extend %bf-font-size-3
+        @extend %bf-mt-0
+        @extend %bf-mb-3
+        // gap: line-height 1.2
         line-height: 1.2
-        margin: 0 0 0.75rem
 
     > p
-        margin: 0 0 1.25rem
+        @extend %bf-mt-0
+        @extend %bf-mb-5
+        // gap: a max-width in ch
         max-width: 68ch
 
 .demo
-    background-color: #fff
-    border: 1px solid var(--site-line)
-    border-radius: var(--site-radius)
-    padding: 1.5rem
-
-    @include sassy.up(md)
-        padding: 2rem
+    @extend %bf-border-1
+    @extend %bf-border-slate-200
+    @extend %bf-rounded-5
+    @extend %bf-p-6
+    @extend %bf-p-8-md
+    // gap: white (the palette has no white), so the surface role
+    background-color: var(--sassy-surface)
 
     // joined to the code below it
     &:has(+ .code)
+        // gap: rounding and borders on some sides only
         border-bottom: 0
         border-bottom-left-radius: 0
         border-bottom-right-radius: 0
@@ -202,17 +270,22 @@ body
 
 // Shaded boxes that make spacing visible in demos: the white around them is margin, padding or gutter
 .box
-    background-color: #{sassy.colour("sky", 50)}
-    border: 1px dashed #{sassy.colour("sky", 300)}
-    border-radius: 0.375rem
-    color: #{sassy.colour("sky", 900)}
-    padding: 0.5rem 0.75rem
+    @extend %bf-bg-sky-50
+    @extend %bf-border-1
+    @extend %bf-border-sky-300
+    @extend %bf-rounded-3
+    @extend %bf-c-sky-900
+    @extend %bf-py-2
+    @extend %bf-px-3
+    // gap: border-style
+    border-style: dashed
 
 // A note in a demo about what to do to see it work
 .demo-hint
-    color: var(--site-muted)
-    font-size: 0.875rem
-    margin: 0 0 1rem
+    @extend %bf-c-slate-600
+    @extend %bf-font-size-small
+    @extend %bf-mt-0
+    @extend %bf-mb-4
 
 
 //  =================================================================
@@ -220,18 +293,21 @@ body
 //  =================================================================
 
 .code
-    background-color: var(--site-code-bg)
-    border-radius: var(--site-radius)
-    color: var(--site-code-text)
-    overflow: hidden
+    @extend %bf-bg-slate-900
+    @extend %bf-c-slate-200
+    @extend %bf-rounded-5
+    @extend %bf-overflow-hidden
 
     // before the build adds tabs, the blocks are listed one after another
     > pre + pre
-        border-top: 1px solid var(--site-code-line)
+        @extend %bf-border-top-1
+        @extend %bf-border-slate-700
 
 .code-tabs
     @extend %bf-tabs
-    --sassy-tabs-border-colour: var(--site-code-line)
+    @extend %bf-font-size-small
+    @extend %bf-px-2
+    --sassy-tabs-border-colour: #{sassy.colour("slate", 700)}
     --sassy-nav-gap: 0
     --sassy-nav-link-colour: #{sassy.colour("slate", 400)}
     --sassy-nav-link-padding-x: 1rem
@@ -240,73 +316,82 @@ body
     --sassy-nav-current-border-colour: #{sassy.colour("sky", 400)}
     --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
     --sassy-focus-outline-offset: -2px
-    font-size: 0.875rem
-    padding-inline: 0.5rem
 
     [role="tab"]
         @extend %bf-tab
 
         &:hover
+            // gap: white text
             color: #fff
 
 // a single block, or each side of a split block, has a label in place of tabs
 .code-label
-    border-bottom: 1px solid var(--site-code-line)
-    color: #{sassy.colour("slate", 400)}
-    font-size: 0.875rem
-    padding: 0.625rem 1.5rem
+    @extend %bf-border-bottom-1
+    @extend %bf-border-slate-700
+    @extend %bf-c-slate-400
+    @extend %bf-font-size-small
+    @extend %bf-px-6
+    // gap: 0.625rem, to match the tabs' padding
+    padding-block: 0.625rem
 
 .code pre
-    font-family: var(--sassy-font-family-mono)
+    @extend %bf-font-family-mono
+    @extend %bf-m-0
+    @extend %bf-overflow-auto
+    @extend %bf-py-5
+    @extend %bf-px-6
+    // gap: a code size of 0.875rem, a line height of 1.65, a max-height in rem, and tab-size
     font-size: 0.875rem
     line-height: 1.65
-    margin: 0
     max-height: 30rem
-    overflow: auto
-    padding: 1.25rem 1.5rem
     tab-size: 4
 
     &:focus-visible
+        // gap: an outline inside the block
         outline: 2px solid #{sassy.colour("sky", 300)}
         outline-offset: -2px
 
 .code-split
-    display: grid
+    @extend %bf-d-grid
 
     @include sassy.up(lg)
+        // gap: grid columns
         grid-template-columns: 1fr 1fr
 
-        figure + figure
-            border-left: 1px solid var(--site-code-line)
+    figure + figure
+        @extend %bf-border-left-1-lg
+        @extend %bf-border-slate-700
 
     figure
-        margin: 0
+        @extend %bf-m-0
+        // gap: min-width 0
         min-width: 0
 
 // Highlighting - Sassy's placeholders stand out in the same orange as the % in the logo
 .t-comment
-    color: #{sassy.colour("slate", 400)}
-    font-style: italic
+    @extend %bf-c-slate-400
+    @extend %bf-font-style-italic
 
 .t-placeholder
-    color: #{sassy.colour("orange", 300)}
+    @extend %bf-c-orange-300
 
 .t-at,
 .t-tag
-    color: #{sassy.colour("pink", 300)}
+    @extend %bf-c-pink-300
 
 .t-property,
 .t-attribute
-    color: #{sassy.colour("sky", 300)}
+    @extend %bf-c-sky-300
 
 .t-string
-    color: #{sassy.colour("emerald", 300)}
+    @extend %bf-c-emerald-300
 
 .t-variable,
 .t-function
-    color: #{sassy.colour("violet", 300)}
+    @extend %bf-c-violet-300
 
 .t-selector
+    // gap: white text
     color: #fff
 
 
@@ -315,17 +400,20 @@ body
 //  =================================================================
 
 .site-footer
-    border-top: 1px solid var(--site-line)
-    color: var(--site-muted)
-    font-size: 0.875rem
-    padding-block: 2rem 3rem
+    @extend %bf-border-top-1
+    @extend %bf-border-slate-200
+    @extend %bf-c-slate-600
+    @extend %bf-font-size-small
+    @extend %bf-pt-8
+    @extend %bf-pb-12
 
     p
-        margin: 0
+        @extend %bf-m-0
 
     a
+        @extend %bf-text-underline-offset-2
+        // gap: colour inherit
         color: inherit
-        text-underline-offset: 0.2em
 
 
 //  =================================================================
@@ -334,6 +422,8 @@ body
 
 // Stripes behind a demo, so transparency shows
 .demo-stripes
+    @extend %bf-rounded-4
+    @extend %bf-py-8
+    @extend %bf-px-6
+    // gap: a gradient
     background: repeating-linear-gradient(-45deg, #{sassy.colour("sky", 200)} 0 0.75rem, #{sassy.colour("amber", 200)} 0.75rem 1.5rem)
-    border-radius: 0.5rem
-    padding: 2rem 1.5rem

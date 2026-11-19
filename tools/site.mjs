@@ -319,6 +319,40 @@ const withCss = (block, css) => ({
 
 const pages = () => readdirSync(samples).filter(f => f.endsWith(".html"));
 
+/**
+ * The nav of a page's sections, from each <section class="example" id> and its <h2>, placed after the <h1>.
+ * It is an offcanvas below lg, opened by the button, and a sticky sidebar from lg; sassy.js marks the
+ * section in view (scrollspy). A page with no sections gets none.
+ */
+const withSectionNav = html => {
+	const sections = [...html.matchAll(/<section class="example" id="([^"]+)">\s*<h2>(.*?)<\/h2>/g)].map(([, id, title]) => ({
+		id,
+		title: title.replace(/<[^>]+>/g, "")
+	}));
+	if (!sections.length) return html;
+	const links = sections
+		.map((s, i) => `                <a href="#${s.id}"${i ? "" : ' aria-current="location"'}>${s.title}</a>`)
+		.join("\n");
+	const nav = `
+        <button type="button" class="site-sections-open" commandfor="site-sections" command="show-modal">Sections</button>
+        <dialog class="site-sections" id="site-sections" closedby="any" aria-labelledby="site-sections-title">
+            <header>
+                <h2 id="site-sections-title">On this page</h2>
+                <button type="button" class="close" commandfor="site-sections" command="close" aria-label="Close"></button>
+            </header>
+            <nav class="site-sections-nav" aria-labelledby="site-sections-title">
+${links}
+            </nav>
+        </dialog>
+        <script>
+            // choosing a section closes the panel on small screens - in the page, from lg, it is not a modal
+            document.getElementById("site-sections").addEventListener("click", e => {
+                if (e.target.closest("a") && e.currentTarget.matches(":modal")) e.currentTarget.close();
+            });
+        </script>`;
+	return html.replace(/(<main class="site-main[^"]*">[\s\S]*?<\/h1>)/, `$1${nav}`);
+};
+
 const build = async () => {
 	const problems = [];
 	rmSync(out, { recursive: true, force: true });
@@ -363,7 +397,7 @@ const build = async () => {
 		});
 
 		let n = 0;
-		const built = html.replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`));
+		const built = withSectionNav(html.replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
 		writeFileSync(join(out, page), built);
 	}
 	console.log(`built ${found.length} pages with ${examples.length} examples`);
