@@ -80,10 +80,9 @@ body
     // gap: line-height 0
     line-height: 0
 
+    // the logo's height is its height attribute
     img
         @extend %bf-width-auto
-        // gap: a height in rem
-        height: 1.8rem
 
 // Sassy's nav component, underline style - the current page has aria-current="page"
 .site-nav
@@ -118,16 +117,14 @@ body
 
     > h1
         @extend .site-heading
+        @extend %bf-display-5
         @extend %bf-font-weight-700
-        @extend %bf-line-height-single
         @extend %bf-mt-0
         @extend %bf-mb-4
-        // gap: a fluid size with clamp()
-        font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem)
 
     > h2
         @extend .site-heading
-        @extend %bf-font-size-3
+        @extend %bf-h3
         @extend %bf-mt-14
         @extend %bf-mb-4
 
@@ -144,8 +141,8 @@ body
         @extend %bf-text-underline-offset-2
 
 .lead
+    @extend %bf-lead
     @extend %bf-c-slate-600
-    @extend %bf-font-size-5
 
 .stylesheet-note
     @extend %bf-c-slate-600
@@ -180,11 +177,11 @@ body
     @extend %bf-position-sticky-lg
     @extend %bf-flex-align-self-start-lg
     @extend %bf-overflow-y-auto-lg
+    @extend %bf-grid-col-3-lg
     --sassy-offcanvas-width: 18rem
 
     @include sassy.up(lg)
-        // gap: grid placement, a top in rem, and a height from calc()
-        grid-column: 1
+        // gap: spanning every row, a top in rem, and a height from calc()
         grid-row: 1 / span 100
         max-block-size: calc(100vh - 7rem)
         top: 5.5rem
@@ -214,17 +211,16 @@ body
         @extend %bf-nav-link
         @extend %bf-font-size-small
 
-// from lg the sections sit beside the content
+// from lg the sections sit beside the content, on Sassy's 12-column grid: 3 columns and 9
 .site-main:has(> .site-sections)
-    @extend %bf-d-grid-lg
+    @extend %bf-grid-lg
     @extend %bf-gap-x-12-lg
+    // only the gap between the columns: the page's own margins space the rows
+    --sassy-grid-gap: 0
 
-    @include sassy.up(lg)
-        // gap: grid columns
-        grid-template-columns: 13rem minmax(0, 1fr)
-
-        > :not(.site-sections, script)
-            grid-column: 2
+    > :not(.site-sections, script)
+        @extend %bf-grid-col-9-lg
+        @extend %bf-grid-start-4-lg
 
 
 //  =================================================================
@@ -236,11 +232,9 @@ body
 
     > h2
         @extend .site-heading
-        @extend %bf-font-size-3
+        @extend %bf-h3
         @extend %bf-mt-0
         @extend %bf-mb-3
-        // gap: line-height 1.2
-        line-height: 1.2
 
     > p
         @extend %bf-mt-0
@@ -248,25 +242,20 @@ body
         // gap: a max-width in ch
         max-width: 68ch
 
-.demo
-    @extend %bf-border-1
+// Each demo and its code, in one of Sassy's cards - tools/site.mjs build wraps them
+.example-card
+    @extend %bf-card
     @extend %bf-border-slate-200
     @extend %bf-rounded-5
+
+    // the card clips the code to its corners
+    > .code
+        @extend %bf-rounded-0
+
+.demo
+    @extend %bf-card-body
     @extend %bf-p-6
     @extend %bf-p-8-md
-    // gap: white (the palette has no white), so the surface role
-    background-color: var(--sassy-surface)
-
-    // joined to the code below it
-    &:has(+ .code)
-        // gap: rounding and borders on some sides only
-        border-bottom: 0
-        border-bottom-left-radius: 0
-        border-bottom-right-radius: 0
-
-        + .code
-            border-top-left-radius: 0
-            border-top-right-radius: 0
 
 // Shaded boxes that make spacing visible in demos: the white around them is margin, padding or gutter
 .box
@@ -311,7 +300,7 @@ body
     --sassy-nav-gap: 0
     --sassy-nav-link-colour: #{sassy.colour("slate", 400)}
     --sassy-nav-link-padding-x: 1rem
-    --sassy-nav-link-padding-y: 0.625rem
+    --sassy-nav-link-padding-y: 0.75rem
     --sassy-nav-current-colour: #fff
     --sassy-nav-current-border-colour: #{sassy.colour("sky", 400)}
     --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
@@ -321,8 +310,7 @@ body
         @extend %bf-tab
 
         &:hover
-            // gap: white text
-            color: #fff
+            @extend %bf-c-slate-50
 
 // a single block, or each side of a split block, has a label in place of tabs
 .code-label
@@ -331,8 +319,8 @@ body
     @extend %bf-c-slate-400
     @extend %bf-font-size-small
     @extend %bf-px-6
-    // gap: 0.625rem, to match the tabs' padding
-    padding-block: 0.625rem
+    // the same as the tabs' padding
+    @extend %bf-py-3
 
 .code pre
     @extend %bf-font-family-mono
@@ -351,21 +339,21 @@ body
         outline: 2px solid #{sassy.colour("sky", 300)}
         outline-offset: -2px
 
+// Sassy's grid: each half is the full width, then half from lg
 .code-split
-    @extend %bf-d-grid
+    @extend %bf-grid
+    --sassy-grid-gap: 0
 
-    @include sassy.up(lg)
-        // gap: grid columns
-        grid-template-columns: 1fr 1fr
+    figure
+        @extend %bf-grid-col-12
+        @extend %bf-grid-col-6-lg
+        @extend %bf-m-0
+        // gap: min-width 0
+        min-width: 0
 
     figure + figure
         @extend %bf-border-left-1-lg
         @extend %bf-border-slate-700
-
-    figure
-        @extend %bf-m-0
-        // gap: min-width 0
-        min-width: 0
 
 // Highlighting - Sassy's placeholders stand out in the same orange as the % in the logo
 .t-comment
@@ -391,8 +379,7 @@ body
     @extend %bf-c-violet-300
 
 .t-selector
-    // gap: white text
-    color: #fff
+    @extend %bf-c-slate-50
 
 
 //  =================================================================
@@ -411,9 +398,8 @@ body
         @extend %bf-m-0
 
     a
+        @extend %bf-c-slate-600
         @extend %bf-text-underline-offset-2
-        // gap: colour inherit
-        color: inherit
 
 
 //  =================================================================

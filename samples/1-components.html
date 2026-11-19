@@ -11,7 +11,7 @@
 
     <header class="site-header">
         <div class="site-width site-header-inner">
-            <a class="brand" href="index.html"><img src="images/logo.svg" alt="Sassy" /></a>
+            <a class="brand" href="index.html"><img src="images/logo.svg" alt="Sassy" height="29" /></a>
             <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="site-menu"></button>
             <nav id="site-menu" class="site-menu" aria-label="Layers">
                 <ul class="site-nav">
@@ -1559,87 +1559,6 @@
                         </div>
                     </div>
                 </section>
-
-        <section class="example" id="scrollspy">
-            <h2>Scrollspy</h2>
-            <p>A nav of links to sections, one with <code>aria-current="location"</code>, follows the scrolling: <code>sassy.js</code> moves <code>aria-current</code> to the link of the section in view. It needs no Sass of its own.</p>
-            <div class="demo">
-                <div class="with-sidebar">
-                    <nav class="menu menu-vertical menu-pills" aria-label="On this demo">
-                        <a href="#spy-intro" aria-current="location">Introduction</a>
-                        <a href="#spy-setup">Setting up</a>
-                        <a href="#spy-usage">Using it</a>
-                        <a href="#spy-faq">Questions</a>
-                    </nav>
-                    <div class="spy-area" tabindex="0">
-                        <section id="spy-intro">
-                            <h3>Introduction</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                        <section id="spy-setup">
-                            <h3>Setting up</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                        <section id="spy-usage">
-                            <h3>Using it</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                        <section id="spy-faq">
-                            <h3>Questions</h3>
-                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-                        </section>
-                    </div>
-                </div>
-            </div>
-<div class="code">
-<pre data-lang="sass"><code>.menu
-    @extend %bf-nav
-
-.menu-pills
-    @extend %bf-nav-pills
-
-.menu-vertical
-    @extend %bf-nav-vertical
-
-.spy-area
-    @extend %bf-overflow-y-auto
-    block-size: 16rem</code></pre>
-<pre data-lang="html"><code>&lt;div class="with-sidebar"&gt;
-    &lt;nav class="menu menu-vertical menu-pills" aria-label="On this demo"&gt;
-        &lt;a href="#spy-intro" aria-current="location"&gt;Introduction&lt;/a&gt;
-        &lt;a href="#spy-setup"&gt;Setting up&lt;/a&gt;
-        &lt;a href="#spy-usage"&gt;Using it&lt;/a&gt;
-        &lt;a href="#spy-faq"&gt;Questions&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;div class="spy-area" tabindex="0"&gt;
-        &lt;section id="spy-intro"&gt;
-            &lt;h3&gt;Introduction&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;section id="spy-setup"&gt;
-            &lt;h3&gt;Setting up&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;section id="spy-usage"&gt;
-            &lt;h3&gt;Using it&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-        &lt;section id="spy-faq"&gt;
-            &lt;h3&gt;Questions&lt;/h3&gt;
-            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
-            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
-        &lt;/section&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</div>
-        </section>
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.carousel
@@ -1725,6 +1644,87 @@
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/section&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="scrollspy">
+            <h2>Scrollspy</h2>
+            <p>A nav of links to sections, one with <code>aria-current="location"</code>, follows the scrolling: <code>sassy.js</code> moves <code>aria-current</code> to the link of the section in view. It needs no Sass of its own.</p>
+            <div class="demo">
+                <div class="with-sidebar">
+                    <nav class="menu menu-vertical menu-pills" aria-label="On this demo">
+                        <a href="#spy-intro" aria-current="location">Introduction</a>
+                        <a href="#spy-setup">Setting up</a>
+                        <a href="#spy-usage">Using it</a>
+                        <a href="#spy-faq">Questions</a>
+                    </nav>
+                    <div class="spy-area" tabindex="0">
+                        <section id="spy-intro">
+                            <h3>Introduction</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-setup">
+                            <h3>Setting up</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-usage">
+                            <h3>Using it</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-faq">
+                            <h3>Questions</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.menu
+    @extend %bf-nav
+
+.menu-pills
+    @extend %bf-nav-pills
+
+.menu-vertical
+    @extend %bf-nav-vertical
+
+.spy-area
+    @extend %bf-overflow-y-auto
+    block-size: 16rem</code></pre>
+<pre data-lang="html"><code>&lt;div class="with-sidebar"&gt;
+    &lt;nav class="menu menu-vertical menu-pills" aria-label="On this demo"&gt;
+        &lt;a href="#spy-intro" aria-current="location"&gt;Introduction&lt;/a&gt;
+        &lt;a href="#spy-setup"&gt;Setting up&lt;/a&gt;
+        &lt;a href="#spy-usage"&gt;Using it&lt;/a&gt;
+        &lt;a href="#spy-faq"&gt;Questions&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class="spy-area" tabindex="0"&gt;
+        &lt;section id="spy-intro"&gt;
+            &lt;h3&gt;Introduction&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-setup"&gt;
+            &lt;h3&gt;Setting up&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-usage"&gt;
+            &lt;h3&gt;Using it&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-faq"&gt;
+            &lt;h3&gt;Questions&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 

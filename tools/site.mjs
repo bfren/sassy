@@ -319,6 +319,32 @@ const withCss = (block, css) => ({
 
 const pages = () => readdirSync(samples).filter(f => f.endsWith(".html"));
 
+/** Wraps each demo and the code block after it in one element, which _site.sass makes a Sassy card. */
+const withExampleCards = html => {
+	let out = "";
+	let from = 0;
+	for (const start of [...html.matchAll(/<div class="demo[" ]/g)].map(m => m.index)) {
+		if (start < from) continue;
+		// the demo ends at the </div> that closes it, counting the divs inside
+		let depth = 0;
+		let end = start;
+		for (const tag of html.slice(start).matchAll(/<div\b|<\/div>/g)) {
+			depth += tag[0] === "<div" ? 1 : -1;
+			if (depth === 0) {
+				end = start + tag.index + tag[0].length;
+				break;
+			}
+		}
+		// the code block holds no divs, so it ends at the first </div>
+		const code = html.slice(end).match(/^\s*<div class="code[^"]*"[^>]*>[\s\S]*?<\/div>/);
+		if (!code) continue;
+		const close = end + code[0].length;
+		out += `${html.slice(from, start)}<div class="example-card">${html.slice(start, close)}</div>`;
+		from = close;
+	}
+	return out + html.slice(from);
+};
+
 /**
  * The nav of a page's sections, from each <section class="example" id> and its <h2>, placed after the <h1>.
  * It is an offcanvas below lg, opened by the button, and a sticky sidebar from lg; sassy.js marks the
@@ -397,7 +423,7 @@ const build = async () => {
 		});
 
 		let n = 0;
-		const built = withSectionNav(html.replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
+		const built = withSectionNav(withExampleCards(html).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
 		writeFileSync(join(out, page), built);
 	}
 	console.log(`built ${found.length} pages with ${examples.length} examples`);
