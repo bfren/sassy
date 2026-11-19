@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns, dialogs and offcanvas</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs and offcanvas</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns and dismissible alerts also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns, and dismissible alerts and toasts, also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -1058,6 +1058,111 @@
         &lt;/div&gt;
     &lt;/article&gt;
 &lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="toasts">
+            <h2>Toasts</h2>
+            <p>A toast is a short message over the page. Each close button hides its toast with <code>command="--dismiss"</code>. A theme colour comes from <code>%bf-text-bg-error</code>.</p>
+            <div class="demo">
+                <div class="toast-examples">
+                    <div class="toast" id="toast-saved">
+                        <header>
+                            <strong>Saved</strong>
+                            <small>just now</small>
+                            <button type="button" class="close" commandfor="toast-saved" command="--dismiss" aria-label="Close"></button>
+                        </header>
+                        <p>Your changes are saved to this device.</p>
+                    </div>
+                    <div class="toast" id="toast-copied">
+                        <p>Link copied. A toast needs no header.</p>
+                        <button type="button" class="close" commandfor="toast-copied" command="--dismiss" aria-label="Close"></button>
+                    </div>
+                    <div class="toast text-bg-error" role="alert">
+                        <p>Couldn't connect. Check your network and try again.</p>
+                    </div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.toast
+    @extend %bf-toast
+
+.toast-examples
+    @extend %bf-d-flex
+    @extend %bf-flex-column
+    @extend %bf-gap-2
+
+.text-bg-error
+    @extend %bf-text-bg-error</code></pre>
+<pre data-lang="html"><code>&lt;div class="toast-examples"&gt;
+    &lt;div class="toast" id="toast-saved"&gt;
+        &lt;header&gt;
+            &lt;strong&gt;Saved&lt;/strong&gt;
+            &lt;small&gt;just now&lt;/small&gt;
+            &lt;button type="button" class="close" commandfor="toast-saved" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;p&gt;Your changes are saved to this device.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="toast" id="toast-copied"&gt;
+        &lt;p&gt;Link copied. A toast needs no header.&lt;/p&gt;
+        &lt;button type="button" class="close" commandfor="toast-copied" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="toast text-bg-error" role="alert"&gt;
+        &lt;p&gt;Couldn't connect. Check your network and try again.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+            <p>In a page, toasts go in a <code>%bf-toast-container</code> fixed to a corner, which is a live region so screen readers announce each toast added to it. Press the button a few times.</p>
+            <div class="demo">
+                <button type="button" class="button" id="toast-show">Show a toast</button>
+                <div class="toast-container" aria-live="polite" id="toast-stack"></div>
+                <template id="toast-template">
+                    <div class="toast toast-autohide">
+                        <header>
+                            <strong>Sent</strong>
+                            <small>just now</small>
+                            <button type="button" class="close" command="--dismiss" aria-label="Close"></button>
+                        </header>
+                        <p>This toast hides itself after 5 seconds, unless the pointer is over it or it has focus.</p>
+                    </div>
+                </template>
+                <script>
+                    let toastCount = 0;
+                    document.getElementById("toast-show").addEventListener("click", () => {
+                        const toast = document.getElementById("toast-template").content.firstElementChild.cloneNode(true);
+                        toast.id = `toast-${++toastCount}`;
+                        toast.querySelector("[command]").setAttribute("commandfor", toast.id);
+                        document.getElementById("toast-stack").append(toast);
+                    });
+                </script>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.toast-autohide
+    @extend %bf-toast-autohide
+
+.toast-container
+    @extend %bf-toast-container</code></pre>
+<pre data-lang="html"><code>&lt;button type="button" class="button" id="toast-show"&gt;Show a toast&lt;/button&gt;
+&lt;div class="toast-container" aria-live="polite" id="toast-stack"&gt;&lt;/div&gt;
+&lt;template id="toast-template"&gt;
+    &lt;div class="toast toast-autohide"&gt;
+        &lt;header&gt;
+            &lt;strong&gt;Sent&lt;/strong&gt;
+            &lt;small&gt;just now&lt;/small&gt;
+            &lt;button type="button" class="close" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;p&gt;This toast hides itself after 5 seconds, unless the pointer is over it or it has focus.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    let toastCount = 0;
+    document.getElementById("toast-show").addEventListener("click", () =&gt; {
+        const toast = document.getElementById("toast-template").content.firstElementChild.cloneNode(true);
+        toast.id = `toast-${++toastCount}`;
+        toast.querySelector("[command]").setAttribute("commandfor", toast.id);
+        document.getElementById("toast-stack").append(toast);
+    });
+&lt;/script&gt;</code></pre>
 </div>
         </section>
 

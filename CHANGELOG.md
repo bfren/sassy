@@ -7,6 +7,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 ### Added
 
 - Dropdowns: `%bf-dropdown` styles a popover menu opened by a `popovertarget` button, placed below it by CSS anchor positioning. `-up` and `-end` change where it opens, `-header` and `-divider` group its items, `%bf-dropdown-toggle` adds a chevron to the button, and `%bf-dropdown-split` makes the chevron button of a split button.
+- Toasts: `%bf-toast` styles a short message, with a `<header>` it starts with as its title row, closed by a `--dismiss` close button. `%bf-toast-container` stacks toasts in a corner of the window, moved by `-top`, `-start` and `-centre`, and `%bf-toast-autohide` hides a toast after a delay with CSS alone, waiting while it is hovered or focused.
 - Popovers: `%bf-popover` styles a panel of content in a popover opened by a `popovertarget` button, placed above it by CSS anchor positioning, with the heading it starts with as a title bar and a `popovertargetaction="hide"` button in its top corner. `-bottom`, `-start` and `-end` change where it opens.
 - `sassy.js` places popovers in browsers without CSS anchor positioning, on any side, and leaves a popover with `role="dialog"` open when a link or button in it is clicked.
 - Offcanvas: `%bf-offcanvas-start`, `-end`, `-top` and `-bottom` turn a `%bf-dialog` into a panel that slides in from that edge of the window, opened as a modal with `command="show-modal"`. With `%bf-offcanvas-{breakpoint}`, it is part of the page from that breakpoint up, such as a sidebar.

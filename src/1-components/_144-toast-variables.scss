@@ -1,0 +1,28 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+@use "../4-utilities/460-shadow-variables" as *;
+
+$sassy-toast-bg: var(--sassy-toast-bg, #fff);
+$sassy-toast-colour: var(--sassy-toast-colour, #{colour("grey", 900)});
+$sassy-toast-border-width: var(--sassy-toast-border-width, 1px);
+$sassy-toast-border-colour: var(--sassy-toast-border-colour, #{colour("grey", 200)});
+$sassy-toast-radius: var(--sassy-toast-radius, $sassy-radius);
+$sassy-toast-shadow: var(--sassy-toast-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.15)});
+$sassy-toast-font-size: var(--sassy-toast-font-size, calc(var(--sassy-font-size-base) * 0.875));
+$sassy-toast-width: var(--sassy-toast-width, 22rem);
+$sassy-toast-padding-y: var(--sassy-toast-padding-y, #{$sassy-padding-unit * 3});
+$sassy-toast-padding-x: var(--sassy-toast-padding-x, #{$sassy-padding-unit * 3});
+
+// %bf-toast-autohide: how long a toast shows before it fades, and how long the fade takes
+$sassy-toast-delay: var(--sassy-toast-delay, 5s);
+$sassy-toast-fade: var(--sassy-toast-fade, 0.5s);
+
+// the stack of toasts: its gap from the window's edges, the gap between toasts, and what it sits above
+$sassy-toast-container-offset: var(--sassy-toast-container-offset, 1rem);
+$sassy-toast-container-gap: var(--sassy-toast-container-gap, 0.5rem);
+$sassy-toast-container-z-index: var(--sassy-toast-container-z-index, 1090);
+
+// Where the stack sits, as flex alignment: %bf-toast-container-top, -start and -centre change them, and combine.
+$sassy-toast-container-block: var(--sassy-toast-container-block, flex-end);
+$sassy-toast-container-inline: var(--sassy-toast-container-inline, flex-end);

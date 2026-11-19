@@ -2378,6 +2378,88 @@
         mask-size: 300% 100%;
       }
     }
+    @keyframes bf-toast-hide {
+      to {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    .bf-toast-container {
+      align-items: var(--sassy-toast-container-inline, flex-end);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sassy-toast-container-gap, 0.5rem);
+      inset: var(--sassy-toast-container-offset, 1rem);
+      justify-content: var(--sassy-toast-container-block, flex-end);
+      pointer-events: none;
+      position: fixed;
+      z-index: var(--sassy-toast-container-z-index, 1090);
+    }
+    .bf-toast-container-top {
+      --sassy-toast-container-block: flex-start;
+    }
+    .bf-toast-container-start {
+      --sassy-toast-container-inline: flex-start;
+    }
+    .bf-toast-container-centre {
+      --sassy-toast-container-inline: center;
+    }
+    .bf-toast {
+      background-color: var(--sassy-toast-bg, #fff);
+      border: var(--sassy-toast-border-width, 1px) solid var(--sassy-toast-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-radius: var(--sassy-toast-radius, var(--sassy-radius, 0.375rem));
+      box-shadow: var(--sassy-toast-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 15%, transparent));
+      box-sizing: border-box;
+      color: var(--sassy-toast-colour, oklch(21% 0.034 264.665deg));
+      font-size: var(--sassy-toast-font-size, calc(var(--sassy-font-size-base) * 0.875));
+      inline-size: var(--sassy-toast-width, 22rem);
+      max-inline-size: 100%;
+      padding: var(--sassy-toast-padding-y, 0.75rem) var(--sassy-toast-padding-x, 0.75rem);
+      pointer-events: auto;
+      position: relative;
+    }
+    .bf-toast > :first-child {
+      margin-block-start: 0;
+    }
+    .bf-toast > :last-child {
+      margin-block-end: 0;
+    }
+    .bf-toast > header:first-child {
+      align-items: center;
+      border-block-end: var(--sassy-toast-border-width, 1px) solid var(--sassy-toast-border-colour, oklch(92.8% 0.006 264.531deg));
+      display: flex;
+      gap: 0.5em;
+      margin: calc(var(--sassy-toast-padding-y, 0.75rem) * -1) calc(var(--sassy-toast-padding-x, 0.75rem) * -1) var(--sassy-toast-padding-y, 0.75rem);
+      padding: calc(var(--sassy-toast-padding-y, 0.75rem) * 0.75) var(--sassy-toast-padding-x, 0.75rem);
+    }
+    .bf-toast > header:first-child > * {
+      margin: 0;
+    }
+    .bf-toast > header:first-child > :first-child {
+      font-size: inherit;
+      margin-inline-end: auto;
+    }
+    .bf-toast > [command="--dismiss"] {
+      inset-block-start: var(--sassy-toast-padding-y, 0.75rem);
+      inset-inline-end: var(--sassy-toast-padding-x, 0.75rem);
+      position: absolute;
+    }
+    .bf-toast:has(> [command="--dismiss"]) {
+      padding-inline-end: calc(var(--sassy-toast-padding-x, 0.75rem) * 2 + 1.5em);
+    }
+    .bf-toast-autohide {
+      animation: bf-toast-hide var(--sassy-toast-fade, 0.5s) ease-in var(--sassy-toast-delay, 5s) forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-toast-autohide {
+        animation-duration: 0s;
+      }
+    }
+    .bf-toast-autohide:hover, .bf-toast-autohide:focus-within {
+      animation-play-state: paused;
+    }
     .bf-tooltip {
       background-color: var(--sassy-tooltip-bg, oklch(21% 0.034 264.665deg));
       border: 0;

@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns, dialogs and offcanvas
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs and offcanvas
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns, dialogs and offcanvas. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs and offcanvas. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, popovers, dropdowns, dialogs and offcanvas need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and the arrow keys of dropdown menus need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs and offcanvas need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and toasts, and the arrow keys of dropdown menus need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
@@ -92,6 +92,10 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-spinner`, `%bf-spinner-grow`                                                               | A ring that turns, or a dot that grows - see [Spinners](#spinners)                      |
 | `%bf-spinner-{theme colour}`, `%bf-spinner-small`                                               | A spinner in a theme colour, or small, combined with either                             |
 | `%bf-skeleton`                                                                                  | A faded block in place of content while it loads - see [Skeletons](#skeletons)          |
+| `%bf-toast`                                                                                     | A short message over the page, with a `<header>` title row - see [Toasts](#toasts)      |
+| `%bf-toast-autohide`                                                                            | Hides a toast after a delay, waiting while it is hovered or focused                     |
+| `%bf-toast-container`                                                                           | The stack toasts sit in, fixed to the bottom end corner                                 |
+| `%bf-toast-container-top`, `-start`, `-centre`                                                  | Moves the stack to the top, or to the start or centre                                   |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
 | `%bf-popover`                                                                                   | A panel of content in a popover (`role="dialog"`), opened by a `popovertarget` button   |
 | `%bf-popover-bottom`, `%bf-popover-start`, `%bf-popover-end`                                    | Opens below the button, or before or after it, rather than above                        |
@@ -939,6 +943,55 @@ A skeleton is a faded block that stands in for content while it loads. It is one
 - **Skeletons in a line wrap like words**, so a 100% block followed by a 75% one makes two lines.
 - **A shimmer crosses each skeleton**, through a mask, so it works in any colour. It does not run for people who prefer reduced motion: the blocks stay a plain shade, which still reads as loading.
 
+## Toasts
+
+A toast is a short message that appears over the page, such as "Saved" or "Link copied". Toasts sit in a `%bf-toast-container`, which is fixed to the bottom end corner of the window and stacks them:
+
+```sass
+.toast-container
+    @extend %bf-toast-container
+
+.toast
+    @extend %bf-toast
+
+.toast-autohide
+    @extend %bf-toast-autohide
+```
+
+```css
+@layer sassy.base.components {
+  .toast-container {
+    align-items: var(--sassy-toast-container-inline, flex-end);
+    justify-content: var(--sassy-toast-container-block, flex-end);
+    pointer-events: none;
+    position: fixed;
+  }
+  .toast-autohide {
+    animation: bf-toast-hide var(--sassy-toast-fade, 0.5s) ease-in var(--sassy-toast-delay, 5s) forwards;
+  }
+}
+```
+
+```html
+<div class="toast-container" aria-live="polite">
+    <div class="toast toast-autohide" id="saved">
+        <header>
+            <strong>Saved</strong>
+            <small>just now</small>
+            <button type="button" class="close" commandfor="saved" command="--dismiss" aria-label="Close"></button>
+        </header>
+        <p>Your changes are saved to this device.</p>
+    </div>
+</div>
+```
+
+- **Put the container in the page, empty, with `aria-live="polite"`**, and add toasts to it from your script: screen readers then read each toast as it arrives. For an urgent message, give the toast `role="alert"` instead.
+- **A `<header>` the toast starts with is its title row.** Its first child takes the room, so anything after it, such as a time or a close button, sits at the end. A toast without a header is just its content.
+- **Close a toast** with a [close button](#close-buttons) that has `commandfor` naming the toast and `command="--dismiss"`: `sassy.js` sets `hidden` on it. A close button outside the header sits in the top corner.
+- **Extend `%bf-toast-autohide`** to hide the toast after `--sassy-toast-delay` (5 seconds), fading over `--sassy-toast-fade`. It waits while the pointer is over the toast or something in it has focus, so people have time to read and use it, and it hides without fading for reduced motion. This is CSS only: the hidden toast stays in the page, out of sight and out of the accessibility tree, so remove old toasts from your script if many build up. Don't auto-hide a toast that people need to act on.
+- **Extend `%bf-toast-container-top`** to stack toasts at the top, and **`%bf-toast-container-start`** or **`-centre`** to move them across. They combine.
+- **For a coloured toast**, extend a `%bf-text-bg-{theme colour}` utility with the toast.
+
 ## Tooltips
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
@@ -1237,6 +1290,12 @@ If the window is widened while the offcanvas is open, it stays a modal until it 
 | `--sassy-progress-margin-bottom`                                                                                                     | Space below a progress bar or stacked bars                                                        |
 | `--sassy-spinner-size`, `--sassy-spinner-width`, `--sassy-spinner-colour`                                                            | Spinner size, ring width and colour - the theme colours and `-small` set them                     |
 | `--sassy-skeleton-colour`, `--sassy-skeleton-opacity`, `--sassy-skeleton-radius`                                                     | Skeleton colour, how faded it is, and its corners                                                 |
+| `--sassy-toast-bg`, `--sassy-toast-colour`, `--sassy-toast-radius`, `--sassy-toast-shadow`                                           | Toast background, text, corners and shadow                                                        |
+| `--sassy-toast-border-width`, `--sassy-toast-border-colour`                                                                          | The border, and the line under the title row                                                      |
+| `--sassy-toast-font-size`, `--sassy-toast-width`, `--sassy-toast-padding-y`, `--sassy-toast-padding-x`                               | Toast text size, width and padding                                                                |
+| `--sassy-toast-delay`, `--sassy-toast-fade`                                                                                          | How long `%bf-toast-autohide` waits, and how long it takes to fade                                |
+| `--sassy-toast-container-offset`, `--sassy-toast-container-gap`, `--sassy-toast-container-z-index`                                   | The stack's gap from the window's edges, the gap between toasts, and what it sits above           |
+| `--sassy-toast-container-block`, `--sassy-toast-container-inline`                                                                    | Where the stack sits - `-top`, `-start` and `-centre` set them                                    |
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |

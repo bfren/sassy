@@ -1,0 +1,111 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: toasts
+//  =================================================================
+
+//  A toast is a short message that appears over the page, in a %bf-toast-container fixed to one corner.
+//  Give the container aria-live="polite" while it is empty, and add toasts to it, so screen readers
+//  announce them; give an urgent toast role="alert" instead. A <header> the toast starts with is its
+//  title row, and a %bf-close button with commandfor="<the toast's id>" command="--dismiss" closes it
+//  (sassy.js sets hidden). %bf-toast-autohide hides it after a delay, paused while it is hovered or focused.
+
+$-hide: make.name("toast", "hide")
+$-close: '[command="--dismiss"]'
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.in-base
+        // display: none at the end takes it out of the stack, where browsers can animate display
+        @keyframes #{$-hide}
+            to
+                display: none
+                opacity: 0
+                visibility: hidden
+
+    // Covers the window inside its offset without catching clicks, and stacks the toasts in one corner
+
+    @include make.single("toast-container")
+        align-items: $sassy-toast-container-inline
+        box-sizing: border-box
+        display: flex
+        flex-direction: column
+        gap: $sassy-toast-container-gap
+        inset: $sassy-toast-container-offset
+        justify-content: $sassy-toast-container-block
+        pointer-events: none
+        position: fixed
+        z-index: $sassy-toast-container-z-index
+
+    // Placement only changes the custom properties, so -top combines with -start or -centre
+
+    @include make.single("toast-container-top")
+        --sassy-toast-container-block: flex-start
+
+    @include make.single("toast-container-start")
+        --sassy-toast-container-inline: flex-start
+
+    @include make.single("toast-container-centre")
+        --sassy-toast-container-inline: center
+
+    // No display, so the hidden attribute set by dismissing still hides it
+
+    @include make.single("toast")
+        background-color: $sassy-toast-bg
+        border: $sassy-toast-border-width solid $sassy-toast-border-colour
+        border-radius: $sassy-toast-radius
+        box-shadow: $sassy-toast-shadow
+        box-sizing: border-box
+        color: $sassy-toast-colour
+        font-size: $sassy-toast-font-size
+        inline-size: $sassy-toast-width
+        max-inline-size: 100%
+        padding: $sassy-toast-padding-y $sassy-toast-padding-x
+        pointer-events: auto
+        position: relative
+
+        & > :first-child
+            margin-block-start: 0
+
+        & > :last-child
+            margin-block-end: 0
+
+        // the title row: its first child takes the space, so a time and the close button sit at the end
+        & > header:first-child
+            align-items: center
+            border-block-end: $sassy-toast-border-width solid $sassy-toast-border-colour
+            display: flex
+            gap: 0.5em
+            margin: calc(#{$sassy-toast-padding-y} * -1) calc(#{$sassy-toast-padding-x} * -1) $sassy-toast-padding-y
+            padding: calc(#{$sassy-toast-padding-y} * 0.75) $sassy-toast-padding-x
+
+            & > *
+                margin: 0
+
+            & > :first-child
+                font-size: inherit
+                margin-inline-end: auto
+
+        // a close button outside the title row sits in the top corner
+        & > #{$-close}
+            inset-block-start: $sassy-toast-padding-y
+            inset-inline-end: $sassy-toast-padding-x
+            position: absolute
+
+        &:has(> #{$-close})
+            padding-inline-end: calc(#{$sassy-toast-padding-x} * 2 + 1.5em)
+
+    // Hides the toast after --sassy-toast-delay, fading over --sassy-toast-fade, and waits while it is
+    // hovered or has focus. It is then hidden from screen readers too, but still in the page: remove it if you need to.
+
+    @include make.single("toast-autohide")
+        animation: #{$-hide} $sassy-toast-fade ease-in $sassy-toast-delay forwards
+
+        @media (prefers-reduced-motion: reduce)
+            animation-duration: 0s
+
+        &:hover,
+        &:focus-within
+            animation-play-state: paused
