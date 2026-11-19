@@ -19,6 +19,12 @@
         margin: 0
         padding: 0
 
+        // its links and buttons, directly or in list items, with no specificity of their own, so a
+        // component class on one - a %bf-btn in the nav, say - wins
+        :where(&) > :where(a, button),
+        :where(&) > li > :where(a, button)
+            @include component.link()
+
     @include make.single("nav-vertical")
         flex-direction: column
 
@@ -50,7 +56,8 @@
         --sassy-nav-link-hover-bg: transparent
         --sassy-nav-current-border-colour: var(--sassy-theme-primary)
 
-    // Each link - mark the current page with aria-current="page"
+    // Each link - mark the current page with aria-current="page". A nav styles its own links, so this is for
+    // a link anywhere else that should look like one
 
     @include make.single("nav-link")
         @include component.link()

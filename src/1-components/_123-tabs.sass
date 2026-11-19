@@ -9,6 +9,10 @@
 //  Tabs follow the WAI-ARIA tabs pattern: role="tablist" on the list, role="tab" on each
 //  button, role="tabpanel" on each panel. sassy.js switches panels and handles the keyboard.
 
+@mixin -tab
+    @include component.link()
+    margin-bottom: calc($sassy-tabs-border-width * -1)
+
 /// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
@@ -26,11 +30,15 @@
         margin: 0
         padding: 0
 
-    // Each tab - the same as a nav link, pulled down over the list's line
+        // its tabs, by their role
+        & > [role="tab"]
+            @include -tab
+
+    // Each tab - the same as a nav link, pulled down over the list's line. The tab list styles its
+    // role="tab" children itself, so this is for a tab that isn't one of them
 
     @include make.single("tab")
-        @include component.link()
-        margin-bottom: calc($sassy-tabs-border-width * -1)
+        @include -tab
 
     // Each panel - sassy.js hides the others with the hidden attribute
 

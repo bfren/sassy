@@ -22,6 +22,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- More components style their parts from the elements and roles inside them, so the part placeholders are optional: `%bf-dialog` (and so offcanvas) styles a `<header>`, its heading, a `<footer>` and the body between them, also inside a `<form method="dialog">`; `%bf-card` a `<header>`, `<footer>` and image; `%bf-tabs` its `role="tab"` children; `%bf-nav` its links and buttons; `%bf-alert` a heading it starts with; and `%bf-dropdown` headings and `<hr>` or `role="separator"`. The part placeholders still work. Markup that matches is styled even without them, which can change a `<header>`, `<footer>`, heading or `<hr>` you didn't mean as a part.
 - The docs have a folder per layer, with a `README.md` for the layer and a page per part named after its source file, such as `docs/1-components/123-tabs.md`, in place of one long page per layer.
 - A few default colours moved to the nearest colour role: card caps and read-only inputs from `grey-50` to `grey-100`; form help text, input placeholders and the current breadcrumb from `grey-500` to `grey-600`; and the text of dropdowns, popovers, toasts and carousel controls from `grey-900` to the body colour, `grey-800`.
 - Outline buttons in a light theme colour (`ok`, `info`, `warn`, `grey-light`) mix it with the body text colour rather than with the button's dark text, so they stay readable on a dark background.

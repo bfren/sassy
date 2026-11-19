@@ -5,6 +5,19 @@
 //  Components: cards
 //  =================================================================
 
+// A card styles a <header> and <footer> it holds as its caps, and an image, picture or video as a full-width
+// image. The body and title keep their placeholders: a card can hold anything, such as a flush list group.
+
+@mixin -cap
+    background-color: $sassy-card-cap-bg
+    padding: calc($sassy-card-padding-y * 0.75) $sassy-card-padding-x
+
+@mixin -image
+    display: block
+    height: auto
+    object-fit: cover
+    width: 100%
+
 /// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
@@ -20,10 +33,21 @@
         min-width: 0
         overflow: hidden
 
+        // with no specificity from the card, so where one of them also extends a component, its rules win
+        :where(&) > header
+            @include -cap
+            border-bottom: $sassy-card-border-width solid $sassy-card-border-colour
+
+        :where(&) > footer
+            @include -cap
+            border-top: $sassy-card-border-width solid $sassy-card-border-colour
+
+        :where(&) > :is(img, picture, video)
+            @include -image
+
     @include make.single("card-header")
-        background-color: $sassy-card-cap-bg
+        @include -cap
         border-bottom: $sassy-card-border-width solid $sassy-card-border-colour
-        padding: calc($sassy-card-padding-y * 0.75) $sassy-card-padding-x
 
     // the body grows, so footers line up across cards of different heights in a row
     @include make.single("card-body")
@@ -37,9 +61,8 @@
             margin-bottom: 0
 
     @include make.single("card-footer")
-        background-color: $sassy-card-cap-bg
+        @include -cap
         border-top: $sassy-card-border-width solid $sassy-card-border-colour
-        padding: calc($sassy-card-padding-y * 0.75) $sassy-card-padding-x
 
     @include make.single("card-title")
         font-size: calc(var(--sassy-font-size-base) * 1.25)
@@ -47,7 +70,4 @@
         margin: 0 0 $sassy-margin-unit * 2
 
     @include make.single("card-image")
-        display: block
-        height: auto
-        object-fit: cover
-        width: 100%
+        @include -image

@@ -47,6 +47,7 @@ An alert is a message box. A theme colour tints its background, border and text,
 </div>
 ```
 
+- **A heading the alert starts with is its title.** Extend `%bf-alert-title` on a title that isn't a heading, or isn't first.
 - **Choose the role by how urgent the message is.** `role="alert"` makes screen readers announce it at once, interrupting the user, so keep it for errors and warnings that need action. Use `role="status"` for a quieter update, such as a saved form, or no role for a message that is part of the page when it loads.
 - **Alert text is the theme colour mixed with the text around it**, so it stays readable on the light theme colours, and follows a dark theme. Change how much colour is mixed in with `$sassy-alert-tint`, `$sassy-alert-border-tint` and `$sassy-alert-text-tint`.
 - **To dismiss an alert**, put a [close button](112-close.md) in it with `commandfor` set to the alert's `id` and `command="--dismiss"`, and load `sassy.js`, which hides the alert. Extend `%bf-alert-dismissible` too, which makes room for the button in the top corner. The close button can come anywhere in the alert.

@@ -701,6 +701,46 @@
       margin: 0;
       padding: 0;
     }
+    :where(.bf-nav) > :where(a, button), :where(.bf-nav) > li > :where(a, button) {
+      align-items: center;
+      background-color: transparent;
+      border: 0;
+      border-bottom: var(--sassy-nav-link-underline-width, 0) solid transparent;
+      border-radius: var(--sassy-nav-link-radius, 0);
+      box-sizing: border-box;
+      color: var(--sassy-nav-link-colour, var(--sassy-theme-primary));
+      cursor: pointer;
+      display: flex;
+      font: inherit;
+      gap: 0.5em;
+      justify-content: var(--sassy-nav-link-justify, flex-start);
+      margin: 0;
+      padding: var(--sassy-nav-link-padding-y, 0.5rem) var(--sassy-nav-link-padding-x, 1rem);
+      text-decoration: none;
+      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :where(.bf-nav) > :where(a, button), :where(.bf-nav) > li > :where(a, button) {
+        transition: none;
+      }
+    }
+    :where(.bf-nav) > :where(a, button):hover, :where(.bf-nav) > li > :where(a, button):hover {
+      background-color: var(--sassy-nav-link-hover-bg, var(--sassy-surface-subtle));
+    }
+    :where(.bf-nav) > :where(a, button):focus-visible, :where(.bf-nav) > li > :where(a, button):focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: var(--sassy-focus-outline-offset, 2px);
+    }
+    :where(.bf-nav) > :where(a, button)[aria-current]:not([aria-current=false]), :where(.bf-nav) > :where(a, button)[aria-selected=true], :where(.bf-nav) > li > :where(a, button)[aria-current]:not([aria-current=false]), :where(.bf-nav) > li > :where(a, button)[aria-selected=true] {
+      background-color: var(--sassy-nav-current-bg, transparent);
+      border-bottom-color: var(--sassy-nav-current-border-colour, transparent);
+      color: var(--sassy-nav-current-colour, var(--sassy-body-colour));
+    }
+    :where(.bf-nav) > :where(a, button):disabled, :where(.bf-nav) > :where(a, button)[aria-disabled=true], :where(.bf-nav) > li > :where(a, button):disabled, :where(.bf-nav) > li > :where(a, button)[aria-disabled=true] {
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+    }
     .bf-nav-vertical {
       flex-direction: column;
     }
@@ -1760,6 +1800,49 @@
       margin: 0;
       padding: 0;
     }
+    .bf-tabs > [role=tab] {
+      align-items: center;
+      background-color: transparent;
+      border: 0;
+      border-bottom: var(--sassy-nav-link-underline-width, 0) solid transparent;
+      border-radius: var(--sassy-nav-link-radius, 0);
+      box-sizing: border-box;
+      color: var(--sassy-nav-link-colour, var(--sassy-theme-primary));
+      cursor: pointer;
+      display: flex;
+      font: inherit;
+      gap: 0.5em;
+      justify-content: var(--sassy-nav-link-justify, flex-start);
+      margin: 0;
+      padding: var(--sassy-nav-link-padding-y, 0.5rem) var(--sassy-nav-link-padding-x, 1rem);
+      text-decoration: none;
+      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-tabs > [role=tab] {
+        transition: none;
+      }
+    }
+    .bf-tabs > [role=tab]:hover {
+      background-color: var(--sassy-nav-link-hover-bg, var(--sassy-surface-subtle));
+    }
+    .bf-tabs > [role=tab]:focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: var(--sassy-focus-outline-offset, 2px);
+    }
+    .bf-tabs > [role=tab][aria-current]:not([aria-current=false]), .bf-tabs > [role=tab][aria-selected=true] {
+      background-color: var(--sassy-nav-current-bg, transparent);
+      border-bottom-color: var(--sassy-nav-current-border-colour, transparent);
+      color: var(--sassy-nav-current-colour, var(--sassy-body-colour));
+    }
+    .bf-tabs > [role=tab]:disabled, .bf-tabs > [role=tab][aria-disabled=true] {
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .bf-tabs > [role=tab] {
+      margin-bottom: calc(var(--sassy-tabs-border-width, 1px) * -1);
+    }
     .bf-tab {
       align-items: center;
       background-color: transparent;
@@ -1820,10 +1903,26 @@
       min-width: 0;
       overflow: hidden;
     }
+    :where(.bf-card) > header {
+      background-color: var(--sassy-card-cap-bg, var(--sassy-surface-subtle));
+      padding: calc(var(--sassy-card-padding-y, 1rem) * 0.75) var(--sassy-card-padding-x, 1rem);
+      border-bottom: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
+    }
+    :where(.bf-card) > footer {
+      background-color: var(--sassy-card-cap-bg, var(--sassy-surface-subtle));
+      padding: calc(var(--sassy-card-padding-y, 1rem) * 0.75) var(--sassy-card-padding-x, 1rem);
+      border-top: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
+    }
+    :where(.bf-card) > :is(img, picture, video) {
+      display: block;
+      height: auto;
+      object-fit: cover;
+      width: 100%;
+    }
     .bf-card-header {
       background-color: var(--sassy-card-cap-bg, var(--sassy-surface-subtle));
-      border-bottom: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
       padding: calc(var(--sassy-card-padding-y, 1rem) * 0.75) var(--sassy-card-padding-x, 1rem);
+      border-bottom: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
     }
     .bf-card-body {
       flex: 1 1 auto;
@@ -1837,8 +1936,8 @@
     }
     .bf-card-footer {
       background-color: var(--sassy-card-cap-bg, var(--sassy-surface-subtle));
-      border-top: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
       padding: calc(var(--sassy-card-padding-y, 1rem) * 0.75) var(--sassy-card-padding-x, 1rem);
+      border-top: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
     }
     .bf-card-title {
       font-size: calc(var(--sassy-font-size-base) * 1.25);
@@ -2112,6 +2211,11 @@
     }
     .bf-alert > :nth-last-child(1 of :not([command])) {
       margin-bottom: 0;
+    }
+    .bf-alert > :is(h1, h2, h3, h4, h5, h6):first-child {
+      color: inherit;
+      font-size: calc(var(--sassy-font-size-base) * 1.25);
+      margin: 0 0 0.5rem;
     }
     .bf-alert a {
       color: inherit;
@@ -2568,6 +2672,18 @@
       cursor: not-allowed;
       pointer-events: none;
     }
+    .bf-dropdown :where(hr, [role=separator]) {
+      border: 0;
+      border-block-start: var(--sassy-dropdown-border-width, 1px) solid var(--sassy-dropdown-border-colour, var(--sassy-line));
+      margin: var(--sassy-dropdown-padding-y, 0.5rem) 0;
+    }
+    .bf-dropdown :where(h1, h2, h3, h4, h5, h6) {
+      color: var(--sassy-dropdown-header-colour, var(--sassy-muted));
+      font-size: calc(var(--sassy-font-size-base) * 0.875);
+      margin: 0;
+      padding: var(--sassy-dropdown-item-padding-y, 0.25rem) var(--sassy-dropdown-item-padding-x, 1rem);
+      white-space: nowrap;
+    }
     .bf-dropdown-up {
       --sassy-dropdown-side: block-start;
     }
@@ -2631,6 +2747,41 @@
     }
     :root:has(.bf-dialog:modal) {
       overflow: hidden;
+    }
+    .bf-dialog > form:has(> header, > footer) {
+      display: contents;
+    }
+    :where(.bf-dialog) > header, :where(.bf-dialog) > form > header {
+      align-items: center;
+      border-bottom: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, var(--sassy-line));
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      padding: var(--sassy-dialog-padding-y, 1rem) var(--sassy-dialog-padding-x, 1.25rem);
+    }
+    :where(.bf-dialog) > header > :is(h1, h2, h3, h4, h5, h6), :where(.bf-dialog) > form > header > :is(h1, h2, h3, h4, h5, h6) {
+      font-size: calc(var(--sassy-font-size-base) * 1.25);
+      line-height: 1.2;
+      margin: 0;
+    }
+    :where(.bf-dialog) > :not(header, footer, form:has(> header, > footer)), :where(.bf-dialog) > form:has(> header, > footer) > :not(header, footer) {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      padding: var(--sassy-dialog-padding-y, 1rem) var(--sassy-dialog-padding-x, 1.25rem);
+    }
+    :where(.bf-dialog) > :not(header, footer, form:has(> header, > footer)) > :first-child, :where(.bf-dialog) > form:has(> header, > footer) > :not(header, footer) > :first-child {
+      margin-top: 0;
+    }
+    :where(.bf-dialog) > :not(header, footer, form:has(> header, > footer)) > :last-child, :where(.bf-dialog) > form:has(> header, > footer) > :not(header, footer) > :last-child {
+      margin-bottom: 0;
+    }
+    :where(.bf-dialog) > footer, :where(.bf-dialog) > form > footer {
+      border-top: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, var(--sassy-line));
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      padding: var(--sassy-dialog-padding-y, 1rem) var(--sassy-dialog-padding-x, 1.25rem);
     }
     .bf-dialog-small {
       --sassy-dialog-width: 20rem;
