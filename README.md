@@ -341,13 +341,17 @@ Component placeholders style whole interface elements, and they output before fo
 | `%bf-pagination`, `-small`, `-large`                                                                    | Links to numbered pages, in a joined row                                               |
 | `%bf-card`, `-header`, `-body`, `-footer`, `-title`, `-image`                                           | A bordered container and its parts                                                     |
 | `%bf-list-group`, `-flush`, `-numbered`, `-horizontal-{breakpoint}`                                     | A bordered list of items, which can be links or buttons                                |
+| `%bf-accordion`, `-flush`                                                                               | Sections that open and close, on native `<details>`                                    |
 | `%bf-table`, `-striped`, `-hover`, `-bordered`, `-small`, `-{theme colour}`, `-responsive-{breakpoint}` | Tables: striped, with hover, bordered, compact, tinted, and scrolling on small screens |
 | `%bf-tabs`, `%bf-tab`, `%bf-tab-panel`                                                                  | Tabs that switch panels, using the ARIA tabs roles                                     |
 | `%bf-alert`, `-{theme colour}`, `-title`, `-dismissible`                                                | A message box, tinted with a theme colour, that can be dismissed                       |
+| `%bf-progress`, `-{theme colour}`, `-animated`, `-stacked`                                              | A native `<progress>` bar, coloured, striped or stacked                                |
+| `%bf-spinner`, `%bf-spinner-grow`, `-{theme colour}`, `-small`                                          | A ring that turns or a dot that grows, to show something is loading                    |
+| `%bf-skeleton`                                                                                          | A faded, shimmering block that stands in for content while it loads                    |
 | `%bf-tooltip`                                                                                           | A tooltip: a popover described by its trigger with `aria-describedby`                  |
 | `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`                               | A native `<dialog>` and its parts                                                      |
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses and dismissible alerts need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses and dismissible alerts need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
 
 ## Limitations
 
@@ -394,7 +398,7 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 | Folder         | Contains                                                                                                                                                                                                       |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles                                                                                                   |
-| `1-components` | Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
+| `1-components` | Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
 | `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                                                                                           |
 | `3-grid`       | The grid                                                                                                                                                                                                       |
 | `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                                                                                      |

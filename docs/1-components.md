@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -72,6 +72,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-list-group-flush`                                                                          | No outer border or corners, for a list that fills a card                                |
 | `%bf-list-group-numbered`                                                                       | Numbers the items of an `<ol>`                                                          |
 | `%bf-list-group-horizontal`, `-horizontal-{breakpoint}`                                         | Items side by side, always or from a breakpoint                                         |
+| `%bf-accordion`                                                                                 | A `<div>` of `<details>`, each a header and content that open and close                 |
+| `%bf-accordion-flush`                                                                           | No outer border or corners, for an accordion that fills a card                          |
 | `%bf-tabs`                                                                                      | The list of tabs (`role="tablist"`)                                                     |
 | `%bf-tab`                                                                                       | Each tab (`role="tab"`)                                                                 |
 | `%bf-tab-panel`                                                                                 | Each panel (`role="tabpanel"`)                                                          |
@@ -79,6 +81,13 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-alert-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | An alert tinted with a theme colour, combined with `%bf-alert`                          |
 | `%bf-alert-title`                                                                               | A heading in an alert                                                                   |
 | `%bf-alert-dismissible`                                                                         | Room for a close button, combined with `%bf-alert`                                      |
+| `%bf-progress`                                                                                  | A native `<progress>` bar - without a value, a bar slides along it                      |
+| `%bf-progress-{theme colour}`                                                                   | A bar in a theme colour, combined with `%bf-progress`                                   |
+| `%bf-progress-animated`                                                                         | Moving stripes over the bar, combined with `%bf-progress`                               |
+| `%bf-progress-stacked`                                                                          | Several bars in one track, on a `<div role="group">`                                    |
+| `%bf-spinner`, `%bf-spinner-grow`                                                               | A ring that turns, or a dot that grows - see [Spinners](#spinners)                      |
+| `%bf-spinner-{theme colour}`, `%bf-spinner-small`                                               | A spinner in a theme colour, or small, combined with either                             |
+| `%bf-skeleton`                                                                                  | A faded block in place of content while it loads - see [Skeletons](#skeletons)          |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
@@ -584,6 +593,51 @@ A list group is a bordered list. Its direct children are its items, so extend on
 - **The list clips its items to its corners**, so a current item's background follows them. Something that pops out of an item, such as a menu, must use a popover, which is drawn above the page.
 - **Combine `%bf-list-group-flush`** for a list with no outer border or corners, such as one that fills a card, **`%bf-list-group-numbered`** to number the items of an `<ol>`, and **`%bf-list-group-horizontal`** or **`-horizontal-{breakpoint}`** to set the items side by side.
 
+## Accordions
+
+An accordion is a `<div>` of native `<details>`, so the browser opens and closes each section, from the keyboard too, with no script. Each `<details>` holds a `<summary>`, the header, and one element with its content. Give them the same `name` and opening one closes the others:
+
+```sass
+.accordion
+    @extend %bf-accordion
+```
+
+```css
+@layer sassy.base.components {
+  .accordion {
+    border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+    interpolate-size: allow-keywords;
+  }
+  .accordion > details[open] > summary {
+    background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, #fff)));
+    color: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
+  }
+  .accordion > details::details-content {
+    block-size: 0;
+    overflow: clip;
+  }
+}
+```
+
+```html
+<div class="accordion">
+    <details name="faq" open>
+        <summary>What is an accordion?</summary>
+        <div>A stack of sections, each with a header that opens and closes it.</div>
+    </details>
+    <details name="faq">
+        <summary>Does it need a script?</summary>
+        <div>No.</div>
+    </details>
+</div>
+```
+
+- **Put each section's content in one element** after the `<summary>`, which gets the padding. Several elements would each be padded.
+- **Leave out `name`** to let several sections be open at once, and add `open` to one that should start open.
+- **Opening and closing are animated where browsers support `::details-content`**, and instant elsewhere and for people who prefer reduced motion.
+- **An open header is tinted with primary**, its text mixed with the text colour so it keeps its contrast. Change it with `--sassy-accordion-open-bg` and `--sassy-accordion-open-colour`.
+- **Extend `%bf-accordion-flush` as well** for an accordion inside a card, or anywhere it should have no outer border.
+
 ## Tables
 
 ```sass
@@ -731,6 +785,148 @@ An alert is a message box. A theme colour tints its background, border and text,
 - **To dismiss an alert**, put a [close button](#close-buttons) in it with `commandfor` set to the alert's `id` and `command="--dismiss"`, and load `sassy.js`, which hides the alert. Extend `%bf-alert-dismissible` too, which makes room for the button in the top corner. The close button can come anywhere in the alert.
 - **A dismissed alert is hidden with the `hidden` attribute**, so don't give it a `display` placeholder, which would override `hidden`.
 
+## Progress bars
+
+A progress bar is a native `<progress>`, so browsers and screen readers already know its value. Give it a `<label for>` or `aria-label`. A theme colour changes the bar, and a bar with no `value` is indeterminate: a shorter bar slides along the track until you set one:
+
+```sass
+.progress
+    @extend %bf-progress
+
+.progress-ok
+    @extend %bf-progress-ok
+
+.progress-animated
+    @extend %bf-progress-animated
+```
+
+```css
+@layer sassy.base.components {
+  .progress {
+    appearance: none;
+    background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+    block-size: var(--sassy-progress-height, 1rem);
+    border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
+  }
+  .progress::-webkit-progress-value {
+    background-color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+  }
+  .progress::-moz-progress-bar {
+    background-color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+  }
+  .progress-ok {
+    --sassy-progress-bar-colour: var(--sassy-theme-ok);
+  }
+}
+```
+
+```html
+<label for="upload">Uploading</label>
+<progress class="progress progress-ok progress-animated" id="upload" value="30" max="100">30%</progress>
+<progress class="progress" aria-label="Loading"></progress>
+```
+
+To show several parts of a whole in one track, put a `<progress>` for each in a `<div>` that extends `%bf-progress-stacked`. Each one is full (`value="1" max="1"`) and its width is its share:
+
+```html
+<div class="progress-stacked" role="group" aria-label="Storage">
+    <progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"></progress>
+    <progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"></progress>
+</div>
+```
+
+- **The text inside `<progress>` is a fallback**, shown only by browsers that don't support it, so put the value in its label too if people need the number.
+- **Light theme colours are hard to see on the track.** `info`, `warn`, `grey-light` and `ok` have less than 3:1 contrast with the default grey track, so show the value as text beside those bars, or set a darker `--sassy-progress-bg`.
+- **The moving parts slow down, rather than stop, for people who prefer reduced motion**, so the bar still shows that something is happening.
+- **Browsers draw the bar with their own pseudo-elements**, `::-webkit-progress-value` in Chrome and Safari and `::-moz-progress-bar` in Firefox, so to restyle it, set the `--sassy-progress-*` properties rather than writing your own rules.
+
+## Spinners
+
+A spinner shows that something is loading: a ring that turns, or a dot that grows and fades. Put it on an element with `role="status"`, holding text for screen readers in a child that extends `%bf-visually-hidden`. Spinners are drawn in the text colour and sized in `em`, so they follow the text around them:
+
+```sass
+.spinner
+    @extend %bf-spinner
+
+.spinner-grow
+    @extend %bf-spinner-grow
+
+.spinner-small
+    @extend %bf-spinner-small
+```
+
+```css
+@layer sassy.base.components {
+  .spinner {
+    border: var(--sassy-spinner-width, 0.25em) solid var(--sassy-spinner-colour, currentColor);
+    border-inline-end-color: transparent;
+    animation: bf-spinner-turn 0.75s linear infinite;
+    block-size: var(--sassy-spinner-size, 2em);
+    border-radius: 50%;
+    inline-size: var(--sassy-spinner-size, 2em);
+  }
+  .spinner-small {
+    --sassy-spinner-size: 1em;
+    --sassy-spinner-width: 0.2em;
+  }
+}
+```
+
+```html
+<div class="spinner" role="status"><span class="visually-hidden">Loading…</span></div>
+<button type="button" class="button" disabled>
+    <span class="spinner spinner-small" aria-hidden="true"></span>
+    Saving…
+</button>
+```
+
+- **Inside a button whose text says what is happening, hide the spinner** with `aria-hidden="true"` instead of giving it `role="status"`, so screen readers don't hear it twice.
+- **Colour a spinner** with `%bf-spinner-{theme colour}`, or with a text colour utility such as `%bf-c-{colour}`, as it uses the text colour.
+- **Spinners slow down, rather than stop, for people who prefer reduced motion**, so they still show that something is happening.
+
+## Skeletons
+
+A skeleton is a faded block that stands in for content while it loads. It is one line of text high and drawn in the text colour, so it fits any text size and shows on any background. Give it a width with `%bf-width-{5-100}`, as an empty block has none:
+
+```sass
+.skeleton
+    @extend %bf-skeleton
+
+.width-75
+    @extend %bf-width-75
+```
+
+```css
+@layer sassy.base.components {
+  .skeleton {
+    background-color: var(--sassy-skeleton-colour, currentColor);
+    display: inline-block;
+    min-block-size: 1em;
+    opacity: var(--sassy-skeleton-opacity, 0.25);
+  }
+}
+@layer sassy.base.utilities {
+  .width-75 {
+    width: 75%;
+  }
+}
+```
+
+```html
+<article class="card" aria-busy="true">
+    <span class="visually-hidden">Loading…</span>
+    <h3 aria-hidden="true"><span class="skeleton width-50"></span></h3>
+    <p aria-hidden="true">
+        <span class="skeleton width-100"></span>
+        <span class="skeleton width-75"></span>
+    </p>
+</article>
+```
+
+- **Tell screen readers what is happening.** Put `aria-busy="true"` on the area that is loading, hide the skeletons with `aria-hidden="true"`, and add text such as "Loading…" in an element that extends `%bf-visually-hidden`. Remove `aria-busy` when the content arrives.
+- **Skeletons in a line wrap like words**, so a 100% block followed by a 75% one makes two lines.
+- **A shimmer crosses each skeleton**, through a mask, so it works in any colour. It does not run for people who prefer reduced motion: the blocks stay a plain shade, which still reads as loading.
+
 ## Tooltips
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
@@ -852,6 +1048,10 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-list-group-bg`, `--sassy-list-group-colour`, `--sassy-list-group-border-width`, `--sassy-list-group-border-colour`, `--sassy-list-group-radius` | List group background, text, border and corners                                                   |
 | `--sassy-list-group-padding-y`, `--sassy-list-group-padding-x`                                                                       | List group item padding                                                                           |
 | `--sassy-list-group-hover-bg`, `--sassy-list-group-current-bg`, `--sassy-list-group-current-colour`, `--sassy-list-group-disabled-colour` | An actionable item under the pointer, the current item, and a disabled item                       |
+| `--sassy-accordion-bg`, `--sassy-accordion-colour`, `--sassy-accordion-radius`                                                       | Accordion background, text and corners                                                            |
+| `--sassy-accordion-border-width`, `--sassy-accordion-border-colour`                                                                  | The lines around and between the sections                                                         |
+| `--sassy-accordion-padding-y`, `--sassy-accordion-padding-x`                                                                         | Header and content padding                                                                        |
+| `--sassy-accordion-hover-bg`, `--sassy-accordion-open-bg`, `--sassy-accordion-open-colour`                                           | A header under the pointer, and an open section's header                                          |
 | `--sassy-table-bg`, `--sassy-table-colour`, `--sassy-table-border-width`, `--sassy-table-border-colour`                              | Table background, text and lines - `%bf-table-{theme colour}` sets the background and line colour |
 | `--sassy-table-padding-y`, `--sassy-table-padding-x`, `--sassy-table-small-padding`                                                  | Cell padding, and the padding of a small table                                                    |
 | `--sassy-table-striped-bg`, `--sassy-table-hover-bg`, `--sassy-table-current-bg`                                                     | The shades laid over a striped row or column, the row under the pointer, and the current row      |
@@ -859,6 +1059,10 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                                           |
 | `--sassy-alert-bg`, `--sassy-alert-colour`, `--sassy-alert-border-width`, `--sassy-alert-border-colour`, `--sassy-alert-radius`      | Alert background, text, border and corners - the theme colours set the colours                    |
 | `--sassy-alert-padding-y`, `--sassy-alert-padding-x`, `--sassy-alert-margin-bottom`                                                  | Alert spacing                                                                                     |
+| `--sassy-progress-height`, `--sassy-progress-bg`, `--sassy-progress-bar-colour`, `--sassy-progress-radius`                           | Progress track height, track and bar colours, and corners                                         |
+| `--sassy-progress-margin-bottom`                                                                                                     | Space below a progress bar or stacked bars                                                        |
+| `--sassy-spinner-size`, `--sassy-spinner-width`, `--sassy-spinner-colour`                                                            | Spinner size, ring width and colour - the theme colours and `-small` set them                     |
+| `--sassy-skeleton-colour`, `--sassy-skeleton-opacity`, `--sassy-skeleton-radius`                                                     | Skeleton colour, how faded it is, and its corners                                                 |
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |
@@ -866,7 +1070,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_160-dialog-variables.scss`](../src/1-components/_160-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-accordion-duration` sets how long accordions take to open, and `$sassy-accordion-icon` their chevron. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. `$sassy-skeleton-duration` sets how long the shimmer takes. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 

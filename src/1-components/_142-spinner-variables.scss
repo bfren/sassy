@@ -1,0 +1,13 @@
+// Spinners are sized in em, so they follow the text size - in a button, for example.
+$sassy-spinner-size: var(--sassy-spinner-size, 2em);
+$sassy-spinner-width: var(--sassy-spinner-width, 0.25em);
+$sassy-spinner-colour: var(--sassy-spinner-colour, currentColor);
+
+// %bf-spinner-small, for beside text or in a button.
+$sassy-spinner-small-size: 1em !default;
+$sassy-spinner-small-width: 0.2em !default;
+
+// How long one turn or pulse takes. With prefers-reduced-motion it is this many times slower,
+// rather than stopped, so the spinner still shows it is busy.
+$sassy-spinner-duration: 0.75s !default;
+$sassy-spinner-reduced-motion-factor: 4 !default;

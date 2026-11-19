@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -707,6 +707,45 @@
 </div>
         </section>
 
+        <section class="example" id="accordions">
+            <h2>Accordions</h2>
+            <p>Native <code>&lt;details&gt;</code> elements in a <code>&lt;div&gt;</code>. They share a <code>name</code>, so opening one closes the others, and in browsers that support it they open and close smoothly.</p>
+            <div class="demo">
+                <div class="accordion">
+                    <details name="faq" open>
+                        <summary>What is an accordion?</summary>
+                        <div>A stack of sections, each with a header that opens and closes it.</div>
+                    </details>
+                    <details name="faq">
+                        <summary>Does it need a script?</summary>
+                        <div>No. Each section is a native <code>&lt;details&gt;</code>, which the browser opens and closes, with the keyboard too.</div>
+                    </details>
+                    <details name="faq">
+                        <summary>Why does opening one close the others?</summary>
+                        <div>They share <code>name="faq"</code>. Leave the name out to let several be open at once.</div>
+                    </details>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.accordion
+    @extend %bf-accordion</code></pre>
+<pre data-lang="html"><code>&lt;div class="accordion"&gt;
+    &lt;details name="faq" open&gt;
+        &lt;summary&gt;What is an accordion?&lt;/summary&gt;
+        &lt;div&gt;A stack of sections, each with a header that opens and closes it.&lt;/div&gt;
+    &lt;/details&gt;
+    &lt;details name="faq"&gt;
+        &lt;summary&gt;Does it need a script?&lt;/summary&gt;
+        &lt;div&gt;No. Each section is a native &lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt;, which the browser opens and closes, with the keyboard too.&lt;/div&gt;
+    &lt;/details&gt;
+    &lt;details name="faq"&gt;
+        &lt;summary&gt;Why does opening one close the others?&lt;/summary&gt;
+        &lt;div&gt;They share &lt;code&gt;name="faq"&lt;/code&gt;. Leave the name out to let several be open at once.&lt;/div&gt;
+    &lt;/details&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="tables">
             <h2>A table</h2>
             <p>Striped rows, a shade under the pointer, the current row marked with <code>aria-current</code>, and a row tinted with the <code>ok</code> theme colour. Below 768px the table scrolls sideways.</p>
@@ -868,6 +907,156 @@
 &lt;div class="alert alert-error alert-dismissible" id="upload-failed" role="alert"&gt;
     &lt;p&gt;The upload failed. &lt;a href="#alerts"&gt;Try again&lt;/a&gt;.&lt;/p&gt;
     &lt;button type="button" class="close" commandfor="upload-failed" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="progress">
+            <h2>Progress bars</h2>
+            <p>Native <code>&lt;progress&gt;</code> elements, each with a label. A theme colour changes the bar, the third has moving stripes, and the fourth has no value, so a bar slides along it. The last is three bars stacked in one track, each given its share with an inline width.</p>
+            <div class="demo">
+                <label for="upload-progress">Uploading</label>
+                <progress class="progress" id="upload-progress" value="30" max="100">30%</progress>
+                <progress class="progress progress-ok" value="60" max="100" aria-label="Saved">60%</progress>
+                <progress class="progress progress-warn progress-animated" value="80" max="100" aria-label="Disk used">80%</progress>
+                <progress class="progress progress-secondary" aria-label="Loading"></progress>
+                <div class="progress-stacked" role="group" aria-label="Storage">
+                    <progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"></progress>
+                    <progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"></progress>
+                    <progress class="progress progress-info" value="1" max="1" style="width: 20%" aria-label="Documents, 20%"></progress>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.progress
+    @extend %bf-progress
+
+.progress-ok
+    @extend %bf-progress-ok
+
+.progress-warn
+    @extend %bf-progress-warn
+
+.progress-secondary
+    @extend %bf-progress-secondary
+
+.progress-info
+    @extend %bf-progress-info
+
+.progress-animated
+    @extend %bf-progress-animated
+
+.progress-stacked
+    @extend %bf-progress-stacked</code></pre>
+<pre data-lang="html"><code>&lt;label for="upload-progress"&gt;Uploading&lt;/label&gt;
+&lt;progress class="progress" id="upload-progress" value="30" max="100"&gt;30%&lt;/progress&gt;
+&lt;progress class="progress progress-ok" value="60" max="100" aria-label="Saved"&gt;60%&lt;/progress&gt;
+&lt;progress class="progress progress-warn progress-animated" value="80" max="100" aria-label="Disk used"&gt;80%&lt;/progress&gt;
+&lt;progress class="progress progress-secondary" aria-label="Loading"&gt;&lt;/progress&gt;
+&lt;div class="progress-stacked" role="group" aria-label="Storage"&gt;
+    &lt;progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"&gt;&lt;/progress&gt;
+    &lt;progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"&gt;&lt;/progress&gt;
+    &lt;progress class="progress progress-info" value="1" max="1" style="width: 20%" aria-label="Documents, 20%"&gt;&lt;/progress&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="spinners">
+            <h2>Spinners</h2>
+            <p>A ring that turns, or a dot that grows, in the text colour or a theme colour. Each has <code>role="status"</code> and hidden text for screen readers. In the button, the small spinner is hidden from screen readers, as the button's text says what is happening.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <div class="spinner" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <div class="spinner spinner-ok" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <div class="spinner-grow" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <div class="spinner-grow spinner-error" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <button type="button" class="button button-primary" disabled>
+                        <span class="spinner spinner-small" aria-hidden="true"></span>
+                        Saving…
+                    </button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.spinner
+    @extend %bf-spinner
+
+.spinner-grow
+    @extend %bf-spinner-grow
+
+.spinner-ok
+    @extend %bf-spinner-ok
+
+.spinner-error
+    @extend %bf-spinner-error
+
+.spinner-small
+    @extend %bf-spinner-small</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;div class="spinner" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="spinner spinner-ok" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="spinner-grow" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="spinner-grow spinner-error" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;button type="button" class="button button-primary" disabled&gt;
+        &lt;span class="spinner spinner-small" aria-hidden="true"&gt;&lt;/span&gt;
+        Saving…
+    &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="skeletons">
+            <h2>Skeletons</h2>
+            <p>Faded blocks that stand in for content while it loads, sized with the width utilities. The loading card has <code>aria-busy="true"</code> and hidden text for screen readers, and a shimmer crosses the blocks unless you prefer reduced motion.</p>
+            <div class="demo">
+                <div class="cards">
+                    <article class="card" aria-busy="true">
+                        <div class="card-body">
+                            <span class="visually-hidden">Loading…</span>
+                            <h3 aria-hidden="true"><span class="skeleton width-50"></span></h3>
+                            <p aria-hidden="true">
+                                <span class="skeleton width-100"></span>
+                                <span class="skeleton width-75"></span>
+                                <span class="skeleton width-50"></span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-body">
+                            <h3>Loaded</h3>
+                            <p>When the content arrives, it replaces the skeletons, and the card loses <code>aria-busy</code>.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.skeleton
+    @extend %bf-skeleton
+
+.width-50
+    @extend %bf-width-50
+
+.width-75
+    @extend %bf-width-75
+
+.width-100
+    @extend %bf-width-100</code></pre>
+<pre data-lang="html"><code>&lt;div class="cards"&gt;
+    &lt;article class="card" aria-busy="true"&gt;
+        &lt;div class="card-body"&gt;
+            &lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;
+            &lt;h3 aria-hidden="true"&gt;&lt;span class="skeleton width-50"&gt;&lt;/span&gt;&lt;/h3&gt;
+            &lt;p aria-hidden="true"&gt;
+                &lt;span class="skeleton width-100"&gt;&lt;/span&gt;
+                &lt;span class="skeleton width-75"&gt;&lt;/span&gt;
+                &lt;span class="skeleton width-50"&gt;&lt;/span&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
+    &lt;article class="card"&gt;
+        &lt;div class="card-body"&gt;
+            &lt;h3&gt;Loaded&lt;/h3&gt;
+            &lt;p&gt;When the content arrives, it replaces the skeletons, and the card loses &lt;code&gt;aria-busy&lt;/code&gt;.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

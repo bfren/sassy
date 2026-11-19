@@ -1748,6 +1748,68 @@
       --sassy-input-font-size: calc(var(--sassy-font-size-base) * 1.25);
       --sassy-input-radius: 0.5rem;
     }
+    .bf-tabs {
+      --sassy-nav-link-underline-width: var(--sassy-tabs-underline-width, 0.125rem);
+      --sassy-nav-link-hover-bg: transparent;
+      --sassy-nav-current-border-colour: var(--sassy-theme-primary);
+      border-bottom: var(--sassy-tabs-border-width, 1px) solid var(--sassy-tabs-border-colour, oklch(92.8% 0.006 264.531deg));
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sassy-nav-gap, 0.25rem);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .bf-tab {
+      align-items: center;
+      background-color: transparent;
+      border: 0;
+      border-bottom: var(--sassy-nav-link-underline-width, 0) solid transparent;
+      border-radius: var(--sassy-nav-link-radius, 0);
+      box-sizing: border-box;
+      color: var(--sassy-nav-link-colour, var(--sassy-theme-primary));
+      cursor: pointer;
+      display: flex;
+      font: inherit;
+      gap: 0.5em;
+      justify-content: var(--sassy-nav-link-justify, flex-start);
+      margin: 0;
+      padding: var(--sassy-nav-link-padding-y, 0.5rem) var(--sassy-nav-link-padding-x, 1rem);
+      text-decoration: none;
+      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-tab {
+        transition: none;
+      }
+    }
+    .bf-tab:hover {
+      background-color: var(--sassy-nav-link-hover-bg, oklch(96.7% 0.003 264.542deg));
+    }
+    .bf-tab:focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: var(--sassy-focus-outline-offset, 2px);
+    }
+    .bf-tab[aria-current]:not([aria-current=false]), .bf-tab[aria-selected=true] {
+      background-color: var(--sassy-nav-current-bg, transparent);
+      border-bottom-color: var(--sassy-nav-current-border-colour, transparent);
+      color: var(--sassy-nav-current-colour, var(--sassy-body-colour));
+    }
+    .bf-tab:disabled, .bf-tab[aria-disabled=true] {
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .bf-tab {
+      margin-bottom: calc(var(--sassy-tabs-border-width, 1px) * -1);
+    }
+    .bf-tab-panel {
+      padding: var(--sassy-tab-panel-padding-y, 1rem) 0;
+    }
+    .bf-tab-panel:focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: var(--sassy-focus-outline-offset, 2px);
+    }
     .bf-card {
       background-color: var(--sassy-card-bg, #fff);
       border: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, oklch(92.8% 0.006 264.531deg));
@@ -1851,6 +1913,83 @@
     .bf-list-group-horizontal > * + * {
       border-block-start: 0;
       border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+    }
+    .bf-accordion {
+      border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-radius: var(--sassy-accordion-radius, var(--sassy-radius, 0.375rem));
+      box-sizing: border-box;
+      interpolate-size: allow-keywords;
+      overflow: hidden;
+    }
+    .bf-accordion > details {
+      background-color: var(--sassy-accordion-bg, #fff);
+      color: var(--sassy-accordion-colour, inherit);
+      margin: 0;
+    }
+    .bf-accordion > details + details {
+      border-block-start: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+    }
+    .bf-accordion > details > summary {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: 1em;
+      justify-content: space-between;
+      list-style: none;
+      padding: var(--sassy-accordion-padding-y, 1rem) var(--sassy-accordion-padding-x, 1.25rem);
+    }
+    .bf-accordion > details > summary:hover {
+      background-color: var(--sassy-accordion-hover-bg, color-mix(in oklab, currentColor 4%, var(--sassy-accordion-bg, #fff)));
+    }
+    .bf-accordion > details > summary:focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: calc(var(--sassy-focus-outline-width, 2px) * -1);
+    }
+    .bf-accordion > details > summary::after {
+      background-color: currentColor;
+      block-size: 1em;
+      content: "";
+      flex-shrink: 0;
+      inline-size: 1em;
+      mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") center/contain no-repeat;
+      transition: transform 0.2s ease-in-out;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-accordion > details > summary::after {
+        transition: none;
+      }
+    }
+    .bf-accordion > details > summary::-webkit-details-marker {
+      display: none;
+    }
+    .bf-accordion > details[open] > summary {
+      background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, #fff)));
+      border-block-end: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+      color: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
+    }
+    .bf-accordion > details[open] > summary::after {
+      transform: rotate(180deg);
+    }
+    .bf-accordion > details > summary ~ * {
+      margin: 0;
+      padding: var(--sassy-accordion-padding-y, 1rem) var(--sassy-accordion-padding-x, 1.25rem);
+    }
+    .bf-accordion > details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition: block-size 0.2s ease-in-out, content-visibility 0.2s allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-accordion > details::details-content {
+        transition: none;
+      }
+    }
+    .bf-accordion > details[open]::details-content {
+      block-size: auto;
+    }
+    .bf-accordion-flush {
+      border-radius: 0;
+      border-width: 0;
     }
     .bf-table {
       border-color: var(--sassy-table-border-colour, oklch(92.8% 0.006 264.531deg));
@@ -1958,68 +2097,6 @@
         overflow-x: auto;
       }
     }
-    .bf-tabs {
-      --sassy-nav-link-underline-width: var(--sassy-tabs-underline-width, 0.125rem);
-      --sassy-nav-link-hover-bg: transparent;
-      --sassy-nav-current-border-colour: var(--sassy-theme-primary);
-      border-bottom: var(--sassy-tabs-border-width, 1px) solid var(--sassy-tabs-border-colour, oklch(92.8% 0.006 264.531deg));
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--sassy-nav-gap, 0.25rem);
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .bf-tab {
-      align-items: center;
-      background-color: transparent;
-      border: 0;
-      border-bottom: var(--sassy-nav-link-underline-width, 0) solid transparent;
-      border-radius: var(--sassy-nav-link-radius, 0);
-      box-sizing: border-box;
-      color: var(--sassy-nav-link-colour, var(--sassy-theme-primary));
-      cursor: pointer;
-      display: flex;
-      font: inherit;
-      gap: 0.5em;
-      justify-content: var(--sassy-nav-link-justify, flex-start);
-      margin: 0;
-      padding: var(--sassy-nav-link-padding-y, 0.5rem) var(--sassy-nav-link-padding-x, 1rem);
-      text-decoration: none;
-      transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .bf-tab {
-        transition: none;
-      }
-    }
-    .bf-tab:hover {
-      background-color: var(--sassy-nav-link-hover-bg, oklch(96.7% 0.003 264.542deg));
-    }
-    .bf-tab:focus-visible {
-      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
-      outline-offset: var(--sassy-focus-outline-offset, 2px);
-    }
-    .bf-tab[aria-current]:not([aria-current=false]), .bf-tab[aria-selected=true] {
-      background-color: var(--sassy-nav-current-bg, transparent);
-      border-bottom-color: var(--sassy-nav-current-border-colour, transparent);
-      color: var(--sassy-nav-current-colour, var(--sassy-body-colour));
-    }
-    .bf-tab:disabled, .bf-tab[aria-disabled=true] {
-      cursor: not-allowed;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    .bf-tab {
-      margin-bottom: calc(var(--sassy-tabs-border-width, 1px) * -1);
-    }
-    .bf-tab-panel {
-      padding: var(--sassy-tab-panel-padding-y, 1rem) 0;
-    }
-    .bf-tab-panel:focus-visible {
-      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
-      outline-offset: var(--sassy-focus-outline-offset, 2px);
-    }
     .bf-alert {
       background-color: var(--sassy-alert-bg, oklch(96.7% 0.003 264.542deg));
       border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, oklch(92.8% 0.006 264.531deg));
@@ -2092,6 +2169,214 @@
       inset-block-start: var(--sassy-alert-padding-y, 1rem);
       inset-inline-end: var(--sassy-alert-padding-x, 1rem);
       position: absolute;
+    }
+    @keyframes bf-progress-slide {
+      from {
+        background-position: -66.667% 0;
+      }
+      to {
+        background-position: 166.667% 0;
+      }
+    }
+    @keyframes bf-progress-stripes {
+      from {
+        background-position: 1rem 0;
+      }
+      to {
+        background-position: 0 0;
+      }
+    }
+    .bf-progress {
+      appearance: none;
+      background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+      block-size: var(--sassy-progress-height, 1rem);
+      border: 0;
+      border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
+      box-sizing: border-box;
+      color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+      display: block;
+      inline-size: 100%;
+      margin: 0 0 var(--sassy-progress-margin-bottom, 1rem);
+      overflow: hidden;
+    }
+    .bf-progress::-webkit-progress-bar {
+      background-color: transparent;
+    }
+    .bf-progress::-webkit-progress-value {
+      background-color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+    }
+    .bf-progress::-moz-progress-bar {
+      background-color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+    }
+    .bf-progress:indeterminate {
+      animation: bf-progress-slide 1.5s ease-in-out infinite;
+      background-image: linear-gradient(var(--sassy-progress-bar-colour, var(--sassy-theme-primary)), var(--sassy-progress-bar-colour, var(--sassy-theme-primary)));
+      background-repeat: no-repeat;
+      background-size: 40% 100%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-progress:indeterminate {
+        animation-duration: 6s;
+      }
+    }
+    .bf-progress:indeterminate::-moz-progress-bar {
+      background-color: transparent;
+    }
+    .bf-progress-primary {
+      --sassy-progress-bar-colour: var(--sassy-theme-primary);
+    }
+    .bf-progress-secondary {
+      --sassy-progress-bar-colour: var(--sassy-theme-secondary);
+    }
+    .bf-progress-ok {
+      --sassy-progress-bar-colour: var(--sassy-theme-ok);
+    }
+    .bf-progress-info {
+      --sassy-progress-bar-colour: var(--sassy-theme-info);
+    }
+    .bf-progress-warn {
+      --sassy-progress-bar-colour: var(--sassy-theme-warn);
+    }
+    .bf-progress-error {
+      --sassy-progress-bar-colour: var(--sassy-theme-error);
+    }
+    .bf-progress-grey-light {
+      --sassy-progress-bar-colour: var(--sassy-theme-grey-light);
+    }
+    .bf-progress-grey-dark {
+      --sassy-progress-bar-colour: var(--sassy-theme-grey-dark);
+    }
+    .bf-progress-animated::-webkit-progress-value {
+      animation: bf-progress-stripes 1s linear infinite;
+      background-image: linear-gradient(45deg, color-mix(in oklab, #fff 15%, transparent) 25%, transparent 25%, transparent 50%, color-mix(in oklab, #fff 15%, transparent) 50%, color-mix(in oklab, #fff 15%, transparent) 75%, transparent 75%, transparent);
+      background-size: 1rem 1rem;
+    }
+    .bf-progress-animated::-moz-progress-bar {
+      animation: bf-progress-stripes 1s linear infinite;
+      background-image: linear-gradient(45deg, color-mix(in oklab, #fff 15%, transparent) 25%, transparent 25%, transparent 50%, color-mix(in oklab, #fff 15%, transparent) 50%, color-mix(in oklab, #fff 15%, transparent) 75%, transparent 75%, transparent);
+      background-size: 1rem 1rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-progress-animated::-webkit-progress-value {
+        animation-duration: 4s;
+      }
+      .bf-progress-animated::-moz-progress-bar {
+        animation-duration: 4s;
+      }
+    }
+    .bf-progress-stacked {
+      background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+      block-size: var(--sassy-progress-height, 1rem);
+      border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
+      display: flex;
+      margin: 0 0 var(--sassy-progress-margin-bottom, 1rem);
+      overflow: hidden;
+    }
+    .bf-progress-stacked > * {
+      block-size: 100%;
+      border-radius: 0;
+      flex: none;
+      margin: 0;
+    }
+    @keyframes bf-spinner-turn {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes bf-spinner-grow {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .bf-spinner {
+      border: var(--sassy-spinner-width, 0.25em) solid var(--sassy-spinner-colour, currentColor);
+      border-inline-end-color: transparent;
+      animation: bf-spinner-turn 0.75s linear infinite;
+      block-size: var(--sassy-spinner-size, 2em);
+      border-radius: 50%;
+      box-sizing: border-box;
+      display: inline-block;
+      flex-shrink: 0;
+      inline-size: var(--sassy-spinner-size, 2em);
+      vertical-align: -0.125em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-spinner {
+        animation-duration: 3s;
+      }
+    }
+    .bf-spinner-grow {
+      background-color: var(--sassy-spinner-colour, currentColor);
+      opacity: 0;
+      animation: bf-spinner-grow 0.75s linear infinite;
+      block-size: var(--sassy-spinner-size, 2em);
+      border-radius: 50%;
+      box-sizing: border-box;
+      display: inline-block;
+      flex-shrink: 0;
+      inline-size: var(--sassy-spinner-size, 2em);
+      vertical-align: -0.125em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-spinner-grow {
+        animation-duration: 3s;
+      }
+    }
+    .bf-spinner-primary {
+      --sassy-spinner-colour: var(--sassy-theme-primary);
+    }
+    .bf-spinner-secondary {
+      --sassy-spinner-colour: var(--sassy-theme-secondary);
+    }
+    .bf-spinner-ok {
+      --sassy-spinner-colour: var(--sassy-theme-ok);
+    }
+    .bf-spinner-info {
+      --sassy-spinner-colour: var(--sassy-theme-info);
+    }
+    .bf-spinner-warn {
+      --sassy-spinner-colour: var(--sassy-theme-warn);
+    }
+    .bf-spinner-error {
+      --sassy-spinner-colour: var(--sassy-theme-error);
+    }
+    .bf-spinner-grey-light {
+      --sassy-spinner-colour: var(--sassy-theme-grey-light);
+    }
+    .bf-spinner-grey-dark {
+      --sassy-spinner-colour: var(--sassy-theme-grey-dark);
+    }
+    .bf-spinner-small {
+      --sassy-spinner-size: 1em;
+      --sassy-spinner-width: 0.2em;
+    }
+    @keyframes bf-skeleton-shimmer {
+      from {
+        mask-position: 100% 0;
+      }
+      to {
+        mask-position: 0 0;
+      }
+    }
+    .bf-skeleton {
+      background-color: var(--sassy-skeleton-colour, currentColor);
+      border-radius: var(--sassy-skeleton-radius, var(--sassy-radius, 0.375rem));
+      cursor: wait;
+      display: inline-block;
+      min-block-size: 1em;
+      opacity: var(--sassy-skeleton-opacity, 0.25);
+      vertical-align: middle;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .bf-skeleton {
+        animation: bf-skeleton-shimmer 2s linear infinite;
+        mask-image: linear-gradient(110deg, #000 40%, rgba(0, 0, 0, 0.4) 50%, #000 60%);
+        mask-size: 300% 100%;
+      }
     }
     .bf-tooltip {
       background-color: var(--sassy-tooltip-bg, oklch(21% 0.034 264.665deg));

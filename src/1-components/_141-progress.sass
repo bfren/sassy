@@ -1,0 +1,109 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: progress bars
+//  =================================================================
+
+//  A native <progress>, labelled with a <label for> or aria-label. Without a value it is
+//  indeterminate, and a bar slides along it. Browsers draw the bar with their own pseudo-elements,
+//  which must each be in a rule of their own: one a browser doesn't know drops the whole rule.
+
+$-stripes: linear-gradient(45deg, $sassy-progress-stripe-colour 25%, transparent 25%, transparent 50%, $sassy-progress-stripe-colour 50%, $sassy-progress-stripe-colour 75%, transparent 75%, transparent)
+$-slide: make.name("progress-slide")
+$-stripe: make.name("progress-stripes")
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.in-base
+        // the slide starts and ends just off the track: the bar is 40% wide, so 0% to 100% would stop at the edges
+        @keyframes #{$-slide}
+            from
+                background-position: -66.667% 0
+            to
+                background-position: 166.667% 0
+
+        @keyframes #{$-stripe}
+            from
+                background-position: $sassy-progress-stripe-size 0
+            to
+                background-position: 0 0
+
+    @include make.single("progress")
+        appearance: none
+        background-color: $sassy-progress-bg
+        block-size: $sassy-progress-height
+        border: 0
+        border-radius: $sassy-progress-radius
+        box-sizing: border-box
+        color: $sassy-progress-bar-colour
+        display: block
+        inline-size: 100%
+        margin: 0 0 $sassy-progress-margin-bottom
+        overflow: hidden
+
+        &::-webkit-progress-bar
+            background-color: transparent
+
+        &::-webkit-progress-value
+            background-color: $sassy-progress-bar-colour
+
+        &::-moz-progress-bar
+            background-color: $sassy-progress-bar-colour
+
+        // no value: the element's own background draws a bar that slides along the track
+        &:indeterminate
+            animation: $-slide $sassy-progress-indeterminate-duration ease-in-out infinite
+            background-image: linear-gradient($sassy-progress-bar-colour, $sassy-progress-bar-colour)
+            background-repeat: no-repeat
+            background-size: 40% 100%
+
+            @media (prefers-reduced-motion: reduce)
+                animation-duration: $sassy-progress-indeterminate-duration * $sassy-progress-reduced-motion-factor
+
+        &:indeterminate::-moz-progress-bar
+            background-color: transparent
+
+    // Theme colours only change the bar colour, so combine them with %bf-progress
+
+    @each $name, $value in $sassy-theme
+        @include make.single("progress-#{$name}")
+            --sassy-progress-bar-colour: #{$value}
+
+    // Moving stripes over the bar, combined with %bf-progress
+
+    @include make.single("progress-animated")
+        &::-webkit-progress-value
+            animation: $-stripe $sassy-progress-stripe-duration linear infinite
+            background-image: $-stripes
+            background-size: $sassy-progress-stripe-size $sassy-progress-stripe-size
+
+        &::-moz-progress-bar
+            animation: $-stripe $sassy-progress-stripe-duration linear infinite
+            background-image: $-stripes
+            background-size: $sassy-progress-stripe-size $sassy-progress-stripe-size
+
+        @media (prefers-reduced-motion: reduce)
+            &::-webkit-progress-value
+                animation-duration: $sassy-progress-stripe-duration * $sassy-progress-reduced-motion-factor
+
+            &::-moz-progress-bar
+                animation-duration: $sassy-progress-stripe-duration * $sassy-progress-reduced-motion-factor
+
+    // Several bars in one track, on a <div role="group"> with an aria-label. Each child is a full
+    // %bf-progress (value="1" max="1", so it is all bar) given its share with style="width: 30%".
+
+    @include make.single("progress-stacked")
+        background-color: $sassy-progress-bg
+        block-size: $sassy-progress-height
+        border-radius: $sassy-progress-radius
+        display: flex
+        margin: 0 0 $sassy-progress-margin-bottom
+        overflow: hidden
+
+        & > *
+            block-size: 100%
+            border-radius: 0
+            flex: none
+            margin: 0

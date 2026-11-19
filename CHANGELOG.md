@@ -11,6 +11,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - **Breaking:** your own unlayered CSS now always beats Sassy's, whatever its specificity. A plain `a { color: red }` overrides every link that extends `%bf-nav-link`. Put your CSS in a layer after Sassy's - `@layer reset, sassy, app;` - to keep Sassy's precedence over it.
 - **Breaking:** `make-passes()` is now `make-layers()`, and outputs each pass in a layer - Sassy's by default, or your own with `$name`.
 - **Breaking:** `src/1-forms` is now `src/2-forms` and `src/2-components` is now `src/1-components`, with their files renumbered to match. Components come before forms because input groups style the buttons inside them.
+- **Breaking:** if you `@use` component files directly, `_140-tabs` is now `_123-tabs` and `_160-dialog` is now `_153-dialog`, with their `-variables` files. Tabs are output after pagination rather than after tables.
 - `%bf-body` is output with the element defaults, below every other placeholder, and sets its heading and paragraph margins itself rather than extending the margin utilities. A margin utility on a heading inside it now always wins.
 
 - Grid columns set `margin-block: 0` and their start margin from `--sassy-col-offset`, rather than `margin: 0`, so offsets work. Rows set `--sassy-col-offset: 0`.
@@ -22,6 +23,10 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Skeletons: `%bf-skeleton`, a faded block one line high that stands in for content while it loads, drawn in the text colour and sized with `%bf-width-{5-100}`. A shimmer crosses it, except for people who prefer reduced motion.
+- Accordions: `%bf-accordion` on a `<div>` styles its native `<details>` as sections that open and close, with a chevron that turns and an open header tinted with primary. They open and close smoothly where browsers support `::details-content`. `%bf-accordion-flush` removes the outer border.
+- Spinners: `%bf-spinner`, a ring that turns, and `%bf-spinner-grow`, a dot that grows and fades, drawn in the text colour and sized in `em`. `%bf-spinner-{theme colour}` and `%bf-spinner-small` combine with either. They slow down for people who prefer reduced motion.
+- Progress bars: `%bf-progress` styles a native `<progress>`, with a bar that slides along the track when it has no value. `%bf-progress-{theme colour}` colours the bar, `%bf-progress-animated` adds moving stripes, and `%bf-progress-stacked` shows several bars in one track. Moving parts slow down for people who prefer reduced motion.
 - Pagination: `%bf-pagination` on the `<ul>` of a `<nav>` joins its page links into a row of boxes that share their borders, with the current page marked by `aria-current="page"` and links that can't be used as a `<span>` or with `aria-disabled`. `%bf-pagination-small` and `-large` match the form control sizes.
 - Button groups: `%bf-btn-group` joins buttons into a row that shares borders, `%bf-btn-group-vertical` stacks them, and `%bf-btn-group-small` and `-large` size every button in a group. `%bf-btn-toolbar` lays groups out in a row.
 - `sassy.js` makes a `role="toolbar"` one stop in the tab order, and moves between its controls with the arrow keys, Home and End.

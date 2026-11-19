@@ -1,0 +1,36 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: skeletons
+//  =================================================================
+
+//  A faded block shown in place of content while it loads, one line high, sized with %bf-width-{5-100}.
+//  Mark the loading area with aria-busy="true", and give it text for screen readers.
+//  A shimmer crosses it, through a mask so it works in any colour; with reduced motion it stays still.
+
+$-shimmer: make.name("skeleton-shimmer")
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.in-base
+        @keyframes #{$-shimmer}
+            from
+                mask-position: 100% 0
+            to
+                mask-position: 0 0
+
+    @include make.single("skeleton")
+        background-color: $sassy-skeleton-colour
+        border-radius: $sassy-skeleton-radius
+        cursor: wait
+        display: inline-block
+        min-block-size: 1em
+        opacity: $sassy-skeleton-opacity
+        vertical-align: middle
+
+        @media (prefers-reduced-motion: no-preference)
+            animation: $-shimmer $sassy-skeleton-duration linear infinite
+            mask-image: linear-gradient(110deg, #000 40%, rgb(0 0 0 / 40%) 50%, #000 60%)
+            mask-size: 300% 100%

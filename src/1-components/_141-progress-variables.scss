@@ -1,0 +1,16 @@
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+
+$sassy-progress-height: var(--sassy-progress-height, 1rem);
+$sassy-progress-bg: var(--sassy-progress-bg, #{colour("grey", 200)});
+$sassy-progress-bar-colour: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+$sassy-progress-radius: var(--sassy-progress-radius, $sassy-radius);
+$sassy-progress-margin-bottom: var(--sassy-progress-margin-bottom, 1rem);
+
+// The stripes of %bf-progress-animated, and how long the moving parts take.
+// With prefers-reduced-motion they move more slowly, so the bar still shows it is busy.
+$sassy-progress-stripe-colour: color-mix(in oklab, #fff 15%, transparent) !default;
+$sassy-progress-stripe-size: 1rem !default;
+$sassy-progress-stripe-duration: 1s !default;
+$sassy-progress-indeterminate-duration: 1.5s !default;
+$sassy-progress-reduced-motion-factor: 4 !default;
