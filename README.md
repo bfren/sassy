@@ -116,7 +116,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
 | Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`                                                   |
 | Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                              |
-| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`                                                                                                                                                                         |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`, `%bf-theme-dark`                                                                                                                                                       |
 | Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                         |
 | Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                         |
 | Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                |
@@ -234,26 +234,21 @@ The prefix keeps Sassy's placeholders apart from your own and from other librari
 
 ### Theming
 
-Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime - for example in dark mode:
+Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime. For dark mode, extend `%bf-theme-dark` on `html` or a section, or `%bf-theme-auto` to follow the visitor's system - components and forms take their neutral colours from a few colour roles, such as `--sassy-surface` and `--sassy-line`, which these switch together with the theme colours (see [5-theme](docs/5-theme.md#light-and-dark)):
 
 ```sass
+html
+    @extend %bf-theme-auto
+
 :root
     --sassy-theme-primary: #{sassy.colour("teal", 600)}
-
-@media (prefers-color-scheme: dark)
-    :root
-        --sassy-body-colour: #{sassy.colour("grey", 100)}
-        --sassy-input-bg: #{sassy.colour("grey", 800)}
-        --sassy-input-colour: #{sassy.colour("grey", 100)}
-        --sassy-input-border-colour: #{sassy.colour("grey", 600)}
-        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}
 ```
 
 Colour properties accept **any CSS colour** - hex, `rgb()`, `oklch()`, a named colour or another custom property - and Sassy adds transparency where it needs it with `color-mix()`. Use `sassy.colour(name, shade)` to get any palette colour, or write a value directly: `--sassy-theme-primary: #0d9488`.
 
-Only the fonts, body text and theme colours are defined on `:root`. Every other property's default is the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so your CSS only contains the defaults of the placeholders you extend. Set any of them, anywhere, to change it. To read one in your own Sass, use its Sass variable, which includes the default: `border-radius: sassy.$sassy-radius`. A bare `var(--sassy-radius)` has no value unless you set it.
+Only the fonts, body text, colour roles and theme colours are defined on `:root`. Every other property's default is the fallback in the `var()` that reads it - `var(--sassy-card-bg, var(--sassy-surface))` - so your CSS only contains the defaults of the placeholders you extend. Set any of them, anywhere, to change it. To read one in your own Sass, use its Sass variable, which includes the default: `border-radius: sassy.$sassy-radius`. A bare `var(--sassy-radius)` has no value unless you set it.
 
-The one exception is the select chevron, an SVG image that cannot read custom properties. If you change `--sassy-input-colour`, set `--sassy-select-chevron` to match using `sassy.chevron()`, as in the example above.
+The one exception is the select chevron, an SVG image that cannot read custom properties. The colour modes set it; if you change `--sassy-input-colour` yourself, set `--sassy-select-chevron` to match using `sassy.chevron()`.
 
 Shadows have one colour, `--sassy-shadow-colour`, which is black at low opacity by default. Set it for a site, a section or an element to colour every shadow there - for example `--sassy-shadow-colour: var(--sassy-theme-primary)`.
 
@@ -407,7 +402,7 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 | `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                                                                                           |
 | `3-grid`       | The grid                                                                                                                                                                                                       |
 | `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                                                                                      |
-| `5-theme`      | Theme colours                                                                                                                                                                                                  |
+| `5-theme`      | Theme colours and colour modes                                                                                                                                                                                 |
 
 Composites - placeholders that set several properties at once, such as content, components, forms and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 

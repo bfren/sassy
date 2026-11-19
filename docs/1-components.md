@@ -141,15 +141,15 @@ A button uses the form controls' padding, font size, line height, border and cor
 @layer sassy.base.components {
   .button {
     align-items: center;
-    background-color: var(--sassy-btn-bg, #fff);
-    border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, oklch(87.2% 0.01 258.338deg));
+    background-color: var(--sassy-btn-bg, var(--sassy-surface));
+    border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, var(--sassy-line-strong));
     border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
     color: var(--sassy-btn-colour, var(--sassy-body-colour));
     display: inline-flex;
     padding: var(--sassy-input-padding-y, 0.375rem) var(--sassy-input-padding-x, 0.75rem);
   }
   .button:hover {
-    background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
+    background-color: color-mix(in oklab, var(--sassy-btn-bg, var(--sassy-surface)) 88%, var(--sassy-btn-shade, #000));
   }
   .button-save {
     --sassy-btn-bg: var(--sassy-theme-primary);
@@ -483,7 +483,7 @@ A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf
     padding-inline: var(--sassy-breadcrumb-gap, 0.5rem);
   }
   .crumbs > [aria-current=page], .crumbs > li > [aria-current=page] {
-    color: var(--sassy-breadcrumb-current-colour, oklch(55.1% 0.027 264.364deg));
+    color: var(--sassy-breadcrumb-current-colour, var(--sassy-muted));
   }
 }
 ```
@@ -603,10 +603,10 @@ A list group is a bordered list. Its direct children are its items, so extend on
     overflow: hidden;
   }
   .inbox > * + * {
-    border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+    border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
   }
   .inbox > :where(a, button):hover {
-    background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, #fff)));
+    background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, var(--sassy-surface))));
   }
   .inbox > [aria-current]:not([aria-current=false]) {
     background-color: var(--sassy-list-group-current-bg, var(--sassy-theme-primary));
@@ -642,11 +642,11 @@ An accordion is a `<div>` of native `<details>`, so the browser opens and closes
 ```css
 @layer sassy.base.components {
   .accordion {
-    border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+    border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, var(--sassy-line));
     interpolate-size: allow-keywords;
   }
   .accordion > details[open] > summary {
-    background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, #fff)));
+    background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, var(--sassy-surface))));
     color: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
   }
   .accordion > details::details-content {
@@ -791,8 +791,8 @@ An alert is a message box. A theme colour tints its background, border and text,
 ```css
 @layer sassy.base.components {
   .alert {
-    background-color: var(--sassy-alert-bg, oklch(96.7% 0.003 264.542deg));
-    border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, oklch(92.8% 0.006 264.531deg));
+    background-color: var(--sassy-alert-bg, var(--sassy-surface-subtle));
+    border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, var(--sassy-line));
     color: var(--sassy-alert-colour, currentColor);
     padding: var(--sassy-alert-padding-y, 1rem) var(--sassy-alert-padding-x, 1rem);
   }
@@ -841,7 +841,7 @@ A progress bar is a native `<progress>`, so browsers and screen readers already 
 @layer sassy.base.components {
   .progress {
     appearance: none;
-    background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+    background-color: var(--sassy-progress-bg, var(--sassy-line));
     block-size: var(--sassy-progress-height, 1rem);
     border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
   }
@@ -1405,17 +1405,4 @@ Buttons also read the form controls' `--sassy-input-*` properties for their padd
 
 ### A dark theme
 
-```sass
-@use "sassy/src" as sassy
-
-@media (prefers-color-scheme: dark)
-    :root
-        --sassy-card-bg: #{sassy.colour("grey", 900)}
-        --sassy-card-border-colour: #{sassy.colour("grey", 700)}
-        --sassy-card-cap-bg: #{sassy.colour("grey", 800)}
-        --sassy-dialog-bg: #{sassy.colour("grey", 900)}
-        --sassy-dialog-border-colour: #{sassy.colour("grey", 700)}
-        --sassy-nav-link-hover-bg: #{sassy.colour("grey", 800)}
-        --sassy-tooltip-bg: #{sassy.colour("grey", 100)}
-        --sassy-tooltip-colour: #{sassy.colour("grey", 900)}
-```
+Components take their neutral colours from Sassy's colour roles, so extending `%bf-theme-dark` (or `%bf-theme-auto`) on `html` or a section switches them all - see [5-theme](5-theme.md#light-and-dark). Set a component's own property to change just that component, as before.

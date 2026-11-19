@@ -154,7 +154,7 @@ At 1200px, the `xl` breakpoint, `1.625rem + 4.5vw` reaches `5rem`, and `min()` k
     font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
   }
   .quote-source {
-    color: var(--sassy-blockquote-caption-colour, oklch(44.6% 0.03 256.802deg));
+    color: var(--sassy-blockquote-caption-colour, var(--sassy-muted));
     font-size: var(--sassy-blockquote-caption-font-size, 0.875em);
     margin-block: -1rem 1rem;
   }

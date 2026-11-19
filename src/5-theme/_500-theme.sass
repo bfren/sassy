@@ -4,14 +4,52 @@
 @use "sass:map"
 
 //  =================================================================
-//  Theme: text, background, background with contrasting text, and border
+//  Theme: colour modes, text, background, background with contrasting text, and border
 //  =================================================================
+
+/// One colour mode's custom properties and, unless $scheme is null, the element's own colours.
+@mixin -mode($mode, $scheme: $mode)
+    @if $mode == dark
+        @include vars.mode-properties(vars.$sassy-roles-dark, vars.$sassy-theme-dark)
+        --sassy-select-chevron: #{chevron(colour("grey", 200))}
+        // text on the lighter theme colours is dark, so it follows each colour's contrast
+        --sassy-check-mark-colour: var(--sassy-theme-primary-contrast)
+        @each $name, $value in $sassy-theme
+            --sassy-btn-#{$name}-colour: var(--sassy-theme-#{$name}-contrast)
+    @else
+        @include vars.mode-properties(vars.$sassy-roles-light, vars.$sassy-theme-light)
+        --sassy-select-chevron: #{chevron(colour("grey", 800))}
+        // initial falls back to each one's default, inside a dark area too
+        --sassy-check-mark-colour: initial
+        @each $name, $value in $sassy-theme
+            --sassy-btn-#{$name}-colour: initial
+    @if $scheme
+        background-color: var(--sassy-body-bg)
+        color: var(--sassy-body-colour)
+        color-scheme: $scheme
 
 /// Outputs this module's utilities - called by _render inside make.layers.
 @mixin utilities()
 
     @include make.in-base
         @include vars.theme-properties
+
+
+    // Colour modes: each sets the roles and theme colours on the element it is extended on - html for a page, or
+    // any element for an area - with the page background and text, and the colours of the browser's own controls.
+
+    @include make.single("theme-light")
+        @include -mode(light)
+
+    @include make.single("theme-dark")
+        @include -mode(dark)
+
+    // dark when the visitor's system is set to dark, and light otherwise
+    @include make.single("theme-auto")
+        @include -mode(light, $scheme: light dark)
+
+        @media (prefers-color-scheme: dark)
+            @include -mode(dark, $scheme: null)
 
 
     // Theme: Text

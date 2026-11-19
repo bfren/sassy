@@ -89,12 +89,15 @@ FNR == NR { next }
 
 # ---- second file: the theme -----------------------------------------------
 
-# e.g.    --sassy-theme-primary: #{colour("sky", 600)};
-# or      --sassy-theme-primary: #0d9488;   (any CSS colour)
-/--sassy-theme-[a-z-]+:/ && !/-contrast:/ {
+# the light set, the default, e.g.
+#         primary: colour("sky", 600),
+# or      primary: #0d9488,   (any CSS colour)
+/^\$sassy-theme-light:/ { in_theme = 1; next }
+in_theme && /^\)/ { in_theme = 0 }
+in_theme && /^[ \t]*[a-z-]+[ \t]*:/ {
     line = $0
-    name = line; sub(/^.*--sassy-theme-/, "", name); sub(/:.*$/, "", name)
-    v = line; sub(/^[^:]*:[ \t]*/, "", v); sub(/;.*$/, "", v); v = trim(v)
+    name = trim(line); sub(/[ \t]*:.*$/, "", name)
+    v = line; sub(/^[^:]*:[ \t]*/, "", v); sub(/,[ \t]*$/, "", v); v = trim(v)
 
     if (v ~ /colour\(/) {
         c = v; sub(/^.*colour\([ \t]*"/, "", c); sub(/".*$/, "", c)

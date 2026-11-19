@@ -3,10 +3,10 @@
 @use "../4-utilities/450-rounded-variables" as *;
 @use "../4-utilities/460-shadow-variables" as *;
 
-$sassy-dropdown-bg: var(--sassy-dropdown-bg, #fff);
-$sassy-dropdown-colour: var(--sassy-dropdown-colour, #{colour("grey", 900)});
+$sassy-dropdown-bg: var(--sassy-dropdown-bg, var(--sassy-surface));
+$sassy-dropdown-colour: var(--sassy-dropdown-colour, var(--sassy-body-colour));
 $sassy-dropdown-border-width: var(--sassy-dropdown-border-width, 1px);
-$sassy-dropdown-border-colour: var(--sassy-dropdown-border-colour, #{colour("grey", 200)});
+$sassy-dropdown-border-colour: var(--sassy-dropdown-border-colour, var(--sassy-line));
 $sassy-dropdown-radius: var(--sassy-dropdown-radius, $sassy-radius);
 $sassy-dropdown-shadow: var(--sassy-dropdown-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.15)});
 $sassy-dropdown-min-width: var(--sassy-dropdown-min-width, 10rem);
@@ -19,8 +19,8 @@ $sassy-dropdown-item-padding-x: var(--sassy-dropdown-item-padding-x, #{$sassy-pa
 $sassy-dropdown-hover-bg: var(--sassy-dropdown-hover-bg, color-mix(in oklab, currentColor 8%, #{$sassy-dropdown-bg}));
 $sassy-dropdown-current-bg: var(--sassy-dropdown-current-bg, var(--sassy-theme-primary));
 $sassy-dropdown-current-colour: var(--sassy-dropdown-current-colour, var(--sassy-theme-primary-contrast));
-$sassy-dropdown-disabled-colour: var(--sassy-dropdown-disabled-colour, #{colour("grey", 400)});
-$sassy-dropdown-header-colour: var(--sassy-dropdown-header-colour, #{colour("grey", 600)});
+$sassy-dropdown-disabled-colour: var(--sassy-dropdown-disabled-colour, var(--sassy-disabled));
+$sassy-dropdown-header-colour: var(--sassy-dropdown-header-colour, var(--sassy-muted));
 
 // Where the menu opens: below or above its button, and lined up with its start or end.
 // %bf-dropdown-up and %bf-dropdown-end change them, and sassy.js reads them where CSS anchor positioning is missing.

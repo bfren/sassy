@@ -2,11 +2,11 @@
 
 // The boxes take their padding, text size, border width and corners from the form control
 // --sassy-input-* properties, as buttons do, so the sizes match buttons and controls.
-$sassy-pagination-bg: var(--sassy-pagination-bg, #fff);
+$sassy-pagination-bg: var(--sassy-pagination-bg, var(--sassy-surface));
 $sassy-pagination-colour: var(--sassy-pagination-colour, var(--sassy-theme-primary));
-$sassy-pagination-border-colour: var(--sassy-pagination-border-colour, #{colour("grey", 300)});
+$sassy-pagination-border-colour: var(--sassy-pagination-border-colour, var(--sassy-line-strong));
 // a link under the pointer, mixed from its own colour so it follows a theme
 $sassy-pagination-hover-bg: var(--sassy-pagination-hover-bg, color-mix(in oklab, currentColor 8%, #{$sassy-pagination-bg}));
 $sassy-pagination-current-bg: var(--sassy-pagination-current-bg, var(--sassy-theme-primary));
 $sassy-pagination-current-colour: var(--sassy-pagination-current-colour, var(--sassy-theme-primary-contrast));
-$sassy-pagination-disabled-colour: var(--sassy-pagination-disabled-colour, #{colour("grey", 400)});
+$sassy-pagination-disabled-colour: var(--sassy-pagination-disabled-colour, var(--sassy-disabled));

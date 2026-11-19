@@ -3,10 +3,10 @@
 @use "../4-utilities/450-rounded-variables" as *;
 @use "../4-utilities/460-shadow-variables" as *;
 
-$sassy-toast-bg: var(--sassy-toast-bg, #fff);
-$sassy-toast-colour: var(--sassy-toast-colour, #{colour("grey", 900)});
+$sassy-toast-bg: var(--sassy-toast-bg, var(--sassy-surface));
+$sassy-toast-colour: var(--sassy-toast-colour, var(--sassy-body-colour));
 $sassy-toast-border-width: var(--sassy-toast-border-width, 1px);
-$sassy-toast-border-colour: var(--sassy-toast-border-colour, #{colour("grey", 200)});
+$sassy-toast-border-colour: var(--sassy-toast-border-colour, var(--sassy-line));
 $sassy-toast-radius: var(--sassy-toast-radius, $sassy-radius);
 $sassy-toast-shadow: var(--sassy-toast-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.15)});
 $sassy-toast-font-size: var(--sassy-toast-font-size, calc(var(--sassy-font-size-base) * 0.875));

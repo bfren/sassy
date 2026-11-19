@@ -6,5 +6,5 @@ $sassy-breadcrumb-divider: var(--sassy-breadcrumb-divider, "/");
 $sassy-breadcrumb-divider-colour: var(--sassy-breadcrumb-divider-colour, #{colour("grey", 400)});
 $sassy-breadcrumb-gap: var(--sassy-breadcrumb-gap, #{$sassy-margin-unit * 2});
 $sassy-breadcrumb-link-colour: var(--sassy-breadcrumb-link-colour, var(--sassy-theme-primary));
-$sassy-breadcrumb-current-colour: var(--sassy-breadcrumb-current-colour, #{colour("grey", 500)});
+$sassy-breadcrumb-current-colour: var(--sassy-breadcrumb-current-colour, var(--sassy-muted));
 $sassy-breadcrumb-margin-bottom: var(--sassy-breadcrumb-margin-bottom, 1rem);
