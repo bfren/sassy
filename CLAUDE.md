@@ -23,7 +23,7 @@ Requires Dart Sass 1.108+ on the path (`sass`), plus bash and `awk`. The site an
 
 **Generated output is committed.** `dist/` (CSS, `sassy.js` copy, snippets) changes whenever `src` changes, and `docs/*.svg` changes when the colour or theme variables do. Rebuild with `./compile-full.sh` and include the results in the same change. `_site/` is built, not committed.
 
-**Version string appears in several places.** `VERSION`, the header comments in `src/0-core/_000-sassy.scss` and `src/sassy.js`, and the `@0.3.0` CDN URLs in `README.md` should all move together.
+**Version string appears in several places.** `VERSION`, the header comments in `src/0-core/_000-sassy.scss` and `src/sassy.js`, and the CDN URLs in `README.md` and `docs/1-components.md` should all move together.
 
 **`src/sassy.js` is an optional progressive-enhancement script** for tabs (ARIA tabs pattern), tooltips (Popover API, with JS positioning fallback when CSS anchor positioning is missing) and `command`/`commandfor` buttons in older browsers. It finds elements by ARIA role and standard attributes, never by class name.
 

@@ -2,7 +2,9 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.4.0] - 2026-11-19
+
+> **Upgrading from 0.3.0.** Sassy now needs Dart Sass 1.108 or later, and outputs everything in cascade layers. Your own unlayered CSS now beats Sassy's whatever its specificity, so to keep Sassy's rules on top, put your CSS in a layer after it, for example `@layer reset, sassy, app;`. Also check for these renames: `%bf-dialog-close` is now `%bf-close`, `%bf-text-wrap-hover` is now `%bf-text-truncate`, `make-passes()` is now `make-layers()`, and if you load files directly, the forms and components folders and some component files have moved. If your own CSS reads a `--sassy-*` property such as `var(--sassy-radius)`, read its Sass variable instead. Each change is listed under Changed.
 
 ### Changed
 
@@ -12,13 +14,12 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - **Breaking:** `make-passes()` is now `make-layers()`, and outputs each pass in a layer - Sassy's by default, or your own with `$name`.
 - **Breaking:** `src/1-forms` is now `src/2-forms` and `src/2-components` is now `src/1-components`, with their files renumbered to match. Components come before forms because input groups style the buttons inside them.
 - **Breaking:** if you `@use` component files directly, `_140-tabs` is now `_123-tabs` and `_160-dialog` is now `_153-dialog`, with their `-variables` files. Tabs are output after pagination rather than after tables.
-- `%bf-body` is output with the element defaults, below every other placeholder, and sets its heading and paragraph margins itself rather than extending the margin utilities. A margin utility on a heading inside it now always wins.
-
-- Grid columns set `margin-block: 0` and their start margin from `--sassy-col-offset`, rather than `margin: 0`, so offsets work. Rows set `--sassy-col-offset: 0`.
 - **Breaking:** `%bf-text-wrap-hover` is now `%bf-text-truncate`, which says what it does. It still expands on hover.
 - **Breaking:** Sassy now needs Dart Sass 1.108 or later, so it can use current Sass syntax.
+- **Breaking:** if your own CSS reads a Sassy custom property other than the font, body and theme ones, such as `var(--sassy-radius)`, it now has no value unless you set it, as its default is no longer on `:root` (see below). Read it through its Sass variable instead, which includes the default: `border-radius: sassy.$sassy-radius`.
+- `%bf-body` is output with the element defaults, below every other placeholder, and sets its heading and paragraph margins itself rather than extending the margin utilities. A margin utility on a heading inside it now always wins.
+- Grid columns set `margin-block: 0` and their start margin from `--sassy-col-offset`, rather than `margin: 0`, so offsets work. Rows set `--sassy-col-offset: 0`.
 - Smaller output: only the font, body and theme custom properties are defined on `:root`. Every other default is now the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so it is only in your CSS when you extend a placeholder that uses it. Setting any of them, on `:root` or anywhere else, works as before.
-- **Breaking:** if your own CSS reads one of those properties, such as `var(--sassy-radius)`, it now has no value unless you set it. Read it through its Sass variable instead, which includes the default: `border-radius: sassy.$sassy-radius`.
 - A default that points to another property now follows that property where it is set, not only on `:root`. For example, `--sassy-radius` set on a section now also changes the corners of cards, inputs and dialogs inside it.
 
 ### Added
@@ -39,7 +40,6 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - `%bf-close`: a close button, an empty `<button>` with `aria-label="Close"` whose × is drawn in the text colour, so it shows on any background. Its size and opacity are set by `--sassy-close-size`, `--sassy-close-opacity` and `--sassy-close-hover-opacity`.
 - `$sassy-layer`, the layer everything is output in, so Sassy can sit inside a stack of your own, such as `"vendor.sassy"`.
 - `node tools/site.mjs check` also checks the full build's layer order, that nothing is outside a layer, and that only `%bf-visually-hidden` uses `!important`.
-
 - Grid: `%bf-col` and `%bf-col-auto` columns, `%bf-col-offset-{0-11}`, `%bf-row-cols-{1-6}` and `-auto` for a row whose children are columns, `%bf-gutter-{0-5}` to change a row's gutter, and an opt-in CSS grid with `%bf-grid`, `%bf-grid-col-{1-12}` and `%bf-grid-start-{1-11}`.
 - Tables: `%bf-table`, with `-striped`, `-striped-columns`, `-hover`, `-bordered`, `-borderless`, `-small`, `-caption-top`, a tint in each theme colour, and `-responsive` wrappers. A row with `aria-current="true"` is shaded. Without them, tables get joined borders and a grey caption below.
 - Content styles in `0-core`: `h1` to `h6` get sizes, weight, line height and margins, `blockquote` and `figure` get a bottom margin and no side margins, and `img` and `svg` line up with text. Placeholders for the rest: `%bf-h{1-6}`, `%bf-lead`, `%bf-display-{1-6}`, `%bf-initialism`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote` and `%bf-blockquote-caption`. Headings and large headings above `1.25rem` shrink on screens narrower than the `xl` breakpoint.
@@ -138,6 +138,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 Initial release.
 
+[0.4.0]: https://github.com/bfren/sassy/releases/tag/v0.4.0
 [0.3.0]: https://github.com/bfren/sassy/releases/tag/v0.3.0
 [0.2.0]: https://github.com/bfren/sassy/releases/tag/v0.2.0
 [0.1.0]: https://github.com/bfren/sassy/releases/tag/v0.1.0
