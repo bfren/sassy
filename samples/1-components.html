@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -868,6 +868,55 @@
 &lt;div class="alert alert-error alert-dismissible" id="upload-failed" role="alert"&gt;
     &lt;p&gt;The upload failed. &lt;a href="#alerts"&gt;Try again&lt;/a&gt;.&lt;/p&gt;
     &lt;button type="button" class="close" commandfor="upload-failed" command="--dismiss" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="progress">
+            <h2>Progress bars</h2>
+            <p>Native <code>&lt;progress&gt;</code> elements, each with a label. A theme colour changes the bar, the third has moving stripes, and the fourth has no value, so a bar slides along it. The last is three bars stacked in one track, each given its share with an inline width.</p>
+            <div class="demo">
+                <label for="upload-progress">Uploading</label>
+                <progress class="progress" id="upload-progress" value="30" max="100">30%</progress>
+                <progress class="progress progress-ok" value="60" max="100" aria-label="Saved">60%</progress>
+                <progress class="progress progress-warn progress-animated" value="80" max="100" aria-label="Disk used">80%</progress>
+                <progress class="progress progress-secondary" aria-label="Loading"></progress>
+                <div class="progress-stacked" role="group" aria-label="Storage">
+                    <progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"></progress>
+                    <progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"></progress>
+                    <progress class="progress progress-info" value="1" max="1" style="width: 20%" aria-label="Documents, 20%"></progress>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.progress
+    @extend %bf-progress
+
+.progress-ok
+    @extend %bf-progress-ok
+
+.progress-warn
+    @extend %bf-progress-warn
+
+.progress-secondary
+    @extend %bf-progress-secondary
+
+.progress-info
+    @extend %bf-progress-info
+
+.progress-animated
+    @extend %bf-progress-animated
+
+.progress-stacked
+    @extend %bf-progress-stacked</code></pre>
+<pre data-lang="html"><code>&lt;label for="upload-progress"&gt;Uploading&lt;/label&gt;
+&lt;progress class="progress" id="upload-progress" value="30" max="100"&gt;30%&lt;/progress&gt;
+&lt;progress class="progress progress-ok" value="60" max="100" aria-label="Saved"&gt;60%&lt;/progress&gt;
+&lt;progress class="progress progress-warn progress-animated" value="80" max="100" aria-label="Disk used"&gt;80%&lt;/progress&gt;
+&lt;progress class="progress progress-secondary" aria-label="Loading"&gt;&lt;/progress&gt;
+&lt;div class="progress-stacked" role="group" aria-label="Storage"&gt;
+    &lt;progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"&gt;&lt;/progress&gt;
+    &lt;progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"&gt;&lt;/progress&gt;
+    &lt;progress class="progress progress-info" value="1" max="1" style="width: 20%" aria-label="Documents, 20%"&gt;&lt;/progress&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

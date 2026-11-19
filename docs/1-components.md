@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, progress bars and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -79,6 +79,10 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-alert-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | An alert tinted with a theme colour, combined with `%bf-alert`                          |
 | `%bf-alert-title`                                                                               | A heading in an alert                                                                   |
 | `%bf-alert-dismissible`                                                                         | Room for a close button, combined with `%bf-alert`                                      |
+| `%bf-progress`                                                                                  | A native `<progress>` bar - without a value, a bar slides along it                      |
+| `%bf-progress-{theme colour}`                                                                   | A bar in a theme colour, combined with `%bf-progress`                                   |
+| `%bf-progress-animated`                                                                         | Moving stripes over the bar, combined with `%bf-progress`                               |
+| `%bf-progress-stacked`                                                                          | Several bars in one track, on a `<div role="group">`                                    |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
@@ -731,6 +735,61 @@ An alert is a message box. A theme colour tints its background, border and text,
 - **To dismiss an alert**, put a [close button](#close-buttons) in it with `commandfor` set to the alert's `id` and `command="--dismiss"`, and load `sassy.js`, which hides the alert. Extend `%bf-alert-dismissible` too, which makes room for the button in the top corner. The close button can come anywhere in the alert.
 - **A dismissed alert is hidden with the `hidden` attribute**, so don't give it a `display` placeholder, which would override `hidden`.
 
+## Progress bars
+
+A progress bar is a native `<progress>`, so browsers and screen readers already know its value. Give it a `<label for>` or `aria-label`. A theme colour changes the bar, and a bar with no `value` is indeterminate: a shorter bar slides along the track until you set one:
+
+```sass
+.progress
+    @extend %bf-progress
+
+.progress-ok
+    @extend %bf-progress-ok
+
+.progress-animated
+    @extend %bf-progress-animated
+```
+
+```css
+@layer sassy.base.components {
+  .progress {
+    appearance: none;
+    background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+    block-size: var(--sassy-progress-height, 1rem);
+    border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
+  }
+  .progress::-webkit-progress-value {
+    background-color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+  }
+  .progress::-moz-progress-bar {
+    background-color: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
+  }
+  .progress-ok {
+    --sassy-progress-bar-colour: var(--sassy-theme-ok);
+  }
+}
+```
+
+```html
+<label for="upload">Uploading</label>
+<progress class="progress progress-ok progress-animated" id="upload" value="30" max="100">30%</progress>
+<progress class="progress" aria-label="Loading"></progress>
+```
+
+To show several parts of a whole in one track, put a `<progress>` for each in a `<div>` that extends `%bf-progress-stacked`. Each one is full (`value="1" max="1"`) and its width is its share:
+
+```html
+<div class="progress-stacked" role="group" aria-label="Storage">
+    <progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"></progress>
+    <progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"></progress>
+</div>
+```
+
+- **The text inside `<progress>` is a fallback**, shown only by browsers that don't support it, so put the value in its label too if people need the number.
+- **Light theme colours are hard to see on the track.** `info`, `warn`, `grey-light` and `ok` have less than 3:1 contrast with the default grey track, so show the value as text beside those bars, or set a darker `--sassy-progress-bg`.
+- **The moving parts slow down, rather than stop, for people who prefer reduced motion**, so the bar still shows that something is happening.
+- **Browsers draw the bar with their own pseudo-elements**, `::-webkit-progress-value` in Chrome and Safari and `::-moz-progress-bar` in Firefox, so to restyle it, set the `--sassy-progress-*` properties rather than writing your own rules.
+
 ## Tooltips
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
@@ -859,6 +918,8 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-tab-panel-padding-y`                                                                                                        | Space above and below a panel's content                                                           |
 | `--sassy-alert-bg`, `--sassy-alert-colour`, `--sassy-alert-border-width`, `--sassy-alert-border-colour`, `--sassy-alert-radius`      | Alert background, text, border and corners - the theme colours set the colours                    |
 | `--sassy-alert-padding-y`, `--sassy-alert-padding-x`, `--sassy-alert-margin-bottom`                                                  | Alert spacing                                                                                     |
+| `--sassy-progress-height`, `--sassy-progress-bg`, `--sassy-progress-bar-colour`, `--sassy-progress-radius`                           | Progress track height, track and bar colours, and corners                                         |
+| `--sassy-progress-margin-bottom`                                                                                                     | Space below a progress bar or stacked bars                                                        |
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |
@@ -866,7 +927,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 

@@ -23,6 +23,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Progress bars: `%bf-progress` styles a native `<progress>`, with a bar that slides along the track when it has no value. `%bf-progress-{theme colour}` colours the bar, `%bf-progress-animated` adds moving stripes, and `%bf-progress-stacked` shows several bars in one track. Moving parts slow down for people who prefer reduced motion.
 - Pagination: `%bf-pagination` on the `<ul>` of a `<nav>` joins its page links into a row of boxes that share their borders, with the current page marked by `aria-current="page"` and links that can't be used as a `<span>` or with `aria-disabled`. `%bf-pagination-small` and `-large` match the form control sizes.
 - Button groups: `%bf-btn-group` joins buttons into a row that shares borders, `%bf-btn-group-vertical` stacks them, and `%bf-btn-group-small` and `-large` size every button in a group. `%bf-btn-toolbar` lays groups out in a row.
 - `sassy.js` makes a `role="toolbar"` one stop in the tab order, and moves between its controls with the arrow keys, Home and End.
