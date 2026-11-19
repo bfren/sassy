@@ -89,7 +89,7 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 `dist/full.css` contains every utility as a class (`.bf-p-3`, `.bf-col-4-md` and so on), for use straight from HTML:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/full.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/full.min.css" />
 ```
 
 ### Script
@@ -97,7 +97,7 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 Tabs, toolbars, tooltips and dismissible alerts also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
 ```
 
 ## Naming
