@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Requires Dart Sass 1.108+ on the path (`sass`), plus bash and `awk`. The site and checks also need Node.js 20+. There is no `package.json` and no lint config.
+Requires Dart Sass 1.108+ on the path (`sass`), plus bash and `awk`. The site and checks also need Node.js 20+, and the `sassy.js` tests Node.js 22.22.2+ or 24.15+. There is no `package.json` and no lint config.
 
 - Full build (regenerates the committed `dist/` files, then runs `snippets.sh` and `palette.sh`): `./compile-full.sh`
 - Compile the sample stylesheets while editing: `./watch.sh` (or `watch.bat`), then open the `samples/*.html` pages
 - Build the samples site: `node tools/site.mjs build` - writes `_site`, adds each example's compiled CSS, and fails if an example does not compile or its page's stylesheet does not use it. The Pages workflow runs this and publishes `_site` on merge to `main`.
 - Check the docs: `node tools/site.mjs check` - fails if the CSS shown after a Sass example in `README.md` or `docs/*.md` is not what Sassy outputs, or if `src` reads a custom property with a bare `var()` that nothing defines. It also checks `dist/full.css`: the `@layer` order statement must match `layerStack` in `site.mjs` (update it with `_render.sass` or the breakpoints), nothing may be outside a layer, and only visually-hidden may use `!important`
-- Test `src/sassy.js`: `npm install --no-save jsdom && node --test tools/sassy.test.mjs`
+- Test `src/sassy.js`: `npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs` - the version CI pins in `.github/workflows/check.yml`; change both together
 - Verify a change: run both `tools/site.mjs` commands, and open the matching page in `_site`. The `Check` workflow runs them on every pull request, after `./compile-full.sh` (it fails if `dist/` or `docs/*.svg` differ from what is committed) and the `sassy.js` tests. CI uses the Dart Sass version pinned in `.github/actions/setup-sass/action.yml`; bump it there.
 
 ## Architecture

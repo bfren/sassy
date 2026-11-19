@@ -1,7 +1,9 @@
 /*
  * Tests for src/sassy.js: tab keys, toolbar keys and dismissing.
  *
- *     npm install --no-save jsdom && node --test tools/sassy.test.mjs
+ *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
+ *
+ * Use the jsdom version CI pins in .github/workflows/check.yml.
  */
 
 import assert from "node:assert/strict";
