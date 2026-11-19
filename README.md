@@ -66,6 +66,10 @@ It is less suited to:
 - teams who want utility classes in their HTML - a class-based framework such as Tailwind will suit them better
 - sites that must support older browsers - see [Limitations](#limitations)
 
+### Coming from Bootstrap
+
+Sassy covers most of Bootstrap 5.3, but works differently: you extend placeholders onto your own selectors rather than adding classes, breakpoints come last (`%bf-d-none-md`), sizes are words (`%bf-btn-small`), spacing goes up in quarter rems (Bootstrap's `mt-3` is `%bf-mt-4`), and components use native elements and ARIA - `<dialog>`, `<details>`, `popover` - rather than `data-bs-*` attributes. [Coming from Bootstrap](docs/bootstrap.md) lists the differences and maps each Bootstrap class to its placeholder.
+
 ## Getting started
 
 ### Sass

@@ -6,6 +6,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- A "Coming from Bootstrap" guide, [docs/bootstrap.md](docs/bootstrap.md): what Sassy does differently, and the placeholder or HTML for each Bootstrap 5.3 class and `data-bs-*` attribute. The README has a short summary.
 - Colour modes: `%bf-theme-dark` switches an element, such as `html` or a section, and everything in it to dark colours, `%bf-theme-light` switches back, and `%bf-theme-auto` follows the visitor's system setting. Each sets the colour roles, the theme colours, the element's background and text, `color-scheme` and the select chevron. The dark set lifts `primary`, `secondary`, `ok` and `error` to lighter shades, with their `-contrast` worked out again, and button text and the check mark follow it.
 - Colour roles on `:root`: `--sassy-body-bg`, `--sassy-surface`, `--sassy-surface-subtle`, `--sassy-line`, `--sassy-line-strong`, `--sassy-muted` and `--sassy-disabled`. Component, form and content colours now default to them, so setting one changes every component that uses it. The light and dark values are `$sassy-roles-light` / `-dark`, and the theme colours `$sassy-theme-light` / `-dark`.
 - Dropdowns: `%bf-dropdown` styles a popover menu opened by a `popovertarget` button, placed below it by CSS anchor positioning. `-up` and `-end` change where it opens, `-header` and `-divider` group its items, `%bf-dropdown-toggle` adds a chevron to the button, and `%bf-dropdown-split` makes the chevron button of a split button.
