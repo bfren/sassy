@@ -11,6 +11,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - **Breaking:** your own unlayered CSS now always beats Sassy's, whatever its specificity. A plain `a { color: red }` overrides every link that extends `%bf-nav-link`. Put your CSS in a layer after Sassy's - `@layer reset, sassy, app;` - to keep Sassy's precedence over it.
 - **Breaking:** `make-passes()` is now `make-layers()`, and outputs each pass in a layer - Sassy's by default, or your own with `$name`.
 - **Breaking:** `src/1-forms` is now `src/2-forms` and `src/2-components` is now `src/1-components`, with their files renumbered to match. Components come before forms because input groups style the buttons inside them.
+- **Breaking:** if you `@use` component files directly, `_140-tabs` is now `_123-tabs` and `_160-dialog` is now `_153-dialog`, with their `-variables` files. Tabs are output after pagination rather than after tables.
 - `%bf-body` is output with the element defaults, below every other placeholder, and sets its heading and paragraph margins itself rather than extending the margin utilities. A margin utility on a heading inside it now always wins.
 
 - Grid columns set `margin-block: 0` and their start margin from `--sassy-col-offset`, rather than `margin: 0`, so offsets work. Rows set `--sassy-col-offset: 0`.

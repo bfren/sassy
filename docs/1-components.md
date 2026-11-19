@@ -866,7 +866,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_160-dialog-variables.scss`](../src/1-components/_160-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 
