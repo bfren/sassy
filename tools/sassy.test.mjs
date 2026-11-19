@@ -153,7 +153,7 @@ const dropdownPage = (menuStyle = "") => {
 			<button id="m1" role="menuitem">Copy</button>
 			<button id="m2" role="menuitem" disabled>Cut</button>
 			<button id="m3" role="menuitem">Paste</button>
-		</div>`, window => (window.CSS.supports = () => false));
+		</div>`, window => (window.CSS = { supports: () => false }));
 	const { HTMLElement, Event } = window;
 	const matches = HTMLElement.prototype.matches;
 	HTMLElement.prototype.matches = function (s) { return s === ":popover-open" ? this.dataset.opened === "true" : matches.call(this, s); };
