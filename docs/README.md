@@ -4,14 +4,15 @@ Sassy is a Sass utility framework built from [placeholder selectors](https://sas
 
 ## Where to start
 
-| Page                            | Covers                                                                                                 |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [0-core](0-core.md)             | Loading and configuring Sassy, the functions and mixins it provides, and writing your own placeholders |
-| [1-components](1-components.md) | Components such as navigation and cards (to come)                                                      |
-| [2-forms](2-forms.md)           | Every form placeholder, the markup each expects, and validation                                        |
-| [3-grid](3-grid.md)             | Rows and columns                                                                                       |
-| [4-utilities](4-utilities.md)   | Text, layout, colour, display, border, corners and shadow                                              |
-| [5-theme](5-theme.md)           | Theme colours, and changing them at runtime                                                            |
+| Page                                  | Covers                                                                                                 |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [0-core](0-core.md)                   | Loading and configuring Sassy, the functions and mixins it provides, and writing your own placeholders |
+| [1-components](1-components.md)       | Every component, the markup each one expects, and what `sassy.js` adds                                 |
+| [2-forms](2-forms.md)                 | Every form placeholder, the markup each expects, and validation                                        |
+| [3-grid](3-grid.md)                   | Rows and columns                                                                                       |
+| [4-utilities](4-utilities.md)         | Text, layout, colour, display, border, corners and shadow                                              |
+| [5-theme](5-theme.md)                 | Theme colours, and changing them at runtime                                                            |
+| [Coming from Bootstrap](bootstrap.md) | What Sassy does differently, and the placeholder for each Bootstrap class                              |
 
 ## How each page is laid out
 

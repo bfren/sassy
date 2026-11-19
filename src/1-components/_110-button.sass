@@ -67,9 +67,9 @@
             --sassy-btn-colour: #{map.get($sassy-btn-text, $name)}
             --sassy-btn-focus-colour: #{$value}
             // a colour light enough to need dark text is too light for outline text on its own,
-            // so it is mixed with that dark text
+            // so it is mixed with the body text, which keeps it readable in light and dark modes
             @if map.has-key($sassy-btn-text-colours, $name)
-                --sassy-btn-outline-colour: color-mix(in oklab, #{$value} 50%, #{map.get($sassy-btn-text, $name)})
+                --sassy-btn-outline-colour: color-mix(in oklab, #{$value} 50%, var(--sassy-body-colour))
             @else
                 --sassy-btn-outline-colour: #{$value}
 

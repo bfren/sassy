@@ -1,0 +1,120 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: dropdowns
+//  =================================================================
+
+//  A dropdown is a popover menu opened by its button: <button popovertarget="id"> and <div popover id="id">,
+//  so the browser opens it, closes it on Escape or a click outside, and returns focus to the button.
+//  With role="menu" and role="menuitem" it is an ARIA menu, and sassy.js adds the arrow keys; without
+//  them it is a list of links reached with Tab. CSS anchor positioning places it below the button,
+//  lined up with its start, and flips it when there is no room; sassy.js does it in other browsers.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("dropdown")
+        background-color: $sassy-dropdown-bg
+        border: $sassy-dropdown-border-width solid $sassy-dropdown-border-colour
+        border-radius: $sassy-dropdown-radius
+        box-shadow: $sassy-dropdown-shadow
+        box-sizing: border-box
+        color: $sassy-dropdown-colour
+        // popovers are centred in the viewport by default - anchor positioning replaces that
+        inset: auto
+        list-style: none
+        margin: $sassy-dropdown-offset 0
+        min-inline-size: $sassy-dropdown-min-width
+        padding: $sassy-dropdown-padding-y 0
+        position-area: $sassy-dropdown-side $sassy-dropdown-align
+        position-try-fallbacks: flip-block, flip-inline
+
+        // :where() so the current and disabled items below win over :hover
+        & :where(a, button, [role="menuitem"])
+            background-color: transparent
+            border: 0
+            box-sizing: border-box
+            color: inherit
+            cursor: pointer
+            display: block
+            font: inherit
+            inline-size: 100%
+            margin: 0
+            padding: $sassy-dropdown-item-padding-y $sassy-dropdown-item-padding-x
+            text-align: start
+            text-decoration: none
+            white-space: nowrap
+
+            &:hover,
+            &:focus-visible
+                background-color: $sassy-dropdown-hover-bg
+
+            // inside the item, so it shows within the menu's edges
+            &:focus-visible
+                outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+                outline-offset: calc(#{$sassy-focus-outline-width} * -1)
+
+        & :where(a, button, [role="menuitem"])[aria-current]:not([aria-current="false"])
+            background-color: $sassy-dropdown-current-bg
+            color: $sassy-dropdown-current-colour
+
+        & :where(a, button, [role="menuitem"]):disabled,
+        & :where(a, button, [role="menuitem"])[aria-disabled="true"]
+            background-color: transparent
+            color: $sassy-dropdown-disabled-colour
+            cursor: not-allowed
+            pointer-events: none
+
+    // Placement only changes the custom properties, so -up and -end combine
+
+    @include make.single("dropdown-up")
+        --sassy-dropdown-side: block-start
+
+    @include make.single("dropdown-end")
+        --sassy-dropdown-align: span-inline-start
+
+    // A line between groups of items: an <hr>, or role="separator"
+
+    @include make.single("dropdown-divider")
+        border: 0
+        border-block-start: $sassy-dropdown-border-width solid $sassy-dropdown-border-colour
+        margin: $sassy-dropdown-padding-y 0
+
+    // A label for a group of items, which can't be chosen
+
+    @include make.single("dropdown-header")
+        color: $sassy-dropdown-header-colour
+        font-size: calc(var(--sassy-font-size-base) * 0.875)
+        margin: 0
+        padding: $sassy-dropdown-item-padding-y $sassy-dropdown-item-padding-x
+        white-space: nowrap
+
+    // A chevron after the button's text, which turns while the menu is open (sassy.js sets aria-expanded)
+
+    @include make.single("dropdown-toggle")
+        &::after
+            background-color: currentColor
+            block-size: 0.75em
+            content: ""
+            display: inline-block
+            flex-shrink: 0
+            inline-size: 0.75em
+            margin-inline-start: 0.5em
+            mask: url($sassy-dropdown-icon) center / contain no-repeat
+            transition: transform 0.15s ease-in-out
+            vertical-align: -0.0625em
+
+            @media (prefers-reduced-motion: reduce)
+                transition: none
+
+        &[aria-expanded="true"]::after
+            transform: rotate(180deg)
+
+    // The chevron-only button of a split button, combined with %bf-dropdown-toggle - give it an aria-label
+
+    @include make.single("dropdown-split")
+        padding-inline: calc(#{$sassy-input-padding-x} * 0.75)
+
+        &::after
+            margin-inline-start: 0

@@ -1,26 +1,76 @@
 @use "../4-utilities/420-colour-variables" as *;
 
-/// Outputs the :root custom properties - called on the base pass by this module's utilities.
-@mixin theme-properties() {
-    :root {
-        --sassy-theme-primary: #{colour("sky", 600)};
-        --sassy-theme-secondary: #{colour("orange", 700)};
-        --sassy-theme-ok: #{colour("green", 600)};
-        --sassy-theme-info: #{colour("sky", 200)};
-        --sassy-theme-warn: #{colour("amber", 400)};
-        --sassy-theme-error: #{colour("red", 600)};
-        --sassy-theme-grey-light: #{colour("grey", 300)};
-        --sassy-theme-grey-dark: #{colour("grey", 600)};
+@use "sass:list";
+@use "sass:map";
 
-        // text that contrasts with each theme colour, for %bf-text-bg-{name} - set it with the colour
-        --sassy-theme-primary-contrast: #{contrast-colour(colour("sky", 600))};
-        --sassy-theme-secondary-contrast: #{contrast-colour(colour("orange", 700))};
-        --sassy-theme-ok-contrast: #{contrast-colour(colour("green", 600))};
-        --sassy-theme-info-contrast: #{contrast-colour(colour("sky", 200))};
-        --sassy-theme-warn-contrast: #{contrast-colour(colour("amber", 400))};
-        --sassy-theme-error-contrast: #{contrast-colour(colour("red", 600))};
-        --sassy-theme-grey-light-contrast: #{contrast-colour(colour("grey", 300))};
-        --sassy-theme-grey-dark-contrast: #{contrast-colour(colour("grey", 600))};
+// The eight theme colours, in a light and a dark set. %bf-theme-dark switches to the dark set, which
+// lifts the colours used as text to lighter shades so they stay readable on a dark background.
+$sassy-theme-light: (
+    primary: colour("sky", 600),
+    secondary: colour("orange", 700),
+    ok: colour("green", 600),
+    info: colour("sky", 200),
+    warn: colour("amber", 400),
+    error: colour("red", 600),
+    grey-light: colour("grey", 300),
+    grey-dark: colour("grey", 600)
+) !default;
+
+$sassy-theme-dark: map.merge($sassy-theme-light, (
+    primary: colour("sky", 400),
+    secondary: colour("orange", 400),
+    ok: colour("green", 400),
+    error: colour("red", 400)
+)) !default;
+
+// Colour roles that components and forms read for their defaults, so one set of values changes them all.
+// body-colour is also defined with the text properties, and is here so the placeholders can switch it.
+$sassy-roles-light: (
+    body-bg: #fff,
+    body-colour: colour("grey", 800),
+    surface: #fff,
+    surface-subtle: colour("grey", 100),
+    line: colour("grey", 200),
+    line-strong: colour("grey", 300),
+    muted: colour("grey", 600),
+    disabled: colour("grey", 400)
+) !default;
+
+$sassy-roles-dark: (
+    body-bg: colour("grey", 950),
+    body-colour: colour("grey", 200),
+    surface: colour("grey", 900),
+    surface-subtle: colour("grey", 800),
+    line: colour("grey", 700),
+    // the edge of form controls and buttons, at 3:1 or more on the page and surface
+    line-strong: colour("grey", 500),
+    muted: colour("grey", 400),
+    disabled: colour("grey", 500)
+) !default;
+
+/// Outputs the custom properties of one colour mode: the roles and the theme colours with their contrasting text.
+/// @param {map} $roles
+/// @param {map} $theme
+/// @param {list} $skip - role names to leave out
+@mixin mode-properties($roles, $theme, $skip: ()) {
+    @each $name, $value in $roles {
+        @if not list.index($skip, $name) {
+            --sassy-#{$name}: #{$value};
+        }
+    }
+
+    @each $name, $value in $theme {
+        --sassy-theme-#{$name}: #{$value};
+        --sassy-theme-#{$name}-contrast: #{contrast-colour($value)};
+    }
+}
+
+/// Outputs the :root custom properties - called on the base pass by this module's utilities.
+/// :where() so that any selector setting them, even html, wins.
+@mixin theme-properties() {
+    :where(:root) {
+        // the text properties define body-colour
+        @include mode-properties($sassy-roles-light, $sassy-theme-light, $skip: (body-colour));
     }
 }
 

@@ -66,6 +66,10 @@ It is less suited to:
 - teams who want utility classes in their HTML - a class-based framework such as Tailwind will suit them better
 - sites that must support older browsers - see [Limitations](#limitations)
 
+### Coming from Bootstrap
+
+Sassy covers most of Bootstrap 5.3, but works differently: you extend placeholders onto your own selectors rather than adding classes, breakpoints come last (`%bf-d-none-md`), sizes are words (`%bf-btn-small`), spacing goes up in quarter rems (Bootstrap's `mt-3` is `%bf-mt-4`), and components use native elements and ARIA - `<dialog>`, `<details>`, `popover` - rather than `data-bs-*` attributes. [Coming from Bootstrap](docs/bootstrap.md) lists the differences and maps each Bootstrap class to its placeholder.
+
 ## Getting started
 
 ### Sass
@@ -94,7 +98,7 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 
 ### Script
 
-Tabs, toolbars, tooltips and dismissible alerts also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
+Tabs, toolbars, tooltips, dismissible alerts and toasts, carousels that play, scrollspy and the keys of dropdown menus also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
@@ -116,7 +120,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
 | Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`                                                   |
 | Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                              |
-| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`                                                                                                                                                                         |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`, `%bf-theme-dark`                                                                                                                                                       |
 | Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                         |
 | Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                         |
 | Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                |
@@ -234,26 +238,21 @@ The prefix keeps Sassy's placeholders apart from your own and from other librari
 
 ### Theming
 
-Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime - for example in dark mode:
+Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime. For dark mode, extend `%bf-theme-dark` on `html` or a section, or `%bf-theme-auto` to follow the visitor's system - components and forms take their neutral colours from a few colour roles, such as `--sassy-surface` and `--sassy-line`, which these switch together with the theme colours (see [5-theme](docs/5-theme.md#light-and-dark)):
 
 ```sass
+html
+    @extend %bf-theme-auto
+
 :root
     --sassy-theme-primary: #{sassy.colour("teal", 600)}
-
-@media (prefers-color-scheme: dark)
-    :root
-        --sassy-body-colour: #{sassy.colour("grey", 100)}
-        --sassy-input-bg: #{sassy.colour("grey", 800)}
-        --sassy-input-colour: #{sassy.colour("grey", 100)}
-        --sassy-input-border-colour: #{sassy.colour("grey", 600)}
-        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}
 ```
 
 Colour properties accept **any CSS colour** - hex, `rgb()`, `oklch()`, a named colour or another custom property - and Sassy adds transparency where it needs it with `color-mix()`. Use `sassy.colour(name, shade)` to get any palette colour, or write a value directly: `--sassy-theme-primary: #0d9488`.
 
-Only the fonts, body text and theme colours are defined on `:root`. Every other property's default is the fallback in the `var()` that reads it - `var(--sassy-card-bg, #fff)` - so your CSS only contains the defaults of the placeholders you extend. Set any of them, anywhere, to change it. To read one in your own Sass, use its Sass variable, which includes the default: `border-radius: sassy.$sassy-radius`. A bare `var(--sassy-radius)` has no value unless you set it.
+Only the fonts, body text, colour roles and theme colours are defined on `:root`. Every other property's default is the fallback in the `var()` that reads it - `var(--sassy-card-bg, var(--sassy-surface))` - so your CSS only contains the defaults of the placeholders you extend. Set any of them, anywhere, to change it. To read one in your own Sass, use its Sass variable, which includes the default: `border-radius: sassy.$sassy-radius`. A bare `var(--sassy-radius)` has no value unless you set it.
 
-The one exception is the select chevron, an SVG image that cannot read custom properties. If you change `--sassy-input-colour`, set `--sassy-select-chevron` to match using `sassy.chevron()`, as in the example above.
+The one exception is the select chevron, an SVG image that cannot read custom properties. The colour modes set it; if you change `--sassy-input-colour` yourself, set `--sassy-select-chevron` to match using `sassy.chevron()`.
 
 Shadows have one colour, `--sassy-shadow-colour`, which is black at low opacity by default. Set it for a site, a section or an element to colour every shadow there - for example `--sassy-shadow-colour: var(--sassy-theme-primary)`.
 
@@ -348,10 +347,15 @@ Component placeholders style whole interface elements, and they output before fo
 | `%bf-progress`, `-{theme colour}`, `-animated`, `-stacked`                                              | A native `<progress>` bar, coloured, striped or stacked                                |
 | `%bf-spinner`, `%bf-spinner-grow`, `-{theme colour}`, `-small`                                          | A ring that turns or a dot that grows, to show something is loading                    |
 | `%bf-skeleton`                                                                                          | A faded, shimmering block that stands in for content while it loads                    |
+| `%bf-toast`, `-autohide`, `%bf-toast-container`, `-top`, `-start`, `-centre`                            | A short message over the page, stacked in a corner, that can hide itself               |
 | `%bf-tooltip`                                                                                           | A tooltip: a popover described by its trigger with `aria-describedby`                  |
+| `%bf-popover`, `-bottom`, `-start`, `-end`                                                              | A panel of content in a popover, opened by a button, with a title bar                  |
+| `%bf-dropdown`, `-up`, `-end`, `-header`, `-divider`, `-toggle`, `-split`                               | A menu in a popover, opened by a button, with keys for `role="menu"`                   |
 | `%bf-dialog`, `-small`, `-large`, `-header`, `-title`, `-body`, `-footer`                               | A native `<dialog>` and its parts                                                      |
+| `%bf-offcanvas-start`, `-end`, `-top`, `-bottom`, `-{breakpoint}`                                       | A dialog that slides in from one edge, or is in the page from a breakpoint             |
+| `%bf-carousel`                                                                                          | Slides that scroll and snap, with CSS buttons and dots where supported, and can play   |
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons and dialogs need no script: dialogs open and close with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses and dismissible alerts need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` support and tooltip positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script: popovers and dropdowns open with `popovertarget`, and dialogs with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses, dismissible alerts and toasts, carousels that play by themselves, scrollspy and the arrow keys of dropdown menus need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` and `closedby` support and tooltip, popover and dropdown positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
 
 ## Limitations
 
@@ -398,11 +402,11 @@ Two workflows run these: **Check** builds the site and checks the docs on every 
 | Folder         | Contains                                                                                                                                                                                                       |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `0-core`       | Copyright notice, Normalize, settings, the `make` mixins that generate placeholders, helpers, content styles                                                                                                   |
-| `1-components` | Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs - `100-shared` holds mixins shared by the component modules |
+| `1-components` | Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels - `100-shared` holds mixins shared by the component modules |
 | `2-forms`      | Form controls - `200-shared` holds mixins shared by the form modules                                                                                                                                           |
 | `3-grid`       | The grid                                                                                                                                                                                                       |
 | `4-utilities`  | Text, layout, colour, display, border, corners and shadow                                                                                                                                                      |
-| `5-theme`      | Theme colours                                                                                                                                                                                                  |
+| `5-theme`      | Theme colours and colour modes                                                                                                                                                                                 |
 
 Composites - placeholders that set several properties at once, such as content, components, forms and the grid - come first. Single-purpose utilities come after them, so they always override a composite: `%bf-col-4` + `%bf-p-0` removes the column's gutter. Theme colours come last.
 

@@ -255,7 +255,7 @@
       caption-side: bottom;
     }
     :where(caption) {
-      color: oklch(44.6% 0.03 256.802deg);
+      color: var(--sassy-muted);
       padding-block: 0.5rem;
       text-align: start;
     }
@@ -366,14 +366,14 @@
       margin-block-end: 0.5rem;
     }
     .bf-figure > figcaption {
-      color: var(--sassy-figure-caption-colour, oklch(44.6% 0.03 256.802deg));
+      color: var(--sassy-figure-caption-colour, var(--sassy-muted));
       font-size: var(--sassy-figure-caption-font-size, 0.875em);
     }
     .bf-blockquote {
       font-size: var(--sassy-blockquote-font-size, calc(var(--sassy-font-size-base) * 1.25));
     }
     .bf-blockquote-caption {
-      color: var(--sassy-blockquote-caption-colour, oklch(44.6% 0.03 256.802deg));
+      color: var(--sassy-blockquote-caption-colour, var(--sassy-muted));
       font-size: var(--sassy-blockquote-caption-font-size, 0.875em);
       margin-block: -1rem 1rem;
     }
@@ -443,8 +443,8 @@
   @layer components {
     .bf-btn {
       align-items: center;
-      background-color: var(--sassy-btn-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-btn-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
       color: var(--sassy-btn-colour, var(--sassy-body-colour));
@@ -470,10 +470,10 @@
       }
     }
     .bf-btn:hover {
-      background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
+      background-color: color-mix(in oklab, var(--sassy-btn-bg, var(--sassy-surface)) 88%, var(--sassy-btn-shade, #000));
     }
     .bf-btn:active, .bf-btn[aria-pressed=true] {
-      background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 80%, var(--sassy-btn-shade, #000));
+      background-color: color-mix(in oklab, var(--sassy-btn-bg, var(--sassy-surface)) 80%, var(--sassy-btn-shade, #000));
     }
     .bf-btn:focus-visible {
       box-shadow: 0 0 0 var(--sassy-input-focus-ring, 0.25rem) color-mix(in oklab, var(--sassy-btn-focus-colour, var(--sassy-input-focus-colour, var(--sassy-theme-primary))) 40%, transparent);
@@ -503,21 +503,21 @@
       --sassy-btn-border-colour: var(--sassy-theme-ok);
       --sassy-btn-colour: var(--sassy-btn-ok-colour, oklch(21% 0.034 264.665deg));
       --sassy-btn-focus-colour: var(--sassy-theme-ok);
-      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-ok) 50%, var(--sassy-btn-ok-colour, oklch(21% 0.034 264.665deg)));
+      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-ok) 50%, var(--sassy-body-colour));
     }
     .bf-btn-info {
       --sassy-btn-bg: var(--sassy-theme-info);
       --sassy-btn-border-colour: var(--sassy-theme-info);
       --sassy-btn-colour: var(--sassy-btn-info-colour, oklch(21% 0.034 264.665deg));
       --sassy-btn-focus-colour: var(--sassy-theme-info);
-      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-info) 50%, var(--sassy-btn-info-colour, oklch(21% 0.034 264.665deg)));
+      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-info) 50%, var(--sassy-body-colour));
     }
     .bf-btn-warn {
       --sassy-btn-bg: var(--sassy-theme-warn);
       --sassy-btn-border-colour: var(--sassy-theme-warn);
       --sassy-btn-colour: var(--sassy-btn-warn-colour, oklch(21% 0.034 264.665deg));
       --sassy-btn-focus-colour: var(--sassy-theme-warn);
-      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-warn) 50%, var(--sassy-btn-warn-colour, oklch(21% 0.034 264.665deg)));
+      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-warn) 50%, var(--sassy-body-colour));
     }
     .bf-btn-error {
       --sassy-btn-bg: var(--sassy-theme-error);
@@ -531,7 +531,7 @@
       --sassy-btn-border-colour: var(--sassy-theme-grey-light);
       --sassy-btn-colour: var(--sassy-btn-grey-light-colour, oklch(21% 0.034 264.665deg));
       --sassy-btn-focus-colour: var(--sassy-theme-grey-light);
-      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-grey-light) 50%, var(--sassy-btn-grey-light-colour, oklch(21% 0.034 264.665deg)));
+      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-grey-light) 50%, var(--sassy-body-colour));
     }
     .bf-btn-grey-dark {
       --sassy-btn-bg: var(--sassy-theme-grey-dark);
@@ -719,7 +719,7 @@
     .bf-nav-pills {
       --sassy-nav-link-radius: var(--sassy-radius, 0.375rem);
       --sassy-nav-current-bg: var(--sassy-theme-primary);
-      --sassy-nav-current-colour: #fff;
+      --sassy-nav-current-colour: var(--sassy-btn-primary-colour, #fff);
     }
     .bf-nav-underline {
       --sassy-nav-link-underline-width: 0.125rem;
@@ -750,7 +750,7 @@
       }
     }
     .bf-nav-link:hover {
-      background-color: var(--sassy-nav-link-hover-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-nav-link-hover-bg, var(--sassy-surface-subtle));
     }
     .bf-nav-link:focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
@@ -790,7 +790,7 @@
       }
     }
     .bf-nav-toggle:hover {
-      background-color: var(--sassy-nav-link-hover-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-nav-link-hover-bg, var(--sassy-surface-subtle));
     }
     .bf-nav-toggle:focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
@@ -845,8 +845,8 @@
     }
     @media (width < 576px) {
       .bf-nav-collapse-sm {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -877,8 +877,8 @@
     }
     @media (width < 768px) {
       .bf-nav-collapse-md {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -909,8 +909,8 @@
     }
     @media (width < 992px) {
       .bf-nav-collapse-lg {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -941,8 +941,8 @@
     }
     @media (width < 1200px) {
       .bf-nav-collapse-xl {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -973,8 +973,8 @@
     }
     @media (width < 1400px) {
       .bf-nav-collapse-2xl {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1005,8 +1005,8 @@
     }
     @media (width < 1600px) {
       .bf-nav-collapse-3xl {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1067,7 +1067,7 @@
       }
     }
     .bf-navbar-toggle:hover {
-      background-color: var(--sassy-nav-link-hover-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-nav-link-hover-bg, var(--sassy-surface-subtle));
     }
     .bf-navbar-toggle:focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
@@ -1135,8 +1135,8 @@
     }
     @media (width < 576px) {
       .bf-navbar-expand-sm .bf-navbar-menu {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1225,8 +1225,8 @@
     }
     @media (width < 768px) {
       .bf-navbar-expand-md .bf-navbar-menu {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1315,8 +1315,8 @@
     }
     @media (width < 992px) {
       .bf-navbar-expand-lg .bf-navbar-menu {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1405,8 +1405,8 @@
     }
     @media (width < 1200px) {
       .bf-navbar-expand-xl .bf-navbar-menu {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1495,8 +1495,8 @@
     }
     @media (width < 1400px) {
       .bf-navbar-expand-2xl .bf-navbar-menu {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1585,8 +1585,8 @@
     }
     @media (width < 1600px) {
       .bf-navbar-expand-3xl .bf-navbar-menu {
-        background-color: var(--sassy-nav-collapse-bg, #fff);
-        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, oklch(92.8% 0.006 264.531deg));
+        background-color: var(--sassy-nav-collapse-bg, var(--sassy-surface));
+        border-bottom: 1px solid var(--sassy-nav-collapse-border-colour, var(--sassy-line));
         box-shadow: var(--sassy-nav-collapse-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 10%, transparent));
         box-sizing: border-box;
         clip-path: inset(0 -2rem -2rem);
@@ -1676,7 +1676,7 @@
       padding-inline: var(--sassy-breadcrumb-gap, 0.5rem);
     }
     .bf-breadcrumb > [aria-current=page], .bf-breadcrumb > li > [aria-current=page] {
-      color: var(--sassy-breadcrumb-current-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-breadcrumb-current-colour, var(--sassy-muted));
     }
     .bf-pagination {
       display: inline-flex;
@@ -1708,8 +1708,8 @@
       padding: 0;
     }
     .bf-pagination > * > * {
-      background-color: var(--sassy-pagination-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-pagination-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-pagination-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-pagination-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
       color: var(--sassy-pagination-colour, var(--sassy-theme-primary));
@@ -1721,14 +1721,14 @@
       text-decoration: none;
     }
     .bf-pagination > * > :where(a):hover {
-      background-color: var(--sassy-pagination-hover-bg, color-mix(in oklab, currentColor 8%, var(--sassy-pagination-bg, #fff)));
+      background-color: var(--sassy-pagination-hover-bg, color-mix(in oklab, currentColor 8%, var(--sassy-pagination-bg, var(--sassy-surface))));
     }
     .bf-pagination > * > :where(a):focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
       outline-offset: var(--sassy-focus-outline-offset, 2px);
     }
     .bf-pagination > * > span, .bf-pagination > * > [aria-disabled=true] {
-      color: var(--sassy-pagination-disabled-colour, oklch(70.7% 0.022 261.325deg));
+      color: var(--sassy-pagination-disabled-colour, var(--sassy-disabled));
       pointer-events: none;
     }
     .bf-pagination > * > [aria-current=page] {
@@ -1752,7 +1752,7 @@
       --sassy-nav-link-underline-width: var(--sassy-tabs-underline-width, 0.125rem);
       --sassy-nav-link-hover-bg: transparent;
       --sassy-nav-current-border-colour: var(--sassy-theme-primary);
-      border-bottom: var(--sassy-tabs-border-width, 1px) solid var(--sassy-tabs-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-bottom: var(--sassy-tabs-border-width, 1px) solid var(--sassy-tabs-border-colour, var(--sassy-line));
       display: flex;
       flex-wrap: wrap;
       gap: var(--sassy-nav-gap, 0.25rem);
@@ -1784,7 +1784,7 @@
       }
     }
     .bf-tab:hover {
-      background-color: var(--sassy-nav-link-hover-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-nav-link-hover-bg, var(--sassy-surface-subtle));
     }
     .bf-tab:focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
@@ -1811,8 +1811,8 @@
       outline-offset: var(--sassy-focus-outline-offset, 2px);
     }
     .bf-card {
-      background-color: var(--sassy-card-bg, #fff);
-      border: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-card-bg, var(--sassy-surface));
+      border: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
       border-radius: var(--sassy-card-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
       display: flex;
@@ -1821,8 +1821,8 @@
       overflow: hidden;
     }
     .bf-card-header {
-      background-color: var(--sassy-card-cap-bg, oklch(98.5% 0.002 247.839deg));
-      border-bottom: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-card-cap-bg, var(--sassy-surface-subtle));
+      border-bottom: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
       padding: calc(var(--sassy-card-padding-y, 1rem) * 0.75) var(--sassy-card-padding-x, 1rem);
     }
     .bf-card-body {
@@ -1836,8 +1836,8 @@
       margin-bottom: 0;
     }
     .bf-card-footer {
-      background-color: var(--sassy-card-cap-bg, oklch(98.5% 0.002 247.839deg));
-      border-top: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-card-cap-bg, var(--sassy-surface-subtle));
+      border-top: var(--sassy-card-border-width, 1px) solid var(--sassy-card-border-colour, var(--sassy-line));
       padding: calc(var(--sassy-card-padding-y, 1rem) * 0.75) var(--sassy-card-padding-x, 1rem);
     }
     .bf-card-title {
@@ -1852,7 +1852,7 @@
       width: 100%;
     }
     .bf-list-group {
-      border: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      border: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       border-radius: var(--sassy-list-group-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
       display: flex;
@@ -1863,7 +1863,7 @@
       padding: 0;
     }
     .bf-list-group > * {
-      background-color: var(--sassy-list-group-bg, #fff);
+      background-color: var(--sassy-list-group-bg, var(--sassy-surface));
       border: 0;
       box-sizing: border-box;
       color: var(--sassy-list-group-colour, inherit);
@@ -1871,7 +1871,7 @@
       padding: var(--sassy-list-group-padding-y, 0.5rem) var(--sassy-list-group-padding-x, 1rem);
     }
     .bf-list-group > * + * {
-      border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
     }
     .bf-list-group > :where(a, button) {
       cursor: pointer;
@@ -1882,7 +1882,7 @@
       width: 100%;
     }
     .bf-list-group > :where(a, button):hover {
-      background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, #fff)));
+      background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, var(--sassy-surface))));
     }
     .bf-list-group > :where(a, button):focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
@@ -1893,7 +1893,7 @@
       color: var(--sassy-list-group-current-colour, var(--sassy-theme-primary-contrast));
     }
     .bf-list-group > :disabled, .bf-list-group > [aria-disabled=true] {
-      color: var(--sassy-list-group-disabled-colour, oklch(70.7% 0.022 261.325deg));
+      color: var(--sassy-list-group-disabled-colour, var(--sassy-disabled));
       cursor: not-allowed;
       pointer-events: none;
     }
@@ -1912,22 +1912,22 @@
     }
     .bf-list-group-horizontal > * + * {
       border-block-start: 0;
-      border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
     }
     .bf-accordion {
-      border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+      border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, var(--sassy-line));
       border-radius: var(--sassy-accordion-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
       interpolate-size: allow-keywords;
       overflow: hidden;
     }
     .bf-accordion > details {
-      background-color: var(--sassy-accordion-bg, #fff);
+      background-color: var(--sassy-accordion-bg, var(--sassy-surface));
       color: var(--sassy-accordion-colour, inherit);
       margin: 0;
     }
     .bf-accordion > details + details {
-      border-block-start: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-block-start: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, var(--sassy-line));
     }
     .bf-accordion > details > summary {
       align-items: center;
@@ -1939,7 +1939,7 @@
       padding: var(--sassy-accordion-padding-y, 1rem) var(--sassy-accordion-padding-x, 1.25rem);
     }
     .bf-accordion > details > summary:hover {
-      background-color: var(--sassy-accordion-hover-bg, color-mix(in oklab, currentColor 4%, var(--sassy-accordion-bg, #fff)));
+      background-color: var(--sassy-accordion-hover-bg, color-mix(in oklab, currentColor 4%, var(--sassy-accordion-bg, var(--sassy-surface))));
     }
     .bf-accordion > details > summary:focus-visible {
       outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
@@ -1963,8 +1963,8 @@
       display: none;
     }
     .bf-accordion > details[open] > summary {
-      background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, #fff)));
-      border-block-end: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, var(--sassy-surface))));
+      border-block-end: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, var(--sassy-line));
       color: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
     }
     .bf-accordion > details[open] > summary::after {
@@ -1992,7 +1992,7 @@
       border-width: 0;
     }
     .bf-table {
-      border-color: var(--sassy-table-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-color: var(--sassy-table-border-colour, var(--sassy-line));
       color: var(--sassy-table-colour, currentColor);
       margin-block-end: 1rem;
       vertical-align: top;
@@ -2098,8 +2098,8 @@
       }
     }
     .bf-alert {
-      background-color: var(--sassy-alert-bg, oklch(96.7% 0.003 264.542deg));
-      border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-alert-bg, var(--sassy-surface-subtle));
+      border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, var(--sassy-line));
       border-radius: var(--sassy-alert-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
       color: var(--sassy-alert-colour, currentColor);
@@ -2188,7 +2188,7 @@
     }
     .bf-progress {
       appearance: none;
-      background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-progress-bg, var(--sassy-line));
       block-size: var(--sassy-progress-height, 1rem);
       border: 0;
       border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
@@ -2265,7 +2265,7 @@
       }
     }
     .bf-progress-stacked {
-      background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-progress-bg, var(--sassy-line));
       block-size: var(--sassy-progress-height, 1rem);
       border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
       display: flex;
@@ -2378,6 +2378,88 @@
         mask-size: 300% 100%;
       }
     }
+    @keyframes bf-toast-hide {
+      to {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+    .bf-toast-container {
+      align-items: var(--sassy-toast-container-inline, flex-end);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sassy-toast-container-gap, 0.5rem);
+      inset: var(--sassy-toast-container-offset, 1rem);
+      justify-content: var(--sassy-toast-container-block, flex-end);
+      pointer-events: none;
+      position: fixed;
+      z-index: var(--sassy-toast-container-z-index, 1090);
+    }
+    .bf-toast-container-top {
+      --sassy-toast-container-block: flex-start;
+    }
+    .bf-toast-container-start {
+      --sassy-toast-container-inline: flex-start;
+    }
+    .bf-toast-container-centre {
+      --sassy-toast-container-inline: center;
+    }
+    .bf-toast {
+      background-color: var(--sassy-toast-bg, var(--sassy-surface));
+      border: var(--sassy-toast-border-width, 1px) solid var(--sassy-toast-border-colour, var(--sassy-line));
+      border-radius: var(--sassy-toast-radius, var(--sassy-radius, 0.375rem));
+      box-shadow: var(--sassy-toast-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 15%, transparent));
+      box-sizing: border-box;
+      color: var(--sassy-toast-colour, var(--sassy-body-colour));
+      font-size: var(--sassy-toast-font-size, calc(var(--sassy-font-size-base) * 0.875));
+      inline-size: var(--sassy-toast-width, 22rem);
+      max-inline-size: 100%;
+      padding: var(--sassy-toast-padding-y, 0.75rem) var(--sassy-toast-padding-x, 0.75rem);
+      pointer-events: auto;
+      position: relative;
+    }
+    .bf-toast > :first-child {
+      margin-block-start: 0;
+    }
+    .bf-toast > :last-child {
+      margin-block-end: 0;
+    }
+    .bf-toast > header:first-child {
+      align-items: center;
+      border-block-end: var(--sassy-toast-border-width, 1px) solid var(--sassy-toast-border-colour, var(--sassy-line));
+      display: flex;
+      gap: 0.5em;
+      margin: calc(var(--sassy-toast-padding-y, 0.75rem) * -1) calc(var(--sassy-toast-padding-x, 0.75rem) * -1) var(--sassy-toast-padding-y, 0.75rem);
+      padding: calc(var(--sassy-toast-padding-y, 0.75rem) * 0.75) var(--sassy-toast-padding-x, 0.75rem);
+    }
+    .bf-toast > header:first-child > * {
+      margin: 0;
+    }
+    .bf-toast > header:first-child > :first-child {
+      font-size: inherit;
+      margin-inline-end: auto;
+    }
+    .bf-toast > [command="--dismiss"] {
+      inset-block-start: var(--sassy-toast-padding-y, 0.75rem);
+      inset-inline-end: var(--sassy-toast-padding-x, 0.75rem);
+      position: absolute;
+    }
+    .bf-toast:has(> [command="--dismiss"]) {
+      padding-inline-end: calc(var(--sassy-toast-padding-x, 0.75rem) * 2 + 1.5em);
+    }
+    .bf-toast-autohide {
+      animation: bf-toast-hide var(--sassy-toast-fade, 0.5s) ease-in var(--sassy-toast-delay, 5s) forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-toast-autohide {
+        animation-duration: 0s;
+      }
+    }
+    .bf-toast-autohide:hover, .bf-toast-autohide:focus-within {
+      animation-play-state: paused;
+    }
     .bf-tooltip {
       background-color: var(--sassy-tooltip-bg, oklch(21% 0.034 264.665deg));
       border: 0;
@@ -2394,9 +2476,145 @@
       position-area: top;
       position-try-fallbacks: flip-block;
     }
+    .bf-popover {
+      background-color: var(--sassy-popover-bg, var(--sassy-surface));
+      border: var(--sassy-popover-border-width, 1px) solid var(--sassy-popover-border-colour, var(--sassy-line));
+      border-radius: var(--sassy-popover-radius, var(--sassy-radius, 0.375rem));
+      box-shadow: var(--sassy-popover-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 15%, transparent));
+      box-sizing: border-box;
+      color: var(--sassy-popover-colour, var(--sassy-body-colour));
+      font-size: var(--sassy-popover-font-size, calc(var(--sassy-font-size-base) * 0.875));
+      inset: auto;
+      line-height: 1.5;
+      margin: var(--sassy-popover-offset, 0.5rem);
+      max-width: var(--sassy-popover-max-width, 20rem);
+      padding: var(--sassy-popover-padding-y, 0.5rem) var(--sassy-popover-padding-x, 0.75rem);
+      position-area: var(--sassy-popover-side, block-start);
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .bf-popover > :last-child {
+      margin-block-end: 0;
+    }
+    .bf-popover > :is(h1, h2, h3, h4, h5, h6):first-child {
+      background-color: var(--sassy-popover-header-bg, var(--sassy-surface-subtle));
+      border-block-end: var(--sassy-popover-border-width, 1px) solid var(--sassy-popover-border-colour, var(--sassy-line));
+      border-start-end-radius: calc(var(--sassy-popover-radius, var(--sassy-radius, 0.375rem)) - var(--sassy-popover-border-width, 1px));
+      border-start-start-radius: calc(var(--sassy-popover-radius, var(--sassy-radius, 0.375rem)) - var(--sassy-popover-border-width, 1px));
+      font-size: var(--sassy-popover-header-font-size, var(--sassy-font-size-base));
+      margin: calc(var(--sassy-popover-padding-y, 0.5rem) * -1) calc(var(--sassy-popover-padding-x, 0.75rem) * -1) var(--sassy-popover-padding-y, 0.5rem);
+      padding: var(--sassy-popover-padding-y, 0.5rem) var(--sassy-popover-padding-x, 0.75rem);
+    }
+    .bf-popover > button[popovertargetaction=hide] {
+      inset-block-start: var(--sassy-popover-padding-y, 0.5rem);
+      inset-inline-end: var(--sassy-popover-padding-x, 0.75rem);
+      position: absolute;
+    }
+    .bf-popover:has(> button[popovertargetaction=hide]) > :is(h1, h2, h3, h4, h5, h6):first-child {
+      padding-inline-end: calc(var(--sassy-popover-padding-x, 0.75rem) * 2 + 1.5em);
+    }
+    .bf-popover-bottom {
+      --sassy-popover-side: block-end;
+    }
+    .bf-popover-start {
+      --sassy-popover-side: inline-start;
+    }
+    .bf-popover-end {
+      --sassy-popover-side: inline-end;
+    }
+    .bf-dropdown {
+      background-color: var(--sassy-dropdown-bg, var(--sassy-surface));
+      border: var(--sassy-dropdown-border-width, 1px) solid var(--sassy-dropdown-border-colour, var(--sassy-line));
+      border-radius: var(--sassy-dropdown-radius, var(--sassy-radius, 0.375rem));
+      box-shadow: var(--sassy-dropdown-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 15%, transparent));
+      box-sizing: border-box;
+      color: var(--sassy-dropdown-colour, var(--sassy-body-colour));
+      inset: auto;
+      list-style: none;
+      margin: var(--sassy-dropdown-offset, 0.125rem) 0;
+      min-inline-size: var(--sassy-dropdown-min-width, 10rem);
+      padding: var(--sassy-dropdown-padding-y, 0.5rem) 0;
+      position-area: var(--sassy-dropdown-side, block-end) var(--sassy-dropdown-align, span-inline-end);
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .bf-dropdown :where(a, button, [role=menuitem]) {
+      background-color: transparent;
+      border: 0;
+      box-sizing: border-box;
+      color: inherit;
+      cursor: pointer;
+      display: block;
+      font: inherit;
+      inline-size: 100%;
+      margin: 0;
+      padding: var(--sassy-dropdown-item-padding-y, 0.25rem) var(--sassy-dropdown-item-padding-x, 1rem);
+      text-align: start;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .bf-dropdown :where(a, button, [role=menuitem]):hover, .bf-dropdown :where(a, button, [role=menuitem]):focus-visible {
+      background-color: var(--sassy-dropdown-hover-bg, color-mix(in oklab, currentColor 8%, var(--sassy-dropdown-bg, var(--sassy-surface))));
+    }
+    .bf-dropdown :where(a, button, [role=menuitem]):focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: calc(var(--sassy-focus-outline-width, 2px) * -1);
+    }
+    .bf-dropdown :where(a, button, [role=menuitem])[aria-current]:not([aria-current=false]) {
+      background-color: var(--sassy-dropdown-current-bg, var(--sassy-theme-primary));
+      color: var(--sassy-dropdown-current-colour, var(--sassy-theme-primary-contrast));
+    }
+    .bf-dropdown :where(a, button, [role=menuitem]):disabled, .bf-dropdown :where(a, button, [role=menuitem])[aria-disabled=true] {
+      background-color: transparent;
+      color: var(--sassy-dropdown-disabled-colour, var(--sassy-disabled));
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .bf-dropdown-up {
+      --sassy-dropdown-side: block-start;
+    }
+    .bf-dropdown-end {
+      --sassy-dropdown-align: span-inline-start;
+    }
+    .bf-dropdown-divider {
+      border: 0;
+      border-block-start: var(--sassy-dropdown-border-width, 1px) solid var(--sassy-dropdown-border-colour, var(--sassy-line));
+      margin: var(--sassy-dropdown-padding-y, 0.5rem) 0;
+    }
+    .bf-dropdown-header {
+      color: var(--sassy-dropdown-header-colour, var(--sassy-muted));
+      font-size: calc(var(--sassy-font-size-base) * 0.875);
+      margin: 0;
+      padding: var(--sassy-dropdown-item-padding-y, 0.25rem) var(--sassy-dropdown-item-padding-x, 1rem);
+      white-space: nowrap;
+    }
+    .bf-dropdown-toggle::after {
+      background-color: currentColor;
+      block-size: 0.75em;
+      content: "";
+      display: inline-block;
+      flex-shrink: 0;
+      inline-size: 0.75em;
+      margin-inline-start: 0.5em;
+      mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") center/contain no-repeat;
+      transition: transform 0.15s ease-in-out;
+      vertical-align: -0.0625em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-dropdown-toggle::after {
+        transition: none;
+      }
+    }
+    .bf-dropdown-toggle[aria-expanded=true]::after {
+      transform: rotate(180deg);
+    }
+    .bf-dropdown-split {
+      padding-inline: calc(var(--sassy-input-padding-x, 0.75rem) * 0.75);
+    }
+    .bf-dropdown-split::after {
+      margin-inline-start: 0;
+    }
     .bf-dialog {
-      background-color: var(--sassy-dialog-bg, #fff);
-      border: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-dialog-bg, var(--sassy-surface));
+      border: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, var(--sassy-line));
       border-radius: var(--sassy-dialog-radius, calc(var(--sassy-radius, 0.375rem) * 2));
       box-shadow: var(--sassy-dialog-shadow, 0 1rem 3rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 17.5%, transparent));
       box-sizing: border-box;
@@ -2422,7 +2640,7 @@
     }
     .bf-dialog-header {
       align-items: center;
-      border-bottom: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-bottom: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, var(--sassy-line));
       display: flex;
       gap: 1rem;
       justify-content: space-between;
@@ -2445,12 +2663,434 @@
       margin-bottom: 0;
     }
     .bf-dialog-footer {
-      border-top: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-top: var(--sassy-dialog-border-width, 1px) solid var(--sassy-dialog-border-colour, var(--sassy-line));
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       justify-content: flex-end;
       padding: var(--sassy-dialog-padding-y, 1rem) var(--sassy-dialog-padding-x, 1.25rem);
+    }
+    @keyframes bf-offcanvas-slide {
+      from {
+        translate: var(--sassy-offcanvas-from);
+      }
+    }
+    @keyframes bf-offcanvas-fade {
+      from {
+        opacity: 0;
+      }
+    }
+    .bf-offcanvas-start {
+      --sassy-offcanvas-from: -100% 0;
+      border-radius: 0;
+      border-width: 0;
+      border-inline-end-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-inline-start: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: 100%;
+      inline-size: var(--sassy-offcanvas-width, 25rem);
+      inset-block-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-start:dir(rtl) {
+      --sassy-offcanvas-from: 100% 0;
+    }
+    .bf-offcanvas-start[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-start::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-start[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start[open]::backdrop {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-end {
+      --sassy-offcanvas-from: 100% 0;
+      border-radius: 0;
+      border-width: 0;
+      border-inline-start-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-inline-end: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: 100%;
+      inline-size: var(--sassy-offcanvas-width, 25rem);
+      inset-block-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-end:dir(rtl) {
+      --sassy-offcanvas-from: -100% 0;
+    }
+    .bf-offcanvas-end[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-end::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-end[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end[open]::backdrop {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-top {
+      --sassy-offcanvas-from: 0 -100%;
+      border-radius: 0;
+      border-width: 0;
+      border-block-end-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-block-start: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: var(--sassy-offcanvas-height, 30vh);
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-top[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-top::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-top[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top[open]::backdrop {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-bottom {
+      --sassy-offcanvas-from: 0 100%;
+      border-radius: 0;
+      border-width: 0;
+      border-block-start-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-block-end: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: var(--sassy-offcanvas-height, 30vh);
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-bottom[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-bottom::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-bottom[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom[open]::backdrop {
+        animation: none;
+      }
+    }
+    @media (width >= 576px) {
+      .bf-offcanvas-sm:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-sm:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 768px) {
+      .bf-offcanvas-md:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-md:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 992px) {
+      .bf-offcanvas-lg:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-lg:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 1200px) {
+      .bf-offcanvas-xl:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-xl:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 1400px) {
+      .bf-offcanvas-2xl:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-2xl:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 1600px) {
+      .bf-offcanvas-3xl:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-3xl:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    .bf-carousel {
+      anchor-name: --sassy-carousel;
+      anchor-scope: --sassy-carousel;
+      display: grid;
+      gap: var(--sassy-carousel-gap, 1rem);
+      grid-auto-columns: calc((100% - (var(--sassy-carousel-per-view, 1) - 1) * var(--sassy-carousel-gap, 1rem)) / var(--sassy-carousel-per-view, 1));
+      grid-auto-flow: column;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
+      scroll-marker-group: after;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-carousel {
+        scroll-behavior: auto;
+      }
+    }
+    .bf-carousel > * {
+      scroll-snap-align: start;
+    }
+    .bf-carousel::scroll-button(*) {
+      align-items: center;
+      background-color: var(--sassy-carousel-button-bg, var(--sassy-surface));
+      block-size: var(--sassy-carousel-button-size, 2.5rem);
+      border: 0;
+      border-radius: 50%;
+      box-shadow: var(--sassy-carousel-button-shadow, 0 0.25rem 0.5rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 20%, transparent));
+      color: var(--sassy-carousel-button-colour, var(--sassy-body-colour));
+      cursor: pointer;
+      display: flex;
+      font-size: calc(var(--sassy-carousel-button-size, 2.5rem) * 0.6);
+      inline-size: var(--sassy-carousel-button-size, 2.5rem);
+      justify-content: center;
+      line-height: 1;
+      position: absolute;
+      position-anchor: --sassy-carousel;
+      top: anchor(center);
+      translate: 0 -50%;
+    }
+    .bf-carousel::scroll-button(*):focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: 2px;
+    }
+    .bf-carousel::scroll-button(*):disabled {
+      cursor: default;
+      opacity: 0.4;
+    }
+    .bf-carousel::scroll-button(inline-start) {
+      content: "‹"/"Previous slide";
+      inset-inline-start: calc(anchor(start) + var(--sassy-carousel-button-offset, 0.5rem));
+    }
+    .bf-carousel::scroll-button(inline-end) {
+      content: "›"/"Next slide";
+      inset-inline-end: calc(anchor(end) + var(--sassy-carousel-button-offset, 0.5rem));
+    }
+    .bf-carousel:dir(rtl)::scroll-button(*) {
+      scale: -1 1;
+    }
+    .bf-carousel::scroll-marker-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sassy-carousel-marker-size, 0.625rem);
+      justify-content: center;
+      margin-block-start: var(--sassy-carousel-marker-size, 0.625rem);
+    }
+    .bf-carousel > *::scroll-marker {
+      background-color: var(--sassy-carousel-marker-colour, var(--sassy-body-colour));
+      block-size: var(--sassy-carousel-marker-size, 0.625rem);
+      border-radius: 50%;
+      content: ""/attr(aria-label);
+      inline-size: var(--sassy-carousel-marker-size, 0.625rem);
+      opacity: 0.5;
+    }
+    .bf-carousel > *::scroll-marker:target-current {
+      border-radius: var(--sassy-carousel-marker-size, 0.625rem);
+      inline-size: calc(var(--sassy-carousel-marker-size, 0.625rem) * 2.5);
+      opacity: 1;
+    }
+    .bf-carousel > *::scroll-marker:focus-visible {
+      outline: var(--sassy-focus-outline-width, 2px) solid var(--sassy-focus-outline-colour, var(--sassy-theme-primary));
+      outline-offset: 2px;
     }
   }
   @layer forms {
@@ -2459,7 +3099,7 @@
       margin-bottom: 0.5rem;
     }
     .bf-form-text {
-      color: var(--sassy-form-text-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-form-text-colour, var(--sassy-muted));
       display: block;
       font-size: 0.875em;
       margin-top: 0.25rem;
@@ -2467,11 +3107,11 @@
     .bf-form-control {
       appearance: none;
       background-clip: padding-box;
-      background-color: var(--sassy-input-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
-      color: var(--sassy-input-colour, oklch(27.8% 0.033 256.848deg));
+      color: var(--sassy-input-colour, var(--sassy-body-colour));
       display: block;
       font-family: inherit;
       font-size: var(--sassy-input-font-size, var(--sassy-font-size-base));
@@ -2487,7 +3127,7 @@
       }
     }
     .bf-form-control::placeholder {
-      color: var(--sassy-input-placeholder-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-input-placeholder-colour, var(--sassy-muted));
       opacity: 1;
     }
     .bf-form-control:focus-visible {
@@ -2496,10 +3136,10 @@
       outline: 0;
     }
     .bf-form-control[readonly] {
-      background-color: var(--sassy-input-readonly-bg, oklch(98.5% 0.002 247.839deg));
+      background-color: var(--sassy-input-readonly-bg, var(--sassy-surface-subtle));
     }
     .bf-form-control:disabled {
-      background-color: var(--sassy-input-disabled-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-input-disabled-bg, var(--sassy-surface-subtle));
       cursor: not-allowed;
       opacity: 1;
     }
@@ -2544,11 +3184,11 @@
     .bf-form-select {
       appearance: none;
       background-clip: padding-box;
-      background-color: var(--sassy-input-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
-      color: var(--sassy-input-colour, oklch(27.8% 0.033 256.848deg));
+      color: var(--sassy-input-colour, var(--sassy-body-colour));
       display: block;
       font-family: inherit;
       font-size: var(--sassy-input-font-size, var(--sassy-font-size-base));
@@ -2564,7 +3204,7 @@
       }
     }
     .bf-form-select::placeholder {
-      color: var(--sassy-input-placeholder-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-input-placeholder-colour, var(--sassy-muted));
       opacity: 1;
     }
     .bf-form-select:focus-visible {
@@ -2573,10 +3213,10 @@
       outline: 0;
     }
     .bf-form-select[readonly] {
-      background-color: var(--sassy-input-readonly-bg, oklch(98.5% 0.002 247.839deg));
+      background-color: var(--sassy-input-readonly-bg, var(--sassy-surface-subtle));
     }
     .bf-form-select:disabled {
-      background-color: var(--sassy-input-disabled-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-input-disabled-bg, var(--sassy-surface-subtle));
       cursor: not-allowed;
       opacity: 1;
     }
@@ -2630,8 +3270,8 @@
     }
     .bf-form-check-input {
       appearance: none;
-      background-color: var(--sassy-input-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       box-sizing: border-box;
       flex-shrink: 0;
       font-size: inherit;
@@ -2716,8 +3356,8 @@
     }
     .bf-form-switch {
       appearance: none;
-      background-color: var(--sassy-input-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       box-sizing: border-box;
       flex-shrink: 0;
       font-size: inherit;
@@ -2769,7 +3409,7 @@
     }
     .bf-form-switch::before {
       aspect-ratio: 1;
-      background-color: var(--sassy-switch-knob-colour, var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg)));
+      background-color: var(--sassy-switch-knob-colour, var(--sassy-input-border-colour, var(--sassy-line-strong)));
       border-radius: 50%;
       inset: 0.125em auto auto 0.125em;
       height: calc(100% - 0.25em);
@@ -2820,11 +3460,11 @@
     }
     .bf-input-group-text {
       align-items: center;
-      background-color: var(--sassy-input-addon-bg, oklch(96.7% 0.003 264.542deg));
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-addon-bg, var(--sassy-surface-subtle));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
-      color: var(--sassy-input-colour, oklch(27.8% 0.033 256.848deg));
+      color: var(--sassy-input-colour, var(--sassy-body-colour));
       display: flex;
       font-size: var(--sassy-input-font-size, var(--sassy-font-size-base));
       line-height: var(--sassy-input-line-height, var(--sassy-line-height-base));
@@ -2851,7 +3491,7 @@
     .bf-form-floating > label {
       border: var(--sassy-input-border-width, 1px) solid transparent;
       box-sizing: border-box;
-      color: var(--sassy-input-placeholder-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-input-placeholder-colour, var(--sassy-muted));
       height: 100%;
       left: 0;
       margin: 0;
@@ -2890,7 +3530,7 @@
       outline: 0;
     }
     .bf-form-range::-webkit-slider-runnable-track {
-      background-color: var(--sassy-range-track-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-range-track-colour, var(--sassy-line));
       border: 0;
       border-radius: var(--sassy-range-track-height, 0.5rem);
       color: transparent;
@@ -2899,7 +3539,7 @@
       width: 100%;
     }
     .bf-form-range::-moz-range-track {
-      background-color: var(--sassy-range-track-colour, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-range-track-colour, var(--sassy-line));
       border: 0;
       border-radius: var(--sassy-range-track-height, 0.5rem);
       color: transparent;
@@ -2939,28 +3579,28 @@
       }
     }
     .bf-form-range:focus-visible::-webkit-slider-thumb {
-      box-shadow: 0 0 0 1px var(--sassy-input-bg, #fff), 0 0 0 var(--sassy-input-focus-ring, 0.25rem) color-mix(in oklab, var(--sassy-input-focus-colour, var(--sassy-theme-primary)) 25%, transparent);
+      box-shadow: 0 0 0 1px var(--sassy-input-bg, var(--sassy-surface)), 0 0 0 var(--sassy-input-focus-ring, 0.25rem) color-mix(in oklab, var(--sassy-input-focus-colour, var(--sassy-theme-primary)) 25%, transparent);
     }
     .bf-form-range:focus-visible::-moz-range-thumb {
-      box-shadow: 0 0 0 1px var(--sassy-input-bg, #fff), 0 0 0 var(--sassy-input-focus-ring, 0.25rem) color-mix(in oklab, var(--sassy-input-focus-colour, var(--sassy-theme-primary)) 25%, transparent);
+      box-shadow: 0 0 0 1px var(--sassy-input-bg, var(--sassy-surface)), 0 0 0 var(--sassy-input-focus-ring, 0.25rem) color-mix(in oklab, var(--sassy-input-focus-colour, var(--sassy-theme-primary)) 25%, transparent);
     }
     .bf-form-range:disabled {
       cursor: not-allowed;
     }
     .bf-form-range:disabled::-webkit-slider-thumb {
-      background-color: var(--sassy-range-disabled-colour, oklch(70.7% 0.022 261.325deg));
+      background-color: var(--sassy-range-disabled-colour, var(--sassy-disabled));
     }
     .bf-form-range:disabled::-moz-range-thumb {
-      background-color: var(--sassy-range-disabled-colour, oklch(70.7% 0.022 261.325deg));
+      background-color: var(--sassy-range-disabled-colour, var(--sassy-disabled));
     }
     .bf-form-file {
       appearance: none;
       background-clip: padding-box;
-      background-color: var(--sassy-input-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
-      color: var(--sassy-input-colour, oklch(27.8% 0.033 256.848deg));
+      color: var(--sassy-input-colour, var(--sassy-body-colour));
       display: block;
       font-family: inherit;
       font-size: var(--sassy-input-font-size, var(--sassy-font-size-base));
@@ -2976,7 +3616,7 @@
       }
     }
     .bf-form-file::placeholder {
-      color: var(--sassy-input-placeholder-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-input-placeholder-colour, var(--sassy-muted));
       opacity: 1;
     }
     .bf-form-file:focus-visible {
@@ -2985,10 +3625,10 @@
       outline: 0;
     }
     .bf-form-file[readonly] {
-      background-color: var(--sassy-input-readonly-bg, oklch(98.5% 0.002 247.839deg));
+      background-color: var(--sassy-input-readonly-bg, var(--sassy-surface-subtle));
     }
     .bf-form-file:disabled {
-      background-color: var(--sassy-input-disabled-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-input-disabled-bg, var(--sassy-surface-subtle));
       cursor: not-allowed;
       opacity: 1;
     }
@@ -3007,11 +3647,11 @@
       cursor: pointer;
     }
     .bf-form-file::file-selector-button {
-      background-color: var(--sassy-input-addon-bg, oklch(96.7% 0.003 264.542deg));
-      border: 0 solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-addon-bg, var(--sassy-surface-subtle));
+      border: 0 solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       border-inline-end-width: var(--sassy-input-border-width, 1px);
       border-radius: 0;
-      color: var(--sassy-input-colour, oklch(27.8% 0.033 256.848deg));
+      color: var(--sassy-input-colour, var(--sassy-body-colour));
       font: inherit;
       margin: calc(var(--sassy-input-padding-y, 0.375rem) * -1) calc(var(--sassy-input-padding-x, 0.75rem) * -1);
       margin-inline-end: var(--sassy-input-padding-x, 0.75rem);
@@ -3025,16 +3665,16 @@
       }
     }
     .bf-form-file:hover:not(:disabled):not([readonly])::file-selector-button {
-      background-color: var(--sassy-input-addon-hover-bg, oklch(92.8% 0.006 264.531deg));
+      background-color: var(--sassy-input-addon-hover-bg, var(--sassy-line));
     }
     .bf-form-colour {
       appearance: none;
       background-clip: padding-box;
-      background-color: var(--sassy-input-bg, #fff);
-      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, oklch(87.2% 0.01 258.338deg));
+      background-color: var(--sassy-input-bg, var(--sassy-surface));
+      border: var(--sassy-input-border-width, 1px) solid var(--sassy-input-border-colour, var(--sassy-line-strong));
       border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
       box-sizing: border-box;
-      color: var(--sassy-input-colour, oklch(27.8% 0.033 256.848deg));
+      color: var(--sassy-input-colour, var(--sassy-body-colour));
       display: block;
       font-family: inherit;
       font-size: var(--sassy-input-font-size, var(--sassy-font-size-base));
@@ -3050,7 +3690,7 @@
       }
     }
     .bf-form-colour::placeholder {
-      color: var(--sassy-input-placeholder-colour, oklch(55.1% 0.027 264.364deg));
+      color: var(--sassy-input-placeholder-colour, var(--sassy-muted));
       opacity: 1;
     }
     .bf-form-colour:focus-visible {
@@ -3059,10 +3699,10 @@
       outline: 0;
     }
     .bf-form-colour[readonly] {
-      background-color: var(--sassy-input-readonly-bg, oklch(98.5% 0.002 247.839deg));
+      background-color: var(--sassy-input-readonly-bg, var(--sassy-surface-subtle));
     }
     .bf-form-colour:disabled {
-      background-color: var(--sassy-input-disabled-bg, oklch(96.7% 0.003 264.542deg));
+      background-color: var(--sassy-input-disabled-bg, var(--sassy-surface-subtle));
       cursor: not-allowed;
       opacity: 1;
     }
@@ -10739,23 +11379,185 @@
     }
   }
   @layer theme {
-    :root {
+    :where(:root) {
+      --sassy-body-bg: #fff;
+      --sassy-surface: #fff;
+      --sassy-surface-subtle: oklch(96.7% 0.003 264.542deg);
+      --sassy-line: oklch(92.8% 0.006 264.531deg);
+      --sassy-line-strong: oklch(87.2% 0.01 258.338deg);
+      --sassy-muted: oklch(44.6% 0.03 256.802deg);
+      --sassy-disabled: oklch(70.7% 0.022 261.325deg);
       --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
-      --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
-      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
-      --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
-      --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
-      --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
-      --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
-      --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
       --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
       --sassy-theme-secondary-contrast: #fff;
+      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
       --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
       --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
       --sassy-theme-warn-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
       --sassy-theme-error-contrast: #fff;
+      --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
       --sassy-theme-grey-light-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
       --sassy-theme-grey-dark-contrast: #fff;
+    }
+    .bf-theme-light {
+      --sassy-body-bg: #fff;
+      --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
+      --sassy-surface: #fff;
+      --sassy-surface-subtle: oklch(96.7% 0.003 264.542deg);
+      --sassy-line: oklch(92.8% 0.006 264.531deg);
+      --sassy-line-strong: oklch(87.2% 0.01 258.338deg);
+      --sassy-muted: oklch(44.6% 0.03 256.802deg);
+      --sassy-disabled: oklch(70.7% 0.022 261.325deg);
+      --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+      --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+      --sassy-theme-secondary-contrast: #fff;
+      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+      --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+      --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+      --sassy-theme-warn-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+      --sassy-theme-error-contrast: #fff;
+      --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+      --sassy-theme-grey-light-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+      --sassy-theme-grey-dark-contrast: #fff;
+      --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e2939' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      --sassy-check-mark-colour: initial;
+      --sassy-btn-primary-colour: initial;
+      --sassy-btn-secondary-colour: initial;
+      --sassy-btn-ok-colour: initial;
+      --sassy-btn-info-colour: initial;
+      --sassy-btn-warn-colour: initial;
+      --sassy-btn-error-colour: initial;
+      --sassy-btn-grey-light-colour: initial;
+      --sassy-btn-grey-dark-colour: initial;
+      background-color: var(--sassy-body-bg);
+      color: var(--sassy-body-colour);
+      color-scheme: light;
+    }
+    .bf-theme-dark {
+      --sassy-body-bg: oklch(13% 0.028 261.692deg);
+      --sassy-body-colour: oklch(92.8% 0.006 264.531deg);
+      --sassy-surface: oklch(21% 0.034 264.665deg);
+      --sassy-surface-subtle: oklch(27.8% 0.033 256.848deg);
+      --sassy-line: oklch(37.3% 0.034 259.733deg);
+      --sassy-line-strong: oklch(55.1% 0.027 264.364deg);
+      --sassy-muted: oklch(70.7% 0.022 261.325deg);
+      --sassy-disabled: oklch(55.1% 0.027 264.364deg);
+      --sassy-theme-primary: oklch(74.6% 0.16 232.661deg);
+      --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-secondary: oklch(75% 0.183 55.934deg);
+      --sassy-theme-secondary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-ok: oklch(79.2% 0.209 151.711deg);
+      --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+      --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+      --sassy-theme-warn-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-error: oklch(70.4% 0.191 22.216deg);
+      --sassy-theme-error-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+      --sassy-theme-grey-light-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+      --sassy-theme-grey-dark-contrast: #fff;
+      --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e5e7eb' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      --sassy-check-mark-colour: var(--sassy-theme-primary-contrast);
+      --sassy-btn-primary-colour: var(--sassy-theme-primary-contrast);
+      --sassy-btn-secondary-colour: var(--sassy-theme-secondary-contrast);
+      --sassy-btn-ok-colour: var(--sassy-theme-ok-contrast);
+      --sassy-btn-info-colour: var(--sassy-theme-info-contrast);
+      --sassy-btn-warn-colour: var(--sassy-theme-warn-contrast);
+      --sassy-btn-error-colour: var(--sassy-theme-error-contrast);
+      --sassy-btn-grey-light-colour: var(--sassy-theme-grey-light-contrast);
+      --sassy-btn-grey-dark-colour: var(--sassy-theme-grey-dark-contrast);
+      background-color: var(--sassy-body-bg);
+      color: var(--sassy-body-colour);
+      color-scheme: dark;
+    }
+    .bf-theme-auto {
+      --sassy-body-bg: #fff;
+      --sassy-body-colour: oklch(27.8% 0.033 256.848deg);
+      --sassy-surface: #fff;
+      --sassy-surface-subtle: oklch(96.7% 0.003 264.542deg);
+      --sassy-line: oklch(92.8% 0.006 264.531deg);
+      --sassy-line-strong: oklch(87.2% 0.01 258.338deg);
+      --sassy-muted: oklch(44.6% 0.03 256.802deg);
+      --sassy-disabled: oklch(70.7% 0.022 261.325deg);
+      --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
+      --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
+      --sassy-theme-secondary-contrast: #fff;
+      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
+      --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+      --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+      --sassy-theme-warn-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-error: oklch(57.7% 0.245 27.325deg);
+      --sassy-theme-error-contrast: #fff;
+      --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+      --sassy-theme-grey-light-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+      --sassy-theme-grey-dark-contrast: #fff;
+      --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231e2939' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+      --sassy-check-mark-colour: initial;
+      --sassy-btn-primary-colour: initial;
+      --sassy-btn-secondary-colour: initial;
+      --sassy-btn-ok-colour: initial;
+      --sassy-btn-info-colour: initial;
+      --sassy-btn-warn-colour: initial;
+      --sassy-btn-error-colour: initial;
+      --sassy-btn-grey-light-colour: initial;
+      --sassy-btn-grey-dark-colour: initial;
+      background-color: var(--sassy-body-bg);
+      color: var(--sassy-body-colour);
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: dark) {
+      .bf-theme-auto {
+        --sassy-body-bg: oklch(13% 0.028 261.692deg);
+        --sassy-body-colour: oklch(92.8% 0.006 264.531deg);
+        --sassy-surface: oklch(21% 0.034 264.665deg);
+        --sassy-surface-subtle: oklch(27.8% 0.033 256.848deg);
+        --sassy-line: oklch(37.3% 0.034 259.733deg);
+        --sassy-line-strong: oklch(55.1% 0.027 264.364deg);
+        --sassy-muted: oklch(70.7% 0.022 261.325deg);
+        --sassy-disabled: oklch(55.1% 0.027 264.364deg);
+        --sassy-theme-primary: oklch(74.6% 0.16 232.661deg);
+        --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-secondary: oklch(75% 0.183 55.934deg);
+        --sassy-theme-secondary-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-ok: oklch(79.2% 0.209 151.711deg);
+        --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
+        --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
+        --sassy-theme-warn-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-error: oklch(70.4% 0.191 22.216deg);
+        --sassy-theme-error-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-grey-light: oklch(87.2% 0.01 258.338deg);
+        --sassy-theme-grey-light-contrast: oklch(13% 0.028 261.692deg);
+        --sassy-theme-grey-dark: oklch(44.6% 0.03 256.802deg);
+        --sassy-theme-grey-dark-contrast: #fff;
+        --sassy-select-chevron: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23e5e7eb' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+        --sassy-check-mark-colour: var(--sassy-theme-primary-contrast);
+        --sassy-btn-primary-colour: var(--sassy-theme-primary-contrast);
+        --sassy-btn-secondary-colour: var(--sassy-theme-secondary-contrast);
+        --sassy-btn-ok-colour: var(--sassy-theme-ok-contrast);
+        --sassy-btn-info-colour: var(--sassy-theme-info-contrast);
+        --sassy-btn-warn-colour: var(--sassy-theme-warn-contrast);
+        --sassy-btn-error-colour: var(--sassy-theme-error-contrast);
+        --sassy-btn-grey-light-colour: var(--sassy-theme-grey-light-contrast);
+        --sassy-btn-grey-dark-colour: var(--sassy-theme-grey-dark-contrast);
+      }
     }
     .bf-c-primary {
       color: var(--sassy-theme-primary);
@@ -10956,7 +11758,7 @@
       }
       .bf-list-group-horizontal-sm > * + * {
         border-block-start: 0;
-        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       }
     }
   }
@@ -18998,7 +19800,7 @@
       }
       .bf-list-group-horizontal-md > * + * {
         border-block-start: 0;
-        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       }
     }
   }
@@ -27040,7 +27842,7 @@
       }
       .bf-list-group-horizontal-lg > * + * {
         border-block-start: 0;
-        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       }
     }
   }
@@ -35082,7 +35884,7 @@
       }
       .bf-list-group-horizontal-xl > * + * {
         border-block-start: 0;
-        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       }
     }
   }
@@ -43124,7 +43926,7 @@
       }
       .bf-list-group-horizontal-2xl > * + * {
         border-block-start: 0;
-        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       }
     }
   }
@@ -51166,7 +51968,7 @@
       }
       .bf-list-group-horizontal-3xl > * + * {
         border-block-start: 0;
-        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+        border-inline-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
       }
     }
   }

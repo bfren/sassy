@@ -3,7 +3,7 @@
 $sassy-table-bg: var(--sassy-table-bg, transparent);
 $sassy-table-colour: var(--sassy-table-colour, currentColor);
 $sassy-table-border-width: var(--sassy-table-border-width, 1px);
-$sassy-table-border-colour: var(--sassy-table-border-colour, #{colour("grey", 200)});
+$sassy-table-border-colour: var(--sassy-table-border-colour, var(--sassy-line));
 $sassy-table-padding-y: var(--sassy-table-padding-y, 0.5rem);
 $sassy-table-padding-x: var(--sassy-table-padding-x, 0.5rem);
 $sassy-table-small-padding: var(--sassy-table-small-padding, 0.25rem);

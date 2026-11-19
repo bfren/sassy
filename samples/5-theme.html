@@ -148,18 +148,86 @@
         </section>
 
         <section class="example" id="dark">
-            <h2>Dark mode</h2>
-            <p>A media query changes the theme for readers who prefer dark colours. It needs a whole-site change, so it is not applied to this page.</p>
+            <h2>Light and dark</h2>
+            <p>The same components in an area that extends <code>%bf-theme-light</code> and one that extends <code>%bf-theme-dark</code>. Each sets Sassy's colour roles and theme colours on its element, so everything inside follows. Extend <code>%bf-theme-auto</code> on <code>html</code> to follow the visitor's system setting.</p>
+            <div class="demo">
+                <div class="modes">
+                    <div class="mode mode-light">
+                        <div class="mode-buttons">
+                            <button type="button" class="mode-button">Default</button>
+                            <button type="button" class="mode-button mode-button-primary">Primary</button>
+                            <button type="button" class="mode-button mode-button-ok mode-button-outline">Outline</button>
+                        </div>
+                        <input class="mode-input" type="text" placeholder="A text field" aria-label="A text field in the light area" />
+                        <select class="mode-select" aria-label="A select in the light area"><option>A select</option></select>
+                        <div class="mode-check">
+                            <input type="checkbox" id="mode-light-check" checked />
+                            <label for="mode-light-check">A checkbox</label>
+                        </div>
+                        <div class="mode-alert">An alert, with <a href="#dark" class="mode-link">a primary link</a>.</div>
+                        <article class="mode-card">
+                            <div class="mode-card-body">
+                                <p>A card on the surface colour.</p>
+                                <p class="mode-muted">Muted text, such as form help.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="mode mode-dark">
+                        <div class="mode-buttons">
+                            <button type="button" class="mode-button">Default</button>
+                            <button type="button" class="mode-button mode-button-primary">Primary</button>
+                            <button type="button" class="mode-button mode-button-ok mode-button-outline">Outline</button>
+                        </div>
+                        <input class="mode-input" type="text" placeholder="A text field" aria-label="A text field in the dark area" />
+                        <select class="mode-select" aria-label="A select in the dark area"><option>A select</option></select>
+                        <div class="mode-check">
+                            <input type="checkbox" id="mode-dark-check" checked />
+                            <label for="mode-dark-check">A checkbox</label>
+                        </div>
+                        <div class="mode-alert">An alert, with <a href="#dark" class="mode-link">a primary link</a>.</div>
+                        <article class="mode-card">
+                            <div class="mode-card-body">
+                                <p>A card on the surface colour.</p>
+                                <p class="mode-muted">Muted text, such as form help.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
 <div class="code">
-<pre data-lang="sass" data-shown-only><code>@use "sassy/src" as sassy
+<pre data-lang="sass"><code>.modes
+    @extend %bf-d-grid
+    @extend %bf-gap-3
 
-@media (prefers-color-scheme: dark)
-    :root:not([data-theme="light"])
-        --sassy-theme-primary: #{sassy.colour("sky", 400)}
-        --sassy-body-colour: #{sassy.colour("grey", 100)}
-        --sassy-btn-bg: #{sassy.colour("grey", 800)}
-        --sassy-input-bg: #{sassy.colour("grey", 800)}
-        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}</code></pre>
+.mode-light
+    @extend %bf-theme-light
+
+.mode-dark
+    @extend %bf-theme-dark
+
+.mode
+    @extend %bf-p-4
+    @extend %bf-rounded-2</code></pre>
+<pre data-lang="html"><code>&lt;div class="mode mode-dark"&gt;
+    &lt;div class="mode-buttons"&gt;
+        &lt;button type="button" class="mode-button"&gt;Default&lt;/button&gt;
+        &lt;button type="button" class="mode-button mode-button-primary"&gt;Primary&lt;/button&gt;
+        &lt;button type="button" class="mode-button mode-button-ok mode-button-outline"&gt;Outline&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;input class="mode-input" type="text" placeholder="A text field" aria-label="A text field in the dark area" /&gt;
+    &lt;select class="mode-select" aria-label="A select in the dark area"&gt;&lt;option&gt;A select&lt;/option&gt;&lt;/select&gt;
+    &lt;div class="mode-check"&gt;
+        &lt;input type="checkbox" id="mode-dark-check" checked /&gt;
+        &lt;label for="mode-dark-check"&gt;A checkbox&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="mode-alert"&gt;An alert, with &lt;a href="#dark" class="mode-link"&gt;a primary link&lt;/a&gt;.&lt;/div&gt;
+    &lt;article class="mode-card"&gt;
+        &lt;div class="mode-card-body"&gt;
+            &lt;p&gt;A card on the surface colour.&lt;/p&gt;
+            &lt;p class="mode-muted"&gt;Muted text, such as form help.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 

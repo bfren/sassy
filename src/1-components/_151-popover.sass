@@ -1,0 +1,68 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: popovers
+//  =================================================================
+
+//  A popover is a panel of rich content opened by its button: <button popovertarget="id"> and
+//  <div popover role="dialog" aria-labelledby="…" id="id">, so the browser opens it, closes it on Escape
+//  or a click outside, and returns focus to the button. A heading it starts with is the title bar, and a
+//  button with popovertargetaction="hide" (such as %bf-close) sits in the top corner. CSS anchor positioning
+//  places it above the button, or on the side chosen, and flips it when there is no room; sassy.js does it in
+//  other browsers. For text shown on hover and focus, use a tooltip.
+
+$-heading: ":is(h1, h2, h3, h4, h5, h6):first-child"
+$-close: 'button[popovertargetaction="hide"]'
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("popover")
+        background-color: $sassy-popover-bg
+        border: $sassy-popover-border-width solid $sassy-popover-border-colour
+        border-radius: $sassy-popover-radius
+        box-shadow: $sassy-popover-shadow
+        box-sizing: border-box
+        color: $sassy-popover-colour
+        font-size: $sassy-popover-font-size
+        // popovers are centred in the viewport by default - anchor positioning replaces that
+        inset: auto
+        line-height: 1.5
+        margin: $sassy-popover-offset
+        max-width: $sassy-popover-max-width
+        padding: $sassy-popover-padding-y $sassy-popover-padding-x
+        position-area: $sassy-popover-side
+        position-try-fallbacks: flip-block, flip-inline
+
+        & > :last-child
+            margin-block-end: 0
+
+        & > #{$-heading}
+            background-color: $sassy-popover-header-bg
+            border-block-end: $sassy-popover-border-width solid $sassy-popover-border-colour
+            border-start-end-radius: calc(#{$sassy-popover-radius} - #{$sassy-popover-border-width})
+            border-start-start-radius: calc(#{$sassy-popover-radius} - #{$sassy-popover-border-width})
+            font-size: $sassy-popover-header-font-size
+            margin: calc(#{$sassy-popover-padding-y} * -1) calc(#{$sassy-popover-padding-x} * -1) $sassy-popover-padding-y
+            padding: $sassy-popover-padding-y $sassy-popover-padding-x
+
+        & > #{$-close}
+            inset-block-start: $sassy-popover-padding-y
+            inset-inline-end: $sassy-popover-padding-x
+            position: absolute
+
+        // room for the close button beside the title
+        &:has(> #{$-close}) > #{$-heading}
+            padding-inline-end: calc(#{$sassy-popover-padding-x} * 2 + 1.5em)
+
+    // Placement only changes the custom property
+
+    @include make.single("popover-bottom")
+        --sassy-popover-side: block-end
+
+    @include make.single("popover-start")
+        --sassy-popover-side: inline-start
+
+    @include make.single("popover-end")
+        --sassy-popover-side: inline-end

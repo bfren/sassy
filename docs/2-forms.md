@@ -229,7 +229,7 @@ The same placeholder works after an input group, because the feedback looks for 
 
 ### Select chevron in a dark theme
 
-Selects draw their chevron as an SVG image, which cannot read custom properties. If you change `--sassy-input-colour`, set `--sassy-select-chevron` to match with `chevron()`, which takes a Sass colour, not `var()`:
+Selects draw their chevron as an SVG image, which cannot read custom properties. `%bf-theme-light`, `-dark` and `-auto` set it for their text colour. If you change `--sassy-input-colour` yourself, set `--sassy-select-chevron` to match with `chevron()`, which takes a Sass colour, not `var()`:
 
 ```sass
 @use "sassy/src" as sassy

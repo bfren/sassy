@@ -2,10 +2,10 @@
 @use "../4-utilities/420-colour-variables" as *;
 @use "../4-utilities/450-rounded-variables" as *;
 
-$sassy-accordion-bg: var(--sassy-accordion-bg, #fff);
+$sassy-accordion-bg: var(--sassy-accordion-bg, var(--sassy-surface));
 $sassy-accordion-colour: var(--sassy-accordion-colour, inherit);
 $sassy-accordion-border-width: var(--sassy-accordion-border-width, 1px);
-$sassy-accordion-border-colour: var(--sassy-accordion-border-colour, #{colour("grey", 200)});
+$sassy-accordion-border-colour: var(--sassy-accordion-border-colour, var(--sassy-line));
 $sassy-accordion-radius: var(--sassy-accordion-radius, $sassy-radius);
 $sassy-accordion-padding-y: var(--sassy-accordion-padding-y, #{$sassy-padding-unit * 4});
 $sassy-accordion-padding-x: var(--sassy-accordion-padding-x, #{$sassy-padding-unit * 5});

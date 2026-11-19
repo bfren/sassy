@@ -7,15 +7,23 @@
  *   (the WAI-ARIA toolbar pattern).
  * - Tooltips: shows popover tooltips on hover and focus, and positions them in browsers
  *   without CSS anchor positioning.
+ * - Dropdowns and popovers: keeps a popovertarget button's aria-expanded in step with its menu or popover,
+ *   positions it in browsers without CSS anchor positioning, and gives role="menu" its arrow keys, Home, End
+ *   and Tab. Choosing a menu item closes the menu; a popover (role="dialog") stays open.
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
+ * - Scrollspy: in a nav or list of #links where one has aria-current="location", moves aria-current="location"
+ *   to the link of the section in view as the page scrolls.
+ * - Carousels: plays a carousel whose slides element has aria-live="off", every --sassy-carousel-interval
+ *   seconds, with a pause button (aria-pressed and aria-controls), waiting on hover and focus.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
+ * - Closing dialogs: a fallback for closedby="any", so a click on a modal dialog's backdrop closes it.
  * - Dismissing: a button with commandfor and command="--dismiss" hides the element it names, such as an alert.
  *
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
  * whatever selectors you extend Sassy's placeholders onto. Load it once, with defer:
  *     <script src="sassy.js" defer></script>
- * Content added later is handled too, except new tab lists, toolbars and collapsed content: call Sassy.init(element) for those.
+ * Content added later is handled too, except new tab lists, toolbars, collapsed content, playing carousels and scrollspy navs: call Sassy.init(element) for those.
  */
 (() => {
 	"use strict";
@@ -138,14 +146,70 @@
 	});
 
 	//  =================================================================
-	//  Tooltips
+	//  Positioning, shared by everything that opens beside its trigger
 	//  =================================================================
 
 	const anchorPositioning = window.CSS?.supports?.("anchor-name: --sassy") ?? false;
+	const anchored = new WeakMap(); // element -> the trigger currently holding its anchor name
+	let anchorCount = 0;
+
+	/** Anchors an element to its trigger with CSS anchor positioning; its CSS says where it goes. */
+	const anchor = (trigger, el) => {
+		el.dataset.sassyAnchor ??= `--sassy-anchor-${++anchorCount}`;
+		const name = el.dataset.sassyAnchor;
+		anchored.get(el)?.style.removeProperty("anchor-name");
+		trigger.style.setProperty("anchor-name", name);
+		el.style.setProperty("position-anchor", name);
+		anchored.set(el, trigger);
+	};
+
+	/**
+	 * Places an element beside its trigger without anchor positioning, on a side named as in CSS: above and
+	 * centred by default (tooltips), below and lined up with the trigger's start or end (dropdowns), or on any
+	 * side (popovers). It moves to the other side if there is no room, and is kept on screen.
+	 */
+	const place = (trigger, el, { side = "block-start", align = "centre" } = {}) => {
+		el.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
+		const offset = parseFloat(getComputedStyle(el).marginTop) || 0;
+		const t = trigger.getBoundingClientRect();
+		const r = el.getBoundingClientRect();
+		const rtl = getComputedStyle(trigger).direction === "rtl";
+		const clamp = (v, size, room) => Math.min(Math.max(v, offset), room - size - offset);
+		// before (above or left of) the trigger or after it, on one axis
+		const beside = (from, to, size, room, before) => {
+			const b = from - size - offset;
+			const a = to + offset;
+			return before ? (b >= 0 ? b : a) : a + size <= room || b < 0 ? a : b;
+		};
+		let top, left;
+		if (side.startsWith("block")) {
+			const start = rtl ? t.right - r.width : t.left;
+			const end = rtl ? t.left : t.right - r.width;
+			const x = { centre: t.left + (t.width - r.width) / 2, start, end }[align];
+			top = beside(t.top, t.bottom, r.height, innerHeight, side === "block-start");
+			left = clamp(x, r.width, innerWidth);
+		} else {
+			top = clamp(t.top + (t.height - r.height) / 2, r.height, innerHeight);
+			left = beside(t.left, t.right, r.width, innerWidth, (side === "inline-start") !== rtl);
+		}
+		Object.assign(el.style, { margin: "0", top: `${top}px`, left: `${left}px` });
+	};
+
+	const isOpen = el => el.matches(":popover-open");
+
+	/** Opens a popover beside its trigger: anchored by CSS where browsers support it, placed by script elsewhere. */
+	const openBeside = (trigger, el) => {
+		if (anchorPositioning) anchor(trigger, el);
+		if (!isOpen(el)) el.showPopover();
+		if (!anchorPositioning) place(trigger, el); // after opening, as a closed popover has no size
+	};
+
+	//  =================================================================
+	//  Tooltips
+	//  =================================================================
+
 	const hideDelay = 100; // ms - time to move the pointer from the trigger onto the tooltip
 	const timers = new WeakMap();
-	const anchored = new WeakMap(); // tooltip -> the trigger currently holding its anchor name
-	let anchorCount = 0;
 
 	/** The tooltip an element is described by: a [role="tooltip"][popover] named in aria-describedby. */
 	const tooltipOf = el => {
@@ -163,35 +227,9 @@
 		return tooltip ? { trigger, tooltip } : null;
 	};
 
-	const isOpen = tooltip => tooltip.matches(":popover-open");
-
-	/** Anchors a tooltip to its trigger with CSS anchor positioning. */
-	const anchor = (trigger, tooltip) => {
-		tooltip.dataset.sassyAnchor ??= `--sassy-tooltip-${++anchorCount}`;
-		const name = tooltip.dataset.sassyAnchor;
-		anchored.get(tooltip)?.style.removeProperty("anchor-name");
-		trigger.style.setProperty("anchor-name", name);
-		tooltip.style.setProperty("position-anchor", name);
-		anchored.set(tooltip, trigger);
-	};
-
-	/** Places a tooltip above its trigger (or below, if there is no room) without anchor positioning. */
-	const place = (trigger, tooltip) => {
-		tooltip.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
-		const offset = parseFloat(getComputedStyle(tooltip).marginTop) || 0;
-		const t = trigger.getBoundingClientRect();
-		const r = tooltip.getBoundingClientRect();
-		const above = t.top - r.height - offset;
-		const top = above >= 0 ? above : t.bottom + offset;
-		const left = Math.min(Math.max(t.left + (t.width - r.width) / 2, offset), innerWidth - r.width - offset);
-		Object.assign(tooltip.style, { margin: "0", top: `${top}px`, left: `${left}px` });
-	};
-
 	const show = (trigger, tooltip) => {
 		clearTimeout(timers.get(tooltip));
-		if (anchorPositioning) anchor(trigger, tooltip);
-		if (!isOpen(tooltip)) tooltip.showPopover();
-		if (!anchorPositioning) place(trigger, tooltip);
+		openBeside(trigger, tooltip);
 	};
 
 	const hide = (tooltip, delay = hideDelay) =>
@@ -229,6 +267,94 @@
 	});
 
 	//  =================================================================
+	//  Dropdowns and popovers: opened by a popovertarget button
+	//  =================================================================
+
+	// The browser opens and closes them, on Escape and a click outside too, and returns focus to the button.
+	// This keeps the button's aria-expanded in step, places the menu, and gives role="menu" its keys.
+
+	const invokers = new WeakMap(); // popover -> the button that last opened it
+
+	/** The button that opens a popover, if one does: the one last used, or the first that names it. */
+	const invokerOf = el =>
+		invokers.get(el) ??
+		[...document.querySelectorAll('[popovertarget]:not([popovertargetaction="hide"])')].find(b => b.getAttribute("popovertarget") === el.id);
+
+	/** The items of a menu that can be chosen. */
+	const menuItems = menu => [...menu.querySelectorAll('[role="menuitem"]')].filter(enabled);
+
+	document.addEventListener(
+		"click",
+		e => {
+			// not a close button inside the popover, which also names it
+			const button = e.target.closest?.('[popovertarget]:not([popovertargetaction="hide"])');
+			const el = button && document.getElementById(button.getAttribute("popovertarget"));
+			if (el) invokers.set(el, button);
+		},
+		true // before the browser opens the popover
+	);
+
+	// toggle events don't bubble, so these listen as they pass down to the popover
+	document.addEventListener(
+		"beforetoggle",
+		e => {
+			const button = e.newState === "open" && invokerOf(e.target);
+			if (button && anchorPositioning) anchor(button, e.target);
+		},
+		true
+	);
+
+	document.addEventListener(
+		"toggle",
+		e => {
+			const menu = e.target;
+			const button = invokerOf(menu);
+			if (!button) return;
+			const open = e.newState === "open";
+			button.setAttribute("aria-expanded", String(open));
+			if (!open) return;
+			if (!anchorPositioning) {
+				// shortcut: placed once the menu is shown, so it can be measured - it may appear in the
+				// wrong place for a frame first; hide it in beforetoggle if that ever shows
+				const style = getComputedStyle(menu);
+				const prop = name => style.getPropertyValue(name).trim();
+				place(
+					button,
+					menu,
+					menu.matches('[role="dialog"]')
+						? { side: prop("--sassy-popover-side") || "block-start" }
+						: {
+								side: prop("--sassy-dropdown-side") || "block-end",
+								align: prop("--sassy-dropdown-align") === "span-inline-start" ? "end" : "start"
+							}
+				);
+			}
+			if (menu.matches('[role="menu"]')) menuItems(menu)[0]?.focus();
+		},
+		true
+	);
+
+	document.addEventListener("keydown", e => {
+		const menu = e.target.closest?.('[role="menu"][popover]');
+		if (!menu) return;
+		// Tab leaves the menu: hiding it returns focus to the button, and Tab then moves on from there
+		if (e.key === "Tab") return menu.hidePopover();
+		const next = itemForKey(menuItems(menu), e.target, e.key, true);
+		if (next) {
+			e.preventDefault();
+			next.focus();
+		}
+	});
+
+	// choosing an item closes the menu - but not a popover (role="dialog"), whose buttons and links are content
+	document.addEventListener("click", e => {
+		const item = e.target.closest?.('a, button, [role="menuitem"]');
+		const menu = item?.closest("[popover]");
+		if (menu?.matches('[role="dialog"]')) return;
+		if (menu && !item.hasAttribute("popovertarget") && isOpen(menu) && invokerOf(menu)) menu.hidePopover();
+	});
+
+	//  =================================================================
 	//  Collapsible content
 	//  =================================================================
 
@@ -247,6 +373,125 @@
 			button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
 			sync(button);
 		}
+	});
+
+	//  =================================================================
+	//  Scrollspy: marks the link to the section in view
+	//  =================================================================
+
+	// A nav or list of #links, one of them with aria-current="location", follows the page: the link to the last
+	// section whose top has scrolled past a line near the top (--sassy-scrollspy-offset, 25% by default) gets
+	// aria-current="location", and the others lose it. At the very bottom, the last section is current.
+
+	const spied = new WeakSet();
+
+	/** The nearest ancestor that scrolls, or null for the page. */
+	const scroller = el => {
+		for (let p = el.parentElement; p && p !== document.body && p !== document.documentElement; p = p.parentElement) {
+			if (/auto|scroll/.test(getComputedStyle(p).overflowY) && p.scrollHeight > p.clientHeight) return p;
+		}
+		return null;
+	};
+
+	const initScrollspy = nav => {
+		if (spied.has(nav)) return;
+		spied.add(nav);
+		const links = [...nav.querySelectorAll('a[href^="#"]')]
+			.map(link => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
+			.filter(x => x.target);
+		if (!links.length) return;
+		const area = scroller(links[0].target);
+		const offset = getComputedStyle(nav).getPropertyValue("--sassy-scrollspy-offset").trim() || "25%";
+
+		const update = () => {
+			const top = area ? area.getBoundingClientRect().top : 0;
+			const height = area ? area.clientHeight : innerHeight;
+			const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+			const n = parseFloat(offset) || 0;
+			const line = top + (offset.endsWith("%") ? (height * n) / 100 : offset.endsWith("rem") ? n * rem : n);
+			const el = area ?? document.documentElement;
+			const atBottom = el.scrollTop > 0 && Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight;
+			const passed = links.filter(x => x.target.getBoundingClientRect().top <= line);
+			const current = atBottom ? links[links.length - 1] : (passed[passed.length - 1] ?? links[0]);
+			for (const x of links) {
+				if (x === current) x.link.setAttribute("aria-current", "location");
+				else x.link.removeAttribute("aria-current");
+			}
+		};
+
+		(area ?? window).addEventListener("scroll", update, { passive: true });
+		window.addEventListener("resize", update, { passive: true });
+		update();
+
+		// In a box that scrolls, following a link would scroll the page too, to bring the section to the top
+		// of the window: scroll only the box instead.
+		if (area) {
+			nav.addEventListener("click", e => {
+				const hit = links.find(x => x.link === e.target.closest?.("a"));
+				if (!hit || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+				e.preventDefault();
+				const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+				area.scrollBy({
+					top: hit.target.getBoundingClientRect().top - area.getBoundingClientRect().top,
+					behavior: smooth ? "smooth" : "auto"
+				});
+				history.pushState(null, "", hit.link.hash);
+			});
+		}
+	};
+
+	//  =================================================================
+	//  Carousels that play by themselves
+	//  =================================================================
+
+	// The slides element of a carousel with aria-live="off" rotates (the WAI-ARIA carousel pattern). A button with
+	// aria-pressed and aria-controls naming it pauses and restarts it, and aria-live is "polite" while it is paused,
+	// so screen readers read the slide people move to. It waits while the pointer is over the carousel, focus is in it,
+	// or the page is hidden, and it starts paused for reduced motion.
+
+	const playing = new WeakSet(); // slides elements set up to rotate
+
+	/** The pause buttons of a carousel's slides element. */
+	const pauseButtons = slides =>
+		[...document.querySelectorAll("button[aria-pressed][aria-controls]")].filter(b => b.getAttribute("aria-controls") === slides.id);
+
+	const setPaused = (slides, paused) => {
+		slides.setAttribute("aria-live", paused ? "polite" : "off");
+		pauseButtons(slides).forEach(b => b.setAttribute("aria-pressed", String(paused)));
+	};
+
+	/** Scrolls to the next slide, or back to the first from the end. */
+	const advance = slides => {
+		const rtl = getComputedStyle(slides).direction === "rtl";
+		const box = slides.getBoundingClientRect();
+		// how far a slide's start is past the start of the slides element
+		const start = el => {
+			const r = el.getBoundingClientRect();
+			return rtl ? box.right - r.right : r.left - box.left;
+		};
+		const items = [...slides.children];
+		const atEnd = Math.abs(slides.scrollLeft) + slides.clientWidth >= slides.scrollWidth - 1;
+		const next = atEnd ? items[0] : items.find(el => start(el) > 1);
+		if (next) slides.scrollBy({ left: rtl ? -start(next) : start(next), behavior: "smooth" });
+	};
+
+	const initCarousel = slides => {
+		if (playing.has(slides)) return;
+		playing.add(slides);
+		if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) setPaused(slides, true);
+		const region = slides.closest('[aria-roledescription="carousel"]') ?? slides;
+		const interval = getComputedStyle(slides).getPropertyValue("--sassy-carousel-interval").trim();
+		const ms = (parseFloat(interval) || 5) * (interval.endsWith("ms") ? 1 : 1000);
+		setInterval(() => {
+			const waiting = slides.getAttribute("aria-live") !== "off" || region.matches(":hover, :focus-within") || document.hidden;
+			if (!waiting) advance(slides);
+		}, ms);
+	};
+
+	document.addEventListener("click", e => {
+		const button = e.target.closest?.("button[aria-pressed][aria-controls]");
+		const slides = button && document.getElementById(button.getAttribute("aria-controls"));
+		if (slides && playing.has(slides)) setPaused(slides, button.getAttribute("aria-pressed") !== "true");
 	});
 
 	//  =================================================================
@@ -273,6 +518,21 @@
 	}
 
 	//  =================================================================
+	//  Closing dialogs from the backdrop: fallback for closedby="any"
+	//  =================================================================
+
+	if (!("closedBy" in HTMLDialogElement.prototype)) {
+		// a click on the backdrop is a click on the dialog itself, outside its box
+		document.addEventListener("click", e => {
+			const dialog = e.target;
+			if (!dialog.matches?.('dialog[closedby="any"]:modal')) return;
+			const r = dialog.getBoundingClientRect();
+			const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+			if (!inside) dialog.close();
+		});
+	}
+
+	//  =================================================================
 	//  Dismissing: command="--dismiss" hides the element named by commandfor
 	//  =================================================================
 
@@ -287,11 +547,13 @@
 	//  Start
 	//  =================================================================
 
-	/** Sets up the tab lists, toolbars and collapsible content in an element (the whole page by default). */
+	/** Sets up the tab lists, toolbars, collapsible content, carousels and scrollspy navs in an element (the whole page by default). */
 	const init = (root = document) => {
 		root.querySelectorAll('[role="tablist"]').forEach(initTabs);
 		root.querySelectorAll('[role="toolbar"]').forEach(initToolbar);
 		root.querySelectorAll(toggleSelector).forEach(sync);
+		root.querySelectorAll('[aria-roledescription="carousel"] [aria-live="off"]').forEach(initCarousel);
+		root.querySelectorAll('a[href^="#"][aria-current="location"]').forEach(link => initScrollspy(link.closest("nav, ul, ol") ?? link.parentElement));
 	};
 
 	window.Sassy = { init };

@@ -40,12 +40,12 @@ $sassy-input-padding-x: var(--sassy-input-padding-x, #{$sassy-padding-unit * 3})
 $sassy-input-border-width: var(--sassy-input-border-width, #{$sassy-border-width-unit});
 $sassy-input-radius: var(--sassy-input-radius, $sassy-radius);
 
-$sassy-input-colour: var(--sassy-input-colour, #{colour("grey", 800)});
-$sassy-input-bg: var(--sassy-input-bg, #fff);
-$sassy-input-border-colour: var(--sassy-input-border-colour, #{colour("grey", 300)});
-$sassy-input-placeholder-colour: var(--sassy-input-placeholder-colour, #{colour("grey", 500)});
-$sassy-input-disabled-bg: var(--sassy-input-disabled-bg, #{colour("grey", 100)});
-$sassy-input-readonly-bg: var(--sassy-input-readonly-bg, #{colour("grey", 50)});
+$sassy-input-colour: var(--sassy-input-colour, var(--sassy-body-colour));
+$sassy-input-bg: var(--sassy-input-bg, var(--sassy-surface));
+$sassy-input-border-colour: var(--sassy-input-border-colour, var(--sassy-line-strong));
+$sassy-input-placeholder-colour: var(--sassy-input-placeholder-colour, var(--sassy-muted));
+$sassy-input-disabled-bg: var(--sassy-input-disabled-bg, var(--sassy-surface-subtle));
+$sassy-input-readonly-bg: var(--sassy-input-readonly-bg, var(--sassy-surface-subtle));
 
 $sassy-input-focus-colour: var(--sassy-input-focus-colour, var(--sassy-theme-primary));
 $sassy-input-focus-ring: var(--sassy-input-focus-ring, 0.25rem);
@@ -61,19 +61,19 @@ $sassy-switch-knob-colour: var(--sassy-switch-knob-colour, $sassy-input-border-c
 // --sassy-input-colour should set this too, using chevron()
 $sassy-select-chevron: var(--sassy-select-chevron, #{chevron(colour("grey", 800))});
 
-$sassy-form-text-colour: var(--sassy-form-text-colour, #{colour("grey", 500)});
+$sassy-form-text-colour: var(--sassy-form-text-colour, var(--sassy-muted));
 
-$sassy-input-addon-bg: var(--sassy-input-addon-bg, #{colour("grey", 100)});
-$sassy-input-addon-hover-bg: var(--sassy-input-addon-hover-bg, #{colour("grey", 200)});
+$sassy-input-addon-bg: var(--sassy-input-addon-bg, var(--sassy-surface-subtle));
+$sassy-input-addon-hover-bg: var(--sassy-input-addon-hover-bg, var(--sassy-line));
 
 $sassy-floating-height: var(--sassy-floating-height, 3.5rem);
 $sassy-floating-padding-y: var(--sassy-floating-padding-y, 1rem);
 
-$sassy-range-track-colour: var(--sassy-range-track-colour, #{colour("grey", 200)});
+$sassy-range-track-colour: var(--sassy-range-track-colour, var(--sassy-line));
 $sassy-range-track-height: var(--sassy-range-track-height, 0.5rem);
 $sassy-range-thumb-colour: var(--sassy-range-thumb-colour, var(--sassy-theme-primary));
 $sassy-range-thumb-size: var(--sassy-range-thumb-size, 1rem);
-$sassy-range-disabled-colour: var(--sassy-range-disabled-colour, #{colour("grey", 400)});
+$sassy-range-disabled-colour: var(--sassy-range-disabled-colour, var(--sassy-disabled));
 
 // Check marks, used as masks - only their shape matters, the colour comes from
 // --sassy-check-mark-colour so it can change at runtime.

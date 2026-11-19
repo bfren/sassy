@@ -2,7 +2,7 @@
 @use "../4-utilities/450-rounded-variables" as *;
 
 $sassy-progress-height: var(--sassy-progress-height, 1rem);
-$sassy-progress-bg: var(--sassy-progress-bg, #{colour("grey", 200)});
+$sassy-progress-bg: var(--sassy-progress-bg, var(--sassy-line));
 $sassy-progress-bar-colour: var(--sassy-progress-bar-colour, var(--sassy-theme-primary));
 $sassy-progress-radius: var(--sassy-progress-radius, $sassy-radius);
 $sassy-progress-margin-bottom: var(--sassy-progress-margin-bottom, 1rem);

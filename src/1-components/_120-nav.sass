@@ -42,7 +42,8 @@
     @include make.single("nav-pills")
         --sassy-nav-link-radius: #{$sassy-radius}
         --sassy-nav-current-bg: var(--sassy-theme-primary)
-        --sassy-nav-current-colour: #fff
+        // the primary button's text, which colour modes change with the theme colour
+        --sassy-nav-current-colour: var(--sassy-btn-primary-colour, #fff)
 
     @include make.single("nav-underline")
         --sassy-nav-link-underline-width: 0.125rem

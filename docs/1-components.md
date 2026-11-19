@@ -1,41 +1,48 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and toasts, carousels that play by themselves, scrollspy and the arrow keys of dropdown menus need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
 ```
 
-`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does six things:
+`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does seven things:
 
 | Feature          | What `sassy.js` does                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Collapsible navs | Opens and closes what a button with `aria-expanded` and `aria-controls` controls                                          |
+| Scrollspy        | Moves `aria-current="location"` to the link of the section in view, in a nav where one link has it                        |
 | Tabs             | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
 | Toolbars         | Makes a toolbar one stop in the tab order, and moves between its controls with the arrow keys, Home and End               |
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
+| Dropdowns        | Updates `aria-expanded`, gives `role="menu"` its keys, and places menus in browsers without CSS anchor positioning        |
+| Popovers         | Updates `aria-expanded`, and places popovers in browsers without CSS anchor positioning                                   |
+| Offcanvas        | Closes a dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`                        |
+| Carousels        | Plays a carousel whose slides have `aria-live="off"`, with a pause button, waiting on hover and focus                     |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 | Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |
 
 The components rely on these browser features:
 
-| Feature                                  | Used by  | Baseline                                              | Without it                    |
-| ---------------------------------------- | -------- | ----------------------------------------------------- | ----------------------------- |
-| Popover API (`popover`)                  | Tooltips | Widely available, since April 2024                    | -                             |
-| `command` and `commandfor`               | Dialogs  | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour |
-| CSS anchor positioning (`position-area`) | Tooltips | Newly available, since January 2026                   | `sassy.js` places the tooltip |
+| Feature                                  | Used by                       | Baseline                                              | Without it                                  |
+| ---------------------------------------- | ----------------------------- | ----------------------------------------------------- | ------------------------------------------- |
+| Popover API (`popover`)                  | Tooltips, popovers, dropdowns | Widely available, since April 2024                    | -                                           |
+| `command` and `commandfor`               | Dialogs                       | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour               |
+| CSS anchor positioning (`position-area`) | Tooltips, popovers, dropdowns | Newly available, since January 2026                   | `sassy.js` places them                      |
+| `closedby="any"`                         | Offcanvas                     | Chrome 134, Firefox 141, not yet Safari               | `sassy.js` adds the behaviour               |
+| `::scroll-button`, `::scroll-marker`     | Carousels                     | Chrome 135; not yet Firefox or Safari                 | Swiped or scrolled, without buttons or dots |
 
 With `sassy.js`, everything works in every browser that supports popovers, which all major browsers have since April 2024.
 
-If you add tabs to the page after it has loaded, call `Sassy.init(element)` on the element that contains them. Tooltips and commands need no setup.
+If you add tabs, a carousel that plays or a scrollspy nav to the page after it has loaded, call `Sassy.init(element)` on the element that contains them. Tooltips and commands need no setup.
 
 ## Placeholders
 
@@ -88,10 +95,23 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-spinner`, `%bf-spinner-grow`                                                               | A ring that turns, or a dot that grows - see [Spinners](#spinners)                      |
 | `%bf-spinner-{theme colour}`, `%bf-spinner-small`                                               | A spinner in a theme colour, or small, combined with either                             |
 | `%bf-skeleton`                                                                                  | A faded block in place of content while it loads - see [Skeletons](#skeletons)          |
+| `%bf-toast`                                                                                     | A short message over the page, with a `<header>` title row - see [Toasts](#toasts)      |
+| `%bf-toast-autohide`                                                                            | Hides a toast after a delay, waiting while it is hovered or focused                     |
+| `%bf-toast-container`                                                                           | The stack toasts sit in, fixed to the bottom end corner                                 |
+| `%bf-toast-container-top`, `-start`, `-centre`                                                  | Moves the stack to the top, or to the start or centre                                   |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
+| `%bf-popover`                                                                                   | A panel of content in a popover (`role="dialog"`), opened by a `popovertarget` button   |
+| `%bf-popover-bottom`, `%bf-popover-start`, `%bf-popover-end`                                    | Opens below the button, or before or after it, rather than above                        |
+| `%bf-dropdown`                                                                                  | A menu in a popover (`popover`, opened by a `popovertarget` button)                     |
+| `%bf-dropdown-up`, `%bf-dropdown-end`                                                           | Opens above the button, or lines up with its end                                        |
+| `%bf-dropdown-header`, `%bf-dropdown-divider`                                                   | A label for a group of items, and a line between groups                                 |
+| `%bf-dropdown-toggle`, `%bf-dropdown-split`                                                     | A chevron after a button's text, or a chevron-only split button                         |
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
 | `%bf-dialog-title`                                                                              | The dialog's heading                                                                    |
+| `%bf-offcanvas-start`, `-end`, `-top`, `-bottom`                                                | With `%bf-dialog`, a panel that slides in from that edge                                |
+| `%bf-offcanvas-{breakpoint}`                                                                    | With a side, part of the page from that breakpoint up                                   |
+| `%bf-carousel`                                                                                  | A row of slides that scrolls and snaps - see [Carousels](#carousels)                    |
 
 ## Buttons
 
@@ -121,15 +141,15 @@ A button uses the form controls' padding, font size, line height, border and cor
 @layer sassy.base.components {
   .button {
     align-items: center;
-    background-color: var(--sassy-btn-bg, #fff);
-    border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, oklch(87.2% 0.01 258.338deg));
+    background-color: var(--sassy-btn-bg, var(--sassy-surface));
+    border: var(--sassy-input-border-width, 1px) solid var(--sassy-btn-border-colour, var(--sassy-line-strong));
     border-radius: var(--sassy-input-radius, var(--sassy-radius, 0.375rem));
     color: var(--sassy-btn-colour, var(--sassy-body-colour));
     display: inline-flex;
     padding: var(--sassy-input-padding-y, 0.375rem) var(--sassy-input-padding-x, 0.75rem);
   }
   .button:hover {
-    background-color: color-mix(in oklab, var(--sassy-btn-bg, #fff) 88%, var(--sassy-btn-shade, #000));
+    background-color: color-mix(in oklab, var(--sassy-btn-bg, var(--sassy-surface)) 88%, var(--sassy-btn-shade, #000));
   }
   .button-save {
     --sassy-btn-bg: var(--sassy-theme-primary);
@@ -422,6 +442,23 @@ The menu grows by animating its one grid row from `0fr` to `1fr`, so it needs a 
 
 Only use `role="tablist"` and the tab roles for tabs that switch panels on the page, not for navigation between pages.
 
+### Scrollspy
+
+A nav of links to sections of the page can follow the reading position. Give one of its links `aria-current="location"`, usually the first, and `sassy.js` then moves it to the link of the section in view as the page scrolls. Any nav, [list group](#list-groups) or [dropdown](#dropdowns) shows that link as current, so scrollspy needs no Sass of its own:
+
+```html
+<nav class="menu menu-vertical" aria-label="On this page">
+    <a href="#install" aria-current="location">Install</a>
+    <a href="#use">Use</a>
+    <a href="#help">Help</a>
+</nav>
+```
+
+- **The section in view** is the last one whose top has scrolled past a line a quarter of the way down the window. Move the line with `--sassy-scrollspy-offset` on the nav, as a percentage of the height, or in `px` or `rem`. At the very bottom of the page, the last section is in view, even if it is short.
+- **The links are found** in the nearest `<nav>`, `<ul>` or `<ol>` around the marked link, and each must point to an `id` on the page. If the sections are in a box that scrolls rather than the page, `sassy.js` follows that box, and its links scroll only the box rather than moving the page as well.
+- **To keep the nav in sight** while the page scrolls, extend `%bf-position-sticky` with a `top`, or put it beside a box that scrolls.
+- **Add it to the page later?** Call `Sassy.init(element)` on the element that contains it.
+
 ## Breadcrumbs
 
 A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf-breadcrumb` on the `<ol>`, and it styles the items:
@@ -446,7 +483,7 @@ A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf
     padding-inline: var(--sassy-breadcrumb-gap, 0.5rem);
   }
   .crumbs > [aria-current=page], .crumbs > li > [aria-current=page] {
-    color: var(--sassy-breadcrumb-current-colour, oklch(55.1% 0.027 264.364deg));
+    color: var(--sassy-breadcrumb-current-colour, var(--sassy-muted));
   }
 }
 ```
@@ -566,10 +603,10 @@ A list group is a bordered list. Its direct children are its items, so extend on
     overflow: hidden;
   }
   .inbox > * + * {
-    border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, oklch(92.8% 0.006 264.531deg));
+    border-block-start: var(--sassy-list-group-border-width, 1px) solid var(--sassy-list-group-border-colour, var(--sassy-line));
   }
   .inbox > :where(a, button):hover {
-    background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, #fff)));
+    background-color: var(--sassy-list-group-hover-bg, color-mix(in oklab, currentColor 6%, var(--sassy-list-group-bg, var(--sassy-surface))));
   }
   .inbox > [aria-current]:not([aria-current=false]) {
     background-color: var(--sassy-list-group-current-bg, var(--sassy-theme-primary));
@@ -605,11 +642,11 @@ An accordion is a `<div>` of native `<details>`, so the browser opens and closes
 ```css
 @layer sassy.base.components {
   .accordion {
-    border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+    border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, var(--sassy-line));
     interpolate-size: allow-keywords;
   }
   .accordion > details[open] > summary {
-    background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, #fff)));
+    background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, var(--sassy-surface))));
     color: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
   }
   .accordion > details::details-content {
@@ -754,8 +791,8 @@ An alert is a message box. A theme colour tints its background, border and text,
 ```css
 @layer sassy.base.components {
   .alert {
-    background-color: var(--sassy-alert-bg, oklch(96.7% 0.003 264.542deg));
-    border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, oklch(92.8% 0.006 264.531deg));
+    background-color: var(--sassy-alert-bg, var(--sassy-surface-subtle));
+    border: var(--sassy-alert-border-width, 1px) solid var(--sassy-alert-border-colour, var(--sassy-line));
     color: var(--sassy-alert-colour, currentColor);
     padding: var(--sassy-alert-padding-y, 1rem) var(--sassy-alert-padding-x, 1rem);
   }
@@ -804,7 +841,7 @@ A progress bar is a native `<progress>`, so browsers and screen readers already 
 @layer sassy.base.components {
   .progress {
     appearance: none;
-    background-color: var(--sassy-progress-bg, oklch(92.8% 0.006 264.531deg));
+    background-color: var(--sassy-progress-bg, var(--sassy-line));
     block-size: var(--sassy-progress-height, 1rem);
     border-radius: var(--sassy-progress-radius, var(--sassy-radius, 0.375rem));
   }
@@ -927,6 +964,55 @@ A skeleton is a faded block that stands in for content while it loads. It is one
 - **Skeletons in a line wrap like words**, so a 100% block followed by a 75% one makes two lines.
 - **A shimmer crosses each skeleton**, through a mask, so it works in any colour. It does not run for people who prefer reduced motion: the blocks stay a plain shade, which still reads as loading.
 
+## Toasts
+
+A toast is a short message that appears over the page, such as "Saved" or "Link copied". Toasts sit in a `%bf-toast-container`, which is fixed to the bottom end corner of the window and stacks them:
+
+```sass
+.toast-container
+    @extend %bf-toast-container
+
+.toast
+    @extend %bf-toast
+
+.toast-autohide
+    @extend %bf-toast-autohide
+```
+
+```css
+@layer sassy.base.components {
+  .toast-container {
+    align-items: var(--sassy-toast-container-inline, flex-end);
+    justify-content: var(--sassy-toast-container-block, flex-end);
+    pointer-events: none;
+    position: fixed;
+  }
+  .toast-autohide {
+    animation: bf-toast-hide var(--sassy-toast-fade, 0.5s) ease-in var(--sassy-toast-delay, 5s) forwards;
+  }
+}
+```
+
+```html
+<div class="toast-container" aria-live="polite">
+    <div class="toast toast-autohide" id="saved">
+        <header>
+            <strong>Saved</strong>
+            <small>just now</small>
+            <button type="button" class="close" commandfor="saved" command="--dismiss" aria-label="Close"></button>
+        </header>
+        <p>Your changes are saved to this device.</p>
+    </div>
+</div>
+```
+
+- **Put the container in the page, empty, with `aria-live="polite"`**, and add toasts to it from your script: screen readers then read each toast as it arrives. For an urgent message, give the toast `role="alert"` instead.
+- **A `<header>` the toast starts with is its title row.** Its first child takes the room, so anything after it, such as a time or a close button, sits at the end. A toast without a header is just its content.
+- **Close a toast** with a [close button](#close-buttons) that has `commandfor` naming the toast and `command="--dismiss"`: `sassy.js` sets `hidden` on it. A close button outside the header sits in the top corner.
+- **Extend `%bf-toast-autohide`** to hide the toast after `--sassy-toast-delay` (5 seconds), fading over `--sassy-toast-fade`. It waits while the pointer is over the toast or something in it has focus, so people have time to read and use it, and it hides without fading for reduced motion. This is CSS only: the hidden toast stays in the page, out of sight and out of the accessibility tree, so remove old toasts from your script if many build up. Don't auto-hide a toast that people need to act on.
+- **Extend `%bf-toast-container-top`** to stack toasts at the top, and **`%bf-toast-container-start`** or **`-centre`** to move them across. They combine.
+- **For a coloured toast**, extend a `%bf-text-bg-{theme colour}` utility with the toast.
+
 ## Tooltips
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
@@ -948,6 +1034,92 @@ CSS anchor positioning places the tooltip above its trigger, or below if there i
 Use `popover="manual"` rather than `popover`, so that showing a tooltip does not close another popover that is open, such as a menu.
 
 A tooltip should be a short description of something that already has a name. Touch screens have no hover, so do not put anything people need only in a tooltip.
+
+## Popovers
+
+A popover is a panel of content in a popover, opened by a button's `popovertarget`, like a [dropdown](#dropdowns). The browser opens and closes it, on Escape or a click outside too, and returns focus to the button, so it works without `sassy.js`. A heading it starts with is its title bar. CSS anchor positioning places it above the button, centred, and moves it when there is no room:
+
+```sass
+.popover
+    @extend %bf-popover
+
+.popover-end
+    @extend %bf-popover-end
+```
+
+```css
+@layer sassy.base.components {
+  .popover {
+    inset: auto;
+    margin: var(--sassy-popover-offset, 0.5rem);
+    position-area: var(--sassy-popover-side, block-start);
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+  .popover-end {
+    --sassy-popover-side: inline-end;
+  }
+}
+```
+
+```html
+<button type="button" class="button" popovertarget="hours">Opening hours</button>
+<div class="popover" id="hours" popover role="dialog" aria-labelledby="hours-title">
+    <h3 id="hours-title">Opening hours</h3>
+    <p>Monday to Friday, 9am to 5pm.</p>
+    <button type="button" class="close" popovertarget="hours" popovertargetaction="hide" aria-label="Close"></button>
+</div>
+```
+
+- **Give the popover `role="dialog"`** and name it with `aria-labelledby` (its heading) or `aria-label`. `sassy.js` then leaves it open when a link or button in it is clicked, where it would close a dropdown menu. It also keeps the button's `aria-expanded` up to date, and places the popover in browsers without CSS anchor positioning.
+- **Extend `%bf-popover-bottom` to open below the button, and `%bf-popover-start` or `%bf-popover-end` to open before or after it.** Each moves to the opposite side when there is no room.
+- **A close button** is a button with `popovertarget` naming the popover and `popovertargetaction="hide"`, such as a [close button](#close-buttons). It sits in the top corner, and the title leaves room for it.
+- **For text shown on hover and focus**, use a [tooltip](#tooltips). A popover only opens when its button is pressed, so it works on touch screens too.
+
+## Dropdowns
+
+A dropdown is a menu in a popover, opened by a button's `popovertarget`. The browser opens and closes it, on Escape or a click outside too, and returns focus to the button, so it works without `sassy.js`. CSS anchor positioning places it below the button, lined up with its start, and moves it when there is no room:
+
+```sass
+.dropdown
+    @extend %bf-dropdown
+
+.dropdown-toggle
+    @extend %bf-dropdown-toggle
+
+.dropdown-divider
+    @extend %bf-dropdown-divider
+```
+
+```css
+@layer sassy.base.components {
+  .dropdown {
+    inset: auto;
+    margin: var(--sassy-dropdown-offset, 0.125rem) 0;
+    position-area: var(--sassy-dropdown-side, block-end) var(--sassy-dropdown-align, span-inline-end);
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+  [aria-expanded=true].dropdown-toggle::after {
+    transform: rotate(180deg);
+  }
+}
+```
+
+```html
+<button type="button" class="button dropdown-toggle" popovertarget="file-menu" aria-haspopup="menu">File</button>
+<div class="dropdown" id="file-menu" popover role="menu" aria-label="File">
+    <button type="button" role="menuitem">New</button>
+    <button type="button" role="menuitem">Open…</button>
+    <hr class="dropdown-divider" />
+    <button type="button" role="menuitem">Print…</button>
+</div>
+```
+
+- **Choose the pattern by what the items do.** For actions, give the popover `role="menu"`, its items `role="menuitem"` and the button `aria-haspopup="menu"`: `sassy.js` then focuses the first item when the menu opens, and moves between items with the arrow keys, Home and End. For links to other pages, leave the roles out: people reach the links with Tab, as in any list, and the popover can be a `<ul>`.
+- **`sassy.js` also** keeps the button's `aria-expanded` up to date, which turns the chevron of `%bf-dropdown-toggle`, closes the menu when an item is chosen or Tab leaves it, and places the menu in browsers without CSS anchor positioning.
+- **Extend `%bf-dropdown-up` to open above the button, and `%bf-dropdown-end` to line the menu up with its end.** They combine.
+- **Group items** with `%bf-dropdown-header`, a label that can't be chosen, and `%bf-dropdown-divider`, on an `<hr>`. Mark the current page with `aria-current="page"`, and items that can't be used with `disabled` or `aria-disabled="true"`.
+- **For a split button**, put an action button and a chevron-only button that extends `%bf-dropdown-toggle` and `%bf-dropdown-split` in a [button group](#button-groups). Give the chevron button an `aria-label`, such as "More ways to publish".
+- **In a navbar**, a link-styled button can open a dropdown in the same way. The menu floats below it even while the navbar is collapsed.
 
 ## Dialogs
 
@@ -1017,6 +1189,138 @@ The dialog is a column with a maximum height, so when its content is taller than
 
 `dialog.show()` opens a dialog without a backdrop, as part of the page. It uses the same styles.
 
+## Offcanvas
+
+An offcanvas is a [dialog](#dialogs) that slides in from one edge of the window, full height or full width, such as a menu or a basket. Extend `%bf-offcanvas-start`, `-end`, `-top` or `-bottom` with `%bf-dialog`, and use the dialog's header, title, body and footer inside it:
+
+```sass
+.offcanvas-start
+    @extend %bf-offcanvas-start
+```
+
+```css
+@layer sassy.base.components {
+  .offcanvas-start {
+    --sassy-offcanvas-from: -100% 0;
+    inset: auto;
+    inset-inline-start: 0;
+    translate: var(--sassy-offcanvas-from);
+  }
+  [open].offcanvas-start {
+    animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+    translate: none;
+  }
+}
+```
+
+```html
+<button type="button" commandfor="menu" command="show-modal">Menu</button>
+
+<dialog class="dialog offcanvas-start" id="menu" closedby="any" aria-labelledby="menu-title">
+    <header>
+        <h2 id="menu-title">Menu</h2>
+        <button type="button" class="close" commandfor="menu" command="close" aria-label="Close"></button>
+    </header>
+    <div class="dialog-body">
+        <p>…</p>
+    </div>
+</dialog>
+```
+
+- **It is a modal dialog**, so the browser puts it over a backdrop, makes the page behind it inert, closes it on Escape, and returns focus to the button that opened it. The page behind it does not scroll.
+- **`closedby="any"` closes it when the backdrop is clicked.** `sassy.js` does this in browsers that don't support `closedby` yet.
+- **It slides in and out**, and the backdrop fades. With reduced motion it appears at once. `--sassy-offcanvas-width` sets the width of a start or end offcanvas, and `--sassy-offcanvas-height` the height of a top or bottom one.
+- **Start and end follow the text direction**, so in right-to-left text a start offcanvas comes in from the right.
+
+### In the page from a breakpoint
+
+With `%bf-offcanvas-{breakpoint}` as well, a closed offcanvas is part of the page from that breakpoint up - a sidebar on wide screens that is an offcanvas on narrow ones. It loses its backdrop styles, shadow and border, and its `command="close"` buttons are hidden. Hide the button that opens it at the same breakpoint, with `%bf-d-none-{breakpoint}`:
+
+```sass
+.offcanvas-md
+    @extend %bf-offcanvas-md
+```
+
+```css
+@layer sassy.base.components {
+  @media (width >= 768px) {
+    .offcanvas-md:not(:modal) {
+      display: flex;
+      position: static;
+    }
+    .offcanvas-md:not(:modal) button[command=close] {
+      display: none;
+    }
+  }
+}
+```
+
+```html
+<button type="button" class="d-none-md" commandfor="filters" command="show-modal">Filters</button>
+
+<dialog class="dialog offcanvas-start offcanvas-md" id="filters" closedby="any" aria-labelledby="filters-title">
+    …
+</dialog>
+```
+
+If the window is widened while the offcanvas is open, it stays a modal until it is closed.
+
+## Carousels
+
+A carousel is a row of slides that scrolls sideways and snaps to each one. Extend `%bf-carousel` on the element that scrolls: its children are the slides. In browsers that support `::scroll-button` and `::scroll-marker`, CSS adds previous and next buttons on its edges and a row of dots under it; in others, people swipe or scroll it:
+
+```sass
+.carousel
+    @extend %bf-carousel
+```
+
+```css
+@layer sassy.base.components {
+  .carousel {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    scroll-marker-group: after;
+    scroll-snap-type: x mandatory;
+  }
+  .carousel > * {
+    scroll-snap-align: start;
+  }
+}
+```
+
+```html
+<section aria-roledescription="carousel" aria-label="Features">
+    <div class="carousel" tabindex="0">
+        <div role="group" aria-roledescription="slide" aria-label="1 of 3">…</div>
+        <div role="group" aria-roledescription="slide" aria-label="2 of 3">…</div>
+        <div role="group" aria-roledescription="slide" aria-label="3 of 3">…</div>
+    </div>
+</section>
+```
+
+- **Follow the ARIA carousel pattern:** wrap it in an element with `aria-roledescription="carousel"` and an `aria-label`, and give each slide `role="group"`, `aria-roledescription="slide"` and an `aria-label` saying where it is, such as "2 of 3". The dots are named after the slides' labels.
+- **`tabindex="0"`** lets people scroll it with the arrow keys in every browser; Chromium makes it focusable without it.
+- **`--sassy-carousel-per-view`** sets how many slides show at once (1 by default), with `--sassy-carousel-gap` between them. Set it in a media query to show more on wider screens.
+- **The previous and next buttons** are greyed out at the first and last slide, and the current dot is solid and longer than the others. The arrows are the text in `$sassy-carousel-previous` and `$sassy-carousel-next`, mirrored in right-to-left text.
+
+### Playing by itself
+
+Give the slides element `aria-live="off"` and an `id`, and a button with `aria-controls` naming it and `aria-pressed="false"`, and `sassy.js` moves the carousel on every `--sassy-carousel-interval` (5 seconds), back to the first slide from the last:
+
+```html
+<section aria-roledescription="carousel" aria-label="News">
+    <button type="button" aria-controls="news" aria-pressed="false">Pause</button>
+    <div class="carousel" id="news" aria-live="off" tabindex="0">
+        …
+    </div>
+</section>
+```
+
+- **The button pauses it** (`aria-pressed="true"`) and starts it again. Put it first in the carousel, so keyboard users reach it before the slides. While it is paused, `sassy.js` sets `aria-live="polite"`, so screen readers read each slide people move to; while it plays they don't, so they aren't interrupted.
+- **It waits** while the pointer is over the carousel, something in it has focus, or the page is hidden. With reduced motion it starts paused, and plays only if the button is pressed.
+- **Add it to the page later?** Call `Sassy.init(element)` on the element that contains it.
+
 ## Settings and custom properties
 
 | Property                                                                                                                             | Controls                                                                                          |
@@ -1063,28 +1367,42 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-progress-margin-bottom`                                                                                                     | Space below a progress bar or stacked bars                                                        |
 | `--sassy-spinner-size`, `--sassy-spinner-width`, `--sassy-spinner-colour`                                                            | Spinner size, ring width and colour - the theme colours and `-small` set them                     |
 | `--sassy-skeleton-colour`, `--sassy-skeleton-opacity`, `--sassy-skeleton-radius`                                                     | Skeleton colour, how faded it is, and its corners                                                 |
+| `--sassy-toast-bg`, `--sassy-toast-colour`, `--sassy-toast-radius`, `--sassy-toast-shadow`                                           | Toast background, text, corners and shadow                                                        |
+| `--sassy-toast-border-width`, `--sassy-toast-border-colour`                                                                          | The border, and the line under the title row                                                      |
+| `--sassy-toast-font-size`, `--sassy-toast-width`, `--sassy-toast-padding-y`, `--sassy-toast-padding-x`                               | Toast text size, width and padding                                                                |
+| `--sassy-toast-delay`, `--sassy-toast-fade`                                                                                          | How long `%bf-toast-autohide` waits, and how long it takes to fade                                |
+| `--sassy-toast-container-offset`, `--sassy-toast-container-gap`, `--sassy-toast-container-z-index`                                   | The stack's gap from the window's edges, the gap between toasts, and what it sits above           |
+| `--sassy-toast-container-block`, `--sassy-toast-container-inline`                                                                    | Where the stack sits - `-top`, `-start` and `-centre` set them                                    |
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |
+| `--sassy-popover-bg`, `--sassy-popover-colour`, `--sassy-popover-radius`, `--sassy-popover-shadow`                                   | Popover background, text, corners and shadow                                                      |
+| `--sassy-popover-border-width`, `--sassy-popover-border-colour`                                                                      | The border, and the line under the title                                                          |
+| `--sassy-popover-font-size`, `--sassy-popover-max-width`, `--sassy-popover-offset`                                                   | Text size, width, and gap from the button                                                         |
+| `--sassy-popover-padding-y`, `--sassy-popover-padding-x`                                                                             | Popover padding                                                                                   |
+| `--sassy-popover-header-bg`, `--sassy-popover-header-font-size`                                                                      | The title bar: the heading a popover starts with                                                  |
+| `--sassy-popover-side`                                                                                                               | Where the popover opens - `-bottom`, `-start` and `-end` set it                                   |
+| `--sassy-dropdown-bg`, `--sassy-dropdown-colour`, `--sassy-dropdown-radius`, `--sassy-dropdown-shadow`                               | Dropdown background, text, corners and shadow                                                     |
+| `--sassy-dropdown-border-width`, `--sassy-dropdown-border-colour`                                                                    | The border, and the line of a divider                                                             |
+| `--sassy-dropdown-min-width`, `--sassy-dropdown-offset`, `--sassy-dropdown-padding-y`                                                | Width, gap from the button, and space above and below the items                                   |
+| `--sassy-dropdown-item-padding-y`, `--sassy-dropdown-item-padding-x`                                                                 | Item padding                                                                                      |
+| `--sassy-dropdown-hover-bg`, `--sassy-dropdown-current-bg`, `--sassy-dropdown-current-colour`                                        | An item under the pointer or with focus, and the current item                                     |
+| `--sassy-dropdown-disabled-colour`, `--sassy-dropdown-header-colour`                                                                 | Items that can't be used, and headers                                                             |
+| `--sassy-dropdown-side`, `--sassy-dropdown-align`                                                                                    | Where the menu opens - `%bf-dropdown-up` and `-end` set them                                      |
 | `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                                                     |
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
+| `--sassy-offcanvas-width`, `--sassy-offcanvas-height`                                                                                | Width of a start or end offcanvas, and height of a top or bottom one                              |
+| `--sassy-offcanvas-duration`                                                                                                         | How long it takes to slide in or out                                                              |
+| `--sassy-carousel-per-view`, `--sassy-carousel-gap`                                                                                  | How many slides show at once, and the gap between them                                            |
+| `--sassy-carousel-interval`                                                                                                          | How often a carousel that plays moves on (5s) - read by `sassy.js`                                |
+| `--sassy-carousel-button-size`, `--sassy-carousel-button-offset`                                                                     | Size of the previous and next buttons, and their gap from the edge                                |
+| `--sassy-carousel-button-bg`, `--sassy-carousel-button-colour`, `--sassy-carousel-button-shadow`                                     | The buttons' background, arrow and shadow                                                         |
+| `--sassy-carousel-marker-size`, `--sassy-carousel-marker-colour`                                                                     | The dots under the slides                                                                         |
+| `--sassy-scrollspy-offset`                                                                                                           | How far down the window a section must scroll to be current (25%) - read by `sassy.js`            |
 
 Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-accordion-duration` sets how long accordions take to open, and `$sassy-accordion-icon` their chevron. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. `$sassy-skeleton-duration` sets how long the shimmer takes. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 
-```sass
-@use "sassy/src" as sassy
-
-@media (prefers-color-scheme: dark)
-    :root
-        --sassy-card-bg: #{sassy.colour("grey", 900)}
-        --sassy-card-border-colour: #{sassy.colour("grey", 700)}
-        --sassy-card-cap-bg: #{sassy.colour("grey", 800)}
-        --sassy-dialog-bg: #{sassy.colour("grey", 900)}
-        --sassy-dialog-border-colour: #{sassy.colour("grey", 700)}
-        --sassy-nav-link-hover-bg: #{sassy.colour("grey", 800)}
-        --sassy-tooltip-bg: #{sassy.colour("grey", 100)}
-        --sassy-tooltip-colour: #{sassy.colour("grey", 900)}
-```
+Components take their neutral colours from Sassy's colour roles, so extending `%bf-theme-dark` (or `%bf-theme-auto`) on `html` or a section switches them all - see [5-theme](5-theme.md#light-and-dark). Set a component's own property to change just that component, as before.

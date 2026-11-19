@@ -1,0 +1,22 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/460-shadow-variables" as *;
+
+// How many slides show at once, and the gap between them
+$sassy-carousel-per-view: var(--sassy-carousel-per-view, 1);
+$sassy-carousel-gap: var(--sassy-carousel-gap, 1rem);
+
+// The previous and next buttons, where browsers draw them (::scroll-button)
+$sassy-carousel-button-size: var(--sassy-carousel-button-size, 2.5rem);
+$sassy-carousel-button-offset: var(--sassy-carousel-button-offset, 0.5rem);
+$sassy-carousel-button-bg: var(--sassy-carousel-button-bg, var(--sassy-surface));
+$sassy-carousel-button-colour: var(--sassy-carousel-button-colour, var(--sassy-body-colour));
+$sassy-carousel-button-shadow: var(--sassy-carousel-button-shadow, 0 0.25rem 0.5rem #{with-alpha(colour("grey", 950), 0.2)});
+
+// The dots under the slides, where browsers draw them (::scroll-marker) - the current one is solid and longer, the rest half faded
+$sassy-carousel-marker-size: var(--sassy-carousel-marker-size, 0.625rem);
+$sassy-carousel-marker-colour: var(--sassy-carousel-marker-colour, var(--sassy-body-colour));
+
+// The arrows on the buttons, as text - they are mirrored in right-to-left text
+$sassy-carousel-previous: "\2039" !default;
+$sassy-carousel-next: "\203A" !default;

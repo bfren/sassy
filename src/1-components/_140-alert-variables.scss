@@ -2,10 +2,10 @@
 @use "../4-utilities/420-colour-variables" as *;
 @use "../4-utilities/450-rounded-variables" as *;
 
-$sassy-alert-bg: var(--sassy-alert-bg, #{colour("grey", 100)});
+$sassy-alert-bg: var(--sassy-alert-bg, var(--sassy-surface-subtle));
 $sassy-alert-colour: var(--sassy-alert-colour, currentColor);
 $sassy-alert-border-width: var(--sassy-alert-border-width, 1px);
-$sassy-alert-border-colour: var(--sassy-alert-border-colour, #{colour("grey", 200)});
+$sassy-alert-border-colour: var(--sassy-alert-border-colour, var(--sassy-line));
 $sassy-alert-radius: var(--sassy-alert-radius, $sassy-radius);
 $sassy-alert-padding-y: var(--sassy-alert-padding-y, #{$sassy-padding-unit * 4});
 $sassy-alert-padding-x: var(--sassy-alert-padding-x, #{$sassy-padding-unit * 4});

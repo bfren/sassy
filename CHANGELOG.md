@@ -2,6 +2,31 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- A "Coming from Bootstrap" guide, [docs/bootstrap.md](docs/bootstrap.md): what Sassy does differently, and the placeholder or HTML for each Bootstrap 5.3 class and `data-bs-*` attribute. The README has a short summary.
+- Colour modes: `%bf-theme-dark` switches an element, such as `html` or a section, and everything in it to dark colours, `%bf-theme-light` switches back, and `%bf-theme-auto` follows the visitor's system setting. Each sets the colour roles, the theme colours, the element's background and text, `color-scheme` and the select chevron. The dark set lifts `primary`, `secondary`, `ok` and `error` to lighter shades, with their `-contrast` worked out again, and button text and the check mark follow it.
+- Colour roles on `:root`: `--sassy-body-bg`, `--sassy-surface`, `--sassy-surface-subtle`, `--sassy-line`, `--sassy-line-strong`, `--sassy-muted` and `--sassy-disabled`. Component, form and content colours now default to them, so setting one changes every component that uses it. The light and dark values are `$sassy-roles-light` / `-dark`, and the theme colours `$sassy-theme-light` / `-dark`.
+- Dropdowns: `%bf-dropdown` styles a popover menu opened by a `popovertarget` button, placed below it by CSS anchor positioning. `-up` and `-end` change where it opens, `-header` and `-divider` group its items, `%bf-dropdown-toggle` adds a chevron to the button, and `%bf-dropdown-split` makes the chevron button of a split button.
+- Scrollspy: in a nav or list of links to sections where one link has `aria-current="location"`, `sassy.js` moves it to the link of the section in view as the page, or the box the sections are in, scrolls. `--sassy-scrollspy-offset` sets how far down a section must be. In a box that scrolls, the links scroll only the box, not the page. Navs, list groups and dropdowns already show the link as current.
+- Carousels: `%bf-carousel` makes its children a row of slides that scrolls sideways and snaps to each one, `--sassy-carousel-per-view` at a time. Where browsers support `::scroll-button` and `::scroll-marker`, it has previous and next buttons and a row of dots, with no script.
+- `sassy.js` plays a carousel whose slides element has `aria-live="off"`, every `--sassy-carousel-interval`, with a pause button (`aria-pressed` and `aria-controls`), waiting while it is hovered or focused, and starting paused for reduced motion.
+- Toasts: `%bf-toast` styles a short message, with a `<header>` it starts with as its title row, closed by a `--dismiss` close button. `%bf-toast-container` stacks toasts in a corner of the window, moved by `-top`, `-start` and `-centre`, and `%bf-toast-autohide` hides a toast after a delay with CSS alone, waiting while it is hovered or focused.
+- Popovers: `%bf-popover` styles a panel of content in a popover opened by a `popovertarget` button, placed above it by CSS anchor positioning, with the heading it starts with as a title bar and a `popovertargetaction="hide"` button in its top corner. `-bottom`, `-start` and `-end` change where it opens.
+- `sassy.js` places popovers in browsers without CSS anchor positioning, on any side, and leaves a popover with `role="dialog"` open when a link or button in it is clicked.
+- Offcanvas: `%bf-offcanvas-start`, `-end`, `-top` and `-bottom` turn a `%bf-dialog` into a panel that slides in from that edge of the window, opened as a modal with `command="show-modal"`. With `%bf-offcanvas-{breakpoint}`, it is part of the page from that breakpoint up, such as a sidebar.
+- `sassy.js` closes a modal dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`.
+- `sassy.js` keeps a `popovertarget` button's `aria-expanded` up to date, gives `role="menu"` its arrow keys, Home, End and Tab, closes a menu when an item is chosen, and places menus in browsers without CSS anchor positioning.
+
+### Changed
+
+- A few default colours moved to the nearest colour role: card caps and read-only inputs from `grey-50` to `grey-100`; form help text, input placeholders and the current breadcrumb from `grey-500` to `grey-600`; and the text of dropdowns, popovers, toasts and carousel controls from `grey-900` to the body colour, `grey-800`.
+- Outline buttons in a light theme colour (`ok`, `info`, `warn`, `grey-light`) mix it with the body text colour rather than with the button's dark text, so they stay readable on a dark background.
+- The current link of `%bf-nav-pills` uses the primary button's text colour, `--sassy-btn-primary-colour`, rather than always white.
+- The theme properties on `:root` are output with `:where(:root)`, so any selector that sets them, even `html`, wins.
+
 ## [0.4.0] - 2026-11-19
 
 > **Upgrading from 0.3.0.** Sassy now needs Dart Sass 1.108 or later, and outputs everything in cascade layers. Your own unlayered CSS now beats Sassy's whatever its specificity, so to keep Sassy's rules on top, put your CSS in a layer after it, for example `@layer reset, sassy, app;`. Also check for these renames: `%bf-dialog-close` is now `%bf-close`, `%bf-text-wrap-hover` is now `%bf-text-truncate`, `make-passes()` is now `make-layers()`, and if you load files directly, the forms and components folders and some component files have moved. If your own CSS reads a `--sassy-*` property such as `var(--sassy-radius)`, read its Sass variable instead. Each change is listed under Changed.
