@@ -17,7 +17,7 @@ Sassy was inspired by Bootstrap, and covers most of what Bootstrap 5.3 offers: c
 
 ## Mapping
 
-The tables give Bootstrap's class and the Sassy placeholder to extend instead. Where a Bootstrap component needs classes on its children, Sassy often styles them from the parent, so the children need none - the [components page](1-components.md) shows the markup each one expects.
+The tables give Bootstrap's class and the Sassy placeholder to extend instead. Where a Bootstrap component needs classes on its children, Sassy often styles them from the parent, so the children need none - the [components page](1-components/README.md) shows the markup each one expects.
 
 ### Layout and grid
 

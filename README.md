@@ -238,7 +238,7 @@ The prefix keeps Sassy's placeholders apart from your own and from other librari
 
 ### Theming
 
-Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime. For dark mode, extend `%bf-theme-dark` on `html` or a section, or `%bf-theme-auto` to follow the visitor's system - components and forms take their neutral colours from a few colour roles, such as `--sassy-surface` and `--sassy-line`, which these switch together with the theme colours (see [5-theme](docs/5-theme.md#light-and-dark)):
+Colours, fonts, the radius, the grid gutter and form styles are CSS custom properties, so you can change them per site, per section or at runtime. For dark mode, extend `%bf-theme-dark` on `html` or a section, or `%bf-theme-auto` to follow the visitor's system - components and forms take their neutral colours from a few colour roles, such as `--sassy-surface` and `--sassy-line`, which these switch together with the theme colours (see [5-theme](docs/5-theme/500-theme.md#light-and-dark)):
 
 ```sass
 html
@@ -355,7 +355,7 @@ Component placeholders style whole interface elements, and they output before fo
 | `%bf-offcanvas-start`, `-end`, `-top`, `-bottom`, `-{breakpoint}`                                       | A dialog that slides in from one edge, or is in the page from a breakpoint             |
 | `%bf-carousel`                                                                                          | Slides that scroll and snap, with CSS buttons and dots where supported, and can play   |
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script: popovers and dropdowns open with `popovertarget`, and dialogs with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses, dismissible alerts and toasts, carousels that play by themselves, scrollspy and the arrow keys of dropdown menus need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` and `closedby` support and tooltip, popover and dropdown positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script: popovers and dropdowns open with `popovertarget`, and dialogs with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses, dismissible alerts and toasts, carousels that play by themselves, scrollspy and the arrow keys of dropdown menus need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` and `closedby` support and tooltip, popover and dropdown positioning to browsers that lack them. [docs/1-components](docs/1-components/README.md) has a page for each one, with the markup it expects.
 
 ## Limitations
 

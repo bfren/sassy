@@ -6,6 +6,18 @@ Live examples: [https://bfren.github.io/sassy/2-forms.html](https://bfren.github
 
 Forms are composites, so they output before the grid and utilities, and after components, as an input group styles the buttons inside it. A single-purpose utility such as `%bf-mb-3` always overrides a form placeholder's margin.
 
+## Pages
+
+- [Labels and help text](210-label.md)
+- [Text inputs](220-control.md)
+- [Selects](230-select.md)
+- [Checkboxes and radios](240-check.md)
+- [Switches](250-switch.md)
+- [Input groups](260-input-group.md)
+- [Floating labels](270-floating.md)
+- [Range, file and colour inputs](280-inputs.md)
+- [Validation](290-validation.md)
+
 ## Placeholders
 
 | Placeholder                                            | For                                                                    |
@@ -31,215 +43,6 @@ Form placeholders have no breakpoint variants.
 
 Sizes are `small` and `large`, not `sm` and `lg`, which are breakpoints. A size only changes custom properties, so extend it alongside the base placeholder: `%bf-form-control` and `%bf-form-control-small`. A size also works on any control, and on an input group, where everything inside follows it.
 
-## Worked examples
-
-### A labelled text field with help text
-
-```sass
-@use "sassy/src" as sassy
-
-.field
-    @extend %bf-mb-3
-
-    label
-        @extend %bf-form-label
-
-    input
-        @extend %bf-form-control
-
-    .field-text
-        @extend %bf-form-text
-```
-
-```html
-<div class="field">
-    <label for="name">Name</label>
-    <input type="text" id="name" />
-    <div class="field-text">Your full name, as it appears on your passport.</div>
-</div>
-```
-
-```css
-@layer sassy.base.forms {
-  .field label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-  }
-  .field input {
-    display: block;
-    width: 100%;
-    /* …other control rules */
-  }
-}
-
-@layer sassy.base.utilities {
-  .field {
-    margin-bottom: 0.75rem;
-  }
-}
-```
-
-### A small control
-
-Extend the size placeholder as well as the base placeholder, on any control:
-
-```sass
-.compact
-    input
-        @extend %bf-form-control
-        @extend %bf-form-control-small
-
-    select
-        @extend %bf-form-select
-        @extend %bf-form-select-small
-```
-
-### Checkboxes and radios
-
-Put the input first, then the label, and any help text after them, inside the element that extends `%bf-form-check`. Long labels wrap beside the input, and help text lines up under the label:
-
-```sass
-.check
-    @extend %bf-form-check
-
-    input
-        @extend %bf-form-check-input
-
-    label
-        @extend %bf-form-check-label
-```
-
-```html
-<div class="check">
-    <input type="checkbox" id="news" />
-    <label for="news">Send me the newsletter</label>
-    <div class="field-text">About once a month.</div>
-</div>
-```
-
-For checks that sit side by side, extend `%bf-form-check-inline` on the wrapper instead.
-
-### A switch
-
-Extend `%bf-form-switch` on a checkbox with `role="switch"`, so assistive technology announces it as a switch:
-
-```sass
-.toggle
-    @extend %bf-form-switch
-```
-
-```html
-<input type="checkbox" role="switch" id="notify" class="toggle" />
-<label for="notify">Notifications</label>
-```
-
-### Input groups
-
-The group holds the controls and add-ons directly. Put feedback after the group, not inside it, so it shows when any control in the group is invalid:
-
-```sass
-.search
-    @extend %bf-input-group
-
-    input
-        @extend %bf-form-control
-
-    span
-        @extend %bf-input-group-text
-```
-
-```sass
-.search-feedback
-    @extend %bf-form-feedback-invalid
-```
-
-```html
-<div class="search">
-    <span>£</span>
-    <input type="number" id="amount" required aria-invalid="true" />
-    <button type="button">Add</button>
-</div>
-<div class="search-feedback">Enter an amount in pounds.</div>
-```
-
-### Floating labels
-
-The control comes first and the label after it, and the control needs `placeholder=" "`. An empty placeholder is how CSS tells that the control has no value:
-
-```sass
-.floating
-    @extend %bf-form-floating
-
-    input
-        @extend %bf-form-control
-```
-
-```html
-<div class="floating">
-    <input type="email" id="email" placeholder=" " />
-    <label for="email">Email address</label>
-</div>
-```
-
-### Range, file and colour inputs
-
-```sass
-.slider
-    @extend %bf-form-range
-
-.upload
-    @extend %bf-form-file
-
-.swatch
-    @extend %bf-form-colour
-```
-
-Their colours come from `--sassy-range-*`, `--sassy-input-*` and `--sassy-theme-primary`. Each browser has its own pseudo-elements for these controls, which Sassy sets separately for each one.
-
-### Validation
-
-There are three ways to show that a control is invalid:
-
-1. **The browser's own check.** `:user-invalid` applies once someone has interacted with the field. Nothing to add in markup beyond `required`, `type` and so on.
-2. **The server's result.** Set `aria-invalid="true"` on the control. Screen readers announce it too, so use this for errors found on the server.
-3. **An explicit state.** Extend `%bf-form-control-invalid` or `%bf-form-control-valid`, for example from a script that knows the result.
-
-Feedback follows the control as a sibling. Invalid feedback is hidden until the control before it is invalid, so you can render it up front. Valid feedback always shows, so render it only when the field is valid:
-
-```sass
-.field
-    input
-        @extend %bf-form-control
-
-    .error
-        @extend %bf-form-feedback-invalid
-
-    .ok
-        @extend %bf-form-feedback-valid
-```
-
-```html
-<div class="field">
-    <input type="email" id="email" required aria-invalid="true" />
-    <div class="error">Please enter a valid email address.</div>
-</div>
-```
-
-The same placeholder works after an input group, because the feedback looks for an invalid control inside the element before it.
-
-### Select chevron in a dark theme
-
-Selects draw their chevron as an SVG image, which cannot read custom properties. `%bf-theme-light`, `-dark` and `-auto` set it for their text colour. If you change `--sassy-input-colour` yourself, set `--sassy-select-chevron` to match with `chevron()`, which takes a Sass colour, not `var()`:
-
-```sass
-@use "sassy/src" as sassy
-
-@media (prefers-color-scheme: dark)
-    :root
-        --sassy-input-colour: #{sassy.colour("grey", 100)}
-        --sassy-select-chevron: #{sassy.chevron(sassy.colour("grey", 100))}
-```
-
 ## Settings and custom properties
 
 Every form value is a custom property, so you can change it per site, per section or at runtime. Its default is the fallback in the `var()` that reads it, so it is only in your CSS when you extend a control that uses it. The main groups:
@@ -261,7 +64,7 @@ Every form value is a custom property, so you can change it per site, per sectio
 | `--sassy-range-track-colour`, `--sassy-range-track-height`, `--sassy-range-thumb-colour`, `--sassy-range-thumb-size`, `--sassy-range-disabled-colour` | Range sliders                                |
 | `--sassy-select-chevron`                                                                                                                              | The select's chevron image (use `chevron()`) |
 
-The sizes `small` and `large` are defined in `$sassy-input-sizes` in [`src/2-forms/_200-variables.scss`](../src/2-forms/_200-variables.scss), and the check and switch shapes in `$sassy-check-tick`, `$sassy-check-dash` and `$sassy-check-dot`.
+The sizes `small` and `large` are defined in `$sassy-input-sizes` in [`src/2-forms/_200-variables.scss`](../../src/2-forms/_200-variables.scss), and the check and switch shapes in `$sassy-check-tick`, `$sassy-check-dash` and `$sassy-check-dot`.
 
 Colours accept any CSS colour, including `oklch()`, `rgb()` and another custom property. The exception is the chevron, which must be an SVG built with `chevron()`.
 
@@ -269,4 +72,4 @@ Colours accept any CSS colour, including `oklch()`, `rgb()` and another custom p
 
 - **Customisable selects are not yet supported.** `appearance: base-select` gives full control over the open list, but it is not yet in Firefox or Safari.
 - **Open select lists** can use a different font in some browsers. Firefox on desktop is one under review. Browsers that draw the list with their native menu ignore the option font.
-- The [README](../README.md#limitations) lists the browser features Sassy relies on.
+- The [README](../../README.md#limitations) lists the browser features Sassy relies on.

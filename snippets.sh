@@ -11,7 +11,7 @@
 #
 # Each description is the CSS the placeholder outputs. When that is longer than 200
 # characters - mostly components - the description comes from the placeholder's row in a
-# "Placeholder | For" table in docs/*.md or README.md instead, or failing that the CSS is
+# "Placeholder | For" table in docs/*.md, docs/*/*.md or README.md instead, or failing that the CSS is
 # cut short at a declaration.
 #
 # Usage: ./snippets.sh [input.css] [output.code-snippets]
@@ -241,4 +241,4 @@ END {
     printf "snippets.sh: %d placeholders written (%d breakpoint variants left out), %d described from the docs, %d shortened\n", \
         k, n - k, from_docs, shortened > "/dev/stderr"
 }
-' docs/*.md README.md "$in" > "$out"
+' docs/*.md docs/*/*.md README.md "$in" > "$out"
