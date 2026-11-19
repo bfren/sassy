@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas, carousels and scrollspy</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns, carousels that play, and dismissible alerts and toasts also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns, carousels that play, scrollspy, and dismissible alerts and toasts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -1592,6 +1592,90 @@
                         </div>
                     </div>
                 </section>
+
+        <section class="example" id="scrollspy">
+            <h2>Scrollspy</h2>
+            <p>A nav of links to sections, one with <code>aria-current="location"</code>, follows the scrolling: <code>sassy.js</code> moves <code>aria-current</code> to the link of the section in view. It needs no Sass of its own.</p>
+            <div class="demo">
+                <div class="with-sidebar">
+                    <nav class="menu menu-vertical menu-pills" aria-label="On this demo">
+                        <a href="#spy-intro" aria-current="location">Introduction</a>
+                        <a href="#spy-setup">Setting up</a>
+                        <a href="#spy-usage">Using it</a>
+                        <a href="#spy-faq">Questions</a>
+                    </nav>
+                    <div class="spy-area" tabindex="0">
+                        <section id="spy-intro">
+                            <h3>Introduction</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-setup">
+                            <h3>Setting up</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-usage">
+                            <h3>Using it</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                        <section id="spy-faq">
+                            <h3>Questions</h3>
+                            <p>Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with <code>aria-current="location"</code>, which the nav styles as current.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                        </section>
+                    </div>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.menu
+    @extend %bf-nav
+
+    a
+        @extend %bf-nav-link
+
+.menu-pills
+    @extend %bf-nav-pills
+
+.menu-vertical
+    @extend %bf-nav-vertical
+
+.spy-area
+    @extend %bf-overflow-y-auto
+    block-size: 16rem</code></pre>
+<pre data-lang="html"><code>&lt;div class="with-sidebar"&gt;
+    &lt;nav class="menu menu-vertical menu-pills" aria-label="On this demo"&gt;
+        &lt;a href="#spy-intro" aria-current="location"&gt;Introduction&lt;/a&gt;
+        &lt;a href="#spy-setup"&gt;Setting up&lt;/a&gt;
+        &lt;a href="#spy-usage"&gt;Using it&lt;/a&gt;
+        &lt;a href="#spy-faq"&gt;Questions&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class="spy-area" tabindex="0"&gt;
+        &lt;section id="spy-intro"&gt;
+            &lt;h3&gt;Introduction&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-setup"&gt;
+            &lt;h3&gt;Setting up&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-usage"&gt;
+            &lt;h3&gt;Using it&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;section id="spy-faq"&gt;
+            &lt;h3&gt;Questions&lt;/h3&gt;
+            &lt;p&gt;Scroll this box. The link to the section whose heading has passed a line a quarter of the way down is marked with &lt;code&gt;aria-current="location"&lt;/code&gt;, which the nav styles as current.&lt;/p&gt;
+            &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.carousel

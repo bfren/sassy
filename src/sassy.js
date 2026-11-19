@@ -12,6 +12,8 @@
  *   and Tab. Choosing a menu item closes the menu; a popover (role="dialog") stays open.
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
+ * - Scrollspy: in a nav or list of #links where one has aria-current="location", moves aria-current="location"
+ *   to the link of the section in view as the page scrolls.
  * - Carousels: plays a carousel whose slides element has aria-live="off", every --sassy-carousel-interval
  *   seconds, with a pause button (aria-pressed and aria-controls), waiting on hover and focus.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
@@ -21,7 +23,7 @@
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
  * whatever selectors you extend Sassy's placeholders onto. Load it once, with defer:
  *     <script src="sassy.js" defer></script>
- * Content added later is handled too, except new tab lists, toolbars, collapsed content and playing carousels: call Sassy.init(element) for those.
+ * Content added later is handled too, except new tab lists, toolbars, collapsed content, playing carousels and scrollspy navs: call Sassy.init(element) for those.
  */
 (() => {
 	"use strict";
@@ -374,6 +376,55 @@
 	});
 
 	//  =================================================================
+	//  Scrollspy: marks the link to the section in view
+	//  =================================================================
+
+	// A nav or list of #links, one of them with aria-current="location", follows the page: the link to the last
+	// section whose top has scrolled past a line near the top (--sassy-scrollspy-offset, 25% by default) gets
+	// aria-current="location", and the others lose it. At the very bottom, the last section is current.
+
+	const spied = new WeakSet();
+
+	/** The nearest ancestor that scrolls, or null for the page. */
+	const scroller = el => {
+		for (let p = el.parentElement; p && p !== document.body && p !== document.documentElement; p = p.parentElement) {
+			if (/auto|scroll/.test(getComputedStyle(p).overflowY) && p.scrollHeight > p.clientHeight) return p;
+		}
+		return null;
+	};
+
+	const initScrollspy = nav => {
+		if (spied.has(nav)) return;
+		spied.add(nav);
+		const links = [...nav.querySelectorAll('a[href^="#"]')]
+			.map(link => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
+			.filter(x => x.target);
+		if (!links.length) return;
+		const area = scroller(links[0].target);
+		const offset = getComputedStyle(nav).getPropertyValue("--sassy-scrollspy-offset").trim() || "25%";
+
+		const update = () => {
+			const top = area ? area.getBoundingClientRect().top : 0;
+			const height = area ? area.clientHeight : innerHeight;
+			const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+			const n = parseFloat(offset) || 0;
+			const line = top + (offset.endsWith("%") ? (height * n) / 100 : offset.endsWith("rem") ? n * rem : n);
+			const el = area ?? document.documentElement;
+			const atBottom = el.scrollTop > 0 && Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight;
+			const passed = links.filter(x => x.target.getBoundingClientRect().top <= line);
+			const current = atBottom ? links[links.length - 1] : (passed[passed.length - 1] ?? links[0]);
+			for (const x of links) {
+				if (x === current) x.link.setAttribute("aria-current", "location");
+				else x.link.removeAttribute("aria-current");
+			}
+		};
+
+		(area ?? window).addEventListener("scroll", update, { passive: true });
+		window.addEventListener("resize", update, { passive: true });
+		update();
+	};
+
+	//  =================================================================
 	//  Carousels that play by themselves
 	//  =================================================================
 
@@ -480,12 +531,13 @@
 	//  Start
 	//  =================================================================
 
-	/** Sets up the tab lists, toolbars, collapsible content and carousels in an element (the whole page by default). */
+	/** Sets up the tab lists, toolbars, collapsible content, carousels and scrollspy navs in an element (the whole page by default). */
 	const init = (root = document) => {
 		root.querySelectorAll('[role="tablist"]').forEach(initTabs);
 		root.querySelectorAll('[role="toolbar"]').forEach(initToolbar);
 		root.querySelectorAll(toggleSelector).forEach(sync);
 		root.querySelectorAll('[aria-roledescription="carousel"] [aria-live="off"]').forEach(initCarousel);
+		root.querySelectorAll('a[href^="#"][aria-current="location"]').forEach(link => initScrollspy(link.closest("nav, ul, ol") ?? link.parentElement));
 	};
 
 	window.Sassy = { init };

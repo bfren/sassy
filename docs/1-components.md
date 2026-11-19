@@ -8,7 +8,7 @@ Every component reads its colours, spacing and sizes from custom properties, so 
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and toasts, carousels that play by themselves and the arrow keys of dropdown menus need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and toasts, carousels that play by themselves, scrollspy and the arrow keys of dropdown menus need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
@@ -19,6 +19,7 @@ Buttons, button groups, close buttons, badges, navigation, breadcrumbs, paginati
 | Feature          | What `sassy.js` does                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Collapsible navs | Opens and closes what a button with `aria-expanded` and `aria-controls` controls                                          |
+| Scrollspy        | Moves `aria-current="location"` to the link of the section in view, in a nav where one link has it                        |
 | Tabs             | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
 | Toolbars         | Makes a toolbar one stop in the tab order, and moves between its controls with the arrow keys, Home and End               |
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
@@ -41,7 +42,7 @@ The components rely on these browser features:
 
 With `sassy.js`, everything works in every browser that supports popovers, which all major browsers have since April 2024.
 
-If you add tabs or a carousel that plays to the page after it has loaded, call `Sassy.init(element)` on the element that contains them. Tooltips and commands need no setup.
+If you add tabs, a carousel that plays or a scrollspy nav to the page after it has loaded, call `Sassy.init(element)` on the element that contains them. Tooltips and commands need no setup.
 
 ## Placeholders
 
@@ -440,6 +441,23 @@ By default the open menu is a panel over the page. Extend `%bf-navbar-push` as w
 The menu grows by animating its one grid row from `0fr` to `1fr`, so it needs a single child, such as the `<ul>` above. As the menu is part of the page, a long one scrolls with the page rather than inside the menu. From the breakpoint it makes no difference. `--sassy-navbar-*` sets the space between the parts and the brand's colour and size.
 
 Only use `role="tablist"` and the tab roles for tabs that switch panels on the page, not for navigation between pages.
+
+### Scrollspy
+
+A nav of links to sections of the page can follow the reading position. Give one of its links `aria-current="location"`, usually the first, and `sassy.js` then moves it to the link of the section in view as the page scrolls. Any nav, [list group](#list-groups) or [dropdown](#dropdowns) shows that link as current, so scrollspy needs no Sass of its own:
+
+```html
+<nav class="menu menu-vertical" aria-label="On this page">
+    <a href="#install" aria-current="location">Install</a>
+    <a href="#use">Use</a>
+    <a href="#help">Help</a>
+</nav>
+```
+
+- **The section in view** is the last one whose top has scrolled past a line a quarter of the way down the window. Move the line with `--sassy-scrollspy-offset` on the nav, as a percentage of the height, or in `px` or `rem`. At the very bottom of the page, the last section is in view, even if it is short.
+- **The links are found** in the nearest `<nav>`, `<ul>` or `<ol>` around the marked link, and each must point to an `id` on the page. If the sections are in a box that scrolls rather than the page, `sassy.js` follows that box.
+- **To keep the nav in sight** while the page scrolls, extend `%bf-position-sticky` with a `top`, or put it beside a box that scrolls.
+- **Add it to the page later?** Call `Sassy.init(element)` on the element that contains it.
 
 ## Breadcrumbs
 
@@ -1381,6 +1399,7 @@ Give the slides element `aria-live="off"` and an `id`, and a button with `aria-c
 | `--sassy-carousel-button-size`, `--sassy-carousel-button-offset`                                                                     | Size of the previous and next buttons, and their gap from the edge                                |
 | `--sassy-carousel-button-bg`, `--sassy-carousel-button-colour`, `--sassy-carousel-button-shadow`                                     | The buttons' background, arrow and shadow                                                         |
 | `--sassy-carousel-marker-size`, `--sassy-carousel-marker-colour`                                                                     | The dots under the slides                                                                         |
+| `--sassy-scrollspy-offset`                                                                                                           | How far down the window a section must scroll to be current (25%) - read by `sassy.js`            |
 
 Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-accordion-duration` sets how long accordions take to open, and `$sassy-accordion-icon` their chevron. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. `$sassy-skeleton-duration` sets how long the shimmer takes. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 

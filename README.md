@@ -94,7 +94,7 @@ Use a single entry stylesheet per site: each stylesheet that loads Sassy also ou
 
 ### Script
 
-Tabs, toolbars, tooltips, dismissible alerts and toasts, carousels that play and the keys of dropdown menus also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
+Tabs, toolbars, tooltips, dismissible alerts and toasts, carousels that play, scrollspy and the keys of dropdown menus also need `dist/sassy.js`, a small script with no dependencies - see [Components](#components):
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
@@ -356,7 +356,7 @@ Component placeholders style whole interface elements, and they output before fo
 | `%bf-offcanvas-start`, `-end`, `-top`, `-bottom`, `-{breakpoint}`                                       | A dialog that slides in from one edge, or is in the page from a breakpoint             |
 | `%bf-carousel`                                                                                          | Slides that scroll and snap, with CSS buttons and dots where supported, and can play   |
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script: popovers and dropdowns open with `popovertarget`, and dialogs with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses, dismissible alerts and toasts, carousels that play by themselves and the arrow keys of dropdown menus need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` and `closedby` support and tooltip, popover and dropdown positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script: popovers and dropdowns open with `popovertarget`, and dialogs with `command` and `commandfor` buttons. Tabs, toolbars, tooltips, navigation that collapses, dismissible alerts and toasts, carousels that play by themselves, scrollspy and the arrow keys of dropdown menus need [`dist/sassy.js`](#script), which finds everything by ARIA role rather than class name, and also adds `command` and `closedby` support and tooltip, popover and dropdown positioning to browsers that lack them. [docs/1-components.md](docs/1-components.md) has the markup each one expects.
 
 ## Limitations
 

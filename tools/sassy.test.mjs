@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, closing dialogs, carousels, tooltips, dropdowns and popovers.
+ * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, closing dialogs, scrollspy, carousels, tooltips, dropdowns and popovers.
  *
  *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
  *
@@ -322,4 +322,52 @@ test("carousels: start paused for reduced motion, and read the interval from --s
 	assert.equal($("pause").getAttribute("aria-pressed"), "true");
 	tick();
 	assert.equal(scrolls.length, 0);
+});
+
+/** A page of three sections and a nav that spies on them. Layout is stubbed: scrollTo(y) moves the sections up by y. */
+const scrollspyPage = (navStyle = "") => {
+	const window = load(`
+		<nav id="nav" style="${navStyle}">
+			<a id="l1" href="#one" aria-current="location">One</a>
+			<a id="l2" href="#two">Two</a>
+			<a id="l3" href="#three">Three</a>
+			<a id="away" href="https://example.com/">Away</a>
+		</nav>
+		<section id="one"></section><section id="two"></section><section id="three"></section>`);
+	const $ = id => window.document.getElementById(id);
+	const root = window.document.documentElement;
+	let y = 0;
+	Object.defineProperties(root, { scrollTop: { get: () => y }, clientHeight: { value: 800 }, scrollHeight: { value: 2000 } });
+	const layout = () => ["one", "two", "three"].forEach((id, i) => ($(id).getBoundingClientRect = () => ({ top: 100 + i * 600 - y })));
+	layout();
+	const scrollTo = to => {
+		y = to;
+		layout();
+		window.dispatchEvent(new window.Event("scroll"));
+	};
+	const current = () => ["l1", "l2", "l3"].filter(id => $(id).getAttribute("aria-current") === "location");
+	return { $, scrollTo, current };
+};
+
+test("scrollspy: the link to the last section past a line 25% down is current, and the last at the bottom", () => {
+	const { scrollTo, current } = scrollspyPage(); // window 768px tall, so the line is at 192
+	scrollTo(0); // the script ran before the layout was stubbed
+	assert.deepEqual(current(), ["l1"]);
+	scrollTo(500); // two's top at 200: not yet past the line
+	assert.deepEqual(current(), ["l1"]);
+	scrollTo(510); // two's top at 190
+	assert.deepEqual(current(), ["l2"]);
+	scrollTo(1150); // three's top at 150
+	assert.deepEqual(current(), ["l3"]);
+});
+
+test("scrollspy: the offset can be in rem, and the last section is current at the bottom even if its top has not reached the line", () => {
+	const { $, scrollTo, current } = scrollspyPage("--sassy-scrollspy-offset: 3rem"); // 48px
+	scrollTo(560); // two's top at 140, under the line
+	assert.deepEqual(current(), ["l1"]);
+	scrollTo(660); // two's top at 40
+	assert.deepEqual(current(), ["l2"]);
+	scrollTo(1200); // three's top at 100, under the line, but the page can't scroll further
+	assert.deepEqual(current(), ["l3"]);
+	assert.equal($("away").hasAttribute("aria-current"), false);
 });

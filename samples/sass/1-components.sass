@@ -383,3 +383,8 @@
 
 .text-bg-warn
     @extend %bf-text-bg-warn
+
+// no placeholder sets a fixed height, so this one is plain CSS
+.spy-area
+    @extend %bf-overflow-y-auto
+    block-size: 16rem
