@@ -371,3 +371,23 @@ test("scrollspy: the offset can be in rem, and the last section is current at th
 	assert.deepEqual(current(), ["l3"]);
 	assert.equal($("away").hasAttribute("aria-current"), false);
 });
+
+test("scrollspy: in a box that scrolls, a link scrolls only the box", () => {
+	const window = load(`
+		<nav><a id="l1" href="#one" aria-current="location">One</a><a id="l2" href="#two">Two</a></nav>
+		<div id="box" style="overflow-y: auto"><section id="one"></section><section id="two"></section></div>`, window => {
+		// the box must scroll before the script looks for it
+		Object.defineProperties(window.HTMLDivElement.prototype, { scrollHeight: { value: 1000 }, clientHeight: { value: 200 } });
+	});
+	const $ = id => window.document.getElementById(id);
+	$("box").getBoundingClientRect = () => ({ top: 50 });
+	$("two").getBoundingClientRect = () => ({ top: 650 });
+	let by, url;
+	$("box").scrollBy = ({ top }) => (by = top);
+	window.history.pushState = (state, title, to) => (url = to); // jsdom's about:blank can't take a hash
+	const click = new window.MouseEvent("click", { bubbles: true, cancelable: true });
+	$("l2").dispatchEvent(click);
+	assert.equal(click.defaultPrevented, true); // so the page doesn't move
+	assert.equal(by, 600);
+	assert.equal(url, "#two");
+});

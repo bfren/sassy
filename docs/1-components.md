@@ -455,7 +455,7 @@ A nav of links to sections of the page can follow the reading position. Give one
 ```
 
 - **The section in view** is the last one whose top has scrolled past a line a quarter of the way down the window. Move the line with `--sassy-scrollspy-offset` on the nav, as a percentage of the height, or in `px` or `rem`. At the very bottom of the page, the last section is in view, even if it is short.
-- **The links are found** in the nearest `<nav>`, `<ul>` or `<ol>` around the marked link, and each must point to an `id` on the page. If the sections are in a box that scrolls rather than the page, `sassy.js` follows that box.
+- **The links are found** in the nearest `<nav>`, `<ul>` or `<ol>` around the marked link, and each must point to an `id` on the page. If the sections are in a box that scrolls rather than the page, `sassy.js` follows that box, and its links scroll only the box rather than moving the page as well.
 - **To keep the nav in sight** while the page scrolls, extend `%bf-position-sticky` with a `top`, or put it beside a box that scrolls.
 - **Add it to the page later?** Call `Sassy.init(element)` on the element that contains it.
 

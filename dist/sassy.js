@@ -422,6 +422,22 @@
 		(area ?? window).addEventListener("scroll", update, { passive: true });
 		window.addEventListener("resize", update, { passive: true });
 		update();
+
+		// In a box that scrolls, following a link would scroll the page too, to bring the section to the top
+		// of the window: scroll only the box instead.
+		if (area) {
+			nav.addEventListener("click", e => {
+				const hit = links.find(x => x.link === e.target.closest?.("a"));
+				if (!hit || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+				e.preventDefault();
+				const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+				area.scrollBy({
+					top: hit.target.getBoundingClientRect().top - area.getBoundingClientRect().top,
+					behavior: smooth ? "smooth" : "auto"
+				});
+				history.pushState(null, "", hit.link.hash);
+			});
+		}
 	};
 
 	//  =================================================================
