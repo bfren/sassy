@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs and offcanvas</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns, and dismissible alerts and toasts, also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns, carousels that play, and dismissible alerts and toasts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -1565,6 +1565,118 @@
     &lt;/dialog&gt;
     &lt;p&gt;Results go here. Make the window narrower than 768px to see the Filters button.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="carousels">
+            <h2>Carousels</h2>
+            <p>A carousel scrolls sideways and snaps to each slide. Where browsers support <code>::scroll-button</code> and <code>::scroll-marker</code> it has previous and next buttons and dots; elsewhere, swipe or scroll it.</p>
+            <div class="demo">
+                <section aria-roledescription="carousel" aria-label="Features">
+                    <div class="carousel" tabindex="0">
+                        <div class="slide text-bg-primary" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                            <h3>Swipe or scroll</h3>
+                            <p>Each slide snaps into place.</p>
+                        </div>
+                        <div class="slide text-bg-ok" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                            <h3>Buttons and dots</h3>
+                            <p>Drawn by CSS where browsers support them.</p>
+                        </div>
+                        <div class="slide text-bg-info" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                            <h3>Keys</h3>
+                            <p>The arrow keys scroll it once it has focus.</p>
+                        </div>
+                        <div class="slide text-bg-warn" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                            <h3>No script</h3>
+                            <p>Only playing by itself needs sassy.js.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.carousel
+    @extend %bf-carousel
+
+.slide
+    @extend %bf-p-5
+    @extend %bf-rounded</code></pre>
+<pre data-lang="html"><code>&lt;section aria-roledescription="carousel" aria-label="Features"&gt;
+    &lt;div class="carousel" tabindex="0"&gt;
+        &lt;div class="slide text-bg-primary" role="group" aria-roledescription="slide" aria-label="1 of 4"&gt;
+            &lt;h3&gt;Swipe or scroll&lt;/h3&gt;
+            &lt;p&gt;Each slide snaps into place.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-ok" role="group" aria-roledescription="slide" aria-label="2 of 4"&gt;
+            &lt;h3&gt;Buttons and dots&lt;/h3&gt;
+            &lt;p&gt;Drawn by CSS where browsers support them.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-info" role="group" aria-roledescription="slide" aria-label="3 of 4"&gt;
+            &lt;h3&gt;Keys&lt;/h3&gt;
+            &lt;p&gt;The arrow keys scroll it once it has focus.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-warn" role="group" aria-roledescription="slide" aria-label="4 of 4"&gt;
+            &lt;h3&gt;No script&lt;/h3&gt;
+            &lt;p&gt;Only playing by itself needs sassy.js.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+</div>
+            <p>With <code>aria-live="off"</code> on the slides, <code>sassy.js</code> plays it, and the button pauses it. This one shows two slides at a time.</p>
+            <div class="demo">
+                <section aria-roledescription="carousel" aria-label="News">
+                    <button type="button" class="button" aria-controls="news-slides" aria-pressed="false">Pause</button>
+                    <div class="carousel carousel-two" id="news-slides" aria-live="off" tabindex="0">
+                        <div class="slide text-bg-primary" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                            <h3>One</h3>
+                            <p>Two slides show at once.</p>
+                        </div>
+                        <div class="slide text-bg-ok" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                            <h3>Two</h3>
+                            <p>It moves every 5 seconds.</p>
+                        </div>
+                        <div class="slide text-bg-info" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                            <h3>Three</h3>
+                            <p>It waits while the pointer is over it or it has focus.</p>
+                        </div>
+                        <div class="slide text-bg-warn" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                            <h3>Four</h3>
+                            <p>From the end it goes back to the start.</p>
+                        </div>
+                        <div class="slide text-bg-primary" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                            <h3>Five</h3>
+                            <p>Pause stops it until it is pressed again.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.carousel-two
+    --sassy-carousel-per-view: 2</code></pre>
+<pre data-lang="html"><code>&lt;section aria-roledescription="carousel" aria-label="News"&gt;
+    &lt;button type="button" class="button" aria-controls="news-slides" aria-pressed="false"&gt;Pause&lt;/button&gt;
+    &lt;div class="carousel carousel-two" id="news-slides" aria-live="off" tabindex="0"&gt;
+        &lt;div class="slide text-bg-primary" role="group" aria-roledescription="slide" aria-label="1 of 5"&gt;
+            &lt;h3&gt;One&lt;/h3&gt;
+            &lt;p&gt;Two slides show at once.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-ok" role="group" aria-roledescription="slide" aria-label="2 of 5"&gt;
+            &lt;h3&gt;Two&lt;/h3&gt;
+            &lt;p&gt;It moves every 5 seconds.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-info" role="group" aria-roledescription="slide" aria-label="3 of 5"&gt;
+            &lt;h3&gt;Three&lt;/h3&gt;
+            &lt;p&gt;It waits while the pointer is over it or it has focus.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-warn" role="group" aria-roledescription="slide" aria-label="4 of 5"&gt;
+            &lt;h3&gt;Four&lt;/h3&gt;
+            &lt;p&gt;From the end it goes back to the start.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="slide text-bg-primary" role="group" aria-roledescription="slide" aria-label="5 of 5"&gt;
+            &lt;h3&gt;Five&lt;/h3&gt;
+            &lt;p&gt;Pause stops it until it is pressed again.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/section&gt;</code></pre>
 </div>
         </section>
 

@@ -1,0 +1,103 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: carousels
+//  =================================================================
+
+//  A carousel is a row of slides that scrolls sideways and snaps to each one: %bf-carousel on the scrolling element,
+//  whose children are the slides. Follow the ARIA carousel pattern: wrap it in an element with
+//  aria-roledescription="carousel" and an aria-label, and give each slide role="group", aria-roledescription="slide"
+//  and an aria-label such as "2 of 4". Where browsers support ::scroll-button and ::scroll-marker, it also gets
+//  previous and next buttons and a row of dots; elsewhere it is swiped or scrolled. To play by itself, give the
+//  scrolling element aria-live="off" - see sassy.js.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("carousel")
+        // each carousel's buttons are placed against it, and only it
+        anchor-name: --sassy-carousel
+        anchor-scope: --sassy-carousel
+        display: grid
+        gap: $sassy-carousel-gap
+        grid-auto-columns: calc((100% - (#{$sassy-carousel-per-view} - 1) * #{$sassy-carousel-gap}) / #{$sassy-carousel-per-view})
+        grid-auto-flow: column
+        overflow-x: auto
+        overscroll-behavior-x: contain
+        scroll-behavior: smooth
+        scroll-marker-group: after
+        scroll-snap-type: x mandatory
+        scrollbar-width: thin
+
+        @media (prefers-reduced-motion: reduce)
+            scroll-behavior: auto
+
+        & > *
+            scroll-snap-align: start
+
+        &::scroll-button(*)
+            align-items: center
+            background-color: $sassy-carousel-button-bg
+            block-size: $sassy-carousel-button-size
+            border: 0
+            border-radius: 50%
+            box-shadow: $sassy-carousel-button-shadow
+            color: $sassy-carousel-button-colour
+            cursor: pointer
+            display: flex
+            font-size: calc(#{$sassy-carousel-button-size} * 0.6)
+            inline-size: $sassy-carousel-button-size
+            justify-content: center
+            line-height: 1
+            position: absolute
+            position-anchor: --sassy-carousel
+            top: anchor(center)
+            translate: 0 -50%
+
+        &::scroll-button(*):focus-visible
+            outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+            outline-offset: 2px
+
+        // at the first or last slide
+        &::scroll-button(*):disabled
+            cursor: default
+            opacity: 0.4
+
+        &::scroll-button(inline-start)
+            content: $sassy-carousel-previous / "Previous slide"
+            inset-inline-start: calc(anchor(start) + #{$sassy-carousel-button-offset})
+
+        &::scroll-button(inline-end)
+            content: $sassy-carousel-next / "Next slide"
+            inset-inline-end: calc(anchor(end) + #{$sassy-carousel-button-offset})
+
+        &:dir(rtl)::scroll-button(*)
+            scale: -1 1
+
+        &::scroll-marker-group
+            display: flex
+            flex-wrap: wrap
+            gap: $sassy-carousel-marker-size
+            justify-content: center
+            margin-block-start: $sassy-carousel-marker-size
+
+        // each dot is named after its slide's aria-label
+        & > *::scroll-marker
+            background-color: $sassy-carousel-marker-colour
+            block-size: $sassy-carousel-marker-size
+            border-radius: 50%
+            content: "" / attr(aria-label)
+            inline-size: $sassy-carousel-marker-size
+            // half the colour keeps a grey-900 dot at 3.4:1 on white
+            opacity: 0.5
+
+        // the current dot is solid and longer, so it differs by shape as well as colour
+        & > *::scroll-marker:target-current
+            border-radius: $sassy-carousel-marker-size
+            inline-size: calc(#{$sassy-carousel-marker-size} * 2.5)
+            opacity: 1
+
+        & > *::scroll-marker:focus-visible
+            outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+            outline-offset: 2px

@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs and offcanvas
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs and offcanvas. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, toasts, tooltips, popovers, dropdowns, dialogs, offcanvas and carousels. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs and offcanvas need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and toasts, and the arrow keys of dropdown menus need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, toasts, popovers, dropdowns, dialogs, offcanvas and carousels need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and toasts, carousels that play by themselves and the arrow keys of dropdown menus need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
@@ -25,21 +25,23 @@ Buttons, button groups, close buttons, badges, navigation, breadcrumbs, paginati
 | Dropdowns        | Updates `aria-expanded`, gives `role="menu"` its keys, and places menus in browsers without CSS anchor positioning        |
 | Popovers         | Updates `aria-expanded`, and places popovers in browsers without CSS anchor positioning                                   |
 | Offcanvas        | Closes a dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`                        |
+| Carousels        | Plays a carousel whose slides have `aria-live="off"`, with a pause button, waiting on hover and focus                     |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 | Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |
 
 The components rely on these browser features:
 
-| Feature                                  | Used by                       | Baseline                                              | Without it                    |
-| ---------------------------------------- | ----------------------------- | ----------------------------------------------------- | ----------------------------- |
-| Popover API (`popover`)                  | Tooltips, popovers, dropdowns | Widely available, since April 2024                    | -                             |
-| `command` and `commandfor`               | Dialogs                       | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour |
-| CSS anchor positioning (`position-area`) | Tooltips, popovers, dropdowns | Newly available, since January 2026                   | `sassy.js` places them        |
-| `closedby="any"`                         | Offcanvas                     | Chrome 134, Firefox 141, not yet Safari               | `sassy.js` adds the behaviour |
+| Feature                                  | Used by                       | Baseline                                              | Without it                                  |
+| ---------------------------------------- | ----------------------------- | ----------------------------------------------------- | ------------------------------------------- |
+| Popover API (`popover`)                  | Tooltips, popovers, dropdowns | Widely available, since April 2024                    | -                                           |
+| `command` and `commandfor`               | Dialogs                       | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour               |
+| CSS anchor positioning (`position-area`) | Tooltips, popovers, dropdowns | Newly available, since January 2026                   | `sassy.js` places them                      |
+| `closedby="any"`                         | Offcanvas                     | Chrome 134, Firefox 141, not yet Safari               | `sassy.js` adds the behaviour               |
+| `::scroll-button`, `::scroll-marker`     | Carousels                     | Chrome 135; not yet Firefox or Safari                 | Swiped or scrolled, without buttons or dots |
 
 With `sassy.js`, everything works in every browser that supports popovers, which all major browsers have since April 2024.
 
-If you add tabs to the page after it has loaded, call `Sassy.init(element)` on the element that contains them. Tooltips and commands need no setup.
+If you add tabs or a carousel that plays to the page after it has loaded, call `Sassy.init(element)` on the element that contains them. Tooltips and commands need no setup.
 
 ## Placeholders
 
@@ -108,6 +110,7 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-dialog-title`                                                                              | The dialog's heading                                                                    |
 | `%bf-offcanvas-start`, `-end`, `-top`, `-bottom`                                                | With `%bf-dialog`, a panel that slides in from that edge                                |
 | `%bf-offcanvas-{breakpoint}`                                                                    | With a side, part of the page from that breakpoint up                                   |
+| `%bf-carousel`                                                                                  | A row of slides that scrolls and snaps - see [Carousels](#carousels)                    |
 
 ## Buttons
 
@@ -1244,6 +1247,62 @@ With `%bf-offcanvas-{breakpoint}` as well, a closed offcanvas is part of the pag
 
 If the window is widened while the offcanvas is open, it stays a modal until it is closed.
 
+## Carousels
+
+A carousel is a row of slides that scrolls sideways and snaps to each one. Extend `%bf-carousel` on the element that scrolls: its children are the slides. In browsers that support `::scroll-button` and `::scroll-marker`, CSS adds previous and next buttons on its edges and a row of dots under it; in others, people swipe or scroll it:
+
+```sass
+.carousel
+    @extend %bf-carousel
+```
+
+```css
+@layer sassy.base.components {
+  .carousel {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    scroll-marker-group: after;
+    scroll-snap-type: x mandatory;
+  }
+  .carousel > * {
+    scroll-snap-align: start;
+  }
+}
+```
+
+```html
+<section aria-roledescription="carousel" aria-label="Features">
+    <div class="carousel" tabindex="0">
+        <div role="group" aria-roledescription="slide" aria-label="1 of 3">…</div>
+        <div role="group" aria-roledescription="slide" aria-label="2 of 3">…</div>
+        <div role="group" aria-roledescription="slide" aria-label="3 of 3">…</div>
+    </div>
+</section>
+```
+
+- **Follow the ARIA carousel pattern:** wrap it in an element with `aria-roledescription="carousel"` and an `aria-label`, and give each slide `role="group"`, `aria-roledescription="slide"` and an `aria-label` saying where it is, such as "2 of 3". The dots are named after the slides' labels.
+- **`tabindex="0"`** lets people scroll it with the arrow keys in every browser; Chromium makes it focusable without it.
+- **`--sassy-carousel-per-view`** sets how many slides show at once (1 by default), with `--sassy-carousel-gap` between them. Set it in a media query to show more on wider screens.
+- **The previous and next buttons** are greyed out at the first and last slide, and the current dot is solid and longer than the others. The arrows are the text in `$sassy-carousel-previous` and `$sassy-carousel-next`, mirrored in right-to-left text.
+
+### Playing by itself
+
+Give the slides element `aria-live="off"` and an `id`, and a button with `aria-controls` naming it and `aria-pressed="false"`, and `sassy.js` moves the carousel on every `--sassy-carousel-interval` (5 seconds), back to the first slide from the last:
+
+```html
+<section aria-roledescription="carousel" aria-label="News">
+    <button type="button" aria-controls="news" aria-pressed="false">Pause</button>
+    <div class="carousel" id="news" aria-live="off" tabindex="0">
+        …
+    </div>
+</section>
+```
+
+- **The button pauses it** (`aria-pressed="true"`) and starts it again. Put it first in the carousel, so keyboard users reach it before the slides. While it is paused, `sassy.js` sets `aria-live="polite"`, so screen readers read each slide people move to; while it plays they don't, so they aren't interrupted.
+- **It waits** while the pointer is over the carousel, something in it has focus, or the page is hidden. With reduced motion it starts paused, and plays only if the button is pressed.
+- **Add it to the page later?** Call `Sassy.init(element)` on the element that contains it.
+
 ## Settings and custom properties
 
 | Property                                                                                                                             | Controls                                                                                          |
@@ -1317,6 +1376,11 @@ If the window is widened while the offcanvas is open, it stays a modal until it 
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 | `--sassy-offcanvas-width`, `--sassy-offcanvas-height`                                                                                | Width of a start or end offcanvas, and height of a top or bottom one                              |
 | `--sassy-offcanvas-duration`                                                                                                         | How long it takes to slide in or out                                                              |
+| `--sassy-carousel-per-view`, `--sassy-carousel-gap`                                                                                  | How many slides show at once, and the gap between them                                            |
+| `--sassy-carousel-interval`                                                                                                          | How often a carousel that plays moves on (5s) - read by `sassy.js`                                |
+| `--sassy-carousel-button-size`, `--sassy-carousel-button-offset`                                                                     | Size of the previous and next buttons, and their gap from the edge                                |
+| `--sassy-carousel-button-bg`, `--sassy-carousel-button-colour`, `--sassy-carousel-button-shadow`                                     | The buttons' background, arrow and shadow                                                         |
+| `--sassy-carousel-marker-size`, `--sassy-carousel-marker-colour`                                                                     | The dots under the slides                                                                         |
 
 Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-accordion-duration` sets how long accordions take to open, and `$sassy-accordion-icon` their chevron. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. `$sassy-skeleton-duration` sets how long the shimmer takes. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 

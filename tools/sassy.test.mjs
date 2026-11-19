@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, closing dialogs, tooltips, dropdowns and popovers.
+ * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, closing dialogs, carousels, tooltips, dropdowns and popovers.
  *
  *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
  *
@@ -260,4 +260,66 @@ test("popovers: placed above and centred, or on the side set, and clicks inside 
 	box($("open"), 900, 200, 80, 30); // 1024px wide window: no room after, so before
 	toggle("open");
 	assert.equal($("menu").style.left, "738px"); // 900 - 160 - 2
+});
+
+/** A carousel of three 100px slides that plays. Timers and layout are stubbed: tick() runs the interval. */
+const carouselPage = ({ reduce = false, style = "" } = {}) => {
+	let tick, delay;
+	const window = load(`
+		<section aria-roledescription="carousel" aria-label="News">
+			<button id="pause" aria-controls="slides" aria-pressed="false">Pause</button>
+			<div id="slides" aria-live="off" style="${style}">
+				<div id="s1" role="group" aria-roledescription="slide" aria-label="1 of 3"></div>
+				<div id="s2" role="group" aria-roledescription="slide" aria-label="2 of 3"></div>
+				<div id="s3" role="group" aria-roledescription="slide" aria-label="3 of 3"></div>
+			</div>
+		</section>`, window => {
+		window.setInterval = (fn, ms) => ((tick = fn), (delay = ms));
+		window.matchMedia = () => ({ matches: reduce });
+		Object.defineProperty(window.document, "hidden", { value: false }); // jsdom pages are hidden unless told otherwise
+	});
+	const $ = id => window.document.getElementById(id);
+	const slides = $("slides");
+	const scrolls = [];
+	let x = 0; // how far the slides are scrolled
+	const layout = () => {
+		slides.getBoundingClientRect = () => ({ left: 0, right: 100 });
+		["s1", "s2", "s3"].forEach((id, i) => ($(id).getBoundingClientRect = () => ({ left: i * 100 - x, right: i * 100 - x + 100 })));
+	};
+	Object.defineProperties(slides, {
+		scrollLeft: { get: () => x },
+		clientWidth: { value: 100 },
+		scrollWidth: { value: 300 }
+	});
+	slides.scrollBy = ({ left }) => (scrolls.push(left), (x += left), layout());
+	layout();
+	return { window, $, scrolls, tick: () => tick(), delay: () => delay };
+};
+
+test("carousels: play every 5 seconds, wrap from the last slide to the first, and pause with the button", () => {
+	const { $, scrolls, tick, delay } = carouselPage();
+	assert.equal(delay(), 5000);
+	tick();
+	tick();
+	tick(); // at the end, so back to the start
+	assert.deepEqual(scrolls, [100, 100, -200]);
+
+	$("pause").click();
+	assert.equal($("pause").getAttribute("aria-pressed"), "true");
+	assert.equal($("slides").getAttribute("aria-live"), "polite");
+	tick();
+	assert.equal(scrolls.length, 3);
+
+	$("pause").click();
+	assert.equal($("slides").getAttribute("aria-live"), "off");
+	tick();
+	assert.equal(scrolls.length, 4);
+});
+
+test("carousels: start paused for reduced motion, and read the interval from --sassy-carousel-interval", () => {
+	const { $, scrolls, tick, delay } = carouselPage({ reduce: true, style: "--sassy-carousel-interval: 1500ms" });
+	assert.equal(delay(), 1500);
+	assert.equal($("pause").getAttribute("aria-pressed"), "true");
+	tick();
+	assert.equal(scrolls.length, 0);
 });

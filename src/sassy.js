@@ -12,6 +12,8 @@
  *   and Tab. Choosing a menu item closes the menu; a popover (role="dialog") stays open.
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
+ * - Carousels: plays a carousel whose slides element has aria-live="off", every --sassy-carousel-interval
+ *   seconds, with a pause button (aria-pressed and aria-controls), waiting on hover and focus.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
  * - Closing dialogs: a fallback for closedby="any", so a click on a modal dialog's backdrop closes it.
  * - Dismissing: a button with commandfor and command="--dismiss" hides the element it names, such as an alert.
@@ -19,7 +21,7 @@
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
  * whatever selectors you extend Sassy's placeholders onto. Load it once, with defer:
  *     <script src="sassy.js" defer></script>
- * Content added later is handled too, except new tab lists, toolbars and collapsed content: call Sassy.init(element) for those.
+ * Content added later is handled too, except new tab lists, toolbars, collapsed content and playing carousels: call Sassy.init(element) for those.
  */
 (() => {
 	"use strict";
@@ -372,6 +374,60 @@
 	});
 
 	//  =================================================================
+	//  Carousels that play by themselves
+	//  =================================================================
+
+	// The slides element of a carousel with aria-live="off" rotates (the WAI-ARIA carousel pattern). A button with
+	// aria-pressed and aria-controls naming it pauses and restarts it, and aria-live is "polite" while it is paused,
+	// so screen readers read the slide people move to. It waits while the pointer is over the carousel, focus is in it,
+	// or the page is hidden, and it starts paused for reduced motion.
+
+	const playing = new WeakSet(); // slides elements set up to rotate
+
+	/** The pause buttons of a carousel's slides element. */
+	const pauseButtons = slides =>
+		[...document.querySelectorAll("button[aria-pressed][aria-controls]")].filter(b => b.getAttribute("aria-controls") === slides.id);
+
+	const setPaused = (slides, paused) => {
+		slides.setAttribute("aria-live", paused ? "polite" : "off");
+		pauseButtons(slides).forEach(b => b.setAttribute("aria-pressed", String(paused)));
+	};
+
+	/** Scrolls to the next slide, or back to the first from the end. */
+	const advance = slides => {
+		const rtl = getComputedStyle(slides).direction === "rtl";
+		const box = slides.getBoundingClientRect();
+		// how far a slide's start is past the start of the slides element
+		const start = el => {
+			const r = el.getBoundingClientRect();
+			return rtl ? box.right - r.right : r.left - box.left;
+		};
+		const items = [...slides.children];
+		const atEnd = Math.abs(slides.scrollLeft) + slides.clientWidth >= slides.scrollWidth - 1;
+		const next = atEnd ? items[0] : items.find(el => start(el) > 1);
+		if (next) slides.scrollBy({ left: rtl ? -start(next) : start(next), behavior: "smooth" });
+	};
+
+	const initCarousel = slides => {
+		if (playing.has(slides)) return;
+		playing.add(slides);
+		if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) setPaused(slides, true);
+		const region = slides.closest('[aria-roledescription="carousel"]') ?? slides;
+		const interval = getComputedStyle(slides).getPropertyValue("--sassy-carousel-interval").trim();
+		const ms = (parseFloat(interval) || 5) * (interval.endsWith("ms") ? 1 : 1000);
+		setInterval(() => {
+			const waiting = slides.getAttribute("aria-live") !== "off" || region.matches(":hover, :focus-within") || document.hidden;
+			if (!waiting) advance(slides);
+		}, ms);
+	};
+
+	document.addEventListener("click", e => {
+		const button = e.target.closest?.("button[aria-pressed][aria-controls]");
+		const slides = button && document.getElementById(button.getAttribute("aria-controls"));
+		if (slides && playing.has(slides)) setPaused(slides, button.getAttribute("aria-pressed") !== "true");
+	});
+
+	//  =================================================================
 	//  Commands: fallback for browsers without command / commandfor
 	//  =================================================================
 
@@ -424,11 +480,12 @@
 	//  Start
 	//  =================================================================
 
-	/** Sets up the tab lists, toolbars and collapsible content in an element (the whole page by default). */
+	/** Sets up the tab lists, toolbars, collapsible content and carousels in an element (the whole page by default). */
 	const init = (root = document) => {
 		root.querySelectorAll('[role="tablist"]').forEach(initTabs);
 		root.querySelectorAll('[role="toolbar"]').forEach(initToolbar);
 		root.querySelectorAll(toggleSelector).forEach(sync);
+		root.querySelectorAll('[aria-roledescription="carousel"] [aria-live="off"]').forEach(initCarousel);
 	};
 
 	window.Sassy = { init };

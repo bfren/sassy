@@ -169,6 +169,7 @@
   "%bf-offcanvas-xl": { "scope": "sass,scss", "prefix": "bf-offcanvas-xl", "body": "bf-offcanvas-xl", "description": "With a side, part of the page from that breakpoint up" },
   "%bf-offcanvas-2xl": { "scope": "sass,scss", "prefix": "bf-offcanvas-2xl", "body": "bf-offcanvas-2xl", "description": "With a side, part of the page from that breakpoint up" },
   "%bf-offcanvas-3xl": { "scope": "sass,scss", "prefix": "bf-offcanvas-3xl", "body": "bf-offcanvas-3xl", "description": "With a side, part of the page from that breakpoint up" },
+  "%bf-carousel": { "scope": "sass,scss", "prefix": "bf-carousel", "body": "bf-carousel", "description": "A row of slides that scrolls and snaps - see Carousels" },
   "%bf-form-label": { "scope": "sass,scss", "prefix": "bf-form-label", "body": "bf-form-label", "description": "display: inline-block; margin-bottom: 0.5rem;" },
   "%bf-form-text": { "scope": "sass,scss", "prefix": "bf-form-text", "body": "bf-form-text", "description": "color: var(--sassy-form-text-colour, oklch(55.1% 0.027 264.364deg)); display: block; font-size: 0.875em; margin-top: 0.25rem;" },
   "%bf-form-control": { "scope": "sass,scss", "prefix": "bf-form-control", "body": "bf-form-control", "description": "Text inputs and textareas. -plaintext shows a value without a border" },
