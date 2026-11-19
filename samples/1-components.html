@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, dropdowns and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips and dismissible alerts also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, dropdowns and dismissible alerts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -1081,6 +1081,89 @@
 &lt;/div&gt;
 &lt;div class="tip" role="tooltip" popover="manual" id="tip-save"&gt;Saves your changes to this device&lt;/div&gt;
 &lt;div class="tip" role="tooltip" popover="manual" id="tip-share"&gt;Copies a link you can send to someone&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="dropdowns">
+            <h2>Dropdowns</h2>
+            <p>Each menu is a popover opened by its button's <code>popovertarget</code>, so the browser opens and closes it. The first two are ARIA menus of actions, reached with the arrow keys; the second is a split button whose menu lines up with its end. The last is a list of links, reached with Tab, that opens above.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="button dropdown-toggle" popovertarget="file-menu" aria-haspopup="menu">File</button>
+                    <div class="dropdown" id="file-menu" popover role="menu" aria-label="File">
+                        <h3 class="dropdown-header">Document</h3>
+                        <button type="button" role="menuitem">New</button>
+                        <button type="button" role="menuitem">Open…</button>
+                        <button type="button" role="menuitem" disabled>Save</button>
+                        <hr class="dropdown-divider" />
+                        <button type="button" role="menuitem">Print…</button>
+                    </div>
+
+                    <div class="group">
+                        <button type="button" class="button button-primary">Publish</button>
+                        <button type="button" class="button button-primary dropdown-toggle dropdown-split" popovertarget="publish-menu" aria-haspopup="menu" aria-label="More ways to publish"></button>
+                    </div>
+                    <div class="dropdown dropdown-end" id="publish-menu" popover role="menu" aria-label="Publish">
+                        <button type="button" role="menuitem">Publish later</button>
+                        <button type="button" role="menuitem">Save as draft</button>
+                    </div>
+
+                    <button type="button" class="button dropdown-toggle" popovertarget="pages">Pages</button>
+                    <ul class="dropdown dropdown-up" id="pages" popover>
+                        <li><a href="#dropdowns" aria-current="page">Dropdowns</a></li>
+                        <li><a href="#tooltips">Tooltips</a></li>
+                        <li><a href="#dialogs">Dialogs</a></li>
+                    </ul>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.dropdown
+    @extend %bf-dropdown
+
+.dropdown-end
+    @extend %bf-dropdown-end
+
+.dropdown-up
+    @extend %bf-dropdown-up
+
+.dropdown-header
+    @extend %bf-dropdown-header
+
+.dropdown-divider
+    @extend %bf-dropdown-divider
+
+.dropdown-toggle
+    @extend %bf-dropdown-toggle
+
+.dropdown-split
+    @extend %bf-dropdown-split</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button dropdown-toggle" popovertarget="file-menu" aria-haspopup="menu"&gt;File&lt;/button&gt;
+    &lt;div class="dropdown" id="file-menu" popover role="menu" aria-label="File"&gt;
+        &lt;h3 class="dropdown-header"&gt;Document&lt;/h3&gt;
+        &lt;button type="button" role="menuitem"&gt;New&lt;/button&gt;
+        &lt;button type="button" role="menuitem"&gt;Open…&lt;/button&gt;
+        &lt;button type="button" role="menuitem" disabled&gt;Save&lt;/button&gt;
+        &lt;hr class="dropdown-divider" /&gt;
+        &lt;button type="button" role="menuitem"&gt;Print…&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class="group"&gt;
+        &lt;button type="button" class="button button-primary"&gt;Publish&lt;/button&gt;
+        &lt;button type="button" class="button button-primary dropdown-toggle dropdown-split" popovertarget="publish-menu" aria-haspopup="menu" aria-label="More ways to publish"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="dropdown dropdown-end" id="publish-menu" popover role="menu" aria-label="Publish"&gt;
+        &lt;button type="button" role="menuitem"&gt;Publish later&lt;/button&gt;
+        &lt;button type="button" role="menuitem"&gt;Save as draft&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;button type="button" class="button dropdown-toggle" popovertarget="pages"&gt;Pages&lt;/button&gt;
+    &lt;ul class="dropdown dropdown-up" id="pages" popover&gt;
+        &lt;li&gt;&lt;a href="#dropdowns" aria-current="page"&gt;Dropdowns&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#tooltips"&gt;Tooltips&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#dialogs"&gt;Dialogs&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 

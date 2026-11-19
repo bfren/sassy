@@ -7,6 +7,8 @@
  *   (the WAI-ARIA toolbar pattern).
  * - Tooltips: shows popover tooltips on hover and focus, and positions them in browsers
  *   without CSS anchor positioning.
+ * - Dropdowns: keeps a popovertarget button's aria-expanded in step with its menu, positions the menu in
+ *   browsers without CSS anchor positioning, and gives role="menu" its arrow keys, Home, End and Tab.
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
@@ -155,15 +157,24 @@
 		anchored.set(el, trigger);
 	};
 
-	/** Places an element above its trigger (or below, if there is no room) without anchor positioning. */
-	const place = (trigger, el) => {
+	/**
+	 * Places an element beside its trigger without anchor positioning: above and centred by default (tooltips),
+	 * or below and lined up with the trigger's start or end (dropdowns). It moves to the other side if there
+	 * is no room, and is kept on screen.
+	 */
+	const place = (trigger, el, { below = false, align = "centre" } = {}) => {
 		el.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
 		const offset = parseFloat(getComputedStyle(el).marginTop) || 0;
 		const t = trigger.getBoundingClientRect();
 		const r = el.getBoundingClientRect();
 		const above = t.top - r.height - offset;
-		const top = above >= 0 ? above : t.bottom + offset;
-		const left = Math.min(Math.max(t.left + (t.width - r.width) / 2, offset), innerWidth - r.width - offset);
+		const under = t.bottom + offset;
+		const top = below ? (under + r.height <= innerHeight || above < 0 ? under : above) : above >= 0 ? above : under;
+		const rtl = getComputedStyle(trigger).direction === "rtl";
+		const start = rtl ? t.right - r.width : t.left;
+		const end = rtl ? t.left : t.right - r.width;
+		const x = { centre: t.left + (t.width - r.width) / 2, start, end }[align];
+		const left = Math.min(Math.max(x, offset), innerWidth - r.width - offset);
 		Object.assign(el.style, { margin: "0", top: `${top}px`, left: `${left}px` });
 	};
 
@@ -236,6 +247,84 @@
 		if (e.key === "Escape") {
 			document.querySelectorAll('[role="tooltip"][popover]').forEach(tooltip => isOpen(tooltip) && hide(tooltip, 0));
 		}
+	});
+
+	//  =================================================================
+	//  Dropdowns: popovers opened by a popovertarget button
+	//  =================================================================
+
+	// The browser opens and closes them, on Escape and a click outside too, and returns focus to the button.
+	// This keeps the button's aria-expanded in step, places the menu, and gives role="menu" its keys.
+
+	const invokers = new WeakMap(); // popover -> the button that last opened it
+
+	/** The button that opens a popover, if one does: the one last used, or the first that names it. */
+	const invokerOf = el =>
+		invokers.get(el) ?? [...document.querySelectorAll("[popovertarget]")].find(b => b.getAttribute("popovertarget") === el.id);
+
+	/** The items of a menu that can be chosen. */
+	const menuItems = menu => [...menu.querySelectorAll('[role="menuitem"]')].filter(enabled);
+
+	document.addEventListener(
+		"click",
+		e => {
+			const button = e.target.closest?.("[popovertarget]");
+			const el = button && document.getElementById(button.getAttribute("popovertarget"));
+			if (el) invokers.set(el, button);
+		},
+		true // before the browser opens the popover
+	);
+
+	// toggle events don't bubble, so these listen as they pass down to the popover
+	document.addEventListener(
+		"beforetoggle",
+		e => {
+			const button = e.newState === "open" && invokerOf(e.target);
+			if (button && anchorPositioning) anchor(button, e.target);
+		},
+		true
+	);
+
+	document.addEventListener(
+		"toggle",
+		e => {
+			const menu = e.target;
+			const button = invokerOf(menu);
+			if (!button) return;
+			const open = e.newState === "open";
+			button.setAttribute("aria-expanded", String(open));
+			if (!open) return;
+			if (!anchorPositioning) {
+				// shortcut: placed once the menu is shown, so it can be measured - it may appear in the
+				// wrong place for a frame first; hide it in beforetoggle if that ever shows
+				const style = getComputedStyle(menu);
+				place(button, menu, {
+					below: style.getPropertyValue("--sassy-dropdown-side").trim() !== "block-start",
+					align: style.getPropertyValue("--sassy-dropdown-align").trim() === "span-inline-start" ? "end" : "start"
+				});
+			}
+			if (menu.matches('[role="menu"]')) menuItems(menu)[0]?.focus();
+		},
+		true
+	);
+
+	document.addEventListener("keydown", e => {
+		const menu = e.target.closest?.('[role="menu"][popover]');
+		if (!menu) return;
+		// Tab leaves the menu: hiding it returns focus to the button, and Tab then moves on from there
+		if (e.key === "Tab") return menu.hidePopover();
+		const next = itemForKey(menuItems(menu), e.target, e.key, true);
+		if (next) {
+			e.preventDefault();
+			next.focus();
+		}
+	});
+
+	// choosing an item closes the menu
+	document.addEventListener("click", e => {
+		const item = e.target.closest?.('a, button, [role="menuitem"]');
+		const menu = item?.closest("[popover]");
+		if (menu && !item.hasAttribute("popovertarget") && isOpen(menu) && invokerOf(menu)) menu.hidePopover();
 	});
 
 	//  =================================================================

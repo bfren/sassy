@@ -2,6 +2,13 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- Dropdowns: `%bf-dropdown` styles a popover menu opened by a `popovertarget` button, placed below it by CSS anchor positioning. `-up` and `-end` change where it opens, `-header` and `-divider` group its items, `%bf-dropdown-toggle` adds a chevron to the button, and `%bf-dropdown-split` makes the chevron button of a split button.
+- `sassy.js` keeps a `popovertarget` button's `aria-expanded` up to date, gives `role="menu"` its arrow keys, Home, End and Tab, closes a menu when an item is chosen, and places menus in browsers without CSS anchor positioning.
+
 ## [0.4.0] - 2026-11-19
 
 > **Upgrading from 0.3.0.** Sassy now needs Dart Sass 1.108 or later, and outputs everything in cascade layers. Your own unlayered CSS now beats Sassy's whatever its specificity, so to keep Sassy's rules on top, put your CSS in a layer after it, for example `@layer reset, sassy, app;`. Also check for these renames: `%bf-dialog-close` is now `%bf-close`, `%bf-text-wrap-hover` is now `%bf-text-truncate`, `make-passes()` is now `make-layers()`, and if you load files directly, the forms and components folders and some component files have moved. If your own CSS reads a `--sassy-*` property such as `var(--sassy-radius)`, read its Sass variable instead. Each change is listed under Changed.

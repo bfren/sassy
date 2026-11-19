@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, and opening tooltips beside their trigger.
+ * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, tooltips and dropdowns.
  *
  *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
  *
@@ -142,4 +142,71 @@ test("positioning with anchor positioning: the tooltip anchors to whichever trig
 	focus($("b"));
 	assert.equal(anchorOf($("b")), name);
 	assert.equal(anchorOf($("a")), ""); // the name moves, so only one trigger holds it
+});
+
+/** A page with a dropdown menu. jsdom has no popovers, so opening, closing and the toggle events are stubbed. */
+const dropdownPage = (menuStyle = "") => {
+	const window = load(`
+		<style>[popover] { margin: 2px 0; } [popover][data-opened="true"] { display: block; }</style>
+		<button id="open" popovertarget="menu" aria-haspopup="menu">Actions</button>
+		<div id="menu" popover role="menu" style="${menuStyle}">
+			<button id="m1" role="menuitem">Copy</button>
+			<button id="m2" role="menuitem" disabled>Cut</button>
+			<button id="m3" role="menuitem">Paste</button>
+		</div>`, window => (window.CSS.supports = () => false));
+	const { HTMLElement, Event } = window;
+	const matches = HTMLElement.prototype.matches;
+	HTMLElement.prototype.matches = function (s) { return s === ":popover-open" ? this.dataset.opened === "true" : matches.call(this, s); };
+	HTMLElement.prototype.hidePopover = function () { delete this.dataset.opened; };
+	const $ = id => window.document.getElementById(id);
+	const box = (el, left, top, width, height) =>
+		(el.getBoundingClientRect = () => ({ left, top, width, height, right: left + width, bottom: top + height }));
+	box($("menu"), 0, 0, 160, 100);
+	const toggle = state => {
+		if (state === "open") $("menu").dataset.opened = "true";
+		$("menu").dispatchEvent(Object.assign(new Event("toggle"), { newState: state }));
+	};
+	return { window, $, box, toggle };
+};
+
+test("dropdowns: opening sets aria-expanded, places the menu below its button, and focuses the first item", () => {
+	const { window, $, box, toggle } = dropdownPage();
+	box($("open"), 100, 50, 80, 30);
+	$("open").click(); // remembers which button opened the menu
+	toggle("open");
+	assert.equal($("open").getAttribute("aria-expanded"), "true");
+	assert.deepEqual([$("menu").style.top, $("menu").style.left], ["82px", "100px"]); // 50 + 30 + 2, lined up with the start
+	assert.equal(window.document.activeElement, $("m1"));
+
+	box($("open"), 100, 700, 80, 30); // 768px tall window: no room below, so above
+	toggle("open");
+	assert.equal($("menu").style.top, "598px"); // 700 - 100 - 2
+
+	toggle("closed");
+	assert.equal($("open").getAttribute("aria-expanded"), "false");
+});
+
+test("dropdowns: %bf-dropdown-end lines the menu up with the button's end", () => {
+	const { $, box, toggle } = dropdownPage("--sassy-dropdown-align: span-inline-start");
+	box($("open"), 300, 50, 80, 30);
+	toggle("open");
+	assert.equal($("menu").style.left, "220px"); // 300 + 80 - 160
+});
+
+test("dropdowns: arrow keys move through enabled items, Tab and choosing an item close the menu", () => {
+	const { window, $, toggle } = dropdownPage();
+	toggle("open");
+	press(window, $("m1"), "ArrowDown");
+	assert.equal(window.document.activeElement, $("m3")); // Cut is disabled
+	press(window, $("m3"), "ArrowDown");
+	assert.equal(window.document.activeElement, $("m1"));
+	press(window, $("m1"), "End");
+	assert.equal(window.document.activeElement, $("m3"));
+
+	press(window, $("m3"), "Tab");
+	assert.equal($("menu").dataset.opened, undefined);
+
+	toggle("open");
+	$("m1").click();
+	assert.equal($("menu").dataset.opened, undefined);
 });

@@ -1,0 +1,31 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+@use "../4-utilities/460-shadow-variables" as *;
+
+$sassy-dropdown-bg: var(--sassy-dropdown-bg, #fff);
+$sassy-dropdown-colour: var(--sassy-dropdown-colour, #{colour("grey", 900)});
+$sassy-dropdown-border-width: var(--sassy-dropdown-border-width, 1px);
+$sassy-dropdown-border-colour: var(--sassy-dropdown-border-colour, #{colour("grey", 200)});
+$sassy-dropdown-radius: var(--sassy-dropdown-radius, $sassy-radius);
+$sassy-dropdown-shadow: var(--sassy-dropdown-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.15)});
+$sassy-dropdown-min-width: var(--sassy-dropdown-min-width, 10rem);
+$sassy-dropdown-offset: var(--sassy-dropdown-offset, 0.125rem);
+$sassy-dropdown-padding-y: var(--sassy-dropdown-padding-y, #{$sassy-padding-unit * 2});
+$sassy-dropdown-item-padding-y: var(--sassy-dropdown-item-padding-y, #{$sassy-padding-unit});
+$sassy-dropdown-item-padding-x: var(--sassy-dropdown-item-padding-x, #{$sassy-padding-unit * 4});
+
+// an item under the pointer or with focus, mixed from the text colour so it shades any background
+$sassy-dropdown-hover-bg: var(--sassy-dropdown-hover-bg, color-mix(in oklab, currentColor 8%, #{$sassy-dropdown-bg}));
+$sassy-dropdown-current-bg: var(--sassy-dropdown-current-bg, var(--sassy-theme-primary));
+$sassy-dropdown-current-colour: var(--sassy-dropdown-current-colour, var(--sassy-theme-primary-contrast));
+$sassy-dropdown-disabled-colour: var(--sassy-dropdown-disabled-colour, #{colour("grey", 400)});
+$sassy-dropdown-header-colour: var(--sassy-dropdown-header-colour, #{colour("grey", 600)});
+
+// Where the menu opens: below or above its button, and lined up with its start or end.
+// %bf-dropdown-up and %bf-dropdown-end change them, and sassy.js reads them where CSS anchor positioning is missing.
+$sassy-dropdown-side: var(--sassy-dropdown-side, block-end);
+$sassy-dropdown-align: var(--sassy-dropdown-align, span-inline-end);
+
+// The chevron of %bf-dropdown-toggle, used as a mask - only its shape matters, the colour is the text colour.
+$sassy-dropdown-icon: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e" !default;

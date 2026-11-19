@@ -1,20 +1,20 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, dropdowns and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, dropdowns and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, dropdowns and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and the arrow keys of dropdown menus need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
 ```
 
-`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does six things:
+`sassy.js` finds everything by ARIA role and standard attributes, never by class name, so it works whatever selectors you extend the placeholders onto. It does seven things:
 
 | Feature          | What `sassy.js` does                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
@@ -22,16 +22,17 @@ Buttons, button groups, close buttons, badges, navigation, breadcrumbs, paginati
 | Tabs             | Switches panels when a tab is clicked, and moves between tabs with the arrow keys, Home and End                           |
 | Toolbars         | Makes a toolbar one stop in the tab order, and moves between its controls with the arrow keys, Home and End               |
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
+| Dropdowns        | Updates `aria-expanded`, gives `role="menu"` its keys, and places menus in browsers without CSS anchor positioning        |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 | Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |
 
 The components rely on these browser features:
 
-| Feature                                  | Used by  | Baseline                                              | Without it                    |
-| ---------------------------------------- | -------- | ----------------------------------------------------- | ----------------------------- |
-| Popover API (`popover`)                  | Tooltips | Widely available, since April 2024                    | -                             |
-| `command` and `commandfor`               | Dialogs  | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour |
-| CSS anchor positioning (`position-area`) | Tooltips | Newly available, since January 2026                   | `sassy.js` places the tooltip |
+| Feature                                  | Used by             | Baseline                                              | Without it                    |
+| ---------------------------------------- | ------------------- | ----------------------------------------------------- | ----------------------------- |
+| Popover API (`popover`)                  | Tooltips, dropdowns | Widely available, since April 2024                    | -                             |
+| `command` and `commandfor`               | Dialogs             | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour |
+| CSS anchor positioning (`position-area`) | Tooltips, dropdowns | Newly available, since January 2026                   | `sassy.js` places them        |
 
 With `sassy.js`, everything works in every browser that supports popovers, which all major browsers have since April 2024.
 
@@ -89,6 +90,10 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-spinner-{theme colour}`, `%bf-spinner-small`                                               | A spinner in a theme colour, or small, combined with either                             |
 | `%bf-skeleton`                                                                                  | A faded block in place of content while it loads - see [Skeletons](#skeletons)          |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
+| `%bf-dropdown`                                                                                  | A menu in a popover (`popover`, opened by a `popovertarget` button)                     |
+| `%bf-dropdown-up`, `%bf-dropdown-end`                                                           | Opens above the button, or lines up with its end                                        |
+| `%bf-dropdown-header`, `%bf-dropdown-divider`                                                   | A label for a group of items, and a line between groups                                 |
+| `%bf-dropdown-toggle`, `%bf-dropdown-split`                                                     | A chevron after a button's text, or a chevron-only split button                         |
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
 | `%bf-dialog-title`                                                                              | The dialog's heading                                                                    |
@@ -949,6 +954,52 @@ Use `popover="manual"` rather than `popover`, so that showing a tooltip does not
 
 A tooltip should be a short description of something that already has a name. Touch screens have no hover, so do not put anything people need only in a tooltip.
 
+## Dropdowns
+
+A dropdown is a menu in a popover, opened by a button's `popovertarget`. The browser opens and closes it, on Escape or a click outside too, and returns focus to the button, so it works without `sassy.js`. CSS anchor positioning places it below the button, lined up with its start, and moves it when there is no room:
+
+```sass
+.dropdown
+    @extend %bf-dropdown
+
+.dropdown-toggle
+    @extend %bf-dropdown-toggle
+
+.dropdown-divider
+    @extend %bf-dropdown-divider
+```
+
+```css
+@layer sassy.base.components {
+  .dropdown {
+    inset: auto;
+    margin: var(--sassy-dropdown-offset, 0.125rem) 0;
+    position-area: var(--sassy-dropdown-side, block-end) var(--sassy-dropdown-align, span-inline-end);
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+  [aria-expanded=true].dropdown-toggle::after {
+    transform: rotate(180deg);
+  }
+}
+```
+
+```html
+<button type="button" class="button dropdown-toggle" popovertarget="file-menu" aria-haspopup="menu">File</button>
+<div class="dropdown" id="file-menu" popover role="menu" aria-label="File">
+    <button type="button" role="menuitem">New</button>
+    <button type="button" role="menuitem">Open…</button>
+    <hr class="dropdown-divider" />
+    <button type="button" role="menuitem">Print…</button>
+</div>
+```
+
+- **Choose the pattern by what the items do.** For actions, give the popover `role="menu"`, its items `role="menuitem"` and the button `aria-haspopup="menu"`: `sassy.js` then focuses the first item when the menu opens, and moves between items with the arrow keys, Home and End. For links to other pages, leave the roles out: people reach the links with Tab, as in any list, and the popover can be a `<ul>`.
+- **`sassy.js` also** keeps the button's `aria-expanded` up to date, which turns the chevron of `%bf-dropdown-toggle`, closes the menu when an item is chosen or Tab leaves it, and places the menu in browsers without CSS anchor positioning.
+- **Extend `%bf-dropdown-up` to open above the button, and `%bf-dropdown-end` to line the menu up with its end.** They combine.
+- **Group items** with `%bf-dropdown-header`, a label that can't be chosen, and `%bf-dropdown-divider`, on an `<hr>`. Mark the current page with `aria-current="page"`, and items that can't be used with `disabled` or `aria-disabled="true"`.
+- **For a split button**, put an action button and a chevron-only button that extends `%bf-dropdown-toggle` and `%bf-dropdown-split` in a [button group](#button-groups). Give the chevron button an `aria-label`, such as "More ways to publish".
+- **In a navbar**, a link-styled button can open a dropdown in the same way. The menu floats below it even while the navbar is collapsed.
+
 ## Dialogs
 
 Dialogs style the native `<dialog>` element. Buttons open and close them with `command` and `commandfor`, so no script is needed in current browsers. The button in the header is a [close button](#close-buttons):
@@ -1066,6 +1117,13 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |
+| `--sassy-dropdown-bg`, `--sassy-dropdown-colour`, `--sassy-dropdown-radius`, `--sassy-dropdown-shadow`                               | Dropdown background, text, corners and shadow                                                     |
+| `--sassy-dropdown-border-width`, `--sassy-dropdown-border-colour`                                                                    | The border, and the line of a divider                                                             |
+| `--sassy-dropdown-min-width`, `--sassy-dropdown-offset`, `--sassy-dropdown-padding-y`                                                | Width, gap from the button, and space above and below the items                                   |
+| `--sassy-dropdown-item-padding-y`, `--sassy-dropdown-item-padding-x`                                                                 | Item padding                                                                                      |
+| `--sassy-dropdown-hover-bg`, `--sassy-dropdown-current-bg`, `--sassy-dropdown-current-colour`                                        | An item under the pointer or with focus, and the current item                                     |
+| `--sassy-dropdown-disabled-colour`, `--sassy-dropdown-header-colour`                                                                 | Items that can't be used, and headers                                                             |
+| `--sassy-dropdown-side`, `--sassy-dropdown-align`                                                                                    | Where the menu opens - `%bf-dropdown-up` and `-end` set them                                      |
 | `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                                                     |
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
