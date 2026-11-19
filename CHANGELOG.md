@@ -23,6 +23,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Added
 
+- Skeletons: `%bf-skeleton`, a faded block one line high that stands in for content while it loads, drawn in the text colour and sized with `%bf-width-{5-100}`. A shimmer crosses it, except for people who prefer reduced motion.
 - Accordions: `%bf-accordion` on a `<div>` styles its native `<details>` as sections that open and close, with a chevron that turns and an open header tinted with primary. They open and close smoothly where browsers support `::details-content`. `%bf-accordion-flush` removes the outer border.
 - Spinners: `%bf-spinner`, a ring that turns, and `%bf-spinner-grow`, a dot that grows and fades, drawn in the text colour and sized in `em`. `%bf-spinner-{theme colour}` and `%bf-spinner-small` combine with either. They slow down for people who prefer reduced motion.
 - Progress bars: `%bf-progress` styles a native `<progress>`, with a bar that slides along the track when it has no value. `%bf-progress-{theme colour}` colours the bar, `%bf-progress-animated` adds moving stripes, and `%bf-progress-stacked` shows several bars in one track. Moving parts slow down for people who prefer reduced motion.

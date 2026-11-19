@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -999,6 +999,64 @@
         &lt;span class="spinner spinner-small" aria-hidden="true"&gt;&lt;/span&gt;
         Saving…
     &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="skeletons">
+            <h2>Skeletons</h2>
+            <p>Faded blocks that stand in for content while it loads, sized with the width utilities. The loading card has <code>aria-busy="true"</code> and hidden text for screen readers, and a shimmer crosses the blocks unless you prefer reduced motion.</p>
+            <div class="demo">
+                <div class="cards">
+                    <article class="card" aria-busy="true">
+                        <div class="card-body">
+                            <span class="visually-hidden">Loading…</span>
+                            <h3 aria-hidden="true"><span class="skeleton width-50"></span></h3>
+                            <p aria-hidden="true">
+                                <span class="skeleton width-100"></span>
+                                <span class="skeleton width-75"></span>
+                                <span class="skeleton width-50"></span>
+                            </p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-body">
+                            <h3>Loaded</h3>
+                            <p>When the content arrives, it replaces the skeletons, and the card loses <code>aria-busy</code>.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.skeleton
+    @extend %bf-skeleton
+
+.width-50
+    @extend %bf-width-50
+
+.width-75
+    @extend %bf-width-75
+
+.width-100
+    @extend %bf-width-100</code></pre>
+<pre data-lang="html"><code>&lt;div class="cards"&gt;
+    &lt;article class="card" aria-busy="true"&gt;
+        &lt;div class="card-body"&gt;
+            &lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;
+            &lt;h3 aria-hidden="true"&gt;&lt;span class="skeleton width-50"&gt;&lt;/span&gt;&lt;/h3&gt;
+            &lt;p aria-hidden="true"&gt;
+                &lt;span class="skeleton width-100"&gt;&lt;/span&gt;
+                &lt;span class="skeleton width-75"&gt;&lt;/span&gt;
+                &lt;span class="skeleton width-50"&gt;&lt;/span&gt;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
+    &lt;article class="card"&gt;
+        &lt;div class="card-body"&gt;
+            &lt;h3&gt;Loaded&lt;/h3&gt;
+            &lt;p&gt;When the content arrives, it replaces the skeletons, and the card loses &lt;code&gt;aria-busy&lt;/code&gt;.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/article&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

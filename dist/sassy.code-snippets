@@ -133,6 +133,7 @@
   "%bf-spinner-grey-light": { "scope": "sass,scss", "prefix": "bf-spinner-grey-light", "body": "bf-spinner-grey-light", "description": "--sassy-spinner-colour: var(--sassy-theme-grey-light);" },
   "%bf-spinner-grey-dark": { "scope": "sass,scss", "prefix": "bf-spinner-grey-dark", "body": "bf-spinner-grey-dark", "description": "--sassy-spinner-colour: var(--sassy-theme-grey-dark);" },
   "%bf-spinner-small": { "scope": "sass,scss", "prefix": "bf-spinner-small", "body": "bf-spinner-small", "description": "--sassy-spinner-size: 1em; --sassy-spinner-width: 0.2em;" },
+  "%bf-skeleton": { "scope": "sass,scss", "prefix": "bf-skeleton", "body": "bf-skeleton", "description": "A faded block in place of content while it loads - see Skeletons" },
   "%bf-tooltip": { "scope": "sass,scss", "prefix": "bf-tooltip", "body": "bf-tooltip", "description": "A tooltip (role=\"tooltip\" with popover=\"manual\")" },
   "%bf-dialog": { "scope": "sass,scss", "prefix": "bf-dialog", "body": "bf-dialog", "description": "A <dialog>, at the default width or smaller or larger" },
   "%bf-dialog-small": { "scope": "sass,scss", "prefix": "bf-dialog-small", "body": "bf-dialog-small", "description": "--sassy-dialog-width: 20rem;" },

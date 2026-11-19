@@ -16,6 +16,7 @@
 @use "1-components/140-alert" as alert
 @use "1-components/141-progress" as progress
 @use "1-components/142-spinner" as spinner
+@use "1-components/143-skeleton" as skeleton
 @use "1-components/150-tooltip" as tooltip
 @use "1-components/153-dialog" as dialog
 @use "2-forms/210-label" as form-label
@@ -77,6 +78,7 @@
         @include alert.utilities
         @include progress.utilities
         @include spinner.utilities
+        @include skeleton.utilities
         @include tooltip.utilities
         @include dialog.utilities
     @include make.layer(forms)

@@ -1,0 +1,9 @@
+@use "../4-utilities/450-rounded-variables" as *;
+
+// A skeleton is drawn in the text colour, faded, so it shows on any background - a button, for example.
+$sassy-skeleton-colour: var(--sassy-skeleton-colour, currentColor);
+$sassy-skeleton-opacity: var(--sassy-skeleton-opacity, 0.25);
+$sassy-skeleton-radius: var(--sassy-skeleton-radius, $sassy-radius);
+
+// How long the shimmer takes to cross a skeleton. It does not run with prefers-reduced-motion.
+$sassy-skeleton-duration: 2s !default;
