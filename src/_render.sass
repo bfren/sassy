@@ -21,6 +21,7 @@
 @use "1-components/151-popover" as popover
 @use "1-components/152-dropdown" as dropdown
 @use "1-components/153-dialog" as dialog
+@use "1-components/154-offcanvas" as offcanvas
 @use "2-forms/210-label" as form-label
 @use "2-forms/220-control" as form-control
 @use "2-forms/230-select" as form-select
@@ -85,6 +86,7 @@
         @include popover.utilities
         @include dropdown.utilities
         @include dialog.utilities
+        @include offcanvas.utilities
     @include make.layer(forms)
         @include form-label.utilities
         @include form-control.utilities

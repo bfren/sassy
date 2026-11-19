@@ -13,6 +13,7 @@
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
+ * - Closing dialogs: a fallback for closedby="any", so a click on a modal dialog's backdrop closes it.
  * - Dismissing: a button with commandfor and command="--dismiss" hides the element it names, such as an alert.
  *
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
@@ -390,6 +391,21 @@
 			const target = button && document.getElementById(button.getAttribute("commandfor"));
 			const command = commands[button?.getAttribute("command")];
 			if (target && command) command(target);
+		});
+	}
+
+	//  =================================================================
+	//  Closing dialogs from the backdrop: fallback for closedby="any"
+	//  =================================================================
+
+	if (!("closedBy" in HTMLDialogElement.prototype)) {
+		// a click on the backdrop is a click on the dialog itself, outside its box
+		document.addEventListener("click", e => {
+			const dialog = e.target;
+			if (!dialog.matches?.('dialog[closedby="any"]:modal')) return;
+			const r = dialog.getBoundingClientRect();
+			const inside = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+			if (!inside) dialog.close();
 		});
 	}
 

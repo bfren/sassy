@@ -2588,6 +2588,344 @@
       justify-content: flex-end;
       padding: var(--sassy-dialog-padding-y, 1rem) var(--sassy-dialog-padding-x, 1.25rem);
     }
+    @keyframes bf-offcanvas-slide {
+      from {
+        translate: var(--sassy-offcanvas-from);
+      }
+    }
+    @keyframes bf-offcanvas-fade {
+      from {
+        opacity: 0;
+      }
+    }
+    .bf-offcanvas-start {
+      --sassy-offcanvas-from: -100% 0;
+      border-radius: 0;
+      border-width: 0;
+      border-inline-end-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-inline-start: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: 100%;
+      inline-size: var(--sassy-offcanvas-width, 25rem);
+      inset-block-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-start:dir(rtl) {
+      --sassy-offcanvas-from: 100% 0;
+    }
+    .bf-offcanvas-start[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-start::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-start[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-start[open]::backdrop {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-end {
+      --sassy-offcanvas-from: 100% 0;
+      border-radius: 0;
+      border-width: 0;
+      border-inline-start-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-inline-end: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: 100%;
+      inline-size: var(--sassy-offcanvas-width, 25rem);
+      inset-block-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-end:dir(rtl) {
+      --sassy-offcanvas-from: -100% 0;
+    }
+    .bf-offcanvas-end[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-end::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-end[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-end[open]::backdrop {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-top {
+      --sassy-offcanvas-from: 0 -100%;
+      border-radius: 0;
+      border-width: 0;
+      border-block-end-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-block-start: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: var(--sassy-offcanvas-height, 30vh);
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-top[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-top::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-top[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-top[open]::backdrop {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-bottom {
+      --sassy-offcanvas-from: 0 100%;
+      border-radius: 0;
+      border-width: 0;
+      border-block-start-width: var(--sassy-dialog-border-width, 1px);
+      inset: auto;
+      inset-block-end: 0;
+      margin: 0;
+      max-block-size: 100%;
+      max-inline-size: 100%;
+      position: fixed;
+      transition: translate var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+      translate: var(--sassy-offcanvas-from);
+      block-size: var(--sassy-offcanvas-height, 30vh);
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-bottom[open] {
+      animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      translate: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom[open] {
+        animation: none;
+      }
+    }
+    .bf-offcanvas-bottom::backdrop {
+      opacity: 0;
+      transition: opacity var(--sassy-offcanvas-duration, 0.3s) ease-in-out, overlay var(--sassy-offcanvas-duration, 0.3s) allow-discrete, display var(--sassy-offcanvas-duration, 0.3s) allow-discrete;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom::backdrop {
+        transition: none;
+      }
+    }
+    .bf-offcanvas-bottom[open]::backdrop {
+      animation: bf-offcanvas-fade var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-offcanvas-bottom[open]::backdrop {
+        animation: none;
+      }
+    }
+    @media (width >= 576px) {
+      .bf-offcanvas-sm:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-sm:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 768px) {
+      .bf-offcanvas-md:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-md:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 992px) {
+      .bf-offcanvas-lg:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-lg:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 1200px) {
+      .bf-offcanvas-xl:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-xl:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 1400px) {
+      .bf-offcanvas-2xl:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-2xl:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
+    @media (width >= 1600px) {
+      .bf-offcanvas-3xl:not(:modal) {
+        animation: none;
+        background-color: transparent;
+        block-size: auto;
+        border: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        inline-size: auto;
+        inset: auto;
+        max-block-size: none;
+        max-inline-size: none;
+        position: static;
+        transition: none;
+        translate: none;
+      }
+      .bf-offcanvas-3xl:not(:modal) button[command=close] {
+        display: none;
+      }
+    }
   }
   @layer forms {
     .bf-form-label {

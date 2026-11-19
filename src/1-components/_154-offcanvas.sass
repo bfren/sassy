@@ -1,0 +1,123 @@
+@use "sass:list"
+@use "sass:map"
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: offcanvas
+//  =================================================================
+
+//  An offcanvas is a %bf-dialog that slides in from one edge of the viewport: combine it with
+//  %bf-offcanvas-start, -end, -top or -bottom, open it with <button commandfor="id" command="show-modal">,
+//  and use the dialog's header, title, body and footer inside it. Add closedby="any" to close it when the
+//  backdrop is clicked. With %bf-offcanvas-{breakpoint} it sits in the page from that breakpoint up.
+
+// Each side: where it sits, which edge keeps its border, and where it slides from (in left-to-right text, then right-to-left)
+$-sides: (
+    start: (inset: inset-inline-start, border: border-inline-end-width, size: inline, from: (-100% 0, 100% 0)),
+    end: (inset: inset-inline-end, border: border-inline-start-width, size: inline, from: (100% 0, -100% 0)),
+    top: (inset: inset-block-start, border: border-block-end-width, size: block, from: (0 -100%, 0 -100%)),
+    bottom: (inset: inset-block-end, border: border-block-start-width, size: block, from: (0 100%, 0 100%))
+)
+
+$-slide: make.name("offcanvas", "slide")
+$-fade: make.name("offcanvas", "fade")
+
+@mixin -side($side)
+    $from: map.get($side, from)
+
+    // where it slides from, read by the closed state and the opening animation
+    --sassy-offcanvas-from: #{list.nth($from, 1)}
+    border-radius: 0
+    border-width: 0
+    #{map.get($side, border)}: $sassy-dialog-border-width
+    // the browser centres a modal dialog and keeps it off the edges
+    inset: auto
+    #{map.get($side, inset)}: 0
+    margin: 0
+    max-block-size: 100%
+    max-inline-size: 100%
+    // fixed while it slides out too, when it is no longer :modal and the browser would make it absolute
+    position: fixed
+    // closing slides out: display and overlay change at the end, so it stays shown while it moves
+    transition: translate $sassy-offcanvas-duration ease-in-out, overlay $sassy-offcanvas-duration allow-discrete, display $sassy-offcanvas-duration allow-discrete
+    translate: var(--sassy-offcanvas-from)
+
+    @if map.get($side, size) == inline
+        block-size: 100%
+        inline-size: $sassy-offcanvas-width
+        inset-block-start: 0
+    @else
+        block-size: $sassy-offcanvas-height
+        inline-size: 100%
+        inset-inline-start: 0
+
+    @media (prefers-reduced-motion: reduce)
+        transition: none
+
+    @if list.nth($from, 1) != list.nth($from, 2)
+        &:dir(rtl)
+            --sassy-offcanvas-from: #{list.nth($from, 2)}
+
+    // opening slides in
+    &[open]
+        animation: #{$-slide} $sassy-offcanvas-duration ease-in-out
+        translate: none
+
+        @media (prefers-reduced-motion: reduce)
+            animation: none
+
+    &::backdrop
+        opacity: 0
+        transition: opacity $sassy-offcanvas-duration ease-in-out, overlay $sassy-offcanvas-duration allow-discrete, display $sassy-offcanvas-duration allow-discrete
+
+        @media (prefers-reduced-motion: reduce)
+            transition: none
+
+    &[open]::backdrop
+        animation: #{$-fade} $sassy-offcanvas-duration ease-in-out
+        opacity: 1
+
+        @media (prefers-reduced-motion: reduce)
+            animation: none
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.in-base
+        @keyframes #{$-slide}
+            from
+                translate: var(--sassy-offcanvas-from)
+
+        @keyframes #{$-fade}
+            from
+                opacity: 0
+
+    @each $name, $side in $-sides
+        @include make.single("offcanvas-" + $name)
+            @include -side($side)
+
+    // From the breakpoint up, a closed offcanvas is part of the page, such as a sidebar, and its close button
+    // is hidden. Hide the button that opens it too, with %bf-d-none-{breakpoint}.
+
+    @each $breakpoint, $width in $sassy-breakpoints
+        @include make.single("offcanvas" + $sassy-separator + $breakpoint)
+            @media (width >= #{$width})
+                &:not(:modal)
+                    animation: none
+                    background-color: transparent
+                    block-size: auto
+                    border: 0
+                    box-shadow: none
+                    display: flex
+                    flex-direction: column
+                    inline-size: auto
+                    inset: auto
+                    max-block-size: none
+                    max-inline-size: none
+                    position: static
+                    transition: none
+                    translate: none
+
+                    & button[command="close"]
+                        display: none

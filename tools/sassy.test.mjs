@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, tooltips and dropdowns.
+ * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, closing dialogs, tooltips, dropdowns and popovers.
  *
  *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
  *
@@ -60,6 +60,28 @@ test("dismissing: a --dismiss button hides the element it names, and other comma
 	assert.equal($("alert").hidden, false);
 	$("icon").click(); // a click on something inside the button
 	assert.equal($("alert").hidden, true);
+});
+
+test("closing dialogs: a click on the backdrop of a closedby=\"any\" modal closes it, and a click inside does not", () => {
+	const window = load(`
+		<dialog id="any" closedby="any" open><p id="text">Menu</p></dialog>
+		<dialog id="none" open></dialog>`);
+	const { HTMLElement, MouseEvent } = window;
+	// jsdom has no top layer, so an open dialog stands in for a modal one
+	const matches = HTMLElement.prototype.matches;
+	HTMLElement.prototype.matches = function (s) { return matches.call(this, s.replace(":modal", "[open]")); };
+	HTMLElement.prototype.close = function () { this.removeAttribute("open"); };
+	const $ = id => window.document.getElementById(id);
+	for (const id of ["any", "none"]) $(id).getBoundingClientRect = () => ({ left: 0, top: 0, right: 400, bottom: 800 });
+	const click = (el, x) => el.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: x, clientY: 100 }));
+
+	click($("any"), 200); // on the dialog's own padding
+	click($("text"), 200);
+	assert.equal($("any").open, true);
+	click($("any"), 600);
+	assert.equal($("any").open, false);
+	click($("none"), 600);
+	assert.equal($("none").open, true); // closedby is not set
 });
 
 test("toolbars: one tab stop, arrow keys wrap, Home and End jump, disabled controls and text fields are skipped", () => {

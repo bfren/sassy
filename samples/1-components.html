@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns, dialogs and offcanvas</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -1316,6 +1316,150 @@
         &lt;button type="button" class="button button-primary" commandfor="terms" command="close"&gt;Close&lt;/button&gt;
     &lt;/footer&gt;
 &lt;/dialog&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="offcanvas">
+            <h2>Offcanvas</h2>
+            <p>An offcanvas is a dialog that slides in from one edge. It opens with <code>command="show-modal"</code>, and <code>closedby="any"</code> closes it when the backdrop is clicked.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="button" commandfor="panel-start" command="show-modal">Start</button>
+                    <button type="button" class="button" commandfor="panel-end" command="show-modal">End</button>
+                    <button type="button" class="button" commandfor="panel-top" command="show-modal">Top</button>
+                    <button type="button" class="button" commandfor="panel-bottom" command="show-modal">Bottom</button>
+                </div>
+                <dialog class="dialog offcanvas-start" id="panel-start" closedby="any" aria-labelledby="panel-start-title">
+                    <header>
+                        <h2 id="panel-start-title">Menu</h2>
+                        <button type="button" class="close" commandfor="panel-start" command="close" aria-label="Close"></button>
+                    </header>
+                    <div class="dialog-body">
+                        <p>Slides in from the start edge. Click the backdrop, press Escape or use the close button to close it.</p>
+                    </div>
+                </dialog>
+                <dialog class="dialog offcanvas-end" id="panel-end" closedby="any" aria-labelledby="panel-end-title">
+                    <header>
+                        <h2 id="panel-end-title">Basket</h2>
+                        <button type="button" class="close" commandfor="panel-end" command="close" aria-label="Close"></button>
+                    </header>
+                    <div class="dialog-body">
+                        <p>Slides in from the end edge.</p>
+                    </div>
+                </dialog>
+                <dialog class="dialog offcanvas-top" id="panel-top" closedby="any" aria-labelledby="panel-top-title">
+                    <header>
+                        <h2 id="panel-top-title">Notice</h2>
+                        <button type="button" class="close" commandfor="panel-top" command="close" aria-label="Close"></button>
+                    </header>
+                    <div class="dialog-body">
+                        <p>Slides down from the top, as tall as <code>--sassy-offcanvas-height</code>.</p>
+                    </div>
+                </dialog>
+                <dialog class="dialog offcanvas-bottom" id="panel-bottom" closedby="any" aria-labelledby="panel-bottom-title">
+                    <header>
+                        <h2 id="panel-bottom-title">Cookies</h2>
+                        <button type="button" class="close" commandfor="panel-bottom" command="close" aria-label="Close"></button>
+                    </header>
+                    <div class="dialog-body">
+                        <p>Slides up from the bottom.</p>
+                    </div>
+                </dialog>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.offcanvas-start
+    @extend %bf-offcanvas-start
+
+.offcanvas-end
+    @extend %bf-offcanvas-end
+
+.offcanvas-top
+    @extend %bf-offcanvas-top
+
+.offcanvas-bottom
+    @extend %bf-offcanvas-bottom</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button" commandfor="panel-start" command="show-modal"&gt;Start&lt;/button&gt;
+    &lt;button type="button" class="button" commandfor="panel-end" command="show-modal"&gt;End&lt;/button&gt;
+    &lt;button type="button" class="button" commandfor="panel-top" command="show-modal"&gt;Top&lt;/button&gt;
+    &lt;button type="button" class="button" commandfor="panel-bottom" command="show-modal"&gt;Bottom&lt;/button&gt;
+&lt;/div&gt;
+&lt;dialog class="dialog offcanvas-start" id="panel-start" closedby="any" aria-labelledby="panel-start-title"&gt;
+    &lt;header&gt;
+        &lt;h2 id="panel-start-title"&gt;Menu&lt;/h2&gt;
+        &lt;button type="button" class="close" commandfor="panel-start" command="close" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="dialog-body"&gt;
+        &lt;p&gt;Slides in from the start edge. Click the backdrop, press Escape or use the close button to close it.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/dialog&gt;
+&lt;dialog class="dialog offcanvas-end" id="panel-end" closedby="any" aria-labelledby="panel-end-title"&gt;
+    &lt;header&gt;
+        &lt;h2 id="panel-end-title"&gt;Basket&lt;/h2&gt;
+        &lt;button type="button" class="close" commandfor="panel-end" command="close" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="dialog-body"&gt;
+        &lt;p&gt;Slides in from the end edge.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/dialog&gt;
+&lt;dialog class="dialog offcanvas-top" id="panel-top" closedby="any" aria-labelledby="panel-top-title"&gt;
+    &lt;header&gt;
+        &lt;h2 id="panel-top-title"&gt;Notice&lt;/h2&gt;
+        &lt;button type="button" class="close" commandfor="panel-top" command="close" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="dialog-body"&gt;
+        &lt;p&gt;Slides down from the top, as tall as &lt;code&gt;--sassy-offcanvas-height&lt;/code&gt;.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/dialog&gt;
+&lt;dialog class="dialog offcanvas-bottom" id="panel-bottom" closedby="any" aria-labelledby="panel-bottom-title"&gt;
+    &lt;header&gt;
+        &lt;h2 id="panel-bottom-title"&gt;Cookies&lt;/h2&gt;
+        &lt;button type="button" class="close" commandfor="panel-bottom" command="close" aria-label="Close"&gt;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="dialog-body"&gt;
+        &lt;p&gt;Slides up from the bottom.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/dialog&gt;</code></pre>
+</div>
+            <p>With <code>%bf-offcanvas-md</code>, the same dialog is a sidebar in the page from the md breakpoint up, and its close button is hidden. The button that opens it is hidden there with <code>%bf-d-none-md</code>.</p>
+            <div class="demo">
+                <button type="button" class="button d-none-md" commandfor="filters" command="show-modal">Filters</button>
+                <div class="with-sidebar">
+                    <dialog class="dialog offcanvas-start offcanvas-md" id="filters" closedby="any" aria-labelledby="filters-title">
+                        <header>
+                            <h2 id="filters-title">Filters</h2>
+                            <button type="button" class="close" commandfor="filters" command="close" aria-label="Close"></button>
+                        </header>
+                        <div class="dialog-body">
+                            <p>On narrow screens these filters slide in from the start; from the md breakpoint they are a sidebar.</p>
+                        </div>
+                    </dialog>
+                    <p>Results go here. Make the window narrower than 768px to see the Filters button.</p>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.offcanvas-md
+    @extend %bf-offcanvas-md
+
+.d-none-md
+    @extend %bf-d-none-md
+
+.with-sidebar
+    @extend %bf-d-flex
+    @extend %bf-gap-4</code></pre>
+<pre data-lang="html"><code>&lt;button type="button" class="button d-none-md" commandfor="filters" command="show-modal"&gt;Filters&lt;/button&gt;
+&lt;div class="with-sidebar"&gt;
+    &lt;dialog class="dialog offcanvas-start offcanvas-md" id="filters" closedby="any" aria-labelledby="filters-title"&gt;
+        &lt;header&gt;
+            &lt;h2 id="filters-title"&gt;Filters&lt;/h2&gt;
+            &lt;button type="button" class="close" commandfor="filters" command="close" aria-label="Close"&gt;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;div class="dialog-body"&gt;
+            &lt;p&gt;On narrow screens these filters slide in from the start; from the md breakpoint they are a sidebar.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/dialog&gt;
+    &lt;p&gt;Results go here. Make the window narrower than 768px to see the Filters button.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 

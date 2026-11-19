@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns, dialogs and offcanvas
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns, dialogs and offcanvas. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, popovers, dropdowns and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and the arrow keys of dropdown menus need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners, skeletons, popovers, dropdowns, dialogs and offcanvas need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation, dismissible alerts and the arrow keys of dropdown menus need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.4.0/dist/sassy.min.js" defer></script>
@@ -24,6 +24,7 @@ Buttons, button groups, close buttons, badges, navigation, breadcrumbs, paginati
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
 | Dropdowns        | Updates `aria-expanded`, gives `role="menu"` its keys, and places menus in browsers without CSS anchor positioning        |
 | Popovers         | Updates `aria-expanded`, and places popovers in browsers without CSS anchor positioning                                   |
+| Offcanvas        | Closes a dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`                        |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 | Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |
 
@@ -34,6 +35,7 @@ The components rely on these browser features:
 | Popover API (`popover`)                  | Tooltips, popovers, dropdowns | Widely available, since April 2024                    | -                             |
 | `command` and `commandfor`               | Dialogs                       | Newly available: Chrome 135, Firefox 144, Safari 26.2 | `sassy.js` adds the behaviour |
 | CSS anchor positioning (`position-area`) | Tooltips, popovers, dropdowns | Newly available, since January 2026                   | `sassy.js` places them        |
+| `closedby="any"`                         | Offcanvas                     | Chrome 134, Firefox 141, not yet Safari               | `sassy.js` adds the behaviour |
 
 With `sassy.js`, everything works in every browser that supports popovers, which all major browsers have since April 2024.
 
@@ -100,6 +102,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
 | `%bf-dialog-title`                                                                              | The dialog's heading                                                                    |
+| `%bf-offcanvas-start`, `-end`, `-top`, `-bottom`                                                | With `%bf-dialog`, a panel that slides in from that edge                                |
+| `%bf-offcanvas-{breakpoint}`                                                                    | With a side, part of the page from that breakpoint up                                   |
 
 ## Buttons
 
@@ -1111,6 +1115,82 @@ The dialog is a column with a maximum height, so when its content is taller than
 
 `dialog.show()` opens a dialog without a backdrop, as part of the page. It uses the same styles.
 
+## Offcanvas
+
+An offcanvas is a [dialog](#dialogs) that slides in from one edge of the window, full height or full width, such as a menu or a basket. Extend `%bf-offcanvas-start`, `-end`, `-top` or `-bottom` with `%bf-dialog`, and use the dialog's header, title, body and footer inside it:
+
+```sass
+.offcanvas-start
+    @extend %bf-offcanvas-start
+```
+
+```css
+@layer sassy.base.components {
+  .offcanvas-start {
+    --sassy-offcanvas-from: -100% 0;
+    inset: auto;
+    inset-inline-start: 0;
+    translate: var(--sassy-offcanvas-from);
+  }
+  [open].offcanvas-start {
+    animation: bf-offcanvas-slide var(--sassy-offcanvas-duration, 0.3s) ease-in-out;
+    translate: none;
+  }
+}
+```
+
+```html
+<button type="button" commandfor="menu" command="show-modal">Menu</button>
+
+<dialog class="dialog offcanvas-start" id="menu" closedby="any" aria-labelledby="menu-title">
+    <header>
+        <h2 id="menu-title">Menu</h2>
+        <button type="button" class="close" commandfor="menu" command="close" aria-label="Close"></button>
+    </header>
+    <div class="dialog-body">
+        <p>…</p>
+    </div>
+</dialog>
+```
+
+- **It is a modal dialog**, so the browser puts it over a backdrop, makes the page behind it inert, closes it on Escape, and returns focus to the button that opened it. The page behind it does not scroll.
+- **`closedby="any"` closes it when the backdrop is clicked.** `sassy.js` does this in browsers that don't support `closedby` yet.
+- **It slides in and out**, and the backdrop fades. With reduced motion it appears at once. `--sassy-offcanvas-width` sets the width of a start or end offcanvas, and `--sassy-offcanvas-height` the height of a top or bottom one.
+- **Start and end follow the text direction**, so in right-to-left text a start offcanvas comes in from the right.
+
+### In the page from a breakpoint
+
+With `%bf-offcanvas-{breakpoint}` as well, a closed offcanvas is part of the page from that breakpoint up - a sidebar on wide screens that is an offcanvas on narrow ones. It loses its backdrop styles, shadow and border, and its `command="close"` buttons are hidden. Hide the button that opens it at the same breakpoint, with `%bf-d-none-{breakpoint}`:
+
+```sass
+.offcanvas-md
+    @extend %bf-offcanvas-md
+```
+
+```css
+@layer sassy.base.components {
+  @media (width >= 768px) {
+    .offcanvas-md:not(:modal) {
+      display: flex;
+      position: static;
+    }
+    .offcanvas-md:not(:modal) button[command=close] {
+      display: none;
+    }
+  }
+}
+```
+
+```html
+<button type="button" class="d-none-md" commandfor="filters" command="show-modal">Filters</button>
+
+<dialog class="dialog offcanvas-start offcanvas-md" id="filters" closedby="any" aria-labelledby="filters-title">
+    …
+</dialog>
+```
+
+If the window is widened while the offcanvas is open, it stays a modal until it is closed.
+
 ## Settings and custom properties
 
 | Property                                                                                                                             | Controls                                                                                          |
@@ -1176,6 +1256,8 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-bg`, `--sassy-dialog-border-width`, `--sassy-dialog-border-colour`, `--sassy-dialog-radius`, `--sassy-dialog-shadow` | Dialog background, border, corners and shadow                                                     |
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
+| `--sassy-offcanvas-width`, `--sassy-offcanvas-height`                                                                                | Width of a start or end offcanvas, and height of a top or bottom one                              |
+| `--sassy-offcanvas-duration`                                                                                                         | How long it takes to slide in or out                                                              |
 
 Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-accordion-duration` sets how long accordions take to open, and `$sassy-accordion-icon` their chevron. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. `$sassy-skeleton-duration` sets how long the shimmer takes. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
