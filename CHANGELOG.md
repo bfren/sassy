@@ -22,6 +22,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- The docs have a folder per layer, with a `README.md` for the layer and a page per part named after its source file, such as `docs/1-components/123-tabs.md`, in place of one long page per layer.
 - A few default colours moved to the nearest colour role: card caps and read-only inputs from `grey-50` to `grey-100`; form help text, input placeholders and the current breadcrumb from `grey-500` to `grey-600`; and the text of dropdowns, popovers, toasts and carousel controls from `grey-900` to the body colour, `grey-800`.
 - Outline buttons in a light theme colour (`ok`, `info`, `warn`, `grey-light`) mix it with the body text colour rather than with the button's dark text, so they stay readable on a dark background.
 - The current link of `%bf-nav-pills` uses the primary button's text colour, `--sassy-btn-primary-colour`, rather than always white.

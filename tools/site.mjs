@@ -3,7 +3,7 @@
  * Builds the samples site, and checks that the CSS shown in examples is what Sassy outputs.
  *
  *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output
- *     node tools/site.mjs check    checks the CSS shown in README.md and docs/*.md, and that every
+ *     node tools/site.mjs check    checks the CSS shown in README.md and the docs folders, and that every
  *                                  custom property Sassy reads has a value or a fallback
  *
  * Both fail if an example does not compile, or shows CSS that Sassy does not output.
@@ -424,7 +424,9 @@ const layerProblems = css => {
 };
 
 const check = async () => {
-	const files = ["README.md", ...readdirSync(join(root, "docs")).filter(f => f.endsWith(".md")).map(f => `docs/${f}`)];
+	// docs/*.md and each layer's folder, docs/1-components/123-tabs.md and so on
+	const docs = readdirSync(join(root, "docs"), { recursive: true }).filter(f => f.endsWith(".md")).sort();
+	const files = ["README.md", ...docs.map(f => `docs/${f}`)];
 	const examples = files.flatMap(f => docExamples(f, readFileSync(join(root, f), "utf8")));
 	const results = await compile(examples);
 	const problems = examples.flatMap((ex, i) =>

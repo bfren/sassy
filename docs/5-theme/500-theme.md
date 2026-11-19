@@ -1,45 +1,8 @@
-# 5-theme: theme colours and runtime theming
+# Theme colours and colour modes
 
-Live examples: [https://bfren.github.io/sassy/5-theme.html](https://bfren.github.io/sassy/5-theme.html)
+[5-theme](README.md) - live examples: [5-theme.html](https://bfren.github.io/sassy/5-theme.html)
 
-`src/5-theme` provides a small set of named theme colours - `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark` - for text, backgrounds and borders, and to colour shadows. Each one is a custom property on `:root`, so a theme can change them per site, per section or at runtime, and a dark set switches them with the colour roles that components use.
-
-Theme colours are output last, so a theme utility such as `%bf-bg-primary` always wins over any composite or single-purpose utility that sets the same property.
-
-## Placeholders
-
-| Placeholder pattern  | Sets                                     | Example             |
-| -------------------- | ---------------------------------------- | ------------------- |
-| `%bf-c-{name}`       | Text colour                              | `%bf-c-primary`     |
-| `%bf-bg-{name}`      | Background colour                        | `%bf-bg-error`      |
-| `%bf-text-bg-{name}` | Background colour, with contrasting text | `%bf-text-bg-error` |
-| `%bf-border-{name}`  | Border colour                            | `%bf-border-ok`     |
-| `%bf-theme-light`    | The light colour roles and theme colours | -                   |
-| `%bf-theme-dark`     | The dark colour roles and theme colours  | -                   |
-| `%bf-theme-auto`     | Dark when the system is set to dark      | -                   |
-
-`{name}` is one of the theme colours. The `%bf-theme-*` placeholders are described under [Light and dark](#light-and-dark). Each has breakpoint variants too, such as `%bf-c-primary-md`, for a theme that changes at a breakpoint.
-
-## Default theme
-
-| Name         | Default colour | Custom property            |
-| ------------ | -------------- | -------------------------- |
-| `primary`    | `sky-600`      | `--sassy-theme-primary`    |
-| `secondary`  | `orange-700`   | `--sassy-theme-secondary`  |
-| `ok`         | `green-600`    | `--sassy-theme-ok`         |
-| `info`       | `sky-200`      | `--sassy-theme-info`       |
-| `warn`       | `amber-400`    | `--sassy-theme-warn`       |
-| `error`      | `red-600`      | `--sassy-theme-error`      |
-| `grey-light` | `grey-300`     | `--sassy-theme-grey-light` |
-| `grey-dark`  | `grey-600`     | `--sassy-theme-grey-dark`  |
-
-The defaults come from the palette, so `sassy.colour()` gives you the same colours to use elsewhere. The [README](../README.md#naming) shows them.
-
-Each theme colour also has a `-contrast` property, such as `--sassy-theme-primary-contrast`, for the text on it. Its default is whichever of `grey-950` and white has the higher WCAG contrast ratio with the default colour. `primary` (`sky-600`) gets dark text, as white text on it is below the 4.5:1 that WCAG AA asks for.
-
-## Worked examples
-
-### Using theme colours
+## Using theme colours
 
 ```sass
 @use "sassy/src" as sassy
@@ -87,7 +50,7 @@ For text and a border, extend `%bf-c-primary` and `%bf-border-primary`. For a sh
 
 Shadows have one colour, `--sassy-shadow-colour`, so this works with any colour, and setting it on a section colours every shadow inside it.
 
-### Text that contrasts with a theme colour
+## Text that contrasts with a theme colour
 
 ```sass
 .alert-warn
@@ -107,7 +70,7 @@ Shadows have one colour, `--sassy-shadow-colour`, so this works with any colour,
 
 The text colour comes from `--sassy-theme-warn-contrast`, so it changes with the theme rather than being fixed in the rule.
 
-### Theming a whole site
+## Theming a whole site
 
 Set the theme once on `:root` in your main stylesheet. Use `sassy.colour()` for a palette colour, or write any CSS colour directly:
 
@@ -129,7 +92,7 @@ When you change a theme colour, set its `-contrast` property too if `%bf-text-bg
 
 Theme colours accept any CSS colour: hex, `rgb()`, `oklch()`, a named colour or another custom property. Sassy adds transparency where it needs it with `color-mix()`, so you do not need separate values for shadows.
 
-### A section with its own theme
+## A section with its own theme
 
 A custom property set on a section applies to everything inside it. Buttons, form controls and utilities in the section all pick up the new colour:
 
@@ -150,7 +113,7 @@ A custom property set on a section applies to everything inside it. Buttons, for
     @extend %bf-c-primary
 ```
 
-### Light and dark
+## Light and dark
 
 Components and forms take their neutral colours from a few **colour roles** on `:root`, so one set of values changes them all:
 
@@ -190,10 +153,10 @@ html
 
 - **The dark set lifts four theme colours** that are used as text - `primary` to `sky-400`, `secondary` to `orange-400`, `ok` to `green-400` and `error` to `red-400` - and works out each `-contrast` again, so links, buttons and checked boxes stay readable on a dark page. Button text and the check mark follow the `-contrast` colours in dark areas.
 - **For a toggle**, extend `%bf-theme-light` and `%bf-theme-dark` on `html` with an attribute, such as `html[data-theme="dark"]`, and `%bf-theme-auto` on `html` for visitors who haven't chosen.
-- **Change the sets** with `$sassy-roles-light`, `$sassy-roles-dark`, `$sassy-theme-light` and `$sassy-theme-dark` in [`src/5-theme/_500-theme-variables.scss`](../src/5-theme/_500-theme-variables.scss), configured with `with (...)`. Any one property can still be set on its own, as before.
-- **The select chevron** is an image, so each mode sets `--sassy-select-chevron` for its text colour - see [2-forms](2-forms.md#select-chevron-in-a-dark-theme).
+- **Change the sets** with `$sassy-roles-light`, `$sassy-roles-dark`, `$sassy-theme-light` and `$sassy-theme-dark` in [`src/5-theme/_500-theme-variables.scss`](../../src/5-theme/_500-theme-variables.scss), configured with `with (...)`. Any one property can still be set on its own, as before.
+- **The select chevron** is an image, so each mode sets `--sassy-select-chevron` for its text colour - see [2-forms](../2-forms/230-select.md).
 
-### Changing a theme colour at runtime
+## Changing a theme colour at runtime
 
 Because the theme is in custom properties, a script can change it without a new stylesheet:
 
@@ -202,13 +165,3 @@ Because the theme is in custom properties, a script can change it without a new 
     document.documentElement.style.setProperty("--sassy-theme-primary", "#0d9488");
 </script>
 ```
-
-## Settings and custom properties
-
-| Property                                                                                              | Controls                |
-| ----------------------------------------------------------------------------------------------------- | ----------------------- |
-| `--sassy-theme-primary`, `-secondary`, `-ok`, `-info`, `-warn`, `-error`, `-grey-light`, `-grey-dark` | The eight theme colours |
-| `--sassy-theme-{name}-contrast`                                                                       | Text on each one        |
-| `--sassy-body-bg`, `--sassy-surface`, `-surface-subtle`, `-line`, `-line-strong`, `-muted`, `-disabled` | The colour roles        |
-
-Theme colours are defined in [`src/5-theme/_500-theme-variables.scss`](../src/5-theme/_500-theme-variables.scss). To add a theme colour, add an entry to the `$sassy-theme` map and to `$sassy-theme-light` and `$sassy-theme-dark` in the same file: its `--sassy-theme-*` and `--sassy-theme-*-contrast` custom properties are then output on `:root` and by the colour modes. The `%bf-c`, `%bf-bg`, `%bf-text-bg` and `%bf-border` placeholders are then generated for it.
