@@ -1,0 +1,24 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+
+$sassy-accordion-bg: var(--sassy-accordion-bg, #fff);
+$sassy-accordion-colour: var(--sassy-accordion-colour, inherit);
+$sassy-accordion-border-width: var(--sassy-accordion-border-width, 1px);
+$sassy-accordion-border-colour: var(--sassy-accordion-border-colour, #{colour("grey", 200)});
+$sassy-accordion-radius: var(--sassy-accordion-radius, $sassy-radius);
+$sassy-accordion-padding-y: var(--sassy-accordion-padding-y, #{$sassy-padding-unit * 4});
+$sassy-accordion-padding-x: var(--sassy-accordion-padding-x, #{$sassy-padding-unit * 5});
+
+// a header under the pointer, mixed from the text colour so it shades any background
+$sassy-accordion-hover-bg: var(--sassy-accordion-hover-bg, color-mix(in oklab, currentColor 4%, #{$sassy-accordion-bg}));
+
+// An open item's header: tinted with primary, the text mixed with the text colour so it keeps its contrast
+$sassy-accordion-open-bg: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, #{$sassy-accordion-bg}));
+$sassy-accordion-open-colour: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
+
+// How long opening and closing take, in browsers that can animate <details>; none with reduced motion
+$sassy-accordion-duration: 0.2s !default;
+
+// The chevron, used as a mask - only its shape matters, the colour is the text colour.
+$sassy-accordion-icon: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e" !default;

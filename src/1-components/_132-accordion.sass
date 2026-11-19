@@ -1,0 +1,91 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: accordions
+//  =================================================================
+
+//  A <div> of <details>, each a <summary> followed by one element holding its content.
+//  Give the <details> the same name="…" for a group where opening one closes the others.
+//  Opening is animated with ::details-content where browsers support it, and instant elsewhere.
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.single("accordion")
+        border: $sassy-accordion-border-width solid $sassy-accordion-border-colour
+        border-radius: $sassy-accordion-radius
+        box-sizing: border-box
+        interpolate-size: allow-keywords
+        overflow: hidden
+
+        & > details
+            background-color: $sassy-accordion-bg
+            color: $sassy-accordion-colour
+            margin: 0
+
+        & > details + details
+            border-block-start: $sassy-accordion-border-width solid $sassy-accordion-border-colour
+
+        & > details > summary
+            align-items: center
+            cursor: pointer
+            display: flex
+            gap: 1em
+            justify-content: space-between
+            list-style: none
+            padding: $sassy-accordion-padding-y $sassy-accordion-padding-x
+
+            &:hover
+                background-color: $sassy-accordion-hover-bg
+
+            // inside the header, as the accordion clips anything outside it
+            &:focus-visible
+                outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+                outline-offset: calc(#{$sassy-focus-outline-width} * -1)
+
+            &::after
+                background-color: currentColor
+                block-size: 1em
+                content: ""
+                flex-shrink: 0
+                inline-size: 1em
+                mask: url($sassy-accordion-icon) center / contain no-repeat
+                transition: transform $sassy-accordion-duration ease-in-out
+
+                @media (prefers-reduced-motion: reduce)
+                    transition: none
+
+        // Safari's own triangle
+        & > details > summary::-webkit-details-marker
+            display: none
+
+        & > details[open] > summary
+            background-color: $sassy-accordion-open-bg
+            border-block-end: $sassy-accordion-border-width solid $sassy-accordion-border-colour
+            color: $sassy-accordion-open-colour
+
+            &::after
+                transform: rotate(180deg)
+
+        & > details > summary ~ *
+            margin: 0
+            padding: $sassy-accordion-padding-y $sassy-accordion-padding-x
+
+        // opening and closing, where supported - a browser that doesn't know ::details-content ignores these
+        & > details::details-content
+            block-size: 0
+            overflow: clip
+            transition: block-size $sassy-accordion-duration ease-in-out, content-visibility $sassy-accordion-duration allow-discrete
+
+            @media (prefers-reduced-motion: reduce)
+                transition: none
+
+        & > details[open]::details-content
+            block-size: auto
+
+    // No outer border or corners, for an accordion that fills a card
+
+    @include make.single("accordion-flush")
+        border-radius: 0
+        border-width: 0

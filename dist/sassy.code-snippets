@@ -81,6 +81,8 @@
   "%bf-list-group-flush": { "scope": "sass,scss", "prefix": "bf-list-group-flush", "body": "bf-list-group-flush", "description": "border-radius: 0; border-width: 0;" },
   "%bf-list-group-numbered": { "scope": "sass,scss", "prefix": "bf-list-group-numbered", "body": "bf-list-group-numbered", "description": "list-style: decimal inside;" },
   "%bf-list-group-horizontal": { "scope": "sass,scss", "prefix": "bf-list-group-horizontal", "body": "bf-list-group-horizontal", "description": "flex-direction: row;" },
+  "%bf-accordion": { "scope": "sass,scss", "prefix": "bf-accordion", "body": "bf-accordion", "description": "A <div> of <details>, each a header and content that open and close" },
+  "%bf-accordion-flush": { "scope": "sass,scss", "prefix": "bf-accordion-flush", "body": "bf-accordion-flush", "description": "border-radius: 0; border-width: 0;" },
   "%bf-table": { "scope": "sass,scss", "prefix": "bf-table", "body": "bf-table", "description": "border-color: var(--sassy-table-border-colour, oklch(92.8% 0.006 264.531deg)); color: var(--sassy-table-colour, currentColor); margin-block-end: 1rem; vertical-align: top; width: 100%;" },
   "%bf-table-striped": { "scope": "sass,scss", "prefix": "bf-table-striped", "body": "bf-table-striped", "description": "& > tbody > tr:nth-of-type(odd) > * { --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent)); }" },
   "%bf-table-striped-columns": { "scope": "sass,scss", "prefix": "bf-table-striped-columns", "body": "bf-table-striped-columns", "description": "& > :not(caption) > tr > :nth-child(even) { --sassy-table-accent: var(--sassy-table-striped-bg, color-mix(in oklab, currentColor 5%, transparent)); }" },

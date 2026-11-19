@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -704,6 +704,45 @@
     &lt;li&gt;from the md&lt;/li&gt;
     &lt;li&gt;breakpoint&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="accordions">
+            <h2>Accordions</h2>
+            <p>Native <code>&lt;details&gt;</code> elements in a <code>&lt;div&gt;</code>. They share a <code>name</code>, so opening one closes the others, and in browsers that support it they open and close smoothly.</p>
+            <div class="demo">
+                <div class="accordion">
+                    <details name="faq" open>
+                        <summary>What is an accordion?</summary>
+                        <div>A stack of sections, each with a header that opens and closes it.</div>
+                    </details>
+                    <details name="faq">
+                        <summary>Does it need a script?</summary>
+                        <div>No. Each section is a native <code>&lt;details&gt;</code>, which the browser opens and closes, with the keyboard too.</div>
+                    </details>
+                    <details name="faq">
+                        <summary>Why does opening one close the others?</summary>
+                        <div>They share <code>name="faq"</code>. Leave the name out to let several be open at once.</div>
+                    </details>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.accordion
+    @extend %bf-accordion</code></pre>
+<pre data-lang="html"><code>&lt;div class="accordion"&gt;
+    &lt;details name="faq" open&gt;
+        &lt;summary&gt;What is an accordion?&lt;/summary&gt;
+        &lt;div&gt;A stack of sections, each with a header that opens and closes it.&lt;/div&gt;
+    &lt;/details&gt;
+    &lt;details name="faq"&gt;
+        &lt;summary&gt;Does it need a script?&lt;/summary&gt;
+        &lt;div&gt;No. Each section is a native &lt;code&gt;&amp;lt;details&amp;gt;&lt;/code&gt;, which the browser opens and closes, with the keyboard too.&lt;/div&gt;
+    &lt;/details&gt;
+    &lt;details name="faq"&gt;
+        &lt;summary&gt;Why does opening one close the others?&lt;/summary&gt;
+        &lt;div&gt;They share &lt;code&gt;name="faq"&lt;/code&gt;. Leave the name out to let several be open at once.&lt;/div&gt;
+    &lt;/details&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 

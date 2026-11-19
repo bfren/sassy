@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, progress bars, spinners and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, progress bars, spinners and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -72,6 +72,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-list-group-flush`                                                                          | No outer border or corners, for a list that fills a card                                |
 | `%bf-list-group-numbered`                                                                       | Numbers the items of an `<ol>`                                                          |
 | `%bf-list-group-horizontal`, `-horizontal-{breakpoint}`                                         | Items side by side, always or from a breakpoint                                         |
+| `%bf-accordion`                                                                                 | A `<div>` of `<details>`, each a header and content that open and close                 |
+| `%bf-accordion-flush`                                                                           | No outer border or corners, for an accordion that fills a card                          |
 | `%bf-tabs`                                                                                      | The list of tabs (`role="tablist"`)                                                     |
 | `%bf-tab`                                                                                       | Each tab (`role="tab"`)                                                                 |
 | `%bf-tab-panel`                                                                                 | Each panel (`role="tabpanel"`)                                                          |
@@ -590,6 +592,51 @@ A list group is a bordered list. Its direct children are its items, so extend on
 - **The list clips its items to its corners**, so a current item's background follows them. Something that pops out of an item, such as a menu, must use a popover, which is drawn above the page.
 - **Combine `%bf-list-group-flush`** for a list with no outer border or corners, such as one that fills a card, **`%bf-list-group-numbered`** to number the items of an `<ol>`, and **`%bf-list-group-horizontal`** or **`-horizontal-{breakpoint}`** to set the items side by side.
 
+## Accordions
+
+An accordion is a `<div>` of native `<details>`, so the browser opens and closes each section, from the keyboard too, with no script. Each `<details>` holds a `<summary>`, the header, and one element with its content. Give them the same `name` and opening one closes the others:
+
+```sass
+.accordion
+    @extend %bf-accordion
+```
+
+```css
+@layer sassy.base.components {
+  .accordion {
+    border: var(--sassy-accordion-border-width, 1px) solid var(--sassy-accordion-border-colour, oklch(92.8% 0.006 264.531deg));
+    interpolate-size: allow-keywords;
+  }
+  .accordion > details[open] > summary {
+    background-color: var(--sassy-accordion-open-bg, color-mix(in oklab, var(--sassy-theme-primary) 10%, var(--sassy-accordion-bg, #fff)));
+    color: var(--sassy-accordion-open-colour, color-mix(in oklab, var(--sassy-theme-primary) 60%, currentColor));
+  }
+  .accordion > details::details-content {
+    block-size: 0;
+    overflow: clip;
+  }
+}
+```
+
+```html
+<div class="accordion">
+    <details name="faq" open>
+        <summary>What is an accordion?</summary>
+        <div>A stack of sections, each with a header that opens and closes it.</div>
+    </details>
+    <details name="faq">
+        <summary>Does it need a script?</summary>
+        <div>No.</div>
+    </details>
+</div>
+```
+
+- **Put each section's content in one element** after the `<summary>`, which gets the padding. Several elements would each be padded.
+- **Leave out `name`** to let several sections be open at once, and add `open` to one that should start open.
+- **Opening and closing are animated where browsers support `::details-content`**, and instant elsewhere and for people who prefer reduced motion.
+- **An open header is tinted with primary**, its text mixed with the text colour so it keeps its contrast. Change it with `--sassy-accordion-open-bg` and `--sassy-accordion-open-colour`.
+- **Extend `%bf-accordion-flush` as well** for an accordion inside a card, or anywhere it should have no outer border.
+
 ## Tables
 
 ```sass
@@ -957,6 +1004,10 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-list-group-bg`, `--sassy-list-group-colour`, `--sassy-list-group-border-width`, `--sassy-list-group-border-colour`, `--sassy-list-group-radius` | List group background, text, border and corners                                                   |
 | `--sassy-list-group-padding-y`, `--sassy-list-group-padding-x`                                                                       | List group item padding                                                                           |
 | `--sassy-list-group-hover-bg`, `--sassy-list-group-current-bg`, `--sassy-list-group-current-colour`, `--sassy-list-group-disabled-colour` | An actionable item under the pointer, the current item, and a disabled item                       |
+| `--sassy-accordion-bg`, `--sassy-accordion-colour`, `--sassy-accordion-radius`                                                       | Accordion background, text and corners                                                            |
+| `--sassy-accordion-border-width`, `--sassy-accordion-border-colour`                                                                  | The lines around and between the sections                                                         |
+| `--sassy-accordion-padding-y`, `--sassy-accordion-padding-x`                                                                         | Header and content padding                                                                        |
+| `--sassy-accordion-hover-bg`, `--sassy-accordion-open-bg`, `--sassy-accordion-open-colour`                                           | A header under the pointer, and an open section's header                                          |
 | `--sassy-table-bg`, `--sassy-table-colour`, `--sassy-table-border-width`, `--sassy-table-border-colour`                              | Table background, text and lines - `%bf-table-{theme colour}` sets the background and line colour |
 | `--sassy-table-padding-y`, `--sassy-table-padding-x`, `--sassy-table-small-padding`                                                  | Cell padding, and the padding of a small table                                                    |
 | `--sassy-table-striped-bg`, `--sassy-table-hover-bg`, `--sassy-table-current-bg`                                                     | The shades laid over a striped row or column, the row under the pointer, and the current row      |
@@ -974,7 +1025,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-accordion-duration` sets how long accordions take to open, and `$sassy-accordion-icon` their chevron. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 
