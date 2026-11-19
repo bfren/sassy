@@ -28,7 +28,7 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, tooltips and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
@@ -917,6 +917,49 @@
     &lt;progress class="progress" value="1" max="1" style="width: 15%" aria-label="Photos, 15%"&gt;&lt;/progress&gt;
     &lt;progress class="progress progress-ok" value="1" max="1" style="width: 30%" aria-label="Music, 30%"&gt;&lt;/progress&gt;
     &lt;progress class="progress progress-info" value="1" max="1" style="width: 20%" aria-label="Documents, 20%"&gt;&lt;/progress&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="spinners">
+            <h2>Spinners</h2>
+            <p>A ring that turns, or a dot that grows, in the text colour or a theme colour. Each has <code>role="status"</code> and hidden text for screen readers. In the button, the small spinner is hidden from screen readers, as the button's text says what is happening.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <div class="spinner" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <div class="spinner spinner-ok" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <div class="spinner-grow" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <div class="spinner-grow spinner-error" role="status"><span class="visually-hidden">Loading…</span></div>
+                    <button type="button" class="button button-primary" disabled>
+                        <span class="spinner spinner-small" aria-hidden="true"></span>
+                        Saving…
+                    </button>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.spinner
+    @extend %bf-spinner
+
+.spinner-grow
+    @extend %bf-spinner-grow
+
+.spinner-ok
+    @extend %bf-spinner-ok
+
+.spinner-error
+    @extend %bf-spinner-error
+
+.spinner-small
+    @extend %bf-spinner-small</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;div class="spinner" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="spinner spinner-ok" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="spinner-grow" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="spinner-grow spinner-error" role="status"&gt;&lt;span class="visually-hidden"&gt;Loading…&lt;/span&gt;&lt;/div&gt;
+    &lt;button type="button" class="button button-primary" disabled&gt;
+        &lt;span class="spinner spinner-small" aria-hidden="true"&gt;&lt;/span&gt;
+        Saving…
+    &lt;/button&gt;
 &lt;/div&gt;</code></pre>
 </div>
         </section>

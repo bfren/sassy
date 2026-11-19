@@ -2201,6 +2201,82 @@
       flex: none;
       margin: 0;
     }
+    @keyframes bf-spinner-turn {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes bf-spinner-grow {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .bf-spinner {
+      border: var(--sassy-spinner-width, 0.25em) solid var(--sassy-spinner-colour, currentColor);
+      border-inline-end-color: transparent;
+      animation: bf-spinner-turn 0.75s linear infinite;
+      block-size: var(--sassy-spinner-size, 2em);
+      border-radius: 50%;
+      box-sizing: border-box;
+      display: inline-block;
+      flex-shrink: 0;
+      inline-size: var(--sassy-spinner-size, 2em);
+      vertical-align: -0.125em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-spinner {
+        animation-duration: 3s;
+      }
+    }
+    .bf-spinner-grow {
+      background-color: var(--sassy-spinner-colour, currentColor);
+      opacity: 0;
+      animation: bf-spinner-grow 0.75s linear infinite;
+      block-size: var(--sassy-spinner-size, 2em);
+      border-radius: 50%;
+      box-sizing: border-box;
+      display: inline-block;
+      flex-shrink: 0;
+      inline-size: var(--sassy-spinner-size, 2em);
+      vertical-align: -0.125em;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bf-spinner-grow {
+        animation-duration: 3s;
+      }
+    }
+    .bf-spinner-primary {
+      --sassy-spinner-colour: var(--sassy-theme-primary);
+    }
+    .bf-spinner-secondary {
+      --sassy-spinner-colour: var(--sassy-theme-secondary);
+    }
+    .bf-spinner-ok {
+      --sassy-spinner-colour: var(--sassy-theme-ok);
+    }
+    .bf-spinner-info {
+      --sassy-spinner-colour: var(--sassy-theme-info);
+    }
+    .bf-spinner-warn {
+      --sassy-spinner-colour: var(--sassy-theme-warn);
+    }
+    .bf-spinner-error {
+      --sassy-spinner-colour: var(--sassy-theme-error);
+    }
+    .bf-spinner-grey-light {
+      --sassy-spinner-colour: var(--sassy-theme-grey-light);
+    }
+    .bf-spinner-grey-dark {
+      --sassy-spinner-colour: var(--sassy-theme-grey-dark);
+    }
+    .bf-spinner-small {
+      --sassy-spinner-size: 1em;
+      --sassy-spinner-width: 0.2em;
+    }
     .bf-tooltip {
       background-color: var(--sassy-tooltip-bg, oklch(21% 0.034 264.665deg));
       border: 0;

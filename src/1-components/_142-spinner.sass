@@ -1,0 +1,64 @@
+@use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
+
+//  =================================================================
+//  Components: spinners
+//  =================================================================
+
+//  Shows that something is loading. Put it on a <div role="status"> holding text for screen
+//  readers, such as <span>Loading…</span>, in a child that extends %bf-visually-hidden.
+
+$-turn: make.name("spinner-turn")
+$-grow: make.name("spinner-grow")
+
+@mixin -spinner($keyframes)
+    animation: $keyframes $sassy-spinner-duration linear infinite
+    block-size: $sassy-spinner-size
+    border-radius: 50%
+    box-sizing: border-box
+    display: inline-block
+    flex-shrink: 0
+    inline-size: $sassy-spinner-size
+    vertical-align: -0.125em
+
+    @media (prefers-reduced-motion: reduce)
+        animation-duration: $sassy-spinner-duration * $sassy-spinner-reduced-motion-factor
+
+/// Outputs this module's utilities - called by _render inside make.layers.
+@mixin utilities()
+
+    @include make.in-base
+        @keyframes #{$-turn}
+            to
+                transform: rotate(360deg)
+
+        @keyframes #{$-grow}
+            0%
+                transform: scale(0)
+            50%
+                opacity: 1
+                transform: none
+
+    // A ring with a gap that turns
+
+    @include make.single("spinner")
+        border: $sassy-spinner-width solid $sassy-spinner-colour
+        border-inline-end-color: transparent
+        @include -spinner($-turn)
+
+    // A dot that grows and fades
+
+    @include make.single("spinner-grow")
+        background-color: $sassy-spinner-colour
+        opacity: 0
+        @include -spinner($-grow)
+
+    // Theme colours and the small size only change the custom properties, so combine them with either spinner
+
+    @each $name, $value in $sassy-theme
+        @include make.single("spinner-#{$name}")
+            --sassy-spinner-colour: #{$value}
+
+    @include make.single("spinner-small")
+        --sassy-spinner-size: #{$sassy-spinner-small-size}
+        --sassy-spinner-width: #{$sassy-spinner-small-width}

@@ -1,14 +1,14 @@
-# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, tooltips and dialogs
+# 1-components: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs
 
 Live examples: [https://bfren.github.io/sassy/1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
+`src/1-components` styles whole interface elements: buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, tables, tabs, alerts, progress bars, spinners, tooltips and dialogs. Like forms, components are composites, so they output before the grid and utilities, and a utility such as `%bf-p-0` can override any part of one.
 
 Every component reads its colours, spacing and sizes from custom properties, so a theme can change them at runtime. Components have no breakpoint variants.
 
 ## Behaviour and browser support
 
-Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, progress bars and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
+Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, progress bars, spinners and dialogs need no script - except for navigation that collapses. Tabs, toolbars, tooltips, collapsible navigation and dismissible alerts need `sassy.js`, which you load once:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/bfren/sassy@0.3.0/dist/sassy.min.js" defer></script>
@@ -83,6 +83,8 @@ If you add tabs to the page after it has loaded, call `Sassy.init(element)` on t
 | `%bf-progress-{theme colour}`                                                                   | A bar in a theme colour, combined with `%bf-progress`                                   |
 | `%bf-progress-animated`                                                                         | Moving stripes over the bar, combined with `%bf-progress`                               |
 | `%bf-progress-stacked`                                                                          | Several bars in one track, on a `<div role="group">`                                    |
+| `%bf-spinner`, `%bf-spinner-grow`                                                               | A ring that turns, or a dot that grows - see [Spinners](#spinners)                      |
+| `%bf-spinner-{theme colour}`, `%bf-spinner-small`                                               | A spinner in a theme colour, or small, combined with either                             |
 | `%bf-tooltip`                                                                                   | A tooltip (`role="tooltip"` with `popover="manual"`)                                    |
 | `%bf-dialog`, `-small`, `-large`                                                                | A `<dialog>`, at the default width or smaller or larger                                 |
 | `%bf-dialog-header`, `%bf-dialog-body`, `%bf-dialog-footer`                                     | The parts of a dialog                                                                   |
@@ -790,6 +792,50 @@ To show several parts of a whole in one track, put a `<progress>` for each in a 
 - **The moving parts slow down, rather than stop, for people who prefer reduced motion**, so the bar still shows that something is happening.
 - **Browsers draw the bar with their own pseudo-elements**, `::-webkit-progress-value` in Chrome and Safari and `::-moz-progress-bar` in Firefox, so to restyle it, set the `--sassy-progress-*` properties rather than writing your own rules.
 
+## Spinners
+
+A spinner shows that something is loading: a ring that turns, or a dot that grows and fades. Put it on an element with `role="status"`, holding text for screen readers in a child that extends `%bf-visually-hidden`. Spinners are drawn in the text colour and sized in `em`, so they follow the text around them:
+
+```sass
+.spinner
+    @extend %bf-spinner
+
+.spinner-grow
+    @extend %bf-spinner-grow
+
+.spinner-small
+    @extend %bf-spinner-small
+```
+
+```css
+@layer sassy.base.components {
+  .spinner {
+    border: var(--sassy-spinner-width, 0.25em) solid var(--sassy-spinner-colour, currentColor);
+    border-inline-end-color: transparent;
+    animation: bf-spinner-turn 0.75s linear infinite;
+    block-size: var(--sassy-spinner-size, 2em);
+    border-radius: 50%;
+    inline-size: var(--sassy-spinner-size, 2em);
+  }
+  .spinner-small {
+    --sassy-spinner-size: 1em;
+    --sassy-spinner-width: 0.2em;
+  }
+}
+```
+
+```html
+<div class="spinner" role="status"><span class="visually-hidden">Loading…</span></div>
+<button type="button" class="button" disabled>
+    <span class="spinner spinner-small" aria-hidden="true"></span>
+    Saving…
+</button>
+```
+
+- **Inside a button whose text says what is happening, hide the spinner** with `aria-hidden="true"` instead of giving it `role="status"`, so screen readers don't hear it twice.
+- **Colour a spinner** with `%bf-spinner-{theme colour}`, or with a text colour utility such as `%bf-c-{colour}`, as it uses the text colour.
+- **Spinners slow down, rather than stop, for people who prefer reduced motion**, so they still show that something is happening.
+
 ## Tooltips
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
@@ -920,6 +966,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-alert-padding-y`, `--sassy-alert-padding-x`, `--sassy-alert-margin-bottom`                                                  | Alert spacing                                                                                     |
 | `--sassy-progress-height`, `--sassy-progress-bg`, `--sassy-progress-bar-colour`, `--sassy-progress-radius`                           | Progress track height, track and bar colours, and corners                                         |
 | `--sassy-progress-margin-bottom`                                                                                                     | Space below a progress bar or stacked bars                                                        |
+| `--sassy-spinner-size`, `--sassy-spinner-width`, `--sassy-spinner-colour`                                                            | Spinner size, ring width and colour - the theme colours and `-small` set them                     |
 | `--sassy-tooltip-bg`, `--sassy-tooltip-colour`, `--sassy-tooltip-font-size`                                                          | Tooltip colours and text size                                                                     |
 | `--sassy-tooltip-padding-y`, `--sassy-tooltip-padding-x`, `--sassy-tooltip-radius`, `--sassy-tooltip-max-width`                      | Tooltip shape and size                                                                            |
 | `--sassy-tooltip-offset`                                                                                                             | Gap between a tooltip and its trigger                                                             |
@@ -927,7 +974,7 @@ The dialog is a column with a maximum height, so when its content is taller than
 | `--sassy-dialog-width`, `--sassy-dialog-padding-y`, `--sassy-dialog-padding-x`                                                       | Dialog width and spacing                                                                          |
 | `--sassy-dialog-backdrop`                                                                                                            | The backdrop behind a modal dialog                                                                |
 
-Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
+Buttons also read the form controls' `--sassy-input-*` properties for their padding, text size, border width and radius, and `$sassy-btn-text-colours` sets which theme colours have dark text. The stripes and how fast the moving parts go are set by `$sassy-progress-stripe-colour`, `-stripe-size`, `-stripe-duration`, `-indeterminate-duration` and `-reduced-motion-factor`. `$sassy-spinner-duration`, `$sassy-spinner-reduced-motion-factor` and `$sassy-spinner-small-size` / `-small-width` set how fast spinners move and the small size. The dialog sizes are set in `$sassy-dialog-sizes` in [`src/1-components/_153-dialog-variables.scss`](../src/1-components/_153-dialog-variables.scss), which you can configure with `with (...)`. Colours accept any CSS colour.
 
 ### A dark theme
 
