@@ -1,5 +1,5 @@
 /*
- * Tests for src/sassy.js: tab keys, toolbar keys and dismissing.
+ * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, and opening tooltips beside their trigger.
  *
  *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
  *
@@ -13,9 +13,10 @@ import { JSDOM } from "jsdom";
 
 const script = readFileSync(new URL("../src/sassy.js", import.meta.url), "utf8");
 
-/** A page with sassy.js loaded. */
-const load = body => {
+/** A page with sassy.js loaded. `before` runs first, to change what the browser supports. */
+const load = (body, before) => {
 	const dom = new JSDOM(body, { runScripts: "outside-only" });
+	before?.(dom.window);
 	dom.window.eval(script);
 	dom.window.Sassy.init(); // jsdom's readyState varies, so the script may be waiting for DOMContentLoaded
 	return dom.window;
@@ -87,4 +88,58 @@ test("toolbars: one tab stop, arrow keys wrap, Home and End jump, disabled contr
 	assert.equal(window.document.activeElement, $("text"));
 	press(window, $("b4"), "Home");
 	assert.equal(window.document.activeElement, $("b1"));
+});
+
+/** A page with a tooltip 100 x 30 that is 8px from its trigger. jsdom has no popovers, so opening one is stubbed. */
+const tooltipPage = before => {
+	const window = load(`
+		<style>[role="tooltip"] { margin: 8px; }</style>
+		<button id="a" aria-describedby="tip">A</button>
+		<button id="b" aria-describedby="tip">B</button>
+		<div id="tip" role="tooltip" popover="manual">Tip</div>`, before);
+	window.HTMLElement.prototype.showPopover = function () { this.dataset.opened = "true"; };
+	const $ = id => window.document.getElementById(id);
+	const box = (el, left, top, width, height) =>
+		(el.getBoundingClientRect = () => ({ left, top, width, height, right: left + width, bottom: top + height }));
+	box($("tip"), 0, 0, 100, 30);
+	const focus = el => el.dispatchEvent(new window.FocusEvent("focusin", { bubbles: true }));
+	return { window, $, box, focus };
+};
+
+test("positioning without anchor positioning: above and centred, below if no room, kept on screen", () => {
+	const { $, box, focus } = tooltipPage(window => (window.CSS.supports = () => false));
+	const at = () => [$("tip").style.top, $("tip").style.left];
+
+	box($("a"), 400, 200, 50, 20);
+	focus($("a"));
+	assert.equal($("tip").dataset.opened, "true");
+	assert.deepEqual(at(), ["162px", "375px"]); // 200 - 30 - 8, and 400 + (50 - 100) / 2
+	assert.equal($("tip").style.margin, "0px");
+
+	box($("a"), 400, 10, 50, 20);
+	focus($("a"));
+	assert.deepEqual(at(), ["38px", "375px"]); // no room above, so 8px below the trigger's bottom at 30
+
+	box($("a"), 1000, 200, 20, 20);
+	focus($("a"));
+	assert.equal(at()[1], "916px"); // 1024 - 100 - 8: kept inside the right edge
+
+	box($("a"), 0, 200, 20, 20);
+	focus($("a"));
+	assert.equal(at()[1], "8px"); // and the left edge
+});
+
+test("positioning with anchor positioning: the tooltip anchors to whichever trigger opened it", () => {
+	const { $, focus } = tooltipPage(window => (window.CSS.supports = () => true));
+	const anchorOf = el => el.style.getPropertyValue("anchor-name");
+
+	focus($("a"));
+	const name = $("tip").style.getPropertyValue("position-anchor");
+	assert.match(name, /^--sassy-anchor-\d+$/);
+	assert.equal(anchorOf($("a")), name);
+	assert.equal($("tip").style.top, ""); // CSS places it, not the script
+
+	focus($("b"));
+	assert.equal(anchorOf($("b")), name);
+	assert.equal(anchorOf($("a")), ""); // the name moves, so only one trigger holds it
 });

@@ -138,14 +138,50 @@
 	});
 
 	//  =================================================================
-	//  Tooltips
+	//  Positioning, shared by everything that opens beside its trigger
 	//  =================================================================
 
 	const anchorPositioning = window.CSS?.supports?.("anchor-name: --sassy") ?? false;
+	const anchored = new WeakMap(); // element -> the trigger currently holding its anchor name
+	let anchorCount = 0;
+
+	/** Anchors an element to its trigger with CSS anchor positioning; its CSS says where it goes. */
+	const anchor = (trigger, el) => {
+		el.dataset.sassyAnchor ??= `--sassy-anchor-${++anchorCount}`;
+		const name = el.dataset.sassyAnchor;
+		anchored.get(el)?.style.removeProperty("anchor-name");
+		trigger.style.setProperty("anchor-name", name);
+		el.style.setProperty("position-anchor", name);
+		anchored.set(el, trigger);
+	};
+
+	/** Places an element above its trigger (or below, if there is no room) without anchor positioning. */
+	const place = (trigger, el) => {
+		el.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
+		const offset = parseFloat(getComputedStyle(el).marginTop) || 0;
+		const t = trigger.getBoundingClientRect();
+		const r = el.getBoundingClientRect();
+		const above = t.top - r.height - offset;
+		const top = above >= 0 ? above : t.bottom + offset;
+		const left = Math.min(Math.max(t.left + (t.width - r.width) / 2, offset), innerWidth - r.width - offset);
+		Object.assign(el.style, { margin: "0", top: `${top}px`, left: `${left}px` });
+	};
+
+	const isOpen = el => el.matches(":popover-open");
+
+	/** Opens a popover beside its trigger: anchored by CSS where browsers support it, placed by script elsewhere. */
+	const openBeside = (trigger, el) => {
+		if (anchorPositioning) anchor(trigger, el);
+		if (!isOpen(el)) el.showPopover();
+		if (!anchorPositioning) place(trigger, el); // after opening, as a closed popover has no size
+	};
+
+	//  =================================================================
+	//  Tooltips
+	//  =================================================================
+
 	const hideDelay = 100; // ms - time to move the pointer from the trigger onto the tooltip
 	const timers = new WeakMap();
-	const anchored = new WeakMap(); // tooltip -> the trigger currently holding its anchor name
-	let anchorCount = 0;
 
 	/** The tooltip an element is described by: a [role="tooltip"][popover] named in aria-describedby. */
 	const tooltipOf = el => {
@@ -163,35 +199,9 @@
 		return tooltip ? { trigger, tooltip } : null;
 	};
 
-	const isOpen = tooltip => tooltip.matches(":popover-open");
-
-	/** Anchors a tooltip to its trigger with CSS anchor positioning. */
-	const anchor = (trigger, tooltip) => {
-		tooltip.dataset.sassyAnchor ??= `--sassy-tooltip-${++anchorCount}`;
-		const name = tooltip.dataset.sassyAnchor;
-		anchored.get(tooltip)?.style.removeProperty("anchor-name");
-		trigger.style.setProperty("anchor-name", name);
-		tooltip.style.setProperty("position-anchor", name);
-		anchored.set(tooltip, trigger);
-	};
-
-	/** Places a tooltip above its trigger (or below, if there is no room) without anchor positioning. */
-	const place = (trigger, tooltip) => {
-		tooltip.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
-		const offset = parseFloat(getComputedStyle(tooltip).marginTop) || 0;
-		const t = trigger.getBoundingClientRect();
-		const r = tooltip.getBoundingClientRect();
-		const above = t.top - r.height - offset;
-		const top = above >= 0 ? above : t.bottom + offset;
-		const left = Math.min(Math.max(t.left + (t.width - r.width) / 2, offset), innerWidth - r.width - offset);
-		Object.assign(tooltip.style, { margin: "0", top: `${top}px`, left: `${left}px` });
-	};
-
 	const show = (trigger, tooltip) => {
 		clearTimeout(timers.get(tooltip));
-		if (anchorPositioning) anchor(trigger, tooltip);
-		if (!isOpen(tooltip)) tooltip.showPopover();
-		if (!anchorPositioning) place(trigger, tooltip);
+		openBeside(trigger, tooltip);
 	};
 
 	const hide = (tooltip, delay = hideDelay) =>
