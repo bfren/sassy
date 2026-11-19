@@ -7,6 +7,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 ### Added
 
 - Dropdowns: `%bf-dropdown` styles a popover menu opened by a `popovertarget` button, placed below it by CSS anchor positioning. `-up` and `-end` change where it opens, `-header` and `-divider` group its items, `%bf-dropdown-toggle` adds a chevron to the button, and `%bf-dropdown-split` makes the chevron button of a split button.
+- Popovers: `%bf-popover` styles a panel of content in a popover opened by a `popovertarget` button, placed above it by CSS anchor positioning, with the heading it starts with as a title bar and a `popovertargetaction="hide"` button in its top corner. `-bottom`, `-start` and `-end` change where it opens.
+- `sassy.js` places popovers in browsers without CSS anchor positioning, on any side, and leaves a popover with `role="dialog"` open when a link or button in it is clicked.
 - `sassy.js` keeps a `popovertarget` button's `aria-expanded` up to date, gives `role="menu"` its arrow keys, Home, End and Tab, closes a menu when an item is chosen, and places menus in browsers without CSS anchor positioning.
 
 ## [0.4.0] - 2026-11-19

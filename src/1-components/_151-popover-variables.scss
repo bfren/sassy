@@ -1,0 +1,24 @@
+@use "../4-utilities/410-layout-variables" as *;
+@use "../4-utilities/420-colour-variables" as *;
+@use "../4-utilities/450-rounded-variables" as *;
+@use "../4-utilities/460-shadow-variables" as *;
+
+$sassy-popover-bg: var(--sassy-popover-bg, #fff);
+$sassy-popover-colour: var(--sassy-popover-colour, #{colour("grey", 900)});
+$sassy-popover-border-width: var(--sassy-popover-border-width, 1px);
+$sassy-popover-border-colour: var(--sassy-popover-border-colour, #{colour("grey", 200)});
+$sassy-popover-radius: var(--sassy-popover-radius, $sassy-radius);
+$sassy-popover-shadow: var(--sassy-popover-shadow, 0 0.5rem 1rem #{with-alpha(colour("grey", 950), 0.15)});
+$sassy-popover-font-size: var(--sassy-popover-font-size, calc(var(--sassy-font-size-base) * 0.875));
+$sassy-popover-max-width: var(--sassy-popover-max-width, 20rem);
+$sassy-popover-offset: var(--sassy-popover-offset, 0.5rem);
+$sassy-popover-padding-y: var(--sassy-popover-padding-y, #{$sassy-padding-unit * 2});
+$sassy-popover-padding-x: var(--sassy-popover-padding-x, #{$sassy-padding-unit * 3});
+
+// the title bar: the heading the popover starts with
+$sassy-popover-header-bg: var(--sassy-popover-header-bg, #{colour("grey", 100)});
+$sassy-popover-header-font-size: var(--sassy-popover-header-font-size, var(--sassy-font-size-base));
+
+// Which side of its button the popover opens on: %bf-popover-bottom, -start and -end change it,
+// and sassy.js reads it where CSS anchor positioning is missing.
+$sassy-popover-side: var(--sassy-popover-side, block-start);

@@ -7,8 +7,9 @@
  *   (the WAI-ARIA toolbar pattern).
  * - Tooltips: shows popover tooltips on hover and focus, and positions them in browsers
  *   without CSS anchor positioning.
- * - Dropdowns: keeps a popovertarget button's aria-expanded in step with its menu, positions the menu in
- *   browsers without CSS anchor positioning, and gives role="menu" its arrow keys, Home, End and Tab.
+ * - Dropdowns and popovers: keeps a popovertarget button's aria-expanded in step with its menu or popover,
+ *   positions it in browsers without CSS anchor positioning, and gives role="menu" its arrow keys, Home, End
+ *   and Tab. Choosing a menu item closes the menu; a popover (role="dialog") stays open.
  * - Collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls,
  *   for navs that collapse on small screens.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
@@ -158,23 +159,34 @@
 	};
 
 	/**
-	 * Places an element beside its trigger without anchor positioning: above and centred by default (tooltips),
-	 * or below and lined up with the trigger's start or end (dropdowns). It moves to the other side if there
-	 * is no room, and is kept on screen.
+	 * Places an element beside its trigger without anchor positioning, on a side named as in CSS: above and
+	 * centred by default (tooltips), below and lined up with the trigger's start or end (dropdowns), or on any
+	 * side (popovers). It moves to the other side if there is no room, and is kept on screen.
 	 */
-	const place = (trigger, el, { below = false, align = "centre" } = {}) => {
+	const place = (trigger, el, { side = "block-start", align = "centre" } = {}) => {
 		el.style.margin = ""; // place() sets it to 0 below, which would hide the CSS offset next time
 		const offset = parseFloat(getComputedStyle(el).marginTop) || 0;
 		const t = trigger.getBoundingClientRect();
 		const r = el.getBoundingClientRect();
-		const above = t.top - r.height - offset;
-		const under = t.bottom + offset;
-		const top = below ? (under + r.height <= innerHeight || above < 0 ? under : above) : above >= 0 ? above : under;
 		const rtl = getComputedStyle(trigger).direction === "rtl";
-		const start = rtl ? t.right - r.width : t.left;
-		const end = rtl ? t.left : t.right - r.width;
-		const x = { centre: t.left + (t.width - r.width) / 2, start, end }[align];
-		const left = Math.min(Math.max(x, offset), innerWidth - r.width - offset);
+		const clamp = (v, size, room) => Math.min(Math.max(v, offset), room - size - offset);
+		// before (above or left of) the trigger or after it, on one axis
+		const beside = (from, to, size, room, before) => {
+			const b = from - size - offset;
+			const a = to + offset;
+			return before ? (b >= 0 ? b : a) : a + size <= room || b < 0 ? a : b;
+		};
+		let top, left;
+		if (side.startsWith("block")) {
+			const start = rtl ? t.right - r.width : t.left;
+			const end = rtl ? t.left : t.right - r.width;
+			const x = { centre: t.left + (t.width - r.width) / 2, start, end }[align];
+			top = beside(t.top, t.bottom, r.height, innerHeight, side === "block-start");
+			left = clamp(x, r.width, innerWidth);
+		} else {
+			top = clamp(t.top + (t.height - r.height) / 2, r.height, innerHeight);
+			left = beside(t.left, t.right, r.width, innerWidth, (side === "inline-start") !== rtl);
+		}
 		Object.assign(el.style, { margin: "0", top: `${top}px`, left: `${left}px` });
 	};
 
@@ -250,7 +262,7 @@
 	});
 
 	//  =================================================================
-	//  Dropdowns: popovers opened by a popovertarget button
+	//  Dropdowns and popovers: opened by a popovertarget button
 	//  =================================================================
 
 	// The browser opens and closes them, on Escape and a click outside too, and returns focus to the button.
@@ -260,7 +272,8 @@
 
 	/** The button that opens a popover, if one does: the one last used, or the first that names it. */
 	const invokerOf = el =>
-		invokers.get(el) ?? [...document.querySelectorAll("[popovertarget]")].find(b => b.getAttribute("popovertarget") === el.id);
+		invokers.get(el) ??
+		[...document.querySelectorAll('[popovertarget]:not([popovertargetaction="hide"])')].find(b => b.getAttribute("popovertarget") === el.id);
 
 	/** The items of a menu that can be chosen. */
 	const menuItems = menu => [...menu.querySelectorAll('[role="menuitem"]')].filter(enabled);
@@ -268,7 +281,8 @@
 	document.addEventListener(
 		"click",
 		e => {
-			const button = e.target.closest?.("[popovertarget]");
+			// not a close button inside the popover, which also names it
+			const button = e.target.closest?.('[popovertarget]:not([popovertargetaction="hide"])');
 			const el = button && document.getElementById(button.getAttribute("popovertarget"));
 			if (el) invokers.set(el, button);
 		},
@@ -298,10 +312,17 @@
 				// shortcut: placed once the menu is shown, so it can be measured - it may appear in the
 				// wrong place for a frame first; hide it in beforetoggle if that ever shows
 				const style = getComputedStyle(menu);
-				place(button, menu, {
-					below: style.getPropertyValue("--sassy-dropdown-side").trim() !== "block-start",
-					align: style.getPropertyValue("--sassy-dropdown-align").trim() === "span-inline-start" ? "end" : "start"
-				});
+				const prop = name => style.getPropertyValue(name).trim();
+				place(
+					button,
+					menu,
+					menu.matches('[role="dialog"]')
+						? { side: prop("--sassy-popover-side") || "block-start" }
+						: {
+								side: prop("--sassy-dropdown-side") || "block-end",
+								align: prop("--sassy-dropdown-align") === "span-inline-start" ? "end" : "start"
+							}
+				);
 			}
 			if (menu.matches('[role="menu"]')) menuItems(menu)[0]?.focus();
 		},
@@ -320,10 +341,11 @@
 		}
 	});
 
-	// choosing an item closes the menu
+	// choosing an item closes the menu - but not a popover (role="dialog"), whose buttons and links are content
 	document.addEventListener("click", e => {
 		const item = e.target.closest?.('a, button, [role="menuitem"]');
 		const menu = item?.closest("[popover]");
+		if (menu?.matches('[role="dialog"]')) return;
 		if (menu && !item.hasAttribute("popovertarget") && isOpen(menu) && invokerOf(menu)) menu.hidePopover();
 	});
 

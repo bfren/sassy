@@ -2394,6 +2394,51 @@
       position-area: top;
       position-try-fallbacks: flip-block;
     }
+    .bf-popover {
+      background-color: var(--sassy-popover-bg, #fff);
+      border: var(--sassy-popover-border-width, 1px) solid var(--sassy-popover-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-radius: var(--sassy-popover-radius, var(--sassy-radius, 0.375rem));
+      box-shadow: var(--sassy-popover-shadow, 0 0.5rem 1rem color-mix(in oklab, oklch(13% 0.028 261.692deg) 15%, transparent));
+      box-sizing: border-box;
+      color: var(--sassy-popover-colour, oklch(21% 0.034 264.665deg));
+      font-size: var(--sassy-popover-font-size, calc(var(--sassy-font-size-base) * 0.875));
+      inset: auto;
+      line-height: 1.5;
+      margin: var(--sassy-popover-offset, 0.5rem);
+      max-width: var(--sassy-popover-max-width, 20rem);
+      padding: var(--sassy-popover-padding-y, 0.5rem) var(--sassy-popover-padding-x, 0.75rem);
+      position-area: var(--sassy-popover-side, block-start);
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .bf-popover > :last-child {
+      margin-block-end: 0;
+    }
+    .bf-popover > :is(h1, h2, h3, h4, h5, h6):first-child {
+      background-color: var(--sassy-popover-header-bg, oklch(96.7% 0.003 264.542deg));
+      border-block-end: var(--sassy-popover-border-width, 1px) solid var(--sassy-popover-border-colour, oklch(92.8% 0.006 264.531deg));
+      border-start-end-radius: calc(var(--sassy-popover-radius, var(--sassy-radius, 0.375rem)) - var(--sassy-popover-border-width, 1px));
+      border-start-start-radius: calc(var(--sassy-popover-radius, var(--sassy-radius, 0.375rem)) - var(--sassy-popover-border-width, 1px));
+      font-size: var(--sassy-popover-header-font-size, var(--sassy-font-size-base));
+      margin: calc(var(--sassy-popover-padding-y, 0.5rem) * -1) calc(var(--sassy-popover-padding-x, 0.75rem) * -1) var(--sassy-popover-padding-y, 0.5rem);
+      padding: var(--sassy-popover-padding-y, 0.5rem) var(--sassy-popover-padding-x, 0.75rem);
+    }
+    .bf-popover > button[popovertargetaction=hide] {
+      inset-block-start: var(--sassy-popover-padding-y, 0.5rem);
+      inset-inline-end: var(--sassy-popover-padding-x, 0.75rem);
+      position: absolute;
+    }
+    .bf-popover:has(> button[popovertargetaction=hide]) > :is(h1, h2, h3, h4, h5, h6):first-child {
+      padding-inline-end: calc(var(--sassy-popover-padding-x, 0.75rem) * 2 + 1.5em);
+    }
+    .bf-popover-bottom {
+      --sassy-popover-side: block-end;
+    }
+    .bf-popover-start {
+      --sassy-popover-side: inline-start;
+    }
+    .bf-popover-end {
+      --sassy-popover-side: inline-end;
+    }
     .bf-dropdown {
       background-color: var(--sassy-dropdown-bg, #fff);
       border: var(--sassy-dropdown-border-width, 1px) solid var(--sassy-dropdown-border-colour, oklch(92.8% 0.006 264.531deg));

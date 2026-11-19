@@ -144,16 +144,20 @@ test("positioning with anchor positioning: the tooltip anchors to whichever trig
 	assert.equal(anchorOf($("a")), ""); // the name moves, so only one trigger holds it
 });
 
-/** A page with a dropdown menu. jsdom has no popovers, so opening, closing and the toggle events are stubbed. */
-const dropdownPage = (menuStyle = "") => {
+const menuItems = `
+	<button id="m1" role="menuitem">Copy</button>
+	<button id="m2" role="menuitem" disabled>Cut</button>
+	<button id="m3" role="menuitem">Paste</button>`;
+
+/**
+ * A page with a dropdown menu, or with other popover content and attributes. jsdom has no popovers, so opening,
+ * closing and the toggle events are stubbed.
+ */
+const dropdownPage = (menuStyle = "", menu = `role="menu">${menuItems}`) => {
 	const window = load(`
-		<style>[popover] { margin: 2px 0; } [popover][data-opened="true"] { display: block; }</style>
+		<style>[popover] { margin: 2px; } [popover][data-opened="true"] { display: block; }</style>
 		<button id="open" popovertarget="menu" aria-haspopup="menu">Actions</button>
-		<div id="menu" popover role="menu" style="${menuStyle}">
-			<button id="m1" role="menuitem">Copy</button>
-			<button id="m2" role="menuitem" disabled>Cut</button>
-			<button id="m3" role="menuitem">Paste</button>
-		</div>`, window => (window.CSS = { supports: () => false }));
+		<div id="menu" popover style="${menuStyle}" ${menu}</div>`, window => (window.CSS = { supports: () => false }));
 	const { HTMLElement, Event } = window;
 	const matches = HTMLElement.prototype.matches;
 	HTMLElement.prototype.matches = function (s) { return s === ":popover-open" ? this.dataset.opened === "true" : matches.call(this, s); };
@@ -209,4 +213,29 @@ test("dropdowns: arrow keys move through enabled items, Tab and choosing an item
 	toggle("open");
 	$("m1").click();
 	assert.equal($("menu").dataset.opened, undefined);
+});
+
+test("popovers: placed above and centred, or on the side set, and clicks inside keep them open", () => {
+	const popover = `role="dialog" aria-labelledby="h"><h3 id="h">Title</h3><button id="m1">More</button>
+		<button id="x" popovertarget="menu" popovertargetaction="hide">Close</button>`;
+	let { $, box, toggle } = dropdownPage("", popover);
+	box($("open"), 100, 200, 80, 30);
+	$("open").click();
+	toggle("open");
+	assert.deepEqual([$("menu").style.top, $("menu").style.left], ["98px", "60px"]); // 200 - 100 - 2, and 100 + (80 - 160) / 2
+	$("m1").click();
+	assert.equal($("menu").dataset.opened, "true");
+	$("x").click(); // the close button is not the popover's button, so aria-expanded stays on the opener
+	toggle("closed");
+	assert.equal($("open").getAttribute("aria-expanded"), "false");
+	assert.equal($("x").hasAttribute("aria-expanded"), false);
+
+	({ $, box, toggle } = dropdownPage("--sassy-popover-side: inline-end", popover));
+	box($("open"), 100, 200, 80, 30);
+	toggle("open");
+	assert.deepEqual([$("menu").style.top, $("menu").style.left], ["165px", "182px"]); // 200 + (30 - 100) / 2, and 180 + 2
+
+	box($("open"), 900, 200, 80, 30); // 1024px wide window: no room after, so before
+	toggle("open");
+	assert.equal($("menu").style.left, "738px"); // 900 - 160 - 2
 });

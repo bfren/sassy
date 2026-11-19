@@ -28,11 +28,11 @@
 
     <main class="site-main site-width">
 
-        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, dropdowns and dialogs</h1>
+        <h1>Buttons, button groups, close buttons, badges, navigation, breadcrumbs, pagination, cards, list groups, accordions, tables, tabs, alerts, progress bars, spinners, skeletons, tooltips, popovers, dropdowns and dialogs</h1>
 
         <p class="lead">The components layer, <code>src/1-components</code>, styles whole interface elements. Like forms, components are output before the grid and utilities, so a utility can override any part of one. The full reference is in <a href="https://github.com/bfren/sassy/blob/main/docs/1-components.md">docs/1-components.md</a>.</p>
 
-        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, dropdowns and dismissible alerts also need <code>js/sassy.js</code>.</p>
+        <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns and dismissible alerts also need <code>js/sassy.js</code>.</p>
 
         <section class="example" id="buttons">
             <h2>Buttons</h2>
@@ -1081,6 +1081,59 @@
 &lt;/div&gt;
 &lt;div class="tip" role="tooltip" popover="manual" id="tip-save"&gt;Saves your changes to this device&lt;/div&gt;
 &lt;div class="tip" role="tooltip" popover="manual" id="tip-share"&gt;Copies a link you can send to someone&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
+        <section class="example" id="popovers">
+            <h2>Popovers</h2>
+            <p>Click a button. A popover is opened by its button's <code>popovertarget</code>, so the browser opens and closes it, and its links and buttons don't close it. Press Escape or click outside to close one.</p>
+            <div class="demo">
+                <div class="buttons">
+                    <button type="button" class="button" popovertarget="pop-hours">Opening hours</button>
+                    <button type="button" class="button" popovertarget="pop-end">Beside</button>
+                    <button type="button" class="button" popovertarget="pop-below">Below</button>
+                </div>
+                <div class="popover" id="pop-hours" popover role="dialog" aria-labelledby="pop-hours-title">
+                    <h3 id="pop-hours-title">Opening hours</h3>
+                    <p>Monday to Friday, 9am to 5pm. Closed on public holidays.</p>
+                    <p><a href="#popovers">Plan your visit</a></p>
+                    <button type="button" class="close" popovertarget="pop-hours" popovertargetaction="hide" aria-label="Close"></button>
+                </div>
+                <div class="popover popover-end" id="pop-end" popover role="dialog" aria-labelledby="pop-end-title">
+                    <h3 id="pop-end-title">Beside the button</h3>
+                    <p>Opens after the button, or before it when there is no room.</p>
+                </div>
+                <div class="popover popover-bottom" id="pop-below" popover role="dialog" aria-label="Note">
+                    <p>A popover needs no heading. Give it an <code>aria-label</code> instead.</p>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.popover
+    @extend %bf-popover
+
+.popover-end
+    @extend %bf-popover-end
+
+.popover-bottom
+    @extend %bf-popover-bottom</code></pre>
+<pre data-lang="html"><code>&lt;div class="buttons"&gt;
+    &lt;button type="button" class="button" popovertarget="pop-hours"&gt;Opening hours&lt;/button&gt;
+    &lt;button type="button" class="button" popovertarget="pop-end"&gt;Beside&lt;/button&gt;
+    &lt;button type="button" class="button" popovertarget="pop-below"&gt;Below&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="popover" id="pop-hours" popover role="dialog" aria-labelledby="pop-hours-title"&gt;
+    &lt;h3 id="pop-hours-title"&gt;Opening hours&lt;/h3&gt;
+    &lt;p&gt;Monday to Friday, 9am to 5pm. Closed on public holidays.&lt;/p&gt;
+    &lt;p&gt;&lt;a href="#popovers"&gt;Plan your visit&lt;/a&gt;&lt;/p&gt;
+    &lt;button type="button" class="close" popovertarget="pop-hours" popovertargetaction="hide" aria-label="Close"&gt;&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="popover popover-end" id="pop-end" popover role="dialog" aria-labelledby="pop-end-title"&gt;
+    &lt;h3 id="pop-end-title"&gt;Beside the button&lt;/h3&gt;
+    &lt;p&gt;Opens after the button, or before it when there is no room.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="popover popover-bottom" id="pop-below" popover role="dialog" aria-label="Note"&gt;
+    &lt;p&gt;A popover needs no heading. Give it an &lt;code&gt;aria-label&lt;/code&gt; instead.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
 </div>
         </section>
 
