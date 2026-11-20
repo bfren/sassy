@@ -67,6 +67,7 @@ $sassy-letter-spacing: (
 ) !default;
 
 $sassy-line-height: (
+    0: 0,
     base: var(--sassy-line-height-base),
     double: 2,
     single: 1,

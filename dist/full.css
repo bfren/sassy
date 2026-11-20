@@ -4322,6 +4322,9 @@
     .bf-letter-spacing-wide {
       letter-spacing: 0.05em;
     }
+    .bf-line-height-0 {
+      line-height: 0;
+    }
     .bf-line-height-base {
       line-height: var(--sassy-line-height-base);
     }
@@ -12974,6 +12977,9 @@
       }
     }
     @media (width >= 576px) {
+      .bf-line-height-0-sm {
+        line-height: 0;
+      }
       .bf-line-height-base-sm {
         line-height: var(--sassy-line-height-base);
       }
@@ -21649,6 +21655,9 @@
       }
     }
     @media (width >= 768px) {
+      .bf-line-height-0-md {
+        line-height: 0;
+      }
       .bf-line-height-base-md {
         line-height: var(--sassy-line-height-base);
       }
@@ -30324,6 +30333,9 @@
       }
     }
     @media (width >= 992px) {
+      .bf-line-height-0-lg {
+        line-height: 0;
+      }
       .bf-line-height-base-lg {
         line-height: var(--sassy-line-height-base);
       }
@@ -38999,6 +39011,9 @@
       }
     }
     @media (width >= 1200px) {
+      .bf-line-height-0-xl {
+        line-height: 0;
+      }
       .bf-line-height-base-xl {
         line-height: var(--sassy-line-height-base);
       }
@@ -47674,6 +47689,9 @@
       }
     }
     @media (width >= 1400px) {
+      .bf-line-height-0-2xl {
+        line-height: 0;
+      }
       .bf-line-height-base-2xl {
         line-height: var(--sassy-line-height-base);
       }
@@ -56349,6 +56367,9 @@
       }
     }
     @media (width >= 1600px) {
+      .bf-line-height-0-3xl {
+        line-height: 0;
+      }
       .bf-line-height-base-3xl {
         line-height: var(--sassy-line-height-base);
       }

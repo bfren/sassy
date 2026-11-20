@@ -294,6 +294,7 @@
   "%bf-letter-spacing-tight": { "scope": "sass,scss", "prefix": "bf-letter-spacing-tight", "body": "bf-letter-spacing-tight", "description": "letter-spacing: -0.01em;" },
   "%bf-letter-spacing-normal": { "scope": "sass,scss", "prefix": "bf-letter-spacing-normal", "body": "bf-letter-spacing-normal", "description": "letter-spacing: 0;" },
   "%bf-letter-spacing-wide": { "scope": "sass,scss", "prefix": "bf-letter-spacing-wide", "body": "bf-letter-spacing-wide", "description": "letter-spacing: 0.05em;" },
+  "%bf-line-height-0": { "scope": "sass,scss", "prefix": "bf-line-height-0", "body": "bf-line-height-0", "description": "line-height: 0;" },
   "%bf-line-height-base": { "scope": "sass,scss", "prefix": "bf-line-height-base", "body": "bf-line-height-base", "description": "line-height: var(--sassy-line-height-base);" },
   "%bf-line-height-double": { "scope": "sass,scss", "prefix": "bf-line-height-double", "body": "bf-line-height-double", "description": "line-height: 2;" },
   "%bf-line-height-single": { "scope": "sass,scss", "prefix": "bf-line-height-single", "body": "bf-line-height-single", "description": "line-height: 1;" },
