@@ -22,6 +22,12 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - `%bf-letter-spacing-tight`, `-normal` and `-wide` (`-0.01em`, `0` and `0.05em`), from `$sassy-letter-spacing`.
 - `%bf-max-width-text` limits text to a readable line length, `--sassy-text-max-width` (`65ch` by default).
 - `sassy.js` closes a modal dialog, such as an offcanvas, when a link in it to a section of the page outside it is followed, so the section can be seen.
+- Negative margins: `n1` to `n20` on every margin placeholder, such as `%bf-mx-n3` for `-0.75rem` on both sides.
+- `%bf-scroll-pt-{0-32}` sets `scroll-padding-top` on the padding scale, up to `8rem`, so in-page links land below a sticky header. `$sassy-scroll-padding-max` sets the highest step.
+- `%bf-max-width-{sm, md, lg, xl, 2xl, 3xl}` limit an element to a breakpoint's width, from `$sassy-breakpoints`.
+- `%bf-backdrop-blur-{none, 1, 2, 3}` blur what is behind a see-through background, from `0.25rem` to `1rem`, set in `$sassy-backdrop-blur`.
+- `%bf-border-style-{solid, dashed, dotted, double, none}`, which win over the `solid` that the border widths set.
+- `%bf-min-width-0`, so a flex or grid item can shrink below its content's width, and `%bf-line-height-0`.
 
 ### Changed
 

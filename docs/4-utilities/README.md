@@ -18,15 +18,16 @@ Most utilities have a breakpoint variant. Add the breakpoint to the end of the n
 
 ## Settings and custom properties
 
-| Name                  | Default       | Description                                                |
-| --------------------- | ------------- | ---------------------------------------------------------- |
-| `$sassy-margin-unit`  | `0.25rem`     | Size of one margin step                                    |
-| `$sassy-padding-unit` | `0.25rem`     | Size of one padding step                                   |
-| `$sassy-gap-unit`     | `0.25rem`     | Size of one gap step                                       |
-| `$sassy-radius-unit`  | `0.25rem`     | Size of one step for `%bf-rounded-{0-6}`                   |
-| `$sassy-shadow-unit`  | `0.125rem`    | Size of one step for `%bf-shadow-{0-3}`                    |
-| `$sassy-loop-max`     | `20`          | Highest spacing, border width and flex grow / shrink step  |
-| `$sassy-breakpoints`  | `sm` to `3xl` | Breakpoints that every responsive utility is generated for |
+| Name                        | Default       | Description                                                |
+| --------------------------- | ------------- | ---------------------------------------------------------- |
+| `$sassy-margin-unit`        | `0.25rem`     | Size of one margin step                                    |
+| `$sassy-padding-unit`       | `0.25rem`     | Size of one padding step                                   |
+| `$sassy-gap-unit`           | `0.25rem`     | Size of one gap step                                       |
+| `$sassy-radius-unit`        | `0.25rem`     | Size of one step for `%bf-rounded-{0-6}`                   |
+| `$sassy-shadow-unit`        | `0.125rem`    | Size of one step for `%bf-shadow-{0-3}`                    |
+| `$sassy-loop-max`           | `20`          | Highest spacing, border width and flex grow / shrink step  |
+| `$sassy-scroll-padding-max` | `32`          | Highest step of `%bf-scroll-pt-{0-32}`                     |
+| `$sassy-breakpoints`        | `sm` to `3xl` | Breakpoints that every responsive utility is generated for |
 
 The settings are set in [0-core](../0-core/README.md#configuring-sassy). The utility values themselves are maps in each module's `-variables.scss` file, in `src/4-utilities`.
 

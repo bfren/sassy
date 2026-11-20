@@ -15,12 +15,14 @@
 | `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}`                                                                    | `aspect-ratio`. Add or change ratios with `$sassy-aspect-ratio`                               |
 | `%bf-pointer-events-{auto, none}`, `%bf-user-select-{all, auto, none}`                                       | Whether an element takes clicks, and how its text is selected                                 |
 | `%bf-height-{5-100}`, `%bf-viewheight-{5-100}`                                                               | Height as a percentage of the parent, or of the viewport                                      |
-| `%bf-min-width-…`, `%bf-min-height-…`, `%bf-min-viewwidth-…`, `%bf-min-viewheight-…`                         | Minimum sizes, as a percentage or of the viewport                                             |
+| `%bf-min-width-{0, 5-100}`, `%bf-min-height-…`, `%bf-min-viewwidth-…`, `%bf-min-viewheight-…`                | Minimum sizes. `%bf-min-width-0` lets a flex or grid item shrink below its content            |
 | `%bf-width-{5-100}`, `%bf-viewwidth-{5-100}`                                                                 | Width, as a percentage of the parent, or of the viewport                                      |
 | `%bf-max-width-{5-100, none}`, `%bf-max-height-{5-100, none}`, `%bf-max-viewwidth-…`, `%bf-max-viewheight-…` | Maximum width and height                                                                      |
+| `%bf-max-width-{sm, md, lg, xl, 2xl, 3xl}`                                                                   | Maximum width of a breakpoint, from `$sassy-breakpoints`                                      |
 | `%bf-max-width-text`                                                                                         | A readable line length, `--sassy-text-max-width` (`65ch`)                                     |
-| `%bf-m-{centre}`, `%bf-mt-…`, `%bf-me-…`, `%bf-mb-…`, `%bf-ms-…`, `%bf-mx-…`, `%bf-my-…`                     | Margin, from `auto` or `0` to `20`. `t`, `e`, `b`, `s` are top, end, bottom and start         |
+| `%bf-m-{centre}`, `%bf-mt-…`, `%bf-me-…`, `%bf-mb-…`, `%bf-ms-…`, `%bf-mx-…`, `%bf-my-…`                     | Margin, from `auto` or `0` to `20`, or `n1` to `n20` for negative                             |
 | `%bf-p-…`, `%bf-pt-…`, `%bf-pe-…`, `%bf-pb-…`, `%bf-ps-…`, `%bf-px-…`, `%bf-py-…`                            | Padding, from `inherit` or `0` to `20`                                                        |
+| `%bf-scroll-pt-{0-32}`                                                                                       | Scroll padding at the top, on the padding scale up to `8rem`, for a sticky header             |
 
 Margin and padding steps are in multiples of `$sassy-margin-unit` and `$sassy-padding-unit`, so `%bf-p-4` is `4 × 0.25rem`, or `1rem`. Sides use `t`, `e`, `b` and `s`, but offsets, which name the edge, use `top`, `right`, `bottom` and `left`.
 

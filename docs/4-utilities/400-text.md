@@ -12,7 +12,7 @@
 | `%bf-font-style-{italic, oblique, normal}`                 | Font style                                                               |
 | `%bf-font-weight-{100-900, bold, bolder, lighter, normal}` | Font weight, as a number or keyword                                      |
 | `%bf-letter-spacing-{tight, normal, wide}`                 | Letter spacing: `-0.01em`, `0` or `0.05em`                               |
-| `%bf-line-height-{single, double, triple, base}`           | Line height                                                              |
+| `%bf-line-height-{0, single, double, triple, base}`        | Line height. `0` for a box around only an image or icon                  |
 | `%bf-text-align-{start, centre, end, justify}`             | Text alignment                                                           |
 | `%bf-text-decoration-{under, over, through, none}`         | Underline, overline, line-through or none                                |
 | `%bf-text-transform-{upper, lower, capitalise, none}`      | Upper or lower case, capitalised or none                                 |

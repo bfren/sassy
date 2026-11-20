@@ -49,7 +49,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 
 | Bootstrap                                         | Sassy                                                                                             |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `.m-3`, `.mt-3`, `.mx-auto`, `.ms-auto`           | `%bf-m-4`, `%bf-mt-4`, `%bf-mx-auto`, `%bf-ms-auto` - see the scale above                         |
+| `.m-3`, `.mt-3`, `.mx-auto`, `.ms-auto`, `.m-n3`  | `%bf-m-4`, `%bf-mt-4`, `%bf-mx-auto`, `%bf-ms-auto`, `%bf-m-n4` - see the scale above             |
 | `.p-2`, `.px-3`                                   | `%bf-p-2`, `%bf-px-4`                                                                             |
 | `.gap-3`                                          | `%bf-gap-4`                                                                                       |
 | `.d-none`, `.d-flex`, `.d-md-block`               | `%bf-d-none`, `%bf-d-flex`, `%bf-d-block-md`                                                      |
@@ -71,7 +71,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.text-start`, `.text-center`, `.text-end`        | `%bf-text-align-start`, `%bf-text-align-centre`, `%bf-text-align-end`                             |
 | `.fs-1` to `.fs-6`, `.small`                      | `%bf-font-size-1` to `-6` (a smaller scale, 2 to 1.1 times the base), `%bf-font-size-small`       |
 | `.fw-bold`, `.fst-italic`                         | `%bf-font-weight-700`, `%bf-font-style-italic`                                                    |
-| `.lh-1`                                           | `%bf-line-height-single`                                                                          |
+| `.lh-1`                                           | `%bf-line-height-single`, or `%bf-line-height-0`                                                  |
 | `.text-uppercase`                                 | `%bf-text-transform-upper`                                                                        |
 | `.text-decoration-none`                           | `%bf-text-decoration-none`                                                                        |
 | `.text-nowrap`, `.text-truncate`, `.text-break`   | `%bf-text-wrap-overflow`, `%bf-text-truncate`, `%bf-text-break`                                   |

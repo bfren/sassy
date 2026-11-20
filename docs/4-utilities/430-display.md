@@ -8,6 +8,7 @@
 | `%bf-visually-hidden`                                                   | Hides content visually, but not from screen readers. Not responsive |
 | `%bf-visually-hidden-focusable`                                         | Hidden like `%bf-visually-hidden` until focused, for skip links     |
 | `%bf-opacity-{0-100}`                                                   | `opacity`, in steps of 10                                           |
+| `%bf-backdrop-blur-{none, 1, 2, 3}`                                     | Blurs what is behind a see-through background: 0.25 to 1rem         |
 | `%bf-flex-{column, column-reverse, row, row-reverse}`                   | `flex-direction`                                                    |
 | `%bf-flex-wrap-{nowrap, wrap, wrap-reverse}`                            | `flex-wrap`                                                         |
 | `%bf-flex-justify-{start, centre, end, between, around, evenly}`        | `justify-content`                                                   |
