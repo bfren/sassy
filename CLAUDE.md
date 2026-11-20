@@ -37,3 +37,20 @@ Requires Dart Sass 1.108+ on the path (`sass`), plus bash and `awk`. The site an
 - Shell scripts must keep LF line endings and `.bat` files CRLF (enforced by `.gitattributes`).
 - Commits must be signed, per the README.
 - `samples/js/`, `samples/images/` and `samples/css/` are build copies and are gitignored; `test/` contains only untracked local leftovers and is not part of the project.
+- Placeholder values: a bare number is always a step on a scale (`%bf-p-4`, `%bf-top-22`); every percentage ends in `pc` (`%bf-width-50pc`, `%bf-opacity-50pc`) and every viewport size in `vh` or `vw` (`%bf-height-100vh`). Keep new scales to this.
+- A new component gets a numbered file `_1NN-name.sass` with its `-variables.scss`, registered in `src/1-components/_index.sass` (`@forward … hide utilities`), `src/_render.sass` (in file order) and `src/0-core/_030-variables.scss`; a page in `docs/1-components/` listed in that folder's `README.md`; a README table row; a samples demo; and a CHANGELOG entry under `[Unreleased]`, marked **Breaking:** where it applies.
+
+## Pitfalls
+
+- **Layers decide before specificity.** A placeholder that styles what is inside it must be in a layer at or above what it styles: components are folder 1 and forms folder 2 because input groups style the buttons inside them, and `%bf-body` is in `core`. A component that styles form controls inside it would lose to the forms layer.
+- **Sass 1.108 crashes** extending into `:where(:has(> &))` ("components may not be empty"). Write `:where(*:has(> &))`, which means the same with zero specificity.
+- **Sass's `if()` function is deprecated**: use `@if` blocks.
+- **Buttons don't inherit the text size**, so anything sized in `em` on a `<button>` needs `font: inherit`.
+- **Hover against a current state**: `a:hover` out-ranks `[aria-current]`. Wrap the element in `:where(a, button)` so the current and disabled rules, written later, win.
+- **Theme colours mixed into text fail contrast** easily. Alerts mix 40% of the theme colour with `currentColor`, which keeps all eight defaults at 5:1 or more; measure any new mix in the browser.
+- **`[hidden]` loses to any author `display`**, layered or not, so a component hidden by script must not get a display placeholder.
+- **Custom properties inherit.** A setting such as `--sassy-grid-gap: 0` on a grid also reaches every grid inside it; prefer a placeholder (`%bf-gap-0`) when only that element should change.
+- **Shared component code** is in `src/1-components/_100-shared.sass`: `focus-outline()`, `joined($axis, $inner)` (the shared borders of button groups and pagination), `link()` and the part helpers.
+- **Tests and `window.CSS`**: jsdom has no `window.CSS` before 31, so run the tests with the version CI pins, and have tests create `window.CSS` rather than change it.
+- **The samples stylesheet is cached** by the browser: reload it with a query string (`?v=2`) after a rebuild before checking a change.
+- **Docs tables**: a new row wider than its column means re-padding the whole Markdown table, or it looks broken in plain text.
