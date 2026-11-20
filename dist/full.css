@@ -4398,8 +4398,14 @@
     .bf-line-height-double {
       line-height: 2;
     }
+    .bf-line-height-relaxed {
+      line-height: 1.625;
+    }
     .bf-line-height-single {
       line-height: 1;
+    }
+    .bf-line-height-tight {
+      line-height: 1.25;
     }
     .bf-line-height-triple {
       line-height: 3;
@@ -13095,8 +13101,14 @@
       .bf-line-height-double-sm {
         line-height: 2;
       }
+      .bf-line-height-relaxed-sm {
+        line-height: 1.625;
+      }
       .bf-line-height-single-sm {
         line-height: 1;
+      }
+      .bf-line-height-tight-sm {
+        line-height: 1.25;
       }
       .bf-line-height-triple-sm {
         line-height: 3;
@@ -21828,8 +21840,14 @@
       .bf-line-height-double-md {
         line-height: 2;
       }
+      .bf-line-height-relaxed-md {
+        line-height: 1.625;
+      }
       .bf-line-height-single-md {
         line-height: 1;
+      }
+      .bf-line-height-tight-md {
+        line-height: 1.25;
       }
       .bf-line-height-triple-md {
         line-height: 3;
@@ -30561,8 +30579,14 @@
       .bf-line-height-double-lg {
         line-height: 2;
       }
+      .bf-line-height-relaxed-lg {
+        line-height: 1.625;
+      }
       .bf-line-height-single-lg {
         line-height: 1;
+      }
+      .bf-line-height-tight-lg {
+        line-height: 1.25;
       }
       .bf-line-height-triple-lg {
         line-height: 3;
@@ -39294,8 +39318,14 @@
       .bf-line-height-double-xl {
         line-height: 2;
       }
+      .bf-line-height-relaxed-xl {
+        line-height: 1.625;
+      }
       .bf-line-height-single-xl {
         line-height: 1;
+      }
+      .bf-line-height-tight-xl {
+        line-height: 1.25;
       }
       .bf-line-height-triple-xl {
         line-height: 3;
@@ -48027,8 +48057,14 @@
       .bf-line-height-double-2xl {
         line-height: 2;
       }
+      .bf-line-height-relaxed-2xl {
+        line-height: 1.625;
+      }
       .bf-line-height-single-2xl {
         line-height: 1;
+      }
+      .bf-line-height-tight-2xl {
+        line-height: 1.25;
       }
       .bf-line-height-triple-2xl {
         line-height: 3;
@@ -56760,8 +56796,14 @@
       .bf-line-height-double-3xl {
         line-height: 2;
       }
+      .bf-line-height-relaxed-3xl {
+        line-height: 1.625;
+      }
       .bf-line-height-single-3xl {
         line-height: 1;
+      }
+      .bf-line-height-tight-3xl {
+        line-height: 1.25;
       }
       .bf-line-height-triple-3xl {
         line-height: 3;

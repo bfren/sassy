@@ -70,7 +70,9 @@ $sassy-line-height: (
     0: 0,
     base: var(--sassy-line-height-base),
     double: 2,
+    relaxed: 1.625,
     single: 1,
+    tight: 1.25,
     triple: 3,
 );
 
