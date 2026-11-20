@@ -7,7 +7,8 @@ Sassy was inspired by Bootstrap, and covers most of what Bootstrap 5.3 offers: c
 - **Placeholders, not classes.** Sassy outputs `%bf-…` placeholders, and you `@extend` them onto your own selectors, so your HTML keeps names that mean something to you and your CSS has only the rules you use. `dist/full.css` has every placeholder as a `.bf-…` class too, for prototyping or a page without Sass.
 - **Breakpoints go last.** Bootstrap's `.d-md-none` is `%bf-d-none-md`, and `.col-lg-4` is `%bf-col-4-lg`. The breakpoints have the same names and widths (`sm` 576px to `xl` 1200px), with `2xl` (1400px) where Bootstrap has `xxl`, and one more, `3xl` (1600px).
 - **Sizes are words.** Bootstrap's `-sm` and `-lg` sizes are `-small` and `-large`, so they can't be mistaken for breakpoints: `.btn-sm` is `%bf-btn-small`.
-- **A finer spacing scale.** Margin, padding and gap go from 0 to 20 in steps of 0.25rem, where Bootstrap has 0 to 5. Bootstrap's `3` (1rem) is Sassy's `4`, its `4` (1.5rem) is `6` and its `5` (3rem) is `12`; `1` and `2` are the same.
+- **A finer spacing scale.** Margin, padding, gap and offsets go from 0 to 32 in steps of 0.25rem, where Bootstrap has 0 to 5. Bootstrap's `3` (1rem) is Sassy's `4`, its `4` (1.5rem) is `6` and its `5` (3rem) is `12`; `1` and `2` are the same.
+- **Percentages and viewport sizes end in their unit.** `.w-50` is `%bf-width-50pc`, `.vh-100` is `%bf-height-100vh` and `.opacity-50` is `%bf-opacity-50pc`, so a bare number is always a step on a scale: `%bf-top-4` is `1rem`, and `%bf-top-50pc` is `50%`.
 - **Native elements and ARIA, not `data-bs-*`.** Modals are `<dialog>` opened with `command="show-modal"`, accordions are `<details>`, dropdowns and popovers use `popovertarget`, progress bars are `<progress>`. Tabs, tooltips and carousels are found by their ARIA roles. Most components need no script at all.
 - **A small script, not a plugin API.** The optional `sassy.js` adds what HTML and CSS can't do yet: tab and menu keys, tooltips, autoplay, scrollspy, and fallbacks for newer browser features. It has no JavaScript API to call and fires no events of its own.
 - **Logical sides.** Start and end follow the text direction everywhere, so there is no separate right-to-left build: `%bf-ms-auto` is `margin-inline-start`.
@@ -47,39 +48,41 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 
 ### Utilities
 
-| Bootstrap                                         | Sassy                                                                                             |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `.m-3`, `.mt-3`, `.mx-auto`, `.ms-auto`, `.m-n3`  | `%bf-m-4`, `%bf-mt-4`, `%bf-mx-auto`, `%bf-ms-auto`, `%bf-m-n4` - see the scale above             |
-| `.p-2`, `.px-3`                                   | `%bf-p-2`, `%bf-px-4`                                                                             |
-| `.gap-3`                                          | `%bf-gap-4`                                                                                       |
-| `.d-none`, `.d-flex`, `.d-md-block`               | `%bf-d-none`, `%bf-d-flex`, `%bf-d-block-md`                                                      |
-| `.flex-column`, `.flex-wrap`, `.flex-grow-1`      | `%bf-flex-column`, `%bf-flex-wrap-wrap`, `%bf-flex-grow-1`                                        |
-| `.justify-content-between`, `.align-items-center` | `%bf-flex-justify-between`, `%bf-flex-align-items-centre`                                         |
-| `.order-last`                                     | `%bf-flex-order-last`                                                                             |
-| `.w-50`, `.h-100`, `.mw-100`, `.vh-100`           | `%bf-width-50pc`, `%bf-height-100pc`, `%bf-max-width-100pc`, `%bf-height-100vh`                   |
-| `.position-sticky`, `.top-0`                      | `%bf-position-sticky`, `%bf-top-0`                                                                |
-| `.sticky-top`, `.fixed-top`                       | `%bf-position-sticky` or `%bf-position-fixed`, with `%bf-top-0`                                   |
-| `.z-3`                                            | `%bf-z-index-3`                                                                                   |
-| `.overflow-hidden`                                | `%bf-overflow-hidden`                                                                             |
-| `.ratio .ratio-16x9`                              | `%bf-aspect-ratio-16x9`, on the element itself                                                    |
-| `.object-fit-cover`                               | `%bf-object-fit-cover`                                                                            |
-| `.float-start`                                    | `%bf-float-start`                                                                                 |
-| `.align-middle`                                   | `%bf-vertical-align-middle`                                                                       |
-| `.opacity-50`                                     | `%bf-opacity-50pc`                                                                                |
-| `.pe-none`, `.user-select-none`                   | `%bf-pointer-events-none`, `%bf-user-select-none`                                                 |
-| `.visually-hidden`, `.visually-hidden-focusable`  | `%bf-visually-hidden`, `%bf-visually-hidden-focusable`                                            |
-| `.text-start`, `.text-center`, `.text-end`        | `%bf-text-align-start`, `%bf-text-align-centre`, `%bf-text-align-end`                             |
-| `.fs-1` to `.fs-6`, `.small`                      | `%bf-font-size-1` to `-6` (a smaller scale, 2 to 1.1 times the base), `%bf-font-size-small`       |
-| `.fw-bold`, `.fst-italic`                         | `%bf-font-weight-700`, `%bf-font-style-italic`                                                    |
-| `.lh-1`                                           | `%bf-line-height-single`, or `%bf-line-height-0`                                                  |
-| `.text-uppercase`                                 | `%bf-text-transform-upper`                                                                        |
-| `.text-decoration-none`                           | `%bf-text-decoration-none`                                                                        |
-| `.text-nowrap`, `.text-truncate`, `.text-break`   | `%bf-text-wrap-overflow`, `%bf-text-truncate`, `%bf-text-break`                                   |
-| `.link-offset-2`, `.link-underline-opacity-50`    | `%bf-text-underline-offset-2`, `%bf-text-decoration-opacity-50pc`                                 |
-| `.stretched-link`, `.icon-link`, `.focus-ring`    | `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                                           |
-| `.border`, `.border-0`, `.border-top`             | `%bf-border-1`, `%bf-border-0`, `%bf-border-top-1`                                                |
-| `.rounded`, `.rounded-circle`, `.rounded-pill`    | `%bf-rounded`, `%bf-rounded-circle`, `%bf-rounded-pill`; the numbered sizes are a different scale |
-| `.shadow-sm`, `.shadow`, `.shadow-lg`             | `%bf-shadow-1`, `%bf-shadow-2`, `%bf-shadow-3`                                                    |
+| Bootstrap                                          | Sassy                                                                                                 |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `.m-3`, `.mt-3`, `.mx-auto`, `.ms-auto`, `.m-n3`   | `%bf-m-4`, `%bf-mt-4`, `%bf-mx-auto`, `%bf-ms-auto`, `%bf-m-n4` - see the scale above                 |
+| `.p-2`, `.px-3`                                    | `%bf-p-2`, `%bf-px-4`                                                                                 |
+| `.gap-3`                                           | `%bf-gap-4`                                                                                           |
+| `.d-none`, `.d-flex`, `.d-md-block`                | `%bf-d-none`, `%bf-d-flex`, `%bf-d-block-md`                                                          |
+| `.flex-column`, `.flex-wrap`, `.flex-grow-1`       | `%bf-flex-column`, `%bf-flex-wrap-wrap`, `%bf-flex-grow-1`                                            |
+| `.justify-content-between`, `.align-items-center`  | `%bf-flex-justify-between`, `%bf-flex-align-items-centre`                                             |
+| `.order-last`                                      | `%bf-flex-order-last`                                                                                 |
+| `.w-50`, `.w-auto`, `.h-100`, `.mw-100`, `.mh-100` | `%bf-width-50pc`, `%bf-width-auto`, `%bf-height-100pc`, `%bf-max-width-100pc`, `%bf-max-height-100pc` |
+| `.vw-100`, `.vh-100`, `.min-vw-100`, `.min-vh-100` | `%bf-width-100vw`, `%bf-height-100vh`, `%bf-min-width-100vw`, `%bf-min-height-100vh`                  |
+| `.position-sticky`, `.position-absolute`           | `%bf-position-sticky`, `%bf-position-absolute`                                                        |
+| `.top-0`, `.top-50`, `.bottom-100`, `.start-0`     | `%bf-top-0`, `%bf-top-50pc`, `%bf-bottom-100pc`, `%bf-left-0`, or a spacing step: `%bf-top-4`         |
+| `.sticky-top`, `.fixed-top`                        | `%bf-position-sticky` or `%bf-position-fixed`, with `%bf-top-0`                                       |
+| `.z-3`                                             | `%bf-z-index-3`                                                                                       |
+| `.overflow-hidden`                                 | `%bf-overflow-hidden`                                                                                 |
+| `.ratio .ratio-16x9`                               | `%bf-aspect-ratio-16x9`, on the element itself                                                        |
+| `.object-fit-cover`                                | `%bf-object-fit-cover`                                                                                |
+| `.float-start`                                     | `%bf-float-start`                                                                                     |
+| `.align-middle`                                    | `%bf-vertical-align-middle`                                                                           |
+| `.opacity-50`                                      | `%bf-opacity-50pc`                                                                                    |
+| `.pe-none`, `.user-select-none`                    | `%bf-pointer-events-none`, `%bf-user-select-none`                                                     |
+| `.visually-hidden`, `.visually-hidden-focusable`   | `%bf-visually-hidden`, `%bf-visually-hidden-focusable`                                                |
+| `.text-start`, `.text-center`, `.text-end`         | `%bf-text-align-start`, `%bf-text-align-centre`, `%bf-text-align-end`                                 |
+| `.fs-1` to `.fs-6`, `.small`                       | `%bf-font-size-1` to `-6` (a smaller scale, 2 to 1.1 times the base), `%bf-font-size-small`           |
+| `.fw-bold`, `.fst-italic`                          | `%bf-font-weight-700`, `%bf-font-style-italic`                                                        |
+| `.lh-1`, `.lh-sm`, `.lh-base`, `.lh-lg`            | `%bf-line-height-single`, `-tight`, `-base`, `-double`; also `-0`, `-relaxed` (1.625) and `-triple`   |
+| `.text-uppercase`                                  | `%bf-text-transform-upper`                                                                            |
+| `.text-decoration-none`                            | `%bf-text-decoration-none`                                                                            |
+| `.text-nowrap`, `.text-truncate`, `.text-break`    | `%bf-text-wrap-overflow`, `%bf-text-truncate`, `%bf-text-break`                                       |
+| `.link-offset-2`, `.link-underline-opacity-50`     | `%bf-text-underline-offset-2`, `%bf-text-decoration-opacity-50pc`                                     |
+| `.stretched-link`, `.icon-link`, `.focus-ring`     | `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                                               |
+| `.border`, `.border-0`, `.border-top`              | `%bf-border-1`, `%bf-border-0`, `%bf-border-top-1`                                                    |
+| `.rounded`, `.rounded-circle`, `.rounded-pill`     | `%bf-rounded`, `%bf-rounded-circle`, `%bf-rounded-pill`; the numbered sizes are a different scale     |
+| `.shadow-sm`, `.shadow`, `.shadow-lg`              | `%bf-shadow-1`, `%bf-shadow-2`, `%bf-shadow-3`                                                        |
 
 ### Colours
 
@@ -89,6 +92,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.bg-primary`          | `%bf-bg-primary`                                                            |
 | `.text-bg-primary`     | `%bf-text-bg-primary`, with text chosen for contrast                        |
 | `.border-primary`      | `%bf-border-primary`                                                        |
+| `.bg-opacity-50`       | `%bf-bg-opacity-50pc`, with any `%bf-bg-*` palette or theme colour          |
 | Any palette colour     | `%bf-c-sky-600`, `%bf-bg-grey-100` and so on, from the Tailwind CSS palette |
 | `data-bs-theme="dark"` | `%bf-theme-dark` on `html` or an element, or `%bf-theme-auto`               |
 
@@ -165,7 +169,7 @@ Opening and closing use HTML rather than `data-bs-*` attributes:
 
 - **Stacks** (`.vstack`, `.hstack`) and the vertical rule (`.vr`): use `%bf-d-flex`, `%bf-flex-column` and `%bf-gap-*`.
 - **`.clearfix`** and **`.translate-middle`**.
-- **Colour opacity utilities** such as `.bg-opacity-50` and `.text-opacity-75`, and `.bg-gradient`.
+- **Text and border opacity utilities** (`.text-opacity-75`, `.border-opacity-50`), and `.bg-gradient`.
 - **Theme colours on list group items** (`.list-group-item-primary`), and coloured links (`.link-primary`).
 - **The body font is opt-in.** Sassy's element defaults cover what Reboot does - `border-box` sizing, headings, paragraph and list spacing, links, code, tables and form basics - but the body's font, size and colour come from `%bf-body`, which you extend on `body`.
 - **The JavaScript plugin API**: no `new bootstrap.Modal()`, no `show.bs.modal` events. Use the elements' own methods and events, such as `dialog.showModal()` and the `toggle` event.
