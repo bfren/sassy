@@ -19,6 +19,10 @@ $sassy-m-loop: (auto: auto, inherit: inherit)
 @for $i from 0 through $sassy-loop-max
     $sassy-m-loop: map.merge($sassy-m-loop, ($i: $i * $sassy-margin-unit))
 
+// negative margins, e.g. n3 for -3 steps
+@for $i from 1 through $sassy-loop-max
+    $sassy-m-loop: map.merge($sassy-m-loop, ("n#{$i}": -$i * $sassy-margin-unit))
+
 $sassy-p-loop: (inherit: inherit)
 @for $i from 0 through $sassy-loop-max
     $sassy-p-loop: map.merge($sassy-p-loop, ($i: $i * $sassy-padding-unit))
