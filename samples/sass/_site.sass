@@ -29,7 +29,6 @@ body
     @extend %bf-px-5
     @extend %bf-px-8-md
     @extend %bf-max-width-2xl
-    box-sizing: border-box
 
 // Headings in the page's own text, in the serif
 .site-heading
@@ -210,7 +209,7 @@ body
     @extend %bf-grid-lg
     @extend %bf-gap-x-12-lg
     // only the gap between the columns: the page's own margins space the rows
-    --sassy-grid-gap: 0
+    @extend %bf-gap-y-0-lg
 
     > :not(.site-sections, script)
         @extend %bf-grid-col-9-lg
@@ -321,9 +320,9 @@ body
     @extend %bf-py-5
     @extend %bf-px-6
     @extend %bf-font-size-small
-    // gap: a line height of 1.65, and a max-height in rem
+    @extend %bf-max-viewheight-50
+    // gap: a line height of 1.65
     line-height: 1.65
-    max-height: 30rem
     // the ring inside the block, which would clip one outside it
     @extend %bf-focus-ring-inset
     --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
@@ -331,7 +330,7 @@ body
 // Sassy's grid: each half is the full width, then half from lg
 .code-split
     @extend %bf-grid
-    --sassy-grid-gap: 0
+    @extend %bf-gap-0
 
     figure
         @extend %bf-grid-col-12
