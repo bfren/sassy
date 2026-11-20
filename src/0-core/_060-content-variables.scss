@@ -10,6 +10,10 @@ $sassy-list-indent: 2rem !default;
 $sassy-link-colour: var(--sassy-link-colour, var(--sassy-theme-primary));
 $sassy-link-hover-colour: var(--sassy-link-hover-colour, color-mix(in oklab, #{$sassy-link-colour} 75%, var(--sassy-body-colour)));
 
+// inline code, code blocks and keys
+$sassy-code-font-size: var(--sassy-code-font-size, 0.875em);
+$sassy-pre-tab-size: var(--sassy-pre-tab-size, 4);
+
 $sassy-lead-font-size: var(--sassy-lead-font-size, calc(var(--sassy-font-size-base) * 1.25));
 $sassy-lead-font-weight: var(--sassy-lead-font-weight, 300);
 
