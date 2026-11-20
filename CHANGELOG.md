@@ -28,6 +28,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - Outline buttons in a light theme colour (`ok`, `info`, `warn`, `grey-light`) mix it with the body text colour rather than with the button's dark text, so they stay readable on a dark background.
 - The current link of `%bf-nav-pills` uses the primary button's text colour, `--sassy-btn-primary-colour`, rather than always white.
 - The theme properties on `:root` are output with `:where(:root)`, so any selector that sets them, even `html`, wins.
+- The light theme's `primary` is now `sky-700` and `ok` `green-700`, rather than the 600 shades, so their buttons have white text that meets WCAG AA (5.9:1 and 5.0:1). The `primary` button had white text at 4.1:1, and `ok` had dark text. The text, background, border and check mark colours that use them are darker too, and the dark theme is unchanged.
 
 ## [0.4.0] - 2026-11-19
 
