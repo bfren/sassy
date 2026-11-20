@@ -124,6 +124,12 @@
             outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
             outline-offset: $sassy-focus-outline-offset
 
+    // the same ring drawn inside the element, where an outside one would be clipped, as in a box that scrolls
+    @include make.single("focus-ring-inset")
+        &:focus-visible
+            outline: $sassy-focus-outline-width solid $sassy-focus-outline-colour
+            outline-offset: calc(-1 * $sassy-focus-outline-width)
+
 
     // Text: Align
 
