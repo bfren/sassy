@@ -28,6 +28,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - `%bf-backdrop-blur-{none, 1, 2, 3}` blur what is behind a see-through background, from `0.25rem` to `1rem`, set in `$sassy-backdrop-blur`.
 - `%bf-border-style-{solid, dashed, dotted, double, none}`, which win over the `solid` that the border widths set.
 - `%bf-min-width-0`, so a flex or grid item can shrink below its content's width, and `%bf-line-height-0`.
+- `%bf-bg-opacity-{0-100}` makes a palette or theme background see-through, in steps of 10, by setting `--sassy-bg-opacity`. The property isn't inherited, so a background inside a see-through one is solid. `%bf-bg-*` now mix their colour with transparent by it, which outputs the same colour when it isn't set.
+- `%bf-focus-ring-inset` draws the focus ring inside the element, for a box that scrolls or anywhere an outside ring would be clipped.
 
 ### Changed
 

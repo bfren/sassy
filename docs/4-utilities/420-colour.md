@@ -6,12 +6,39 @@
 | ------------------------------ | --------------------------------------------------- |
 | `%bf-c-{colour}-{shade}`       | Text colour, from the palette                       |
 | `%bf-bg-{colour}-{shade}`      | Background colour                                   |
+| `%bf-bg-opacity-{0-100}`       | Makes a `%bf-bg-…` see-through, in steps of 10      |
 | `%bf-text-bg-{colour}-{shade}` | Background colour, with text that contrasts with it |
 | `%bf-border-{colour}-{shade}`  | Border colour                                       |
 
 `{colour}` is one of the 26 palette colours and `{shade}` is `50`, `100` to `900`, or `950`. See the [README](../../README.md#naming) for the list, and the [theme](../5-theme/README.md) for the colours with their own names.
 
 `%bf-text-bg-…` picks the text colour when Sass compiles, using the WCAG contrast ratio: `$sassy-contrast-dark` (`grey-950`) or `$sassy-contrast-light` (white), whichever contrasts more with the background. `sassy.contrast-colour()` gives the same choice for any colour.
+
+`%bf-bg-opacity-…` sets `--sassy-bg-opacity`, which the palette and theme backgrounds mix with transparent. It isn't inherited, so a background inside a see-through one is solid. It doesn't change `%bf-text-bg-…`, whose text colour is chosen for the solid background.
+
+## Example: a frosted header
+
+```sass
+.header
+    @extend %bf-position-sticky
+    @extend %bf-top-0
+    @extend %bf-bg-grey-50
+    @extend %bf-bg-opacity-80
+    @extend %bf-backdrop-blur-2
+```
+
+```css
+@layer sassy.base.utilities {
+  .header {
+    --sassy-bg-opacity: 80%;
+  }
+  .header {
+    backdrop-filter: blur(0.5rem);
+  }
+}
+```
+
+What scrolls under the header shows through, blurred.
 
 ## Example: a coloured tag
 

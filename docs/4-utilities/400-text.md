@@ -26,6 +26,7 @@
 | `%bf-icon-link`                                            | A link with an icon: in a row, centred, with a `1em` square `svg`        |
 | `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
 | `%bf-focus-ring`                                           | The focus outline that links, tabs and buttons in components use         |
+| `%bf-focus-ring-inset`                                     | The same ring inside the element, where one outside would be clipped     |
 
 ## Example: a page heading and a caption
 
