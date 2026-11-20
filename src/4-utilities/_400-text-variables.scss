@@ -60,6 +60,12 @@ $sassy-font-weight: (
     normal
 );
 
+$sassy-letter-spacing: (
+    tight: -0.01em,
+    normal: 0,
+    wide: 0.05em
+) !default;
+
 $sassy-line-height: (
     base: var(--sassy-line-height-base),
     double: 2,

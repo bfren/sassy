@@ -130,6 +130,10 @@ $sassy-p-loop: (inherit: inherit)
     @include make.responsive("max-viewwidth", -get-steps(1vw, none)) using ($value)
         max-width: $value
 
+    // a readable line length for text
+    @include make.responsive("max-width-text", ())
+        max-width: $sassy-text-max-width
+
     // Margin
 
     @include make.responsive("m", ("centre")) using ($value)
