@@ -2,7 +2,9 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.5.0] - 2026-11-20
+
+> **Upgrading from 0.4.0.** Two changes can break existing styles. Every percentage placeholder now ends in `pc` and every viewport size in `vh` or `vw`: `%bf-width-50` is `%bf-width-50pc`, `%bf-viewheight-100` is `%bf-height-100vh`, `%bf-top-50` is `%bf-top-50pc` and `%bf-opacity-50` is `%bf-opacity-50pc` - an old name fails to compile, so Sass shows you each one to rename. And everything now uses `box-sizing: border-box`, so your own elements with a width or height and padding or a border get smaller; set `box-sizing: content-box` on any that should not. The new element defaults also space paragraphs and lists, colour links and size code, so check pages that relied on the browser's defaults. Each change is listed under Changed.
 
 ### Added
 
@@ -36,6 +38,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ### Changed
 
+- **Breaking:** every percentage ends in `pc`, and every viewport size in `vh` or `vw`, so a bare number is always a step on a scale. `%bf-width-50` is now `%bf-width-50pc`, and the same for `height`, `min-` and `max-`; `%bf-top-50` and `-100` are `%bf-top-50pc` and `-100pc`, and the same for the other edges; `%bf-opacity-50` is `%bf-opacity-50pc`, and the same for `bg-opacity` and `text-decoration-opacity`. The viewport sizes take the property's own name: `%bf-viewheight-100` is `%bf-height-100vh`, `%bf-min-viewwidth-50` is `%bf-min-width-50vw`, and so on. `%bf-opacity-*` outputs a percentage, such as `opacity: 50%`.
+- **Breaking:** everything uses `box-sizing: border-box`, with `::before` and `::after`, so padding and borders are inside an element's width and height. Your own elements with a width or height and padding or a border get smaller; set `box-sizing: content-box` on any that should not.
 - More components style their parts from the elements and roles inside them, so the part placeholders are optional: `%bf-dialog` (and so offcanvas) styles a `<header>`, its heading, a `<footer>` and the body between them, also inside a `<form method="dialog">`; `%bf-card` a `<header>`, `<footer>` and image; `%bf-tabs` its `role="tab"` children; `%bf-nav` its links and buttons; `%bf-alert` a heading it starts with; and `%bf-dropdown` headings and `<hr>` or `role="separator"`. The part placeholders still work. Markup that matches is styled even without them, which can change a `<header>`, `<footer>`, heading or `<hr>` you didn't mean as a part.
 - The docs have a folder per layer, with a `README.md` for the layer and a page per part named after its source file, such as `docs/1-components/123-tabs.md`, in place of one long page per layer.
 - A few default colours moved to the nearest colour role: card caps and read-only inputs from `grey-50` to `grey-100`; form help text, input placeholders and the current breadcrumb from `grey-500` to `grey-600`; and the text of dropdowns, popovers, toasts and carousel controls from `grey-900` to the body colour, `grey-800`.
@@ -45,9 +49,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - The light theme's `primary` is now `sky-700` and `ok` `green-700`, rather than the 600 shades, so their buttons have white text that meets WCAG AA (5.9:1 and 5.0:1). The `primary` button had white text at 4.1:1, and `ok` had dark text. Everything else that uses them is darker too, such as the text, background and border utilities, links, focus rings, checked boxes and range thumbs. The dark theme is unchanged.
 - `%bf-font-size-small` is `0.875` times the base size rather than `0.8`, the same as figure and blockquote captions.
 - `--sassy-line-strong` is `grey-500` in the light theme rather than `grey-300`, so the edges of form controls, default buttons and pagination contrast 4.8:1 with the page, above the 3:1 that WCAG asks for. It was 1.47:1.
-- **Breaking:** every percentage ends in `pc`, and every viewport size in `vh` or `vw`, so a bare number is always a step on a scale. `%bf-width-50` is now `%bf-width-50pc`, and the same for `height`, `min-` and `max-`; `%bf-top-50` and `-100` are `%bf-top-50pc` and `-100pc`, and the same for the other edges; `%bf-opacity-50` is `%bf-opacity-50pc`, and the same for `bg-opacity` and `text-decoration-opacity`. The viewport sizes take the property's own name: `%bf-viewheight-100` is `%bf-height-100vh`, `%bf-min-viewwidth-50` is `%bf-min-width-50vw`, and so on. `%bf-opacity-*` outputs a percentage, such as `opacity: 50%`.
 - Margin, padding and gap go up to step `32` (`8rem`) rather than `20`.
-- **Breaking:** everything uses `box-sizing: border-box`, with `::before` and `::after`, so padding and borders are inside an element's width and height. Your own elements with a width or height and padding or a border get smaller; set `box-sizing: content-box` on any that should not.
 - More element defaults, at zero specificity like the rest: `p`, `ul`, `ol`, `dl` and `pre` have no top margin and `1rem` below; lists are indented `2rem` (`$sassy-list-indent`); `dt` is bold; links are the primary colour and underlined, moving towards the body text on hover (`--sassy-link-colour`, `--sassy-link-hover-colour`), and a link without `href` looks like plain text; `code`, `kbd` and `pre` are `0.875em` (`--sassy-code-font-size`); `pre` scrolls with tabs 4 wide (`--sassy-pre-tab-size`); `kbd` looks like a key; `label` is `inline-block`; `fieldset`, `legend` and `iframe` lose their borders; and `summary` and `role="button"` have a pointer cursor. The body font stays opt-in with `%bf-body`.
 
 ## [0.4.0] - 2026-11-19
@@ -186,6 +188,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 Initial release.
 
+[0.5.0]: https://github.com/bfren/sassy/releases/tag/v0.5.0
 [0.4.0]: https://github.com/bfren/sassy/releases/tag/v0.4.0
 [0.3.0]: https://github.com/bfren/sassy/releases/tag/v0.3.0
 [0.2.0]: https://github.com/bfren/sassy/releases/tag/v0.2.0

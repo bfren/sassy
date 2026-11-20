@@ -1,5 +1,5 @@
 /*!
- * Sassy v0.4.0 - behaviour for components that CSS cannot provide on its own
+ * Sassy v0.5.0 - behaviour for components that CSS cannot provide on its own
  * https://github.com/bfren/sassy - MIT licence
  *
  * - Tabs: switches panels, with arrow keys, Home and End (the WAI-ARIA tabs pattern).
