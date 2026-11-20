@@ -24,8 +24,8 @@ $sassy-position: (
 
 $sassy-offset: (
     0: 0,
-    50: 50%,
-    100: 100%,
+    "50pc": 50%,
+    "100pc": 100%,
     auto: auto
 ) !default;
 

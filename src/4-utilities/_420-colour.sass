@@ -31,8 +31,8 @@
     // Background Opacity: makes a %bf-bg-* see-through
 
     @for $i from 0 through 10
-        @include make.responsive("bg-opacity", ($i * 10)) using ($value)
-            --sassy-bg-opacity: #{$value * 1%}
+        @include make.responsive("bg-opacity", ("#{$i * 10}pc": $i * 10%)) using ($value)
+            --sassy-bg-opacity: #{$value}
 
 
     // Background Colour with contrasting text
