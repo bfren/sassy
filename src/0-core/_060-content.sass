@@ -54,6 +54,19 @@
         :where(blockquote, figure)
             margin-inline: 0
 
+        // links
+        :where(a)
+            color: $sassy-link-colour
+            text-decoration: underline
+
+            &:hover
+                color: $sassy-link-hover-colour
+
+        // a link without href is a placeholder, so looks like the text around it
+        :where(a:not([href]))
+            color: inherit
+            text-decoration: none
+
         :where(img, svg)
             vertical-align: middle
 

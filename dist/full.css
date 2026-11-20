@@ -263,6 +263,17 @@
     :where(blockquote, figure) {
       margin-inline: 0;
     }
+    :where(a) {
+      color: var(--sassy-link-colour, var(--sassy-theme-primary));
+      text-decoration: underline;
+    }
+    :where(a):hover {
+      color: var(--sassy-link-hover-colour, color-mix(in oklab, var(--sassy-link-colour, var(--sassy-theme-primary)) 75%, var(--sassy-body-colour)));
+    }
+    :where(a:not([href])) {
+      color: inherit;
+      text-decoration: none;
+    }
     :where(img, svg) {
       vertical-align: middle;
     }
