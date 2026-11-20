@@ -48,8 +48,8 @@ body
     @extend %bf-border-bottom-1
     @extend %bf-border-slate-200
     @extend %bf-backdrop-blur-2
-    // gap: a background with transparency
-    background-color: color-mix(in oklab, #fff 85%, transparent)
+    @extend %bf-bg-slate-50
+    @extend %bf-bg-opacity-80
 
 // Sassy's navbar: below md the menu is behind the toggle (sassy.js opens and closes it), from md it is always open
 .site-header-inner
@@ -326,11 +326,9 @@ body
     line-height: 1.65
     max-height: 30rem
     tab-size: 4
-
-    &:focus-visible
-        // gap: an outline inside the block
-        outline: 2px solid #{sassy.colour("sky", 300)}
-        outline-offset: -2px
+    // the ring inside the block, which would clip one outside it
+    @extend %bf-focus-ring-inset
+    --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
 
 // Sassy's grid: each half is the full width, then half from lg
 .code-split
