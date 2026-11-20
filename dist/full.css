@@ -4251,7 +4251,7 @@
       font-size: var(--sassy-font-size-base);
     }
     .bf-font-size-small {
-      font-size: calc(var(--sassy-font-size-base) * 0.8);
+      font-size: calc(var(--sassy-font-size-base) * 0.875);
     }
     .bf-font-size-smaller {
       font-size: calc(var(--sassy-font-size-base) * 0.7);
@@ -12276,7 +12276,7 @@
         font-size: var(--sassy-font-size-base);
       }
       .bf-font-size-small-sm {
-        font-size: calc(var(--sassy-font-size-base) * 0.8);
+        font-size: calc(var(--sassy-font-size-base) * 0.875);
       }
       .bf-font-size-smaller-sm {
         font-size: calc(var(--sassy-font-size-base) * 0.7);
@@ -20318,7 +20318,7 @@
         font-size: var(--sassy-font-size-base);
       }
       .bf-font-size-small-md {
-        font-size: calc(var(--sassy-font-size-base) * 0.8);
+        font-size: calc(var(--sassy-font-size-base) * 0.875);
       }
       .bf-font-size-smaller-md {
         font-size: calc(var(--sassy-font-size-base) * 0.7);
@@ -28360,7 +28360,7 @@
         font-size: var(--sassy-font-size-base);
       }
       .bf-font-size-small-lg {
-        font-size: calc(var(--sassy-font-size-base) * 0.8);
+        font-size: calc(var(--sassy-font-size-base) * 0.875);
       }
       .bf-font-size-smaller-lg {
         font-size: calc(var(--sassy-font-size-base) * 0.7);
@@ -36402,7 +36402,7 @@
         font-size: var(--sassy-font-size-base);
       }
       .bf-font-size-small-xl {
-        font-size: calc(var(--sassy-font-size-base) * 0.8);
+        font-size: calc(var(--sassy-font-size-base) * 0.875);
       }
       .bf-font-size-smaller-xl {
         font-size: calc(var(--sassy-font-size-base) * 0.7);
@@ -44444,7 +44444,7 @@
         font-size: var(--sassy-font-size-base);
       }
       .bf-font-size-small-2xl {
-        font-size: calc(var(--sassy-font-size-base) * 0.8);
+        font-size: calc(var(--sassy-font-size-base) * 0.875);
       }
       .bf-font-size-smaller-2xl {
         font-size: calc(var(--sassy-font-size-base) * 0.7);
@@ -52486,7 +52486,7 @@
         font-size: var(--sassy-font-size-base);
       }
       .bf-font-size-small-3xl {
-        font-size: calc(var(--sassy-font-size-base) * 0.8);
+        font-size: calc(var(--sassy-font-size-base) * 0.875);
       }
       .bf-font-size-smaller-3xl {
         font-size: calc(var(--sassy-font-size-base) * 0.7);

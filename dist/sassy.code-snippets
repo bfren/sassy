@@ -270,7 +270,7 @@
   "%bf-font-size-5": { "scope": "sass,scss", "prefix": "bf-font-size-5", "body": "bf-font-size-5", "description": "font-size: calc(var(--sassy-font-size-base) * 1.2);" },
   "%bf-font-size-6": { "scope": "sass,scss", "prefix": "bf-font-size-6", "body": "bf-font-size-6", "description": "font-size: calc(var(--sassy-font-size-base) * 1.1);" },
   "%bf-font-size-base": { "scope": "sass,scss", "prefix": "bf-font-size-base", "body": "bf-font-size-base", "description": "font-size: var(--sassy-font-size-base);" },
-  "%bf-font-size-small": { "scope": "sass,scss", "prefix": "bf-font-size-small", "body": "bf-font-size-small", "description": "font-size: calc(var(--sassy-font-size-base) * 0.8);" },
+  "%bf-font-size-small": { "scope": "sass,scss", "prefix": "bf-font-size-small", "body": "bf-font-size-small", "description": "font-size: calc(var(--sassy-font-size-base) * 0.875);" },
   "%bf-font-size-smaller": { "scope": "sass,scss", "prefix": "bf-font-size-smaller", "body": "bf-font-size-smaller", "description": "font-size: calc(var(--sassy-font-size-base) * 0.7);" },
   "%bf-font-size-smallest": { "scope": "sass,scss", "prefix": "bf-font-size-smallest", "body": "bf-font-size-smallest", "description": "font-size: calc(var(--sassy-font-size-base) * 0.6);" },
   "%bf-font-style-inherit": { "scope": "sass,scss", "prefix": "bf-font-style-inherit", "body": "bf-font-style-inherit", "description": "font-style: inherit;" },
