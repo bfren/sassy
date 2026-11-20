@@ -17,7 +17,8 @@
  * - Carousels: plays a carousel whose slides element has aria-live="off", every --sassy-carousel-interval
  *   seconds, with a pause button (aria-pressed and aria-controls), waiting on hover and focus.
  * - Commands: a fallback for command / commandfor buttons in browsers without them.
- * - Closing dialogs: a fallback for closedby="any", so a click on a modal dialog's backdrop closes it.
+ * - Closing dialogs: a fallback for closedby="any", so a click on a modal dialog's backdrop closes it, and following
+ *   a link in a modal dialog to a section of the page outside it closes it.
  * - Dismissing: a button with commandfor and command="--dismiss" hides the element it names, such as an alert.
  *
  * Everything is found by ARIA role and standard attributes, never by class name, so it works
@@ -531,6 +532,18 @@
 			if (!inside) dialog.close();
 		});
 	}
+
+	//  =================================================================
+	//  Closing dialogs when an in-page link in them is followed
+	//  =================================================================
+
+	// so the section the link goes to, under the modal, can be seen - such as from a nav in an offcanvas
+	document.addEventListener("click", e => {
+		const link = e.target.closest?.('a[href^="#"]');
+		const dialog = link?.closest("dialog");
+		const target = dialog?.matches(":modal") && document.getElementById(decodeURIComponent(link.hash.slice(1)));
+		if (target && !dialog.contains(target)) dialog.close();
+	});
 
 	//  =================================================================
 	//  Dismissing: command="--dismiss" hides the element named by commandfor

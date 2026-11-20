@@ -84,6 +84,32 @@ test("closing dialogs: a click on the backdrop of a closedby=\"any\" modal close
 	assert.equal($("none").open, true); // closedby is not set
 });
 
+test("closing dialogs: following a link in a modal to a section outside it closes the modal, and other links do not", () => {
+	const window = load(`
+		<dialog id="modal" open>
+			<a id="out" href="#section">Section</a>
+			<a id="in" href="#part">Part</a>
+			<a id="none" href="#">Nowhere</a>
+			<p id="part">Part of the dialog</p>
+		</dialog>
+		<dialog id="plain"><a id="plain-link" href="#section">Section</a></dialog>
+		<section id="section"></section>`);
+	const { HTMLElement } = window;
+	// jsdom has no top layer, so an open dialog stands in for a modal one
+	const matches = HTMLElement.prototype.matches;
+	HTMLElement.prototype.matches = function (s) { return matches.call(this, s.replace(":modal", "[open]")); };
+	HTMLElement.prototype.close = function () { this.removeAttribute("open"); };
+	const $ = id => window.document.getElementById(id);
+
+	$("in").click(); // the section is in the dialog
+	$("none").click(); // no section
+	assert.equal($("modal").open, true);
+	$("out").click();
+	assert.equal($("modal").open, false);
+	$("plain-link").click(); // not open, so not modal: nothing to close, and no error
+	assert.equal($("plain").open, false);
+});
+
 test("toolbars: one tab stop, arrow keys wrap, Home and End jump, disabled controls and text fields are skipped", () => {
 	const window = load(`
 		<div role="toolbar">
