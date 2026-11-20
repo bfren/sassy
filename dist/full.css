@@ -221,6 +221,9 @@
     :where(summary) {
       display: list-item;
     }
+    *, ::before, ::after {
+      box-sizing: border-box;
+    }
     :where(h1, h2, h3, h4, h5, h6) {
       font-weight: var(--sassy-heading-font-weight, 500);
       line-height: var(--sassy-heading-line-height, 1.2);

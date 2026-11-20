@@ -24,6 +24,10 @@
     // so any placeholder or class overrides them.
 
     @include make.in-base
+        // padding and borders inside an element's width and height
+        *, ::before, ::after
+            box-sizing: border-box
+
         :where(h1, h2, h3, h4, h5, h6)
             font-weight: $sassy-heading-font-weight
             line-height: $sassy-heading-line-height
