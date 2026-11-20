@@ -127,6 +127,10 @@ $sassy-scroll-p-loop: ()
     @include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
         width: $value
 
+    // 0 lets a flex or grid item shrink below its content's width
+    @include make.responsive("min-width", (0: 0)) using ($value)
+        min-width: $value
+
     @include make.responsive("min-width", -get-steps(1%)) using ($value)
         min-width: $value
 
@@ -137,6 +141,9 @@ $sassy-scroll-p-loop: ()
         max-width: $value
 
     @include make.responsive("max-viewwidth", -get-steps(1vw, none)) using ($value)
+        max-width: $value
+
+    @include make.responsive("max-width", $sassy-breakpoints) using ($value)
         max-width: $value
 
     // a readable line length for text
