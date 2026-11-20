@@ -4,6 +4,11 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking:** start and end follow the text direction, as the Bootstrap guide already said. `%bf-ms-*`, `-me-*`, `-ps-*` and `-pe-*` are `margin-inline-start` and so on, and `%bf-rounded-start` and `-end` use the logical corners. In left-to-right text nothing changes; in right-to-left text, start and end are now on the right and left. Placeholders named for a physical side - `x`, `y`, `top`, `bottom`, the offsets and the borders - are unchanged.
+- **Breaking:** input groups, selects, floating labels and inline checks follow the text direction too. In right-to-left text an input group's outer corners are rounded, a select's chevron is on the left, and a floating label sits and shrinks on the right.
+
 ### Fixed
 
 - `sassy.js`: a button with both a tooltip and a dropdown or popover keeps both anchored to it, so opening the menu no longer moves the tooltip, and showing the tooltip no longer moves the menu.

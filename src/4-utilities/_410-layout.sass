@@ -3,6 +3,10 @@
 @use "sass:map"
 @use "sass:math"
 
+// The sides of margin and padding: start and end follow the text direction, so in right-to-left text
+// %bf-ms-auto is on the right. x and y, offsets and borders are named for physical sides, so they stay physical.
+$-sides: (t: top, e: inline-end, b: bottom, s: inline-start)
+
 /// Returns a map of steps from 5-100 in increments of 5, keyed with the unit, e.g. 50pc or 50vh
 ///
 /// @param {number} $unit
@@ -178,7 +182,7 @@ $sassy-offset-loop: map.merge($sassy-offset-loop, $sassy-offset)
         margin-top: $value
         margin-bottom: $value
 
-    @each $key, $val in $sassy-sides
+    @each $key, $val in $-sides
         @include make.responsive("m" + $key, $sassy-m-loop) using ($value)
             #{"margin-" + $val}: $value
 
@@ -195,7 +199,7 @@ $sassy-offset-loop: map.merge($sassy-offset-loop, $sassy-offset)
         padding-top: $value
         padding-bottom: $value
 
-    @each $key, $val in $sassy-sides
+    @each $key, $val in $-sides
         @include make.responsive("p" + $key, $sassy-p-loop) using ($value)
             #{"padding-" + $val}: $value
 

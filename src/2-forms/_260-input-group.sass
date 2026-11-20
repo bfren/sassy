@@ -30,14 +30,15 @@
             width: 1%
 
         // neighbours share a border, and only the group's outer corners are rounded
+        // logical, so the outer corners stay outside in right-to-left text
         & > :not(:first-child)
-            border-bottom-left-radius: 0
-            border-top-left-radius: 0
-            margin-left: calc($sassy-input-border-width * -1)
+            border-end-start-radius: 0
+            border-start-start-radius: 0
+            margin-inline-start: calc($sassy-input-border-width * -1)
 
         & > :not(:last-child)
-            border-bottom-right-radius: 0
-            border-top-right-radius: 0
+            border-end-end-radius: 0
+            border-start-end-radius: 0
 
         // an invalid or focused control sits above its neighbours, so its border and ring show in full
         & > :user-invalid,

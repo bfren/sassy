@@ -43,7 +43,7 @@
             box-sizing: border-box
             color: $sassy-input-placeholder-colour
             height: 100%
-            left: 0
+            inset-inline-start: 0
             margin: 0
             max-width: 100%
             overflow: hidden
@@ -65,3 +65,8 @@
         & > :not(:placeholder-shown) ~ label,
         & > select ~ label
             transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem)
+
+            // shrinks towards the start of the line, which is on the right in right-to-left text
+            &:dir(rtl)
+                transform: scale(0.85) translateY(-0.5rem) translateX(-0.15rem)
+                transform-origin: 100% 0
