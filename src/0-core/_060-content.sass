@@ -37,8 +37,22 @@
             :where(h#{$level})
                 font-size: -fluid($size)
 
+        // text: space below blocks, none above, so the gap between two is one margin
+        :where(p, ul, ol, dl, pre, blockquote, figure)
+            margin-block: 0 $sassy-content-margin
+
+        :where(ul, ol)
+            padding-inline-start: $sassy-list-indent
+
+        :where(dt)
+            font-weight: 700
+
+        :where(dd)
+            margin-block-end: calc($sassy-content-margin / 2)
+            margin-inline-start: 0
+
         :where(blockquote, figure)
-            margin: 0 0 $sassy-content-margin
+            margin-inline: 0
 
         :where(img, svg)
             vertical-align: middle

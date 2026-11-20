@@ -3,6 +3,9 @@
 // space below blocks of content, such as blockquotes and figures
 $sassy-content-margin: 1rem !default;
 
+// how far lists are indented
+$sassy-list-indent: 2rem !default;
+
 $sassy-lead-font-size: var(--sassy-lead-font-size, calc(var(--sassy-font-size-base) * 1.25));
 $sassy-lead-font-weight: var(--sassy-lead-font-weight, 300);
 

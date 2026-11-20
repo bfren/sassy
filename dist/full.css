@@ -247,8 +247,21 @@
     :where(h6) {
       font-size: 1rem;
     }
+    :where(p, ul, ol, dl, pre, blockquote, figure) {
+      margin-block: 0 1rem;
+    }
+    :where(ul, ol) {
+      padding-inline-start: 2rem;
+    }
+    :where(dt) {
+      font-weight: 700;
+    }
+    :where(dd) {
+      margin-block-end: 0.5rem;
+      margin-inline-start: 0;
+    }
     :where(blockquote, figure) {
-      margin: 0 0 1rem;
+      margin-inline: 0;
     }
     :where(img, svg) {
       vertical-align: middle;
