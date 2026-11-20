@@ -52,7 +52,7 @@ Buttons, button groups, close buttons, badges, navigation, breadcrumbs, paginati
 | Tooltips         | Shows a tooltip on hover and keyboard focus, hides it on Escape, and places it in browsers without CSS anchor positioning |
 | Dropdowns        | Updates `aria-expanded`, gives `role="menu"` its keys, and places menus in browsers without CSS anchor positioning        |
 | Popovers         | Updates `aria-expanded`, and places popovers in browsers without CSS anchor positioning                                   |
-| Offcanvas        | Closes a dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`                        |
+| Offcanvas        | Closes a modal from its backdrop with `closedby="any"` where browsers can't, and when an in-page link in it is followed   |
 | Carousels        | Plays a carousel whose slides have `aria-live="off"`, with a pause button, waiting on hover and focus                     |
 | Commands         | Makes `command` / `commandfor` buttons work in browsers that do not support them yet                                      |
 | Dismissing       | Hides the element named by a `commandfor` button with `command="--dismiss"`, such as an alert                             |

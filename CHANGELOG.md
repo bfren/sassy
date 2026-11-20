@@ -19,6 +19,9 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - Offcanvas: `%bf-offcanvas-start`, `-end`, `-top` and `-bottom` turn a `%bf-dialog` into a panel that slides in from that edge of the window, opened as a modal with `command="show-modal"`. With `%bf-offcanvas-{breakpoint}`, it is part of the page from that breakpoint up, such as a sidebar.
 - `sassy.js` closes a modal dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`.
 - `sassy.js` keeps a `popovertarget` button's `aria-expanded` up to date, gives `role="menu"` its arrow keys, Home, End and Tab, closes a menu when an item is chosen, and places menus in browsers without CSS anchor positioning.
+- `%bf-letter-spacing-tight`, `-normal` and `-wide` (`-0.01em`, `0` and `0.05em`), from `$sassy-letter-spacing`.
+- `%bf-max-width-text` limits text to a readable line length, `--sassy-text-max-width` (`65ch` by default).
+- `sassy.js` closes a modal dialog, such as an offcanvas, when a link in it to a section of the page outside it is followed, so the section can be seen.
 
 ### Changed
 
@@ -29,6 +32,8 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - The current link of `%bf-nav-pills` uses the primary button's text colour, `--sassy-btn-primary-colour`, rather than always white.
 - The theme properties on `:root` are output with `:where(:root)`, so any selector that sets them, even `html`, wins.
 - The light theme's `primary` is now `sky-700` and `ok` `green-700`, rather than the 600 shades, so their buttons have white text that meets WCAG AA (5.9:1 and 5.0:1). The `primary` button had white text at 4.1:1, and `ok` had dark text. Everything else that uses them is darker too, such as the text, background and border utilities, links, focus rings, checked boxes and range thumbs. The dark theme is unchanged.
+- `%bf-font-size-small` is `0.875` times the base size rather than `0.8`, the same as figure and blockquote captions.
+- `--sassy-line-strong` is `grey-500` in the light theme rather than `grey-300`, so the edges of form controls, default buttons and pagination contrast 4.8:1 with the page, above the 3:1 that WCAG asks for. It was 1.47:1.
 
 ## [0.4.0] - 2026-11-19
 

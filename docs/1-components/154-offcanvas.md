@@ -39,7 +39,7 @@ An offcanvas is a [dialog](153-dialog.md) that slides in from one edge of the wi
 ```
 
 - **It is a modal dialog**, so the browser puts it over a backdrop, makes the page behind it inert, closes it on Escape, and returns focus to the button that opened it. The page behind it does not scroll.
-- **`closedby="any"` closes it when the backdrop is clicked.** `sassy.js` does this in browsers that don't support `closedby` yet.
+- **`closedby="any"` closes it when the backdrop is clicked.** `sassy.js` does this in browsers that don't support `closedby` yet. It also closes the offcanvas when a link in it to a section of the page outside it is followed, so a nav in an offcanvas shows the section it goes to.
 - **It slides in and out**, and the backdrop fades. With reduced motion it appears at once. `--sassy-offcanvas-width` sets the width of a start or end offcanvas, and `--sassy-offcanvas-height` the height of a top or bottom one.
 - **Start and end follow the text direction**, so in right-to-left text a start offcanvas comes in from the right.
 

@@ -8,9 +8,10 @@
 | ---------------------------------------------------------- | ------------------------------------------------------------------------ |
 | `%bf-body`                                                 | Text defaults and heading sizes, on the body                             |
 | `%bf-font-family-{mono, sans, serif}`                      | Font family                                                              |
-| `%bf-font-size-{1-6, base, small, smaller, smallest}`      | Font size. `1` is largest, `6` is smallest of the numbered sizes         |
+| `%bf-font-size-{1-6, base, small, smaller, smallest}`      | Font size. `1` is largest; `small` is `0.875` times the base             |
 | `%bf-font-style-{italic, oblique, normal}`                 | Font style                                                               |
 | `%bf-font-weight-{100-900, bold, bolder, lighter, normal}` | Font weight, as a number or keyword                                      |
+| `%bf-letter-spacing-{tight, normal, wide}`                 | Letter spacing: `-0.01em`, `0` or `0.05em`                               |
 | `%bf-line-height-{single, double, triple, base}`           | Line height                                                              |
 | `%bf-text-align-{start, centre, end, justify}`             | Text alignment                                                           |
 | `%bf-text-decoration-{under, over, through, none}`         | Underline, overline, line-through or none                                |

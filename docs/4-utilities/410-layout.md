@@ -18,6 +18,7 @@
 | `%bf-min-width-…`, `%bf-min-height-…`, `%bf-min-viewwidth-…`, `%bf-min-viewheight-…`                         | Minimum sizes, as a percentage or of the viewport                                             |
 | `%bf-width-{5-100}`, `%bf-viewwidth-{5-100}`                                                                 | Width, as a percentage of the parent, or of the viewport                                      |
 | `%bf-max-width-{5-100, none}`, `%bf-max-height-{5-100, none}`, `%bf-max-viewwidth-…`, `%bf-max-viewheight-…` | Maximum width and height                                                                      |
+| `%bf-max-width-text`                                                                                         | A readable line length, `--sassy-text-max-width` (`65ch`)                                     |
 | `%bf-m-{centre}`, `%bf-mt-…`, `%bf-me-…`, `%bf-mb-…`, `%bf-ms-…`, `%bf-mx-…`, `%bf-my-…`                     | Margin, from `auto` or `0` to `20`. `t`, `e`, `b`, `s` are top, end, bottom and start         |
 | `%bf-p-…`, `%bf-pt-…`, `%bf-pe-…`, `%bf-pb-…`, `%bf-ps-…`, `%bf-px-…`, `%bf-py-…`                            | Padding, from `inherit` or `0` to `20`                                                        |
 

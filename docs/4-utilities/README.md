@@ -37,3 +37,4 @@ The settings are set in [0-core](../0-core/README.md#configuring-sassy). The uti
 | `--sassy-body-colour`, `--sassy-body-font-family`, `--sassy-body-font-size`, `--sassy-body-font-weight`, `--sassy-body-line-height` | `%bf-body`                      |
 | `--sassy-radius`                                                                                                                    | `%bf-rounded` and form controls |
 | `--sassy-shadow-colour`                                                                                                             | `%bf-shadow-{0-3}`              |
+| `--sassy-text-max-width`                                                                                                            | `%bf-max-width-text`            |

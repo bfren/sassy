@@ -124,7 +124,7 @@ Components and forms take their neutral colours from a few **colour roles** on `
 | `--sassy-surface`        | Cards, dialogs, menus, buttons and form controls              | white      | `grey-900` |
 | `--sassy-surface-subtle` | Card caps, alerts, hovered nav links, disabled and add-ons    | `grey-100` | `grey-800` |
 | `--sassy-line`           | Borders and dividers                                          | `grey-200` | `grey-700` |
-| `--sassy-line-strong`    | The edges of form controls, buttons and pagination            | `grey-300` | `grey-500` |
+| `--sassy-line-strong`    | The edges of form controls, buttons and pagination            | `grey-500` | `grey-500` |
 | `--sassy-muted`          | Help text, captions, placeholders and menu headers            | `grey-600` | `grey-400` |
 | `--sassy-disabled`       | Text of items that can't be used                              | `grey-400` | `grey-500` |
 
