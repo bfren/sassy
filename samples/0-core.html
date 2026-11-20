@@ -97,11 +97,12 @@
 <pre data-lang="sass"><code>@use "sassy/src" as sassy
 
 .tooltip
+    @extend %bf-d-inline-block
+    @extend %bf-px-3
+    @extend %bf-py-2
+    @extend %bf-rounded-3
     background-color: sassy.with-alpha(sassy.colour("grey", 900), 0.6)
-    border-radius: 0.375rem
-    color: sassy.colour("grey", 50)
-    display: inline-block
-    padding: 0.5rem 0.75rem</code></pre>
+    color: sassy.colour("grey", 50)</code></pre>
 <pre data-lang="html"><code>&lt;span class="tooltip"&gt;A label on a grey 900 background at 60%&lt;/span&gt;</code></pre>
 </div>
         </section>
@@ -115,8 +116,8 @@
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.hero
+    @extend %bf-m-0
     font-size: 1rem
-    margin: 0
 
     @include sassy.up(md)
         font-size: 1.5rem</code></pre>
@@ -133,8 +134,9 @@
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.sidebar
-    background-color: sassy.colour("grey", 200)
-    padding: 0.75rem 1rem
+    @extend %bf-bg-grey-200
+    @extend %bf-px-4
+    @extend %bf-py-3
     @include sassy.up-prop(width (sm: 50%, lg: 25%))</code></pre>
 <pre data-lang="html"><code>&lt;div class="sidebar"&gt;Sidebar&lt;/div&gt;</code></pre>
 </div>
