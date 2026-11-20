@@ -10108,6 +10108,18 @@
     .bf-opacity-100 {
       opacity: 1;
     }
+    .bf-backdrop-blur-none {
+      backdrop-filter: none;
+    }
+    .bf-backdrop-blur-1 {
+      backdrop-filter: blur(0.25rem);
+    }
+    .bf-backdrop-blur-2 {
+      backdrop-filter: blur(0.5rem);
+    }
+    .bf-backdrop-blur-3 {
+      backdrop-filter: blur(1rem);
+    }
     .bf-flex-align-content-centre {
       align-content: center;
     }
@@ -18785,6 +18797,20 @@
       }
     }
     @media (width >= 576px) {
+      .bf-backdrop-blur-none-sm {
+        backdrop-filter: none;
+      }
+      .bf-backdrop-blur-1-sm {
+        backdrop-filter: blur(0.25rem);
+      }
+      .bf-backdrop-blur-2-sm {
+        backdrop-filter: blur(0.5rem);
+      }
+      .bf-backdrop-blur-3-sm {
+        backdrop-filter: blur(1rem);
+      }
+    }
+    @media (width >= 576px) {
       .bf-flex-align-content-centre-sm {
         align-content: center;
       }
@@ -27426,6 +27452,20 @@
     @media (width >= 768px) {
       .bf-opacity-100-md {
         opacity: 1;
+      }
+    }
+    @media (width >= 768px) {
+      .bf-backdrop-blur-none-md {
+        backdrop-filter: none;
+      }
+      .bf-backdrop-blur-1-md {
+        backdrop-filter: blur(0.25rem);
+      }
+      .bf-backdrop-blur-2-md {
+        backdrop-filter: blur(0.5rem);
+      }
+      .bf-backdrop-blur-3-md {
+        backdrop-filter: blur(1rem);
       }
     }
     @media (width >= 768px) {
@@ -36073,6 +36113,20 @@
       }
     }
     @media (width >= 992px) {
+      .bf-backdrop-blur-none-lg {
+        backdrop-filter: none;
+      }
+      .bf-backdrop-blur-1-lg {
+        backdrop-filter: blur(0.25rem);
+      }
+      .bf-backdrop-blur-2-lg {
+        backdrop-filter: blur(0.5rem);
+      }
+      .bf-backdrop-blur-3-lg {
+        backdrop-filter: blur(1rem);
+      }
+    }
+    @media (width >= 992px) {
       .bf-flex-align-content-centre-lg {
         align-content: center;
       }
@@ -44714,6 +44768,20 @@
     @media (width >= 1200px) {
       .bf-opacity-100-xl {
         opacity: 1;
+      }
+    }
+    @media (width >= 1200px) {
+      .bf-backdrop-blur-none-xl {
+        backdrop-filter: none;
+      }
+      .bf-backdrop-blur-1-xl {
+        backdrop-filter: blur(0.25rem);
+      }
+      .bf-backdrop-blur-2-xl {
+        backdrop-filter: blur(0.5rem);
+      }
+      .bf-backdrop-blur-3-xl {
+        backdrop-filter: blur(1rem);
       }
     }
     @media (width >= 1200px) {
@@ -53361,6 +53429,20 @@
       }
     }
     @media (width >= 1400px) {
+      .bf-backdrop-blur-none-2xl {
+        backdrop-filter: none;
+      }
+      .bf-backdrop-blur-1-2xl {
+        backdrop-filter: blur(0.25rem);
+      }
+      .bf-backdrop-blur-2-2xl {
+        backdrop-filter: blur(0.5rem);
+      }
+      .bf-backdrop-blur-3-2xl {
+        backdrop-filter: blur(1rem);
+      }
+    }
+    @media (width >= 1400px) {
       .bf-flex-align-content-centre-2xl {
         align-content: center;
       }
@@ -62002,6 +62084,20 @@
     @media (width >= 1600px) {
       .bf-opacity-100-3xl {
         opacity: 1;
+      }
+    }
+    @media (width >= 1600px) {
+      .bf-backdrop-blur-none-3xl {
+        backdrop-filter: none;
+      }
+      .bf-backdrop-blur-1-3xl {
+        backdrop-filter: blur(0.25rem);
+      }
+      .bf-backdrop-blur-2-3xl {
+        backdrop-filter: blur(0.5rem);
+      }
+      .bf-backdrop-blur-3-3xl {
+        backdrop-filter: blur(1rem);
       }
     }
     @media (width >= 1600px) {

@@ -1,3 +1,10 @@
+$sassy-backdrop-blur: (
+    none: none,
+    1: blur(0.25rem),
+    2: blur(0.5rem),
+    3: blur(1rem)
+) !default;
+
 $sassy-display: (
     block,
     contents,

@@ -40,6 +40,12 @@ $sassy-gap-loop: (inherit: inherit)
             opacity: calc($value / 100)
 
 
+    // Backdrop blur: blurs what is behind a see-through background, such as a sticky header
+
+    @include make.responsive("backdrop-blur", $sassy-backdrop-blur) using ($value)
+        backdrop-filter: $value
+
+
     // Flex: Align
 
     @include make.responsive("flex-align-content", $sassy-flex-align-content) using ($value)
