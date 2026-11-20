@@ -1,5 +1,5 @@
 @echo off
-rem Runs compile-full.sh in Git Bash: the build also needs gzip and awk, which Git for Windows provides.
+rem Runs compile-full.sh in Git Bash: the build also needs awk, which Git for Windows provides.
 setlocal
 
 set "GITBASH=%ProgramFiles%\Git\bin\bash.exe"
