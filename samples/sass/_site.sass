@@ -149,8 +149,7 @@ body
 .example > p code
     @extend %bf-bg-slate-100
     @extend %bf-rounded-2
-    // gap: sizes and padding in em, relative to the text around it
-    font-size: 0.875em
+    // gap: padding in em, relative to the text around it
     padding: 0.1em 0.3em
 
 
@@ -322,10 +321,9 @@ body
     @extend %bf-py-5
     @extend %bf-px-6
     @extend %bf-font-size-small
-    // gap: a line height of 1.65, a max-height in rem, and tab-size
+    // gap: a line height of 1.65, and a max-height in rem
     line-height: 1.65
     max-height: 30rem
-    tab-size: 4
     // the ring inside the block, which would clip one outside it
     @extend %bf-focus-ring-inset
     --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
