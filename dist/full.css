@@ -11216,6 +11216,21 @@
       border-left-style: solid;
       border-left-width: 20px;
     }
+    .bf-border-style-dashed {
+      border-style: dashed;
+    }
+    .bf-border-style-dotted {
+      border-style: dotted;
+    }
+    .bf-border-style-double {
+      border-style: double;
+    }
+    .bf-border-style-none {
+      border-style: none;
+    }
+    .bf-border-style-solid {
+      border-style: solid;
+    }
     .bf-border-slate-50 {
       border-color: oklch(98.4% 0.003 247.858deg);
     }
@@ -20027,6 +20042,23 @@
       }
     }
     @media (width >= 576px) {
+      .bf-border-style-dashed-sm {
+        border-style: dashed;
+      }
+      .bf-border-style-dotted-sm {
+        border-style: dotted;
+      }
+      .bf-border-style-double-sm {
+        border-style: double;
+      }
+      .bf-border-style-none-sm {
+        border-style: none;
+      }
+      .bf-border-style-solid-sm {
+        border-style: solid;
+      }
+    }
+    @media (width >= 576px) {
       .bf-border-slate-50-sm {
         border-color: oklch(98.4% 0.003 247.858deg);
       }
@@ -28682,6 +28714,23 @@
       .bf-border-left-20-md {
         border-left-style: solid;
         border-left-width: 20px;
+      }
+    }
+    @media (width >= 768px) {
+      .bf-border-style-dashed-md {
+        border-style: dashed;
+      }
+      .bf-border-style-dotted-md {
+        border-style: dotted;
+      }
+      .bf-border-style-double-md {
+        border-style: double;
+      }
+      .bf-border-style-none-md {
+        border-style: none;
+      }
+      .bf-border-style-solid-md {
+        border-style: solid;
       }
     }
     @media (width >= 768px) {
@@ -37343,6 +37392,23 @@
       }
     }
     @media (width >= 992px) {
+      .bf-border-style-dashed-lg {
+        border-style: dashed;
+      }
+      .bf-border-style-dotted-lg {
+        border-style: dotted;
+      }
+      .bf-border-style-double-lg {
+        border-style: double;
+      }
+      .bf-border-style-none-lg {
+        border-style: none;
+      }
+      .bf-border-style-solid-lg {
+        border-style: solid;
+      }
+    }
+    @media (width >= 992px) {
       .bf-border-slate-50-lg {
         border-color: oklch(98.4% 0.003 247.858deg);
       }
@@ -45998,6 +46064,23 @@
       .bf-border-left-20-xl {
         border-left-style: solid;
         border-left-width: 20px;
+      }
+    }
+    @media (width >= 1200px) {
+      .bf-border-style-dashed-xl {
+        border-style: dashed;
+      }
+      .bf-border-style-dotted-xl {
+        border-style: dotted;
+      }
+      .bf-border-style-double-xl {
+        border-style: double;
+      }
+      .bf-border-style-none-xl {
+        border-style: none;
+      }
+      .bf-border-style-solid-xl {
+        border-style: solid;
       }
     }
     @media (width >= 1200px) {
@@ -54659,6 +54742,23 @@
       }
     }
     @media (width >= 1400px) {
+      .bf-border-style-dashed-2xl {
+        border-style: dashed;
+      }
+      .bf-border-style-dotted-2xl {
+        border-style: dotted;
+      }
+      .bf-border-style-double-2xl {
+        border-style: double;
+      }
+      .bf-border-style-none-2xl {
+        border-style: none;
+      }
+      .bf-border-style-solid-2xl {
+        border-style: solid;
+      }
+    }
+    @media (width >= 1400px) {
       .bf-border-slate-50-2xl {
         border-color: oklch(98.4% 0.003 247.858deg);
       }
@@ -63314,6 +63414,23 @@
       .bf-border-left-20-3xl {
         border-left-style: solid;
         border-left-width: 20px;
+      }
+    }
+    @media (width >= 1600px) {
+      .bf-border-style-dashed-3xl {
+        border-style: dashed;
+      }
+      .bf-border-style-dotted-3xl {
+        border-style: dotted;
+      }
+      .bf-border-style-double-3xl {
+        border-style: double;
+      }
+      .bf-border-style-none-3xl {
+        border-style: none;
+      }
+      .bf-border-style-solid-3xl {
+        border-style: solid;
       }
     }
     @media (width >= 1600px) {

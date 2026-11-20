@@ -33,6 +33,11 @@ $sassy-border-loop: (inherit: inherit)
             #{"border-" + $val + "-style"}: solid
             #{"border-" + $val + "-width"}: $value
 
+    // Border Style: after the widths, which set solid, so it wins
+
+    @include make.responsive("border-style", $sassy-border-style) using ($value)
+        border-style: $value
+
 
     // Border Colour
 
