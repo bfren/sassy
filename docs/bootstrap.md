@@ -56,7 +56,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.flex-column`, `.flex-wrap`, `.flex-grow-1`      | `%bf-flex-column`, `%bf-flex-wrap-wrap`, `%bf-flex-grow-1`                                        |
 | `.justify-content-between`, `.align-items-center` | `%bf-flex-justify-between`, `%bf-flex-align-items-centre`                                         |
 | `.order-last`                                     | `%bf-flex-order-last`                                                                             |
-| `.w-50`, `.h-100`, `.mw-100`, `.vh-100`           | `%bf-width-50`, `%bf-height-100`, `%bf-max-width-100`, `%bf-viewheight-100`                       |
+| `.w-50`, `.h-100`, `.mw-100`, `.vh-100`           | `%bf-width-50pc`, `%bf-height-100pc`, `%bf-max-width-100pc`, `%bf-height-100vh`                   |
 | `.position-sticky`, `.top-0`                      | `%bf-position-sticky`, `%bf-top-0`                                                                |
 | `.sticky-top`, `.fixed-top`                       | `%bf-position-sticky` or `%bf-position-fixed`, with `%bf-top-0`                                   |
 | `.z-3`                                            | `%bf-z-index-3`                                                                                   |
@@ -65,7 +65,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.object-fit-cover`                               | `%bf-object-fit-cover`                                                                            |
 | `.float-start`                                    | `%bf-float-start`                                                                                 |
 | `.align-middle`                                   | `%bf-vertical-align-middle`                                                                       |
-| `.opacity-50`                                     | `%bf-opacity-50`                                                                                  |
+| `.opacity-50`                                     | `%bf-opacity-50pc`                                                                                |
 | `.pe-none`, `.user-select-none`                   | `%bf-pointer-events-none`, `%bf-user-select-none`                                                 |
 | `.visually-hidden`, `.visually-hidden-focusable`  | `%bf-visually-hidden`, `%bf-visually-hidden-focusable`                                            |
 | `.text-start`, `.text-center`, `.text-end`        | `%bf-text-align-start`, `%bf-text-align-centre`, `%bf-text-align-end`                             |
@@ -75,7 +75,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.text-uppercase`                                 | `%bf-text-transform-upper`                                                                        |
 | `.text-decoration-none`                           | `%bf-text-decoration-none`                                                                        |
 | `.text-nowrap`, `.text-truncate`, `.text-break`   | `%bf-text-wrap-overflow`, `%bf-text-truncate`, `%bf-text-break`                                   |
-| `.link-offset-2`, `.link-underline-opacity-50`    | `%bf-text-underline-offset-2`, `%bf-text-decoration-opacity-50`                                   |
+| `.link-offset-2`, `.link-underline-opacity-50`    | `%bf-text-underline-offset-2`, `%bf-text-decoration-opacity-50pc`                                 |
 | `.stretched-link`, `.icon-link`, `.focus-ring`    | `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                                           |
 | `.border`, `.border-0`, `.border-top`             | `%bf-border-1`, `%bf-border-0`, `%bf-border-top-1`                                                |
 | `.rounded`, `.rounded-circle`, `.rounded-pill`    | `%bf-rounded`, `%bf-rounded-circle`, `%bf-rounded-pill`; the numbered sizes are a different scale |

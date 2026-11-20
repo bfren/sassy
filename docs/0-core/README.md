@@ -40,7 +40,8 @@ With the breakpoints above, the placeholders for `xl`, `2xl` and `3xl` no longer
 | `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem`                | Size of one spacing step                                                      |
 | `$sassy-radius-unit`                                           | `0.25rem`                | Size of one step for `%bf-rounded-{0-6}`                                      |
 | `$sassy-shadow-unit`                                           | `0.125rem`               | Size of one step for `%bf-shadow-{0-3}`                                       |
-| `$sassy-loop-max`                                              | `20`                     | Highest spacing, border width and flex grow / shrink step                     |
+| `$sassy-loop-max`                                              | `20`                     | Highest border width and flex grow / shrink step                              |
+| `$sassy-spacing-max`                                           | `32`                     | Highest margin, padding, gap, offset and scroll padding step                  |
 | `$sassy-prefix`                                                | `"bf"`                   | Prefix for every placeholder and class. `""` for none                         |
 | `$sassy-separator`                                             | `"-"`                    | Joins the prefix, utility, value and breakpoint                               |
 | `$sassy-full`                                                  | `false`                  | Also output every utility as a class, as in `dist/full.css`                   |

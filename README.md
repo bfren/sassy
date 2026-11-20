@@ -114,24 +114,24 @@ Every placeholder follows the same pattern:
 
 The breakpoint is optional - see [Responsive](#responsive). Names use British spelling: `centre`, `colour`, `capitalise`, `grey`.
 
-| Module             | Examples                                                                                                                                                                                                                                     |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Content            | `%bf-h2`, `%bf-lead`, `%bf-display-1`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote`, `%bf-blockquote-caption`                                                                                     |
-| Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50`, `%bf-viewheight-100`, `%bf-max-width-100`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
-| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50`, `%bf-visually-hidden`                                                   |
-| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                              |
-| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`, `%bf-theme-dark`                                                                                                                                                       |
-| Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                         |
-| Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                         |
-| Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                |
-| Grid               | `%bf-d-flex-row`, `%bf-col-6`, `%bf-col`, `%bf-col-offset-2`, `%bf-row-cols-3`, `%bf-gutter-4`, `%bf-grid`, `%bf-grid-col-4`                                                                                                                 |
-| Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                                                                          |
+| Module             | Examples                                                                                                                                                                                                                                       |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Content            | `%bf-h2`, `%bf-lead`, `%bf-display-1`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote`, `%bf-blockquote-caption`                                                                                       |
+| Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50pc`, `%bf-height-100vh`, `%bf-max-width-100pc`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
+| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50pc`, `%bf-visually-hidden`                                                   |
+| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                                |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`, `%bf-theme-dark`                                                                                                                                                         |
+| Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                           |
+| Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                           |
+| Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                  |
+| Grid               | `%bf-d-flex-row`, `%bf-col-6`, `%bf-col`, `%bf-col-offset-2`, `%bf-row-cols-3`, `%bf-gutter-4`, `%bf-grid`, `%bf-grid-col-4`                                                                                                                   |
+| Forms              | `%bf-form-control`, `%bf-form-select-small`, `%bf-form-check-input`, `%bf-form-switch`, `%bf-form-feedback-invalid`                                                                                                                            |
 
 A few conventions:
 
 - **Sides** are `t`, `e`, `b` and `s` (top, end, bottom, start), so `%bf-mt-3` is `margin-top` and `%bf-ps-2` is `padding-left`. `x` is both horizontal sides and `y` both vertical sides.
 - **Spacing** (margin, padding and gap) runs from 0 to 20 in steps of 0.25rem: `%bf-p-4` is `1rem`.
-- **Sizes** run from 5 to 100 in steps of 5: `%bf-width-50` is `50%`, `%bf-viewheight-100` is `100vh`.
+- **Sizes** run from 5 to 100 in steps of 5, and end in their unit: `%bf-width-50pc` is `50%`, `%bf-height-100vh` is `100vh`. Every percentage ends in `pc`, so a bare number is always a step on a scale.
 - **Colours** are the [Tailwind CSS v4](https://tailwindcss.com/docs/colors) palette - the neutrals `slate`, `grey`, `zinc`, `neutral`, `stone`, `mauve`, `olive`, `mist` and `taupe`, and `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink` and `rose` - each with shades `50`, then `100` to `900`, and `950`. They are defined in `oklch()`, so on wide-gamut screens the most vivid shades show more vividly than sRGB allows.
 
   ![The Sassy colour palette: 26 colours, each in shades 50, 100 to 900 and 950](docs/palette.svg)
@@ -228,7 +228,8 @@ Settings are passed with `with (...)` when you load Sassy:
 | `$sassy-margin-unit`, `$sassy-padding-unit`, `$sassy-gap-unit` | `0.25rem`               | Size of one spacing step                                                       |
 | `$sassy-radius-unit`                                           | `0.25rem`               | Size of one step for `%bf-rounded-{0-6}`                                       |
 | `$sassy-shadow-unit`                                           | `0.125rem`              | Size of one step for `%bf-shadow-{0-3}`                                        |
-| `$sassy-loop-max`                                              | `20`                    | Highest spacing, border width and flex grow / shrink step                      |
+| `$sassy-loop-max`                                              | `20`                    | Highest border width and flex grow / shrink step                               |
+| `$sassy-spacing-max`                                           | `32`                    | Highest margin, padding, gap, offset and scroll padding step                   |
 | `$sassy-prefix`                                                | `"bf"`                  | Prefix for every placeholder (and class) - `""` for none                       |
 | `$sassy-separator`                                             | `"-"`                   | Joins the prefix, utility, value and breakpoint                                |
 | `$sassy-full`                                                  | `false`                 | Also output every utility as a class, as in `dist/full.css`                    |

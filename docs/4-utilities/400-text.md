@@ -4,29 +4,29 @@
 
 `%bf-body` sets the text defaults on a `body` element: colour, font family, size, weight and line height, all from custom properties. It also sets the size, margins and spacing of `h1` to `h5`, so extend it once, on the page's body, and leave the headings to it.
 
-| Placeholder                                                | Sets                                                                     |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `%bf-body`                                                 | Text defaults and heading sizes, on the body                             |
-| `%bf-font-family-{mono, sans, serif}`                      | Font family                                                              |
-| `%bf-font-size-{1-6, base, small, smaller, smallest}`      | Font size. `1` is largest; `small` is `0.875` times the base             |
-| `%bf-font-style-{italic, oblique, normal}`                 | Font style                                                               |
-| `%bf-font-weight-{100-900, bold, bolder, lighter, normal}` | Font weight, as a number or keyword                                      |
-| `%bf-letter-spacing-{tight, normal, wide}`                 | Letter spacing: `-0.01em`, `0` or `0.05em`                               |
-| `%bf-line-height-{0, single, double, triple, base}`        | Line height. `0` for a box around only an image or icon                  |
-| `%bf-text-align-{start, centre, end, justify}`             | Text alignment                                                           |
-| `%bf-text-decoration-{under, over, through, none}`         | Underline, overline, line-through or none                                |
-| `%bf-text-transform-{upper, lower, capitalise, none}`      | Upper or lower case, capitalised or none                                 |
-| `%bf-text-wrap`                                            | Text wraps as normal                                                     |
-| `%bf-text-wrap-overflow`                                   | Text stays on one line and overflows                                     |
-| `%bf-text-truncate`                                        | Text stays on one line, truncated with an ellipsis, and expands on hover |
-| `%bf-text-break`                                           | Long words and URLs break anywhere rather than overflow                  |
-| `%bf-text-underline-offset-{auto, 1, 2, 3}`                | Gap between text and its underline, from `0.125em` to `0.375em`          |
-| `%bf-text-decoration-opacity-{0-100}`                      | Fades the underline in steps of 10, without fading the text              |
-| `%bf-stretched-link`                                       | Makes the nearest positioned ancestor clickable as the link              |
-| `%bf-icon-link`                                            | A link with an icon: in a row, centred, with a `1em` square `svg`        |
-| `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
-| `%bf-focus-ring`                                           | The focus outline that links, tabs and buttons in components use         |
-| `%bf-focus-ring-inset`                                     | The same ring inside the element, where one outside would be clipped     |
+| Placeholder                                                         | Sets                                                                                                        |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `%bf-body`                                                          | Text defaults and heading sizes, on the body                                                                |
+| `%bf-font-family-{mono, sans, serif}`                               | Font family                                                                                                 |
+| `%bf-font-size-{1-6, base, small, smaller, smallest}`               | Font size. `1` is largest; `small` is `0.875` times the base                                                |
+| `%bf-font-style-{italic, oblique, normal}`                          | Font style                                                                                                  |
+| `%bf-font-weight-{100-900, bold, bolder, lighter, normal}`          | Font weight, as a number or keyword                                                                         |
+| `%bf-letter-spacing-{tight, normal, wide}`                          | Letter spacing: `-0.01em`, `0` or `0.05em`                                                                  |
+| `%bf-line-height-{0, single, tight, base, relaxed, double, triple}` | Line height: `1`, `1.25`, the base (`1.5`), `1.625`, `2` or `3`. `0` for a box around only an image or icon |
+| `%bf-text-align-{start, centre, end, justify}`                      | Text alignment                                                                                              |
+| `%bf-text-decoration-{under, over, through, none}`                  | Underline, overline, line-through or none                                                                   |
+| `%bf-text-transform-{upper, lower, capitalise, none}`               | Upper or lower case, capitalised or none                                                                    |
+| `%bf-text-wrap`                                                     | Text wraps as normal                                                                                        |
+| `%bf-text-wrap-overflow`                                            | Text stays on one line and overflows                                                                        |
+| `%bf-text-truncate`                                                 | Text stays on one line, truncated with an ellipsis, and expands on hover                                    |
+| `%bf-text-break`                                                    | Long words and URLs break anywhere rather than overflow                                                     |
+| `%bf-text-underline-offset-{auto, 1, 2, 3}`                         | Gap between text and its underline, from `0.125em` to `0.375em`                                             |
+| `%bf-text-decoration-opacity-{0pc-100pc}`                           | Fades the underline in steps of 10, without fading the text                                                 |
+| `%bf-stretched-link`                                                | Makes the nearest positioned ancestor clickable as the link                                                 |
+| `%bf-icon-link`                                                     | A link with an icon: in a row, centred, with a `1em` square `svg`                                           |
+| `%bf-outline-none`                                                  | Removes the outline. Use with care, as it removes the focus indicator                                       |
+| `%bf-focus-ring`                                                    | The focus outline that links, tabs and buttons in components use                                            |
+| `%bf-focus-ring-inset`                                              | The same ring inside the element, where one outside would be clipped                                        |
 
 ## Example: a page heading and a caption
 
@@ -90,7 +90,7 @@ The ring only shows when the keyboard moves focus, not on a click. It reads the 
 .teaser-link
     @extend %bf-stretched-link
     @extend %bf-text-underline-offset-2
-    @extend %bf-text-decoration-opacity-50
+    @extend %bf-text-decoration-opacity-50pc
 ```
 
 ```css
