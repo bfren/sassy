@@ -3,7 +3,7 @@
 @use "sass:map"
 
 $sassy-gap-loop: (inherit: inherit)
-@for $i from 0 through $sassy-loop-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-gap-loop: map.merge($sassy-gap-loop, ($i: $i * $sassy-gap-unit))
 
 //  =================================================================

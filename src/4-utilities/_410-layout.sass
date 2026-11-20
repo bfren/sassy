@@ -22,21 +22,27 @@
     @return $steps
 
 $sassy-m-loop: (auto: auto, inherit: inherit)
-@for $i from 0 through $sassy-loop-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-m-loop: map.merge($sassy-m-loop, ($i: $i * $sassy-margin-unit))
 
 // negative margins, e.g. n3 for -3 steps
-@for $i from 1 through $sassy-loop-max
+@for $i from 1 through $sassy-spacing-max
     $sassy-m-loop: map.merge($sassy-m-loop, ("n#{$i}": -$i * $sassy-margin-unit))
 
 $sassy-p-loop: (inherit: inherit)
-@for $i from 0 through $sassy-loop-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-p-loop: map.merge($sassy-p-loop, ($i: $i * $sassy-padding-unit))
 
 // scroll padding, on the padding scale
 $sassy-scroll-p-loop: ()
-@for $i from 0 through $sassy-scroll-padding-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-scroll-p-loop: map.merge($sassy-scroll-p-loop, ($i: $i * $sassy-padding-unit))
+
+// offsets: steps on the padding scale, then the percentages and auto
+$sassy-offset-loop: ()
+@for $i from 0 through $sassy-spacing-max
+    $sassy-offset-loop: map.merge($sassy-offset-loop, ($i: $i * $sassy-padding-unit))
+$sassy-offset-loop: map.merge($sassy-offset-loop, $sassy-offset)
 
 
 
@@ -64,7 +70,7 @@ $sassy-scroll-p-loop: ()
     // Offset
 
     @each $key, $val in $sassy-sides
-        @include make.responsive($val, $sassy-offset) using ($value)
+        @include make.responsive($val, $sassy-offset-loop) using ($value)
             #{$val}: $value
 
     // Z-index
