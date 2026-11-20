@@ -501,9 +501,9 @@
     .bf-btn-ok {
       --sassy-btn-bg: var(--sassy-theme-ok);
       --sassy-btn-border-colour: var(--sassy-theme-ok);
-      --sassy-btn-colour: var(--sassy-btn-ok-colour, oklch(21% 0.034 264.665deg));
+      --sassy-btn-colour: var(--sassy-btn-ok-colour, #fff);
       --sassy-btn-focus-colour: var(--sassy-theme-ok);
-      --sassy-btn-outline-colour: color-mix(in oklab, var(--sassy-theme-ok) 50%, var(--sassy-body-colour));
+      --sassy-btn-outline-colour: var(--sassy-theme-ok);
     }
     .bf-btn-info {
       --sassy-btn-bg: var(--sassy-theme-info);
@@ -11538,12 +11538,12 @@
       --sassy-line-strong: oklch(87.2% 0.01 258.338deg);
       --sassy-muted: oklch(44.6% 0.03 256.802deg);
       --sassy-disabled: oklch(70.7% 0.022 261.325deg);
-      --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
-      --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-primary: oklch(50% 0.134 242.749deg);
+      --sassy-theme-primary-contrast: #fff;
       --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
       --sassy-theme-secondary-contrast: #fff;
-      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
-      --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-ok: oklch(52.7% 0.154 150.069deg);
+      --sassy-theme-ok-contrast: #fff;
       --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
       --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
       --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
@@ -11564,12 +11564,12 @@
       --sassy-line-strong: oklch(87.2% 0.01 258.338deg);
       --sassy-muted: oklch(44.6% 0.03 256.802deg);
       --sassy-disabled: oklch(70.7% 0.022 261.325deg);
-      --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
-      --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-primary: oklch(50% 0.134 242.749deg);
+      --sassy-theme-primary-contrast: #fff;
       --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
       --sassy-theme-secondary-contrast: #fff;
-      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
-      --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-ok: oklch(52.7% 0.154 150.069deg);
+      --sassy-theme-ok-contrast: #fff;
       --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
       --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
       --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
@@ -11642,12 +11642,12 @@
       --sassy-line-strong: oklch(87.2% 0.01 258.338deg);
       --sassy-muted: oklch(44.6% 0.03 256.802deg);
       --sassy-disabled: oklch(70.7% 0.022 261.325deg);
-      --sassy-theme-primary: oklch(58.8% 0.158 241.966deg);
-      --sassy-theme-primary-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-primary: oklch(50% 0.134 242.749deg);
+      --sassy-theme-primary-contrast: #fff;
       --sassy-theme-secondary: oklch(55.3% 0.195 38.402deg);
       --sassy-theme-secondary-contrast: #fff;
-      --sassy-theme-ok: oklch(62.7% 0.194 149.214deg);
-      --sassy-theme-ok-contrast: oklch(13% 0.028 261.692deg);
+      --sassy-theme-ok: oklch(52.7% 0.154 150.069deg);
+      --sassy-theme-ok-contrast: #fff;
       --sassy-theme-info: oklch(90.1% 0.058 230.902deg);
       --sassy-theme-info-contrast: oklch(13% 0.028 261.692deg);
       --sassy-theme-warn: oklch(82.8% 0.189 84.429deg);
