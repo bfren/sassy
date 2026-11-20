@@ -13,11 +13,10 @@
     --sassy-font-family-serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif
     --sassy-font-family-mono: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace
     --sassy-body-colour: #{sassy.colour("slate", 800)}
-    --site-width: 80rem
 
 html
-    // gap: scroll-padding - anchors land below the sticky header
-    scroll-padding-top: 6rem
+    // anchors land below the sticky header
+    @extend %bf-scroll-pt-24
 
 body
     @extend %bf-body
@@ -29,15 +28,13 @@ body
     @extend %bf-mx-auto
     @extend %bf-px-5
     @extend %bf-px-8-md
+    @extend %bf-max-width-2xl
     box-sizing: border-box
-    // gap: a max-width in rem (the max-width utilities are percentages)
-    max-width: var(--site-width)
 
 // Headings in the page's own text, in the serif
 .site-heading
     @extend %bf-font-family-serif
-    // gap: letter-spacing
-    letter-spacing: -0.01em
+    @extend %bf-letter-spacing-tight
 
 
 //  =================================================================
@@ -50,9 +47,9 @@ body
     @extend %bf-z-index-5
     @extend %bf-border-bottom-1
     @extend %bf-border-slate-200
-    // gap: backdrop-filter, and a background with transparency
-    backdrop-filter: blur(0.5rem)
-    background-color: color-mix(in oklab, #fff 85%, transparent)
+    @extend %bf-backdrop-blur-2
+    @extend %bf-bg-slate-50
+    @extend %bf-bg-opacity-80
 
 // Sassy's navbar: below md the menu is behind the toggle (sassy.js opens and closes it), from md it is always open
 .site-header-inner
@@ -77,8 +74,7 @@ body
 
 .brand
     @extend %bf-navbar-brand
-    // gap: line-height 0
-    line-height: 0
+    @extend %bf-line-height-0
 
     // the logo's height is its height attribute
     img
@@ -94,8 +90,8 @@ body
     --sassy-nav-link-colour: #{sassy.colour("slate", 600)}
     --sassy-nav-link-padding-x: 0.75rem
     --sassy-nav-link-padding-y: 1rem
-    // gap: negative margins
-    margin-inline: -0.75rem
+    // pulls the links out by their padding, so their text lines up with the page
+    @extend %bf-mx-n3
 
     a
         @extend %bf-nav-link
@@ -131,8 +127,7 @@ body
     > p,
     > ul,
     > ol
-        // gap: a max-width in ch, for a readable line length
-        max-width: 68ch
+        @extend %bf-max-width-text
 
     > p a,
     > ul a,
@@ -154,8 +149,7 @@ body
 .example > p code
     @extend %bf-bg-slate-100
     @extend %bf-rounded-2
-    // gap: sizes and padding in em, relative to the text around it
-    font-size: 0.875em
+    // gap: padding in em, relative to the text around it
     padding: 0.1em 0.3em
 
 
@@ -239,8 +233,7 @@ body
     > p
         @extend %bf-mt-0
         @extend %bf-mb-5
-        // gap: a max-width in ch
-        max-width: 68ch
+        @extend %bf-max-width-text
 
 // Each demo and its code, in one of Sassy's cards - tools/site.mjs build wraps them
 .example-card
@@ -266,8 +259,7 @@ body
     @extend %bf-c-sky-900
     @extend %bf-py-2
     @extend %bf-px-3
-    // gap: border-style
-    border-style: dashed
+    @extend %bf-border-style-dashed
 
 // A note in a demo about what to do to see it work
 .demo-hint
@@ -328,16 +320,13 @@ body
     @extend %bf-overflow-auto
     @extend %bf-py-5
     @extend %bf-px-6
-    // gap: a code size of 0.875rem, a line height of 1.65, a max-height in rem, and tab-size
-    font-size: 0.875rem
+    @extend %bf-font-size-small
+    // gap: a line height of 1.65, and a max-height in rem
     line-height: 1.65
     max-height: 30rem
-    tab-size: 4
-
-    &:focus-visible
-        // gap: an outline inside the block
-        outline: 2px solid #{sassy.colour("sky", 300)}
-        outline-offset: -2px
+    // the ring inside the block, which would clip one outside it
+    @extend %bf-focus-ring-inset
+    --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
 
 // Sassy's grid: each half is the full width, then half from lg
 .code-split
@@ -348,8 +337,8 @@ body
         @extend %bf-grid-col-12
         @extend %bf-grid-col-6-lg
         @extend %bf-m-0
-        // gap: min-width 0
-        min-width: 0
+        // lets the code scroll inside the column rather than widen it
+        @extend %bf-min-width-0
 
     figure + figure
         @extend %bf-border-left-1-lg

@@ -4,10 +4,9 @@
 @use "../2-forms/200-variables" as *;
 
 // Text colour on each theme colour's button, chosen for contrast with the default theme:
-// dark on the light colours (and on ok, as white on green-600 is only 3.2:1), white on the rest.
+// dark on the light colours, white on the rest.
 // A theme that changes a colour can change its text with --sassy-btn-<name>-colour.
 $sassy-btn-text-colours: (
-    ok: colour("grey", 900),
     info: colour("grey", 900),
     warn: colour("grey", 900),
     grey-light: colour("grey", 900)

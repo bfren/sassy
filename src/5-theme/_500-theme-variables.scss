@@ -6,9 +6,9 @@
 // The eight theme colours, in a light and a dark set. %bf-theme-dark switches to the dark set, which
 // lifts the colours used as text to lighter shades so they stay readable on a dark background.
 $sassy-theme-light: (
-    primary: colour("sky", 600),
+    primary: colour("sky", 700),
     secondary: colour("orange", 700),
-    ok: colour("green", 600),
+    ok: colour("green", 700),
     info: colour("sky", 200),
     warn: colour("amber", 400),
     error: colour("red", 600),
@@ -31,7 +31,8 @@ $sassy-roles-light: (
     surface: #fff,
     surface-subtle: colour("grey", 100),
     line: colour("grey", 200),
-    line-strong: colour("grey", 300),
+    // the edge of form controls and buttons, at 3:1 or more on the page and surface
+    line-strong: colour("grey", 500),
     muted: colour("grey", 600),
     disabled: colour("grey", 400)
 ) !default;

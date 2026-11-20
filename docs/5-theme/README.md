@@ -28,9 +28,9 @@ Theme colours are output last, so a theme utility such as `%bf-bg-primary` alway
 
 | Name         | Default colour | Custom property            |
 | ------------ | -------------- | -------------------------- |
-| `primary`    | `sky-600`      | `--sassy-theme-primary`    |
+| `primary`    | `sky-700`      | `--sassy-theme-primary`    |
 | `secondary`  | `orange-700`   | `--sassy-theme-secondary`  |
-| `ok`         | `green-600`    | `--sassy-theme-ok`         |
+| `ok`         | `green-700`    | `--sassy-theme-ok`         |
 | `info`       | `sky-200`      | `--sassy-theme-info`       |
 | `warn`       | `amber-400`    | `--sassy-theme-warn`       |
 | `error`      | `red-600`      | `--sassy-theme-error`      |
@@ -39,7 +39,7 @@ Theme colours are output last, so a theme utility such as `%bf-bg-primary` alway
 
 The defaults come from the palette, so `sassy.colour()` gives you the same colours to use elsewhere. The [README](../../README.md#naming) shows them.
 
-Each theme colour also has a `-contrast` property, such as `--sassy-theme-primary-contrast`, for the text on it. Its default is whichever of `grey-950` and white has the higher WCAG contrast ratio with the default colour. `primary` (`sky-600`) gets dark text, as white text on it is below the 4.5:1 that WCAG AA asks for.
+Each theme colour also has a `-contrast` property, such as `--sassy-theme-primary-contrast`, for the text on it. Its default is whichever of `grey-950` and white has the higher WCAG contrast ratio with the default colour. `primary` and `ok` use the 700 shades so they get white text, as white on the 600 shades is below the 4.5:1 that WCAG AA asks for.
 
 ## Settings and custom properties
 

@@ -8,10 +8,11 @@
 | ---------------------------------------------------------- | ------------------------------------------------------------------------ |
 | `%bf-body`                                                 | Text defaults and heading sizes, on the body                             |
 | `%bf-font-family-{mono, sans, serif}`                      | Font family                                                              |
-| `%bf-font-size-{1-6, base, small, smaller, smallest}`      | Font size. `1` is largest, `6` is smallest of the numbered sizes         |
+| `%bf-font-size-{1-6, base, small, smaller, smallest}`      | Font size. `1` is largest; `small` is `0.875` times the base             |
 | `%bf-font-style-{italic, oblique, normal}`                 | Font style                                                               |
 | `%bf-font-weight-{100-900, bold, bolder, lighter, normal}` | Font weight, as a number or keyword                                      |
-| `%bf-line-height-{single, double, triple, base}`           | Line height                                                              |
+| `%bf-letter-spacing-{tight, normal, wide}`                 | Letter spacing: `-0.01em`, `0` or `0.05em`                               |
+| `%bf-line-height-{0, single, double, triple, base}`        | Line height. `0` for a box around only an image or icon                  |
 | `%bf-text-align-{start, centre, end, justify}`             | Text alignment                                                           |
 | `%bf-text-decoration-{under, over, through, none}`         | Underline, overline, line-through or none                                |
 | `%bf-text-transform-{upper, lower, capitalise, none}`      | Upper or lower case, capitalised or none                                 |
@@ -25,6 +26,7 @@
 | `%bf-icon-link`                                            | A link with an icon: in a row, centred, with a `1em` square `svg`        |
 | `%bf-outline-none`                                         | Removes the outline. Use with care, as it removes the focus indicator    |
 | `%bf-focus-ring`                                           | The focus outline that links, tabs and buttons in components use         |
+| `%bf-focus-ring-inset`                                     | The same ring inside the element, where one outside would be clipped     |
 
 ## Example: a page heading and a caption
 

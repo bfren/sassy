@@ -49,7 +49,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 
 | Bootstrap                                         | Sassy                                                                                             |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `.m-3`, `.mt-3`, `.mx-auto`, `.ms-auto`           | `%bf-m-4`, `%bf-mt-4`, `%bf-mx-auto`, `%bf-ms-auto` - see the scale above                         |
+| `.m-3`, `.mt-3`, `.mx-auto`, `.ms-auto`, `.m-n3`  | `%bf-m-4`, `%bf-mt-4`, `%bf-mx-auto`, `%bf-ms-auto`, `%bf-m-n4` - see the scale above             |
 | `.p-2`, `.px-3`                                   | `%bf-p-2`, `%bf-px-4`                                                                             |
 | `.gap-3`                                          | `%bf-gap-4`                                                                                       |
 | `.d-none`, `.d-flex`, `.d-md-block`               | `%bf-d-none`, `%bf-d-flex`, `%bf-d-block-md`                                                      |
@@ -71,7 +71,7 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.text-start`, `.text-center`, `.text-end`        | `%bf-text-align-start`, `%bf-text-align-centre`, `%bf-text-align-end`                             |
 | `.fs-1` to `.fs-6`, `.small`                      | `%bf-font-size-1` to `-6` (a smaller scale, 2 to 1.1 times the base), `%bf-font-size-small`       |
 | `.fw-bold`, `.fst-italic`                         | `%bf-font-weight-700`, `%bf-font-style-italic`                                                    |
-| `.lh-1`                                           | `%bf-line-height-single`                                                                          |
+| `.lh-1`                                           | `%bf-line-height-single`, or `%bf-line-height-0`                                                  |
 | `.text-uppercase`                                 | `%bf-text-transform-upper`                                                                        |
 | `.text-decoration-none`                           | `%bf-text-decoration-none`                                                                        |
 | `.text-nowrap`, `.text-truncate`, `.text-break`   | `%bf-text-wrap-overflow`, `%bf-text-truncate`, `%bf-text-break`                                   |
@@ -167,6 +167,6 @@ Opening and closing use HTML rather than `data-bs-*` attributes:
 - **`.clearfix`** and **`.translate-middle`**.
 - **Colour opacity utilities** such as `.bg-opacity-50` and `.text-opacity-75`, and `.bg-gradient`.
 - **Theme colours on list group items** (`.list-group-item-primary`), and coloured links (`.link-primary`).
-- **The rest of Reboot.** Sassy's element defaults cover headings, lists, quotes, figures, tables and more, but the body font is opt-in with `%bf-body`, and paragraph and link defaults are left to the browser.
+- **The body font is opt-in.** Sassy's element defaults cover what Reboot does - `border-box` sizing, headings, paragraph and list spacing, links, code, tables and form basics - but the body's font, size and colour come from `%bf-body`, which you extend on `body`.
 - **The JavaScript plugin API**: no `new bootstrap.Modal()`, no `show.bs.modal` events. Use the elements' own methods and events, such as `dialog.showModal()` and the `toggle` event.
 - **Bootstrap Icons.** Sassy draws its few icons (the close button and chevrons) as masks in the text colour.

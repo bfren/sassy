@@ -90,7 +90,7 @@ FNR == NR { next }
 # ---- second file: the theme -----------------------------------------------
 
 # the light set, the default, e.g.
-#         primary: colour("sky", 600),
+#         primary: colour("sky", 700),
 # or      primary: #0d9488,   (any CSS colour)
 /^\$sassy-theme-light:/ { in_theme = 1; next }
 in_theme && /^\)/ { in_theme = 0 }

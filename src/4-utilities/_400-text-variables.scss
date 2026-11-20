@@ -32,7 +32,7 @@ $sassy-font-size: (
     5: calc(var(--sassy-font-size-base) * 1.2),
     6: calc(var(--sassy-font-size-base) * 1.1),
     base: var(--sassy-font-size-base),
-    small: calc(var(--sassy-font-size-base) * 0.8),
+    small: calc(var(--sassy-font-size-base) * 0.875),
     smaller: calc(var(--sassy-font-size-base) * 0.7),
     smallest: calc(var(--sassy-font-size-base) * 0.6)) !default;
 
@@ -60,7 +60,14 @@ $sassy-font-weight: (
     normal
 );
 
+$sassy-letter-spacing: (
+    tight: -0.01em,
+    normal: 0,
+    wide: 0.05em
+) !default;
+
 $sassy-line-height: (
+    0: 0,
     base: var(--sassy-line-height-base),
     double: 2,
     single: 1,

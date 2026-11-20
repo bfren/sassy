@@ -19,9 +19,18 @@ $sassy-m-loop: (auto: auto, inherit: inherit)
 @for $i from 0 through $sassy-loop-max
     $sassy-m-loop: map.merge($sassy-m-loop, ($i: $i * $sassy-margin-unit))
 
+// negative margins, e.g. n3 for -3 steps
+@for $i from 1 through $sassy-loop-max
+    $sassy-m-loop: map.merge($sassy-m-loop, ("n#{$i}": -$i * $sassy-margin-unit))
+
 $sassy-p-loop: (inherit: inherit)
 @for $i from 0 through $sassy-loop-max
     $sassy-p-loop: map.merge($sassy-p-loop, ($i: $i * $sassy-padding-unit))
+
+// scroll padding, on the padding scale
+$sassy-scroll-p-loop: ()
+@for $i from 0 through $sassy-scroll-padding-max
+    $sassy-scroll-p-loop: map.merge($sassy-scroll-p-loop, ($i: $i * $sassy-padding-unit))
 
 
 
@@ -118,6 +127,10 @@ $sassy-p-loop: (inherit: inherit)
     @include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
         width: $value
 
+    // 0 lets a flex or grid item shrink below its content's width
+    @include make.responsive("min-width", (0: 0)) using ($value)
+        min-width: $value
+
     @include make.responsive("min-width", -get-steps(1%)) using ($value)
         min-width: $value
 
@@ -129,6 +142,13 @@ $sassy-p-loop: (inherit: inherit)
 
     @include make.responsive("max-viewwidth", -get-steps(1vw, none)) using ($value)
         max-width: $value
+
+    @include make.responsive("max-width", $sassy-breakpoints) using ($value)
+        max-width: $value
+
+    // a readable line length for text
+    @include make.responsive("max-width-text", ())
+        max-width: $sassy-text-max-width
 
     // Margin
 
@@ -166,6 +186,12 @@ $sassy-p-loop: (inherit: inherit)
     @each $key, $val in $sassy-sides
         @include make.responsive("p" + $key, $sassy-p-loop) using ($value)
             #{"padding-" + $val}: $value
+
+
+    // Scroll padding: where in-page links scroll an element to, e.g. below a sticky header
+
+    @include make.responsive("scroll-pt", $sassy-scroll-p-loop) using ($value)
+        scroll-padding-top: $value
 
 
     // Wrap classes (extend-only, so outputting them on every pass adds nothing)

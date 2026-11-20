@@ -19,6 +19,17 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - Offcanvas: `%bf-offcanvas-start`, `-end`, `-top` and `-bottom` turn a `%bf-dialog` into a panel that slides in from that edge of the window, opened as a modal with `command="show-modal"`. With `%bf-offcanvas-{breakpoint}`, it is part of the page from that breakpoint up, such as a sidebar.
 - `sassy.js` closes a modal dialog with `closedby="any"` when its backdrop is clicked, in browsers without `closedby`.
 - `sassy.js` keeps a `popovertarget` button's `aria-expanded` up to date, gives `role="menu"` its arrow keys, Home, End and Tab, closes a menu when an item is chosen, and places menus in browsers without CSS anchor positioning.
+- `%bf-letter-spacing-tight`, `-normal` and `-wide` (`-0.01em`, `0` and `0.05em`), from `$sassy-letter-spacing`.
+- `%bf-max-width-text` limits text to a readable line length, `--sassy-text-max-width` (`65ch` by default).
+- `sassy.js` closes a modal dialog, such as an offcanvas, when a link in it to a section of the page outside it is followed, so the section can be seen.
+- Negative margins: `n1` to `n20` on every margin placeholder, such as `%bf-mx-n3` for `-0.75rem` on both sides.
+- `%bf-scroll-pt-{0-32}` sets `scroll-padding-top` on the padding scale, up to `8rem`, so in-page links land below a sticky header. `$sassy-scroll-padding-max` sets the highest step.
+- `%bf-max-width-{sm, md, lg, xl, 2xl, 3xl}` limit an element to a breakpoint's width, from `$sassy-breakpoints`.
+- `%bf-backdrop-blur-{none, 1, 2, 3}` blur what is behind a see-through background, from `0.25rem` to `1rem`, set in `$sassy-backdrop-blur`.
+- `%bf-border-style-{solid, dashed, dotted, double, none}`, which win over the `solid` that the border widths set.
+- `%bf-min-width-0`, so a flex or grid item can shrink below its content's width, and `%bf-line-height-0`.
+- `%bf-bg-opacity-{0-100}` makes a palette or theme background see-through, in steps of 10, by setting `--sassy-bg-opacity`. The property isn't inherited, so a background inside a see-through one is solid. `%bf-bg-*` now mix their colour with transparent by it, which outputs the same colour when it isn't set.
+- `%bf-focus-ring-inset` draws the focus ring inside the element, for a box that scrolls or anywhere an outside ring would be clipped.
 
 ### Changed
 
@@ -28,6 +39,11 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 - Outline buttons in a light theme colour (`ok`, `info`, `warn`, `grey-light`) mix it with the body text colour rather than with the button's dark text, so they stay readable on a dark background.
 - The current link of `%bf-nav-pills` uses the primary button's text colour, `--sassy-btn-primary-colour`, rather than always white.
 - The theme properties on `:root` are output with `:where(:root)`, so any selector that sets them, even `html`, wins.
+- The light theme's `primary` is now `sky-700` and `ok` `green-700`, rather than the 600 shades, so their buttons have white text that meets WCAG AA (5.9:1 and 5.0:1). The `primary` button had white text at 4.1:1, and `ok` had dark text. Everything else that uses them is darker too, such as the text, background and border utilities, links, focus rings, checked boxes and range thumbs. The dark theme is unchanged.
+- `%bf-font-size-small` is `0.875` times the base size rather than `0.8`, the same as figure and blockquote captions.
+- `--sassy-line-strong` is `grey-500` in the light theme rather than `grey-300`, so the edges of form controls, default buttons and pagination contrast 4.8:1 with the page, above the 3:1 that WCAG asks for. It was 1.47:1.
+- **Breaking:** everything uses `box-sizing: border-box`, with `::before` and `::after`, so padding and borders are inside an element's width and height. Your own elements with a width or height and padding or a border get smaller; set `box-sizing: content-box` on any that should not.
+- More element defaults, at zero specificity like the rest: `p`, `ul`, `ol`, `dl` and `pre` have no top margin and `1rem` below; lists are indented `2rem` (`$sassy-list-indent`); `dt` is bold; links are the primary colour and underlined, moving towards the body text on hover (`--sassy-link-colour`, `--sassy-link-hover-colour`), and a link without `href` looks like plain text; `code`, `kbd` and `pre` are `0.875em` (`--sassy-code-font-size`); `pre` scrolls with tabs 4 wide (`--sassy-pre-tab-size`); `kbd` looks like a key; `label` is `inline-block`; `fieldset`, `legend` and `iframe` lose their borders; and `summary` and `role="button"` have a pointer cursor. The body font stays opt-in with `%bf-body`.
 
 ## [0.4.0] - 2026-11-19
 
