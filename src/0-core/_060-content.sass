@@ -90,6 +90,26 @@
             font-size: 1em
             padding: 0
 
+        // forms and media
+        :where(label)
+            display: inline-block
+
+        :where(iframe)
+            border: 0
+
+        :where(summary, [role="button"])
+            cursor: pointer
+
+        :where(fieldset)
+            border: 0
+            margin: 0
+            min-width: 0
+            padding: 0
+
+        :where(legend)
+            margin-block-end: calc($sassy-content-margin / 2)
+            padding: 0
+
         :where(img, svg)
             vertical-align: middle
 
