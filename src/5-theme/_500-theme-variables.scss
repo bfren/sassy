@@ -31,7 +31,8 @@ $sassy-roles-light: (
     surface: #fff,
     surface-subtle: colour("grey", 100),
     line: colour("grey", 200),
-    line-strong: colour("grey", 300),
+    // the edge of form controls and buttons, at 3:1 or more on the page and surface
+    line-strong: colour("grey", 500),
     muted: colour("grey", 600),
     disabled: colour("grey", 400)
 ) !default;
