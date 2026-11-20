@@ -124,9 +124,7 @@
     @extend %bf-navbar-push
 
 .cards
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-gap-4
+    @extend %bf-grid
 
 .crumbs
     @extend %bf-breadcrumb
@@ -143,7 +141,8 @@
 
 .card
     @extend %bf-card
-    flex: 1 1 15rem
+    @extend %bf-grid-col-12
+    @extend %bf-grid-col-6-sm
 
     h3
         @extend %bf-card-title
@@ -351,7 +350,6 @@
 .text-bg-warn
     @extend %bf-text-bg-warn
 
-// no placeholder sets a fixed height, so this one is plain CSS
 .spy-area
     @extend %bf-overflow-y-auto
-    block-size: 16rem
+    @extend %bf-viewheight-30

@@ -603,13 +603,12 @@
             </div>
 <div class="code">
 <pre data-lang="sass"><code>.cards
-    @extend %bf-d-flex
-    @extend %bf-flex-wrap-wrap
-    @extend %bf-gap-4
+    @extend %bf-grid
 
 .card
     @extend %bf-card
-    flex: 1 1 15rem
+    @extend %bf-grid-col-12
+    @extend %bf-grid-col-6-sm
 
     h3
         @extend %bf-card-title
@@ -1694,7 +1693,7 @@
 
 .spy-area
     @extend %bf-overflow-y-auto
-    block-size: 16rem</code></pre>
+    @extend %bf-viewheight-30</code></pre>
 <pre data-lang="html"><code>&lt;div class="with-sidebar"&gt;
     &lt;nav class="menu menu-vertical menu-pills" aria-label="On this demo"&gt;
         &lt;a href="#spy-intro" aria-current="location"&gt;Introduction&lt;/a&gt;

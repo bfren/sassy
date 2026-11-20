@@ -13,7 +13,7 @@
 .card-title
     @extend %bf-text-truncate
     @extend %bf-font-weight-700
-    max-width: 24rem
+    @extend %bf-max-width-50
 
 .scroller
     @extend %bf-overflow-y-auto
@@ -21,6 +21,7 @@
     @extend %bf-border-grey-200
     @extend %bf-rounded
     @extend %bf-px-3
+    // no placeholder sets a fixed height, and a vh one would stop it scrolling in a tall window
     max-height: 11rem
 
 .header
