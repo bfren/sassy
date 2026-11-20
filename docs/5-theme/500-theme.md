@@ -33,7 +33,7 @@
 
 @layer sassy.base.theme {
   .alert-error {
-    background-color: var(--sassy-theme-error);
+    background-color: color-mix(in oklab, var(--sassy-theme-error) var(--sassy-bg-opacity, 100%), transparent);
   }
 }
 ```

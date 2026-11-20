@@ -61,7 +61,7 @@
     // Theme: Background
 
     @include make.responsive("bg", $sassy-theme) using ($value)
-        background-color: $value
+        background-color: color-mix(in oklab, $value var(--sassy-bg-opacity, 100%), transparent)
 
 
     // Theme: Background with contrasting text

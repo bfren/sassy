@@ -18,8 +18,21 @@
     // Background Colour
     // See also 5-theme
 
+    // not inherited, so a background inside a see-through one is solid
+    @include make.in-base
+        @property --sassy-bg-opacity
+            syntax: "<percentage>"
+            inherits: false
+            initial-value: 100%
+
     @include make.responsive("bg", $tailwind-colours) using ($value)
-        background-color: $value
+        background-color: color-mix(in oklab, $value var(--sassy-bg-opacity, 100%), transparent)
+
+    // Background Opacity: makes a %bf-bg-* see-through
+
+    @for $i from 0 through 10
+        @include make.responsive("bg-opacity", ($i * 10)) using ($value)
+            --sassy-bg-opacity: #{$value * 1%}
 
 
     // Background Colour with contrasting text
