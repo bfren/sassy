@@ -12,7 +12,11 @@ $sassy-separator: "-" !default;
 // cascade layer every rule is output in - a string, so it can be nested, e.g. "vendor.sassy"
 $sassy-layer: "sassy" !default;
 
+// highest border width and flex grow / shrink step
 $sassy-loop-max: 20 !default;
+
+// highest margin, padding, gap, offset and scroll padding step
+$sassy-spacing-max: 32 !default;
 
 $sassy-sides: (
     t: top,

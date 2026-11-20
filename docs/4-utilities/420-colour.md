@@ -6,7 +6,7 @@
 | ------------------------------ | --------------------------------------------------- |
 | `%bf-c-{colour}-{shade}`       | Text colour, from the palette                       |
 | `%bf-bg-{colour}-{shade}`      | Background colour                                   |
-| `%bf-bg-opacity-{0-100}`       | Makes a `%bf-bg-…` see-through, in steps of 10      |
+| `%bf-bg-opacity-{0pc-100pc}`   | Makes a `%bf-bg-…` see-through, in steps of 10      |
 | `%bf-text-bg-{colour}-{shade}` | Background colour, with text that contrasts with it |
 | `%bf-border-{colour}-{shade}`  | Border colour                                       |
 
@@ -23,7 +23,7 @@
     @extend %bf-position-sticky
     @extend %bf-top-0
     @extend %bf-bg-grey-50
-    @extend %bf-bg-opacity-80
+    @extend %bf-bg-opacity-80pc
     @extend %bf-backdrop-blur-2
 ```
 

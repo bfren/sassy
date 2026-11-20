@@ -1,36 +1,48 @@
 @use "../0-core/030-variables" as *
 @use "../0-core/040-make" as make
 @use "sass:map"
+@use "sass:math"
 
-/// Returns a map of steps from 0-100 in increments of 5, including a keyword (auto by default)
+/// Returns a map of steps from 5-100 in increments of 5, keyed with the unit, e.g. 50pc or 50vh
 ///
-/// @param {string} $unit
-///     Single unit (e.g. 1px).
+/// @param {number} $unit
+///     Single unit: 1%, 1vh or 1vw.
 /// @param {string} $keyword
-///     Keyword to include as the first step, e.g. none for max-width / max-height.
-@function -get-steps($unit, $keyword: auto)
-    $steps: ($keyword: $keyword)
+///     Keyword to include as the first step, e.g. none for max-width / max-height, or null for none.
+@function -get-steps($unit, $keyword: null)
+    $steps: ()
+    @if $keyword
+        $steps: ($keyword: $keyword)
+    $suffix: math.unit($unit)
+    @if $suffix == "%"
+        $suffix: "pc"
     @for $i from 1 through 20
-        $step: calc($i * 5)
-        $steps: map.merge($steps, ($step: calc($step * $unit)))
+        $step: $i * 5
+        $steps: map.merge($steps, ("#{$step}#{$suffix}": $step * $unit))
     @return $steps
 
 $sassy-m-loop: (auto: auto, inherit: inherit)
-@for $i from 0 through $sassy-loop-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-m-loop: map.merge($sassy-m-loop, ($i: $i * $sassy-margin-unit))
 
 // negative margins, e.g. n3 for -3 steps
-@for $i from 1 through $sassy-loop-max
+@for $i from 1 through $sassy-spacing-max
     $sassy-m-loop: map.merge($sassy-m-loop, ("n#{$i}": -$i * $sassy-margin-unit))
 
 $sassy-p-loop: (inherit: inherit)
-@for $i from 0 through $sassy-loop-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-p-loop: map.merge($sassy-p-loop, ($i: $i * $sassy-padding-unit))
 
 // scroll padding, on the padding scale
 $sassy-scroll-p-loop: ()
-@for $i from 0 through $sassy-scroll-padding-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-scroll-p-loop: map.merge($sassy-scroll-p-loop, ($i: $i * $sassy-padding-unit))
+
+// offsets: steps on the padding scale, then the percentages and auto
+$sassy-offset-loop: ()
+@for $i from 0 through $sassy-spacing-max
+    $sassy-offset-loop: map.merge($sassy-offset-loop, ($i: $i * $sassy-padding-unit))
+$sassy-offset-loop: map.merge($sassy-offset-loop, $sassy-offset)
 
 
 
@@ -58,7 +70,7 @@ $sassy-scroll-p-loop: ()
     // Offset
 
     @each $key, $val in $sassy-sides
-        @include make.responsive($val, $sassy-offset) using ($value)
+        @include make.responsive($val, $sassy-offset-loop) using ($value)
             #{$val}: $value
 
     // Z-index
@@ -101,46 +113,46 @@ $sassy-scroll-p-loop: ()
 
     // Height
 
-    @include make.responsive("height", -get-steps(1%)) using ($value)
+    @include make.responsive("height", -get-steps(1%, auto)) using ($value)
         height: $value
 
-    @include make.responsive("viewheight", -get-steps(1vh)) using ($value)
+    @include make.responsive("height", -get-steps(1vh)) using ($value)
         height: $value
 
-    @include make.responsive("min-height", -get-steps(1%)) using ($value)
+    @include make.responsive("min-height", -get-steps(1%, auto)) using ($value)
         min-height: $value
 
-    @include make.responsive("min-viewheight", -get-steps(1vh)) using ($value)
+    @include make.responsive("min-height", -get-steps(1vh)) using ($value)
         min-height: $value
 
     @include make.responsive("max-height", -get-steps(1%, none)) using ($value)
         max-height: $value
 
-    @include make.responsive("max-viewheight", -get-steps(1vh, none)) using ($value)
+    @include make.responsive("max-height", -get-steps(1vh)) using ($value)
         max-height: $value
 
     // Width
 
-    @include make.responsive("width", -get-steps(1%)) using ($value)
+    @include make.responsive("width", -get-steps(1%, auto)) using ($value)
         width: $value
 
-    @include make.responsive("viewwidth", -get-steps(1vw)) using ($value)
+    @include make.responsive("width", -get-steps(1vw)) using ($value)
         width: $value
 
     // 0 lets a flex or grid item shrink below its content's width
     @include make.responsive("min-width", (0: 0)) using ($value)
         min-width: $value
 
-    @include make.responsive("min-width", -get-steps(1%)) using ($value)
+    @include make.responsive("min-width", -get-steps(1%, auto)) using ($value)
         min-width: $value
 
-    @include make.responsive("min-viewwidth", -get-steps(1vw)) using ($value)
+    @include make.responsive("min-width", -get-steps(1vw)) using ($value)
         min-width: $value
 
     @include make.responsive("max-width", -get-steps(1%, none)) using ($value)
         max-width: $value
 
-    @include make.responsive("max-viewwidth", -get-steps(1vw, none)) using ($value)
+    @include make.responsive("max-width", -get-steps(1vw)) using ($value)
         max-width: $value
 
     @include make.responsive("max-width", $sassy-breakpoints) using ($value)

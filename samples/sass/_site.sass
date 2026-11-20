@@ -29,7 +29,6 @@ body
     @extend %bf-px-5
     @extend %bf-px-8-md
     @extend %bf-max-width-2xl
-    box-sizing: border-box
 
 // Headings in the page's own text, in the serif
 .site-heading
@@ -49,7 +48,7 @@ body
     @extend %bf-border-slate-200
     @extend %bf-backdrop-blur-2
     @extend %bf-bg-slate-50
-    @extend %bf-bg-opacity-80
+    @extend %bf-bg-opacity-80pc
 
 // Sassy's navbar: below md the menu is behind the toggle (sassy.js opens and closes it), from md it is always open
 .site-header-inner
@@ -172,13 +171,13 @@ body
     @extend %bf-flex-align-self-start-lg
     @extend %bf-overflow-y-auto-lg
     @extend %bf-grid-col-3-lg
+    @extend %bf-top-22-lg
     --sassy-offcanvas-width: 18rem
 
     @include sassy.up(lg)
-        // gap: spanning every row, a top in rem, and a height from calc()
+        // gap: spanning every row, and a height from calc()
         grid-row: 1 / span 100
         max-block-size: calc(100vh - 7rem)
-        top: 5.5rem
 
     > header
         @extend %bf-dialog-header
@@ -210,7 +209,7 @@ body
     @extend %bf-grid-lg
     @extend %bf-gap-x-12-lg
     // only the gap between the columns: the page's own margins space the rows
-    --sassy-grid-gap: 0
+    @extend %bf-gap-y-0-lg
 
     > :not(.site-sections, script)
         @extend %bf-grid-col-9-lg
@@ -321,9 +320,8 @@ body
     @extend %bf-py-5
     @extend %bf-px-6
     @extend %bf-font-size-small
-    // gap: a line height of 1.65, and a max-height in rem
-    line-height: 1.65
-    max-height: 30rem
+    @extend %bf-max-height-50vh
+    @extend %bf-line-height-relaxed
     // the ring inside the block, which would clip one outside it
     @extend %bf-focus-ring-inset
     --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
@@ -331,7 +329,7 @@ body
 // Sassy's grid: each half is the full width, then half from lg
 .code-split
     @extend %bf-grid
-    --sassy-grid-gap: 0
+    @extend %bf-gap-0
 
     figure
         @extend %bf-grid-col-12

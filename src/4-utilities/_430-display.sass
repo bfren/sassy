@@ -3,7 +3,7 @@
 @use "sass:map"
 
 $sassy-gap-loop: (inherit: inherit)
-@for $i from 0 through $sassy-loop-max
+@for $i from 0 through $sassy-spacing-max
     $sassy-gap-loop: map.merge($sassy-gap-loop, ($i: $i * $sassy-gap-unit))
 
 //  =================================================================
@@ -36,8 +36,8 @@ $sassy-gap-loop: (inherit: inherit)
     // Opacity
 
     @for $i from 0 through 10
-        @include make.responsive("opacity", ($i * 10)) using ($value)
-            opacity: calc($value / 100)
+        @include make.responsive("opacity", ("#{$i * 10}pc": $i * 10%)) using ($value)
+            opacity: $value
 
 
     // Backdrop blur: blurs what is behind a see-through background, such as a sticky header

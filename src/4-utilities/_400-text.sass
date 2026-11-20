@@ -176,8 +176,8 @@
 
     // Fades the underline (or any decoration) without changing the text colour
     @for $i from 0 through 10
-        @include make.responsive("text-decoration-opacity", ($i * 10)) using ($value)
-            text-decoration-color: color-mix(in srgb, currentColor #{$value * 1%}, transparent)
+        @include make.responsive("text-decoration-opacity", ("#{$i * 10}pc": $i * 10%)) using ($value)
+            text-decoration-color: color-mix(in srgb, currentColor #{$value}, transparent)
 
     // Makes the whole of the nearest positioned ancestor clickable
     @include make.single("stretched-link")

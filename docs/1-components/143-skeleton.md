@@ -2,14 +2,14 @@
 
 [1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
 
-A skeleton is a faded block that stands in for content while it loads. It is one line of text high and drawn in the text colour, so it fits any text size and shows on any background. Give it a width with `%bf-width-{5-100}`, as an empty block has none:
+A skeleton is a faded block that stands in for content while it loads. It is one line of text high and drawn in the text colour, so it fits any text size and shows on any background. Give it a width with `%bf-width-{5pc-100pc}`, as an empty block has none:
 
 ```sass
 .skeleton
     @extend %bf-skeleton
 
 .width-75
-    @extend %bf-width-75
+    @extend %bf-width-75pc
 ```
 
 ```css

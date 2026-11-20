@@ -4,13 +4,13 @@
     --sassy-theme-primary: #{sassy.colour("orange", 600)}
 
 html
-    @extend %bf-height-100
+    @extend %bf-height-100pc
 
 body
     @extend %bf-body
     @extend %bf-d-flex-lg
     @extend %bf-flex-column-lg
-    @extend %bf-height-100-lg
+    @extend %bf-height-100pc-lg
     @include sassy.up(md)
         font-family: Arial
     @include sassy.up(3xl)
@@ -50,8 +50,8 @@ div.test
     @extend %bf-bg-green-500
     @extend %bf-mt-5-2xl
     @extend %bf-mt-10-lg
-    @extend %bf-opacity-50
-    @extend %bf-opacity-100-md
+    @extend %bf-opacity-50pc
+    @extend %bf-opacity-100pc-md
     @extend %bf-py-2
     @extend %bf-rounded
     @extend %bf-text-align-centre
@@ -122,4 +122,4 @@ div.shadow
     @include sassy.up(xl)
         --sassy-shadow-colour: #{sassy.colour("fuchsia", 500)}
     @extend %bf-text-align-centre
-    @extend %bf-width-50
+    @extend %bf-width-50pc

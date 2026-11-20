@@ -7,7 +7,7 @@
 | `%bf-d-{block, inline, inline-block, flex, inline-flex, grid, none, …}` | `display`. Responsive                                               |
 | `%bf-visually-hidden`                                                   | Hides content visually, but not from screen readers. Not responsive |
 | `%bf-visually-hidden-focusable`                                         | Hidden like `%bf-visually-hidden` until focused, for skip links     |
-| `%bf-opacity-{0-100}`                                                   | `opacity`, in steps of 10                                           |
+| `%bf-opacity-{0pc-100pc}`                                               | `opacity`, in steps of 10                                           |
 | `%bf-backdrop-blur-{none, 1, 2, 3}`                                     | Blurs what is behind a see-through background: 0.25 to 1rem         |
 | `%bf-flex-{column, column-reverse, row, row-reverse}`                   | `flex-direction`                                                    |
 | `%bf-flex-wrap-{nowrap, wrap, wrap-reverse}`                            | `flex-wrap`                                                         |
@@ -17,7 +17,7 @@
 | `%bf-flex-order-{first, 0-5, last}`                                     | `order`                                                             |
 | `%bf-flex-grow-{0-20}`, `%bf-flex-shrink-{0-20}`                        | `flex-grow` and `flex-shrink`                                       |
 | `%bf-flex-fill`                                                         | `flex: 1 1 auto`                                                    |
-| `%bf-gap-{0-20}`, `%bf-gap-x-…`, `%bf-gap-y-…`                          | `gap` between flex or grid items                                    |
+| `%bf-gap-{0-32}`, `%bf-gap-x-…`, `%bf-gap-y-…`                          | `gap` between flex or grid items                                    |
 
 ## Example: a navigation bar that changes at a breakpoint
 

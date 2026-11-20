@@ -6,10 +6,6 @@ $sassy-breakpoints: (
     2xl: 1400px,
     3xl: 1600px) !default;
 
-// Highest step of %bf-scroll-pt-{0-n}, on the padding scale: higher than $sassy-loop-max,
-// as scroll padding matches a sticky header's height
-$sassy-scroll-padding-max: 32 !default;
-
 // The max-width of %bf-max-width-text, for a readable line length
 $sassy-text-max-width: var(--sassy-text-max-width, 65ch);
 
@@ -22,10 +18,10 @@ $sassy-position: (
     sticky
 );
 
+// %bf-top-{key} etc, alongside the steps on the padding scale
 $sassy-offset: (
-    0: 0,
-    50: 50%,
-    100: 100%,
+    "50pc": 50%,
+    "100pc": 100%,
     auto: auto
 ) !default;
 
