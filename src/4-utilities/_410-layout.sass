@@ -27,6 +27,11 @@ $sassy-p-loop: (inherit: inherit)
 @for $i from 0 through $sassy-loop-max
     $sassy-p-loop: map.merge($sassy-p-loop, ($i: $i * $sassy-padding-unit))
 
+// scroll padding, on the padding scale
+$sassy-scroll-p-loop: ()
+@for $i from 0 through $sassy-scroll-padding-max
+    $sassy-scroll-p-loop: map.merge($sassy-scroll-p-loop, ($i: $i * $sassy-padding-unit))
+
 
 
 //  =================================================================
@@ -174,6 +179,12 @@ $sassy-p-loop: (inherit: inherit)
     @each $key, $val in $sassy-sides
         @include make.responsive("p" + $key, $sassy-p-loop) using ($value)
             #{"padding-" + $val}: $value
+
+
+    // Scroll padding: where in-page links scroll an element to, e.g. below a sticky header
+
+    @include make.responsive("scroll-pt", $sassy-scroll-p-loop) using ($value)
+        scroll-padding-top: $value
 
 
     // Wrap classes (extend-only, so outputting them on every pass adds nothing)
