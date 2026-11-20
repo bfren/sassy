@@ -171,13 +171,13 @@ body
     @extend %bf-flex-align-self-start-lg
     @extend %bf-overflow-y-auto-lg
     @extend %bf-grid-col-3-lg
+    @extend %bf-top-22-lg
     --sassy-offcanvas-width: 18rem
 
     @include sassy.up(lg)
-        // gap: spanning every row, a top in rem, and a height from calc()
+        // gap: spanning every row, and a height from calc()
         grid-row: 1 / span 100
         max-block-size: calc(100vh - 7rem)
-        top: 5.5rem
 
     > header
         @extend %bf-dialog-header
@@ -321,8 +321,7 @@ body
     @extend %bf-px-6
     @extend %bf-font-size-small
     @extend %bf-max-height-50vh
-    // gap: a line height of 1.65
-    line-height: 1.65
+    @extend %bf-line-height-relaxed
     // the ring inside the block, which would clip one outside it
     @extend %bf-focus-ring-inset
     --sassy-focus-outline-colour: #{sassy.colour("sky", 300)}
