@@ -167,6 +167,6 @@ Opening and closing use HTML rather than `data-bs-*` attributes:
 - **`.clearfix`** and **`.translate-middle`**.
 - **Colour opacity utilities** such as `.bg-opacity-50` and `.text-opacity-75`, and `.bg-gradient`.
 - **Theme colours on list group items** (`.list-group-item-primary`), and coloured links (`.link-primary`).
-- **The rest of Reboot.** Sassy's element defaults cover headings, lists, quotes, figures, tables and more, but the body font is opt-in with `%bf-body`, and paragraph and link defaults are left to the browser.
+- **The body font is opt-in.** Sassy's element defaults cover what Reboot does - `border-box` sizing, headings, paragraph and list spacing, links, code, tables and form basics - but the body's font, size and colour come from `%bf-body`, which you extend on `body`.
 - **The JavaScript plugin API**: no `new bootstrap.Modal()`, no `show.bs.modal` events. Use the elements' own methods and events, such as `dialog.showModal()` and the `toggle` event.
 - **Bootstrap Icons.** Sassy draws its few icons (the close button and chevrons) as masks in the text colour.

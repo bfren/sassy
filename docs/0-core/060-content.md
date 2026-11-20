@@ -4,17 +4,29 @@
 
 Sassy is meant to style the whole site, so `0-core` sets a few defaults on elements, after Normalize:
 
-| Element                                     | Default                                                                                          |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `h1` to `h6`                                | Weight 500, line height 1.2, no top margin and `0.5rem` below, and sizes from `2.5rem` to `1rem` |
-| `blockquote`, `figure`                      | No side margins, and `$sassy-content-margin` (`1rem`) below                                      |
-| `table`                                     | Borders that join, and the caption below the table                                               |
-| `caption`                                   | Grey, aligned to the start, with `0.5rem` above and below                                        |
-| `th`                                        | Aligned like the rest of its row, not centred                                                    |
-| `thead`, `tbody`, `tfoot`, `tr`, `td`, `th` | Solid borders of no width, so `%bf-table` only has to set a width                                |
-| `img`, `svg`                                | `vertical-align: middle`, so they line up with text beside them                                  |
+| Element                                     | Default                                                                                                                                                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Everything, with `::before` and `::after`   | `box-sizing: border-box`, so padding and borders are inside an element's width and height                                                                                            |
+| `h1` to `h6`                                | Weight 500, line height 1.2, no top margin and `0.5rem` below, and sizes from `2.5rem` to `1rem`                                                                                     |
+| `blockquote`, `figure`                      | No side margins, and `$sassy-content-margin` (`1rem`) below                                                                                                                          |
+| `table`                                     | Borders that join, and the caption below the table                                                                                                                                   |
+| `caption`                                   | Grey, aligned to the start, with `0.5rem` above and below                                                                                                                            |
+| `th`                                        | Aligned like the rest of its row, not centred                                                                                                                                        |
+| `thead`, `tbody`, `tfoot`, `tr`, `td`, `th` | Solid borders of no width, so `%bf-table` only has to set a width                                                                                                                    |
+| `img`, `svg`                                | `vertical-align: middle`, so they line up with text beside them                                                                                                                      |
+| `p`, `ul`, `ol`, `dl`, `pre`                | No top margin, and `$sassy-content-margin` (`1rem`) below                                                                                                                            |
+| `ul`, `ol`                                  | Indented by `$sassy-list-indent` (`2rem`); a list inside another has no margins                                                                                                      |
+| `dt`, `dd`                                  | Bold terms; descriptions not indented, with `0.5rem` below                                                                                                                           |
+| `a`                                         | `--sassy-link-colour` (the primary colour), underlined, moving towards the body text colour on hover (`--sassy-link-hover-colour`). Without `href`, it looks like the text around it |
+| `code`, `kbd`, `pre`                        | `--sassy-code-font-size` (`0.875em`); code in a `pre` keeps the `pre`'s size                                                                                                         |
+| `pre`                                       | Scrolls when its lines are too long, with tabs `--sassy-pre-tab-size` (`4`) wide                                                                                                     |
+| `kbd`                                       | A key: the body text and background colours swapped, with rounded corners                                                                                                            |
+| `label`                                     | `inline-block`, so margins and widths work                                                                                                                                           |
+| `fieldset`, `legend`                        | No border, margin or padding; `0.5rem` below the legend                                                                                                                              |
+| `iframe`                                    | No border                                                                                                                                                                            |
+| `summary`, `[role="button"]`                | A pointer cursor                                                                                                                                                                     |
 
-They use `:where()`, so they have no specificity and any placeholder or class overrides them.
+They use `:where()`, so they have no specificity and any placeholder or class overrides them. The body text is still opt-in: extend `%bf-body` on `body` for its font, size, colour and heading sizes.
 
 Heading sizes are set by `$sassy-heading`, and the large heading sizes by `$sassy-display-heading`. Any size larger than `$sassy-fluid-min` (`1.25rem`) shrinks on screens narrower than the `xl` breakpoint, down to `1.25rem` plus a tenth of the difference, so `h1` runs from `1.375rem` to `2.5rem`. From `xl` up each heading is its full size.
 
