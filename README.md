@@ -140,7 +140,7 @@ A few conventions:
 
 - **Theme colours** are `primary`, `secondary`, `ok`, `info`, `warn`, `error`, `grey-light` and `grey-dark`, and can be changed at runtime - see [Theming](#theming). The defaults are:
 
-  ![The default theme colours: primary sky-600, secondary orange-700, ok green-600, info sky-200, warn amber-400, error red-600, grey-light grey-300 and grey-dark grey-600](docs/theme.svg)
+  ![The default theme colours: primary sky-700, secondary orange-700, ok green-700, info sky-200, warn amber-400, error red-600, grey-light grey-300 and grey-dark grey-600](docs/theme.svg)
 
 - **Grid** columns are out of 12: extend `%bf-d-flex-row` on the container and `%bf-col-{1-12}` on each column, or `%bf-grid` and `%bf-grid-col-{1-12}` for a CSS grid.
 

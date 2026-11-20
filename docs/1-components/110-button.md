@@ -55,7 +55,7 @@ Hover and press darken whatever colour the button is, by mixing `--sassy-btn-sha
 - **A toggle button that is on has `aria-pressed="true"`**, and looks pressed. Set it to `"false"` when it is off.
 - **In an input group**, a button joins the controls beside it, as an add-on does, and follows the group's size.
 
-The text colour on each theme colour is chosen for contrast with the default theme: dark text on `info`, `warn`, `grey-light` and `ok`, white on the rest. If you change a theme colour, check its text still contrasts, and change it with `--sassy-btn-<name>-colour` if not - for example `--sassy-btn-primary-colour`.
+The text colour on each theme colour is chosen for contrast with the default theme: dark text on `info`, `warn` and `grey-light`, white on the rest. If you change a theme colour, check its text still contrasts, and change it with `--sassy-btn-<name>-colour` if not - for example `--sassy-btn-primary-colour`.
 
 ## Settings and custom properties
 
