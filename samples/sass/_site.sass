@@ -36,8 +36,7 @@ body
 // Headings in the page's own text, in the serif
 .site-heading
     @extend %bf-font-family-serif
-    // gap: letter-spacing
-    letter-spacing: -0.01em
+    @extend %bf-letter-spacing-tight
 
 
 //  =================================================================
@@ -131,8 +130,7 @@ body
     > p,
     > ul,
     > ol
-        // gap: a max-width in ch, for a readable line length
-        max-width: 68ch
+        @extend %bf-max-width-text
 
     > p a,
     > ul a,
@@ -328,8 +326,8 @@ body
     @extend %bf-overflow-auto
     @extend %bf-py-5
     @extend %bf-px-6
-    // gap: a code size of 0.875rem, a line height of 1.65, a max-height in rem, and tab-size
-    font-size: 0.875rem
+    @extend %bf-font-size-small
+    // gap: a line height of 1.65, a max-height in rem, and tab-size
     line-height: 1.65
     max-height: 30rem
     tab-size: 4
