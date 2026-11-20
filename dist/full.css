@@ -3569,7 +3569,7 @@
       cursor: not-allowed;
       opacity: 0.5;
     }
-    :user-invalid ~ .bf-form-check-label, [aria-invalid=true] ~ .bf-form-check-label {
+    :user-invalid ~ .bf-form-check-label, [aria-invalid=true] ~ .bf-form-check-label, :is(.bf-form-control-invalid) ~ .bf-form-check-label {
       color: var(--sassy-input-invalid-colour, var(--sassy-theme-error));
     }
     .bf-form-switch {
@@ -3658,7 +3658,7 @@
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
     }
-    .bf-input-group > :user-invalid, .bf-input-group > [aria-invalid=true] {
+    .bf-input-group > :user-invalid, .bf-input-group > [aria-invalid=true], .bf-input-group > :is(.bf-form-control-invalid) {
       z-index: 2;
     }
     .bf-input-group > :focus-visible {
@@ -3971,7 +3971,7 @@
       margin-top: 0.25rem;
       display: none;
     }
-    :user-invalid ~ .bf-form-feedback-invalid, [aria-invalid=true] ~ .bf-form-feedback-invalid, :has(> :user-invalid) ~ .bf-form-feedback-invalid, :has(> [aria-invalid=true]) ~ .bf-form-feedback-invalid {
+    :user-invalid ~ .bf-form-feedback-invalid, [aria-invalid=true] ~ .bf-form-feedback-invalid, :is(.bf-form-control-invalid) ~ .bf-form-feedback-invalid, :has(> :user-invalid) ~ .bf-form-feedback-invalid, :has(> [aria-invalid=true]) ~ .bf-form-feedback-invalid, :has(> :is(.bf-form-control-invalid)) ~ .bf-form-feedback-invalid {
       display: block;
     }
     .bf-form-feedback-valid {

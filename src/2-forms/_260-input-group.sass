@@ -41,7 +41,8 @@
 
         // an invalid or focused control sits above its neighbours, so its border and ring show in full
         & > :user-invalid,
-        & > [aria-invalid="true"]
+        & > [aria-invalid="true"],
+        & > #{form.$invalid}
             z-index: 2
 
         & > :focus-visible

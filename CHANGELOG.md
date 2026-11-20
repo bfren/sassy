@@ -7,6 +7,7 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 ### Fixed
 
 - `sassy.js`: a button with both a tooltip and a dropdown or popover keeps both anchored to it, so opening the menu no longer moves the tooltip, and showing the tooltip no longer moves the menu.
+- A control that extends `%bf-form-control-invalid` is now treated like one that is `:user-invalid` or has `aria-invalid="true"`: `%bf-form-feedback-invalid` after it (or after an element with one in it) shows, it sits above its neighbours in an input group so its whole border shows, and a `%bf-form-check-label` after it turns the error colour. Before, the control turned red but its message stayed hidden.
 - `sassy.js`: an in-page link that is not valid percent-encoding, such as `#50%`, no longer throws an error that stopped the scrollspy navs after it from being set up.
 
 ## [0.5.0] - 2026-11-20

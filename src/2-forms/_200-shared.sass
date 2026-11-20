@@ -1,4 +1,5 @@
 @use "../0-core/030-variables" as *
+@use "../0-core/040-make" as make
 
 //  =================================================================
 //  Form: shared mixins
@@ -44,6 +45,15 @@
         opacity: 1
 
     @include invalid()
+
+
+
+/// A control made invalid with %bf-form-control-invalid, for rules about what is next to or around it,
+/// alongside :user-invalid and [aria-invalid="true"]. The full build's class does not extend the placeholder,
+/// so it is named too.
+$invalid: "%" + make.name("form-control-invalid")
+@if $sassy-full
+    $invalid: ":is(#{$invalid}, .#{make.name("form-control-invalid")})"
 
 
 

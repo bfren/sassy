@@ -185,7 +185,8 @@
 
             <div class="field">
                 <label for="placeholder-invalid">Invalid placeholder</label>
-                <input type="text" id="placeholder-invalid" class="control invalid" value="Red border from the placeholder" />
+                <input type="text" id="placeholder-invalid" class="control invalid" value="Red border from the placeholder" aria-describedby="placeholder-invalid-feedback" />
+                <span id="placeholder-invalid-feedback" class="feedback-invalid">The placeholder shows this message too.</span>
             </div>
 
             <div class="field">
