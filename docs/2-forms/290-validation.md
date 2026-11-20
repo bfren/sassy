@@ -30,3 +30,21 @@ Feedback follows the control as a sibling. Invalid feedback is hidden until the 
 ```
 
 The same placeholder works after an input group, because the feedback looks for an invalid control inside the element before it.
+
+Invalid feedback also shows after a control that extends `%bf-form-control-invalid`, as Bootstrap's `.invalid-feedback` does after `.is-invalid`:
+
+```sass
+.is-invalid
+    @extend %bf-form-control-invalid
+
+.invalid-feedback
+    @extend %bf-form-feedback-invalid
+```
+
+```css
+@layer sassy.base.forms {
+  .is-invalid ~ .invalid-feedback {
+    display: block;
+  }
+}
+```

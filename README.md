@@ -129,7 +129,7 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 
 A few conventions:
 
-- **Sides** are `t`, `e`, `b` and `s` (top, end, bottom, start), so `%bf-mt-3` is `margin-top` and `%bf-ps-2` is `padding-left`. `x` is both horizontal sides and `y` both vertical sides.
+- **Sides** are `t`, `e`, `b` and `s` (top, end, bottom, start), so `%bf-mt-3` is `margin-top` and `%bf-ps-2` is `padding-inline-start`: start and end follow the text direction, so in right-to-left text `%bf-ps-2` is on the right. `x` is both horizontal sides and `y` both vertical sides. Offsets and borders are named for the physical side: `%bf-left-4`, `%bf-border-right-1`.
 - **Spacing** (margin, padding, gap and the `top`, `right`, `bottom` and `left` offsets) runs from 0 to 32 in steps of 0.25rem: `%bf-p-4` is `1rem`, and `%bf-top-22` is `5.5rem`.
 - **Sizes** run from 5 to 100 in steps of 5, and end in their unit: `%bf-width-50pc` is `50%`, `%bf-height-100vh` is `100vh`. Every percentage ends in `pc`, so a bare number is always a step on a scale.
 - **Colours** are the [Tailwind CSS v4](https://tailwindcss.com/docs/colors) palette - the neutrals `slate`, `grey`, `zinc`, `neutral`, `stone`, `mauve`, `olive`, `mist` and `taupe`, and `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink` and `rose` - each with shades `50`, then `100` to `900`, and `950`. They are defined in `oklch()`, so on wide-gamut screens the most vivid shades show more vividly than sRGB allows.

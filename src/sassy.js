@@ -44,6 +44,15 @@
 		return null;
 	};
 
+	/** The id an in-page link points to, as written when it is not valid percent-encoding, such as #50%. */
+	const idOf = link => {
+		try {
+			return decodeURIComponent(link.hash.slice(1));
+		} catch {
+			return link.hash.slice(1);
+		}
+	};
+
 	/** Whether an element is laid out top to bottom, from its aria-orientation. */
 	const isVertical = el => el.getAttribute("aria-orientation") === "vertical";
 
@@ -152,14 +161,25 @@
 
 	const anchorPositioning = window.CSS?.supports?.("anchor-name: --sassy") ?? false;
 	const anchored = new WeakMap(); // element -> the trigger currently holding its anchor name
+	const anchorNames = new WeakMap(); // trigger -> the anchor names it holds, as a button can have a tooltip and a menu
 	let anchorCount = 0;
+
+	/** Adds an anchor name to a trigger, or takes one away, keeping the others it holds. */
+	const holdName = (trigger, name, hold) => {
+		const names = anchorNames.get(trigger) ?? new Set();
+		names[hold ? "add" : "delete"](name);
+		anchorNames.set(trigger, names);
+		if (names.size) trigger.style.setProperty("anchor-name", [...names].join(", "));
+		else trigger.style.removeProperty("anchor-name");
+	};
 
 	/** Anchors an element to its trigger with CSS anchor positioning; its CSS says where it goes. */
 	const anchor = (trigger, el) => {
 		el.dataset.sassyAnchor ??= `--sassy-anchor-${++anchorCount}`;
 		const name = el.dataset.sassyAnchor;
-		anchored.get(el)?.style.removeProperty("anchor-name");
-		trigger.style.setProperty("anchor-name", name);
+		const before = anchored.get(el);
+		if (before && before !== trigger) holdName(before, name, false);
+		holdName(trigger, name, true);
 		el.style.setProperty("position-anchor", name);
 		anchored.set(el, trigger);
 	};
@@ -398,7 +418,7 @@
 		if (spied.has(nav)) return;
 		spied.add(nav);
 		const links = [...nav.querySelectorAll('a[href^="#"]')]
-			.map(link => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
+			.map(link => ({ link, target: document.getElementById(idOf(link)) }))
 			.filter(x => x.target);
 		if (!links.length) return;
 		const area = scroller(links[0].target);
@@ -500,13 +520,12 @@
 	//  =================================================================
 
 	if (!("command" in HTMLButtonElement.prototype)) {
-		const popoverOpen = el => el.matches(":popover-open");
 		const commands = {
 			"show-modal": el => el.open || el.showModal(),
 			"close": el => el.close(),
 			"request-close": el => (el.requestClose ? el.requestClose() : el.close()),
-			"show-popover": el => popoverOpen(el) || el.showPopover(),
-			"hide-popover": el => popoverOpen(el) && el.hidePopover(),
+			"show-popover": el => isOpen(el) || el.showPopover(),
+			"hide-popover": el => isOpen(el) && el.hidePopover(),
 			"toggle-popover": el => el.togglePopover()
 		};
 
@@ -541,7 +560,7 @@
 	document.addEventListener("click", e => {
 		const link = e.target.closest?.('a[href^="#"]');
 		const dialog = link?.closest("dialog");
-		const target = dialog?.matches(":modal") && document.getElementById(decodeURIComponent(link.hash.slice(1)));
+		const target = dialog?.matches(":modal") && document.getElementById(idOf(link));
 		if (target && !dialog.contains(target)) dialog.close();
 	});
 

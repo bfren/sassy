@@ -17,17 +17,18 @@
         border-top-left-radius: $sassy-radius
         border-top-right-radius: $sassy-radius
 
+    // start and end follow the text direction, so in right-to-left text the end is on the left
     @include make.responsive("rounded-end", ())
-        border-top-right-radius: $sassy-radius
-        border-bottom-right-radius: $sassy-radius
+        border-start-end-radius: $sassy-radius
+        border-end-end-radius: $sassy-radius
 
     @include make.responsive("rounded-bottom", ())
         border-bottom-right-radius: $sassy-radius
         border-bottom-left-radius: $sassy-radius
 
     @include make.responsive("rounded-start", ())
-        border-top-left-radius: $sassy-radius
-        border-bottom-left-radius: $sassy-radius
+        border-start-start-radius: $sassy-radius
+        border-end-start-radius: $sassy-radius
 
 
     // Rounded corners: sized

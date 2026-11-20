@@ -1,5 +1,6 @@
 /*
- * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, closing dialogs, scrollspy, carousels, tooltips, dropdowns and popovers.
+ * Tests for src/sassy.js: tab keys, toolbar keys, dismissing, commands, closing dialogs, collapsible content, scrollspy, carousels,
+ * tooltips, dropdowns and popovers.
  *
  *     npm install --no-save jsdom@31.0.1 && node --test tools/sassy.test.mjs
  *
@@ -190,6 +191,26 @@ test("positioning with anchor positioning: the tooltip anchors to whichever trig
 	focus($("b"));
 	assert.equal(anchorOf($("b")), name);
 	assert.equal(anchorOf($("a")), ""); // the name moves, so only one trigger holds it
+});
+
+test("positioning with anchor positioning: a button with a tooltip and a menu anchors both", () => {
+	const window = load(`
+		<button id="open" popovertarget="menu" aria-describedby="tip">More</button>
+		<div id="tip" role="tooltip" popover="manual">More actions</div>
+		<div id="menu" role="menu" popover></div>`, window => (window.CSS = { supports: () => true }));
+	window.HTMLElement.prototype.showPopover = function () { this.dataset.opened = "true"; };
+	const $ = id => window.document.getElementById(id);
+	const names = () => $("open").style.getPropertyValue("anchor-name").split(", ").sort();
+	const tip = () => $("tip").style.getPropertyValue("position-anchor");
+	const menu = () => $("menu").style.getPropertyValue("position-anchor");
+	const focus = () => $("open").dispatchEvent(new window.FocusEvent("focusin", { bubbles: true }));
+
+	focus();
+	$("menu").dispatchEvent(Object.assign(new window.Event("beforetoggle"), { newState: "open" }));
+	assert.notEqual(tip(), menu());
+	assert.deepEqual(names(), [tip(), menu()].sort()); // opening the menu keeps the tooltip's anchor
+	focus();
+	assert.deepEqual(names(), [tip(), menu()].sort()); // and showing the tooltip again keeps the menu's
 });
 
 const menuItems = `
@@ -396,6 +417,64 @@ test("scrollspy: the offset can be in rem, and the last section is current at th
 	scrollTo(1200); // three's top at 100, under the line, but the page can't scroll further
 	assert.deepEqual(current(), ["l3"]);
 	assert.equal($("away").hasAttribute("aria-current"), false);
+});
+
+test("collapsible content: a button with aria-expanded and aria-controls shows and hides what it controls", () => {
+	const window = load(`
+		<button id="toggle" aria-expanded="false" aria-controls="menu"><span id="icon"></span></button>
+		<button id="tab" role="tab" aria-expanded="false" aria-controls="other"></button>
+		<ul id="menu"></ul>
+		<div id="other"></div>`);
+	const $ = id => window.document.getElementById(id);
+
+	assert.equal($("menu").hidden, true); // set up to match aria-expanded
+	$("icon").click(); // a click on something inside the button
+	assert.equal($("toggle").getAttribute("aria-expanded"), "true");
+	assert.equal($("menu").hidden, false);
+	$("toggle").click();
+	assert.equal($("toggle").getAttribute("aria-expanded"), "false");
+	assert.equal($("menu").hidden, true);
+	$("tab").click(); // a button with a role is not a disclosure button
+	assert.equal($("other").hidden, false);
+});
+
+test("commands: without command support, command buttons open and close dialogs and popovers", () => {
+	const window = load(`
+		<button id="show" commandfor="dialog" command="show-modal"></button>
+		<button id="close" commandfor="dialog" command="close"></button>
+		<button id="toggle" commandfor="pop" command="toggle-popover"></button>
+		<button id="unknown" commandfor="dialog" command="--other"></button>
+		<dialog id="dialog"></dialog>
+		<div id="pop" popover></div>`, window => delete window.HTMLButtonElement.prototype.command);
+	const { HTMLElement } = window;
+	// jsdom has no top layer or popovers, so these are stubbed
+	HTMLElement.prototype.showModal = function () { this.setAttribute("open", ""); };
+	HTMLElement.prototype.close = function () { this.removeAttribute("open"); };
+	HTMLElement.prototype.togglePopover = function () { this.toggleAttribute("data-opened"); };
+	const $ = id => window.document.getElementById(id);
+
+	$("unknown").click();
+	assert.equal($("dialog").open, false);
+	$("show").click();
+	assert.equal($("dialog").open, true);
+	$("close").click();
+	assert.equal($("dialog").open, false);
+	$("toggle").click();
+	assert.equal($("pop").hasAttribute("data-opened"), true);
+	$("toggle").click();
+	assert.equal($("pop").hasAttribute("data-opened"), false);
+});
+
+test("scrollspy: a link that is not valid percent-encoding, such as #50%, does not stop the navs after it", () => {
+	const window = load(`
+		<nav><a id="odd" href="#50%" aria-current="location">Half</a></nav>
+		<nav><a id="l1" href="#one" aria-current="location">One</a><a id="l2" href="#two">Two</a></nav>
+		<section id="50%"></section><section id="one"></section><section id="two"></section>`);
+	const $ = id => window.document.getElementById(id);
+	// jsdom has no layout, so every section is past the line: being set up moves the mark to the last link
+	assert.equal($("l2").getAttribute("aria-current"), "location");
+	assert.equal($("l1").hasAttribute("aria-current"), false);
+	assert.equal($("odd").getAttribute("aria-current"), "location"); // its section is found by the id as written
 });
 
 test("scrollspy: in a box that scrolls, a link scrolls only the box", () => {

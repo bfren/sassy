@@ -2,6 +2,19 @@
 
 All notable changes to Sassy are listed here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+
+- **Breaking:** start and end follow the text direction, as the Bootstrap guide already said. `%bf-ms-*`, `-me-*`, `-ps-*` and `-pe-*` are `margin-inline-start` and so on, and `%bf-rounded-start` and `-end` use the logical corners. In left-to-right text nothing changes; in right-to-left text, start and end are now on the right and left. Placeholders named for a physical side - `x`, `y`, `top`, `bottom`, the offsets and the borders - are unchanged.
+- **Breaking:** input groups, selects, floating labels and inline checks follow the text direction too. In right-to-left text an input group's outer corners are rounded, a select's chevron is on the left, and a floating label sits and shrinks on the right.
+
+### Fixed
+
+- `sassy.js`: a button with both a tooltip and a dropdown or popover keeps both anchored to it, so opening the menu no longer moves the tooltip, and showing the tooltip no longer moves the menu.
+- A control that extends `%bf-form-control-invalid` is now treated like one that is `:user-invalid` or has `aria-invalid="true"`: `%bf-form-feedback-invalid` after it (or after an element with one in it) shows, it sits above its neighbours in an input group so its whole border shows, and a `%bf-form-check-label` after it turns the error colour. Before, the control turned red but its message stayed hidden.
+- `sassy.js`: an in-page link that is not valid percent-encoding, such as `#50%`, no longer throws an error that stopped the scrollspy navs after it from being set up.
+
 ## [0.5.0] - 2026-11-20
 
 > **Upgrading from 0.4.0.** Two changes can break existing styles. Every percentage placeholder now ends in `pc` and every viewport size in `vh` or `vw`: `%bf-width-50` is `%bf-width-50pc`, `%bf-viewheight-100` is `%bf-height-100vh`, `%bf-top-50` is `%bf-top-50pc` and `%bf-opacity-50` is `%bf-opacity-50pc` - an old name fails to compile, so Sass shows you each one to rename. And everything now uses `box-sizing: border-box`, so your own elements with a width or height and padding or a border get smaller; set `box-sizing: content-box` on any that should not. The new element defaults also space paragraphs and lists, colour links and size code, so check pages that relied on the browser's defaults. Each change is listed under Changed.

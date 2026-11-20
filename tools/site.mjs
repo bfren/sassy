@@ -348,7 +348,7 @@ const withExampleCards = html => {
 /**
  * The nav of a page's sections, from each <section class="example" id> and its <h2>, placed after the <h1>.
  * It is an offcanvas below lg, opened by the button, and a sticky sidebar from lg; sassy.js marks the
- * section in view (scrollspy). A page with no sections gets none.
+ * section in view (scrollspy), and closes the offcanvas when a link in it is followed. A page with no sections gets none.
  */
 const withSectionNav = html => {
 	const sections = [...html.matchAll(/<section class="example" id="([^"]+)">\s*<h2>(.*?)<\/h2>/g)].map(([, id, title]) => ({
@@ -369,13 +369,7 @@ const withSectionNav = html => {
             <nav class="site-sections-nav" aria-labelledby="site-sections-title">
 ${links}
             </nav>
-        </dialog>
-        <script>
-            // choosing a section closes the panel on small screens - in the page, from lg, it is not a modal
-            document.getElementById("site-sections").addEventListener("click", e => {
-                if (e.target.closest("a") && e.currentTarget.matches(":modal")) e.currentTarget.close();
-            });
-        </script>`;
+        </dialog>`;
 	return html.replace(/(<main class="site-main[^"]*">[\s\S]*?<\/h1>)/, `$1${nav}`);
 };
 
