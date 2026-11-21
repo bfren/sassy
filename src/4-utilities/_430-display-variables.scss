@@ -102,3 +102,10 @@ $sassy-flex-justify: (
 );
 
 $sassy-gap-unit: 0.25rem !default;
+
+// stacks: the gap between items, which %bf-gap-* also sets
+$sassy-stack-gap: var(--sassy-stack-gap, 0);
+
+// the vertical rule
+$sassy-vr-width: var(--sassy-vr-width, 1px);
+$sassy-vr-colour: var(--sassy-vr-colour, var(--sassy-line));

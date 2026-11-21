@@ -250,6 +250,51 @@
 </div>
         </section>
 
+        <section class="example" id="stacks">
+            <h2>Stacks and a vertical rule</h2>
+            <p>A row of buttons centred on one line, with a line between the groups, above a caption at 70% opacity.</p>
+            <div class="demo">
+                <div class="toolbar-demo">
+                    <div class="toolbar">
+                        <button type="button" class="tool">Bold</button>
+                        <button type="button" class="tool">Italic</button>
+                        <span class="toolbar-divider"></span>
+                        <button type="button" class="tool">Link</button>
+                    </div>
+                    <p class="toolbar-caption">Formatting</p>
+                </div>
+            </div>
+<div class="code">
+<pre data-lang="sass"><code>.toolbar-demo
+    @extend %bf-vstack
+    @extend %bf-gap-2
+
+.toolbar
+    @extend %bf-hstack
+    @extend %bf-gap-2
+
+.tool
+    @extend %bf-btn
+
+.toolbar-divider
+    @extend %bf-vr
+
+.toolbar-caption
+    @extend %bf-c-grey-800
+    @extend %bf-text-opacity-70pc
+    @extend %bf-mb-0</code></pre>
+<pre data-lang="html"><code>&lt;div class="toolbar-demo"&gt;
+    &lt;div class="toolbar"&gt;
+        &lt;button type="button" class="tool"&gt;Bold&lt;/button&gt;
+        &lt;button type="button" class="tool"&gt;Italic&lt;/button&gt;
+        &lt;span class="toolbar-divider"&gt;&lt;/span&gt;
+        &lt;button type="button" class="tool"&gt;Link&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p class="toolbar-caption"&gt;Formatting&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+        </section>
+
         <section class="example" id="display">
             <h2>Showing something on small screens only</h2>
             <div class="demo">
