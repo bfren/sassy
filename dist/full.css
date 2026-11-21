@@ -2422,6 +2422,9 @@
         animation-duration: 6s;
       }
     }
+    .bf-progress:indeterminate:dir(rtl) {
+      animation-direction: reverse;
+    }
     .bf-progress:indeterminate::-moz-progress-bar {
       background-color: transparent;
     }
@@ -2466,6 +2469,12 @@
       .bf-progress-animated::-moz-progress-bar {
         animation-duration: 4s;
       }
+    }
+    .bf-progress-animated:dir(rtl)::-webkit-progress-value {
+      animation-direction: reverse;
+    }
+    .bf-progress-animated:dir(rtl)::-moz-progress-bar {
+      animation-direction: reverse;
     }
     .bf-progress-stacked {
       background-color: var(--sassy-progress-bg, var(--sassy-line));
@@ -3315,9 +3324,6 @@
       content: "›"/"Next slide";
       inset-inline-end: calc(anchor(end) + var(--sassy-carousel-button-offset, 0.5rem));
     }
-    .bf-carousel:dir(rtl)::scroll-button(*) {
-      scale: -1 1;
-    }
     .bf-carousel::scroll-marker-group {
       display: flex;
       flex-wrap: wrap;
@@ -3664,12 +3670,16 @@
       aspect-ratio: 1;
       background-color: var(--sassy-switch-knob-colour, var(--sassy-input-border-colour, var(--sassy-line-strong)));
       border-radius: 50%;
-      inset: 0.125em auto auto 0.125em;
       height: calc(100% - 0.25em);
+      inset-block: 0.125em auto;
+      inset-inline: 0.125em auto;
     }
     .bf-form-switch:checked::before {
       background-color: var(--sassy-check-mark-colour, #fff);
       transform: translateX(1em);
+    }
+    .bf-form-switch:dir(rtl):checked::before {
+      transform: translateX(-1em);
     }
     .bf-input-group {
       align-items: stretch;
