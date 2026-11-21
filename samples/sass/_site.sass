@@ -50,26 +50,31 @@ body
     @extend %bf-bg-slate-50
     @extend %bf-bg-opacity-80pc
 
-// Sassy's navbar: below md the menu is behind the toggle (sassy.js opens and closes it), from md it is always open
+// Sassy's navbar: below lg the menu is behind the toggle (sassy.js opens and closes it), from lg it is always open
 .site-header-inner
-    @extend %bf-navbar-expand-md
+    @extend %bf-navbar-expand-lg
     @extend %bf-p-3
-    @extend %bf-p-0-md
+    // the page's side gutter stays, from .site-width
+    @extend %bf-py-0-lg
     // the menu follows the brand rather than going to the end of the row
     @extend %bf-flex-justify-start
-    @extend %bf-flex-wrap-nowrap-md
+    @extend %bf-flex-wrap-nowrap-lg
     --sassy-navbar-gap: 1.5rem
+
+    // gap: a smaller gap below lg leaves the search box room between the brand and the toggle
+    @media (max-width: 991.98px)
+        --sassy-navbar-gap: 0.75rem
 
 .site-nav-toggle
     @extend %bf-navbar-toggle
     @extend %bf-ms-auto
     --sassy-nav-link-colour: #{sassy.colour("slate", 600)}
 
-// below md the open menu is a panel under the header, wiping down over the page
+// below lg the open menu is a panel under the header, wiping down over the page
 .site-menu
     @extend %bf-navbar-menu
     @extend %bf-px-5
-    @extend %bf-px-0-md
+    @extend %bf-px-0-lg
 
 .brand
     @extend %bf-navbar-brand
@@ -79,20 +84,24 @@ body
     img
         @extend %bf-width-auto
 
-// The search box (tools/site-search.js): centred on a row of its own under the brand and toggle below md,
-// and at the end of the row from md
+// The search box (tools/site-search.js): filling the space between the brand and the toggle below lg, centred in it,
+// and at the end of the row from lg
 .site-search
-    @extend %bf-flex-order-last
     @extend %bf-d-flex
     @extend %bf-flex-justify-centre
-    @extend %bf-width-100pc
-    @extend %bf-mt-3
-    @extend %bf-width-auto-md
-    @extend %bf-mt-0-md
-    @extend %bf-ms-auto-md
+    @extend %bf-min-width-0
+    @extend %bf-flex-order-last-lg
+    @extend %bf-ms-auto-lg
+    // gap: share the row from nothing, so it shrinks to fit rather than wrapping; from lg, the box's full width
+    flex: 1 1 0
 
+    @media (min-width: 992px)
+        flex: 0 0 16rem
+
+// on a phone the results hang from the header, as the box is too narrow to read them in; from sm they hang from the box
 .site-search-box
-    @extend %bf-position-relative
+    @extend %bf-position-static
+    @extend %bf-position-relative-sm
     @extend %bf-width-100pc
     // gap: no rem width scale, and a vw width would be too wide on a phone
     max-width: 16rem
@@ -104,8 +113,8 @@ body
     input
         @extend %bf-form-control
         @extend %bf-form-control-small
-        // room for the key hint
-        @extend %bf-pe-12
+        // room for the key hint, which only shows from lg
+        @extend %bf-pe-12-lg
 
 .site-search-key
     @extend %bf-position-absolute
@@ -113,19 +122,24 @@ body
     @extend %bf-right-2
     @extend %bf-translate-middle-y
     @extend %bf-d-none
-    @extend %bf-d-inline-block-md
+    @extend %bf-d-inline-block-lg
     @extend %bf-pointer-events-none
     @extend %bf-bg-slate-200
     @extend %bf-c-slate-600
 
     // the hint goes while you type
     input:focus + &
-        @extend %bf-d-none-md
+        @extend %bf-d-none-lg
 
 .site-search-results
     @extend %bf-list-unstyled
     @extend %bf-position-absolute
-    @extend %bf-right-0
+    @extend %bf-top-100pc
+    @extend %bf-left-3
+    @extend %bf-right-3
+    @extend %bf-top-auto-sm
+    @extend %bf-left-auto-sm
+    @extend %bf-right-0-sm
     @extend %bf-z-index-5
     @extend %bf-mt-1
     @extend %bf-mb-0
@@ -135,12 +149,11 @@ body
     @extend %bf-border-slate-200
     @extend %bf-rounded-3
     @extend %bf-shadow-2
-    @extend %bf-width-100pc
-    // gap: the surface colour role, which no placeholder sets; wider than the box from md, and no taller than the window
+    // gap: the surface colour role, which no placeholder sets; wider than the box from sm, and no taller than the window
     background-color: var(--sassy-surface)
     max-height: 70vh
 
-    @media (min-width: 768px)
+    @media (min-width: 576px)
         width: 24rem
 
     [role="option"]
@@ -172,7 +185,7 @@ body
     @extend %bf-nav
     @extend %bf-nav-underline
     @extend %bf-flex-column
-    @extend %bf-flex-row-md
+    @extend %bf-flex-row-lg
     --sassy-nav-gap: 0
     --sassy-nav-link-colour: #{sassy.colour("slate", 600)}
     --sassy-nav-link-padding-x: 0.75rem
@@ -183,7 +196,7 @@ body
     a
         @extend %bf-nav-link
         @extend %bf-p-1
-        @extend %bf-p-5-md
+        @extend %bf-p-5-lg
         @extend %bf-text-wrap-overflow
 
         &:hover
