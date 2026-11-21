@@ -67,8 +67,10 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 | `.ratio .ratio-16x9`                               | `%bf-aspect-ratio-16x9`, on the element itself                                                        |
 | `.object-fit-cover`                                | `%bf-object-fit-cover`                                                                                |
 | `.float-start`                                     | `%bf-float-start`                                                                                     |
+| `.clearfix`, `.translate-middle`                   | `%bf-clearfix`, `%bf-translate-middle` (and `-x`, `-y`)                                               |
 | `.align-middle`                                    | `%bf-vertical-align-middle`                                                                           |
 | `.opacity-50`                                      | `%bf-opacity-50pc`                                                                                    |
+| `.vstack`, `.hstack`, `.vr`                        | `%bf-vstack`, `%bf-hstack`, `%bf-vr`; space the items with `%bf-gap-*`                                |
 | `.pe-none`, `.user-select-none`                    | `%bf-pointer-events-none`, `%bf-user-select-none`                                                     |
 | `.visually-hidden`, `.visually-hidden-focusable`   | `%bf-visually-hidden`, `%bf-visually-hidden-focusable`                                                |
 | `.text-start`, `.text-center`, `.text-end`         | `%bf-text-align-start`, `%bf-text-align-centre`, `%bf-text-align-end`                                 |
@@ -86,15 +88,18 @@ The tables give Bootstrap's class and the Sassy placeholder to extend instead. W
 
 ### Colours
 
-| Bootstrap              | Sassy                                                                       |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `.text-primary`        | `%bf-c-primary`                                                             |
-| `.bg-primary`          | `%bf-bg-primary`                                                            |
-| `.text-bg-primary`     | `%bf-text-bg-primary`, with text chosen for contrast                        |
-| `.border-primary`      | `%bf-border-primary`                                                        |
-| `.bg-opacity-50`       | `%bf-bg-opacity-50pc`, with any `%bf-bg-*` palette or theme colour          |
-| Any palette colour     | `%bf-c-sky-600`, `%bf-bg-grey-100` and so on, from the Tailwind CSS palette |
-| `data-bs-theme="dark"` | `%bf-theme-dark` on `html` or an element, or `%bf-theme-auto`               |
+| Bootstrap                                | Sassy                                                                       |
+| ---------------------------------------- | --------------------------------------------------------------------------- |
+| `.text-primary`                          | `%bf-c-primary`                                                             |
+| `.bg-primary`                            | `%bf-bg-primary`                                                            |
+| `.text-bg-primary`                       | `%bf-text-bg-primary`, with text chosen for contrast                        |
+| `.border-primary`                        | `%bf-border-primary`                                                        |
+| `.bg-opacity-50`                         | `%bf-bg-opacity-50pc`, with any `%bf-bg-*` palette or theme colour          |
+| `.text-opacity-75`, `.border-opacity-50` | `%bf-text-opacity-70pc`, `%bf-border-opacity-50pc`, in steps of 10          |
+| `.bg-gradient`                           | `%bf-bg-gradient`                                                           |
+| `.link-primary`                          | `%bf-link-primary`                                                          |
+| Any palette colour                       | `%bf-c-sky-600`, `%bf-bg-grey-100` and so on, from the Tailwind CSS palette |
+| `data-bs-theme="dark"`                   | `%bf-theme-dark` on `html` or an element, or `%bf-theme-auto`               |
 
 ### Forms
 
@@ -133,6 +138,7 @@ Form placeholders keep Bootstrap's names, apart from the sizes.
 | `.pagination`, `.page-item`, `.page-link`, `.pagination-sm`                                  | `%bf-pagination` on the `<ul>`, and `%bf-pagination-small`; the items need nothing                                       |
 | `.card`, `.card-header`, `.card-body`, `.card-footer`, `.card-title`, `.card-img-top`        | `%bf-card`, `%bf-card-header`, `-body`, `-footer`, `-title`, `-image`                                                    |
 | `.list-group`, `.list-group-flush`, `.list-group-numbered`, `.list-group-horizontal-md`      | `%bf-list-group`, `-flush`, `-numbered`, `-horizontal-md`; the items need nothing                                        |
+| `.list-group-item-primary`                                                                   | `%bf-list-group-item-primary`                                                                                            |
 | `.accordion`, `.accordion-flush`                                                             | `%bf-accordion`, `-flush`, on a `<div>` of `<details>`                                                                   |
 | `.table`, `.table-striped`, `.table-hover`, `.table-bordered`, `.table-sm`, `.table-primary` | `%bf-table`, `-striped`, `-hover`, `-bordered`, `-small`, `-primary`                                                     |
 | `.table-responsive-md`                                                                       | `%bf-table-responsive-md`, on the wrapper                                                                                |
@@ -167,10 +173,6 @@ Opening and closing use HTML rather than `data-bs-*` attributes:
 
 ## Not in Sassy
 
-- **Stacks** (`.vstack`, `.hstack`) and the vertical rule (`.vr`): use `%bf-d-flex`, `%bf-flex-column` and `%bf-gap-*`.
-- **`.clearfix`** and **`.translate-middle`**.
-- **Text and border opacity utilities** (`.text-opacity-75`, `.border-opacity-50`), and `.bg-gradient`.
-- **Theme colours on list group items** (`.list-group-item-primary`), and coloured links (`.link-primary`).
 - **The body font is opt-in.** Sassy's element defaults cover what Reboot does - `border-box` sizing, headings, paragraph and list spacing, links, code, tables and form basics - but the body's font, size and colour come from `%bf-body`, which you extend on `body`.
 - **The JavaScript plugin API**: no `new bootstrap.Modal()`, no `show.bs.modal` events. Use the elements' own methods and events, such as `dialog.showModal()` and the `toggle` event.
 - **Bootstrap Icons.** Sassy draws its few icons (the close button and chevrons) as masks in the text colour.
