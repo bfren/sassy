@@ -59,11 +59,11 @@ body
     // the menu follows the brand rather than going to the end of the row
     @extend %bf-flex-justify-start
     @extend %bf-flex-wrap-nowrap-lg
-    --sassy-navbar-gap: 1.5rem
+    // a smaller gap below lg leaves the search box room between the brand and the toggle
+    --sassy-navbar-gap: 0.75rem
 
-    // gap: a smaller gap below lg leaves the search box room between the brand and the toggle
-    @media (max-width: 991.98px)
-        --sassy-navbar-gap: 0.75rem
+    @include sassy.up(lg)
+        --sassy-navbar-gap: 1.5rem
 
 .site-nav-toggle
     @extend %bf-navbar-toggle
@@ -95,7 +95,7 @@ body
     // gap: share the row from nothing, so it shrinks to fit rather than wrapping; from lg, the box's full width
     flex: 1 1 0
 
-    @media (min-width: 992px)
+    @include sassy.up(lg)
         flex: 0 0 16rem
 
 // on a phone the results hang from the header, as the box is too narrow to read them in; from sm they hang from the box
@@ -153,7 +153,7 @@ body
     background-color: var(--sassy-surface)
     max-height: 70vh
 
-    @media (min-width: 576px)
+    @include sassy.up(sm)
         width: 24rem
 
     [role="option"]
