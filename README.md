@@ -40,7 +40,7 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 
 @layer sassy.base.theme {
   .card-title {
-    color: var(--sassy-theme-primary);
+    color: color-mix(in oklab, var(--sassy-theme-primary) var(--sassy-text-opacity, 100%), transparent);
   }
 }
 

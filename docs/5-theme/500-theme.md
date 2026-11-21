@@ -24,7 +24,7 @@
     padding: 0.75rem;
   }
   .alert-error {
-    color: oklch(98.5% 0.002 247.839deg);
+    color: color-mix(in oklab, oklch(98.5% 0.002 247.839deg) var(--sassy-text-opacity, 100%), transparent);
   }
   .alert-error {
     border-radius: 0.25rem;

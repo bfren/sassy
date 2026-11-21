@@ -55,7 +55,7 @@
     // Theme: Text
 
     @include make.responsive("c", $sassy-theme) using ($value)
-        color: $value
+        color: color-mix(in oklab, $value var(--sassy-text-opacity, 100%), transparent)
 
 
     // Theme: Background
@@ -74,4 +74,11 @@
     // Theme: Border
 
     @include make.responsive("border", $sassy-theme) using ($value)
-        border-color: $value
+        border-color: color-mix(in oklab, $value var(--sassy-border-opacity, 100%), transparent)
+
+
+    // Theme: Links - sets the link colour, so the hover colour follows it
+
+    @each $name, $value in $sassy-theme
+        @include make.single("link-#{$name}")
+            --sassy-link-colour: #{$value}

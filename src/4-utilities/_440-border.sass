@@ -40,6 +40,20 @@ $sassy-border-loop: (inherit: inherit)
 
 
     // Border Colour
+    // See also 5-theme
+
+    // not inherited, so a border inside a see-through one is solid
+    @include make.in-base
+        @property --sassy-border-opacity
+            syntax: "<percentage>"
+            inherits: false
+            initial-value: 100%
 
     @include make.responsive("border", $tailwind-colours) using ($value)
-        border-color: $value
+        border-color: color-mix(in oklab, $value var(--sassy-border-opacity, 100%), transparent)
+
+    // Border Opacity: makes a %bf-border-{colour} see-through
+
+    @for $i from 0 through 10
+        @include make.responsive("border-opacity", ("#{$i * 10}pc": $i * 10%)) using ($value)
+            --sassy-border-opacity: #{$value}

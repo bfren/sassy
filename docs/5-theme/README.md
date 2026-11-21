@@ -12,17 +12,18 @@ Theme colours are output last, so a theme utility such as `%bf-bg-primary` alway
 
 ## Placeholders
 
-| Placeholder pattern  | Sets                                     | Example             |
-| -------------------- | ---------------------------------------- | ------------------- |
-| `%bf-c-{name}`       | Text colour                              | `%bf-c-primary`     |
-| `%bf-bg-{name}`      | Background colour                        | `%bf-bg-error`      |
-| `%bf-text-bg-{name}` | Background colour, with contrasting text | `%bf-text-bg-error` |
-| `%bf-border-{name}`  | Border colour                            | `%bf-border-ok`     |
-| `%bf-theme-light`    | The light colour roles and theme colours | -                   |
-| `%bf-theme-dark`     | The dark colour roles and theme colours  | -                   |
-| `%bf-theme-auto`     | Dark when the system is set to dark      | -                   |
+| Placeholder pattern  | Sets                                                                                    | Example             |
+| -------------------- | --------------------------------------------------------------------------------------- | ------------------- |
+| `%bf-c-{name}`       | Text colour                                                                             | `%bf-c-primary`     |
+| `%bf-bg-{name}`      | Background colour                                                                       | `%bf-bg-error`      |
+| `%bf-text-bg-{name}` | Background colour, with contrasting text                                                | `%bf-text-bg-error` |
+| `%bf-border-{name}`  | Border colour                                                                           | `%bf-border-ok`     |
+| `%bf-link-{name}`    | Link colour, with the hover colour following it, on a link or anything with links in it | `%bf-link-error`    |
+| `%bf-theme-light`    | The light colour roles and theme colours                                                | -                   |
+| `%bf-theme-dark`     | The dark colour roles and theme colours                                                 | -                   |
+| `%bf-theme-auto`     | Dark when the system is set to dark                                                     | -                   |
 
-`{name}` is one of the theme colours. The `%bf-theme-*` placeholders are described under [Light and dark](500-theme.md#light-and-dark). Each has breakpoint variants too, such as `%bf-c-primary-md`, for a theme that changes at a breakpoint.
+`{name}` is one of the theme colours. The `%bf-theme-*` placeholders are described under [Light and dark](500-theme.md#light-and-dark). Each has breakpoint variants too, such as `%bf-c-primary-md`, for a theme that changes at a breakpoint, apart from `%bf-link-{name}`. The light theme colours, such as `warn` and `info`, are too pale for links or text on a light background.
 
 ## Default theme
 
