@@ -97,6 +97,10 @@ body
     // gap: no rem width scale, and a vw width would be too wide on a phone
     max-width: 16rem
 
+    // for screen readers: the placeholder shows sighted visitors what the box is for
+    label
+        @extend %bf-visually-hidden
+
     input
         @extend %bf-form-control
         @extend %bf-form-control-small

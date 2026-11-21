@@ -443,7 +443,7 @@ const withSearch = html => html
 	.replace(/(<a class="brand"[^>]*>.*?<\/a>)/, `$1
             <div class="site-search" role="search">
                 <div class="site-search-box">
-                    <label for="site-search-input" class="visually-hidden">Search the samples and placeholders</label>
+                    <label for="site-search-input">Search the samples and placeholders</label>
                     <input type="search" id="site-search-input" placeholder="Search" autocomplete="off" spellcheck="false"
                         role="combobox" aria-expanded="false" aria-controls="site-search-results" aria-autocomplete="list" />
                     <kbd class="site-search-key" aria-hidden="true">Ctrl K</kbd>
