@@ -638,7 +638,7 @@
 
         <section class="example" id="list-groups">
             <h2>List groups</h2>
-            <p>The list's direct children are its items. Links and buttons shade under the pointer, the current item is marked with <code>aria-current</code>, and the last list sits in a row from the <code>md</code> breakpoint.</p>
+            <p>The list's direct children are its items. Links and buttons shade under the pointer, the current item is marked with <code>aria-current</code>, a finished step is tinted green, and the last list sits in a row from the <code>md</code> breakpoint.</p>
             <div class="demo">
                 <div class="list-demos">
                     <nav class="items" aria-label="Folders">
@@ -648,7 +648,7 @@
                         <a href="#list-groups" aria-disabled="true">Archive</a>
                     </nav>
                     <ol class="items items-numbered">
-                        <li>Choose a plan</li>
+                        <li class="item-done">Choose a plan</li>
                         <li>Add your details</li>
                         <li>Pay</li>
                     </ol>
@@ -669,6 +669,9 @@
 .items-row
     @extend %bf-list-group-horizontal-md
 
+.item-done
+    @extend %bf-list-group-item-ok
+
 .list-demos
     @extend %bf-d-grid
     @extend %bf-gap-3
@@ -681,7 +684,7 @@
         &lt;a href="#list-groups" aria-disabled="true"&gt;Archive&lt;/a&gt;
     &lt;/nav&gt;
     &lt;ol class="items items-numbered"&gt;
-        &lt;li&gt;Choose a plan&lt;/li&gt;
+        &lt;li class="item-done"&gt;Choose a plan&lt;/li&gt;
         &lt;li&gt;Add your details&lt;/li&gt;
         &lt;li&gt;Pay&lt;/li&gt;
     &lt;/ol&gt;

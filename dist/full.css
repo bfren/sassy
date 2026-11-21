@@ -2063,6 +2063,38 @@
       cursor: not-allowed;
       pointer-events: none;
     }
+    .bf-list-group-item-primary {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-primary) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-primary) 40%, currentColor);
+    }
+    .bf-list-group-item-secondary {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-secondary) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-secondary) 40%, currentColor);
+    }
+    .bf-list-group-item-ok {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-ok) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-ok) 40%, currentColor);
+    }
+    .bf-list-group-item-info {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-info) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-info) 40%, currentColor);
+    }
+    .bf-list-group-item-warn {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-warn) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-warn) 40%, currentColor);
+    }
+    .bf-list-group-item-error {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-error) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-error) 40%, currentColor);
+    }
+    .bf-list-group-item-grey-light {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-grey-light) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-grey-light) 40%, currentColor);
+    }
+    .bf-list-group-item-grey-dark {
+      --sassy-list-group-bg: color-mix(in oklab, var(--sassy-theme-grey-dark) 15%, var(--sassy-surface));
+      --sassy-list-group-colour: color-mix(in oklab, var(--sassy-theme-grey-dark) 40%, currentColor);
+    }
     .bf-list-group-flush {
       border-radius: 0;
       border-width: 0;

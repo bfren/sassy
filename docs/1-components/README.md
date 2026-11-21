@@ -106,6 +106,7 @@ If you add tabs, a carousel that plays or a scrollspy nav to the page after it h
 | `%bf-list-group-flush`                                                                            | No outer border or corners, for a list that fills a card                                      |
 | `%bf-list-group-numbered`                                                                         | Numbers the items of an `<ol>`                                                                |
 | `%bf-list-group-horizontal`, `-horizontal-{breakpoint}`                                           | Items side by side, always or from a breakpoint                                               |
+| `%bf-list-group-item-{theme colour}`                                                              | One item tinted with a theme colour, like an alert                                            |
 | `%bf-accordion`                                                                                   | A `<div>` of `<details>`, each a header and content that open and close                       |
 | `%bf-accordion-flush`                                                                             | No outer border or corners, for an accordion that fills a card                                |
 | `%bf-tabs`                                                                                        | The list of tabs (`role="tablist"`)                                                           |

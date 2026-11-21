@@ -61,6 +61,13 @@
             cursor: not-allowed
             pointer-events: none
 
+    // Theme colours on one item, tinted like an alert - the item sets the colours the list gives it
+
+    @each $name, $value in $sassy-theme
+        @include make.single("list-group-item-#{$name}")
+            --sassy-list-group-bg: color-mix(in oklab, #{$value} #{$sassy-list-group-item-tint}, var(--sassy-surface))
+            --sassy-list-group-colour: color-mix(in oklab, #{$value} #{$sassy-list-group-item-text-tint}, currentColor)
+
     // No outer border or corners, for a list that fills a card
 
     @include make.single("list-group-flush")
