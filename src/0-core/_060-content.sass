@@ -71,6 +71,11 @@
         :where(code, kbd)
             font-size: $sassy-code-font-size
 
+        // code reads left to right, in right-to-left text too, kept apart from the text around it
+        :where(code, kbd, pre, samp)
+            direction: ltr
+            unicode-bidi: isolate
+
         // no display: it would beat [hidden], and a pre is a block anyway
         :where(pre)
             font-size: $sassy-code-font-size

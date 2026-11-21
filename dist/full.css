@@ -277,6 +277,10 @@
     :where(code, kbd) {
       font-size: var(--sassy-code-font-size, 0.875em);
     }
+    :where(code, kbd, pre, samp) {
+      direction: ltr;
+      unicode-bidi: isolate;
+    }
     :where(pre) {
       font-size: var(--sassy-code-font-size, 0.875em);
       overflow: auto;
