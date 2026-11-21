@@ -88,6 +88,22 @@ then load it once, in your site's main stylesheet:
 
 Use a single entry stylesheet per site: each stylesheet that loads Sassy also outputs Normalize and the font and theme custom properties on `:root`.
 
+#### Compiling your stylesheet
+
+Dart Sass watches, compiles and minifies on its own, so there is no build script to copy. With your stylesheets in `styles` and Sassy in `sassy`, recompile every time you save:
+
+```sh
+sass --load-path=. --watch styles:css
+```
+
+and build minified CSS for your live site:
+
+```sh
+sass --load-path=. --style=compressed --no-source-map styles:css
+```
+
+Run them from your project's folder. `--load-path=.` lets `@use "sassy/src"` find Sassy from any stylesheet, as Sass otherwise only looks beside the file. Each file in `styles` whose name doesn't start with `_` becomes a `.css` file in `css`. If Sassy is somewhere else, such as `vendor/sassy`, use `--load-path=vendor` instead.
+
 ### Classes
 
 `dist/full.css` contains every utility as a class (`.bf-p-3`, `.bf-col-4-md` and so on), for use straight from HTML:
