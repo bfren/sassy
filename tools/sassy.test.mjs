@@ -49,6 +49,22 @@ test("tabs: arrow keys wrap, Home and End jump, disabled tabs are skipped, panel
 	assert.equal($("t1").getAttribute("aria-selected"), "true");
 });
 
+test("tabs: in right-to-left text, the left arrow moves to the next tab", () => {
+	const window = load(`
+		<div role="tablist" style="direction: rtl">
+			<button role="tab" id="t1" aria-controls="p1" aria-selected="true">1</button>
+			<button role="tab" id="t2" aria-controls="p2">2</button>
+			<button role="tab" id="t3" aria-controls="p3">3</button>
+		</div>
+		<div id="p1"></div><div id="p2"></div><div id="p3"></div>`);
+	const $ = id => window.document.getElementById(id);
+
+	press(window, $("t1"), "ArrowLeft");
+	assert.equal($("t2").getAttribute("aria-selected"), "true");
+	press(window, $("t2"), "ArrowRight");
+	assert.equal($("t1").getAttribute("aria-selected"), "true");
+});
+
 test("dismissing: a --dismiss button hides the element it names, and other commands do not", () => {
 	const window = load(`
 		<div id="alert">
