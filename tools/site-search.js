@@ -47,18 +47,25 @@
 			if (n) found.push({ rank: 20 + n, label: d.title, note: "Docs", url: `${data.docsUrl}/${d.doc}`, newTab: true });
 		}
 		// a placeholder typed in full comes first, then titles, then placeholders starting with or containing the query
+		// then placeholders that set a matching CSS property, such as radius for border-radius: those that set fewest first
+		const word = q.replace(/\s+/g, "-");
 		for (const d of data.docs) {
-			for (const n of d.names) {
-				const rank = n === name ? 30 : n.startsWith(name) ? 12 : n.includes(q) ? 11 : 0;
-				if (!rank) continue;
+			d.names.forEach((n, i) => {
+				const props = d.props[i] ? d.props[i].split(" ") : [];
+				const prop = props.find(p => p === word) ?? props.find(p => p.includes(word));
+				const rank = n === name ? 30 : n.startsWith(name) ? 12 : n.includes(q) ? 11 : prop ? (prop === word ? 6 : 5) : 0;
+				if (!rank) return;
 				const demo = data.sections.find(s => s.names.includes(n));
-				found.push(demo
-					? { rank, label: `%${n}`, note: `${demo.title} - ${demo.layer} demo`, url: demo.url, code: true }
-					: { rank, label: `%${n}`, note: `${d.title} docs`, url: `${data.docsUrl}/${d.doc}`, newTab: true, code: true });
-			}
+				const where = demo ? `${demo.title} - ${demo.layer} demo` : `${d.title} docs`;
+				found.push({
+					rank, size: props.length, label: `%${n}`, code: true,
+					note: rank < 10 ? `${prop} - ${where}` : where,
+					url: demo ? demo.url : `${data.docsUrl}/${d.doc}`, newTab: !demo
+				});
+			});
 		}
 		// shorter names before their longer variants
-		return found.sort((a, b) => b.rank - a.rank || a.label.length - b.label.length || a.label.localeCompare(b.label)).slice(0, max);
+		return found.sort((a, b) => b.rank - a.rank || (a.size ?? 0) - (b.size ?? 0) || a.label.length - b.label.length || a.label.localeCompare(b.label)).slice(0, max);
 	};
 
 	const setActive = i => {

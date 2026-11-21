@@ -422,9 +422,14 @@ const placeholderDocs = async () => {
 			return sass(["--no-source-map", "--quiet", file]);
 		}));
 		return modules.map((m, i) => {
-			const names = new Set([...css[i].matchAll(/\.(bf-[a-z0-9-]+)/g)].map(x => x[1]));
-			const own = [...names].filter(n => !breakpoints.some(b => n.endsWith(`-${b}`) && names.has(n.slice(0, -b.length - 1))));
-			return { doc: m.doc, title: docTitle(m.doc), names: own.sort() };
+			// the CSS properties each placeholder sets, on itself or on what is inside it, but not custom properties
+			const props = new Map();
+			for (const [selector, decls] of declarations(css[i])) {
+				const set = decls.map(d => d.slice(0, d.indexOf(":")).trim()).filter(p => p && !p.startsWith("--"));
+				for (const [, n] of selector.matchAll(/\.(bf-[a-z0-9-]+)/g)) props.set(n, new Set([...(props.get(n) ?? []), ...set]));
+			}
+			const own = [...props.keys()].filter(n => !breakpoints.some(b => n.endsWith(`-${b}`) && props.has(n.slice(0, -b.length - 1))));
+			return { doc: m.doc, title: docTitle(m.doc), names: own.sort().map(n => ({ name: n, props: props.get(n) })) };
 		});
 	} finally {
 		rmSync(dir, { recursive: true, force: true });
@@ -437,11 +442,18 @@ const placeholderDocs = async () => {
  */
 const family = name => name.replace(/-n?\d+(?:pc|vh|vw)?$/, "-…");
 
-/** What the search box searches: each section with the placeholders it uses, and each placeholder's docs page. */
+/**
+ * What the search box searches: each section with the placeholders it uses, and each docs page with its placeholder
+ * families and the CSS properties each family sets (props[i] for names[i], space-separated), so "radius" finds bf-rounded-….
+ */
 const searchIndex = async sections => ({
 	docsUrl,
 	sections: sections.map(s => ({ title: s.title, layer: s.layer, url: `${s.page}#${s.id}`, names: [...new Set(s.placeholders.map(family))] })),
-	docs: (await placeholderDocs()).map(d => ({ ...d, names: [...new Set(d.names.map(family))] }))
+	docs: (await placeholderDocs()).map(d => {
+		const families = new Map();
+		for (const { name, props } of d.names) families.set(family(name), new Set([...(families.get(family(name)) ?? []), ...props]));
+		return { doc: d.doc, title: d.title, names: [...families.keys()], props: [...families.values()].map(p => [...p].sort().join(" ")) };
+	})
 });
 
 /** Adds the search box after the brand in the header, and its script after sassy.js - see tools/site-search.js. */
