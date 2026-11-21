@@ -1,6 +1,6 @@
 # Dropdowns
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Dropdowns](https://bfren.github.io/sassy/1-components.html#dropdowns)
 
 A dropdown is a menu in a popover, opened by a button's `popovertarget`. The browser opens and closes it, on Escape or a click outside too, and returns focus to the button, so it works without `sassy.js`. CSS anchor positioning places it below the button, lined up with its start, and moves it when there is no room:
 

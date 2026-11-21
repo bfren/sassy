@@ -1,6 +1,6 @@
 # List groups
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [List groups](https://bfren.github.io/sassy/1-components.html#list-groups)
 
 A list group is a bordered list. Its direct children are its items, so extend one placeholder on the list:
 

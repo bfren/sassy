@@ -1,6 +1,6 @@
 # Offcanvas
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Offcanvas](https://bfren.github.io/sassy/1-components.html#offcanvas)
 
 An offcanvas is a [dialog](153-dialog.md) that slides in from one edge of the window, full height or full width, such as a menu or a basket. Extend `%bf-offcanvas-start`, `-end`, `-top` or `-bottom` with `%bf-dialog`, and use the dialog's header, title, body and footer inside it:
 

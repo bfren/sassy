@@ -1,6 +1,6 @@
 # Popovers
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Popovers](https://bfren.github.io/sassy/1-components.html#popovers)
 
 A popover is a panel of content in a popover, opened by a button's `popovertarget`, like a [dropdown](152-dropdown.md). The browser opens and closes it, on Escape or a click outside too, and returns focus to the button, so it works without `sassy.js`. A heading it starts with is its title bar. CSS anchor positioning places it above the button, centred, and moves it when there is no room:
 

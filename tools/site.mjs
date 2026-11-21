@@ -4,8 +4,8 @@
  *
  *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output
  *     node tools/site.mjs check    checks the CSS shown in README.md and the docs folders, that every
- *                                  custom property Sassy reads has a value or a fallback, and that each
- *                                  samples section names its docs pages
+ *                                  custom property Sassy reads has a value or a fallback, and that the
+ *                                  samples sections and the docs pages link to each other
  *
  * Both fail if an example does not compile, or shows CSS that Sassy does not output.
  * Needs Node 20 or later and Dart Sass on the path as `sass` - or set SASS to run it from elsewhere.
@@ -360,6 +360,24 @@ const withDocsLinks = (html, page, sections) =>
 		return `${section}\n            <div class="example-docs">Docs: ${links}</div>`;
 	});
 
+/**
+ * The line under each docs page's title must link to the sections that show it, such as
+ * [1-components](README.md) - live examples: [List groups](https://bfren.github.io/sassy/1-components.html#list-groups),
+ * or to its samples page when none does.
+ */
+const docsLinkProblems = sections => readdirSync(join(root, "docs"), { recursive: true })
+	.map(f => f.replaceAll("\\", "/"))
+	.filter(f => /^\d-[a-z]+\/\d{3}-.+\.md$/.test(f))
+	.flatMap(file => {
+		const folder = file.split("/")[0];
+		const shown = sections.filter(s => s.docs.includes(file));
+		const links = shown.length
+			? shown.map(s => `[${s.title}](${siteUrl}/${s.page}#${s.id})`).join(", ")
+			: `[${folder}.html](${siteUrl}/${folder}.html)`;
+		const expected = `[${folder}](README.md) - live examples: ${links}`;
+		const line = readFileSync(join(root, "docs", file), "utf8").split("\n")[2];
+		return line === expected ? [] : [`docs/${file}:3: should be: ${expected}`];
+	});
 
 /** Wraps each demo and the code block after it in one element, which _site.sass makes a Sassy card. */
 const withExampleCards = html => {
@@ -532,8 +550,8 @@ const check = async () => {
 		results[i].error ? [results[i].error] : missing(ex.css, results[i].css).map(m => `${ex.label}: the CSS shown is not output: ${m}`)
 	);
 	console.log(`checked ${examples.length} examples in ${files.length} files`);
-	const { problems: sectionProblems } = sectionDocs();
-	return [...problems, ...sectionProblems, ...(await undefinedProperties()), ...layerProblems(readFileSync(join(root, "dist", "full.css"), "utf8"))];
+	const { sections, problems: sectionProblems } = sectionDocs();
+	return [...problems, ...sectionProblems, ...docsLinkProblems(sections), ...(await undefinedProperties()), ...layerProblems(readFileSync(join(root, "dist", "full.css"), "utf8"))];
 };
 
 //  =================================================================

@@ -1,6 +1,6 @@
 # Scrollspy
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Scrollspy](https://bfren.github.io/sassy/1-components.html#scrollspy)
 
 A nav of links to sections of the page can follow the reading position. Give one of its links `aria-current="location"`, usually the first, and `sassy.js` then moves it to the link of the section in view as the page scrolls. Any nav, [list group](131-list-group.md) or [dropdown](152-dropdown.md) shows that link as current, so scrollspy needs no Sass of its own:
 

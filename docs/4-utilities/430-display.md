@@ -1,6 +1,6 @@
 # Display
 
-[4-utilities](README.md) - live examples: [4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+[4-utilities](README.md) - live examples: [A flex layout that changes at a breakpoint](https://bfren.github.io/sassy/4-utilities.html#flex), [Stacks and a vertical rule](https://bfren.github.io/sassy/4-utilities.html#stacks), [Showing something on small screens only](https://bfren.github.io/sassy/4-utilities.html#display), [A skip link for keyboard users](https://bfren.github.io/sassy/4-utilities.html#hidden)
 
 | Placeholder                                                             | Sets                                                                                                           |
 | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |

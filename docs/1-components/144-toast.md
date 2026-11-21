@@ -1,6 +1,6 @@
 # Toasts
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Toasts](https://bfren.github.io/sassy/1-components.html#toasts)
 
 A toast is a short message that appears over the page, such as "Saved" or "Link copied". Toasts sit in a `%bf-toast-container`, which is fixed to the bottom end corner of the window and stacks them:
 

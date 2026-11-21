@@ -1,6 +1,6 @@
 # Carousels
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Carousels](https://bfren.github.io/sassy/1-components.html#carousels)
 
 A carousel is a row of slides that scrolls sideways and snaps to each one. Extend `%bf-carousel` on the element that scrolls: its children are the slides. In browsers that support `::scroll-button` and `::scroll-marker`, CSS adds previous and next buttons on its edges and a row of dots under it; in others, people swipe or scroll it:
 

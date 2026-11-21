@@ -1,6 +1,6 @@
 # Badges
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Badges](https://bfren.github.io/sassy/1-components.html#badges)
 
 A badge is a small label, sized from the text around it, so it fits a heading or a button as well as a sentence. It is grey by default. Colour it with `%bf-text-bg-{theme}` or `%bf-text-bg-{colour}-{shade}`, which choose a text colour that contrasts, and round it into a pill with `%bf-rounded-pill`:
 

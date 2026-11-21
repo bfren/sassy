@@ -1,6 +1,6 @@
 # Text inputs
 
-[2-forms](README.md) - live examples: [2-forms.html](https://bfren.github.io/sassy/2-forms.html)
+[2-forms](README.md) - live examples: [A labelled text field with help text](https://bfren.github.io/sassy/2-forms.html#field), [Small and large controls](https://bfren.github.io/sassy/2-forms.html#sizes)
 
 Extend the size placeholder as well as the base placeholder, on any control:
 

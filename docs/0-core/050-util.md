@@ -1,6 +1,6 @@
 # Functions
 
-[0-core](README.md) - live examples: [0-core.html](https://bfren.github.io/sassy/0-core.html)
+[0-core](README.md) - live examples: [Palette colours and transparency](https://bfren.github.io/sassy/0-core.html#colours)
 
 These are available as `sassy.name()`.
 

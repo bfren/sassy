@@ -1,6 +1,6 @@
 # Progress bars
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Progress bars](https://bfren.github.io/sassy/1-components.html#progress)
 
 A progress bar is a native `<progress>`, so browsers and screen readers already know its value. Give it a `<label for>` or `aria-label`. A theme colour changes the bar, and a bar with no `value` is indeterminate: a shorter bar slides along the track until you set one:
 

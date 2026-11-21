@@ -1,6 +1,6 @@
 # Content
 
-[0-core](README.md) - live examples: [0-core.html](https://bfren.github.io/sassy/0-core.html)
+[0-core](README.md) - live examples: [Content](https://bfren.github.io/sassy/0-core.html#content)
 
 Sassy is meant to style the whole site, so `0-core` sets a few defaults on elements, after Normalize:
 

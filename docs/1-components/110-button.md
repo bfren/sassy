@@ -1,6 +1,6 @@
 # Buttons
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Buttons](https://bfren.github.io/sassy/1-components.html#buttons)
 
 A button uses the form controls' padding, font size, line height, border and corners, so it lines up with the inputs beside it. Theme colours, outline and size only change custom properties, so extend them alongside `%bf-btn`:
 

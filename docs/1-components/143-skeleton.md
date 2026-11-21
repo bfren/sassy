@@ -1,6 +1,6 @@
 # Skeletons
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Skeletons](https://bfren.github.io/sassy/1-components.html#skeletons)
 
 A skeleton is a faded block that stands in for content while it loads. It is one line of text high and drawn in the text colour, so it fits any text size and shows on any background. Give it a width with `%bf-width-{5pc-100pc}`, as an empty block has none:
 

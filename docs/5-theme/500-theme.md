@@ -1,6 +1,6 @@
 # Theme colours and colour modes
 
-[5-theme](README.md) - live examples: [5-theme.html](https://bfren.github.io/sassy/5-theme.html)
+[5-theme](README.md) - live examples: [Using theme colours](https://bfren.github.io/sassy/5-theme.html#using), [Text that contrasts](https://bfren.github.io/sassy/5-theme.html#contrast), [A section with its own theme](https://bfren.github.io/sassy/5-theme.html#section), [Changing the theme at runtime](https://bfren.github.io/sassy/5-theme.html#runtime), [Light and dark](https://bfren.github.io/sassy/5-theme.html#dark)
 
 ## Using theme colours
 

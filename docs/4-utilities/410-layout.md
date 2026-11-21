@@ -1,6 +1,6 @@
 # Layout
 
-[4-utilities](README.md) - live examples: [4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+[4-utilities](README.md) - live examples: [A sticky header](https://bfren.github.io/sassy/4-utilities.html#sticky), [A 16:9 frame](https://bfren.github.io/sassy/4-utilities.html#frame), [Responsive spacing](https://bfren.github.io/sassy/4-utilities.html#spacing)
 
 | Placeholder                                                                                    | Sets                                                                                          |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |

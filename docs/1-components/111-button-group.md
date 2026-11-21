@@ -1,6 +1,6 @@
 # Button groups
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Button groups](https://bfren.github.io/sassy/1-components.html#button-groups)
 
 A button group joins buttons into one row: they share their borders, and only the group's outer corners are rounded. A toolbar holds groups, with a gap between them:
 
