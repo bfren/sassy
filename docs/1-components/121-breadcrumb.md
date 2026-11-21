@@ -1,6 +1,6 @@
 # Breadcrumbs
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Breadcrumbs](https://bfren.github.io/sassy/1-components.html#breadcrumbs)
 
 A breadcrumb shows where the current page sits, as a trail of links. Extend `%bf-breadcrumb` on the `<ol>`, and it styles the items:
 

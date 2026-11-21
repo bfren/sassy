@@ -36,7 +36,10 @@
 	/** The item a key moves to from the current one, or null if the key does not move. */
 	const itemForKey = (items, current, key, vertical) => {
 		const i = items.indexOf(current);
-		const step = { [vertical ? "ArrowDown" : "ArrowRight"]: 1, [vertical ? "ArrowUp" : "ArrowLeft"]: -1 }[key];
+		// in right-to-left text the next item is on the left
+		const next = vertical ? "ArrowDown" : getComputedStyle(current).direction === "rtl" ? "ArrowLeft" : "ArrowRight";
+		const previous = { ArrowDown: "ArrowUp", ArrowLeft: "ArrowRight", ArrowRight: "ArrowLeft" }[next];
+		const step = { [next]: 1, [previous]: -1 }[key];
 		if (i < 0) return null;
 		if (step) return items[(i + step + items.length) % items.length];
 		if (key === "Home") return items[0];

@@ -1,6 +1,6 @@
 # Rows and columns
 
-[3-grid](README.md) - live examples: [3-grid.html](https://bfren.github.io/sassy/3-grid.html)
+[3-grid](README.md) - live examples: [Two columns that stack on small screens](https://bfren.github.io/sassy/3-grid.html#halves), [Main content and a sidebar](https://bfren.github.io/sassy/3-grid.html#sidebar), [A centred column](https://bfren.github.io/sassy/3-grid.html#offset), [Cards in a row](https://bfren.github.io/sassy/3-grid.html#row-cols), [A CSS grid](https://bfren.github.io/sassy/3-grid.html#css-grid), [Removing a column's gutter](https://bfren.github.io/sassy/3-grid.html#gutter)
 
 ## Two equal columns that stack on small screens
 

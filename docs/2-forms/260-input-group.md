@@ -1,6 +1,6 @@
 # Input groups
 
-[2-forms](README.md) - live examples: [2-forms.html](https://bfren.github.io/sassy/2-forms.html)
+[2-forms](README.md) - live examples: [Input groups](https://bfren.github.io/sassy/2-forms.html#input-group)
 
 The group holds the controls and add-ons directly. Put feedback after the group, not inside it, so it shows when any control in the group is invalid:
 

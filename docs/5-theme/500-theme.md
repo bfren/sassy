@@ -1,6 +1,6 @@
 # Theme colours and colour modes
 
-[5-theme](README.md) - live examples: [5-theme.html](https://bfren.github.io/sassy/5-theme.html)
+[5-theme](README.md) - live examples: [Using theme colours](https://bfren.github.io/sassy/5-theme.html#using), [Text that contrasts](https://bfren.github.io/sassy/5-theme.html#contrast), [A section with its own theme](https://bfren.github.io/sassy/5-theme.html#section), [Changing the theme at runtime](https://bfren.github.io/sassy/5-theme.html#runtime), [Light and dark](https://bfren.github.io/sassy/5-theme.html#dark)
 
 ## Using theme colours
 
@@ -24,7 +24,7 @@
     padding: 0.75rem;
   }
   .alert-error {
-    color: oklch(98.5% 0.002 247.839deg);
+    color: color-mix(in oklab, oklch(98.5% 0.002 247.839deg) var(--sassy-text-opacity, 100%), transparent);
   }
   .alert-error {
     border-radius: 0.25rem;

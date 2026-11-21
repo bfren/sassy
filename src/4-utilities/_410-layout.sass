@@ -77,6 +77,17 @@ $sassy-offset-loop: map.merge($sassy-offset-loop, $sassy-offset)
         @include make.responsive($val, $sassy-offset-loop) using ($value)
             #{$val}: $value
 
+    // Translate: centres an element on its offset, such as %bf-top-50pc with %bf-left-50pc
+
+    @include make.single("translate-middle")
+        translate: -50% -50%
+
+    @include make.single("translate-middle-x")
+        translate: -50% 0
+
+    @include make.single("translate-middle-y")
+        translate: 0 -50%
+
     // Z-index
 
     @include make.responsive("z-index", $sassy-z-index) using ($value)
@@ -97,6 +108,13 @@ $sassy-offset-loop: map.merge($sassy-offset-loop, $sassy-offset)
 
     @include make.responsive("float", $sassy-float) using ($value)
         float: $value
+
+    // Clearfix: a container grows to hold the floats inside it
+    @include make.single("clearfix")
+        &::after
+            clear: both
+            content: ""
+            display: block
 
     @include make.responsive("vertical-align", $sassy-vertical-align) using ($value)
         vertical-align: $value

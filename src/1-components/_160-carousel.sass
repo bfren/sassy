@@ -72,8 +72,7 @@
             content: $sassy-carousel-next / "Next slide"
             inset-inline-end: calc(anchor(end) + #{$sassy-carousel-button-offset})
 
-        &:dir(rtl)::scroll-button(*)
-            scale: -1 1
+        // no flip in right-to-left text: the browser already mirrors ‹ and ›, so an image set in their place stays as drawn
 
         &::scroll-marker-group
             display: flex

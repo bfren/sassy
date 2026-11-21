@@ -4,13 +4,26 @@ All notable changes to Sassy are listed here. The format follows [Keep a Changel
 
 ## [Unreleased]
 
+### Added
+
+- Stacks: `%bf-vstack` is a flex column that fills its parent and `%bf-hstack` a flex row with its items centred, both spaced by `--sassy-stack-gap` (`0`) or a `%bf-gap-*`. `%bf-vr` is a vertical line between the items of a row, `--sassy-vr-width` wide in `--sassy-vr-colour`.
+- `%bf-text-opacity-{0pc-100pc}` and `%bf-border-opacity-{0pc-100pc}` make a palette or theme text or border colour see-through, in steps of 10, like `%bf-bg-opacity-*`, by setting `--sassy-text-opacity` and `--sassy-border-opacity`. Neither is inherited.
+- `%bf-link-{theme colour}` colours the links in an element, or the link itself, and the hover colour follows it.
+- `%bf-list-group-item-{theme colour}` tints one list group item, like an alert: 15% of the colour in the background (`$sassy-list-group-item-tint`) and 40% in the text (`$sassy-list-group-item-text-tint`).
+- `%bf-bg-gradient` lays a light sheen over the background colour, `--sassy-bg-gradient`.
+- `%bf-clearfix`, and `%bf-translate-middle`, `-x` and `-y` to centre an element on its offset.
+
 ### Changed
+
+- `code`, `kbd`, `pre` and `samp` read left to right in right-to-left text too, kept apart from the text around it, as in Bootstrap.
+- `%bf-c-*` and `%bf-border-{colour}` mix their colour with transparent by `--sassy-text-opacity` and `--sassy-border-opacity`, which outputs the same colour when they aren't set.
 
 - **Breaking:** start and end follow the text direction, as the Bootstrap guide already said. `%bf-ms-*`, `-me-*`, `-ps-*` and `-pe-*` are `margin-inline-start` and so on, and `%bf-rounded-start` and `-end` use the logical corners. In left-to-right text nothing changes; in right-to-left text, start and end are now on the right and left. Placeholders named for a physical side - `x`, `y`, `top`, `bottom`, the offsets and the borders - are unchanged.
 - **Breaking:** input groups, selects, floating labels and inline checks follow the text direction too. In right-to-left text an input group's outer corners are rounded, a select's chevron is on the left, and a floating label sits and shrinks on the right.
 
 ### Fixed
 
+- Right-to-left text: a `%bf-form-switch` knob starts on the right and moves left; the indeterminate progress bar and moving stripes travel right to left; the carousel's previous and next arrows point outwards (the browser already mirrors `‹` and `›`, and Sassy flipped them back); and in `sassy.js`, the left arrow key moves to the next tab or toolbar item.
 - `sassy.js`: a button with both a tooltip and a dropdown or popover keeps both anchored to it, so opening the menu no longer moves the tooltip, and showing the tooltip no longer moves the menu.
 - A control that extends `%bf-form-control-invalid` is now treated like one that is `:user-invalid` or has `aria-invalid="true"`: `%bf-form-feedback-invalid` after it (or after an element with one in it) shows, it sits above its neighbours in an input group so its whole border shows, and a `%bf-form-check-label` after it turns the error colour. Before, the control turned red but its message stayed hidden.
 - `sassy.js`: an in-page link that is not valid percent-encoding, such as `#50%`, no longer throws an error that stopped the scrollspy navs after it from being set up.

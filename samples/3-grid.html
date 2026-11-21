@@ -34,7 +34,7 @@
 
         <p class="stylesheet-note">Each demo on this page is styled by <code>sass/3-grid.sass</code>, compiled to <code>css/3-grid.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. In the demos, the shaded boxes are each column's content: the white space around them is the gutter.</p>
 
-        <section class="example" id="halves">
+        <section class="example" id="halves" data-docs="300-grid">
             <h2>Two columns that stack on small screens</h2>
             <div class="demo">
                 <p class="demo-hint">Side by side from 768px; make the window narrower and they stack.</p>
@@ -59,7 +59,7 @@
 </div>
         </section>
 
-        <section class="example" id="sidebar">
+        <section class="example" id="sidebar" data-docs="300-grid">
             <h2>Main content and a sidebar</h2>
             <div class="demo">
                 <p class="demo-hint">Eight and four columns from 992px; stacked below that.</p>
@@ -83,7 +83,7 @@
 </div>
         </section>
 
-        <section class="example" id="offset">
+        <section class="example" id="offset" data-docs="300-grid">
             <h2>A centred column</h2>
             <div class="demo">
                 <p class="demo-hint">Two thirds wide, then half wide from 992px, centred by its offset at both widths.</p>
@@ -103,7 +103,7 @@
 </div>
         </section>
 
-        <section class="example" id="row-cols">
+        <section class="example" id="row-cols" data-docs="300-grid">
             <h2>Cards in a row</h2>
             <div class="demo">
                 <p class="demo-hint">The children have no placeholder: the row makes them columns, one to a row, then three from 768px, with a wider gutter.</p>
@@ -127,7 +127,7 @@
 </div>
         </section>
 
-        <section class="example" id="css-grid">
+        <section class="example" id="css-grid" data-docs="300-grid">
             <h2>A CSS grid</h2>
             <div class="demo">
                 <p class="demo-hint">Stacked, then eight and four columns from 992px. The gap is only between the cells.</p>
@@ -154,7 +154,7 @@
 </div>
         </section>
 
-        <section class="example" id="gutter">
+        <section class="example" id="gutter" data-docs="300-grid">
             <h2>Removing a column's gutter</h2>
             <p>A utility such as <code>%bf-p-0</code> always overrides the grid, whatever order the <code>@extend</code> lines are in. The first column has no gutter, so its box reaches the edges.</p>
             <div class="demo">

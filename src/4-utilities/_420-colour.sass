@@ -11,8 +11,21 @@
     // Text Colour
     // See also 5-theme
 
+    // not inherited, so it only changes the element whose colour it is set with
+    @include make.in-base
+        @property --sassy-text-opacity
+            syntax: "<percentage>"
+            inherits: false
+            initial-value: 100%
+
     @include make.responsive("c", $tailwind-colours) using ($value)
-        color: $value
+        color: color-mix(in oklab, $value var(--sassy-text-opacity, 100%), transparent)
+
+    // Text Opacity: makes a %bf-c-* see-through
+
+    @for $i from 0 through 10
+        @include make.responsive("text-opacity", ("#{$i * 10}pc": $i * 10%)) using ($value)
+            --sassy-text-opacity: #{$value}
 
 
     // Background Colour
@@ -33,6 +46,12 @@
     @for $i from 0 through 10
         @include make.responsive("bg-opacity", ("#{$i * 10}pc": $i * 10%)) using ($value)
             --sassy-bg-opacity: #{$value}
+
+
+    // Background Gradient: a light sheen over the background colour
+
+    @include make.single("bg-gradient")
+        background-image: $sassy-bg-gradient
 
 
     // Background Colour with contrasting text

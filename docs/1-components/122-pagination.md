@@ -1,6 +1,6 @@
 # Pagination
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Pagination](https://bfren.github.io/sassy/1-components.html#pagination)
 
 Pagination links to numbered pages. Extend `%bf-pagination` on the `<ul>`: each item's link is a box, and the boxes share their borders, like the buttons in a [button group](111-button-group.md):
 

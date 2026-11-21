@@ -408,3 +408,6 @@ $sassy-contrast-light: #fff !default;
     $yb: color.channel($b, "y", $space: xyz) + 0.05;
     @return math.div(math.max($ya, $yb), math.min($ya, $yb));
 }
+
+// the sheen %bf-bg-gradient lays over the background colour
+$sassy-bg-gradient: var(--sassy-bg-gradient, linear-gradient(180deg, rgb(255 255 255 / 15%), rgb(255 255 255 / 0%)));

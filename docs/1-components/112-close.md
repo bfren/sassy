@@ -1,6 +1,6 @@
 # Close buttons
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Close buttons](https://bfren.github.io/sassy/1-components.html#close)
 
 A close button is an empty `<button>`. The × is drawn in the text colour, so it shows on any background without a light or dark version:
 

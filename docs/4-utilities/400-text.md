@@ -1,6 +1,6 @@
 # Text
 
-[4-utilities](README.md) - live examples: [4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+[4-utilities](README.md) - live examples: [Text](https://bfren.github.io/sassy/4-utilities.html#text), [A focus ring](https://bfren.github.io/sassy/4-utilities.html#focus), [A clickable card and an icon link](https://bfren.github.io/sassy/4-utilities.html#links)
 
 `%bf-body` sets the text defaults on a `body` element: colour, font family, size, weight and line height, all from custom properties. It also sets the size, margins and spacing of `h1` to `h5`, so extend it once, on the page's body, and leave the headings to it.
 

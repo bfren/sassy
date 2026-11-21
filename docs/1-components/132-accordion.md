@@ -1,6 +1,6 @@
 # Accordions
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Accordions](https://bfren.github.io/sassy/1-components.html#accordions)
 
 An accordion is a `<div>` of native `<details>`, so the browser opens and closes each section, from the keyboard too, with no script. Each `<details>` holds a `<summary>`, the header, and one element with its content. Give them the same `name` and opening one closes the others:
 

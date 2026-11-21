@@ -40,7 +40,7 @@ compiles to (alongside Normalize, Sassy's custom properties and the [wrap](#wrap
 
 @layer sassy.base.theme {
   .card-title {
-    color: var(--sassy-theme-primary);
+    color: color-mix(in oklab, var(--sassy-theme-primary) var(--sassy-text-opacity, 100%), transparent);
   }
 }
 
@@ -88,6 +88,22 @@ then load it once, in your site's main stylesheet:
 
 Use a single entry stylesheet per site: each stylesheet that loads Sassy also outputs Normalize and the font and theme custom properties on `:root`.
 
+#### Compiling your stylesheet
+
+Dart Sass watches, compiles and minifies on its own, so there is no build script to copy. With your stylesheets in `styles` and Sassy in `sassy`, recompile every time you save:
+
+```sh
+sass --load-path=. --watch styles:css
+```
+
+and build minified CSS for your live site:
+
+```sh
+sass --load-path=. --style=compressed --no-source-map styles:css
+```
+
+Run them from your project's folder. `--load-path=.` lets `@use "sassy/src"` find Sassy from any stylesheet, as Sass otherwise only looks beside the file. Each file in `styles` whose name doesn't start with `_` becomes a `.css` file in `css`. If Sassy is somewhere else, such as `vendor/sassy`, use `--load-path=vendor` instead.
+
 ### Classes
 
 `dist/full.css` contains every utility as a class (`.bf-p-3`, `.bf-col-4-md` and so on), for use straight from HTML:
@@ -118,9 +134,9 @@ The breakpoint is optional - see [Responsive](#responsive). Names use British sp
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Content            | `%bf-h2`, `%bf-lead`, `%bf-display-1`, `%bf-list-unstyled`, `%bf-list-inline`, `%bf-img-fluid`, `%bf-figure`, `%bf-blockquote`, `%bf-blockquote-caption`                                                                                       |
 | Layout             | `%bf-p-2`, `%bf-mt-3`, `%bf-mx-auto`, `%bf-m-centre`, `%bf-width-50pc`, `%bf-height-100vh`, `%bf-max-width-100pc`, `%bf-position-sticky`, `%bf-top-0`, `%bf-z-index-3`, `%bf-overflow-hidden`, `%bf-aspect-ratio-16x9`, `%bf-object-fit-cover` |
-| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-opacity-50pc`, `%bf-visually-hidden`                                                   |
-| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`                                                                                                                                                                |
-| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`, `%bf-theme-dark`                                                                                                                                                         |
+| Display and flex   | `%bf-d-flex`, `%bf-d-none`, `%bf-flex-justify-between`, `%bf-flex-align-items-centre`, `%bf-flex-wrap-nowrap`, `%bf-flex-order-last`, `%bf-gap-3`, `%bf-vstack`, `%bf-hstack`, `%bf-vr`, `%bf-opacity-50pc`, `%bf-visually-hidden`             |
+| Colour             | `%bf-c-red-500`, `%bf-bg-sky-100`, `%bf-text-bg-sky-700`, `%bf-border-grey-300`, `%bf-text-opacity-70pc`                                                                                                                                       |
+| Theme              | `%bf-c-primary`, `%bf-bg-error`, `%bf-text-bg-warn`, `%bf-border-ok`, `%bf-link-error`, `%bf-theme-dark`                                                                                                                                       |
 | Text               | `%bf-body`, `%bf-font-size-4`, `%bf-font-family-mono`, `%bf-font-weight-700`, `%bf-line-height-single`, `%bf-text-align-centre`, `%bf-text-transform-upper`, `%bf-stretched-link`, `%bf-icon-link`, `%bf-focus-ring`                           |
 | Border and corners | `%bf-border-1`, `%bf-border-x-2`, `%bf-rounded`, `%bf-rounded-3`, `%bf-rounded-pill`                                                                                                                                                           |
 | Shadow             | `%bf-shadow-2` - coloured by `--sassy-shadow-colour`, see [Theming](#theming)                                                                                                                                                                  |
@@ -378,7 +394,7 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 ## Building and contributing
 
-You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
+You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later on your path, and bash with `awk`, which come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
 
 | Script                      | Does                                                                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |

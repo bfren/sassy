@@ -21,9 +21,14 @@
             aspect-ratio: 1
             background-color: $sassy-switch-knob-colour
             border-radius: 50%
-            inset: 0.125em auto auto 0.125em
             height: calc(100% - 0.25em)
+            inset-block: 0.125em auto
+            inset-inline: 0.125em auto
 
         &:checked::before
             background-color: $sassy-check-mark-colour
             transform: translateX(1em)
+
+        // the knob starts on the right in right-to-left text, so it moves left
+        &:dir(rtl):checked::before
+            transform: translateX(-1em)

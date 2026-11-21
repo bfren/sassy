@@ -1,6 +1,6 @@
 # Range, file and colour inputs
 
-[2-forms](README.md) - live examples: [2-forms.html](https://bfren.github.io/sassy/2-forms.html)
+[2-forms](README.md) - live examples: [Range, file and colour inputs](https://bfren.github.io/sassy/2-forms.html#inputs)
 
 ```sass
 .slider

@@ -34,7 +34,7 @@
 
         <p class="stylesheet-note">Each demo on this page is styled by <code>sass/2-forms.sass</code>, compiled to <code>css/2-forms.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example" id="field">
+        <section class="example" id="field" data-docs="210-label 220-control">
             <h2>A labelled text field with help text</h2>
             <div class="demo">
                 <div class="field">
@@ -65,7 +65,7 @@
 </div>
         </section>
 
-        <section class="example" id="sizes">
+        <section class="example" id="sizes" data-docs="220-control">
             <h2>Small and large controls</h2>
             <p>A size only changes custom properties, so extend it as well as the control.</p>
             <div class="demo">
@@ -107,7 +107,7 @@
 </div>
         </section>
 
-        <section class="example" id="checks">
+        <section class="example" id="checks" data-docs="240-check">
             <h2>Checkboxes and radios</h2>
             <p>The input comes first, then the label, then any help text, which lines up under the label.</p>
             <div class="demo">
@@ -129,7 +129,7 @@
 <pre data-lang="sass"><code>.check
     @extend %bf-form-check
 
-    input
+    input:not([role="switch"])
         @extend %bf-form-check-input
 
     label
@@ -150,7 +150,7 @@
 </div>
         </section>
 
-        <section class="example" id="switch">
+        <section class="example" id="switch" data-docs="250-switch">
             <h2>A switch</h2>
             <p>A switch is a checkbox with <code>role="switch"</code>, so assistive technology announces it as one.</p>
             <div class="demo">
@@ -169,7 +169,7 @@
 </div>
         </section>
 
-        <section class="example" id="input-group">
+        <section class="example" id="input-group" data-docs="260-input-group">
             <h2>Input groups</h2>
             <p>Controls, add-on text and buttons join up, sharing their borders. Feedback goes after the group, and shows when a control inside it is invalid.</p>
             <div class="demo">
@@ -204,7 +204,7 @@
 </div>
         </section>
 
-        <section class="example" id="floating">
+        <section class="example" id="floating" data-docs="270-floating">
             <h2>Floating labels</h2>
             <p>Click into the field: the label moves up out of the way. The control comes first, and needs <code>placeholder=" "</code>.</p>
             <div class="demo">
@@ -226,7 +226,7 @@
 </div>
         </section>
 
-        <section class="example" id="inputs">
+        <section class="example" id="inputs" data-docs="280-inputs">
             <h2>Range, file and colour inputs</h2>
             <div class="demo">
                 <div class="inputs">
@@ -256,7 +256,7 @@
 </div>
         </section>
 
-        <section class="example" id="validation">
+        <section class="example" id="validation" data-docs="290-validation">
             <h2>Validation</h2>
             <p>The first field has <code>aria-invalid="true"</code>, as set by a server, so its message shows. Type an invalid address in the second and leave it, and the browser shows its message.</p>
             <div class="demo">
@@ -295,7 +295,7 @@
 </div>
         </section>
 
-        <section class="example" id="chevron">
+        <section class="example" id="chevron" data-docs="230-select">
             <h2>Select chevron in a dark theme</h2>
             <p>A select draws its chevron as an image, so a dark theme sets <code>--sassy-select-chevron</code> with <code>chevron()</code>, as well as the text colour.</p>
 <div class="code">

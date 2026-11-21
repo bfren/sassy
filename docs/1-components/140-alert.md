@@ -1,6 +1,6 @@
 # Alerts
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Alerts](https://bfren.github.io/sassy/1-components.html#alerts)
 
 An alert is a message box. A theme colour tints its background, border and text, and links inside it take the alert's text colour, in bold:
 

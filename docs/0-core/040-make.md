@@ -1,6 +1,6 @@
 # Mixins
 
-[0-core](README.md) - live examples: [0-core.html](https://bfren.github.io/sassy/0-core.html)
+[0-core](README.md) - live examples: [Your own breakpoint styles](https://bfren.github.io/sassy/0-core.html#up), [Different values at different breakpoints](https://bfren.github.io/sassy/0-core.html#up-prop), [Your own placeholders, in Sassy's style](https://bfren.github.io/sassy/0-core.html#placeholders)
 
 These are available as `sassy.name()` too.
 

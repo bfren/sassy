@@ -1,6 +1,6 @@
 # Spinners
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Spinners](https://bfren.github.io/sassy/1-components.html#spinners)
 
 A spinner shows that something is loading: a ring that turns, or a dot that grows and fades. Put it on an element with `role="status"`, holding text for screen readers in a child that extends `%bf-visually-hidden`. Spinners are drawn in the text colour and sized in `em`, so they follow the text around them:
 

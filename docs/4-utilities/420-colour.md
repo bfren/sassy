@@ -1,20 +1,25 @@
 # Colour
 
-[4-utilities](README.md) - live examples: [4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+[4-utilities](README.md) - live examples: [Colour, borders and corners](https://bfren.github.io/sassy/4-utilities.html#colour)
 
-| Placeholder                    | Sets                                                |
-| ------------------------------ | --------------------------------------------------- |
-| `%bf-c-{colour}-{shade}`       | Text colour, from the palette                       |
-| `%bf-bg-{colour}-{shade}`      | Background colour                                   |
-| `%bf-bg-opacity-{0pc-100pc}`   | Makes a `%bf-bg-…` see-through, in steps of 10      |
-| `%bf-text-bg-{colour}-{shade}` | Background colour, with text that contrasts with it |
-| `%bf-border-{colour}-{shade}`  | Border colour                                       |
+| Placeholder                      | Sets                                                            |
+| -------------------------------- | --------------------------------------------------------------- |
+| `%bf-c-{colour}-{shade}`         | Text colour, from the palette                                   |
+| `%bf-text-opacity-{0pc-100pc}`   | Makes a `%bf-c-…` see-through, in steps of 10                   |
+| `%bf-bg-{colour}-{shade}`        | Background colour                                               |
+| `%bf-bg-opacity-{0pc-100pc}`     | Makes a `%bf-bg-…` see-through, in steps of 10                  |
+| `%bf-bg-gradient`                | A light sheen over the background colour, `--sassy-bg-gradient` |
+| `%bf-text-bg-{colour}-{shade}`   | Background colour, with text that contrasts with it             |
+| `%bf-border-{colour}-{shade}`    | Border colour                                                   |
+| `%bf-border-opacity-{0pc-100pc}` | Makes a `%bf-border-{colour}-…` see-through, in steps of 10     |
 
 `{colour}` is one of the 26 palette colours and `{shade}` is `50`, `100` to `900`, or `950`. See the [README](../../README.md#naming) for the list, and the [theme](../5-theme/README.md) for the colours with their own names.
 
 `%bf-text-bg-…` picks the text colour when Sass compiles, using the WCAG contrast ratio: `$sassy-contrast-dark` (`grey-950`) or `$sassy-contrast-light` (white), whichever contrasts more with the background. `sassy.contrast-colour()` gives the same choice for any colour.
 
 `%bf-bg-opacity-…` sets `--sassy-bg-opacity`, which the palette and theme backgrounds mix with transparent. It isn't inherited, so a background inside a see-through one is solid. It doesn't change `%bf-text-bg-…`, whose text colour is chosen for the solid background.
+
+`%bf-text-opacity-…` and `%bf-border-opacity-…` do the same for text and border colours, with `--sassy-text-opacity` and `--sassy-border-opacity`, for the palette and the theme. They aren't inherited either, so extend one on the element that has the colour.
 
 ## Example: a frosted header
 

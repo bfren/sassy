@@ -1,6 +1,6 @@
 # Validation
 
-[2-forms](README.md) - live examples: [2-forms.html](https://bfren.github.io/sassy/2-forms.html)
+[2-forms](README.md) - live examples: [Validation](https://bfren.github.io/sassy/2-forms.html#validation)
 
 There are three ways to show that a control is invalid:
 

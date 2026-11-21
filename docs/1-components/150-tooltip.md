@@ -1,6 +1,6 @@
 # Tooltips
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Tooltips](https://bfren.github.io/sassy/1-components.html#tooltips)
 
 A tooltip is a popover with `role="tooltip"`, linked to its trigger by `aria-describedby`:
 

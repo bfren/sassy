@@ -1,6 +1,6 @@
 # Shadow
 
-[4-utilities](README.md) - live examples: [4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+[4-utilities](README.md) - live examples: [Colour, borders and corners](https://bfren.github.io/sassy/4-utilities.html#colour), [Coloured shadows](https://bfren.github.io/sassy/4-utilities.html#shadows)
 
 | Placeholder        | Sets                                                         |
 | ------------------ | ------------------------------------------------------------ |

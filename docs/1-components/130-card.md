@@ -1,6 +1,6 @@
 # Cards
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Cards](https://bfren.github.io/sassy/1-components.html#cards)
 
 ```sass
 .card

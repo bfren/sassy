@@ -1,15 +1,17 @@
 # Layout
 
-[4-utilities](README.md) - live examples: [4-utilities.html](https://bfren.github.io/sassy/4-utilities.html)
+[4-utilities](README.md) - live examples: [A sticky header](https://bfren.github.io/sassy/4-utilities.html#sticky), [A 16:9 frame](https://bfren.github.io/sassy/4-utilities.html#frame), [Responsive spacing](https://bfren.github.io/sassy/4-utilities.html#spacing)
 
 | Placeholder                                                                                    | Sets                                                                                          |
 | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `%bf-wrap`                                                                                     | A centred container whose width steps up at each breakpoint. Also output as the `.wrap` class |
 | `%bf-position-{absolute, fixed, relative, static, sticky, inherit}`                            | `position`                                                                                    |
 | `%bf-top-{0-32, 50pc, 100pc, auto}`, `%bf-bottom-…`, `%bf-left-…`, `%bf-right-…`               | Offsets from the edge: steps on the padding scale, a percentage or `auto`                     |
+| `%bf-translate-middle`, `-x`, `-y`                                                             | Moves an element back by half its size, both ways or on one axis, to centre it on its offset  |
 | `%bf-z-index-{3, 4, 5}`                                                                        | `z-index`                                                                                     |
 | `%bf-overflow-{auto, hidden, scroll, visible}`, `%bf-overflow-x-…`, `%bf-overflow-y-…`         | `overflow`, or by axis                                                                        |
 | `%bf-float-{start, end, none}`                                                                 | `float`, using the logical `inline-start` and `inline-end`                                    |
+| `%bf-clearfix`                                                                                 | Makes a container grow to hold the floats inside it                                           |
 | `%bf-vertical-align-{baseline, top, middle, bottom, text-top, text-bottom}`                    | `vertical-align`                                                                              |
 | `%bf-object-fit-{contain, cover, fill, scale, none}`                                           | How an image or video fills its box. `scale` is `scale-down`                                  |
 | `%bf-aspect-ratio-{1x1, 4x3, 16x9, 21x9}`                                                      | `aspect-ratio`. Add or change ratios with `$sassy-aspect-ratio`                               |

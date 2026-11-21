@@ -1,6 +1,6 @@
 # Dialogs
 
-[1-components](README.md) - live examples: [1-components.html](https://bfren.github.io/sassy/1-components.html)
+[1-components](README.md) - live examples: [Dialogs](https://bfren.github.io/sassy/1-components.html#dialogs)
 
 Dialogs style the native `<dialog>` element. Buttons open and close them with `command` and `commandfor`, so no script is needed in current browsers. The button in the header is a [close button](112-close.md):
 

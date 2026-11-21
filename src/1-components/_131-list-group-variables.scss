@@ -15,3 +15,8 @@ $sassy-list-group-hover-bg: var(--sassy-list-group-hover-bg, color-mix(in oklab,
 $sassy-list-group-current-bg: var(--sassy-list-group-current-bg, var(--sassy-theme-primary));
 $sassy-list-group-current-colour: var(--sassy-list-group-current-colour, var(--sassy-theme-primary-contrast));
 $sassy-list-group-disabled-colour: var(--sassy-list-group-disabled-colour, var(--sassy-disabled));
+
+// How much of a theme colour %bf-list-group-item-{name} mixes into the item's background and text,
+// as for alerts: the text is mixed with the text colour around it, so it stays readable.
+$sassy-list-group-item-tint: 15% !default;
+$sassy-list-group-item-text-tint: 40% !default;

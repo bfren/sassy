@@ -1,6 +1,6 @@
 # Checkboxes and radios
 
-[2-forms](README.md) - live examples: [2-forms.html](https://bfren.github.io/sassy/2-forms.html)
+[2-forms](README.md) - live examples: [Checkboxes and radios](https://bfren.github.io/sassy/2-forms.html#checks)
 
 Put the input first, then the label, and any help text after them, inside the element that extends `%bf-form-check`. Long labels wrap beside the input, and help text lines up under the label:
 

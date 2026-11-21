@@ -1,6 +1,6 @@
 # Floating labels
 
-[2-forms](README.md) - live examples: [2-forms.html](https://bfren.github.io/sassy/2-forms.html)
+[2-forms](README.md) - live examples: [Floating labels](https://bfren.github.io/sassy/2-forms.html#floating)
 
 The control comes first and the label after it, and the control needs `placeholder=" "`. An empty placeholder is how CSS tells that the control has no value:
 
