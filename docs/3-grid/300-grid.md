@@ -172,8 +172,7 @@ The gutter is a custom property, so you can change it per site or at a breakpoin
 :root
     --sassy-grid-gutter: 0.5rem
 
-@media (width >= 768px)
-    :root
+    @include sassy.up(md)
         --sassy-grid-gutter: 1.5rem
 ```
 
