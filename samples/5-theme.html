@@ -34,7 +34,7 @@
 
         <p class="stylesheet-note">Each demo on this page is styled by <code>sass/5-theme.sass</code>, compiled to <code>css/5-theme.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example" id="using">
+        <section class="example" id="using" data-docs="500-theme">
             <h2>Using theme colours</h2>
             <div class="demo">
                 <div class="alert-error">Something went wrong. Please try again.</div>
@@ -51,7 +51,7 @@
 </div>
         </section>
 
-        <section class="example" id="contrast">
+        <section class="example" id="contrast" data-docs="500-theme">
             <h2>Text that contrasts</h2>
             <p>Each chip's text is dark or white, whichever has the higher contrast with its theme colour.</p>
             <div class="demo">
@@ -79,7 +79,7 @@
 </div>
         </section>
 
-        <section class="example" id="section">
+        <section class="example" id="section" data-docs="500-theme">
             <h2>A section with its own theme</h2>
             <p>The section sets <code>--sassy-theme-primary</code>, and everything inside it follows - text, and the button component too.</p>
             <div class="demo">
@@ -106,7 +106,7 @@
 </div>
         </section>
 
-        <section class="example" id="runtime">
+        <section class="example" id="runtime" data-docs="500-theme">
             <h2>Changing the theme at runtime</h2>
             <p>Choose a colour: a script sets <code>--sassy-theme-primary</code> on this demo, and its button and link follow, with no new stylesheet.</p>
             <div class="demo">
@@ -147,7 +147,7 @@
 </div>
         </section>
 
-        <section class="example" id="dark">
+        <section class="example" id="dark" data-docs="500-theme">
             <h2>Light and dark</h2>
             <p>The same components in an area that extends <code>%bf-theme-light</code> and one that extends <code>%bf-theme-dark</code>. Each sets Sassy's colour roles and theme colours on its element, so everything inside follows. Extend <code>%bf-theme-auto</code> on <code>html</code> to follow the visitor's system setting.</p>
             <div class="demo">

@@ -3,8 +3,9 @@
  * Builds the samples site, and checks that the CSS shown in examples is what Sassy outputs.
  *
  *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output
- *     node tools/site.mjs check    checks the CSS shown in README.md and the docs folders, and that every
- *                                  custom property Sassy reads has a value or a fallback
+ *     node tools/site.mjs check    checks the CSS shown in README.md and the docs folders, that every
+ *                                  custom property Sassy reads has a value or a fallback, and that each
+ *                                  samples section names its docs pages
  *
  * Both fail if an example does not compile, or shows CSS that Sassy does not output.
  * Needs Node 20 or later and Dart Sass on the path as `sass` - or set SASS to run it from elsewhere.
@@ -319,6 +320,47 @@ const withCss = (block, css) => ({
 
 const pages = () => readdirSync(samples).filter(f => f.endsWith(".html"));
 
+//  =================================================================
+//  Links between the samples and the docs
+//  =================================================================
+
+const siteUrl = "https://bfren.github.io/sassy";
+const docsUrl = "https://github.com/bfren/sassy/blob/main/docs";
+
+/** A section of a samples page, with the docs pages it names in data-docs, such as data-docs="131-list-group 133-table". */
+const sectionPattern = /<section class="example" id="([^"]+)"(?: data-docs="([^"]*)")?>\s*<h2>(.*?)<\/h2>/g;
+
+/** A docs page's title, from its first line. */
+const docTitle = file => readFileSync(join(root, "docs", file), "utf8").match(/^# (.+)/)?.[1] ?? file;
+
+/**
+ * Every section of the layer pages (1-components.html and so on, which have a docs folder of the same name), with the
+ * docs pages it names - each a file in that folder, without .md - and a problem for each section that names none, or a page that isn't there.
+ */
+const sectionDocs = () => {
+	const problems = [];
+	const sections = pages().filter(page => existsSync(join(root, "docs", page.replace(/\.html$/, "")))).flatMap(page => {
+		const folder = page.replace(/\.html$/, "");
+		return [...readFileSync(join(samples, page), "utf8").matchAll(sectionPattern)].map(([, id, names, title]) => {
+			const docs = (names ?? "").split(" ").filter(Boolean).map(name => `${folder}/${name}.md`);
+			if (!docs.length) problems.push(`${page}#${id}: name its docs pages with data-docs`);
+			docs.filter(d => !existsSync(join(root, "docs", d))).forEach(d => problems.push(`${page}#${id}: data-docs names docs/${d}, which isn't there`));
+			return { page, id, title: title.replace(/<[^>]+>/g, ""), docs: docs.filter(d => existsSync(join(root, "docs", d))) };
+		});
+	});
+	return { sections, problems };
+};
+
+/** Adds a link to each section's docs pages at the end of the section. */
+const withDocsLinks = (html, page, sections) =>
+	html.replace(/<section class="example" id="([^"]+)"[^>]*>[\s\S]*?(?=\s*<\/section>)/g, (section, id) => {
+		const docs = sections.find(s => s.page === page && s.id === id)?.docs ?? [];
+		if (!docs.length) return section;
+		const links = docs.map(d => `<a href="${docsUrl}/${d}">${docTitle(d)}</a>`).join(", ");
+		return `${section}\n            <div class="example-docs">Docs: ${links}</div>`;
+	});
+
+
 /** Wraps each demo and the code block after it in one element, which _site.sass makes a Sassy card. */
 const withExampleCards = html => {
 	let out = "";
@@ -351,7 +393,7 @@ const withExampleCards = html => {
  * section in view (scrollspy), and closes the offcanvas when a link in it is followed. A page with no sections gets none.
  */
 const withSectionNav = html => {
-	const sections = [...html.matchAll(/<section class="example" id="([^"]+)">\s*<h2>(.*?)<\/h2>/g)].map(([, id, title]) => ({
+	const sections = [...html.matchAll(sectionPattern)].map(([, id, , title]) => ({
 		id,
 		title: title.replace(/<[^>]+>/g, "")
 	}));
@@ -382,6 +424,9 @@ const build = async () => {
 	mkdirSync(join(out, "images"), { recursive: true });
 	cpSync(join(root, "logo", "logo-light.svg"), join(out, "images", "logo.svg"));
 	if (existsSync(join(samples, ".nojekyll"))) cpSync(join(samples, ".nojekyll"), join(out, ".nojekyll"));
+
+	const { sections, problems: sectionProblems } = sectionDocs();
+	problems.push(...sectionProblems);
 
 	const found = pages().map(page => {
 		const html = readFileSync(join(samples, page), "utf8");
@@ -417,7 +462,7 @@ const build = async () => {
 		});
 
 		let n = 0;
-		const built = withSectionNav(withExampleCards(html).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
+		const built = withSectionNav(withDocsLinks(withExampleCards(html), page, sections).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
 		writeFileSync(join(out, page), built);
 	}
 	console.log(`built ${found.length} pages with ${examples.length} examples`);
@@ -487,7 +532,8 @@ const check = async () => {
 		results[i].error ? [results[i].error] : missing(ex.css, results[i].css).map(m => `${ex.label}: the CSS shown is not output: ${m}`)
 	);
 	console.log(`checked ${examples.length} examples in ${files.length} files`);
-	return [...problems, ...(await undefinedProperties()), ...layerProblems(readFileSync(join(root, "dist", "full.css"), "utf8"))];
+	const { problems: sectionProblems } = sectionDocs();
+	return [...problems, ...sectionProblems, ...(await undefinedProperties()), ...layerProblems(readFileSync(join(root, "dist", "full.css"), "utf8"))];
 };
 
 //  =================================================================

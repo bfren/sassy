@@ -34,7 +34,7 @@
 
         <p class="stylesheet-note">Each demo on this page is styled by <code>sass/1-components.sass</code>, compiled to <code>css/1-components.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML. Tabs, toolbars, tooltips, popovers, dropdowns, carousels that play, scrollspy, and dismissible alerts and toasts also need <code>js/sassy.js</code>.</p>
 
-        <section class="example" id="buttons">
+        <section class="example" id="buttons" data-docs="110-button">
             <h2>Buttons</h2>
             <p>A theme colour, the outline style and the sizes only change custom properties, so extend them as well as <code>%bf-btn</code>.</p>
             <div class="demo">
@@ -98,7 +98,7 @@
 </div>
         </section>
 
-        <section class="example" id="button-groups">
+        <section class="example" id="button-groups" data-docs="111-button-group">
             <h2>Button groups</h2>
             <p>Buttons in a group share their borders. The toolbar is one stop in the tab order: with <code>js/sassy.js</code> the arrow keys move between its buttons. Bold and Week have <code>aria-pressed="true"</code>.</p>
             <div class="demo">
@@ -165,7 +165,7 @@
 </div>
         </section>
 
-        <section class="example" id="close">
+        <section class="example" id="close" data-docs="112-close">
             <h2>Close buttons</h2>
             <p>An empty button with <code>aria-label</code>. The × is drawn in the text colour, so it shows on a dark background too.</p>
             <div class="demo">
@@ -196,7 +196,7 @@
 </div>
         </section>
 
-        <section class="example" id="badges">
+        <section class="example" id="badges" data-docs="113-badge">
             <h2>Badges</h2>
             <p>A badge is sized from the text around it. Colour it with <code>%bf-text-bg-*</code> and round it with <code>%bf-rounded-pill</code>. The second count is empty, so it is hidden.</p>
             <div class="demo">
@@ -264,7 +264,7 @@
 </div>
         </section>
 
-        <section class="example" id="nav">
+        <section class="example" id="nav" data-docs="120-nav">
             <h2>Navigation</h2>
             <p>Mark the current page with <code>aria-current="page"</code>, which also tells screen readers. The navigation at the top of this page is the underline style.</p>
             <div class="demo">
@@ -289,7 +289,7 @@
 </div>
         </section>
 
-        <section class="example" id="nav-styles">
+        <section class="example" id="nav-styles" data-docs="120-nav">
             <h2>Pills, underline and vertical</h2>
             <p>Each style combines with <code>%bf-nav</code> on the same element.</p>
             <div class="demo">
@@ -336,7 +336,7 @@
 </div>
         </section>
 
-        <section class="example" id="nav-fill">
+        <section class="example" id="nav-fill" data-docs="120-nav">
             <h2>Navigation that fills the row</h2>
             <p>Extend <code>%bf-nav-fill</code> and the links share the row's spare width, so longer links stay wider (top); extend <code>%bf-nav-justified</code> and every link is the same width (bottom).</p>
             <div class="demo">
@@ -370,7 +370,7 @@
 </div>
         </section>
 
-        <section class="example" id="nav-collapse">
+        <section class="example" id="nav-collapse" data-docs="120-nav">
             <h2>Collapsible navigation</h2>
             <p>A button with <code>aria-expanded</code> and <code>aria-controls</code> opens and closes what it controls: <code>sassy.js</code> keeps the two in step. Extend <code>%bf-nav-collapse-md</code> on what it controls and <code>%bf-d-none-md</code> on the button, and below <code>md</code> the navigation is a panel that wipes down over the content that follows, and from <code>md</code> it stays open. Narrow the window to try it: the navigation at the top of this page works the same way.</p>
             <div class="demo">
@@ -408,7 +408,7 @@
 </div>
         </section>
 
-        <section class="example" id="navbar">
+        <section class="example" id="navbar" data-docs="120-nav">
             <h2>Navbar</h2>
             <p>A navbar holds a brand, a toggle and a menu in one row, and names the breakpoint once. Extend <code>%bf-navbar-expand-md</code> on the row, and below <code>md</code> the toggle shows and the menu wipes down under the row when it is clicked; from <code>md</code> the toggle hides and the menu sits at the end of the row. Narrow the window to try it.</p>
             <div class="demo">
@@ -450,7 +450,7 @@
 </div>
         </section>
 
-        <section class="example" id="navbar-push">
+        <section class="example" id="navbar-push" data-docs="120-nav">
             <h2>Navbar that pushes the page down</h2>
             <p>Extend <code>%bf-navbar-push</code> as well, and below <code>md</code> the open menu is a row under the brand and toggle that pushes the content below it down, rather than a panel over it. Narrow the window to try it.</p>
             <div class="demo">
@@ -485,7 +485,7 @@
 </div>
         </section>
 
-        <section class="example" id="breadcrumbs">
+        <section class="example" id="breadcrumbs" data-docs="121-breadcrumb">
             <h2>Breadcrumbs</h2>
             <p>Extend <code>%bf-breadcrumb</code> on the list, and it styles the items. The divider is set by a custom property, and screen readers skip it.</p>
             <div class="demo">
@@ -527,7 +527,7 @@
 </div>
         </section>
 
-        <section class="example" id="pagination">
+        <section class="example" id="pagination" data-docs="122-pagination">
             <h2>Pagination</h2>
             <p>The page links share their borders, like a button group. The current page has <code>aria-current="page"</code>, and Previous is a <code>&lt;span&gt;</code> on the first page, so it can't be used.</p>
             <div class="demo">
@@ -578,7 +578,7 @@
 </div>
         </section>
 
-        <section class="example" id="cards">
+        <section class="example" id="cards" data-docs="130-card">
             <h2>Cards</h2>
             <p>Card bodies grow, so footers line up when cards in a row have different amounts of text.</p>
             <div class="demo">
@@ -636,7 +636,7 @@
 </div>
         </section>
 
-        <section class="example" id="list-groups">
+        <section class="example" id="list-groups" data-docs="131-list-group">
             <h2>List groups</h2>
             <p>The list's direct children are its items. Links and buttons shade under the pointer, the current item is marked with <code>aria-current</code>, a finished step is tinted green, and the last list sits in a row from the <code>md</code> breakpoint.</p>
             <div class="demo">
@@ -697,7 +697,7 @@
 </div>
         </section>
 
-        <section class="example" id="accordions">
+        <section class="example" id="accordions" data-docs="132-accordion">
             <h2>Accordions</h2>
             <p>Native <code>&lt;details&gt;</code> elements in a <code>&lt;div&gt;</code>. They share a <code>name</code>, so opening one closes the others, and in browsers that support it they open and close smoothly.</p>
             <div class="demo">
@@ -736,7 +736,7 @@
 </div>
         </section>
 
-        <section class="example" id="tables">
+        <section class="example" id="tables" data-docs="133-table">
             <h2>A table</h2>
             <p>Striped rows, a shade under the pointer, the current row marked with <code>aria-current</code>, and a row tinted with the <code>ok</code> theme colour. Below 768px the table scrolls sideways.</p>
             <div class="demo">
@@ -782,7 +782,7 @@
 </div>
         </section>
 
-        <section class="example" id="tabs">
+        <section class="example" id="tabs" data-docs="123-tabs">
             <h2>Tabs</h2>
             <p>Click a tab, or focus one and use the arrow keys, Home and End. <code>sassy.js</code> switches the panels. The code under each demo uses the same tabs.</p>
             <div class="demo">
@@ -824,7 +824,7 @@
 </div>
         </section>
 
-        <section class="example" id="alerts">
+        <section class="example" id="alerts" data-docs="140-alert">
             <h2>Alerts</h2>
             <p>A theme colour tints the background, border and text. The last alert can be dismissed: its close button has <code>command="--dismiss"</code>, which <code>sassy.js</code> handles.</p>
             <div class="demo">
@@ -895,7 +895,7 @@
 </div>
         </section>
 
-        <section class="example" id="progress">
+        <section class="example" id="progress" data-docs="141-progress">
             <h2>Progress bars</h2>
             <p>Native <code>&lt;progress&gt;</code> elements, each with a label. A theme colour changes the bar, the third has moving stripes, and the fourth has no value, so a bar slides along it. The last is three bars stacked in one track, each given its share with an inline width.</p>
             <div class="demo">
@@ -944,7 +944,7 @@
 </div>
         </section>
 
-        <section class="example" id="spinners">
+        <section class="example" id="spinners" data-docs="142-spinner">
             <h2>Spinners</h2>
             <p>A ring that turns, or a dot that grows, in the text colour or a theme colour. Each has <code>role="status"</code> and hidden text for screen readers. In the button, the small spinner is hidden from screen readers, as the button's text says what is happening.</p>
             <div class="demo">
@@ -987,7 +987,7 @@
 </div>
         </section>
 
-        <section class="example" id="skeletons">
+        <section class="example" id="skeletons" data-docs="143-skeleton">
             <h2>Skeletons</h2>
             <p>Faded blocks that stand in for content while it loads, sized with the width utilities. The loading card has <code>aria-busy="true"</code> and hidden text for screen readers, and a shimmer crosses the blocks unless you prefer reduced motion.</p>
             <div class="demo">
@@ -1045,7 +1045,7 @@
 </div>
         </section>
 
-        <section class="example" id="toasts">
+        <section class="example" id="toasts" data-docs="144-toast">
             <h2>Toasts</h2>
             <p>A toast is a short message over the page. Each close button hides its toast with <code>command="--dismiss"</code>. A theme colour comes from <code>%bf-text-bg-error</code>.</p>
             <div class="demo">
@@ -1150,7 +1150,7 @@
 </div>
         </section>
 
-        <section class="example" id="tooltips">
+        <section class="example" id="tooltips" data-docs="150-tooltip">
             <h2>Tooltips</h2>
             <p>Hover over or tab to a button. A tooltip is a popover, described by its trigger with <code>aria-describedby</code>.</p>
             <div class="demo">
@@ -1173,7 +1173,7 @@
 </div>
         </section>
 
-        <section class="example" id="popovers">
+        <section class="example" id="popovers" data-docs="151-popover">
             <h2>Popovers</h2>
             <p>Click a button. A popover is opened by its button's <code>popovertarget</code>, so the browser opens and closes it, and its links and buttons don't close it. Press Escape or click outside to close one.</p>
             <div class="demo">
@@ -1226,7 +1226,7 @@
 </div>
         </section>
 
-        <section class="example" id="dropdowns">
+        <section class="example" id="dropdowns" data-docs="152-dropdown">
             <h2>Dropdowns</h2>
             <p>Each menu is a popover opened by its button's <code>popovertarget</code>, so the browser opens and closes it. The first two are ARIA menus of actions, reached with the arrow keys; the second is a split button whose menu lines up with its end. The last is a list of links, reached with Tab, that opens above.</p>
             <div class="demo">
@@ -1303,7 +1303,7 @@
 </div>
         </section>
 
-        <section class="example" id="dialogs">
+        <section class="example" id="dialogs" data-docs="153-dialog">
             <h2>Dialogs</h2>
             <p>The buttons open and close each dialog with <code>command</code> and <code>commandfor</code>, so no script is needed in current browsers.</p>
             <div class="demo">
@@ -1393,7 +1393,7 @@
 </div>
         </section>
 
-        <section class="example" id="offcanvas">
+        <section class="example" id="offcanvas" data-docs="154-offcanvas">
             <h2>Offcanvas</h2>
             <p>An offcanvas is a dialog that slides in from one edge. It opens with <code>command="show-modal"</code>, and <code>closedby="any"</code> closes it when the backdrop is clicked.</p>
             <div class="demo">
@@ -1537,7 +1537,7 @@
 </div>
         </section>
 
-        <section class="example" id="carousels">
+        <section class="example" id="carousels" data-docs="160-carousel">
             <h2>Carousels</h2>
             <p>A carousel scrolls sideways and snaps to each slide. Where browsers support <code>::scroll-button</code> and <code>::scroll-marker</code> it has previous and next buttons and dots; elsewhere, swipe or scroll it.</p>
             <div class="demo">
@@ -1649,7 +1649,7 @@
 </div>
         </section>
 
-        <section class="example" id="scrollspy">
+        <section class="example" id="scrollspy" data-docs="124-scrollspy">
             <h2>Scrollspy</h2>
             <p>A nav of links to sections, one with <code>aria-current="location"</code>, follows the scrolling: <code>sassy.js</code> moves <code>aria-current</code> to the link of the section in view. It needs no Sass of its own.</p>
             <div class="demo">

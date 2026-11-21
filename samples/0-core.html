@@ -34,7 +34,7 @@
 
         <p class="stylesheet-note">Each demo on this page is styled by <code>sass/0-core.sass</code>, compiled to <code>css/0-core.css</code>. Under each demo are its Sass, the CSS that Sassy outputs for it, and its HTML.</p>
 
-        <section class="example" id="content">
+        <section class="example" id="content" data-docs="060-content">
             <h2>Content</h2>
             <p>A large heading, a lead paragraph, a quote with its source, and a list in a row. Make the window narrower than 1200px and the heading shrinks.</p>
             <div class="demo">
@@ -85,7 +85,7 @@
 </div>
         </section>
 
-        <section class="example" id="colours">
+        <section class="example" id="colours" data-docs="050-util">
             <h2>Palette colours and transparency</h2>
             <p><code>colour()</code> returns any palette colour, and <code>with-alpha()</code> makes any colour transparent - here 60%, so the stripes show through.</p>
             <div class="demo">
@@ -107,7 +107,7 @@
 </div>
         </section>
 
-        <section class="example" id="up">
+        <section class="example" id="up" data-docs="040-make">
             <h2>Your own breakpoint styles</h2>
             <p><code>up()</code> wraps your own styles in a media query for a breakpoint, as Sass cannot <code>@extend</code> inside one.</p>
             <div class="demo">
@@ -125,7 +125,7 @@
 </div>
         </section>
 
-        <section class="example" id="up-prop">
+        <section class="example" id="up-prop" data-docs="040-make">
             <h2>Different values at different breakpoints</h2>
             <p><code>up-prop()</code> takes a property, then its value at each breakpoint you name.</p>
             <div class="demo">
@@ -142,7 +142,7 @@
 </div>
         </section>
 
-        <section class="example" id="placeholders">
+        <section class="example" id="placeholders" data-docs="040-make">
             <h2>Your own placeholders, in Sassy's style</h2>
             <p><code>make-responsive()</code> generates a placeholder for each value and breakpoint, and <code>make-layers()</code> outputs them in Sassy's cascade layers, so each breakpoint beats the one before. This stack has a 0.25rem gap, and 0.5rem from md upwards.</p>
             <div class="demo">
