@@ -394,7 +394,7 @@ The file is generated from `dist/full.css` by `snippets.sh`, which `compile-full
 
 ## Building and contributing
 
-You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later on your path, and bash with `gzip` and `awk` - these come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
+You need [Dart Sass](https://sass-lang.com/dart-sass/) 1.108.0 or later on your path, and bash with `awk`, which come with macOS and Linux, and with [Git for Windows](https://gitforwindows.org) on Windows. The `tools/site.mjs` scripts also need [Node.js](https://nodejs.org) 20 or later.
 
 | Script                      | Does                                                                                                                                                         |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
