@@ -3,7 +3,7 @@
  * Builds the samples site, and checks that the CSS shown in examples is what Sassy outputs.
  *
  *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output, links to
- *                                  the docs, and a search index (search.json)
+ *                                  the docs, and search (search.json and tools/site-search.js)
  *     node tools/site.mjs check    checks the CSS shown in README.md and the docs folders, that every
  *                                  custom property Sassy reads has a value or a fallback, and that the
  *                                  samples sections and the docs pages link to each other
@@ -438,6 +438,20 @@ const searchIndex = async sections => ({
 	docs: await placeholderDocs()
 });
 
+/** Adds the search box after the brand in the header, and its script after sassy.js - see tools/site-search.js. */
+const withSearch = html => html
+	.replace(/(<a class="brand"[^>]*>.*?<\/a>)/, `$1
+            <div class="site-search" role="search">
+                <div class="site-search-box">
+                    <label for="site-search-input" class="visually-hidden">Search the samples and placeholders</label>
+                    <input type="search" id="site-search-input" placeholder="Search" autocomplete="off" spellcheck="false"
+                        role="combobox" aria-expanded="false" aria-controls="site-search-results" aria-autocomplete="list" />
+                    <kbd class="site-search-key" aria-hidden="true">Ctrl K</kbd>
+                    <ul id="site-search-results" class="site-search-results" role="listbox" aria-label="Results" hidden></ul>
+                </div>
+            </div>`)
+	.replace(/(<script src="js\/sassy\.js" defer><\/script>)/, `$1\n    <script src="js/site-search.js" defer></script>`);
+
 /** Wraps each demo and the code block after it in one element, which _site.sass makes a Sassy card. */
 const withExampleCards = html => {
 	let out = "";
@@ -498,6 +512,7 @@ const build = async () => {
 	mkdirSync(join(out, "css"), { recursive: true });
 	mkdirSync(join(out, "js"), { recursive: true });
 	cpSync(join(root, "src", "sassy.js"), join(out, "js", "sassy.js"));
+	cpSync(join(root, "tools", "site-search.js"), join(out, "js", "site-search.js"));
 	mkdirSync(join(out, "images"), { recursive: true });
 	cpSync(join(root, "logo", "logo-light.svg"), join(out, "images", "logo.svg"));
 	if (existsSync(join(samples, ".nojekyll"))) cpSync(join(samples, ".nojekyll"), join(out, ".nojekyll"));
@@ -541,7 +556,7 @@ const build = async () => {
 		});
 
 		let n = 0;
-		const built = withSectionNav(withDocsLinks(withExampleCards(html), page, sections)).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`));
+		const built = withSearch(withSectionNav(withDocsLinks(withExampleCards(html), page, sections)).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
 		writeFileSync(join(out, page), built);
 	}
 	console.log(`built ${found.length} pages with ${examples.length} examples`);
