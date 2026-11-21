@@ -431,11 +431,17 @@ const placeholderDocs = async () => {
 	}
 };
 
+/**
+ * A placeholder's family: one ending in a step or a size is listed once, as bf-rounded-… for %bf-rounded-1 to -5
+ * (and bf-mx-… for -n3, bf-width-… for -50pc), so the results aren't a list of values. Named ones such as bf-rounded-pill stay.
+ */
+const family = name => name.replace(/-n?\d+(?:pc|vh|vw)?$/, "-…");
+
 /** What the search box searches: each section with the placeholders it uses, and each placeholder's docs page. */
 const searchIndex = async sections => ({
 	docsUrl,
-	sections: sections.map(s => ({ title: s.title, layer: s.layer, url: `${s.page}#${s.id}`, names: s.placeholders })),
-	docs: await placeholderDocs()
+	sections: sections.map(s => ({ title: s.title, layer: s.layer, url: `${s.page}#${s.id}`, names: [...new Set(s.placeholders.map(family))] })),
+	docs: (await placeholderDocs()).map(d => ({ ...d, names: [...new Set(d.names.map(family))] }))
 });
 
 /** Adds the search box after the brand in the header, and its script after sassy.js - see tools/site-search.js. */

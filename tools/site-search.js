@@ -34,7 +34,8 @@
 	const search = (data, raw) => {
 		const q = raw.trim().toLowerCase().replace(/^%/, "");
 		if (!q) return [];
-		const name = q.startsWith("bf-") ? q : `bf-${q}`;
+		// a step typed in full finds its family: rounded-3 is bf-rounded-…, as tools/site.mjs lists it
+		const name = (q.startsWith("bf-") ? q : `bf-${q}`).replace(/-n?\d+(?:pc|vh|vw)?$/, "-…");
 		const found = [];
 
 		for (const s of data.sections) {
