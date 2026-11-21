@@ -2,7 +2,8 @@
 /*
  * Builds the samples site, and checks that the CSS shown in examples is what Sassy outputs.
  *
- *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output
+ *     node tools/site.mjs build    compiles the samples into _site, adding each example's CSS output, links to
+ *                                  the docs, and search (search.json and tools/site-search.js)
  *     node tools/site.mjs check    checks the CSS shown in README.md and the docs folders, that every
  *                                  custom property Sassy reads has a value or a fallback, and that the
  *                                  samples sections and the docs pages link to each other
@@ -330,6 +331,9 @@ const docsUrl = "https://github.com/bfren/sassy/blob/main/docs";
 /** A section of a samples page, with the docs pages it names in data-docs, such as data-docs="131-list-group 133-table". */
 const sectionPattern = /<section class="example" id="([^"]+)"(?: data-docs="([^"]*)")?>\s*<h2>(.*?)<\/h2>/g;
 
+/** The placeholders a piece of Sass or HTML names, such as bf-gap-3 for %bf-gap-3, each once. */
+const placeholdersIn = text => [...new Set([...text.matchAll(/%(bf-[a-z0-9-]+)/g)].map(m => m[1]))];
+
 /** A docs page's title, from its first line. */
 const docTitle = file => readFileSync(join(root, "docs", file), "utf8").match(/^# (.+)/)?.[1] ?? file;
 
@@ -341,11 +345,18 @@ const sectionDocs = () => {
 	const problems = [];
 	const sections = pages().filter(page => existsSync(join(root, "docs", page.replace(/\.html$/, "")))).flatMap(page => {
 		const folder = page.replace(/\.html$/, "");
-		return [...readFileSync(join(samples, page), "utf8").matchAll(sectionPattern)].map(([, id, names, title]) => {
+		const html = readFileSync(join(samples, page), "utf8");
+		const layer = html.match(/<h1>(.*?)<\/h1>/)?.[1] ?? folder;
+		return [...html.matchAll(sectionPattern)].map(({ 0: head, 1: id, 2: names, 3: title, index }) => {
+			const body = html.slice(index + head.length, html.indexOf("</section>", index));
 			const docs = (names ?? "").split(" ").filter(Boolean).map(name => `${folder}/${name}.md`);
 			if (!docs.length) problems.push(`${page}#${id}: name its docs pages with data-docs`);
 			docs.filter(d => !existsSync(join(root, "docs", d))).forEach(d => problems.push(`${page}#${id}: data-docs names docs/${d}, which isn't there`));
-			return { page, id, title: title.replace(/<[^>]+>/g, ""), docs: docs.filter(d => existsSync(join(root, "docs", d))) };
+			return {
+				page, id, layer, title: title.replace(/<[^>]+>/g, ""),
+				docs: docs.filter(d => existsSync(join(root, "docs", d))),
+				placeholders: placeholdersIn(body)
+			};
 		});
 	});
 	return { sections, problems };
@@ -378,6 +389,68 @@ const docsLinkProblems = sections => readdirSync(join(root, "docs"), { recursive
 		const line = readFileSync(join(root, "docs", file), "utf8").split("\n")[2];
 		return line === expected ? [] : [`docs/${file}:3: should be: ${expected}`];
 	});
+
+//  =================================================================
+//  Search
+//  =================================================================
+
+const breakpoints = ["sm", "md", "lg", "xl", "2xl", "3xl"];
+
+/**
+ * The placeholders each source file outputs, compiled on its own with every placeholder as a class, so each name
+ * leads to the docs page named after its file (src/4-utilities/_430-display.sass is docs/4-utilities/430-display.md).
+ * Breakpoint variants are left out, as snippets.sh does: %bf-gap-3-md is found as %bf-gap-3.
+ */
+const placeholderDocs = async () => {
+	const modules = readdirSync(join(root, "src")).filter(f => /^\d-[a-z]+$/.test(f)).flatMap(folder =>
+		readdirSync(join(root, "src", folder)).flatMap(file => {
+			const name = file.match(/^_(\d{3}-[a-z-]+)\.sass$/)?.[1];
+			const doc = `${folder}/${name}.md`;
+			if (!name || !existsSync(join(root, "docs", doc))) return [];
+			const mixins = [...readFileSync(join(root, "src", folder, file), "utf8").matchAll(/^@mixin (utilities|defaults)\(\)/gm)].map(m => m[1]);
+			return mixins.length ? [{ folder, file, doc, mixins }] : [];
+		}));
+	const dir = mkdtempSync(join(tmpdir(), "sassy-search-"));
+	try {
+		const css = await inParallel(modules.map((m, i) => () => {
+			const file = join(dir, `module-${i}.sass`);
+			writeFileSync(file, [
+				`@use "${srcPath}/0-core/030-variables" as variables with ($sassy-full: true)`,
+				`@use "${srcPath}/${m.folder}/${m.file.replace(/^_|\.sass$/g, "")}" as module`,
+				...m.mixins.map(mixin => `@include module.${mixin}`)
+			].join("\n"));
+			return sass(["--no-source-map", "--quiet", file]);
+		}));
+		return modules.map((m, i) => {
+			const names = new Set([...css[i].matchAll(/\.(bf-[a-z0-9-]+)/g)].map(x => x[1]));
+			const own = [...names].filter(n => !breakpoints.some(b => n.endsWith(`-${b}`) && names.has(n.slice(0, -b.length - 1))));
+			return { doc: m.doc, title: docTitle(m.doc), names: own.sort() };
+		});
+	} finally {
+		rmSync(dir, { recursive: true, force: true });
+	}
+};
+
+/** What the search box searches: each section with the placeholders it uses, and each placeholder's docs page. */
+const searchIndex = async sections => ({
+	docsUrl,
+	sections: sections.map(s => ({ title: s.title, layer: s.layer, url: `${s.page}#${s.id}`, names: s.placeholders })),
+	docs: await placeholderDocs()
+});
+
+/** Adds the search box after the brand in the header, and its script after sassy.js - see tools/site-search.js. */
+const withSearch = html => html
+	.replace(/(<a class="brand"[^>]*>.*?<\/a>)/, `$1
+            <div class="site-search" role="search">
+                <div class="site-search-box">
+                    <label for="site-search-input" class="visually-hidden">Search the samples and placeholders</label>
+                    <input type="search" id="site-search-input" placeholder="Search" autocomplete="off" spellcheck="false"
+                        role="combobox" aria-expanded="false" aria-controls="site-search-results" aria-autocomplete="list" />
+                    <kbd class="site-search-key" aria-hidden="true">Ctrl K</kbd>
+                    <ul id="site-search-results" class="site-search-results" role="listbox" aria-label="Results" hidden></ul>
+                </div>
+            </div>`)
+	.replace(/(<script src="js\/sassy\.js" defer><\/script>)/, `$1\n    <script src="js/site-search.js" defer></script>`);
 
 /** Wraps each demo and the code block after it in one element, which _site.sass makes a Sassy card. */
 const withExampleCards = html => {
@@ -439,6 +512,7 @@ const build = async () => {
 	mkdirSync(join(out, "css"), { recursive: true });
 	mkdirSync(join(out, "js"), { recursive: true });
 	cpSync(join(root, "src", "sassy.js"), join(out, "js", "sassy.js"));
+	cpSync(join(root, "tools", "site-search.js"), join(out, "js", "site-search.js"));
 	mkdirSync(join(out, "images"), { recursive: true });
 	cpSync(join(root, "logo", "logo-light.svg"), join(out, "images", "logo.svg"));
 	if (existsSync(join(samples, ".nojekyll"))) cpSync(join(samples, ".nojekyll"), join(out, ".nojekyll"));
@@ -455,10 +529,12 @@ const build = async () => {
 	const examples = found.flatMap(f => f.panels.map((p, i) => ({ panel: p, page: f.page, label: `${f.page}, Sass example ${i + 1}`, sass: p.code })));
 
 	// every example, and Sassy on its own once, alongside each page's own stylesheet
-	const [results] = await Promise.all([
+	const [results, , search] = await Promise.all([
 		compile([...examples, { label: "Sassy on its own", sass: "" }]),
-		sass(["--no-source-map", "--quiet", `${join(samples, "sass")}:${join(out, "css")}`])
+		sass(["--no-source-map", "--quiet", `${join(samples, "sass")}:${join(out, "css")}`]),
+		searchIndex(sections)
 	]);
+	writeFileSync(join(out, "search.json"), JSON.stringify(search));
 	const baseline = results.at(-1).css ?? "";
 
 	const css = new Map();
@@ -480,7 +556,7 @@ const build = async () => {
 		});
 
 		let n = 0;
-		const built = withSectionNav(withDocsLinks(withExampleCards(html), page, sections).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
+		const built = withSearch(withSectionNav(withDocsLinks(withExampleCards(html), page, sections)).replace(codePattern, () => renderCode(withCss(blocks[n++], css), `code-${n}`)));
 		writeFileSync(join(out, page), built);
 	}
 	console.log(`built ${found.length} pages with ${examples.length} examples`);

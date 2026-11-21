@@ -79,6 +79,90 @@ body
     img
         @extend %bf-width-auto
 
+// The search box (tools/site-search.js): centred on a row of its own under the brand and toggle below md,
+// and at the end of the row from md
+.site-search
+    @extend %bf-flex-order-last
+    @extend %bf-d-flex
+    @extend %bf-flex-justify-centre
+    @extend %bf-width-100pc
+    @extend %bf-mt-3
+    @extend %bf-width-auto-md
+    @extend %bf-mt-0-md
+    @extend %bf-ms-auto-md
+
+.site-search-box
+    @extend %bf-position-relative
+    @extend %bf-width-100pc
+    // gap: no rem width scale, and a vw width would be too wide on a phone
+    max-width: 16rem
+
+    input
+        @extend %bf-form-control
+        @extend %bf-form-control-small
+        // room for the key hint
+        @extend %bf-pe-12
+
+.site-search-key
+    @extend %bf-position-absolute
+    @extend %bf-top-50pc
+    @extend %bf-right-2
+    @extend %bf-translate-middle-y
+    @extend %bf-d-none
+    @extend %bf-d-inline-block-md
+    @extend %bf-pointer-events-none
+    @extend %bf-bg-slate-200
+    @extend %bf-c-slate-600
+
+    // the hint goes while you type
+    input:focus + &
+        @extend %bf-d-none-md
+
+.site-search-results
+    @extend %bf-list-unstyled
+    @extend %bf-position-absolute
+    @extend %bf-right-0
+    @extend %bf-z-index-5
+    @extend %bf-mt-1
+    @extend %bf-mb-0
+    @extend %bf-p-1
+    @extend %bf-overflow-y-auto
+    @extend %bf-border-1
+    @extend %bf-border-slate-200
+    @extend %bf-rounded-3
+    @extend %bf-shadow-2
+    @extend %bf-width-100pc
+    // gap: the surface colour role, which no placeholder sets; wider than the box from md, and no taller than the window
+    background-color: var(--sassy-surface)
+    max-height: 70vh
+
+    @media (min-width: 768px)
+        width: 24rem
+
+    [role="option"]
+        @extend %bf-d-grid
+        @extend %bf-px-3
+        @extend %bf-py-2
+        @extend %bf-rounded-2
+        cursor: pointer
+
+        &[aria-selected="true"],
+        &:hover
+            @extend %bf-bg-slate-100
+
+.site-search-label
+    @extend %bf-font-weight-500
+    @extend %bf-text-truncate
+
+.site-search-note,
+.site-search-empty
+    @extend %bf-font-size-small
+    @extend %bf-c-slate-600
+
+.site-search-empty
+    @extend %bf-px-3
+    @extend %bf-py-2
+
 // Sassy's nav component, underline style - the current page has aria-current="page"
 .site-nav
     @extend %bf-nav
